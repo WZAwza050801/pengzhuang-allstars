@@ -1,0 +1,209 @@
+$ npm run test:net
+
+> pengzhuang-allstars@1.0.0 test:net
+> tsx tools/net-tests.ts
+
+[net-tests] real Colyseus server on ws://127.0.0.1:37633, dataVersion field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1
+
+[lobby]
+  PASS  room id is a 6-char code from the allowed alphabet
+  PASS  creator gets a lobby snapshot for seat 0 (code, protocol, configVersion)
+  PASS  guest takes seat 1 and both sides see both nicknames
+  PASS  third client is refused on a full lobby
+  PASS  invalid room code (well-formed but nonexistent code) is refused
+  PASS  invalid room code (lowercase code) is refused
+  PASS  invalid room code (empty code) is refused
+  PASS  invalid room code (too short) is refused
+  PASS  invalid room code (500 chars) is refused
+  PASS  invalid room code (path traversal) is refused
+  PASS  invalid room code (emoji) is refused
+  PASS  invalid room code (whitespace) is refused
+  PASS  create with protocol mismatch is refused
+  PASS  create with no protocol is refused
+  PASS  create with empty nickname is refused
+  PASS  create with over-long nickname is refused
+  PASS  create with control char in nickname is refused
+  PASS  create with non-string nickname is refused
+  PASS  create with unknown skin is refused
+  PASS  join with a protocol mismatch is refused
+  PASS  refused joins and creates left the lobby untouched
+  PASS  30 concurrent rooms get 30 distinct well-formed codes
+  PASS  rooms are disposed once everybody has left
+
+[lineup]
+  PASS  lineup with 4 players -> bad-lineup
+  PASS  lineup with a duplicate player -> bad-lineup
+  PASS  lineup with an unknown player id -> bad-lineup
+  PASS  lineup with a prototype-chain id -> bad-lineup
+  PASS  lineup that is not an array -> bad-lineup
+  PASS  level 0 -> bad-level
+  PASS  level above the maximum -> bad-level
+  PASS  fractional level -> bad-level
+  PASS  wrong number of levels -> bad-level
+  PASS  set_lineup with an extra key -> bad-message
+  PASS  ready that is not a boolean -> bad-message
+  PASS  ready with an extra key -> bad-message
+  PASS  shot while still in the lobby -> match-not-started
+  PASS  valid set_lineup is broadcast to both seats with the new levels
+  PASS  one ready seat does not start the match
+  PASS  changing the lineup cancels that seat's ready flag
+  PASS  both seats ready -> both get exactly one match_start
+  PASS  match_start is identical on both seats and carries the lineups
+  PASS  match_start state is fresh: 10 pieces, shotNo 0, rng not leaked
+  PASS  the seed never appears on the wire
+  PASS  server and both snapshots agree the match is playing
+  PASS  set_lineup after the start -> match-already-started
+  PASS  ready after the start -> match-already-started
+  PASS  the room is locked once the match started
+
+[shot-chain]
+  PASS  non-acting side shoots -> not-your-turn
+  PASS  non-acting side shoots with NaN (turn check beats number check) -> not-your-turn
+  PASS  wrong matchId -> stale-match
+  PASS  wrong configVersion -> config-mismatch
+  PASS  empty configVersion -> config-mismatch
+  PASS  wrong matchId and wrong configVersion (matchId is checked first) -> stale-match
+  PASS  wrong configVersion and NaN (config is checked first) -> config-mismatch
+  PASS  turnId ahead of the server -> stale-turn
+  PASS  turnId far ahead of the server -> stale-turn
+  PASS  NaN dirX -> bad-number
+  PASS  NaN dirY -> bad-number
+  PASS  Infinity dirX -> bad-number
+  PASS  -Infinity dirY -> bad-number
+  PASS  NaN power -> bad-number
+  PASS  Infinity power -> bad-number
+  PASS  -Infinity power -> bad-number
+  PASS  NaN curve -> bad-number
+  PASS  Infinity curve -> bad-number
+  PASS  zero direction -> bad-direction
+  PASS  power 0 -> bad-power
+  PASS  power below minPower -> bad-power
+  PASS  negative power -> bad-power
+  PASS  power above 1 -> bad-power
+  PASS  curve above 1 -> bad-curve
+  PASS  curve below -1 -> bad-curve
+  PASS  unknown piece id -> no-such-piece
+  PASS  opponent piece -> not-your-piece
+  PASS  piece that is off the pitch (white-box setup) -> piece-off-pitch
+  PASS  frozen piece (white-box setup) -> piece-frozen
+  PASS  shot without clientShotId -> bad-message
+  PASS  shot without input -> bad-message
+  PASS  shot with an extra top-level key -> bad-message
+  PASS  shot with an extra input key -> bad-message
+  PASS  clientShotId containing a space -> bad-message
+  PASS  65-char clientShotId -> bad-message
+  PASS  turnId as a string -> bad-message
+  PASS  negative turnId -> bad-message
+  PASS  fractional turnId -> bad-message
+  PASS  power as a string -> bad-message
+  PASS  pieceId as a number -> bad-message
+  PASS  null payload -> bad-message
+  PASS  array payload -> bad-message
+  PASS  numeric payload -> bad-message
+  PASS  string payload -> bad-message
+  PASS  every rejected shot left the authoritative state untouched
+  PASS  no shot_packet was broadcast for any rejected shot
+  PASS  accepted shot reaches both seats as exactly one packet (seq 1, id echoed, seat set)
+  PASS  both seats received byte-identical packets
+  PASS  packet carries frames; wire state has shotNo advanced and rng zeroed
+  PASS  server state equals the broadcast state (rng aside); one shot recorded
+  PASS  replayed clientShotId -> duplicate-shot with ref and the original seq (dedupe beats stale turnId)
+  PASS  replay of the same id with a different input -> duplicate-shot
+  PASS  replay of the same id with a changed turnId -> duplicate-shot
+  PASS  replays changed neither the state nor the packet count
+  PASS  turn passes to the other seat within a few shots
+  PASS  dedupe is scoped per seat: the other seat may reuse the same clientShotId
+  PASS  packet seq is contiguous from 1 on both seats
+  PASS  server seq and accepted-shot count match the packet count
+
+[disconnect]
+  PASS  lobby: dropping the guest frees seat 1 and clears the ready flags
+  PASS  lobby: the freed seat can be taken by a new client
+  PASS  match: the opponent is told the dropped seat is disconnected
+  PASS  match: the disconnect did not touch the authoritative state
+  PASS  match: the room stays open and playing
+colyseus.js - onError => (4216) match-already-started
+  PASS  match: a newcomer cannot take the dropped seat
+  PASS  match: no shot_packet was produced by the disconnect
+Room connection was closed unexpectedly (4002):
+colyseus.js - onError => (4002)
+
+[matches]
+  info  aimed match: 100 shots in 2254 ms, score 2-1, ended by shot-limit
+  PASS  aimed match: exactly one end event on each seat
+  PASS  aimed match: the end event rides on the final packet only
+  PASS  aimed match: packet seq contiguous 1..100 and both seats saw identical streams
+  PASS  aimed match: final state is over with a consistent reason and winner
+  PASS  aimed match: server agrees (phase ended, same state, rng aside)
+  PASS  aimed match: seat 0 shoots after the end -> match-over
+  PASS  aimed match: seat 1 shoots after the end -> match-over
+  PASS  aimed match: ready after the end -> match-already-started
+  PASS  aimed match: nothing further was broadcast and nobody was kicked
+  PASS  forced shot-limit: the match is still running after 8 shots, before the counter is moved
+  PASS  forced shot-limit: the final shot ends the match on both seats
+  PASS  forced shot-limit match: exactly one end event on each seat
+  PASS  forced shot-limit match: the end event rides on the final packet only
+  PASS  forced shot-limit match: packet seq contiguous 1..9 and both seats saw identical streams
+  PASS  forced shot-limit match: final state is over with a consistent reason and winner
+  PASS  forced shot-limit match: server agrees (phase ended, same state, rng aside)
+  PASS  forced shot-limit match: seat 0 shoots after the end -> match-over
+  PASS  forced shot-limit match: seat 1 shoots after the end -> match-over
+  PASS  forced shot-limit match: ready after the end -> match-already-started
+  PASS  forced shot-limit match: nothing further was broadcast and nobody was kicked
+  info  AI match #1: 5 shots in 1044 ms, score 2-3, ended by goals
+  PASS  AI match #1: exactly one end event on each seat
+  PASS  AI match #1: the end event rides on the final packet only
+  PASS  AI match #1: packet seq contiguous 1..5 and both seats saw identical streams
+  PASS  AI match #1: final state is over with a consistent reason and winner
+  PASS  AI match #1: server agrees (phase ended, same state, rng aside)
+  PASS  AI match #1: seat 0 shoots after the end -> match-over
+  PASS  AI match #1: seat 1 shoots after the end -> match-over
+  PASS  AI match #1: ready after the end -> match-already-started
+  PASS  AI match #1: nothing further was broadcast and nobody was kicked
+  PASS  an AI-driven match ended by the goals rule over the wire
+
+[hostile]
+  PASS  3000 B payload closes the connection (1009)
+  PASS  100000 B payload closes the connection (1009)
+  PASS  1000000 B payload closes the connection (1009)
+  info  the server logged 3 line(s) for the 3 oversize frames (expected, captured): Max payload size exceeded
+  PASS  the only server error logged for oversize frames is the payload limit itself
+  PASS  a 1500 B payload is within the limit and answered with bad-message
+  PASS  unknown message type: not kicked for a handler fault, server keeps answering
+  PASS  __proto__ type: not kicked for a handler fault, server keeps answering
+  PASS  constructor type: not kicked for a handler fault, server keeps answering
+  PASS  __no_message_handler (300 B): not kicked for a handler fault, server keeps answering
+  PASS  __no_message_handler (multibyte): not kicked for a handler fault, server keeps answering
+  PASS  numeric type: not kicked for a handler fault, server keeps answering
+  PASS  shot with null: not kicked for a handler fault, server keeps answering
+  PASS  shot without payload: not kicked for a handler fault, server keeps answering
+  PASS  sendBytes garbage: not kicked for a handler fault, server keeps answering
+  PASS  corrupt msgpack frame: not kicked for a handler fault, server keeps answering
+  PASS  one-byte frame: not kicked for a handler fault, server keeps answering
+  PASS  unknown protocol byte: not kicked for a handler fault, server keeps answering
+  PASS  JOIN_ROOM replay: not kicked for a handler fault, server keeps answering
+  PASS  a 100-message burst is rate-limited, with one reply per window rather than one per message
+  PASS  the rate limit lifts after the window
+  PASS  no uncaught exception during the abuse
+  PASS  /healthz still answers 200
+
+[faults]
+  PASS  no seat: ready -> not-seated
+  PASS  no seat: set_lineup -> not-seated
+  PASS  no seat: shot -> not-seated
+  PASS  the seatless probes changed nothing on the server
+  PASS  a handler that throws is reported to the sender -> internal-error
+  PASS  the throwing handler was logged on the server, with its message
+  PASS  the fault did not kick the sender
+  PASS  with the fault removed the same client is served normally again
+  PASS  b was never disturbed
+
+[serving]
+  PASS  after all of the above a fresh room still plays shots end to end
+
+[summary]
+  PASS  no uncaught exception in the whole run
+  PASS  /healthz answers 200 at the end
+  info  error codes exercised over the wire: 25/26  (not exercised: bad-seat-token)
+
+net-tests: PASS=176 FAIL=0

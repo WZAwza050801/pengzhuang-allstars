@@ -7,10 +7,10 @@
 - 2026-11-16：建立产品化规划、112 项任务、专项规范与清单检查器；功能任务均未勾选。
 - 起始代码基线：`70a8df4e134eb3051b35e9343b875a80c39efb9c`。
 - 本变更是规划交付，不代表 FND-01 或任何功能任务已由后续实施完成。
-- 推荐首项：FND-01，之后依据依赖选择 FND-02/FND-03/FND-06。
+- FND-01 已完成本次独立验证；下一可领取 FND-02/FND-03/FND-06。远端同步仍受 403 阻塞。
 - 历史会话测试见 BASELINE；后续实施不得重复引用为新代码的测试证据。
 
-## 本次规划交付验证
+## 初始规划交付验证（b60b10e，历史记录）
 
 - `node tools/check-plan.mjs`：112 项、18 工作包、0 项勾选；依赖无环、编号唯一、文档本地链接存在；首个可领取任务为 FND-01。
 - `node --check tools/check-plan.mjs`：JavaScript 语法检查通过。
@@ -18,6 +18,22 @@
 - 本次只变更规划、入口文档及检查器，不修改游戏功能或配置；因此没有把旧游戏测试重复运行当作本次文档的必要验证。
 - 提交前 `git diff --cached --check` 通过，无空白错误；后续实施新增代码时需按任务重新验证。
 - 已在本地分支 `docs/productization-roadmap` 提交。GitHub 插件创建分支返回 `403 Resource not accessible by integration`；现有 HTTPS Git 连接推送也返回 403。因此本次没有写入远端或创建 PR，交付文档包及可导入补丁；恢复仓库写权限后可提交同一变更。
+
+## 任务执行记录
+
+### FND-01
+
+- 状态：完成
+- 开始：2026-11-16 22:26 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / b60b10eed31715daf54dde8150526f5c81e2df8f
+- 范围：从已提交代码导出隔离副本，按锁文件安装，重新核实环境、类型、构建、物理、联机、真实浏览器与双客户端恢复；更新基线和持久验证报告。暂不改游戏玩法或完成后续任务。
+- 实现：全新归档副本与锁定安装，更新 BASELINE、旧文档差异及持久证据；测试生成的四个已跟踪文件均留在副本，玩法代码与锁文件未改。
+- 验证：npm ci/typecheck/build 退出 0；physics 18/18；net PASS=176/FAIL=0；Chromium PASS=7/SKIP=0/FAIL=0；双 SDK 客户端 17 项 PASS/0 failure。环境和每条命令见报告，本次未沿用旧测试结果。
+- 证据：本提交（git log -- docs/productization/reports/FND-01.md 可定位）；reports/FND-01.md、reports/FND-01/results.json 和 8 份原始文本日志。
+- 风险与剩余：本地验收无阻塞。GitHub 写入仍为 403，远端未同步；既有构建体积提示、未覆盖错误码与 SDK 警告已在报告记录，后续按相关任务处理。
+- 回滚：本任务只修改基线、报告、执行记录与对应复选框，可独立回退。
+- 下一项：FND-02/FND-03/FND-06；未执行或勾选后续任务。
 
 ## 记录模板
 
