@@ -1,0 +1,127 @@
+{
+  "version": "1.2.0",
+  "table": "guildjob",
+  "source_path": "assets/res/raw-assets/resources/data/guildjob.txt",
+  "source_sha256": "cb916f988a19616ab9a45e5aa381354412dc31b76d0acba6c9b0cd384f8b6f21",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "jobName",
+      "original_key": "jobName",
+      "label": "职位名字",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "jobchinese",
+      "original_key": "jobchinese",
+      "label": "职位中文",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "jobWeight",
+      "original_key": "jobWeight",
+      "label": "职位大小",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "jobAmount",
+      "original_key": "jobAmount",
+      "label": "数量上限",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "dealApp",
+      "original_key": "dealApp",
+      "label": "审核权限",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "guildEdit",
+      "original_key": "guildEdit",
+      "label": "公会设置权限",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "kickout",
+      "original_key": "kickout",
+      "label": "公会设置权限",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "President",
+      "jobName": "$PRESIDENT",
+      "jobchinese": "主席",
+      "jobWeight": "1",
+      "jobAmount": "1",
+      "dealApp": "TRUE",
+      "guildEdit": "TRUE",
+      "kickout": "TRUE"
+    },
+    {
+      "id": "VicePresident",
+      "jobName": "$VICEPRESIDENT",
+      "jobchinese": "副主席",
+      "jobWeight": "2",
+      "jobAmount": "2",
+      "dealApp": "TRUE",
+      "guildEdit": "TRUE",
+      "kickout": "TRUE"
+    },
+    {
+      "id": "Manager",
+      "jobName": "$MANAGER",
+      "jobchinese": "经理",
+      "jobWeight": "3",
+      "jobAmount": "5",
+      "dealApp": "FALSE",
+      "guildEdit": "FALSE",
+      "kickout": "FALSE"
+    },
+    {
+      "id": "Adviser",
+      "jobName": "$ADVISER",
+      "jobchinese": "顾问",
+      "jobWeight": "4",
+      "jobAmount": "10",
+      "dealApp": "FALSE",
+      "guildEdit": "FALSE",
+      "kickout": "FALSE"
+    },
+    {
+      "id": "Member",
+      "jobName": "$MEMBER",
+      "jobchinese": "成员",
+      "jobWeight": "5",
+      "jobAmount": "9999999",
+      "dealApp": "FALSE",
+      "guildEdit": "FALSE",
+      "kickout": "FALSE"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    8,
+    8,
+    8,
+    8,
+    8
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

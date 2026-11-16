@@ -1,0 +1,98 @@
+{
+  "version": "1.2.0",
+  "table": "dailyworldrefresh",
+  "source_path": "assets/res/raw-assets/resources/data/dailyworldrefresh.txt",
+  "source_sha256": "427025283e2e26172e2e4c329590900959a4226257c9a0d6214c322e07f2ea9a",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "Comment",
+      "original_key": "Comment",
+      "label": "备注",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "StartRefer",
+      "original_key": "StartRefer",
+      "label": "起始参照",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "FirstSec",
+      "original_key": "FirstSec",
+      "label": "起始第一次触发秒数",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "Interval",
+      "original_key": "Interval",
+      "label": "循环间隔 至少为1",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "EventTypes",
+      "original_key": "EventTypes",
+      "label": "触发事件列表",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "EventValues",
+      "original_key": "EventValues",
+      "label": "事件值",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "Comment": "每日0点触发",
+      "StartRefer": "NowDay",
+      "FirstSec": "0",
+      "Interval": "86400",
+      "EventTypes": "Day_h0",
+      "EventValues": ""
+    },
+    {
+      "id": "2",
+      "Comment": "每周星期一0点",
+      "StartRefer": "NowWeek",
+      "FirstSec": "0",
+      "Interval": "604800",
+      "EventTypes": "Week_d1h0",
+      "EventValues": null
+    },
+    {
+      "id": "3",
+      "Comment": "自开服以来每周触发一次",
+      "StartRefer": "StartServerDay",
+      "FirstSec": "0",
+      "Interval": "604801",
+      "EventTypes": "Week_From_ServerStart",
+      "EventValues": null
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    7,
+    6,
+    6
+  ],
+  "short_rows": [
+    4,
+    5
+  ],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

@@ -1,0 +1,55 @@
+{
+  "version": "1.5.5",
+  "table": "freedraw",
+  "source_path": "assets/res/raw-assets/resources/data/freedraw.txt",
+  "source_sha256": "0d356c99417ce8de72bd8fa5f7db7263b3b2273e7c5c9dbd191f82c2dd9ba3bd",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "cnt",
+      "original_key": "cnt",
+      "label": "最大免费次数",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "interval",
+      "original_key": "interval",
+      "label": "刷新时间",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "cnt": "0",
+      "interval": "0"
+    },
+    {
+      "id": "2",
+      "cnt": "0",
+      "interval": "0"
+    },
+    {
+      "id": "3",
+      "cnt": "0",
+      "interval": "0"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3,
+    3,
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

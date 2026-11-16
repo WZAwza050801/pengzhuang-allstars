@@ -1,0 +1,252 @@
+[
+  {
+    "id": "S01",
+    "title": "碰撞全明星：游戏介绍与历史更新",
+    "url": "https://www.taptap.cn/app/13833/all-info",
+    "kind": "官方入驻商店页面／官方更新日志",
+    "date": "2016-12 历史日志；页面无单一发布日期",
+    "supports": "开发商、原用 Cocos Creator、模式、弧线存在、全球过线判定、操作调整",
+    "limits": "商店描述包含宣传语言；不是完整规则书。页面不同位置的更新时间不一致。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S02",
+    "title": "碰撞全明星：TapTap 主页面",
+    "url": "https://www.taptap.cn/app/13833",
+    "kind": "游戏平台状态记录",
+    "date": "2016-10-29 为平台列出的 Android 上线日期；2026-11-14 核查状态",
+    "supports": "游戏身份、上线日期、目前标记已停服",
+    "limits": "没有准确停服日及停服原因；不可据此判断所有历史渠道同时停服。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S03",
+    "title": "11 月 21 日版本更新公告（V1.2.1）",
+    "url": "https://www.taptap.cn/moment/15205128717994616?group_id=1102",
+    "kind": "梦加网络官方公告",
+    "date": "2016-11-18 发布；2016-11-21 更新",
+    "supports": "大罗、木乐的技能概率；状态差的属性惩罚",
+    "limits": "仅对应这一版平衡；概率不是完整技能效果。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S04",
+    "title": "V1.4.0 版本更新公告",
+    "url": "https://www.taptap.cn/moment/15209013016791720",
+    "kind": "梦加网络官方公告",
+    "date": "页面显示 2017-01-18；正文安排 2017-01-17 更新",
+    "supports": "训练场、友谊赛、额外行动、部分技能平衡及杯赛开球",
+    "limits": "落款写成 2016 年，与正文、页面日期冲突；按页面和正文标记 2017，保留原始矛盾。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S05",
+    "title": "精英测试震撼来袭 体验指尖竞技",
+    "url": "https://www.9game.cn/pengzhuang/1284230.html",
+    "kind": "2016 年媒体转载宣传稿",
+    "date": "2016-11-02",
+    "supports": "保存 4 张早期宣传图、球场及阵容外观",
+    "limits": "图片只有 500×300；不适合读取小字或估计精确物理参数。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S06",
+    "title": "碰撞全明星：4399 专区",
+    "url": "https://news.4399.com/pzqmx/",
+    "kind": "游戏门户图库／历史专区",
+    "date": "图像所在资料与 2016 年资讯对应；图库上传日未独立核实",
+    "supports": "5 张 480×800 竖屏宣传图；5 对 5 布局、阵容及大厅",
+    "limits": "宣传图有装饰、透视与遮挡；不能当作像素级 UI 原稿。页面字符集需 GB18030 解码。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S07",
+    "title": "咸鱼游戏宣布代理 Facebook 热门体育产品 Total Soccer",
+    "url": "https://news.17173.com/content/04202018/160501237.shtml",
+    "kind": "标注来源为官方的媒体转载稿",
+    "date": "2018-04-20",
+    "supports": "Total Soccer 与碰撞全明星名称对应；1V1 同时在线、轮流回合的桌面撞球玩法",
+    "limits": "发行宣传稿；用户量数据未经独立审计，本资料未采用。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S08",
+    "title": "厦门梦加网络科技股份有限公司 2018 年半年度报告",
+    "url": "https://file.finance.sina.com.cn/211.154.219.97%3A9494/MRGG/XSB/2018-8/2018-08-24/4686967.PDF",
+    "kind": "公司公开披露文件（新浪镜像）",
+    "date": "2018 年半年度；镜像路径 2018-08-24",
+    "supports": "PDF 第 2 页：2018-03-20 签约，2018-06-14 微信小游戏上线",
+    "limits": "说明 H5 项目的发行时间，不证明独立手游和微信版规则相同，也不提供停服原因。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S09",
+    "title": "Total Soccer：Tamindir 游戏页",
+    "url": "https://www.tamindir.com/indir/total-soccer/",
+    "kind": "2017 年海外应用门户页面",
+    "date": "2017-11-22",
+    "supports": "开发商标为 Mechanist Games；5 张海外宣传图、嵌入视频链接",
+    "limits": "画面品牌为 All-Star Soccer；可做同开发商海外视觉线索，不保证与中文各版本完全一致。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S10",
+    "title": "Total Soccer - TR",
+    "url": "https://www.youtube.com/watch?v=euDrVEFqia0",
+    "kind": "开发商名下 YouTube 视频／oEmbed 元数据",
+    "date": "第三方嵌入页写 2017-11-22；YouTube 原始发布日期未核实",
+    "supports": "oEmbed 返回标题 Total Soccer - TR，上传者显示 Mechanist Games",
+    "limits": "本次未播放或逐帧核验内容、时长与可完整播放性；不是已核验的一局实况。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S11",
+    "title": "碰撞全明星：玩家评价与官方回复",
+    "url": "https://www.taptap.cn/app/13833/review",
+    "kind": "玩家一手体验＋官方账号回复",
+    "date": "所用讨论为 2016-10-30 至 2016-11-02",
+    "supports": "官方回复确认新手教程包含弧线球；可检查早期玩家感受",
+    "limits": "玩家提议的磁铁传球不是已实现功能；个人评价不代表完整规则或普遍体验。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S12",
+    "title": "碰撞全明星正式版下载页",
+    "url": "https://www.k73.com/down/android/241006.html",
+    "kind": "第三方应用目录",
+    "date": "页面版本写 1.5.2；素材地址含 2016-11-01",
+    "supports": "历史宣传图与镜像来源；后续实际文件核查得到1.2.0内部版本、87卡及头像等资源。",
+    "limits": "页面标称1.5.2，但实际下载文件为1.2.0；未运行安装包，不保证远端热更新和服务器最终配置。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S13",
+    "title": "碰撞全明星：AppStorio 历史商店镜像",
+    "url": "https://app-1166844582.appstor.io/",
+    "kind": "第三方 App Store 元数据镜像",
+    "date": "历史版本写 1.5.2；无可靠发布日期",
+    "supports": "iOS ID 1166844582，1.5.2 版本更新线索",
+    "limits": "当前 screenshot 链接实际是占位图，未收入截图；不能当作官方当前可下载证据。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S14",
+    "title": "碰撞全明星删档封测公告",
+    "url": "https://www.taptap.cn/moment/15202912128992374?group_id=1102",
+    "kind": "游戏官方公告",
+    "date": "2016-09-09",
+    "supports": "2016-09-10 至 09-25 安卓删档封测",
+    "limits": "2016-09-26 的关服是这一轮测试结束，不是后来永久停服公告。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S15",
+    "title": "Qt6 碰撞全明星1.5.5下载页与实际文件",
+    "url": "https://www.qt6.com/apk/75837.html",
+    "kind": "第三方镜像＋实际文件内部元数据",
+    "date": "页面更新时间2018-11-13；内部versionCode2017110302，不等同确认发布日期",
+    "supports": "内部versionName1.5.5；137卡、106卡表关联人物、额外独立头像与配置和场地图像",
+    "limits": "文件来源为第三方；未运行客户端，不保证热更新、渠道和服务端最终数据。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "S16",
+    "title": "Guillermo Enio Burdisso Galatasaray’da",
+    "url": "https://www.galatasaray.org/haber/gs-sportif-a-s/guillermo-enio-burdisso-galatasaray-da/10807",
+    "kind": "加拉塔萨雷俱乐部官方签约公告",
+    "date": "2014-02-03",
+    "supports": "该俱乐部当时签约Guillermo Enio Burdisso，用于标记耳帝原表Nicolas身份与俱乐部的冲突",
+    "limits": "不能单凭俱乐部自动把游戏原名改成兄弟；还需头像或游戏直接证据。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T01",
+    "title": "Vite Building for Production",
+    "url": "https://vite.dev/guide/build",
+    "kind": "官方开发文档",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "说明前端构建产生可静态托管产物",
+    "limits": "不能据此承载常驻联机房间。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T02",
+    "title": "PixiJS 8 Rendering",
+    "url": "https://pixijs.com/8.x/guides/components/renderers",
+    "kind": "官方开发文档",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "说明渲染器选项，文档推荐生产使用WebGL",
+    "limits": "版本页面会变化；未做本项目性能实测。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T03",
+    "title": "Planck.js project",
+    "url": "https://piqnt.com/",
+    "kind": "项目官方页面",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "JavaScript/TypeScript 2D刚体，浏览器和Node支持",
+    "limits": "不是本包安装兼容性验证，也不证明原作采用它。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T04",
+    "title": "Planck.js Body / Bullets",
+    "url": "https://piqnt.dev/planck.js/docs/body.html",
+    "kind": "项目官方文档；搜索索引可读",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "动态体bullet与高速连续碰撞说明",
+    "limits": "本次直开返回访问错误；依据可读索引，实际最高速仍需验证。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T05",
+    "title": "Planck.js Simulation",
+    "url": "https://piqnt.dev/planck.js/docs/world/simulation.html",
+    "kind": "项目官方文档",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "固定时间步与world.step说明",
+    "limits": "120Hz是本项目建议，不是文档指定或原版参数。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T06",
+    "title": "Colyseus State Synchronization",
+    "url": "https://docs.colyseus.io/state",
+    "kind": "官方开发文档，页面版本0.18",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "服务器控制同步状态的模式",
+    "limits": "具体SDK与Schema写法须按锁定版本实现。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T07",
+    "title": "Colyseus Reconnection",
+    "url": "https://docs.colyseus.io/room/reconnection",
+    "kind": "官方开发文档，页面版本0.18",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "重连机制与凭证恢复的基础",
+    "limits": "60秒、等待与判负由游戏自己定义；不自动实现进程重启恢复。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T08",
+    "title": "Vite Env Variables and Modes",
+    "url": "https://vite.dev/guide/env-and-mode",
+    "kind": "官方开发文档",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "VITE_变量暴露给客户端构建",
+    "limits": "不能用于保存服务端密钥。",
+    "checked_at": "2026-11-14"
+  },
+  {
+    "id": "T09",
+    "title": "Render Deploy for Free",
+    "url": "https://render.com/docs/free",
+    "kind": "托管平台官方方案文档",
+    "date": "2026-11-14查阅的现行页面，无统一发布日期",
+    "supports": "免费服务的休眠与本地文件易失限制",
+    "limits": "套餐随时变化；本项目尚未部署，也没有报价。",
+    "checked_at": "2026-11-14"
+  }
+]

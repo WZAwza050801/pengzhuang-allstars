@@ -1,0 +1,4067 @@
+[
+  {
+    "player_id": "10101",
+    "game_name": "马少尔",
+    "card_table_name": "马少尔",
+    "real_name_original": "安东尼·马歇尔",
+    "real_name_en_key": "Anthony Martial",
+    "english_game_name": "Marshall",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 34,
+    "power": 51,
+    "mind": 53,
+    "radian": 55,
+    "precision": 47,
+    "skill_ids": "10;11;12",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1001_10101",
+    "portrait_file": "portraits_1_2_0/head_1001_10101.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "be5ec2957f720ce429cf08423f2c4cea7d7077532a3acf391e1eaad8b154080f",
+    "sprite_frame": {
+      "name": "head_1001_10101",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1698,
+        1316,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1001_10101.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10102",
+    "game_name": "小胖",
+    "card_table_name": "小胖",
+    "real_name_original": "韦恩·鲁尼",
+    "real_name_en_key": "Wayne Rooney",
+    "english_game_name": "Roon",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 56,
+    "power": 56,
+    "mind": 57,
+    "radian": 52,
+    "precision": 56,
+    "skill_ids": "20;21;22",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1001_10102",
+    "portrait_file": "portraits_1_2_0/head_1001_10102.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "b48afac44e0b40742bd523ccee9bdb4de27d0f6683ab5f9f5ad04af1980df59a",
+    "sprite_frame": {
+      "name": "head_1001_10102",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1504,
+        1316,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1001_10102.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10103",
+    "game_name": "玛塔叔叔",
+    "card_table_name": "玛塔叔叔",
+    "real_name_original": "胡安·马塔",
+    "real_name_en_key": "Juan Mata",
+    "english_game_name": "Matador",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 24,
+    "power": 50,
+    "mind": 53,
+    "radian": 60,
+    "precision": 60,
+    "skill_ids": "30;31;32",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1001_10103",
+    "portrait_file": "portraits_1_2_0/head_1001_10103.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "0507a53373bbebe86816b37a07307a86197ba11301a2684bc406cf862d407173",
+    "sprite_frame": {
+      "name": "head_1001_10103",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1316,
+        1704,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1001_10103.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10104",
+    "game_name": "得佩",
+    "card_table_name": "得佩",
+    "real_name_original": "孟菲斯·德佩",
+    "real_name_en_key": "Memphis Depay",
+    "english_game_name": "Decay",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 43,
+    "power": 53,
+    "mind": 46,
+    "radian": 57,
+    "precision": 51,
+    "skill_ids": "390;391;392",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1001_10104",
+    "portrait_file": "portraits_1_2_0/head_1001_10104.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "891acc7f26c22143c73da5fccd8d1ea0c2808626217cd6dc259bc89fcf814df7",
+    "sprite_frame": {
+      "name": "head_1001_10104",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1316,
+        1510,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1001_10104.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10105",
+    "game_name": "小猪",
+    "card_table_name": "小猪",
+    "real_name_original": "巴斯蒂安·施魏因施泰格",
+    "real_name_en_key": "Bastian Schweinsteiger",
+    "english_game_name": "Swinestiger",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 49,
+    "power": 47,
+    "mind": 51,
+    "radian": 47,
+    "precision": 49,
+    "skill_ids": "400;402;404",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1001_10105",
+    "portrait_file": "portraits_1_2_0/head_1001_10105.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "9c70015ab163a5e758d3ac9228a40ccab425c49a35f23d27b2b487d6ab9c846d",
+    "sprite_frame": {
+      "name": "head_1001_10105",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1316,
+        1316,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1001_10105.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10106",
+    "game_name": "罗货",
+    "card_table_name": "罗货",
+    "real_name_original": "马科斯·罗霍",
+    "real_name_en_key": "Marcos Rojo",
+    "english_game_name": "Roho",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 53,
+    "power": 32,
+    "mind": 43,
+    "radian": 41,
+    "precision": 34,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_1001_10106",
+    "portrait_file": "portraits_1_2_0/head_1001_10106.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "417648a32d49923ece73503c2daebe365b40ecd0741d0e0faf8ad119f2adde87",
+    "sprite_frame": {
+      "name": "head_1001_10106",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1720,
+        1128,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1001_10106.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10107",
+    "game_name": "布琳德",
+    "card_table_name": "布琳德",
+    "real_name_original": "达利·布林德",
+    "real_name_en_key": "Daley Blind",
+    "english_game_name": "Blinds",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 58,
+    "power": 34,
+    "mind": 48,
+    "radian": 36,
+    "precision": 49,
+    "skill_ids": "410;411;412",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1001_10107",
+    "portrait_file": "portraits_1_2_0/head_1001_10107.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "fd5414b476e60b4b3b00507d79596386e91337e4a7bafb258c17bf1b1e9e8909",
+    "sprite_frame": {
+      "name": "head_1001_10107",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1526,
+        1128,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1001_10107.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10201",
+    "game_name": "阿圭罗",
+    "card_table_name": "阿圭罗",
+    "real_name_original": "塞尔吉奥·阿奎罗",
+    "real_name_en_key": "Sergio Aguero",
+    "english_game_name": "Aquaro",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 30,
+    "power": 71,
+    "mind": 60,
+    "radian": 61,
+    "precision": 75,
+    "skill_ids": "40;41;42",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1002_10201",
+    "portrait_file": "portraits_1_2_0/head_1002_10201.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "59ef5d1260f7fcf7154cadf714b7a268b8c64ce13d1efec82670c811e6ff5c43",
+    "sprite_frame": {
+      "name": "head_1002_10201",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1332,
+        1128,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1002_10201.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10202",
+    "game_name": "思特灵",
+    "card_table_name": "思特灵",
+    "real_name_original": "拉希姆·斯特林",
+    "real_name_en_key": "Raheem Sterling",
+    "english_game_name": "Starling",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 45,
+    "power": 46,
+    "mind": 39,
+    "radian": 61,
+    "precision": 57,
+    "skill_ids": "420;421;422",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1002_10202",
+    "portrait_file": "portraits_1_2_0/head_1002_10202.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "8fe5e63d421125889b83cccac7d61b18acea7d7cccfe18ba12008d314ed8a2f6",
+    "sprite_frame": {
+      "name": "head_1002_10202",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1729,
+        940,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1002_10202.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10203",
+    "game_name": "喜娃",
+    "card_table_name": "喜娃",
+    "real_name_original": "大卫·席尔瓦",
+    "real_name_en_key": "David Silva",
+    "english_game_name": "Silver",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 32,
+    "power": 60,
+    "mind": 57,
+    "radian": 72,
+    "precision": 69,
+    "skill_ids": "50;51;52",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1002_10203",
+    "portrait_file": "portraits_1_2_0/head_1002_10203.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "4e41e96142953dc81994b1940090e7a775a8c4ea55b80c1e7b449c74c17432a2",
+    "sprite_frame": {
+      "name": "head_1002_10203",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1535,
+        940,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1002_10203.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10204",
+    "game_name": "土雷",
+    "card_table_name": "土雷",
+    "real_name_original": "亚亚·图雷",
+    "real_name_en_key": "Yaya Toure",
+    "english_game_name": "Tourettes",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 58,
+    "power": 57,
+    "mind": 48,
+    "radian": 43,
+    "precision": 57,
+    "skill_ids": "60;61;62",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1002_10204",
+    "portrait_file": "portraits_1_2_0/head_1002_10204.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "5507346e6fc308390833b6758dee8b6a6271d68fa0075e8ea7a5e090ec27f0ed",
+    "sprite_frame": {
+      "name": "head_1002_10204",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1341,
+        940,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1002_10204.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10205",
+    "game_name": "丁丁",
+    "card_table_name": "丁丁",
+    "real_name_original": "凯文·德布鲁因",
+    "real_name_en_key": "Kevin De Bruyne",
+    "english_game_name": "Da Brown",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 41,
+    "power": 56,
+    "mind": 50,
+    "radian": 62,
+    "precision": 60,
+    "skill_ids": "430;431;432",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1002_10205",
+    "portrait_file": "portraits_1_2_0/head_1002_10205.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "1f3657728e778788a3ec5f73cc5e4ea7f16015a898827ce593faa05d6918adb3",
+    "sprite_frame": {
+      "name": "head_1002_10205",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1711,
+        752,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1002_10205.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10206",
+    "game_name": "孔向前",
+    "card_table_name": "孔向前",
+    "real_name_original": "文森特·孔帕尼",
+    "real_name_en_key": "Vincent Kompany",
+    "english_game_name": "Company",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "DC",
+    "rarity_code": 4,
+    "weight": 76,
+    "power": 46,
+    "mind": 57,
+    "radian": 39,
+    "precision": 55,
+    "skill_ids": "70;71;72",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1002_10206",
+    "portrait_file": "portraits_1_2_0/head_1002_10206.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "4299aa5a6952c92a63ce219c3d085b0e3a58f75d49b7eb736a9b899a4df9dc2f",
+    "sprite_frame": {
+      "name": "head_1002_10206",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1517,
+        752,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1002_10206.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10207",
+    "game_name": "德漏勺",
+    "card_table_name": "德漏勺",
+    "real_name_original": "马丁·德米凯利斯",
+    "real_name_en_key": "Martin Demichelis",
+    "english_game_name": "Demichelle",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 52,
+    "power": 32,
+    "mind": 45,
+    "radian": 34,
+    "precision": 37,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_1002_10207",
+    "portrait_file": "portraits_1_2_0/head_1002_10207.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "1e65c5ccd1505437716af634ce6576b56faa0fa115db71df946aa145fd4f424f",
+    "sprite_frame": {
+      "name": "head_1002_10207",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1711,
+        564,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1002_10207.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10301",
+    "game_name": "克斯塔",
+    "card_table_name": "克斯塔",
+    "real_name_original": "迭戈·科斯塔",
+    "real_name_en_key": "Diego Costa",
+    "english_game_name": "Costanza",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "club_id": "1003",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 49,
+    "power": 50,
+    "mind": 63,
+    "radian": 43,
+    "precision": 48,
+    "skill_ids": "440;441;442",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1003_10301",
+    "portrait_file": "portraits_1_2_0/head_1003_10301.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "c3900aa029dbf9ff97239604727f257035915e254992aa06bc4e946783172eb1",
+    "sprite_frame": {
+      "name": "head_1003_10301",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1517,
+        564,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1003_10301.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10302",
+    "game_name": "扎球王",
+    "card_table_name": "扎球王",
+    "real_name_original": "埃登·阿扎尔",
+    "real_name_en_key": "Eden Hazard",
+    "english_game_name": "Hazardous",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "club_id": "1003",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 27,
+    "power": 64,
+    "mind": 60,
+    "radian": 74,
+    "precision": 63,
+    "skill_ids": "80;81;82",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1003_10302",
+    "portrait_file": "portraits_1_2_0/head_1003_10302.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "e5c67a54f5227d22c76d9ba8ef09ceb641e55b64ae855dcf6a2ab427002fb72c",
+    "sprite_frame": {
+      "name": "head_1003_10302",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1711,
+        376,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1003_10302.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10303",
+    "game_name": "小法",
+    "card_table_name": "小法",
+    "real_name_original": "塞斯克·法布雷加斯",
+    "real_name_en_key": "Cesc Fabregas",
+    "english_game_name": "Fibreglass",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "club_id": "1003",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 38,
+    "power": 46,
+    "mind": 50,
+    "radian": 53,
+    "precision": 59,
+    "skill_ids": "90;91;92",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1003_10303",
+    "portrait_file": "portraits_1_2_0/head_1003_10303.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "18dc947aca972ba0761635f981f089d71f895fbb07327e6a08b2ccf1c3e3b7aa",
+    "sprite_frame": {
+      "name": "head_1003_10303",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1517,
+        376,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1003_10303.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10304",
+    "game_name": "小金人",
+    "card_table_name": "小金人",
+    "real_name_original": "奥斯卡·多斯桑托斯",
+    "real_name_en_key": "Oscar",
+    "english_game_name": "Ocarina",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "club_id": "1003",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 34,
+    "power": 45,
+    "mind": 52,
+    "radian": 62,
+    "precision": 49,
+    "skill_ids": "450;451;452",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1003_10304",
+    "portrait_file": "portraits_1_2_0/head_1003_10304.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "8619fab70cba6435d8d19e8ea7a4d873403b24ff63ea923ecdc04407a6bbcdee",
+    "sprite_frame": {
+      "name": "head_1003_10304",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1329,
+        702,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1003_10304.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10305",
+    "game_name": "玛蒂七",
+    "card_table_name": "玛蒂七",
+    "real_name_original": "内曼贾·马蒂奇",
+    "real_name_en_key": "Nemanja Matic",
+    "english_game_name": "Matisse",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "club_id": "1003",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 59,
+    "power": 39,
+    "mind": 50,
+    "radian": 28,
+    "precision": 41,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_1003_10305",
+    "portrait_file": "portraits_1_2_0/head_1003_10305.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "d7080bf35cd198ffa61175edc1443f6294272e05cf16349f159a7bd9c068c831",
+    "sprite_frame": {
+      "name": "head_1003_10305",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1329,
+        508,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1003_10305.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10306",
+    "game_name": "特队",
+    "card_table_name": "特队",
+    "real_name_original": "约翰·特里",
+    "real_name_en_key": "John Terry",
+    "english_game_name": "T.Johns",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "club_id": "1003",
+    "position": "DC",
+    "rarity_code": 4,
+    "weight": 63,
+    "power": 40,
+    "mind": 71,
+    "radian": 39,
+    "precision": 62,
+    "skill_ids": "100;101;102",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1003_10306",
+    "portrait_file": "portraits_1_2_0/head_1003_10306.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "9f44b059020b6e8d021a70c2b5bf4f42e44aca5444c7ae18d4b0503de74cce50",
+    "sprite_frame": {
+      "name": "head_1003_10306",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1153,
+        896,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1003_10306.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10307",
+    "game_name": "阿紫",
+    "card_table_name": "阿紫",
+    "real_name_original": "阿斯皮利奎塔",
+    "real_name_en_key": "Cesar Azpilicueta",
+    "english_game_name": "Applicator",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "club_id": "1003",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 50,
+    "power": 48,
+    "mind": 47,
+    "radian": 39,
+    "precision": 46,
+    "skill_ids": "460;461;462",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1003_10307",
+    "portrait_file": "portraits_1_2_0/head_1003_10307.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "395eb939b55005a5eb68776a45a850434e28b3914e177da0b00767483f804a5c",
+    "sprite_frame": {
+      "name": "head_1003_10307",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1141,
+        702,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1003_10307.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10401",
+    "game_name": "基努",
+    "card_table_name": "基努",
+    "real_name_original": "奥利弗·吉鲁",
+    "real_name_en_key": "Olivier Giroud",
+    "english_game_name": "Ground",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "club_id": "1004",
+    "position": "ST",
+    "rarity_code": 2,
+    "weight": 57,
+    "power": 55,
+    "mind": 46,
+    "radian": 31,
+    "precision": 35,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_1004_10401",
+    "portrait_file": "portraits_1_2_0/head_1004_10401.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "cddf2c826b719c96d2e420d76255298af3e8dd26a83e6e0601345a204a4d2663",
+    "sprite_frame": {
+      "name": "head_1004_10401",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1141,
+        508,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1004_10401.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10402",
+    "game_name": "小老虎",
+    "card_table_name": "小老虎",
+    "real_name_original": "西奥·沃尔科特",
+    "real_name_en_key": "Theo Walcott",
+    "english_game_name": "Woolcat",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "club_id": "1004",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 32,
+    "power": 62,
+    "mind": 46,
+    "radian": 49,
+    "precision": 55,
+    "skill_ids": "110;111;112",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1004_10402",
+    "portrait_file": "portraits_1_2_0/head_1004_10402.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "0b1350152e89450469e4515a5f3c27a98fc0cb9a695c059733c3181fcb3b7659",
+    "sprite_frame": {
+      "name": "head_1004_10402",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1720,
+        188,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1004_10402.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10403",
+    "game_name": "桑大腿",
+    "card_table_name": "桑大腿",
+    "real_name_original": "阿莱克西斯·桑切斯",
+    "real_name_en_key": "Alexis Sanchez",
+    "english_game_name": "Sandwichez",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "club_id": "1004",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 39,
+    "power": 57,
+    "mind": 59,
+    "radian": 62,
+    "precision": 60,
+    "skill_ids": "120;121;122",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1004_10403",
+    "portrait_file": "portraits_1_2_0/head_1004_10403.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "318b1a813945c8dd152b2b928908bec8ab9417cf56f92bdce16acbe78d089569",
+    "sprite_frame": {
+      "name": "head_1004_10403",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1526,
+        188,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1004_10403.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10404",
+    "game_name": "大眼",
+    "card_table_name": "大眼",
+    "real_name_original": "梅苏特·厄齐尔",
+    "real_name_en_key": "Mesut ezil",
+    "english_game_name": "O'Zeal",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "club_id": "1004",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 32,
+    "power": 60,
+    "mind": 51,
+    "radian": 74,
+    "precision": 64,
+    "skill_ids": "130;131;132",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1004_10404",
+    "portrait_file": "portraits_1_2_0/head_1004_10404.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "e46a8f4b7e89b5af1d525d41b65adc4b736b5f2ab8e73a5be9c18a59a3155f2b",
+    "sprite_frame": {
+      "name": "head_1004_10404",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1141,
+        188,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1004_10404.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10405",
+    "game_name": "卡锁啦",
+    "card_table_name": "卡锁啦",
+    "real_name_original": "卡索拉",
+    "real_name_en_key": "Santi Cazorla",
+    "english_game_name": "Carloza",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "club_id": "1004",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 29,
+    "power": 42,
+    "mind": 54,
+    "radian": 60,
+    "precision": 53,
+    "skill_ids": "470;471;472",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_1004_10405",
+    "portrait_file": "portraits_1_2_0/head_1004_10405.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "6d230f017c874316eeb547f24021eb816e2fb678abc3f4bfcb54324968361c30",
+    "sprite_frame": {
+      "name": "head_1004_10405",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1332,
+        188,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1004_10405.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10406",
+    "game_name": "贝闪电",
+    "card_table_name": "贝闪电",
+    "real_name_original": "埃克托·贝莱林",
+    "real_name_en_key": "Hector Bellerin",
+    "english_game_name": "Bellringer",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "club_id": "1004",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 37,
+    "power": 34,
+    "mind": 43,
+    "radian": 46,
+    "precision": 42,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_1004_10406",
+    "portrait_file": "portraits_1_2_0/head_1004_10406.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "04744e303e6270ff4d3b6166f0d55c1965eb40b897752588f62eb7e30395a0b1",
+    "sprite_frame": {
+      "name": "head_1004_10406",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1128,
+        1746,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1004_10406.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "10407",
+    "game_name": "模特撒克",
+    "card_table_name": "模特撒克",
+    "real_name_original": "佩尔· 默特萨克",
+    "real_name_en_key": "Per Mertesacker",
+    "english_game_name": "Metasucker",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "club_id": "1004",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 58,
+    "power": 32,
+    "mind": 36,
+    "radian": 21,
+    "precision": 37,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_1004_10407",
+    "portrait_file": "portraits_1_2_0/head_1004_10407.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "e1c6d72eb88c228a4c0d3c0136554b11a522eca1f09152f86b65aa7658c8d42d",
+    "sprite_frame": {
+      "name": "head_1004_10407",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1128,
+        1552,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_1004_10407.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "60101",
+    "game_name": "告林斯曼",
+    "card_table_name": "告林斯曼",
+    "real_name_original": "郜林",
+    "real_name_en_key": "GaoLin",
+    "english_game_name": "Forest",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "club_id": "6001",
+    "position": "ST",
+    "rarity_code": 1,
+    "weight": 32,
+    "power": 36,
+    "mind": 43,
+    "radian": 35,
+    "precision": 34,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_6001_60101",
+    "portrait_file": "portraits_1_2_0/head_6001_60101.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "589b90a0bb41df8b9e5b30fe896e31fbef43fc98b7a6ec32286803a3d30af579",
+    "sprite_frame": {
+      "name": "head_6001_60101",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        188,
+        1788,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_6001_60101.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "60102",
+    "game_name": "杰马",
+    "card_table_name": "杰马",
+    "real_name_original": "杰克逊·马丁内斯",
+    "real_name_en_key": "Jackson Martinez",
+    "english_game_name": "Martíns",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "club_id": "6001",
+    "position": "ST",
+    "rarity_code": 2,
+    "weight": 46,
+    "power": 43,
+    "mind": 39,
+    "radian": 45,
+    "precision": 48,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_6001_60102",
+    "portrait_file": "portraits_1_2_0/head_6001_60102.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "d035517890cb339c384e6497a48122e208712c41abce687f42c0e94050eba00d",
+    "sprite_frame": {
+      "name": "head_6001_60102",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        188,
+        1594,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_6001_60102.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "60103",
+    "game_name": "高辣条",
+    "card_table_name": "高辣条",
+    "real_name_original": "里卡多·高拉特",
+    "real_name_en_key": "Ricardo Goulart",
+    "english_game_name": "Ghoulart",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "club_id": "6001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 43,
+    "power": 46,
+    "mind": 46,
+    "radian": 48,
+    "precision": 56,
+    "skill_ids": "140;141;142",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_6001_60103",
+    "portrait_file": "portraits_1_2_0/head_6001_60103.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "3b2c424a5d250cc053903074feedec4927d280d6bb0a8e6bb69bc241be2960cb",
+    "sprite_frame": {
+      "name": "head_6001_60103",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        188,
+        1400,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_6001_60103.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "60104",
+    "game_name": "郑队",
+    "card_table_name": "郑队",
+    "real_name_original": "郑智",
+    "real_name_en_key": "ZhengZhi",
+    "english_game_name": "Zheng",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "club_id": "6001",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 57,
+    "power": 32,
+    "mind": 41,
+    "radian": 21,
+    "precision": 32,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_6001_60104",
+    "portrait_file": "portraits_1_2_0/head_6001_60104.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "a7dd0c36c74f431e4217a8e6096cc18e08694870fe7093acc03824b3d22f68e6",
+    "sprite_frame": {
+      "name": "head_6001_60104",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        188,
+        1206,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_6001_60104.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "60105",
+    "game_name": "暴力鸟",
+    "card_table_name": "暴力鸟",
+    "real_name_original": "保利尼奥",
+    "real_name_en_key": "Paulinho",
+    "english_game_name": "Pauline",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "club_id": "6001",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 48,
+    "power": 39,
+    "mind": 44,
+    "radian": 45,
+    "precision": 43,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_6001_60105",
+    "portrait_file": "portraits_1_2_0/head_6001_60105.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "3cf620cc5980de0f58026117c8f54c0c175ee53692631192d90bd8c7b67eb8ca",
+    "sprite_frame": {
+      "name": "head_6001_60105",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        0,
+        1788,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_6001_60105.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "60106",
+    "game_name": "世界博",
+    "card_table_name": "世界博",
+    "real_name_original": "黄博文",
+    "real_name_en_key": "HuangBowen",
+    "english_game_name": "Yellow",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "club_id": "6001",
+    "position": "DC",
+    "rarity_code": 1,
+    "weight": 33,
+    "power": 28,
+    "mind": 34,
+    "radian": 34,
+    "precision": 30,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_6001_60106",
+    "portrait_file": "portraits_1_2_0/head_6001_60106.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "159b10f3b5eded71daaa911a43fa7eef204c89c1f80a824d86a2902b3d6ca7d3",
+    "sprite_frame": {
+      "name": "head_6001_60106",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        0,
+        1594,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_6001_60106.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "60107",
+    "game_name": "张莫斯",
+    "card_table_name": "张莫斯",
+    "real_name_original": "张琳芃",
+    "real_name_en_key": "ZhangLinfan",
+    "english_game_name": "Deluxe",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "club_id": "6001",
+    "position": "DC",
+    "rarity_code": 1,
+    "weight": 29,
+    "power": 22,
+    "mind": 41,
+    "radian": 35,
+    "precision": 32,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_6001_60107",
+    "portrait_file": "portraits_1_2_0/head_6001_60107.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "e076012a3e5a1b2cb985922d6e926f43faf680cd07b51292ab2c51ef4e1be903",
+    "sprite_frame": {
+      "name": "head_6001_60107",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        0,
+        1400,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_6001_60107.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20101",
+    "game_name": "莱万",
+    "card_table_name": "莱万",
+    "real_name_original": "罗伯特·莱万多夫斯基",
+    "real_name_en_key": "Robert Lewandowski",
+    "english_game_name": "Lemondonki",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "club_id": "2001",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 58,
+    "power": 60,
+    "mind": 46,
+    "radian": 49,
+    "precision": 60,
+    "skill_ids": "150;151;152",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2001_20101",
+    "portrait_file": "portraits_1_2_0/head_2001_20101.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "3ca7f39daafffe0ec518cf3e4dfa13311b4132b222f57cac8e7c4626623aff94",
+    "sprite_frame": {
+      "name": "head_2001_20101",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1128,
+        1358,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2001_20101.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20102",
+    "game_name": "木乐",
+    "card_table_name": "木乐",
+    "real_name_original": "托马斯·穆勒",
+    "real_name_en_key": "Thomas Muller",
+    "english_game_name": "Miller",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "club_id": "2001",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 43,
+    "power": 59,
+    "mind": 60,
+    "radian": 43,
+    "precision": 71,
+    "skill_ids": "160;161;162",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2001_20102",
+    "portrait_file": "portraits_1_2_0/head_2001_20102.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "c4f6d5eb1ff63b96a9fe87aef9207ec1a69d7d96a5c05a361b5d85b5e7df1086",
+    "sprite_frame": {
+      "name": "head_2001_20102",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1128,
+        1164,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2001_20102.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20103",
+    "game_name": "小飞侠",
+    "card_table_name": "小飞侠",
+    "real_name_original": "阿尔杰·罗本",
+    "real_name_en_key": "Arjen Robben",
+    "english_game_name": "Robber",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "club_id": "2001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 29,
+    "power": 54,
+    "mind": 52,
+    "radian": 67,
+    "precision": 55,
+    "skill_ids": "480;481;482",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2001_20103",
+    "portrait_file": "portraits_1_2_0/head_2001_20103.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "3b1da36f74114902637e77e5fe89999ecd8f0d37bad8f877998689442a951591",
+    "sprite_frame": {
+      "name": "head_2001_20103",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        940,
+        1746,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2001_20103.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20104",
+    "game_name": "格册",
+    "card_table_name": "格册",
+    "real_name_original": "马里奥·格策",
+    "real_name_en_key": "Mario Getze",
+    "english_game_name": "Gotcha",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "club_id": "2002",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 27,
+    "power": 55,
+    "mind": 44,
+    "radian": 69,
+    "precision": 57,
+    "skill_ids": "170;171;172",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2001_20104",
+    "portrait_file": "portraits_1_2_0/head_2001_20104.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "84ec94d5848faede0478d78ef4cb492e9f4479b525d47ece883aeed28277ff71",
+    "sprite_frame": {
+      "name": "head_2001_20104",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        940,
+        1552,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2001_20104.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20105",
+    "game_name": "比达二",
+    "card_table_name": "比达二",
+    "real_name_original": "阿图罗·比达尔",
+    "real_name_en_key": "Arturo Vidal",
+    "english_game_name": "Vital",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "club_id": "2001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 51,
+    "power": 48,
+    "mind": 67,
+    "radian": 46,
+    "precision": 49,
+    "skill_ids": "490;491;492",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2001_20105",
+    "portrait_file": "portraits_1_2_0/head_2001_20105.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "78f616ff5c0891f6d65e4d8d4caf83cb75cf53d9d9efdc88b4b8f9bfda42b9ba",
+    "sprite_frame": {
+      "name": "head_2001_20105",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        940,
+        1358,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2001_20105.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20106",
+    "game_name": "拉队",
+    "card_table_name": "拉队",
+    "real_name_original": "菲利普·拉姆",
+    "real_name_en_key": "Philipp Lahm",
+    "english_game_name": "Lamb",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "club_id": "2001",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 43,
+    "power": 62,
+    "mind": 61,
+    "radian": 46,
+    "precision": 63,
+    "skill_ids": "180;181;182",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2001_20106",
+    "portrait_file": "portraits_1_2_0/head_2001_20106.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "1b665bb9cc83b535a67a15978613bd252065fc8695e341c7046296f4405bfea9",
+    "sprite_frame": {
+      "name": "head_2001_20106",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        959,
+        976,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2001_20106.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20107",
+    "game_name": "博啊疼",
+    "card_table_name": "博啊疼",
+    "real_name_original": "热罗姆·博阿滕",
+    "real_name_en_key": "Jerrme Boateng",
+    "english_game_name": "Booting",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "club_id": "2001",
+    "position": "DC",
+    "rarity_code": 4,
+    "weight": 75,
+    "power": 31,
+    "mind": 36,
+    "radian": 52,
+    "precision": 61,
+    "skill_ids": "500;501;502",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2001_20107",
+    "portrait_file": "portraits_1_2_0/head_2001_20107.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "b6005615df48f2ef89da9f712da8d304b0c98c8f56b2af7ceb6154dfac90f7b2",
+    "sprite_frame": {
+      "name": "head_2001_20107",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        940,
+        1164,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2001_20107.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20201",
+    "game_name": "奥巴没样",
+    "card_table_name": "奥巴没样",
+    "real_name_original": "皮埃尔-埃梅里克·奥巴梅扬",
+    "real_name_en_key": "Pierre Emerick Aubameyang",
+    "english_game_name": "Auboomerang",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "club_id": "2002",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 36,
+    "power": 57,
+    "mind": 43,
+    "radian": 47,
+    "precision": 58,
+    "skill_ids": "190;191;192",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2002_20201",
+    "portrait_file": "portraits_1_2_0/head_2002_20201.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "61b5aab2285786f6fc5de49278951b3a60a843c8e64067e1ca9375f730deac20",
+    "sprite_frame": {
+      "name": "head_2002_20201",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        953,
+        782,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2002_20201.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20202",
+    "game_name": "螺一丝",
+    "card_table_name": "螺一丝",
+    "real_name_original": "马尔科·罗伊斯",
+    "real_name_en_key": "Marco Reus",
+    "english_game_name": "Rues",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "club_id": "2002",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 29,
+    "power": 62,
+    "mind": 53,
+    "radian": 63,
+    "precision": 63,
+    "skill_ids": "200;201;202",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2002_20202",
+    "portrait_file": "portraits_1_2_0/head_2002_20202.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "a4d0802bdce0c6c23cd01ed5dbe6e5284fd56ed9a4c07b9259cdbecb4c48caca",
+    "sprite_frame": {
+      "name": "head_2002_20202",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        953,
+        588,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2002_20202.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20203",
+    "game_name": "美西他娘",
+    "card_table_name": "美西他娘",
+    "real_name_original": "亨里克·姆希塔良",
+    "real_name_en_key": "Henrikh Mkhitaryan",
+    "english_game_name": "Mickytarian",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 32,
+    "power": 48,
+    "mind": 47,
+    "radian": 62,
+    "precision": 53,
+    "skill_ids": "510;511;512",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2002_20203",
+    "portrait_file": "portraits_1_2_0/head_2002_20203.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "4613612afb10cc5006c93d485dc8075b6434a00600dd9c011a4473ba7302d3d3",
+    "sprite_frame": {
+      "name": "head_2002_20203",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        953,
+        394,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2002_20203.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20204",
+    "game_name": "香川寿司",
+    "card_table_name": "香川寿司",
+    "real_name_original": "香川真司",
+    "real_name_en_key": "Shinji Kagawa",
+    "english_game_name": "Kawasaki",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "club_id": "2002",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 21,
+    "power": 40,
+    "mind": 39,
+    "radian": 59,
+    "precision": 48,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_2002_20204",
+    "portrait_file": "portraits_1_2_0/head_2002_20204.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "0c285290f7e71f255aa5a20c546dc47a44c08caffd18320e96e152826fd23847",
+    "sprite_frame": {
+      "name": "head_2002_20204",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        953,
+        200,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2002_20204.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20205",
+    "game_name": "景多安",
+    "card_table_name": "景多安",
+    "real_name_original": "伊尔卡伊·京多安",
+    "real_name_en_key": "Ilkay Gundogan",
+    "english_game_name": "Gundog",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "club_id": "1002",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 48,
+    "power": 46,
+    "mind": 42,
+    "radian": 50,
+    "precision": 48,
+    "skill_ids": "520;521;522",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2002_20205",
+    "portrait_file": "portraits_1_2_0/head_2002_20205.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "66c40eca5c238db7a4a0fa5f6df63a4fd93dd009ffaf1e1ce40ef843698a7be2",
+    "sprite_frame": {
+      "name": "head_2002_20205",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        765,
+        976,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2002_20205.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20206",
+    "game_name": "狐媚",
+    "card_table_name": "狐媚",
+    "real_name_original": "马茨·胡梅尔斯",
+    "real_name_en_key": "Mats Hummels",
+    "english_game_name": "Hummers",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "club_id": "2001",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 57,
+    "power": 39,
+    "mind": 47,
+    "radian": 43,
+    "precision": 44,
+    "skill_ids": "530;531;532",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_2002_20206",
+    "portrait_file": "portraits_1_2_0/head_2002_20206.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "1978014d2753e2a06c706767e91961f8d9b1df395c850422e4d00e0901b9b57f",
+    "sprite_frame": {
+      "name": "head_2002_20206",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        765,
+        782,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2002_20206.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "20207",
+    "game_name": "金特二",
+    "card_table_name": "金特二",
+    "real_name_original": "马蒂亚斯·金特尔",
+    "real_name_en_key": "Matthias Ginter",
+    "english_game_name": "Gunter",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "club_id": "2002",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 52,
+    "power": 41,
+    "mind": 41,
+    "radian": 29,
+    "precision": 42,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_2002_20207",
+    "portrait_file": "portraits_1_2_0/head_2002_20207.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "e45f2d330825740aa9d942624972371a45ece550f17d40d830aedac64a7e6300",
+    "sprite_frame": {
+      "name": "head_2002_20207",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        765,
+        588,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_2002_20207.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "30101",
+    "game_name": "迪吧啦",
+    "card_table_name": "迪吧啦",
+    "real_name_original": "保罗·迪巴拉",
+    "real_name_en_key": "Paulo Dybala",
+    "english_game_name": "Dublya",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "club_id": "3001",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 34,
+    "power": 57,
+    "mind": 53,
+    "radian": 60,
+    "precision": 69,
+    "skill_ids": "210;211;212",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_3001_30101",
+    "portrait_file": "portraits_1_2_0/head_3001_30101.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "39a8da03bd174614d583b42f862fb1fe7e5d331f8850ae1147ce403f5bf0f87c",
+    "sprite_frame": {
+      "name": "head_3001_30101",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        765,
+        394,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_3001_30101.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "30102",
+    "game_name": "莫邋遢",
+    "card_table_name": "莫邋遢",
+    "real_name_original": "阿尔瓦罗·莫拉塔",
+    "real_name_en_key": "alvaro Morata",
+    "english_game_name": "Morales",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 45,
+    "power": 53,
+    "mind": 51,
+    "radian": 53,
+    "precision": 51,
+    "skill_ids": "540;541;542",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_3001_30102",
+    "portrait_file": "portraits_1_2_0/head_3001_30102.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "702e9780366aa84d24211b6acedf7a14bb4fa8e20b294549d427b6df60f4f767",
+    "sprite_frame": {
+      "name": "head_3001_30102",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        765,
+        200,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_3001_30102.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "30103",
+    "game_name": "波霸",
+    "card_table_name": "波霸",
+    "real_name_original": "保罗·博格巴",
+    "real_name_en_key": "Paul Pogba",
+    "english_game_name": "Potba",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 60,
+    "power": 59,
+    "mind": 53,
+    "radian": 62,
+    "precision": 57,
+    "skill_ids": "380;381;382",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_3001_30103",
+    "portrait_file": "portraits_1_2_0/head_3001_30103.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "efdf426d2b792a71d5e28212bda7f7ff28e090eb737873cf790f412dd090d73d",
+    "sprite_frame": {
+      "name": "head_3001_30103",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1788,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_3001_30103.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "30104",
+    "game_name": "马绩效",
+    "card_table_name": "马绩效",
+    "real_name_original": "克劳迪奥·马尔基西奥",
+    "real_name_en_key": "Claudio Marchisio",
+    "english_game_name": "Machismo",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "club_id": "3001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 48,
+    "power": 50,
+    "mind": 48,
+    "radian": 50,
+    "precision": 57,
+    "skill_ids": "220;221;222",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_3001_30104",
+    "portrait_file": "portraits_1_2_0/head_3001_30104.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "8806de4adeb2e5df565cf4813b714a426e3b326d235ca2deb6a478207bbaa90f",
+    "sprite_frame": {
+      "name": "head_3001_30104",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1594,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_3001_30104.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "30105",
+    "game_name": "脸哥",
+    "card_table_name": "脸哥",
+    "real_name_original": "萨米·赫迪拉",
+    "real_name_en_key": "Sami Khedira",
+    "english_game_name": "Kadira",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "club_id": "3001",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 53,
+    "power": 47,
+    "mind": 50,
+    "radian": 29,
+    "precision": 43,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_3001_30105",
+    "portrait_file": "portraits_1_2_0/head_3001_30105.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "d78c61456966f6d4ad606dd3092292d97d731b51f333f9d0e121e85c51e8137b",
+    "sprite_frame": {
+      "name": "head_3001_30105",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1400,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_3001_30105.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "30106",
+    "game_name": "菠萝奇",
+    "card_table_name": "菠萝奇",
+    "real_name_original": "莱昂纳多·博努奇",
+    "real_name_en_key": "Leonardo Bonucci",
+    "english_game_name": "Bonus",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "club_id": "3001",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 53,
+    "power": 41,
+    "mind": 47,
+    "radian": 44,
+    "precision": 42,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_3001_30106",
+    "portrait_file": "portraits_1_2_0/head_3001_30106.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "267182cf233a7751bfd4a126cae99c3a88305ca607383d75cb32e1eff8117dbd",
+    "sprite_frame": {
+      "name": "head_3001_30106",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1206,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_3001_30106.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "30107",
+    "game_name": "鲁加尼",
+    "card_table_name": "鲁加尼",
+    "real_name_original": "丹尼尔·鲁加尼",
+    "real_name_en_key": "Daniele Rugani",
+    "english_game_name": "Ranugi",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "club_id": "3001",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 56,
+    "power": 29,
+    "mind": 36,
+    "radian": 30,
+    "precision": 32,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_3001_30107",
+    "portrait_file": "portraits_1_2_0/head_3001_30107.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "1bbe299c0d5add6c147011419a6fb9ef26822673c9f7a16299e04b3e09b6794a",
+    "sprite_frame": {
+      "name": "head_3001_30107",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        1012,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_3001_30107.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40101",
+    "game_name": "内少",
+    "card_table_name": "内少",
+    "real_name_original": "内马尔",
+    "real_name_en_key": "Neymar",
+    "english_game_name": "Naymer",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "club_id": "4001",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 29,
+    "power": 58,
+    "mind": 61,
+    "radian": 76,
+    "precision": 71,
+    "skill_ids": "230;231;232",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40101",
+    "portrait_file": "portraits_1_2_0/head_4001_40101.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "676feea845ef3356b22303e97535152111446d83a449ef91da50ba88dbedccc0",
+    "sprite_frame": {
+      "name": "head_4001_40101",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        752,
+        1786,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40101.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40102",
+    "game_name": "苏牙",
+    "card_table_name": "苏牙",
+    "real_name_original": "苏亚雷斯",
+    "real_name_en_key": "Luis Suarez",
+    "english_game_name": "Swarez",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "club_id": "4001",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 43,
+    "power": 57,
+    "mind": 57,
+    "radian": 62,
+    "precision": 74,
+    "skill_ids": "240;241;242",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40102",
+    "portrait_file": "portraits_1_2_0/head_4001_40102.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "d7dbea6eceff82bd11130ac900771d1c50de44412d3f1a854a2198e49d865fcd",
+    "sprite_frame": {
+      "name": "head_4001_40102",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        752,
+        1592,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40102.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40103",
+    "game_name": "小白",
+    "card_table_name": "小白",
+    "real_name_original": "安德雷斯·伊涅斯塔",
+    "real_name_en_key": "Andres Iniesta",
+    "english_game_name": "Instanta",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "club_id": "4001",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 29,
+    "power": 48,
+    "mind": 62,
+    "radian": 75,
+    "precision": 58,
+    "skill_ids": "250;252;254",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40103",
+    "portrait_file": "portraits_1_2_0/head_4001_40103.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "4a6f8af66a36874609893f3f70f30649b8048e169cbd96ea036d11fb22a6844a",
+    "sprite_frame": {
+      "name": "head_4001_40103",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        752,
+        1398,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40103.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40104",
+    "game_name": "布教授",
+    "card_table_name": "布教授",
+    "real_name_original": "塞尔吉奥·布斯克茨",
+    "real_name_en_key": "Sergio Busquets",
+    "english_game_name": "Bouquets",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "club_id": "4001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 48,
+    "power": 46,
+    "mind": 49,
+    "radian": 45,
+    "precision": 46,
+    "skill_ids": "550;552;554",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40104",
+    "portrait_file": "portraits_1_2_0/head_4001_40104.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "c751ea41eaf39287ecb40818910aa43884ead7ce7078fbe87e7edaba248be512",
+    "sprite_frame": {
+      "name": "head_4001_40104",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        752,
+        1204,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40104.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40105",
+    "game_name": "小马哥",
+    "card_table_name": "小马哥",
+    "real_name_original": "哈维尔·马斯切拉诺",
+    "real_name_en_key": "Javier Mascherano",
+    "english_game_name": "Mascara",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "club_id": "4001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 57,
+    "power": 34,
+    "mind": 54,
+    "radian": 36,
+    "precision": 53,
+    "skill_ids": "560;561;562",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40105",
+    "portrait_file": "portraits_1_2_0/head_4001_40105.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "c96c4f1d66136ed91a356f0c51a47808786cb45abb1edad592204e2d8c20a825",
+    "sprite_frame": {
+      "name": "head_4001_40105",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        577,
+        970,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40105.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40106",
+    "game_name": "皮主席",
+    "card_table_name": "皮主席",
+    "real_name_original": "杰拉德·皮克",
+    "real_name_en_key": "Gerard Pique",
+    "english_game_name": "Peekay",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "club_id": "4001",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 63,
+    "power": 36,
+    "mind": 41,
+    "radian": 48,
+    "precision": 46,
+    "skill_ids": "260;261;262",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40106",
+    "portrait_file": "portraits_1_2_0/head_4001_40106.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "2d320227aa3a1e46398cc65b21e74c92c7df97fd8558847a5a9ee33282bdb42d",
+    "sprite_frame": {
+      "name": "head_4001_40106",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        577,
+        776,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40106.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40107",
+    "game_name": "铁达尼",
+    "card_table_name": "铁达尼",
+    "real_name_original": "丹尼尔·阿尔维斯",
+    "real_name_en_key": "Daniel Alves",
+    "english_game_name": "Halves",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "club_id": "3001",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 38,
+    "power": 45,
+    "mind": 52,
+    "radian": 60,
+    "precision": 43,
+    "skill_ids": "570;571;572",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40107",
+    "portrait_file": "portraits_1_2_0/head_4001_40107.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "892a9486d88d9d0c7785683ddade96881a33d9e0fb7d7ce39a72171eba0ec897",
+    "sprite_frame": {
+      "name": "head_4001_40107",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        577,
+        582,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40107.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40108",
+    "game_name": "梅球王",
+    "card_table_name": "梅球王",
+    "real_name_original": "里奥·梅西",
+    "real_name_en_key": "Lionel Messi",
+    "english_game_name": "Messy",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "club_id": "4001",
+    "position": "ST",
+    "rarity_code": 5,
+    "weight": 31,
+    "power": 74,
+    "mind": 67,
+    "radian": 77,
+    "precision": 77,
+    "skill_ids": "360;361;362",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4001_40108",
+    "portrait_file": "portraits_1_2_0/head_4001_40108.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "7c459fdae64bfabb1456c6aeb68d489eb679f0994e1848c8857ee96e2d83f53c",
+    "sprite_frame": {
+      "name": "head_4001_40108",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        577,
+        388,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4001_40108.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40201",
+    "game_name": "笨马",
+    "card_table_name": "笨马",
+    "real_name_original": "卡里姆·本泽马",
+    "real_name_en_key": "Karim Benzema",
+    "english_game_name": "Benzene",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 44,
+    "power": 53,
+    "mind": 36,
+    "radian": 61,
+    "precision": 56,
+    "skill_ids": "580;581;582",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40201",
+    "portrait_file": "portraits_1_2_0/head_4002_40201.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "3ee67b00d738000df92f81ffefc30332d9ae77b1b9ce7f045da3d458210b9b38",
+    "sprite_frame": {
+      "name": "head_4002_40201",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        577,
+        194,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40201.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40202",
+    "game_name": "大圣",
+    "card_table_name": "大圣",
+    "real_name_original": "加雷斯·贝尔",
+    "real_name_en_key": "Gareth Bale",
+    "english_game_name": "Bail",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 57,
+    "power": 76,
+    "mind": 43,
+    "radian": 57,
+    "precision": 62,
+    "skill_ids": "270;271;272",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40202",
+    "portrait_file": "portraits_1_2_0/head_4002_40202.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "232a65fc775693ffa99f5c011754f61a7dbf04eeb8adfa3c57566acd7729cb9c",
+    "sprite_frame": {
+      "name": "head_4002_40202",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        577,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40202.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40203",
+    "game_name": "甜菜",
+    "card_table_name": "甜菜",
+    "real_name_original": "托尼·克罗斯",
+    "real_name_en_key": "Toni Kroos",
+    "english_game_name": "Cruise",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 58,
+    "power": 57,
+    "mind": 37,
+    "radian": 56,
+    "precision": 65,
+    "skill_ids": "280;282;284",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40203",
+    "portrait_file": "portraits_1_2_0/head_4002_40203.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "650f9d0fbf6a4111ed913ed07889866379eff8c67068594cf5b3c0254515bc59",
+    "sprite_frame": {
+      "name": "head_4002_40203",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        564,
+        1786,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40203.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40204",
+    "game_name": "魔笛",
+    "card_table_name": "魔笛",
+    "real_name_original": "卢卡·莫德里奇",
+    "real_name_en_key": "Luka Modric",
+    "english_game_name": "Midrich",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 32,
+    "power": 46,
+    "mind": 49,
+    "radian": 64,
+    "precision": 56,
+    "skill_ids": "590;591;592",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40204",
+    "portrait_file": "portraits_1_2_0/head_4002_40204.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "587cad3628cc6c78a2b5138ce33ce9856d28c8a74adcfdd4cd38d1ff60f659fa",
+    "sprite_frame": {
+      "name": "head_4002_40204",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        564,
+        1592,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40204.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40205",
+    "game_name": "哈罗",
+    "card_table_name": "哈罗",
+    "real_name_original": "哈梅斯·罗德里格斯",
+    "real_name_en_key": "James Rodriguez",
+    "english_game_name": "Rodgerez",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 36,
+    "power": 53,
+    "mind": 57,
+    "radian": 57,
+    "precision": 56,
+    "skill_ids": "600;601;602",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40205",
+    "portrait_file": "portraits_1_2_0/head_4002_40205.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "683d9ca21c6f8d304352687eb20dadd2de2291079b9dd20f65624ea987485237",
+    "sprite_frame": {
+      "name": "head_4002_40205",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        564,
+        1398,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40205.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40206",
+    "game_name": "水爷",
+    "card_table_name": "水爷",
+    "real_name_original": "塞尔吉奥·拉莫斯",
+    "real_name_en_key": "Sergio Ramos",
+    "english_game_name": "Ramoos",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "DC",
+    "rarity_code": 4,
+    "weight": 72,
+    "power": 47,
+    "mind": 60,
+    "radian": 49,
+    "precision": 49,
+    "skill_ids": "290;291;292",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40206",
+    "portrait_file": "portraits_1_2_0/head_4002_40206.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "4bac3af9af1c63e964082a1427220d9d4b8909d2173079f6744c7e946dd5d53a",
+    "sprite_frame": {
+      "name": "head_4002_40206",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        564,
+        1204,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40206.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40207",
+    "game_name": "武僧",
+    "card_table_name": "武僧",
+    "real_name_original": "佩佩",
+    "real_name_en_key": "Pepe",
+    "english_game_name": "Peppy",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 62,
+    "power": 43,
+    "mind": 43,
+    "radian": 37,
+    "precision": 44,
+    "skill_ids": "300;301;302",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40207",
+    "portrait_file": "portraits_1_2_0/head_4002_40207.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "480b4da83ac1fdb0c601f7239822f6e7d5822f1ebbf58ae96db79413b2b9304a",
+    "sprite_frame": {
+      "name": "head_4002_40207",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        389,
+        970,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40207.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40208",
+    "game_name": "小小罗",
+    "card_table_name": "小小罗",
+    "real_name_original": "克里斯蒂亚诺·罗纳尔多",
+    "real_name_en_key": "Cristiano Ronaldo",
+    "english_game_name": "Rolando",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "club_id": "4002",
+    "position": "ST",
+    "rarity_code": 5,
+    "weight": 65,
+    "power": 77,
+    "mind": 55,
+    "radian": 57,
+    "precision": 71,
+    "skill_ids": "370;371;372",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4002_40208",
+    "portrait_file": "portraits_1_2_0/head_4002_40208.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "c35026b03f4eea22a9ce116b420ca4dc4664d8606f6e7aea95dfb490ba063223",
+    "sprite_frame": {
+      "name": "head_4002_40208",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        389,
+        776,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4002_40208.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40301",
+    "game_name": "格子",
+    "card_table_name": "格子",
+    "real_name_original": "安东尼·格里斯曼",
+    "real_name_en_key": "Antoine Griezmann",
+    "english_game_name": "Greasemann",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "club_id": "4003",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 28,
+    "power": 45,
+    "mind": 48,
+    "radian": 51,
+    "precision": 49,
+    "skill_ids": "310;311;312",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4003_40301",
+    "portrait_file": "portraits_1_2_0/head_4003_40301.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "675b977d4659762cf71da5cb6afc54fec83224b47d3be733e0e064f5007cd91b",
+    "sprite_frame": {
+      "name": "head_4003_40301",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        389,
+        582,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4003_40301.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40302",
+    "game_name": "托妞",
+    "card_table_name": "托妞",
+    "real_name_original": "费尔南多·托雷斯",
+    "real_name_en_key": "Fernando Torres",
+    "english_game_name": "Torro",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "club_id": "4003",
+    "position": "ST",
+    "rarity_code": 2,
+    "weight": 40,
+    "power": 46,
+    "mind": 46,
+    "radian": 46,
+    "precision": 44,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_4003_40302",
+    "portrait_file": "portraits_1_2_0/head_4003_40302.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "f4ec3ff07a4130e43c27a839294427e6be77cb6f3dd01f9c2c03cf21d4f83582",
+    "sprite_frame": {
+      "name": "head_4003_40302",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        389,
+        388,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4003_40302.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40303",
+    "game_name": "科客",
+    "card_table_name": "科客",
+    "real_name_original": "科克",
+    "real_name_en_key": "Koke",
+    "english_game_name": "Keko",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "club_id": "4003",
+    "position": "CM",
+    "rarity_code": 4,
+    "weight": 58,
+    "power": 60,
+    "mind": 46,
+    "radian": 45,
+    "precision": 58,
+    "skill_ids": "320;321;322",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4003_40303",
+    "portrait_file": "portraits_1_2_0/head_4003_40303.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "3616d243110113b96994c6041ef5c6f25afcfa29292e9223ed80f6257ecb8f6c",
+    "sprite_frame": {
+      "name": "head_4003_40303",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        389,
+        194,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4003_40303.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40304",
+    "game_name": "费南斯",
+    "card_table_name": "费南斯",
+    "real_name_original": "奥古斯托·费尔南德斯",
+    "real_name_en_key": "Augusto Fernandez",
+    "english_game_name": "Fernando",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "club_id": "4003",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 41,
+    "power": 37,
+    "mind": 45,
+    "radian": 47,
+    "precision": 42,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_4003_40304",
+    "portrait_file": "portraits_1_2_0/head_4003_40304.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "cf06ad3b434c424410f3b0791489ec0ed6868c4a77597ce40e5781ab9eb04d8e",
+    "sprite_frame": {
+      "name": "head_4003_40304",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        389,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4003_40304.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40305",
+    "game_name": "卡啦斯",
+    "card_table_name": "卡啦斯",
+    "real_name_original": "费雷拉·卡拉斯科",
+    "real_name_en_key": "Yannick Ferreira Carrasco",
+    "english_game_name": "Cascaro",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "club_id": "4003",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 32,
+    "power": 44,
+    "mind": 49,
+    "radian": 53,
+    "precision": 46,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_4003_40305",
+    "portrait_file": "portraits_1_2_0/head_4003_40305.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "223e1d079a3ddffbc17ddfb27ea16e0b2cb986ddc120fca758457f9dbe1e192c",
+    "sprite_frame": {
+      "name": "head_4003_40305",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        376,
+        1786,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4003_40305.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40306",
+    "game_name": "哥丁",
+    "card_table_name": "哥丁",
+    "real_name_original": "迭戈·戈丁",
+    "real_name_en_key": "Diego Godin",
+    "english_game_name": "Gudin",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "club_id": "4003",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 58,
+    "power": 35,
+    "mind": 52,
+    "radian": 30,
+    "precision": 58,
+    "skill_ids": "610;611;612",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_4003_40306",
+    "portrait_file": "portraits_1_2_0/head_4003_40306.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "a15b12726b7d0b4cd3a141fcb3893515c0186a1a2828fb8ba2b28c5138cbebfa",
+    "sprite_frame": {
+      "name": "head_4003_40306",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        376,
+        1592,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4003_40306.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "40307",
+    "game_name": "陆一丝",
+    "card_table_name": "陆一丝",
+    "real_name_original": "菲利佩·路易斯",
+    "real_name_en_key": "Filipe Luis",
+    "english_game_name": "Louís",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "club_id": "4003",
+    "position": "DC",
+    "rarity_code": 2,
+    "weight": 39,
+    "power": 43,
+    "mind": 46,
+    "radian": 53,
+    "precision": 43,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_4003_40307",
+    "portrait_file": "portraits_1_2_0/head_4003_40307.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "bbc99652f488b4e5a4acbe41ffc7d575deeeae011c629dd3310c2eb468c35dfd",
+    "sprite_frame": {
+      "name": "head_4003_40307",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        376,
+        1398,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_4003_40307.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "50101",
+    "game_name": "咔哇泥",
+    "card_table_name": "咔哇泥",
+    "real_name_original": "埃丁森·卡瓦尼",
+    "real_name_en_key": "Edinson Cavani",
+    "english_game_name": "Cavanini",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "club_id": "5001",
+    "position": "ST",
+    "rarity_code": 3,
+    "weight": 62,
+    "power": 46,
+    "mind": 48,
+    "radian": 49,
+    "precision": 56,
+    "skill_ids": "620;621;622",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_5001_50101",
+    "portrait_file": "portraits_1_2_0/head_5001_50101.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "5021da8525c124c1dde30aa8a5471987b229354a5efbfb5d73acdedcbaba62f4",
+    "sprite_frame": {
+      "name": "head_5001_50101",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        376,
+        1204,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_5001_50101.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "50102",
+    "game_name": "奉先",
+    "card_table_name": "奉先",
+    "real_name_original": "兹拉坦·伊布拉西莫维奇",
+    "real_name_en_key": "Zlatan Ibrahimovic",
+    "english_game_name": "Abrahamovic",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "club_id": "1001",
+    "position": "ST",
+    "rarity_code": 4,
+    "weight": 63,
+    "power": 71,
+    "mind": 53,
+    "radian": 57,
+    "precision": 57,
+    "skill_ids": "330;331;332",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_5001_50102",
+    "portrait_file": "portraits_1_2_0/head_5001_50102.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "1c602818efdc67841de20191c1d84a68585cb5b5b2c16870dc3b5dcdd3660792",
+    "sprite_frame": {
+      "name": "head_5001_50102",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        201,
+        970,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_5001_50102.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "50103",
+    "game_name": "天使",
+    "card_table_name": "天使",
+    "real_name_original": "安赫尔·迪马里亚",
+    "real_name_en_key": "angel Di Maria",
+    "english_game_name": "De Maríachi",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "club_id": "5001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 32,
+    "power": 43,
+    "mind": 49,
+    "radian": 60,
+    "precision": 51,
+    "skill_ids": "340;341;342",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_5001_50103",
+    "portrait_file": "portraits_1_2_0/head_5001_50103.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "9a0823de9519f9e62da9e71a0c8521f41f9d5c9fbdc8de5999b941499b945f07",
+    "sprite_frame": {
+      "name": "head_5001_50103",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        201,
+        776,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_5001_50103.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "50104",
+    "game_name": "微辣帝",
+    "card_table_name": "微辣帝",
+    "real_name_original": "马尔科·维拉蒂",
+    "real_name_en_key": "Marco Verratti",
+    "english_game_name": "Verrity",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "club_id": "5001",
+    "position": "CM",
+    "rarity_code": 3,
+    "weight": 47,
+    "power": 32,
+    "mind": 50,
+    "radian": 56,
+    "precision": 42,
+    "skill_ids": "630;631;632",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_5001_50104",
+    "portrait_file": "portraits_1_2_0/head_5001_50104.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "8f89f0b7cfe7527b24846d98c6df64fe1627accea7f75a4f77fe7fd9c96f7141",
+    "sprite_frame": {
+      "name": "head_5001_50104",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        201,
+        582,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_5001_50104.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "50105",
+    "game_name": "小卢卡斯",
+    "card_table_name": "小卢卡斯",
+    "real_name_original": "卢卡斯·莫拉",
+    "real_name_en_key": "Lucas Moura",
+    "english_game_name": "Mora",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "club_id": "5001",
+    "position": "CM",
+    "rarity_code": 2,
+    "weight": 32,
+    "power": 37,
+    "mind": 40,
+    "radian": 56,
+    "precision": 44,
+    "skill_ids": "",
+    "skill_unlock_levels": "",
+    "portrait_id": "head_5001_50105",
+    "portrait_file": "portraits_1_2_0/head_5001_50105.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "95a02ea2e1e1931e94191fa2cc3b1aae38460c9e8c49470e034a71b5980a0769",
+    "sprite_frame": {
+      "name": "head_5001_50105",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        201,
+        388,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_5001_50105.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "50106",
+    "game_name": "蓬蓬",
+    "card_table_name": "蓬蓬",
+    "real_name_original": "大卫·路易斯",
+    "real_name_en_key": "David Luiz",
+    "english_game_name": "Lewis",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "club_id": "5001",
+    "position": "DC",
+    "rarity_code": 3,
+    "weight": 49,
+    "power": 43,
+    "mind": 59,
+    "radian": 45,
+    "precision": 42,
+    "skill_ids": "640;641;642",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_5001_50106",
+    "portrait_file": "portraits_1_2_0/head_5001_50106.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "649e447854c7a7113e0d2501d64591b7b8b793df7c2b1346cf98bcc6fd357507",
+    "sprite_frame": {
+      "name": "head_5001_50106",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        201,
+        194,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_5001_50106.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "50107",
+    "game_name": "弟媳",
+    "card_table_name": "弟媳",
+    "real_name_original": "蒂亚戈·席尔瓦",
+    "real_name_en_key": "Thiago Silva",
+    "english_game_name": "Silver",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "club_id": "5001",
+    "position": "DC",
+    "rarity_code": 4,
+    "weight": 61,
+    "power": 44,
+    "mind": 62,
+    "radian": 44,
+    "precision": 60,
+    "skill_ids": "350;351;352",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_5001_50107",
+    "portrait_file": "portraits_1_2_0/head_5001_50107.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "2bf0a9ccc4a11564766c0b65596535364d8d24ac177f232b562de76d2a8b1278",
+    "sprite_frame": {
+      "name": "head_5001_50107",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        201,
+        0,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_5001_50107.png",
+    "source_version": "1.2.0"
+  },
+  {
+    "player_id": "90002",
+    "game_name": "大罗",
+    "card_table_name": "大罗",
+    "real_name_original": "罗纳尔多",
+    "real_name_en_key": "Ronaldo Luiz NazarioDe Lima",
+    "english_game_name": "Rolando",
+    "club_original": "Leader",
+    "club_cn": "传奇球员",
+    "club_id": "9001",
+    "position": "ST",
+    "rarity_code": 9,
+    "weight": 70,
+    "power": 70,
+    "mind": 50,
+    "radian": 60,
+    "precision": 70,
+    "skill_ids": "660;661;662",
+    "skill_unlock_levels": "3;6;10",
+    "portrait_id": "head_9001_90002",
+    "portrait_file": "portraits_1_2_0/head_9001_90002.png",
+    "portrait_width": 194,
+    "portrait_height": 188,
+    "portrait_sha256": "b231fe3aa0824e982173cdfa6124c7fc2fd4b684282821ced1ec89d3c9edefd8",
+    "sprite_frame": {
+      "name": "head_9001_90002",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        0,
+        1206,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ],
+      "rotated": 1
+    },
+    "evidence": "同一历史 APK：card.txt 原名字段 → headIcon → cc.SpriteFrame → head.png；中文显示名另核对 language/zh.txt",
+    "generation_output": "head_9001_90002.png",
+    "source_version": "1.2.0"
+  }
+]

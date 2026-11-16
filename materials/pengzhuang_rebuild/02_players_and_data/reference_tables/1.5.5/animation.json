@@ -1,0 +1,204 @@
+{
+  "version": "1.5.5",
+  "table": "animation",
+  "source_path": "assets/res/raw-assets/resources/data/animation.txt",
+  "source_sha256": "abf1461050065ed5ad0a27928429750dc4d4fb20254e0f458544ecda9e1c3906",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "编号",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "soccerID",
+      "original_key": "soccerID",
+      "label": "动画演示球员",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "intervalTime",
+      "original_key": "intervalTime",
+      "label": "循环间隔时间",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "countPerLoop",
+      "original_key": "countPerLoop",
+      "label": "每个循环内演示次数",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "lineDirection",
+      "original_key": "lineDirection",
+      "label": "直线方向",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "linePower",
+      "original_key": "linePower",
+      "label": "直线力度",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "arcDirection",
+      "original_key": "arcDirection",
+      "label": "弧线方向",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "arcPower",
+      "original_key": "arcPower",
+      "label": "弧线力度",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "10001",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "266",
+      "linePower": "60",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10002",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "285",
+      "linePower": "60",
+      "arcDirection": "100",
+      "arcPower": "60"
+    },
+    {
+      "id": "10003",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "258",
+      "linePower": "70",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10004",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "312",
+      "linePower": "70",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10005",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "306",
+      "linePower": "80",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10006",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "271",
+      "linePower": "70",
+      "arcDirection": "130",
+      "arcPower": "48"
+    },
+    {
+      "id": "10007",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "325",
+      "linePower": "80",
+      "arcDirection": "300",
+      "arcPower": "60"
+    },
+    {
+      "id": "10008",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "170",
+      "linePower": "80",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10009",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "125",
+      "linePower": "80",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10010",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "0",
+      "linePower": "0",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10011",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "0",
+      "linePower": "0",
+      "arcDirection": "0",
+      "arcPower": "0"
+    },
+    {
+      "id": "10012",
+      "soccerID": "0",
+      "intervalTime": "1",
+      "countPerLoop": "3",
+      "lineDirection": "0",
+      "linePower": "0",
+      "arcDirection": "0",
+      "arcPower": "0"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

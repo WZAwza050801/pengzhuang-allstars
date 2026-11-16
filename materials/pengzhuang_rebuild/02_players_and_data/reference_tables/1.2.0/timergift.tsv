@@ -1,0 +1,4 @@
+﻿ID	最大数量	获取间隔s	任务达成
+id	cnt	interval	progress
+1	3	14400	0
+2	2	86400	8

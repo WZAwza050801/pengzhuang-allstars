@@ -1,0 +1,11 @@
+﻿阵型ID	阵型名字	阵型图标	开启所需等级	开启金币花费	开启钻石花费	球员1位置(区域;x:y)	球员2位置(区域;x:y)	球员3位置(区域;x:y)	球员4位置(区域;x:y)	球员5位置(区域;x:y)
+id	formationName	formationIcon	reqLevel	needMoney	needCrystal	soccerPos0	soccerPos1	soccerPos2	soccerPos3	soccerPos4
+10001	2_2_1(A)	Btn_Icon_03	1	1000	0	ST;35:50	ST;65:50	CM;20:50	CM;80:50	DC;50:50
+10002	1_2_2(A)	Btn_Icon_03	2	2000	0	ST;50:50	CM;30:50	CM;70:50	DC;10:50	DC;90:50
+10003	2_2_1(W)	Btn_Icon_03	3	4000	0	ST;10:50	ST;90:50	CM;30:50	CM;70:50	DC;50:50
+10004	1_2_2(S)	Btn_Icon_03	4	8000	0	ST;50:50	CM;20:50	CM;80:50	DC;35:50	DC;65:50
+10005	2_2_1(S)	Btn_Icon_03	5	9500	0	ST;33:50	ST;67:50	CM;33:50	CM;67:50	DC;50:50
+10006	2_1_2(W)	Btn_Icon_03	6	11800	0	ST;10:50	ST;90:50	CM;50:50	DC;30:50	DC;70:50
+10007	3_1_1(A)	Btn_Icon_03	7	14100	0	ST;10:50	ST;50:50	ST;90:50	CM;50:50	DC;50:50
+10008	1_1_3(D)	Btn_Icon_03	8	16400	0	ST;50:50	CM;50:50	DC;10:50	DC;50:50	DC;90:50
+10009	1_3_1(S)	Btn_Icon_03	9	18700	0	ST;50:50	CM;10:50	CM;50:50	CM;90:50	DC;50:50

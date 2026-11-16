@@ -1,0 +1,74 @@
+[
+  {
+    "id": "NAME-01",
+    "type": "人名",
+    "subject": "40109 / head_4001_40109",
+    "finding": "额外独立头像未被 card 表引用；外观与语言表 Ronaldinho_Gaucho／小罗匹配。",
+    "status": "等待用户确认",
+    "action": "确认是否按小罗收录；属性继续留空。",
+    "source": "1.5.5 SpriteFrame + language/zh.txt、en.txt"
+  },
+  {
+    "id": "NAME-02",
+    "type": "人名",
+    "subject": "80206 耳帝 / 布尔迪索",
+    "finding": "卡表与英文键写 Nicolas Burdisso，俱乐部字段却是加拉塔萨雷；俱乐部官方签约记录写 Guillermo Enio Burdisso。",
+    "status": "待确认",
+    "action": "保留原表身份，另记 Guillermo 候选，不自动替换。",
+    "source": "https://www.galatasaray.org/haber/gs-sportif-a-s/guillermo-enio-burdisso-galatasaray-da/10807"
+  },
+  {
+    "id": "DATA-01",
+    "type": "数值",
+    "subject": "1.5.5 的20条卡牌",
+    "finding": "card 表基础五属性与 card_attr 的1级行存在不一致。",
+    "status": "已标注，取值优先级未知",
+    "action": "两组值并排保留；以后用运行证据判断。",
+    "source": "card.txt + card_attr.txt"
+  },
+  {
+    "id": "DATA-02",
+    "type": "版本",
+    "subject": "1.2.0 的90001 齐祖",
+    "finding": "有10行等级属性及语言表条目，但无 card 记录与对应头像。",
+    "status": "已保留未关联记录",
+    "action": "不把这10行丢弃，也不认定当时已可获得该球员。",
+    "source": "1.2.0 card_attr.txt + card.txt"
+  },
+  {
+    "id": "RULE-01",
+    "type": "字段",
+    "subject": "weight / power / mind / radian / precision",
+    "finding": "源表只定义为重量、力度、心理、弧度、精准；未恢复物理单位和换算。",
+    "status": "未知",
+    "action": "按属性点保存，不标成kg、N、角度或命中率。",
+    "source": "card.txt 第一行字段名"
+  },
+  {
+    "id": "RULE-02",
+    "type": "字段",
+    "subject": "技能duration与回合",
+    "finding": "原始duration数值与文案所说回合数不总相同。",
+    "status": "计数语义未知",
+    "action": "保留duration与原始规则描述两列，不自行换算秒数或玩家回合。",
+    "source": "skill.txt"
+  },
+  {
+    "id": "RULE-03",
+    "type": "字段",
+    "subject": "triggerPerList与条件列表",
+    "finding": "概率和条件有多项分号列表。",
+    "status": "执行逻辑未知",
+    "action": "保留顺序与列表，暂不相乘成一个概率。",
+    "source": "skill.txt"
+  },
+  {
+    "id": "NAME-03",
+    "type": "别称",
+    "subject": "后期公告中的蜘蛛侠",
+    "finding": "卡表中奥巴梅扬仍叫奥巴没样；早期小传称蜘蛛侠。公告的别称尚未与具体ID直接关联。",
+    "status": "别称关联待核对",
+    "action": "显示名保留原表，不把它改成门将或另一位球员。",
+    "source": "官方V1.4.0公告与卡表"
+  }
+]

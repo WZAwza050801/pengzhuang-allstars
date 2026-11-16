@@ -1,0 +1,116 @@
+{
+  "version": "1.5.5",
+  "table": "activity",
+  "source_path": "assets/res/raw-assets/resources/data/activity.txt",
+  "source_sha256": "b0834c3d8aff0213db462716e722815a6eba758c64c05449dc44a97c0d7db776",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "活动ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "Type",
+      "original_key": "Type",
+      "label": "类型",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "MailID",
+      "original_key": "MailID",
+      "label": "邮件ID",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "Open",
+      "original_key": "Open",
+      "label": "默认状态",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "BeginTime",
+      "original_key": "BeginTime",
+      "label": "开始时间",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "EndTime",
+      "original_key": "EndTime",
+      "label": "结束时间",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "CloseTime",
+      "original_key": "CloseTime",
+      "label": "关闭时间",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "Json",
+      "original_key": "Json",
+      "label": "默认配置(json格式)",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1001",
+      "Type": "FirstRecharge",
+      "MailID": "",
+      "Open": "TRUE",
+      "BeginTime": "",
+      "EndTime": "",
+      "CloseTime": "",
+      "Json": "{\"awards\":[{\"itemId\": 9014, \"count\": 1, \"recharge\": 0}]}"
+    },
+    {
+      "id": "1002",
+      "Type": "AccumRecharge",
+      "MailID": "",
+      "Open": "FALSE",
+      "BeginTime": "1488326400",
+      "EndTime": "1488333600",
+      "CloseTime": "1488333600",
+      "Json": "{\"config\": [{\"limit\": 300,\"items\": [{\"uniformId\":1, \"count\":300},{\"uniformId\":10104, \"count\":1}]},{\"limit\": 600,\"items\": [{\"uniformId\":1, \"count\":600},{\"uniformId\":10105, \"count\":1}]},{\"limit\": 1200,\"items\": [{\"uniformId\":1, \"count\":1200},{\"uniformId\":3, \"count\":1200},{\"uniformId\":10106, \"count\":1}]},{\"limit\": 3000,\"items\": [{\"uniformId\":1, \"count\":3000},{\"uniformId\":3, \"count\":1200},{\"uniformId\":180202, \"count\":1}]}]}"
+    },
+    {
+      "id": "1003",
+      "Type": "Turntable",
+      "MailID": "",
+      "Open": "FALSE",
+      "BeginTime": "1488326400",
+      "EndTime": "1488333600",
+      "CloseTime": "1488333600",
+      "Json": "{\"basePond\":\"5000\",\"maxPond\":\"10000\",\"oncePondAddPro\":\"0.1\",\"onceScoreAdd\" : \"10\", \"costCoin\":\"1\", \"onceConsume\":\"50\", \"awards\":[{\"aid\":\"1\", \"weight\":\"30\", \"items\":[{\"uniformId\": 2, \"count\": 1}]}, {\"aid\":\"2\", \"weight\":\"30\", \"items\":[{\"uniformId\": 10101, \"count\": 1}]},{\"aid\":\"3\", \"weight\":\"30\", \"items\":[{\"uniformId\": 10203, \"count\": 1}]},{\"aid\":\"4\", \"weight\":\"30\", \"items\":[{\"uniformId\": 2, \"count\": 1000}]},{\"aid\":\"5\", \"weight\":\"30\", \"items\":[{\"uniformId\": 40110, \"count\": 1}]}, {\"aid\":\"6\", \"weight\":\"30\", \"items\":[{\"uniformId\": 70, \"count\": 1}]}],\"scores\": [{\"aid\":\"1\", \"score\":\"60\", \"items\":[{\"uniformId\": 1, \"count\": 1000}]}, {\"aid\":\"2\", \"score\":\"300\", \"items\":[{\"uniformId\": 2, \"count\": 100}]},{\"aid\":\"3\", \"score\":\"600\", \"items\":[{\"uniformId\": 2, \"count\": 100}, {\"uniformId\": 9001, \"count\": 1}]},{\"aid\":\"4\", \"score\":\"800\", \"items\":[{\"uniformId\": 1, \"count\": 5000}]},{\"aid\":\"5\", \"score\":\"1000\", \"items\":[{\"uniformId\": 2, \"count\": 1000},{\"uniformId\": 10105, \"count\": 1}]}]}"
+    },
+    {
+      "id": "1004",
+      "Type": "RebateStore",
+      "MailID": "",
+      "Open": "FALSE",
+      "BeginTime": "1488326400",
+      "EndTime": "1488333600",
+      "CloseTime": "1488333600",
+      "Json": "{\"goodsList\": [{\"aid\":1, \"goodsId\":30, \"buyTimes\":5, \"isDayRefresh\": 1, \"items\":[{\"uniformId\":2, \"count\":1000},{\"uniformId\":10104, \"count\":1}]},{\"aid\":2, \"goodsId\":31, \"buyTimes\":5, \"isDayRefresh\": 0, \"items\":[{\"uniformId\":1, \"count\":2000},{\"uniformId\":10104, \"count\":1}]}]}"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    8,
+    8,
+    8,
+    8
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

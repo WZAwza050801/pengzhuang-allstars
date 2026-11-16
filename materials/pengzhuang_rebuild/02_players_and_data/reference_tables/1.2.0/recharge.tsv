@@ -1,0 +1,9 @@
+﻿ID号	类型Crystal钻石MonthCard月卡	货币类型	价格	获得钻石数量	赠送数量	是否有首冲双倍	第三方产品ID
+id	goodsType	costType	price	crystal	bonus	ifDouble	ThridProductId
+21	Crystal	RMB	6	60	0	0	origin.s80001
+22	Crystal	RMB	30	300	20	1	origin.s80002
+23	Crystal	RMB	98	980	120	0	origin.s80003
+24	Crystal	RMB	198	1980	270	1	origin.s80004
+25	Crystal	RMB	328	3280	520	0	origin.s80005
+26	Crystal	RMB	648	6480	1320	1	origin.s80006
+27	MonthCard	RMB	30	0	0	0	origin.s80007

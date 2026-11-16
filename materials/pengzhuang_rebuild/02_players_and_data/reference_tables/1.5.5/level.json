@@ -1,0 +1,242 @@
+{
+  "version": "1.5.5",
+  "table": "level",
+  "source_path": "assets/res/raw-assets/resources/data/level.txt",
+  "source_sha256": "74f3a0fa1984d9d985276c8fddce04bce9681cd3123984f2d85af2f9ffb3f6ac",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "通用关卡ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "posX",
+      "original_key": "posX",
+      "label": "关卡点坐标X",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "posY",
+      "original_key": "posY",
+      "label": "关卡点坐标Y",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "levelPath",
+      "original_key": "levelPath",
+      "label": "关卡路径配置(角度;数量）",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "openLevel",
+      "original_key": "openLevel",
+      "label": "开启等级",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "repeated",
+      "original_key": "repeated",
+      "label": "是否可重复挑战",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "levelSceneID",
+      "original_key": "levelSceneID",
+      "label": "关卡场景ID",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "formationID",
+      "original_key": "formationID",
+      "label": "敌方球员阵型（阵型ID）",
+      "included": true
+    },
+    {
+      "index": 9,
+      "key": "cardList",
+      "original_key": "cardList",
+      "label": "敌方球员列表(CardID)",
+      "included": true
+    },
+    {
+      "index": 10,
+      "key": "conditionID",
+      "original_key": "conditionID",
+      "label": "过关条件(过关条件ID)",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "10001",
+      "posX": "250",
+      "posY": "170",
+      "levelPath": "135;5",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10001",
+      "formationID": "10001;10003;10005",
+      "cardList": "10101;30101;10103;60105;10106",
+      "conditionID": "10001;10002;10003"
+    },
+    {
+      "id": "10002",
+      "posX": "700",
+      "posY": "670",
+      "levelPath": "45;5",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10002",
+      "formationID": "10007;10009;10011",
+      "cardList": "10102;30102;10104;20103;10107",
+      "conditionID": "10004;10005;10006"
+    },
+    {
+      "id": "10003",
+      "posX": "250",
+      "posY": "1170",
+      "levelPath": "135;5",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10003",
+      "formationID": "10013;10015;10017",
+      "cardList": "10201;40101;10105;20104;10206",
+      "conditionID": "10007;10008;10009"
+    },
+    {
+      "id": "10004",
+      "posX": "250",
+      "posY": "170",
+      "levelPath": "135;4",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10004",
+      "formationID": "10019;10021;10023",
+      "cardList": "10202;40102;10203;20105;10207",
+      "conditionID": "10010;10011;10012"
+    },
+    {
+      "id": "10005",
+      "posX": "700",
+      "posY": "570",
+      "levelPath": "90;4",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10005",
+      "formationID": "10025;10027;10029",
+      "cardList": "10301;40108;10204;20106;10106",
+      "conditionID": "10013;10014;10015"
+    },
+    {
+      "id": "10006",
+      "posX": "700",
+      "posY": "1170",
+      "levelPath": "135;4",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10006",
+      "formationID": "10031;10033;10035",
+      "cardList": "60101;40201;10205;20203;10107",
+      "conditionID": "10016;10017;10018"
+    },
+    {
+      "id": "10007",
+      "posX": "250",
+      "posY": "170",
+      "levelPath": "90;4",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10007",
+      "formationID": "10037;10039;10041",
+      "cardList": "10402;40202;10302;20204;10206",
+      "conditionID": "10019;10020;10021"
+    },
+    {
+      "id": "10008",
+      "posX": "250",
+      "posY": "770",
+      "levelPath": "135;4",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10008",
+      "formationID": "10043;10045;10047",
+      "cardList": "60101;40208;10303;20205;10207",
+      "conditionID": "10022;10023;10024"
+    },
+    {
+      "id": "10009",
+      "posX": "700",
+      "posY": "1170",
+      "levelPath": "45;4",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10009",
+      "formationID": "10049;10051;10053",
+      "cardList": "60102;40301;10304;30103;10306",
+      "conditionID": "10025;10026;10027"
+    },
+    {
+      "id": "10010",
+      "posX": "700",
+      "posY": "170",
+      "levelPath": "45;5",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10010",
+      "formationID": "10055;10057;10059",
+      "cardList": "20101;40302;10305;30104;10307",
+      "conditionID": "10028;10029;10030"
+    },
+    {
+      "id": "10011",
+      "posX": "250",
+      "posY": "670",
+      "levelPath": "135;5",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10011",
+      "formationID": "10061;10063;10065",
+      "cardList": "20102;50101;10403;30105;10406",
+      "conditionID": "10031;10032;10033"
+    },
+    {
+      "id": "10012",
+      "posX": "700",
+      "posY": "1170",
+      "levelPath": "45;5",
+      "openLevel": "1",
+      "repeated": "1",
+      "levelSceneID": "10012",
+      "formationID": "10067;10069;10071",
+      "cardList": "20201;50102;10404;40103;10407",
+      "conditionID": "10034;10035;10036"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

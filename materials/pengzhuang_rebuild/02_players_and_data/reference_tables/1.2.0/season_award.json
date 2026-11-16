@@ -1,0 +1,435 @@
+{
+  "version": "1.2.0",
+  "table": "season_award",
+  "source_path": "assets/res/raw-assets/resources/data/season_award.txt",
+  "source_sha256": "c592409500635ed12e955b0421c1382df6dc406ec57fee89f156114cceba7814",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "排名ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "rankList",
+      "original_key": "rankList",
+      "label": "排名",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "leaguelevel",
+      "original_key": "leaguelevel",
+      "label": "联赛等级",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "reward",
+      "original_key": "reward",
+      "label": "获得",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "mailID",
+      "original_key": "mailID",
+      "label": "邮件ID",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "rankList": "1",
+      "leaguelevel": "5",
+      "reward": "500",
+      "mailID": "100001"
+    },
+    {
+      "id": "2",
+      "rankList": "2",
+      "leaguelevel": "5",
+      "reward": "400",
+      "mailID": "100002"
+    },
+    {
+      "id": "3",
+      "rankList": "3",
+      "leaguelevel": "5",
+      "reward": "325",
+      "mailID": "100003"
+    },
+    {
+      "id": "4",
+      "rankList": "4",
+      "leaguelevel": "5",
+      "reward": "275",
+      "mailID": "100004"
+    },
+    {
+      "id": "5",
+      "rankList": "5",
+      "leaguelevel": "5",
+      "reward": "250",
+      "mailID": "100005"
+    },
+    {
+      "id": "6",
+      "rankList": "6",
+      "leaguelevel": "5",
+      "reward": "225",
+      "mailID": "100006"
+    },
+    {
+      "id": "7",
+      "rankList": "7",
+      "leaguelevel": "5",
+      "reward": "200",
+      "mailID": "100007"
+    },
+    {
+      "id": "8",
+      "rankList": "8",
+      "leaguelevel": "5",
+      "reward": "175",
+      "mailID": "100008"
+    },
+    {
+      "id": "9",
+      "rankList": "9",
+      "leaguelevel": "5",
+      "reward": "150",
+      "mailID": "100009"
+    },
+    {
+      "id": "10",
+      "rankList": "10",
+      "leaguelevel": "5",
+      "reward": "125",
+      "mailID": "100010"
+    },
+    {
+      "id": "11",
+      "rankList": "11;20",
+      "leaguelevel": "5",
+      "reward": "100",
+      "mailID": "100011"
+    },
+    {
+      "id": "12",
+      "rankList": "21;100",
+      "leaguelevel": "5",
+      "reward": "75",
+      "mailID": "100012"
+    },
+    {
+      "id": "13",
+      "rankList": "1",
+      "leaguelevel": "4",
+      "reward": "400",
+      "mailID": "100013"
+    },
+    {
+      "id": "14",
+      "rankList": "2",
+      "leaguelevel": "4",
+      "reward": "320",
+      "mailID": "100014"
+    },
+    {
+      "id": "15",
+      "rankList": "3",
+      "leaguelevel": "4",
+      "reward": "260",
+      "mailID": "100015"
+    },
+    {
+      "id": "16",
+      "rankList": "4",
+      "leaguelevel": "4",
+      "reward": "220",
+      "mailID": "100016"
+    },
+    {
+      "id": "17",
+      "rankList": "5",
+      "leaguelevel": "4",
+      "reward": "200",
+      "mailID": "100017"
+    },
+    {
+      "id": "18",
+      "rankList": "6",
+      "leaguelevel": "4",
+      "reward": "180",
+      "mailID": "100018"
+    },
+    {
+      "id": "19",
+      "rankList": "7",
+      "leaguelevel": "4",
+      "reward": "160",
+      "mailID": "100019"
+    },
+    {
+      "id": "20",
+      "rankList": "8",
+      "leaguelevel": "4",
+      "reward": "140",
+      "mailID": "100020"
+    },
+    {
+      "id": "21",
+      "rankList": "9",
+      "leaguelevel": "4",
+      "reward": "120",
+      "mailID": "100021"
+    },
+    {
+      "id": "22",
+      "rankList": "10",
+      "leaguelevel": "4",
+      "reward": "100",
+      "mailID": "100022"
+    },
+    {
+      "id": "23",
+      "rankList": "11;20",
+      "leaguelevel": "4",
+      "reward": "80",
+      "mailID": "100023"
+    },
+    {
+      "id": "24",
+      "rankList": "21;100",
+      "leaguelevel": "4",
+      "reward": "60",
+      "mailID": "100024"
+    },
+    {
+      "id": "25",
+      "rankList": "1",
+      "leaguelevel": "3",
+      "reward": "300",
+      "mailID": "100025"
+    },
+    {
+      "id": "26",
+      "rankList": "2",
+      "leaguelevel": "3",
+      "reward": "240",
+      "mailID": "100026"
+    },
+    {
+      "id": "27",
+      "rankList": "3",
+      "leaguelevel": "3",
+      "reward": "195",
+      "mailID": "100027"
+    },
+    {
+      "id": "28",
+      "rankList": "4",
+      "leaguelevel": "3",
+      "reward": "165",
+      "mailID": "100028"
+    },
+    {
+      "id": "29",
+      "rankList": "5",
+      "leaguelevel": "3",
+      "reward": "150",
+      "mailID": "100029"
+    },
+    {
+      "id": "30",
+      "rankList": "6",
+      "leaguelevel": "3",
+      "reward": "135",
+      "mailID": "100030"
+    },
+    {
+      "id": "31",
+      "rankList": "7",
+      "leaguelevel": "3",
+      "reward": "120",
+      "mailID": "100031"
+    },
+    {
+      "id": "32",
+      "rankList": "8",
+      "leaguelevel": "3",
+      "reward": "105",
+      "mailID": "100032"
+    },
+    {
+      "id": "33",
+      "rankList": "9",
+      "leaguelevel": "3",
+      "reward": "90",
+      "mailID": "100033"
+    },
+    {
+      "id": "34",
+      "rankList": "10",
+      "leaguelevel": "3",
+      "reward": "75",
+      "mailID": "100034"
+    },
+    {
+      "id": "35",
+      "rankList": "11;20",
+      "leaguelevel": "3",
+      "reward": "60",
+      "mailID": "100035"
+    },
+    {
+      "id": "36",
+      "rankList": "21;100",
+      "leaguelevel": "3",
+      "reward": "45",
+      "mailID": "100036"
+    },
+    {
+      "id": "37",
+      "rankList": "1",
+      "leaguelevel": "2",
+      "reward": "200",
+      "mailID": "100037"
+    },
+    {
+      "id": "38",
+      "rankList": "2",
+      "leaguelevel": "2",
+      "reward": "160",
+      "mailID": "100038"
+    },
+    {
+      "id": "39",
+      "rankList": "3",
+      "leaguelevel": "2",
+      "reward": "130",
+      "mailID": "100039"
+    },
+    {
+      "id": "40",
+      "rankList": "4",
+      "leaguelevel": "2",
+      "reward": "110",
+      "mailID": "100040"
+    },
+    {
+      "id": "41",
+      "rankList": "5",
+      "leaguelevel": "2",
+      "reward": "100",
+      "mailID": "100041"
+    },
+    {
+      "id": "42",
+      "rankList": "6",
+      "leaguelevel": "2",
+      "reward": "90",
+      "mailID": "100042"
+    },
+    {
+      "id": "43",
+      "rankList": "7",
+      "leaguelevel": "2",
+      "reward": "80",
+      "mailID": "100043"
+    },
+    {
+      "id": "44",
+      "rankList": "8",
+      "leaguelevel": "2",
+      "reward": "70",
+      "mailID": "100044"
+    },
+    {
+      "id": "45",
+      "rankList": "9",
+      "leaguelevel": "2",
+      "reward": "60",
+      "mailID": "100045"
+    },
+    {
+      "id": "46",
+      "rankList": "10",
+      "leaguelevel": "2",
+      "reward": "50",
+      "mailID": "100046"
+    },
+    {
+      "id": "47",
+      "rankList": "11;20",
+      "leaguelevel": "2",
+      "reward": "40",
+      "mailID": "100047"
+    },
+    {
+      "id": "48",
+      "rankList": "21;100",
+      "leaguelevel": "2",
+      "reward": "30",
+      "mailID": "100048"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

@@ -1,0 +1,578 @@
+[
+  {
+    "version": "1.5.5",
+    "card_id": "30108",
+    "player_id": "30108",
+    "game_name": "西瓜",
+    "variant": "普通卡",
+    "fields": [
+      "power",
+      "mind",
+      "radian"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 70,
+      "power": 76,
+      "mind": 69,
+      "radian": 55,
+      "precision": 70
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "40110",
+    "player_id": "40110",
+    "game_name": "图蓝",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 61,
+      "power": 64,
+      "mind": 72,
+      "radian": 61,
+      "precision": 60
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "70101",
+    "player_id": "70101",
+    "game_name": "马队",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 73,
+      "power": 70,
+      "mind": 72,
+      "radian": 59,
+      "precision": 54
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80101",
+    "player_id": "80101",
+    "game_name": "马大腿",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 64,
+      "power": 67,
+      "mind": 55,
+      "radian": 70,
+      "precision": 65
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80102",
+    "player_id": "80102",
+    "game_name": "费米",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 45,
+      "power": 64,
+      "mind": 69,
+      "radian": 70,
+      "precision": 55
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80103",
+    "player_id": "80103",
+    "game_name": "司徒",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 64,
+      "power": 65,
+      "mind": 60,
+      "radian": 69,
+      "precision": 64
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80104",
+    "player_id": "80104",
+    "game_name": "库鸟",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 50,
+      "power": 69,
+      "mind": 70,
+      "radian": 72,
+      "precision": 69
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80105",
+    "player_id": "80105",
+    "game_name": "纳天王",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 57,
+      "power": 55,
+      "mind": 66,
+      "radian": 70,
+      "precision": 55
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80106",
+    "player_id": "80106",
+    "game_name": "克莱鹰",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 64,
+      "power": 55,
+      "mind": 64,
+      "radian": 64,
+      "precision": 38
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80107",
+    "player_id": "80107",
+    "game_name": "莫小雷",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 69,
+      "power": 50,
+      "mind": 67,
+      "radian": 64,
+      "precision": 55
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80201",
+    "player_id": "80201",
+    "game_name": "师奶",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 60,
+      "power": 69,
+      "mind": 60,
+      "radian": 73,
+      "precision": 64
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80202",
+    "player_id": "80202",
+    "game_name": "魔兽",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 73,
+      "power": 73,
+      "mind": 70,
+      "radian": 69,
+      "precision": 72
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80203",
+    "player_id": "80203",
+    "game_name": "拓扑哥哥",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 61,
+      "power": 60,
+      "mind": 50,
+      "radian": 50,
+      "precision": 61
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80204",
+    "player_id": "80204",
+    "game_name": "波尔蒂王子",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 64,
+      "power": 64,
+      "mind": 67,
+      "radian": 66,
+      "precision": 67
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80205",
+    "player_id": "80205",
+    "game_name": "功夫熊猫",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 46,
+      "power": 50,
+      "mind": 57,
+      "radian": 50,
+      "precision": 54
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80206",
+    "player_id": "80206",
+    "game_name": "耳帝",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 60,
+      "power": 47,
+      "mind": 59,
+      "radian": 46,
+      "precision": 42
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "80207",
+    "player_id": "80207",
+    "game_name": "霉洛",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 59,
+      "power": 55,
+      "mind": 49,
+      "radian": 56,
+      "precision": 55
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "90003",
+    "player_id": "90003",
+    "game_name": "小贝",
+    "variant": "普通卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 64,
+      "power": 61,
+      "mind": 69,
+      "radian": 70,
+      "precision": 73
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "180104",
+    "player_id": "80104",
+    "game_name": "库鸟",
+    "variant": "闪卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 50,
+      "power": 69,
+      "mind": 70,
+      "radian": 72,
+      "precision": 69
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  },
+  {
+    "version": "1.5.5",
+    "card_id": "180202",
+    "player_id": "80202",
+    "game_name": "魔兽",
+    "variant": "闪卡",
+    "fields": [
+      "weight",
+      "power",
+      "mind",
+      "radian",
+      "precision"
+    ],
+    "card_values": {
+      "weight": 70,
+      "power": 70,
+      "mind": 50,
+      "radian": 60,
+      "precision": 70
+    },
+    "level1_values": {
+      "weight": 73,
+      "power": 73,
+      "mind": 70,
+      "radian": 69,
+      "precision": 72
+    },
+    "resolution": "两表原值均保留，运行时取值优先级未知。"
+  }
+]

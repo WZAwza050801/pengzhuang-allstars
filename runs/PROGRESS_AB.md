@@ -1,0 +1,7 @@
+﻿2026-11-15 14:47:45 | 启动 | 读完上一轮日志(只有计划无落盘)，确认 node v22.22.2 / npm 10.9.7 命令可执行 | node --version OK
+2026-11-15 14:51:38 | 基线 | 实跑基线：npm run typecheck 0 错误；npm run test:physics 14/14 passed（23.7ms/次随机出手，30 场完整比赛 30/30）| typecheck OK, physics 14/14
+2026-11-15 15:27:16 | B-文件 | 落盘 shared/protocol.ts(+isNetErrorCode)、server/validation.ts、server/auth.ts（尚未 typecheck）| 仅写文件
+2026-11-15 15:36:40 | A/B-文件 | 落盘 server/rooms/MatchRoom.ts、server/app.ts、server/index.ts、.env.example（尚未 typecheck）| 仅写文件
+2026-11-15 15:38:03 | A-验收 | npm run typecheck 0 错误（含 server/、shared/protocol.ts）；node --import tsx server/index.ts 冷启动约 13.5s 后 GET /healthz -> 200 {"status":"ok","service":"collision-allstars","protocol":1,"dataVersion":"field-2/phys-2/players-1/skills-1/rules-1","uptimeSec":14}，GET /nope -> 404，Stop-Process 后 2567 无 LISTENING（仅 TIME_WAIT 客户端套接字）| typecheck OK, healthz 200
+2026-11-15 16:17:01 | B-安全发现 | 探针 tools/_scratch_nmh_1.ts 实测: 客户端发送 Colyseus 内部保留键 __no_message_handler 会被当成已注册 handler -> 自己被踢(4002)且 payload 写进服务端日志; payload>123B 时 ws 抛未捕获 RangeError(Sender.close) => 远程可崩服务进程。已在 MatchRoom.onCreate 覆盖注册该键(返回 bad-message) | 修复前探针: D 被踢 4002 / E,F uncaught RangeError
+2026-11-15 16:20:48 | B-安全验证 | 探针 tools/_scratch_nmh_2.ts 在补丁后实测: __no_message_handler(短/300B/多字节/sendBytes)、__proto__/constructor/未知类型/数字类型/空 payload/null/sendBytes shot/16 种原始帧/120 帧种子模糊 -> 全部 bad-message 或静默忽略，无踢人(4002)；3000B 超限 -> 客户端 close 1009；/healthz 仍 200；process uncaughtException 记录=0 | 补丁生效, uncaught=0

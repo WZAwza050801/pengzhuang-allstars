@@ -1,0 +1,238 @@
+{
+  "version": "1.2.0",
+  "table": "boxrare",
+  "source_path": "assets/res/raw-assets/resources/data/boxrare.txt",
+  "source_sha256": "40b3a38b95496f828630142684018315389f82c5bea474492fd6469d3c2f44e4",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "编号",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "quality",
+      "original_key": "quality",
+      "label": "品质",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "arenaLevel",
+      "original_key": "arenaLevel",
+      "label": "竞技场等级",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "dropRate",
+      "original_key": "dropRate",
+      "label": "掉落权重",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "dropMin",
+      "original_key": "dropMin",
+      "label": "爆率下限（100个箱子）",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "dropMax",
+      "original_key": "dropMax",
+      "label": "爆率上限（100个箱子）",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1001",
+      "quality": "1",
+      "arenaLevel": "1",
+      "dropRate": "5000",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "1002",
+      "quality": "1",
+      "arenaLevel": "2",
+      "dropRate": "4000",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "1003",
+      "quality": "1",
+      "arenaLevel": "3",
+      "dropRate": "3000",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "1004",
+      "quality": "1",
+      "arenaLevel": "4",
+      "dropRate": "2000",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "1005",
+      "quality": "1",
+      "arenaLevel": "5",
+      "dropRate": "1000",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "2001",
+      "quality": "2",
+      "arenaLevel": "1",
+      "dropRate": "4000",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "2002",
+      "quality": "2",
+      "arenaLevel": "2",
+      "dropRate": "4500",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "2003",
+      "quality": "2",
+      "arenaLevel": "3",
+      "dropRate": "3400",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "2004",
+      "quality": "2",
+      "arenaLevel": "4",
+      "dropRate": "3700",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "2005",
+      "quality": "2",
+      "arenaLevel": "5",
+      "dropRate": "4000",
+      "dropMin": "0",
+      "dropMax": "0"
+    },
+    {
+      "id": "3001",
+      "quality": "3",
+      "arenaLevel": "1",
+      "dropRate": "1000",
+      "dropMin": "1",
+      "dropMax": "3"
+    },
+    {
+      "id": "3002",
+      "quality": "3",
+      "arenaLevel": "2",
+      "dropRate": "1500",
+      "dropMin": "1",
+      "dropMax": "3"
+    },
+    {
+      "id": "3003",
+      "quality": "3",
+      "arenaLevel": "3",
+      "dropRate": "2000",
+      "dropMin": "1",
+      "dropMax": "3"
+    },
+    {
+      "id": "3004",
+      "quality": "3",
+      "arenaLevel": "4",
+      "dropRate": "2500",
+      "dropMin": "1",
+      "dropMax": "3"
+    },
+    {
+      "id": "3005",
+      "quality": "3",
+      "arenaLevel": "5",
+      "dropRate": "3000",
+      "dropMin": "1",
+      "dropMax": "3"
+    },
+    {
+      "id": "4001",
+      "quality": "4",
+      "arenaLevel": "1",
+      "dropRate": "0",
+      "dropMin": "1",
+      "dropMax": "2"
+    },
+    {
+      "id": "4002",
+      "quality": "4",
+      "arenaLevel": "2",
+      "dropRate": "0",
+      "dropMin": "1",
+      "dropMax": "2"
+    },
+    {
+      "id": "4003",
+      "quality": "4",
+      "arenaLevel": "3",
+      "dropRate": "400",
+      "dropMin": "1",
+      "dropMax": "2"
+    },
+    {
+      "id": "4004",
+      "quality": "4",
+      "arenaLevel": "4",
+      "dropRate": "800",
+      "dropMin": "1",
+      "dropMax": "2"
+    },
+    {
+      "id": "4005",
+      "quality": "4",
+      "arenaLevel": "5",
+      "dropRate": "1200",
+      "dropMin": "1",
+      "dropMax": "2"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

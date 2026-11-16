@@ -1,0 +1,695 @@
+{
+  "version": "1.2.0",
+  "table": "team_badge",
+  "source_path": "assets/res/raw-assets/resources/data/team_badge.txt",
+  "source_sha256": "95063503000278b305217d0780300fd6f670350c66f72bc2cb92f51fcaaca094",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "﻿队徽id",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "type",
+      "original_key": "type",
+      "label": "类型",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "icon",
+      "original_key": "icon",
+      "label": "图标",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "giveCardList",
+      "original_key": "giveCardList",
+      "label": "新手赠送的球员",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "name",
+      "original_key": "name",
+      "label": "俱乐部名称",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "Chinese",
+      "original_key": "Chinese",
+      "label": "中文",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "shirt",
+      "original_key": "shirt",
+      "label": "俱乐部球服",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1001",
+      "type": "1",
+      "icon": "badge_icon_1001",
+      "giveCardList": "10103",
+      "name": "$club_name_1001",
+      "Chinese": "红魔",
+      "shirt": "shirt_1001"
+    },
+    {
+      "id": "1002",
+      "type": "1",
+      "icon": "badge_icon_1002",
+      "giveCardList": "10204",
+      "name": "$club_name_1002",
+      "Chinese": "蓝月亮",
+      "shirt": "shirt_1002"
+    },
+    {
+      "id": "1003",
+      "type": "1",
+      "icon": "badge_icon_1003",
+      "giveCardList": "10303",
+      "name": "$club_name_1003",
+      "Chinese": "蓝军",
+      "shirt": "shirt_1003"
+    },
+    {
+      "id": "1004",
+      "type": "1",
+      "icon": "badge_icon_1004",
+      "giveCardList": "10402",
+      "name": "$club_name_1004",
+      "Chinese": "兵工厂",
+      "shirt": "shirt_1004"
+    },
+    {
+      "id": "2001",
+      "type": "1",
+      "icon": "badge_icon_2001",
+      "giveCardList": "20104",
+      "name": "$club_name_2001",
+      "Chinese": "绿茵好莱坞",
+      "shirt": "shirt_2001"
+    },
+    {
+      "id": "2002",
+      "type": "1",
+      "icon": "badge_icon_2002",
+      "giveCardList": "20201",
+      "name": "$club_name_2002",
+      "Chinese": "大黄蜂",
+      "shirt": "shirt_2002"
+    },
+    {
+      "id": "3001",
+      "type": "1",
+      "icon": "badge_icon_3001",
+      "giveCardList": "30104",
+      "name": "$club_name_3001",
+      "Chinese": "斑马军团",
+      "shirt": "shirt_3001"
+    },
+    {
+      "id": "4001",
+      "type": "1",
+      "icon": "badge_icon_4001",
+      "giveCardList": "40106",
+      "name": "$club_name_4001",
+      "Chinese": "宇宙队",
+      "shirt": "shirt_4001"
+    },
+    {
+      "id": "4002",
+      "type": "1",
+      "icon": "badge_icon_4002",
+      "giveCardList": "40207",
+      "name": "$club_name_4002",
+      "Chinese": "银河战舰",
+      "shirt": "shirt_4002"
+    },
+    {
+      "id": "4003",
+      "type": "1",
+      "icon": "badge_icon_4003",
+      "giveCardList": "40301",
+      "name": "$club_name_4003",
+      "Chinese": "床单军团",
+      "shirt": "shirt_4003"
+    },
+    {
+      "id": "5001",
+      "type": "1",
+      "icon": "badge_icon_5001",
+      "giveCardList": "50103",
+      "name": "$club_name_5001",
+      "Chinese": "大巴黎",
+      "shirt": "shirt_5001"
+    },
+    {
+      "id": "6001",
+      "type": "1",
+      "icon": "badge_icon_6001",
+      "giveCardList": "60103",
+      "name": "$club_name_6001",
+      "Chinese": "华南虎",
+      "shirt": "shirt_6001"
+    },
+    {
+      "id": "10000",
+      "type": "2",
+      "icon": "badge_icon_10000",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10001",
+      "type": "2",
+      "icon": "badge_icon_10001",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10002",
+      "type": "2",
+      "icon": "badge_icon_10002",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10003",
+      "type": "2",
+      "icon": "badge_icon_10003",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10004",
+      "type": "2",
+      "icon": "badge_icon_10004",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10005",
+      "type": "2",
+      "icon": "badge_icon_10005",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10006",
+      "type": "2",
+      "icon": "badge_icon_10006",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10007",
+      "type": "2",
+      "icon": "badge_icon_10007",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10008",
+      "type": "2",
+      "icon": "badge_icon_10008",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10009",
+      "type": "2",
+      "icon": "badge_icon_10009",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10010",
+      "type": "2",
+      "icon": "badge_icon_10010",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10011",
+      "type": "2",
+      "icon": "badge_icon_10011",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10012",
+      "type": "2",
+      "icon": "badge_icon_10012",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10013",
+      "type": "2",
+      "icon": "badge_icon_10013",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10014",
+      "type": "2",
+      "icon": "badge_icon_10014",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10015",
+      "type": "2",
+      "icon": "badge_icon_10015",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10016",
+      "type": "2",
+      "icon": "badge_icon_10016",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10017",
+      "type": "2",
+      "icon": "badge_icon_10017",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10018",
+      "type": "2",
+      "icon": "badge_icon_10018",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10019",
+      "type": "2",
+      "icon": "badge_icon_10019",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10020",
+      "type": "2",
+      "icon": "badge_icon_10020",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10021",
+      "type": "2",
+      "icon": "badge_icon_10021",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10022",
+      "type": "2",
+      "icon": "badge_icon_10022",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10023",
+      "type": "2",
+      "icon": "badge_icon_10023",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10024",
+      "type": "2",
+      "icon": "badge_icon_10024",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10025",
+      "type": "2",
+      "icon": "badge_icon_10025",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10026",
+      "type": "2",
+      "icon": "badge_icon_10026",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10027",
+      "type": "2",
+      "icon": "badge_icon_10027",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10028",
+      "type": "2",
+      "icon": "badge_icon_10028",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10029",
+      "type": "2",
+      "icon": "badge_icon_10029",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10030",
+      "type": "2",
+      "icon": "badge_icon_10030",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10031",
+      "type": "2",
+      "icon": "badge_icon_10031",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10032",
+      "type": "2",
+      "icon": "badge_icon_10032",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10033",
+      "type": "2",
+      "icon": "badge_icon_10033",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10034",
+      "type": "2",
+      "icon": "badge_icon_10034",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10035",
+      "type": "2",
+      "icon": "badge_icon_10035",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10036",
+      "type": "2",
+      "icon": "badge_icon_10036",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10037",
+      "type": "2",
+      "icon": "badge_icon_10037",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10038",
+      "type": "2",
+      "icon": "badge_icon_10038",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10039",
+      "type": "2",
+      "icon": "badge_icon_10039",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10040",
+      "type": "2",
+      "icon": "badge_icon_10040",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10041",
+      "type": "2",
+      "icon": "badge_icon_10041",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10042",
+      "type": "2",
+      "icon": "badge_icon_10042",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10043",
+      "type": "2",
+      "icon": "badge_icon_10043",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10044",
+      "type": "2",
+      "icon": "badge_icon_10044",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10045",
+      "type": "2",
+      "icon": "badge_icon_10045",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10046",
+      "type": "2",
+      "icon": "badge_icon_10046",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10047",
+      "type": "2",
+      "icon": "badge_icon_10047",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10048",
+      "type": "2",
+      "icon": "badge_icon_10048",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10049",
+      "type": "2",
+      "icon": "badge_icon_10049",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    },
+    {
+      "id": "10050",
+      "type": "2",
+      "icon": "badge_icon_10050",
+      "giveCardList": "",
+      "name": "",
+      "Chinese": "",
+      "shirt": ""
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

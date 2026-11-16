@@ -1,0 +1,21 @@
+﻿金球杯赛	杯赛类型	联赛等级	晋级	奖励邮件ID
+id	matchType	rankLevel	rank	mailID
+regio001	1	1	1	300003
+regio002	1	1	2	300002
+regio003	1	1	4	300001
+cup001	2	2	1	
+cup002	2	2	2	
+cup003	2	2	4	
+cup004	2	2	8	0
+cup005	2	3	1	
+cup006	2	3	2	
+cup007	2	3	4	
+cup008	2	3	8	0
+cup009	2	4	1	
+cup010	2	4	2	
+cup011	2	4	4	
+cup012	2	4	8	0
+cup013	2	5	1	
+cup014	2	5	2	
+cup015	2	5	4	
+cup016	2	5	8	0

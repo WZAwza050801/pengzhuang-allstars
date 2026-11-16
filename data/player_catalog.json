@@ -1,0 +1,2853 @@
+{
+ "version": "catalog-1",
+ "note": "选人 / 阵容界面的显示目录：原版球员（有 srcId 且有原版头像）、原版卡的位置 / 稀有度 / 技能名与原文描述。只供界面显示，不进 GameData，不影响 dataVersion。",
+ "generatedBy": "art/build_lobby_assets.py",
+ "sources": {
+  "data/players.json": "b852e5831ac81a14345b9caca195fb6edb19e879805cbde53392f635622fa995",
+  "data/cards.json": "4b9cd239751bc04bf69ea7edd7ddd4cc5a7806e5c1b6495c482082d579e5a873",
+  "data/portrait_map.json": "4978f5ecf2adcbc92b412b1da4a4567b65ae52d9bebdda0f2fc6a462b0b80d8a",
+  "materials/.../skill_records.json": "c0152c6e76d3681d3aad4c43aea948944ceacf76e8faa4847c0a8b04975db861"
+ },
+ "excluded": "重建球员 p06–p16（原版没有）按用户决定不进卡池",
+ "missingSkillIcons": [],
+ "entries": [
+  {
+   "id": "p01",
+   "name": "梅球王",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "orange",
+   "rarity": 5,
+   "portraitId": "head_4001_40108",
+   "card": "1.5.5|40108",
+   "skills": [
+    {
+     "id": "360",
+     "name": "球王震慑",
+     "desc": "回合开始时15%的几率触发，使对方全体球员陷入混乱，直至下回合结束",
+     "icon": "skill_360_40108",
+     "unlock": 3
+    },
+    {
+     "id": "361",
+     "name": "球王震慑",
+     "desc": "回合开始时20%的几率触发，使对方全体球员陷入混乱，直至下回合结束",
+     "icon": "skill_360_40108",
+     "unlock": 6
+    },
+    {
+     "id": "362",
+     "name": "球王震慑",
+     "desc": "回合开始时25%的几率触发，使对方全体球员陷入混乱，直至下回合结束",
+     "icon": "skill_360_40108",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "name": "小小罗",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "orange",
+   "rarity": 5,
+   "portraitId": "head_4002_40208",
+   "card": "1.5.5|40208",
+   "skills": [
+    {
+     "id": "370",
+     "name": "霸气侧漏",
+     "desc": "回合开始时15%的几率触发，使对方全体球员被震慑，失明至下回合结束。",
+     "icon": "skill_370_40208",
+     "unlock": 3
+    },
+    {
+     "id": "371",
+     "name": "霸气侧漏",
+     "desc": "回合开始时20%的几率触发，使对方全体球员被震慑，失明至下回合结束。",
+     "icon": "skill_370_40208",
+     "unlock": 6
+    },
+    {
+     "id": "372",
+     "name": "霸气侧漏",
+     "desc": "回合开始时25%的几率触发，使对方全体球员被震慑，失明至下回合结束。",
+     "icon": "skill_370_40208",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "name": "大罗",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "orange",
+   "rarity": 9,
+   "portraitId": "head_9001_90002",
+   "card": "1.5.5|90002",
+   "skills": [
+    {
+     "id": "660",
+     "name": "外星人来袭",
+     "desc": "回合开始时10%触发，当使用弧线射门后，可以立即再移动一次",
+     "icon": "skill_660_90002",
+     "unlock": 3
+    },
+    {
+     "id": "661",
+     "name": "外星人来袭",
+     "desc": "回合开始时15%触发，当使用弧线射门后，可以立即再移动一次",
+     "icon": "skill_660_90002",
+     "unlock": 6
+    },
+    {
+     "id": "662",
+     "name": "外星人来袭",
+     "desc": "回合开始时20%触发，当使用弧线射门后，可以立即再移动一次",
+     "icon": "skill_660_90002",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "name": "木乐",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_2001_20102",
+   "card": "1.5.5|20102",
+   "skills": [
+    {
+     "id": "160",
+     "name": "禁区之狐",
+     "desc": "如果我方球员射门的球在禁区内被挡出，则木乐有20%的几率可以立即进行一次移动",
+     "icon": "skill_160_20102",
+     "unlock": 3
+    },
+    {
+     "id": "161",
+     "name": "禁区之狐",
+     "desc": "如果我方球员射门的球在禁区内被挡出，则木乐有25%的几率可以立即进行一次移动",
+     "icon": "skill_160_20102",
+     "unlock": 6
+    },
+    {
+     "id": "162",
+     "name": "禁区之狐",
+     "desc": "如果我方球员射门的球在禁区内被挡出，则木乐有30%的几率可以立即进行一次移动",
+     "icon": "skill_160_20102",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "name": "波霸",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "orange",
+   "rarity": 4,
+   "portraitId": "head_3001_30103",
+   "card": "1.5.5|30103",
+   "skills": [
+    {
+     "id": "380",
+     "name": "野蛮重炮",
+     "desc": "回合开始时10%几率触发，踢球碰到的敌方球员出场两回合",
+     "icon": "skill_380_30103",
+     "unlock": 3
+    },
+    {
+     "id": "381",
+     "name": "野蛮重炮",
+     "desc": "回合开始时15%几率触发，踢球碰到的敌方球员出场两回合",
+     "icon": "skill_380_30103",
+     "unlock": 6
+    },
+    {
+     "id": "382",
+     "name": "野蛮重炮",
+     "desc": "回合开始时20%几率触发，踢球碰到的敌方球员出场两回合",
+     "icon": "skill_380_30103",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p17",
+   "name": "马少尔",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1001_10101",
+   "card": "1.5.5|10101",
+   "skills": [
+    {
+     "id": "10",
+     "name": "疾风金童",
+     "desc": "我方回合开始时10%几率触发，移动时直接触球会增加全体己方球员精准10%，持续一回合",
+     "icon": "skill_010_10101",
+     "unlock": 3
+    },
+    {
+     "id": "11",
+     "name": "疾风金童",
+     "desc": "我方回合开始时15%几率触发，移动时直接触球会增加全体己方球员精准15%，持续一回合",
+     "icon": "skill_010_10101",
+     "unlock": 6
+    },
+    {
+     "id": "12",
+     "name": "疾风金童",
+     "desc": "我方回合开始时20%几率触发，移动时直接触球会增加全体己方球员精准20%，持续一回合",
+     "icon": "skill_010_10101",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p18",
+   "name": "小胖",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1001_10102",
+   "card": "1.5.5|10102",
+   "skills": [
+    {
+     "id": "20",
+     "name": "重型坦克",
+     "desc": "我方回合开始时10%几率触发，撞击到对方的球员出场一回合。",
+     "icon": "skill_020_10102",
+     "unlock": 3
+    },
+    {
+     "id": "21",
+     "name": "重型坦克",
+     "desc": "我方回合开始时15%几率触发，撞击到对方的球员出场一回合。",
+     "icon": "skill_020_10102",
+     "unlock": 6
+    },
+    {
+     "id": "22",
+     "name": "重型坦克",
+     "desc": "我方回合开始时20%几率触发，撞击到对方的球员出场一回合。",
+     "icon": "skill_020_10102",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p19",
+   "name": "玛塔叔叔",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1001_10103",
+   "card": "1.5.5|10103",
+   "skills": [
+    {
+     "id": "30",
+     "name": "大叔巧射",
+     "desc": "我方回合开始时10%几率触发，用弧线射门后，提升自身精准20%，持续2回合",
+     "icon": "skill_030_10103",
+     "unlock": 3
+    },
+    {
+     "id": "31",
+     "name": "大叔巧射",
+     "desc": "我方回合开始时15%几率触发，用弧线射门后，提升自身精准25%，持续2回合",
+     "icon": "skill_030_10103",
+     "unlock": 6
+    },
+    {
+     "id": "32",
+     "name": "大叔巧射",
+     "desc": "我方回合开始时20%几率触发，用弧线射门后，提升自身精准30%，持续2回合",
+     "icon": "skill_030_10103",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p20",
+   "name": "得佩",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1001_10104",
+   "card": "1.5.5|10104",
+   "skills": [
+    {
+     "id": "390",
+     "name": "精准远射",
+     "desc": "回合开始时10%触发，如果射门，提升自身精准10%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 3
+    },
+    {
+     "id": "391",
+     "name": "精准远射",
+     "desc": "回合开始时15%触发，如果射门，提升自身精准20%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 6
+    },
+    {
+     "id": "392",
+     "name": "精准远射",
+     "desc": "回合开始时20%触发，如果射门，提升自身精准30%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p21",
+   "name": "小猪",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1001_10105",
+   "card": "1.5.5|10105",
+   "skills": [
+    {
+     "id": "400",
+     "name": "攻防纽带",
+     "desc": "当他在对方半场时，降低对方全体重量10%，当他在我方半场时，降低对方全体力度10%",
+     "icon": "skill_400_10105",
+     "unlock": 3
+    },
+    {
+     "id": "402",
+     "name": "攻防纽带",
+     "desc": "当他在对方半场时，降低对方全体重量20%，当他在我方半场时，降低对方全体力度20%",
+     "icon": "skill_400_10105",
+     "unlock": 6
+    },
+    {
+     "id": "404",
+     "name": "攻防纽带",
+     "desc": "当他在对方半场时，降低对方全体重量30%，当他在我方半场时，降低对方全体力度30%",
+     "icon": "skill_400_10105",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p22",
+   "name": "罗货",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_1001_10106",
+   "card": "1.5.5|10106",
+   "skills": []
+  },
+  {
+   "id": "p23",
+   "name": "布琳德",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1001_10107",
+   "card": "1.5.5|10107",
+   "skills": [
+    {
+     "id": "410",
+     "name": "球场指挥官",
+     "desc": "在对方半场时，提升全体己方球员力度和精准5%",
+     "icon": "skill_410_10107",
+     "unlock": 3
+    },
+    {
+     "id": "411",
+     "name": "球场指挥官",
+     "desc": "在对方半场时，提升全体己方球员力度和精准10%",
+     "icon": "skill_410_10107",
+     "unlock": 6
+    },
+    {
+     "id": "412",
+     "name": "球场指挥官",
+     "desc": "在对方半场时，提升全体己方球员力度和精准15%",
+     "icon": "skill_410_10107",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p24",
+   "name": "阿圭罗",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1002_10201",
+   "card": "1.5.5|10201",
+   "skills": [
+    {
+     "id": "40",
+     "name": "凌波微步",
+     "desc": "当前在对方半场内，我方回合开始时10%几率触发，如果在本回合移动中没有碰触到任何角色，那么可以再进行一次移动",
+     "icon": "skill_040_10201",
+     "unlock": 3
+    },
+    {
+     "id": "41",
+     "name": "凌波微步",
+     "desc": "当前在对方半场内，我方回合开始时15%几率触发，如果在本回合移动中没有碰触到任何角色，那么可以再进行一次移动",
+     "icon": "skill_040_10201",
+     "unlock": 6
+    },
+    {
+     "id": "42",
+     "name": "凌波微步",
+     "desc": "当前在对方半场内，我方回合开始时20%几率触发，如果在本回合移动中没有碰触到任何角色，那么可以再进行一次移动",
+     "icon": "skill_040_10201",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p25",
+   "name": "思特灵",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1002_10202",
+   "card": "1.5.5|10202",
+   "skills": [
+    {
+     "id": "420",
+     "name": "一气呵成",
+     "desc": "回合开始时10%触发，如果射门，提升自身力度10%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 3
+    },
+    {
+     "id": "421",
+     "name": "一气呵成",
+     "desc": "回合开始时15%触发，如果射门，提升自身力度20%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 6
+    },
+    {
+     "id": "422",
+     "name": "一气呵成",
+     "desc": "回合开始时20%触发，如果射门，提升自身力度30%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p26",
+   "name": "喜娃",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1002_10203",
+   "card": "1.5.5|10203",
+   "skills": [
+    {
+     "id": "50",
+     "name": "中场发动机",
+     "desc": "当前在对方半场内，我方回合开始时20%几率触发，移动时降低对方半场内所有球员力度30%，持续一回合",
+     "icon": "skill_050_10203",
+     "unlock": 3
+    },
+    {
+     "id": "51",
+     "name": "中场发动机",
+     "desc": "当前在对方半场内，我方回合开始时25%几率触发，移动时降低对方半场内所有球员力度40%，持续一回合",
+     "icon": "skill_050_10203",
+     "unlock": 6
+    },
+    {
+     "id": "52",
+     "name": "中场发动机",
+     "desc": "当前在对方半场内，我方回合开始时30%几率触发，移动时降低对方半场内所有球员力度50%，持续一回合",
+     "icon": "skill_050_10203",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p27",
+   "name": "土雷",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1002_10204",
+   "card": "1.5.5|10204",
+   "skills": [
+    {
+     "id": "60",
+     "name": "碰碰车",
+     "desc": "我方回合开始时10%的几率触发，该回合将对方球员撞击到墙上可以将其眩晕一回合",
+     "icon": "skill_060_10204",
+     "unlock": 3
+    },
+    {
+     "id": "61",
+     "name": "碰碰车",
+     "desc": "我方回合开始时12%的几率触发，该回合将对方球员撞击到墙上可以将其眩晕一回合",
+     "icon": "skill_060_10204",
+     "unlock": 6
+    },
+    {
+     "id": "62",
+     "name": "碰碰车",
+     "desc": "我方回合开始时15%的几率触发，该回合将对方球员撞击到墙上可以将其眩晕一回合",
+     "icon": "skill_060_10204",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p28",
+   "name": "丁丁",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1002_10205",
+   "card": "1.5.5|10205",
+   "skills": [
+    {
+     "id": "430",
+     "name": "进攻核心",
+     "desc": "回合开始时20%触发，如果用弧线射门，提升全队力度20%，持续2回合",
+     "icon": "skill_430_10205",
+     "unlock": 3
+    },
+    {
+     "id": "431",
+     "name": "进攻核心",
+     "desc": "回合开始时25%触发，如果用弧线射门，提升全队力度25%，持续2回合",
+     "icon": "skill_430_10205",
+     "unlock": 6
+    },
+    {
+     "id": "432",
+     "name": "进攻核心",
+     "desc": "回合开始时30%触发，如果用弧线射门，提升全队力度30%，持续2回合",
+     "icon": "skill_430_10205",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p29",
+   "name": "孔向前",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1002_10206",
+   "card": "1.5.5|10206",
+   "skills": [
+    {
+     "id": "70",
+     "name": "钢筋铁骨",
+     "desc": "当被敌人撞击的时候有20%几率眩晕敌人一回合",
+     "icon": "skill_070_10206",
+     "unlock": 3
+    },
+    {
+     "id": "71",
+     "name": "钢筋铁骨",
+     "desc": "当被敌人撞击的时候有25%几率眩晕敌人一回合",
+     "icon": "skill_070_10206",
+     "unlock": 6
+    },
+    {
+     "id": "72",
+     "name": "钢筋铁骨",
+     "desc": "当被敌人撞击的时候有30%几率眩晕敌人一回合",
+     "icon": "skill_070_10206",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p30",
+   "name": "德漏勺",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_1002_10207",
+   "card": "1.5.5|10207",
+   "skills": []
+  },
+  {
+   "id": "p31",
+   "name": "克斯塔",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1003_10301",
+   "card": "1.5.5|10301",
+   "skills": [
+    {
+     "id": "440",
+     "name": "强力中锋",
+     "desc": "在对方半场时，降低对方半场内的对方球员10%的重量",
+     "icon": "skill_440_10301",
+     "unlock": 3
+    },
+    {
+     "id": "441",
+     "name": "强力中锋",
+     "desc": "在对方半场时，降低对方半场内的对方球员20%的重量",
+     "icon": "skill_440_10301",
+     "unlock": 6
+    },
+    {
+     "id": "442",
+     "name": "强力中锋",
+     "desc": "在对方半场时，降低对方半场内的对方球员30%的重量",
+     "icon": "skill_440_10301",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p32",
+   "name": "扎球王",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1003_10302",
+   "card": "1.5.5|10302",
+   "skills": [
+    {
+     "id": "80",
+     "name": "无解盘带",
+     "desc": "每触球5次，可以在当前回合额外进行一次移动",
+     "icon": "skill_080_10302",
+     "unlock": 3
+    },
+    {
+     "id": "81",
+     "name": "无解盘带",
+     "desc": "每触球4次，可以在当前回合额外进行一次移动",
+     "icon": "skill_080_10302",
+     "unlock": 6
+    },
+    {
+     "id": "82",
+     "name": "无解盘带",
+     "desc": "每触球3次，可以在当前回合额外进行一次移动",
+     "icon": "skill_080_10302",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p33",
+   "name": "小法",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1003_10303",
+   "card": "1.5.5|10303",
+   "skills": [
+    {
+     "id": "90",
+     "name": "致命直塞",
+     "desc": "当前在对方半场内，我方回合开始时20%几率触发，传球触碰到的第一个己方球员可以再行动一回合。",
+     "icon": "skill_090_10303",
+     "unlock": 3
+    },
+    {
+     "id": "91",
+     "name": "致命直塞",
+     "desc": "当前在对方半场内，我方回合开始时25%几率触发，传球触碰到的第一个己方球员可以再行动一回合。",
+     "icon": "skill_090_10303",
+     "unlock": 6
+    },
+    {
+     "id": "92",
+     "name": "致命直塞",
+     "desc": "当前在对方半场内，我方回合开始时30%几率触发，传球触碰到的第一个己方球员可以再行动一回合。",
+     "icon": "skill_090_10303",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p34",
+   "name": "小金人",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1003_10304",
+   "card": "1.5.5|10304",
+   "skills": [
+    {
+     "id": "450",
+     "name": "脚下生花",
+     "desc": "在对方半场时，有10%几率触发，移动时降低对方半场所有球员下回合力度10%",
+     "icon": "skill_450_10304",
+     "unlock": 3
+    },
+    {
+     "id": "451",
+     "name": "脚下生花",
+     "desc": "在对方半场时，有15%几率触发，移动时降低对方半场所有球员下回合力度20%",
+     "icon": "skill_450_10304",
+     "unlock": 6
+    },
+    {
+     "id": "452",
+     "name": "脚下生花",
+     "desc": "在对方半场时，有20%几率触发，移动时降低对方半场所有球员下回合力度30%",
+     "icon": "skill_450_10304",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p35",
+   "name": "玛蒂七",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_1003_10305",
+   "card": "1.5.5|10305",
+   "skills": []
+  },
+  {
+   "id": "p36",
+   "name": "特队",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1003_10306",
+   "card": "1.5.5|10306",
+   "skills": [
+    {
+     "id": "100",
+     "name": "定海神针",
+     "desc": "当在我方半场时，提升在我方半场的己方球员重量20%",
+     "icon": "skill_100_10306",
+     "unlock": 3
+    },
+    {
+     "id": "101",
+     "name": "定海神针",
+     "desc": "当在我方半场时，提升在我方半场的己方球员重量25%",
+     "icon": "skill_100_10306",
+     "unlock": 6
+    },
+    {
+     "id": "102",
+     "name": "定海神针",
+     "desc": "当在我方半场时，提升在我方半场的己方球员重量30%",
+     "icon": "skill_100_10306",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p37",
+   "name": "阿紫",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1003_10307",
+   "card": "1.5.5|10307",
+   "skills": [
+    {
+     "id": "460",
+     "name": "全面防御",
+     "desc": "在己方半场时，有10%几率触发,降低对方全体球员精准10%",
+     "icon": "skill_460_10307",
+     "unlock": 3
+    },
+    {
+     "id": "461",
+     "name": "全面防御",
+     "desc": "在己方半场时，有15%几率触发,降低对方全体球员精准15%",
+     "icon": "skill_460_10307",
+     "unlock": 6
+    },
+    {
+     "id": "462",
+     "name": "全面防御",
+     "desc": "在己方半场时，有20%几率触发,降低对方全体球员精准20%",
+     "icon": "skill_460_10307",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p38",
+   "name": "基努",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_1004_10401",
+   "card": "1.5.5|10401",
+   "skills": []
+  },
+  {
+   "id": "p39",
+   "name": "小老虎",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1004_10402",
+   "card": "1.5.5|10402",
+   "skills": [
+    {
+     "id": "110",
+     "name": "猛虎下山",
+     "desc": "当前在对方半场内，我方回合开始时10%几率触发，移动时降低对方半场内所有球员重量10%，持续一回合",
+     "icon": "skill_110_10402",
+     "unlock": 3
+    },
+    {
+     "id": "111",
+     "name": "猛虎下山",
+     "desc": "当前在对方半场内，我方回合开始时15%几率触发，移动时降低对方半场内所有球员重量20%，持续一回合",
+     "icon": "skill_110_10402",
+     "unlock": 6
+    },
+    {
+     "id": "112",
+     "name": "猛虎下山",
+     "desc": "当前在对方半场内，我方回合开始时20%几率触发，移动时降低对方半场内所有球员重量30%，持续一回合",
+     "icon": "skill_110_10402",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p40",
+   "name": "桑大腿",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1004_10403",
+   "card": "1.5.5|10403",
+   "skills": [
+    {
+     "id": "120",
+     "name": "辗转腾挪",
+     "desc": "当前在对方半场内，我方回合开始时20%几率触发，移动时降低对方半场内所有球员重量30%，持续一回合",
+     "icon": "skill_120_10403",
+     "unlock": 3
+    },
+    {
+     "id": "121",
+     "name": "辗转腾挪",
+     "desc": "当前在对方半场内，我方回合开始时25%几率触发，移动时降低对方半场内所有球员重量40%，持续一回合",
+     "icon": "skill_120_10403",
+     "unlock": 6
+    },
+    {
+     "id": "122",
+     "name": "辗转腾挪",
+     "desc": "当前在对方半场内，我方回合开始时30%几率触发，移动时降低对方半场内所有球员重量50%，持续一回合",
+     "icon": "skill_120_10403",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p41",
+   "name": "大眼",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_1004_10404",
+   "card": "1.5.5|10404",
+   "skills": [
+    {
+     "id": "130",
+     "name": "助攻之王",
+     "desc": "我方回合开始时10%几率触发，传球触碰到的第一个己方球员可以再行动一回合。",
+     "icon": "skill_130_10404",
+     "unlock": 3
+    },
+    {
+     "id": "131",
+     "name": "助攻之王",
+     "desc": "我方回合开始时15%几率触发，传球触碰到的第一个己方球员可以再行动一回合。",
+     "icon": "skill_130_10404",
+     "unlock": 6
+    },
+    {
+     "id": "132",
+     "name": "助攻之王",
+     "desc": "我方回合开始时20%几率触发，传球触碰到的第一个己方球员可以再行动一回合。",
+     "icon": "skill_130_10404",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p42",
+   "name": "卡锁啦",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_1004_10405",
+   "card": "1.5.5|10405",
+   "skills": [
+    {
+     "id": "470",
+     "name": "斗牛战将",
+     "desc": "在我方半场时，有10%几率触发，移动时降低对方半场所有球员下回合重量10%",
+     "icon": "skill_450_10304",
+     "unlock": 3
+    },
+    {
+     "id": "471",
+     "name": "斗牛战将",
+     "desc": "在我方半场时，有15%几率触发，移动时降低对方半场所有球员下回合重量20%",
+     "icon": "skill_450_10304",
+     "unlock": 6
+    },
+    {
+     "id": "472",
+     "name": "斗牛战将",
+     "desc": "在我方半场时，有20%几率触发，移动时降低对方半场所有球员下回合重量30%",
+     "icon": "skill_450_10304",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p43",
+   "name": "贝闪电",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_1004_10406",
+   "card": "1.5.5|10406",
+   "skills": []
+  },
+  {
+   "id": "p44",
+   "name": "模特撒克",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_1004_10407",
+   "card": "1.5.5|10407",
+   "skills": []
+  },
+  {
+   "id": "p45",
+   "name": "莱万",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_2001_20101",
+   "card": "1.5.5|20101",
+   "skills": [
+    {
+     "id": "150",
+     "name": "全能中锋",
+     "desc": "在对方半场时，降低对方半场内的对方球员20%的重量",
+     "icon": "skill_150_20101",
+     "unlock": 3
+    },
+    {
+     "id": "151",
+     "name": "全能中锋",
+     "desc": "在对方半场时，降低对方半场内的对方球员30%的重量",
+     "icon": "skill_150_20101",
+     "unlock": 6
+    },
+    {
+     "id": "152",
+     "name": "全能中锋",
+     "desc": "在对方半场时，降低对方半场内的对方球员40%的重量",
+     "icon": "skill_150_20101",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p46",
+   "name": "小飞侠",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_2001_20103",
+   "card": "1.5.5|20103",
+   "skills": [
+    {
+     "id": "480",
+     "name": "边路突袭",
+     "desc": "回合开始时3%触发，球员移动过程中先触碰墙，则再行动一回合",
+     "icon": "skill_480_20103",
+     "unlock": 3
+    },
+    {
+     "id": "481",
+     "name": "边路突袭",
+     "desc": "回合开始时5%触发，球员移动过程中先触碰墙，则再行动一回合",
+     "icon": "skill_480_20103",
+     "unlock": 6
+    },
+    {
+     "id": "482",
+     "name": "边路突袭",
+     "desc": "回合开始时5%触发，球员移动过程中先触碰墙，则再行动一回合",
+     "icon": "skill_480_20103",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p47",
+   "name": "格册",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_2001_20104",
+   "card": "1.5.5|20104",
+   "skills": [
+    {
+     "id": "170",
+     "name": "超级马里奥",
+     "desc": "我方回合开始时10%的几率触发，如果用弧线射门，提升全队力度10%，持续2回合",
+     "icon": "skill_170_20104",
+     "unlock": 3
+    },
+    {
+     "id": "171",
+     "name": "超级马里奥",
+     "desc": "我方回合开始时15%的几率触发，如果用弧线射门，提升全队力度15%，持续2回合",
+     "icon": "skill_170_20104",
+     "unlock": 6
+    },
+    {
+     "id": "172",
+     "name": "超级马里奥",
+     "desc": "我方回合开始时20%的几率触发，如果用弧线射门，提升全队力度20%，持续2回合",
+     "icon": "skill_170_20104",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p48",
+   "name": "比达二",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_2001_20105",
+   "card": "1.5.5|20105",
+   "skills": [
+    {
+     "id": "490",
+     "name": "狂徒斗士",
+     "desc": "当撞击敌人时，20%几率降低全体对方球员力度10% 持续一回合",
+     "icon": "skill_220_30104",
+     "unlock": 3
+    },
+    {
+     "id": "491",
+     "name": "狂徒斗士",
+     "desc": "当撞击敌人时，20%几率降低全体对方球员力度20% 持续一回合",
+     "icon": "skill_220_30104",
+     "unlock": 6
+    },
+    {
+     "id": "492",
+     "name": "狂徒斗士",
+     "desc": "当撞击敌人时，20%几率降低全体对方球员力度30% 持续一回合",
+     "icon": "skill_220_30104",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p49",
+   "name": "拉队",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_2001_20106",
+   "card": "1.5.5|20106",
+   "skills": [
+    {
+     "id": "180",
+     "name": "球场指挥塔",
+     "desc": "在对方半场时，提升全体己方球员力度和精准15%",
+     "icon": "skill_180_20106",
+     "unlock": 3
+    },
+    {
+     "id": "181",
+     "name": "球场指挥塔",
+     "desc": "在对方半场时，提升全体己方球员力度和精准20%",
+     "icon": "skill_180_20106",
+     "unlock": 6
+    },
+    {
+     "id": "182",
+     "name": "球场指挥塔",
+     "desc": "在对方半场时，提升全体己方球员力度和精准25%",
+     "icon": "skill_180_20106",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p50",
+   "name": "博啊疼",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_2001_20107",
+   "card": "1.5.5|20107",
+   "skills": [
+    {
+     "id": "500",
+     "name": "绝对硬霸",
+     "desc": "被对方球员撞击时,对方球员有20%几率下场直到下回合结束",
+     "icon": "skill_500_20107",
+     "unlock": 3
+    },
+    {
+     "id": "501",
+     "name": "绝对硬霸",
+     "desc": "被对方球员撞击时,对方球员有25%几率下场直到下回合结束",
+     "icon": "skill_500_20107",
+     "unlock": 6
+    },
+    {
+     "id": "502",
+     "name": "绝对硬霸",
+     "desc": "被对方球员撞击时,对方球员有30%几率下场直到下回合结束",
+     "icon": "skill_500_20107",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p51",
+   "name": "奥巴没样",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_2002_20201",
+   "card": "1.5.5|20201",
+   "skills": [
+    {
+     "id": "190",
+     "name": "蜘蛛侠",
+     "desc": "我方回合开始时20%几率触发，射门后提升自身力度30%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 3
+    },
+    {
+     "id": "191",
+     "name": "蜘蛛侠",
+     "desc": "我方回合开始时25%几率触发，射门后提升自身力度40%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 6
+    },
+    {
+     "id": "192",
+     "name": "蜘蛛侠",
+     "desc": "我方回合开始时30%几率触发，射门后提升自身力度50%，持续2回合",
+     "icon": "skill_190_20201",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p52",
+   "name": "螺一丝",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_2002_20202",
+   "card": "1.5.5|20202",
+   "skills": [
+    {
+     "id": "200",
+     "name": "前场尖兵",
+     "desc": "当前在对方半场内，我方回合开始时20%几率触发，移动后降低对方半场所有对方球员下回合力度30%",
+     "icon": "skill_200_20202",
+     "unlock": 3
+    },
+    {
+     "id": "201",
+     "name": "前场尖兵",
+     "desc": "当前在对方半场内，我方回合开始时25%几率触发，移动后降低对方半场所有对方球员下回合力度40%",
+     "icon": "skill_200_20202",
+     "unlock": 6
+    },
+    {
+     "id": "202",
+     "name": "前场尖兵",
+     "desc": "当前在对方半场内，我方回合开始时30%几率触发，移动后降低对方半场所有对方球员下回合力度50%",
+     "icon": "skill_200_20202",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p53",
+   "name": "美西他娘",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_2002_20203",
+   "card": "1.5.5|20203",
+   "skills": [
+    {
+     "id": "510",
+     "name": "中场马达",
+     "desc": "在对方半场时，有10%几率触发，移动时降低对方半场所有球员下回合重量10%",
+     "icon": "skill_450_10304",
+     "unlock": 3
+    },
+    {
+     "id": "511",
+     "name": "中场马达",
+     "desc": "在对方半场时，有15%几率触发，移动时降低对方半场所有球员下回合重量20%",
+     "icon": "skill_450_10304",
+     "unlock": 6
+    },
+    {
+     "id": "512",
+     "name": "中场马达",
+     "desc": "在对方半场时，有20%几率触发，移动时降低对方半场所有球员下回合重量30%",
+     "icon": "skill_450_10304",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p54",
+   "name": "香川寿司",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_2002_20204",
+   "card": "1.5.5|20204",
+   "skills": []
+  },
+  {
+   "id": "p55",
+   "name": "景多安",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_2002_20205",
+   "card": "1.5.5|20205",
+   "skills": [
+    {
+     "id": "520",
+     "name": "御敌之门",
+     "desc": "在我方半场时，降低我方半场内的对方球员10%的力度",
+     "icon": "skill_520_20205",
+     "unlock": 3
+    },
+    {
+     "id": "521",
+     "name": "御敌之门",
+     "desc": "在我方半场时，降低我方半场内的对方球员20%的力度",
+     "icon": "skill_520_20205",
+     "unlock": 6
+    },
+    {
+     "id": "522",
+     "name": "御敌之门",
+     "desc": "在我方半场时，降低我方半场内的对方球员30%的力度",
+     "icon": "skill_520_20205",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p56",
+   "name": "狐媚",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_2002_20206",
+   "card": "1.5.5|20206",
+   "skills": [
+    {
+     "id": "530",
+     "name": "不动如松",
+     "desc": "在对方回合10%的几率触发，不会被任何人或球撞击移动",
+     "icon": "skill_530_20206",
+     "unlock": 3
+    },
+    {
+     "id": "531",
+     "name": "不动如松",
+     "desc": "在对方回合15%的几率触发，不会被任何人或球撞击移动",
+     "icon": "skill_530_20206",
+     "unlock": 6
+    },
+    {
+     "id": "532",
+     "name": "不动如松",
+     "desc": "在对方回合20%的几率触发，不会被任何人或球撞击移动",
+     "icon": "skill_530_20206",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p57",
+   "name": "金特二",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_2002_20207",
+   "card": "1.5.5|20207",
+   "skills": []
+  },
+  {
+   "id": "p58",
+   "name": "迪吧啦",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_3001_30101",
+   "card": "1.5.5|30101",
+   "skills": [
+    {
+     "id": "210",
+     "name": "小魔仙",
+     "desc": "我方回合开始时20%几率触发，提升自身本回合的力度和精准30%",
+     "icon": "skill_210_30101",
+     "unlock": 3
+    },
+    {
+     "id": "211",
+     "name": "小魔仙",
+     "desc": "我方回合开始时25%几率触发，提升自身本回合的力度和精准30%",
+     "icon": "skill_210_30101",
+     "unlock": 6
+    },
+    {
+     "id": "212",
+     "name": "小魔仙",
+     "desc": "我方回合开始时30%几率触发，提升自身本回合的力度和精准30%",
+     "icon": "skill_210_30101",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p59",
+   "name": "莫邋遢",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_3001_30102",
+   "card": "1.5.5|30102",
+   "skills": [
+    {
+     "id": "540",
+     "name": "势大力沉",
+     "desc": "回合开始时5%的几率触发，本回合射门时球所碰到的全部对方球员会被眩晕一回合",
+     "icon": "skill_540_30102",
+     "unlock": 3
+    },
+    {
+     "id": "541",
+     "name": "势大力沉",
+     "desc": "回合开始时7%的几率触发，本回合射门时球所碰到的全部对方球员会被眩晕一回合",
+     "icon": "skill_540_30102",
+     "unlock": 6
+    },
+    {
+     "id": "542",
+     "name": "势大力沉",
+     "desc": "回合开始时10%的几率触发，本回合射门时球所碰到的全部对方球员会被眩晕一回合",
+     "icon": "skill_540_30102",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p60",
+   "name": "马绩效",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_3001_30104",
+   "card": "1.5.5|30104",
+   "skills": [
+    {
+     "id": "220",
+     "name": "遇强则强",
+     "desc": "我方回合开始时20%几率触发，移动后降低下回合全体对方球员重量10%",
+     "icon": "skill_220_30104",
+     "unlock": 3
+    },
+    {
+     "id": "221",
+     "name": "遇强则强",
+     "desc": "我方回合开始时25%几率触发，移动后降低下回合全体对方球员重量15%",
+     "icon": "skill_220_30104",
+     "unlock": 6
+    },
+    {
+     "id": "222",
+     "name": "遇强则强",
+     "desc": "我方回合开始时30%几率触发，移动后降低下回合全体对方球员重量20%",
+     "icon": "skill_220_30104",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p61",
+   "name": "脸哥",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_3001_30105",
+   "card": "1.5.5|30105",
+   "skills": []
+  },
+  {
+   "id": "p62",
+   "name": "菠萝奇",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_3001_30106",
+   "card": "1.5.5|30106",
+   "skills": []
+  },
+  {
+   "id": "p63",
+   "name": "鲁加尼",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_3001_30107",
+   "card": "1.5.5|30107",
+   "skills": []
+  },
+  {
+   "id": "p64",
+   "name": "西瓜",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_3001_30108",
+   "card": "1.5.5|30108",
+   "skills": [
+    {
+     "id": "690",
+     "name": "神准烟枪",
+     "desc": "在对方半场时，有20%几率触发，射门时提升自身精准30%，持续2回合",
+     "icon": "skill_690_30108",
+     "unlock": 3
+    },
+    {
+     "id": "691",
+     "name": "神准烟枪",
+     "desc": "在对方半场时，有25%几率触发，射门时提升自身精准40%，持续2回合",
+     "icon": "skill_690_30108",
+     "unlock": 6
+    },
+    {
+     "id": "692",
+     "name": "神准烟枪",
+     "desc": "在对方半场时，有30%几率触发，射门时提升自身精准50%，持续2回合",
+     "icon": "skill_690_30108",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p65",
+   "name": "内少",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4001_40101",
+   "card": "1.5.5|40101",
+   "skills": [
+    {
+     "id": "230",
+     "name": "蝴蝶穿花",
+     "desc": "回合开始时10%的几率触发，本回合射门的时候如果球触碰到了敌方球员，则可以再行动一次",
+     "icon": "skill_230_40101",
+     "unlock": 3
+    },
+    {
+     "id": "231",
+     "name": "蝴蝶穿花",
+     "desc": "回合开始时15%的几率触发，本回合射门的时候如果球触碰到了敌方球员，则可以再行动一次",
+     "icon": "skill_230_40101",
+     "unlock": 6
+    },
+    {
+     "id": "232",
+     "name": "蝴蝶穿花",
+     "desc": "回合开始时20%的几率触发，本回合射门的时候如果球触碰到了敌方球员，则可以再行动一次",
+     "icon": "skill_230_40101",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p66",
+   "name": "苏牙",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4001_40102",
+   "card": "1.5.5|40102",
+   "skills": [
+    {
+     "id": "240",
+     "name": "禁区之王",
+     "desc": "在对方半场时，我方回合开始时10%几率触发，射门的球在对方禁区被对方球员挡出，则再行动一回合。",
+     "icon": "skill_240_40102",
+     "unlock": 3
+    },
+    {
+     "id": "241",
+     "name": "禁区之王",
+     "desc": "在对方半场时，我方回合开始时15%几率触发，射门的球在对方禁区被对方球员挡出，则再行动一回合。",
+     "icon": "skill_240_40102",
+     "unlock": 6
+    },
+    {
+     "id": "242",
+     "name": "禁区之王",
+     "desc": "在对方半场时，我方回合开始时20%几率触发，射门的球在对方禁区被对方球员挡出，则再行动一回合。",
+     "icon": "skill_240_40102",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p67",
+   "name": "小白",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4001_40103",
+   "card": "1.5.5|40103",
+   "skills": [
+    {
+     "id": "250",
+     "name": "攻防枢纽",
+     "desc": "在对方半场时，增加全体己方球员力度30%，在我方半场时，增加全体己方球员重量30%",
+     "icon": "skill_250_40103",
+     "unlock": 3
+    },
+    {
+     "id": "252",
+     "name": "攻防枢纽",
+     "desc": "在对方半场时，增加全体己方球员力度40%，在我方半场时，增加全体己方球员重量40%",
+     "icon": "skill_250_40103",
+     "unlock": 6
+    },
+    {
+     "id": "254",
+     "name": "攻防枢纽",
+     "desc": "在对方半场时，增加全体己方球员力度50%，在我方半场时，增加全体己方球员重量50%",
+     "icon": "skill_250_40103",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p68",
+   "name": "布教授",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4001_40104",
+   "card": "1.5.5|40104",
+   "skills": [
+    {
+     "id": "550",
+     "name": "攻防俱佳",
+     "desc": "在对方半场时，增加全体己方球员力度10%，在我方半场时，增加全体己方球员重量10%",
+     "icon": "skill_550_40104",
+     "unlock": 3
+    },
+    {
+     "id": "552",
+     "name": "攻防俱佳",
+     "desc": "在对方半场时，增加全体己方球员力度20%，在我方半场时，增加全体己方球员重量20%",
+     "icon": "skill_550_40104",
+     "unlock": 6
+    },
+    {
+     "id": "554",
+     "name": "攻防俱佳",
+     "desc": "在对方半场时，增加全体己方球员力度30%，在我方半场时，增加全体己方球员重量30%",
+     "icon": "skill_550_40104",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p69",
+   "name": "小马哥",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4001_40105",
+   "card": "1.5.5|40105",
+   "skills": [
+    {
+     "id": "560",
+     "name": "老马识途",
+     "desc": "在我方半场时，降低我方半场内的对方球员10%的重量",
+     "icon": "skill_560_40105",
+     "unlock": 3
+    },
+    {
+     "id": "561",
+     "name": "老马识途",
+     "desc": "在我方半场时，降低我方半场内的对方球员20%的重量",
+     "icon": "skill_560_40105",
+     "unlock": 6
+    },
+    {
+     "id": "562",
+     "name": "老马识途",
+     "desc": "在我方半场时，降低我方半场内的对方球员30%的重量",
+     "icon": "skill_560_40105",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p70",
+   "name": "皮主席",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4001_40106",
+   "card": "1.5.5|40106",
+   "skills": [
+    {
+     "id": "260",
+     "name": "极度坚韧",
+     "desc": "在我方半场时，增加自身重量20%",
+     "icon": "skill_260_40106",
+     "unlock": 3
+    },
+    {
+     "id": "261",
+     "name": "极度坚韧",
+     "desc": "在我方半场时，增加自身重量25%",
+     "icon": "skill_260_40106",
+     "unlock": 6
+    },
+    {
+     "id": "262",
+     "name": "极度坚韧",
+     "desc": "在我方半场时，增加自身重量30%",
+     "icon": "skill_260_40106",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p71",
+   "name": "铁达尼",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4001_40107",
+   "card": "1.5.5|40107",
+   "skills": [
+    {
+     "id": "570",
+     "name": "边卫飞翼",
+     "desc": "在对方半场时，提升全体己方球员精准10%",
+     "icon": "skill_570_40107",
+     "unlock": 3
+    },
+    {
+     "id": "571",
+     "name": "边卫飞翼",
+     "desc": "在对方半场时，提升全体己方球员精准15%",
+     "icon": "skill_570_40107",
+     "unlock": 6
+    },
+    {
+     "id": "572",
+     "name": "边卫飞翼",
+     "desc": "在对方半场时，提升全体己方球员精准20%",
+     "icon": "skill_570_40107",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p72",
+   "name": "图蓝",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4001_40110",
+   "card": "1.5.5|40110",
+   "skills": [
+    {
+     "id": "680",
+     "name": "图穷匕见",
+     "desc": "在对方半场时，有10%几率触发，移动时增加对方半场内我方球员力度10%,持续1回合",
+     "icon": "skill_680_40110",
+     "unlock": 3
+    },
+    {
+     "id": "681",
+     "name": "图穷匕见",
+     "desc": "在对方半场时，有15%几率触发，移动时增加对方半场内我方球员力度20%,持续1回合",
+     "icon": "skill_680_40110",
+     "unlock": 6
+    },
+    {
+     "id": "682",
+     "name": "图穷匕见",
+     "desc": "在对方半场时，有20%几率触发，移动时增加对方半场内我方球员力度30%,持续1回合",
+     "icon": "skill_680_40110",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p73",
+   "name": "笨马",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4002_40201",
+   "card": "1.5.5|40201",
+   "skills": [
+    {
+     "id": "580",
+     "name": "马踏联营",
+     "desc": "在对方半场时，有3%几率触发，如果在本回合移动中没有碰触到任何角色，那么可以再进行一次移动",
+     "icon": "skill_580_40201",
+     "unlock": 3
+    },
+    {
+     "id": "581",
+     "name": "马踏联营",
+     "desc": "在对方半场时，有5%几率触发，如果在本回合移动中没有碰触到任何角色，那么可以再进行一次移动",
+     "icon": "skill_580_40201",
+     "unlock": 6
+    },
+    {
+     "id": "582",
+     "name": "马踏联营",
+     "desc": "在对方半场时，有8%几率触发，如果在本回合移动中没有碰触到任何角色，那么可以再进行一次移动",
+     "icon": "skill_580_40201",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p74",
+   "name": "大圣",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4002_40202",
+   "card": "1.5.5|40202",
+   "skills": [
+    {
+     "id": "270",
+     "name": "人球分过",
+     "desc": "我方回合开始时10%几率触发，移动过程中如果先触碰墙，则可以再行动一回合。",
+     "icon": "skill_270_40202",
+     "unlock": 3
+    },
+    {
+     "id": "271",
+     "name": "人球分过",
+     "desc": "我方回合开始时15%几率触发，移动过程中如果先触碰墙，则可以再行动一回合。",
+     "icon": "skill_270_40202",
+     "unlock": 6
+    },
+    {
+     "id": "272",
+     "name": "人球分过",
+     "desc": "我方回合开始时20%几率触发，移动过程中如果先触碰墙，则可以再行动一回合。",
+     "icon": "skill_270_40202",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p75",
+   "name": "甜菜",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4002_40203",
+   "card": "1.5.5|40203",
+   "skills": [
+    {
+     "id": "280",
+     "name": "甜而不菜",
+     "desc": "当他在对方半场时，降低对方全体重量30%，当他在我方半场时，降低对方全体力度30%",
+     "icon": "skill_280_40203",
+     "unlock": 3
+    },
+    {
+     "id": "282",
+     "name": "甜而不菜",
+     "desc": "当他在对方半场时，降低对方全体重量40%，当他在我方半场时，降低对方全体力度40%",
+     "icon": "skill_280_40203",
+     "unlock": 6
+    },
+    {
+     "id": "284",
+     "name": "甜而不菜",
+     "desc": "当他在对方半场时，降低对方全体重量50%，当他在我方半场时，降低对方全体力度50%",
+     "icon": "skill_280_40203",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p76",
+   "name": "魔笛",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4002_40204",
+   "card": "1.5.5|40204",
+   "skills": [
+    {
+     "id": "590",
+     "name": "魔笛传音",
+     "desc": "回合开始时10%触发，如果用弧线射门，提升全队精准10%，持续2回合",
+     "icon": "skill_030_10103",
+     "unlock": 3
+    },
+    {
+     "id": "591",
+     "name": "魔笛传音",
+     "desc": "回合开始时15%触发，如果用弧线射门，提升全队精准15%，持续2回合",
+     "icon": "skill_030_10103",
+     "unlock": 6
+    },
+    {
+     "id": "592",
+     "name": "魔笛传音",
+     "desc": "回合开始时20%触发，如果用弧线射门，提升全队精准20%，持续2回合",
+     "icon": "skill_030_10103",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p77",
+   "name": "哈罗",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4002_40205",
+   "card": "1.5.5|40205",
+   "skills": [
+    {
+     "id": "600",
+     "name": "精巧盘带",
+     "desc": "每触球6次，可以在当前回合额外进行一次移动",
+     "icon": "skill_600_40205",
+     "unlock": 3
+    },
+    {
+     "id": "601",
+     "name": "精巧盘带",
+     "desc": "每触球5次，可以在当前回合额外进行一次移动",
+     "icon": "skill_600_40205",
+     "unlock": 6
+    },
+    {
+     "id": "602",
+     "name": "精巧盘带",
+     "desc": "每触球4次，可以在当前回合额外进行一次移动",
+     "icon": "skill_600_40205",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p78",
+   "name": "水爷",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4002_40206",
+   "card": "1.5.5|40206",
+   "skills": [
+    {
+     "id": "290",
+     "name": "带刀侍卫",
+     "desc": "回合开始时10%的几率触发，本回合触碰的所有人会出场两回合",
+     "icon": "skill_290_40206",
+     "unlock": 3
+    },
+    {
+     "id": "291",
+     "name": "带刀侍卫",
+     "desc": "回合开始时15%的几率触发，本回合触碰的所有人会出场两回合",
+     "icon": "skill_290_40206",
+     "unlock": 6
+    },
+    {
+     "id": "292",
+     "name": "带刀侍卫",
+     "desc": "回合开始时20%的几率触发，本回合触碰的所有人会出场两回合",
+     "icon": "skill_290_40206",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p79",
+   "name": "武僧",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4002_40207",
+   "card": "1.5.5|40207",
+   "skills": [
+    {
+     "id": "300",
+     "name": "少林绝学",
+     "desc": "我方回合开始时20%几率触发，撞击的第一个对方球员和其一起出场至下回合结束。",
+     "icon": "skill_300_40207",
+     "unlock": 3
+    },
+    {
+     "id": "301",
+     "name": "少林绝学",
+     "desc": "我方回合开始时25%几率触发，撞击的第一个对方球员和其一起出场至下回合结束。",
+     "icon": "skill_300_40207",
+     "unlock": 6
+    },
+    {
+     "id": "302",
+     "name": "少林绝学",
+     "desc": "我方回合开始时30%几率触发，撞击的第一个对方球员和其一起出场至下回合结束。",
+     "icon": "skill_300_40207",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p80",
+   "name": "格子",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4003_40301",
+   "card": "1.5.5|40301",
+   "skills": [
+    {
+     "id": "310",
+     "name": "格子戏法",
+     "desc": "我方回合开始时10%几率触发，本回合射门时球所碰到的全部对方球员会被眩晕一回合",
+     "icon": "skill_310_40301",
+     "unlock": 3
+    },
+    {
+     "id": "311",
+     "name": "格子戏法",
+     "desc": "我方回合开始时15%几率触发，本回合射门时球所碰到的全部对方球员会被眩晕一回合",
+     "icon": "skill_310_40301",
+     "unlock": 6
+    },
+    {
+     "id": "312",
+     "name": "格子戏法",
+     "desc": "我方回合开始时20%几率触发，本回合射门时球所碰到的全部对方球员会被眩晕一回合",
+     "icon": "skill_310_40301",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p81",
+   "name": "托妞",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_4003_40302",
+   "card": "1.5.5|40302",
+   "skills": []
+  },
+  {
+   "id": "p82",
+   "name": "科客",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_4003_40303",
+   "card": "1.5.5|40303",
+   "skills": [
+    {
+     "id": "320",
+     "name": "野蛮冲撞",
+     "desc": "20%几率触发，将本回合第一个撞击到墙上的敌人眩晕两回合",
+     "icon": "skill_320_40303",
+     "unlock": 3
+    },
+    {
+     "id": "321",
+     "name": "野蛮冲撞",
+     "desc": "25%几率触发，将本回合第一个撞击到墙上的敌人眩晕两回合",
+     "icon": "skill_320_40303",
+     "unlock": 6
+    },
+    {
+     "id": "322",
+     "name": "野蛮冲撞",
+     "desc": "30%几率触发，将本回合第一个撞击到墙上的敌人眩晕两回合",
+     "icon": "skill_320_40303",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p83",
+   "name": "费南斯",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_4003_40304",
+   "card": "1.5.5|40304",
+   "skills": []
+  },
+  {
+   "id": "p84",
+   "name": "卡啦斯",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_4003_40305",
+   "card": "1.5.5|40305",
+   "skills": []
+  },
+  {
+   "id": "p85",
+   "name": "哥丁",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_4003_40306",
+   "card": "1.5.5|40306",
+   "skills": [
+    {
+     "id": "610",
+     "name": "铜墙铁壁",
+     "desc": "当被敌人撞击的时候有10%几率眩晕敌人一回合",
+     "icon": "skill_610_40306",
+     "unlock": 3
+    },
+    {
+     "id": "611",
+     "name": "铜墙铁壁",
+     "desc": "当被敌人撞击的时候有15%几率眩晕敌人一回合",
+     "icon": "skill_610_40306",
+     "unlock": 6
+    },
+    {
+     "id": "612",
+     "name": "铜墙铁壁",
+     "desc": "当被敌人撞击的时候有20%几率眩晕敌人一回合",
+     "icon": "skill_610_40306",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p86",
+   "name": "陆一丝",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_4003_40307",
+   "card": "1.5.5|40307",
+   "skills": []
+  },
+  {
+   "id": "p87",
+   "name": "咔哇泥",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_5001_50101",
+   "card": "1.5.5|50101",
+   "skills": [
+    {
+     "id": "620",
+     "name": "坦克前锋",
+     "desc": "回合开始时5%触发 撞击到对方的球员出场直至下回合结束",
+     "icon": "skill_620_50101",
+     "unlock": 3
+    },
+    {
+     "id": "621",
+     "name": "坦克前锋",
+     "desc": "回合开始时8%触发 撞击到对方的球员出场直至下回合结束",
+     "icon": "skill_620_50101",
+     "unlock": 6
+    },
+    {
+     "id": "622",
+     "name": "坦克前锋",
+     "desc": "回合开始时10%触发 撞击到对方的球员出场直至下回合结束",
+     "icon": "skill_620_50101",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p88",
+   "name": "奉先",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_5001_50102",
+   "card": "1.5.5|50102",
+   "skills": [
+    {
+     "id": "330",
+     "name": "人中吕布",
+     "desc": "如果对方球场只有他自己，那么提升自身全属性25%",
+     "icon": "skill_330_50102",
+     "unlock": 3
+    },
+    {
+     "id": "331",
+     "name": "人中吕布",
+     "desc": "如果对方球场只有他自己，那么提升自身全属性30%",
+     "icon": "skill_330_50102",
+     "unlock": 6
+    },
+    {
+     "id": "332",
+     "name": "人中吕布",
+     "desc": "如果对方球场只有他自己，那么提升自身全属性35%",
+     "icon": "skill_330_50102",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p89",
+   "name": "天使",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_5001_50103",
+   "card": "1.5.5|50103",
+   "skills": [
+    {
+     "id": "340",
+     "name": "折翼天使",
+     "desc": "在对方半场时，被对方球员撞击时，对方球员有25%几率下场直到下回合结束。",
+     "icon": "skill_340_50103",
+     "unlock": 3
+    },
+    {
+     "id": "341",
+     "name": "折翼天使",
+     "desc": "在对方半场时，被对方球员撞击时，对方球员有30%几率下场直到下回合结束。",
+     "icon": "skill_340_50103",
+     "unlock": 6
+    },
+    {
+     "id": "342",
+     "name": "折翼天使",
+     "desc": "在对方半场时，被对方球员撞击时，对方球员有35%几率下场直到下回合结束。",
+     "icon": "skill_340_50103",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p90",
+   "name": "微辣帝",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_5001_50104",
+   "card": "1.5.5|50104",
+   "skills": [
+    {
+     "id": "630",
+     "name": "精准长传",
+     "desc": "在己方半场时，有5%几率触发，传球触碰己方球员，会让该球员再行动一回合",
+     "icon": "skill_090_10303",
+     "unlock": 3
+    },
+    {
+     "id": "631",
+     "name": "精准长传",
+     "desc": "在己方半场时，有10%几率触发，传球触碰己方球员，会让该球员再行动一回合",
+     "icon": "skill_090_10303",
+     "unlock": 6
+    },
+    {
+     "id": "632",
+     "name": "精准长传",
+     "desc": "在己方半场时，有15%几率触发，传球触碰己方球员，会让该球员再行动一回合",
+     "icon": "skill_090_10303",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p91",
+   "name": "小卢卡斯",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_5001_50105",
+   "card": "1.5.5|50105",
+   "skills": []
+  },
+  {
+   "id": "p92",
+   "name": "蓬蓬",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_5001_50106",
+   "card": "1.5.5|50106",
+   "skills": [
+    {
+     "id": "640",
+     "name": "带刀护卫",
+     "desc": "回合开始时10%的几率触发，本回合触碰的所有人会出场一回合",
+     "icon": "skill_640_50106",
+     "unlock": 3
+    },
+    {
+     "id": "641",
+     "name": "带刀护卫",
+     "desc": "回合开始时15%的几率触发，本回合触碰的所有人会出场一回合",
+     "icon": "skill_640_50106",
+     "unlock": 6
+    },
+    {
+     "id": "642",
+     "name": "带刀护卫",
+     "desc": "回合开始时20%的几率触发，本回合触碰的所有人会出场一回合",
+     "icon": "skill_640_50106",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p93",
+   "name": "弟媳",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_5001_50107",
+   "card": "1.5.5|50107",
+   "skills": [
+    {
+     "id": "350",
+     "name": "不动如山",
+     "desc": "对方回合开始时20%的几率触发，本回合不会被任何人或球撞击移动",
+     "icon": "skill_350_50107",
+     "unlock": 3
+    },
+    {
+     "id": "351",
+     "name": "不动如山",
+     "desc": "对方回合开始时25%的几率触发，本回合不会被任何人或球撞击移动",
+     "icon": "skill_350_50107",
+     "unlock": 6
+    },
+    {
+     "id": "352",
+     "name": "不动如山",
+     "desc": "对方回合开始时30%的几率触发，本回合不会被任何人或球撞击移动",
+     "icon": "skill_350_50107",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p94",
+   "name": "告林斯曼",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "white",
+   "rarity": 1,
+   "portraitId": "head_6001_60101",
+   "card": "1.5.5|60101",
+   "skills": []
+  },
+  {
+   "id": "p95",
+   "name": "杰马",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_6001_60102",
+   "card": "1.5.5|60102",
+   "skills": []
+  },
+  {
+   "id": "p96",
+   "name": "高辣条",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_6001_60103",
+   "card": "1.5.5|60103",
+   "skills": [
+    {
+     "id": "140",
+     "name": "球场刺客",
+     "desc": "射门的时候有10%的几率触发提升力度15%，持续2回合",
+     "icon": "skill_140_60103",
+     "unlock": 3
+    },
+    {
+     "id": "141",
+     "name": "球场刺客",
+     "desc": "射门的时候有20%的几率触发提升力度20%，持续2回合",
+     "icon": "skill_140_60103",
+     "unlock": 6
+    },
+    {
+     "id": "142",
+     "name": "球场刺客",
+     "desc": "射门的时候有30%的几率触发提升力度25%，持续2回合",
+     "icon": "skill_140_60103",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p97",
+   "name": "郑队",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_6001_60104",
+   "card": "1.5.5|60104",
+   "skills": []
+  },
+  {
+   "id": "p98",
+   "name": "暴力鸟",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_6001_60105",
+   "card": "1.5.5|60105",
+   "skills": []
+  },
+  {
+   "id": "p99",
+   "name": "世界博",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "white",
+   "rarity": 1,
+   "portraitId": "head_6001_60106",
+   "card": "1.5.5|60106",
+   "skills": []
+  },
+  {
+   "id": "p100",
+   "name": "张莫斯",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "white",
+   "rarity": 1,
+   "portraitId": "head_6001_60107",
+   "card": "1.5.5|60107",
+   "skills": []
+  },
+  {
+   "id": "p101",
+   "name": "马队",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "orange",
+   "rarity": 5,
+   "portraitId": "head_7001_70101",
+   "card": "1.5.5|70101",
+   "skills": [
+    {
+     "id": "820",
+     "name": "无所不在",
+     "desc": "当我方半场内有球员出场时，有30%几率触发，抵制出场效果",
+     "icon": "skill_820_70101",
+     "unlock": 3
+    },
+    {
+     "id": "821",
+     "name": "无所不在",
+     "desc": "当我方半场内有球员出场时，有40%几率触发，抵制出场效果",
+     "icon": "skill_820_70101",
+     "unlock": 6
+    },
+    {
+     "id": "822",
+     "name": "无所不在",
+     "desc": "当我方半场内有球员出场时，有50%几率触发，抵制出场效果",
+     "icon": "skill_820_70101",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p102",
+   "name": "马大腿",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_8001_80101",
+   "card": "1.5.5|80101",
+   "skills": [
+    {
+     "id": "700",
+     "name": "能突善射",
+     "desc": "在对方半场时，有10%几率触发，移动时降低对方半场内对方球员力度10%，持续一回合",
+     "icon": "skill_700_80101",
+     "unlock": 3
+    },
+    {
+     "id": "701",
+     "name": "能突善射",
+     "desc": "在对方半场时，有15%几率触发，移动时降低对方半场内对方球员力度20%，持续一回合",
+     "icon": "skill_700_80101",
+     "unlock": 6
+    },
+    {
+     "id": "702",
+     "name": "能突善射",
+     "desc": "在对方半场时，有20%几率触发，移动时降低对方半场内对方球员力度30%，持续一回合",
+     "icon": "skill_700_80101",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p103",
+   "name": "费米",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_8001_80102",
+   "card": "1.5.5|80102",
+   "skills": [
+    {
+     "id": "710",
+     "name": "影子杀手",
+     "desc": "回合开始时有10%几率触发，提升自身本回合的力度和精准15%",
+     "icon": "skill_710_80102",
+     "unlock": 3
+    },
+    {
+     "id": "711",
+     "name": "影子杀手",
+     "desc": "回合开始时有15%几率触发，提升自身本回合的力度和精准15%",
+     "icon": "skill_710_80102",
+     "unlock": 6
+    },
+    {
+     "id": "712",
+     "name": "影子杀手",
+     "desc": "回合开始时有20%几率触发，提升自身本回合的力度和精准15%",
+     "icon": "skill_710_80102",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p104",
+   "name": "司徒",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8001_80103",
+   "card": "1.5.5|80103",
+   "skills": []
+  },
+  {
+   "id": "p105",
+   "name": "库鸟",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_8001_80104",
+   "card": "1.5.5|80104",
+   "skills": [
+    {
+     "id": "720",
+     "name": "库鸟展翅",
+     "desc": "在对方半场时，有10%几率触发，移动时增加对方半场内己方球员力度和精准20%，持续2回合",
+     "icon": "skill_720_80104",
+     "unlock": 3
+    },
+    {
+     "id": "721",
+     "name": "库鸟展翅",
+     "desc": "在对方半场时，有15%几率触发，移动时增加对方半场内己方球员力度和精准30%，持续2回合",
+     "icon": "skill_720_80104",
+     "unlock": 6
+    },
+    {
+     "id": "722",
+     "name": "库鸟展翅",
+     "desc": "在对方半场时，有20%几率触发，移动时增加对方半场内己方球员力度和精准40%，持续2回合",
+     "icon": "skill_720_80104",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p106",
+   "name": "纳天王",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8001_80105",
+   "card": "1.5.5|80105",
+   "skills": []
+  },
+  {
+   "id": "p107",
+   "name": "克莱鹰",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8001_80106",
+   "card": "1.5.5|80106",
+   "skills": []
+  },
+  {
+   "id": "p108",
+   "name": "莫小雷",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8001_80107",
+   "card": "1.5.5|80107",
+   "skills": []
+  },
+  {
+   "id": "p109",
+   "name": "师奶",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_8002_80201",
+   "card": "1.5.5|80201",
+   "skills": [
+    {
+     "id": "790",
+     "name": "师奶杀手",
+     "desc": "在对方半场时，有10%几率触发，移动后降低对方半场内对方球员力度10%，持续1回合",
+     "icon": "skill_790_80201",
+     "unlock": 3
+    },
+    {
+     "id": "791",
+     "name": "师奶杀手",
+     "desc": "在对方半场时，有15%几率触发，移动后降低对方半场内对方球员力度20%，持续1回合",
+     "icon": "skill_790_80201",
+     "unlock": 6
+    },
+    {
+     "id": "792",
+     "name": "师奶杀手",
+     "desc": "在对方半场时，有20%几率触发，移动后降低对方半场内对方球员力度30%，持续1回合",
+     "icon": "skill_790_80201",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p110",
+   "name": "魔兽",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "purple",
+   "rarity": 4,
+   "portraitId": "head_8002_80202",
+   "card": "1.5.5|80202",
+   "skills": [
+    {
+     "id": "810",
+     "name": "魔兽来袭",
+     "desc": "在对方半场时，提升自身力度15%",
+     "icon": "skill_810_80202",
+     "unlock": 3
+    },
+    {
+     "id": "811",
+     "name": "魔兽来袭",
+     "desc": "在对方半场时，提升自身力度20%",
+     "icon": "skill_810_80202",
+     "unlock": 6
+    },
+    {
+     "id": "812",
+     "name": "魔兽来袭",
+     "desc": "在对方半场时，提升自身力度25%",
+     "icon": "skill_810_80202",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p111",
+   "name": "拓扑哥哥",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8002_80203",
+   "card": "1.5.5|80203",
+   "skills": []
+  },
+  {
+   "id": "p112",
+   "name": "波尔蒂王子",
+   "position": "FW",
+   "srcPosition": "ST",
+   "quality": "blue",
+   "rarity": 3,
+   "portraitId": "head_8002_80204",
+   "card": "1.5.5|80204",
+   "skills": [
+    {
+     "id": "800",
+     "name": "王子复仇",
+     "desc": "回合开始时有10%几率触发，如果射门，提升自身精准20%，持续2回合",
+     "icon": "skill_800_80204",
+     "unlock": 3
+    },
+    {
+     "id": "801",
+     "name": "王子复仇",
+     "desc": "回合开始时有15%几率触发，如果射门，提升自身精准25%，持续2回合",
+     "icon": "skill_800_80204",
+     "unlock": 6
+    },
+    {
+     "id": "802",
+     "name": "王子复仇",
+     "desc": "回合开始时有20%几率触发，如果射门，提升自身精准30%，持续2回合",
+     "icon": "skill_800_80204",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p113",
+   "name": "功夫熊猫",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8002_80205",
+   "card": "1.5.5|80205",
+   "skills": []
+  },
+  {
+   "id": "p114",
+   "name": "耳帝",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8002_80206",
+   "card": "1.5.5|80206",
+   "skills": []
+  },
+  {
+   "id": "p115",
+   "name": "霉洛",
+   "position": "DF",
+   "srcPosition": "DC",
+   "quality": "green",
+   "rarity": 2,
+   "portraitId": "head_8002_80207",
+   "card": "1.5.5|80207",
+   "skills": []
+  },
+  {
+   "id": "p116",
+   "name": "齐祖",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "orange",
+   "rarity": 5,
+   "portraitId": "head_9001_90001",
+   "card": "1.5.5|90001",
+   "skills": [
+    {
+     "id": "650",
+     "name": "齐祖之光",
+     "desc": "在己方半场时，增加我方全体球员全属性15%；在对方半场时，降低对方全体球员全属性15%",
+     "icon": "skill_650_90001",
+     "unlock": 3
+    },
+    {
+     "id": "652",
+     "name": "齐祖之光",
+     "desc": "在己方半场时，增加我方全体球员全属性20%；在对方半场时，降低对方全体球员全属性20%",
+     "icon": "skill_650_90001",
+     "unlock": 6
+    },
+    {
+     "id": "654",
+     "name": "齐祖之光",
+     "desc": "在己方半场时，增加我方全体球员全属性25%；在对方半场时，降低对方全体球员全属性25%",
+     "icon": "skill_650_90001",
+     "unlock": 10
+    }
+   ]
+  },
+  {
+   "id": "p117",
+   "name": "小贝",
+   "position": "MF",
+   "srcPosition": "CM",
+   "quality": "orange",
+   "rarity": 9,
+   "portraitId": "head_9001_90003",
+   "card": "1.5.5|90003",
+   "skills": [
+    {
+     "id": "670",
+     "name": "贝氏弧线",
+     "desc": "回合开始时有10%几率触发，使用弧线传球时碰到首个己方球员可额外行动一回合",
+     "icon": "skill_670_90003",
+     "unlock": 3
+    },
+    {
+     "id": "671",
+     "name": "贝氏弧线",
+     "desc": "回合开始时有15%几率触发，使用弧线传球时碰到首个己方球员可额外行动一回合",
+     "icon": "skill_670_90003",
+     "unlock": 6
+    },
+    {
+     "id": "672",
+     "name": "贝氏弧线",
+     "desc": "回合开始时有20%几率触发，使用弧线传球时碰到首个己方球员可额外行动一回合",
+     "icon": "skill_670_90003",
+     "unlock": 10
+    }
+   ]
+  }
+ ]
+}

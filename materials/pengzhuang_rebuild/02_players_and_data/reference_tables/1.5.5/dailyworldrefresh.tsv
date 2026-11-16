@@ -1,0 +1,5 @@
+﻿ID	备注	起始参照	起始第一次触发秒数	循环间隔 至少为1	触发事件列表	事件值
+id	Comment	StartRefer	FirstSec	Interval	EventTypes	EventValues
+1	每日0点触发	NowDay	0	86400	Day_h0	
+2	每周星期一0点	NowWeek	0	604800	Week_d1h0	
+3	自开服以来每周触发一次	StartServerDay	0	604801	Week_From_ServerStart	

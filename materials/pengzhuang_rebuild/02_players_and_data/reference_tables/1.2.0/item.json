@@ -1,0 +1,1129 @@
+{
+  "version": "1.2.0",
+  "table": "item",
+  "source_path": "assets/res/raw-assets/resources/data/item.txt",
+  "source_sha256": "ed3ad2e8c405a664f01ac80d2846909a16eb10f7712ddfc2847d68a3131b7993",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "name",
+      "original_key": "name",
+      "label": "名字",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "Chinese",
+      "original_key": "Chinese",
+      "label": "中文",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "type",
+      "original_key": "type",
+      "label": "类型",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "typeID",
+      "original_key": "typeID",
+      "label": "型分类后的id",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "icon",
+      "original_key": "icon",
+      "label": "图标",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "name": "$GOLD",
+      "Chinese": "钞票",
+      "type": "Gold",
+      "typeID": "1",
+      "icon": "Banknote_Icon_01"
+    },
+    {
+      "id": "2",
+      "name": "$CRYSTAL",
+      "Chinese": "钻石",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_01"
+    },
+    {
+      "id": "3",
+      "name": "$Training_card",
+      "Chinese": "训练卡",
+      "type": "TrainingCard",
+      "typeID": "3",
+      "icon": "Player_Icon"
+    },
+    {
+      "id": "4",
+      "name": "$Share_certificate",
+      "Chinese": "金券",
+      "type": "shareCredit",
+      "typeID": "4",
+      "icon": "ID_56"
+    },
+    {
+      "id": "5",
+      "name": "$Trophy_count",
+      "Chinese": "奖杯数",
+      "type": "rankPoint",
+      "typeID": "5",
+      "icon": "Diamond_Icon_01"
+    },
+    {
+      "id": "11",
+      "name": "$A_handful_of_bills",
+      "Chinese": "一把钞票",
+      "type": "Gold",
+      "typeID": "1",
+      "icon": "Banknote_Icon_01"
+    },
+    {
+      "id": "12",
+      "name": "$A_pile_of_money",
+      "Chinese": "一堆钞票",
+      "type": "Gold",
+      "typeID": "1",
+      "icon": "Banknote_Icon_02"
+    },
+    {
+      "id": "13",
+      "name": "$A_box_of_money",
+      "Chinese": "一箱钞票",
+      "type": "Gold",
+      "typeID": "1",
+      "icon": "Banknote_Icon_03"
+    },
+    {
+      "id": "14",
+      "name": "$A_packet_of_money",
+      "Chinese": "一包钞票",
+      "type": "Gold",
+      "typeID": "1",
+      "icon": "Banknote_Icon_04"
+    },
+    {
+      "id": "21",
+      "name": "$A_pile_of_diamonds",
+      "Chinese": "一堆钻石",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_02"
+    },
+    {
+      "id": "22",
+      "name": "$Bag_of_diamonds",
+      "Chinese": "小袋钻石",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_03"
+    },
+    {
+      "id": "23",
+      "name": "$Packet_diamond",
+      "Chinese": "小包钻石",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_04"
+    },
+    {
+      "id": "24",
+      "name": "$Big_bags_of_diamonds",
+      "Chinese": "大包钻石",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_05"
+    },
+    {
+      "id": "25",
+      "name": "$A_car_of_diamonds",
+      "Chinese": "一车钻石",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_06"
+    },
+    {
+      "id": "26",
+      "name": "$A_cart_of_diamonds",
+      "Chinese": "一大车钻石",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_07"
+    },
+    {
+      "id": "27",
+      "name": "$Month_card",
+      "Chinese": "月卡",
+      "type": "Crystal",
+      "typeID": "2",
+      "icon": "Diamond_Icon_09"
+    },
+    {
+      "id": "50",
+      "name": "$Fevernova",
+      "Chinese": "飞火流星",
+      "type": "skin",
+      "typeID": "50",
+      "icon": "Diamond_Icon_08"
+    },
+    {
+      "id": "99",
+      "name": "$experience",
+      "Chinese": "经验",
+      "type": "exp",
+      "typeID": "99",
+      "icon": "Lv_Background"
+    },
+    {
+      "id": "10101",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10101",
+      "icon": ""
+    },
+    {
+      "id": "10102",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10102",
+      "icon": ""
+    },
+    {
+      "id": "10103",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10103",
+      "icon": ""
+    },
+    {
+      "id": "10104",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10104",
+      "icon": ""
+    },
+    {
+      "id": "10105",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10105",
+      "icon": ""
+    },
+    {
+      "id": "10106",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10106",
+      "icon": ""
+    },
+    {
+      "id": "10107",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10107",
+      "icon": ""
+    },
+    {
+      "id": "10201",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10201",
+      "icon": ""
+    },
+    {
+      "id": "10202",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10202",
+      "icon": ""
+    },
+    {
+      "id": "10203",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10203",
+      "icon": ""
+    },
+    {
+      "id": "10204",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10204",
+      "icon": ""
+    },
+    {
+      "id": "10205",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10205",
+      "icon": ""
+    },
+    {
+      "id": "10206",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10206",
+      "icon": ""
+    },
+    {
+      "id": "10207",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10207",
+      "icon": ""
+    },
+    {
+      "id": "10301",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10301",
+      "icon": ""
+    },
+    {
+      "id": "10302",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10302",
+      "icon": ""
+    },
+    {
+      "id": "10303",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10303",
+      "icon": ""
+    },
+    {
+      "id": "10304",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10304",
+      "icon": ""
+    },
+    {
+      "id": "10305",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10305",
+      "icon": ""
+    },
+    {
+      "id": "10306",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10306",
+      "icon": ""
+    },
+    {
+      "id": "10307",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10307",
+      "icon": ""
+    },
+    {
+      "id": "10401",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10401",
+      "icon": ""
+    },
+    {
+      "id": "10402",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10402",
+      "icon": ""
+    },
+    {
+      "id": "10403",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10403",
+      "icon": ""
+    },
+    {
+      "id": "10404",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10404",
+      "icon": ""
+    },
+    {
+      "id": "10405",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10405",
+      "icon": ""
+    },
+    {
+      "id": "10406",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10406",
+      "icon": ""
+    },
+    {
+      "id": "10407",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "10407",
+      "icon": ""
+    },
+    {
+      "id": "60101",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "60101",
+      "icon": ""
+    },
+    {
+      "id": "60102",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "60102",
+      "icon": ""
+    },
+    {
+      "id": "60103",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "60103",
+      "icon": ""
+    },
+    {
+      "id": "60104",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "60104",
+      "icon": ""
+    },
+    {
+      "id": "60105",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "60105",
+      "icon": ""
+    },
+    {
+      "id": "60106",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "60106",
+      "icon": ""
+    },
+    {
+      "id": "60107",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "60107",
+      "icon": ""
+    },
+    {
+      "id": "20101",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20101",
+      "icon": ""
+    },
+    {
+      "id": "20102",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20102",
+      "icon": ""
+    },
+    {
+      "id": "20103",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20103",
+      "icon": ""
+    },
+    {
+      "id": "20104",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20104",
+      "icon": ""
+    },
+    {
+      "id": "20105",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20105",
+      "icon": ""
+    },
+    {
+      "id": "20106",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20106",
+      "icon": ""
+    },
+    {
+      "id": "20107",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20107",
+      "icon": ""
+    },
+    {
+      "id": "20201",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20201",
+      "icon": ""
+    },
+    {
+      "id": "20202",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20202",
+      "icon": ""
+    },
+    {
+      "id": "20203",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20203",
+      "icon": ""
+    },
+    {
+      "id": "20204",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20204",
+      "icon": ""
+    },
+    {
+      "id": "20205",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20205",
+      "icon": ""
+    },
+    {
+      "id": "20206",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20206",
+      "icon": ""
+    },
+    {
+      "id": "20207",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "20207",
+      "icon": ""
+    },
+    {
+      "id": "30101",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "30101",
+      "icon": ""
+    },
+    {
+      "id": "30102",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "30102",
+      "icon": ""
+    },
+    {
+      "id": "30103",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "30103",
+      "icon": ""
+    },
+    {
+      "id": "30104",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "30104",
+      "icon": ""
+    },
+    {
+      "id": "30105",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "30105",
+      "icon": ""
+    },
+    {
+      "id": "30106",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "30106",
+      "icon": ""
+    },
+    {
+      "id": "30107",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "30107",
+      "icon": ""
+    },
+    {
+      "id": "40101",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40101",
+      "icon": ""
+    },
+    {
+      "id": "40102",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40102",
+      "icon": ""
+    },
+    {
+      "id": "40103",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40103",
+      "icon": ""
+    },
+    {
+      "id": "40104",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40104",
+      "icon": ""
+    },
+    {
+      "id": "40105",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40105",
+      "icon": ""
+    },
+    {
+      "id": "40106",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40106",
+      "icon": ""
+    },
+    {
+      "id": "40107",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40107",
+      "icon": ""
+    },
+    {
+      "id": "40108",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40108",
+      "icon": ""
+    },
+    {
+      "id": "40201",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40201",
+      "icon": ""
+    },
+    {
+      "id": "40202",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40202",
+      "icon": ""
+    },
+    {
+      "id": "40203",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40203",
+      "icon": ""
+    },
+    {
+      "id": "40204",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40204",
+      "icon": ""
+    },
+    {
+      "id": "40205",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40205",
+      "icon": ""
+    },
+    {
+      "id": "40206",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40206",
+      "icon": ""
+    },
+    {
+      "id": "40207",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40207",
+      "icon": ""
+    },
+    {
+      "id": "40208",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40208",
+      "icon": ""
+    },
+    {
+      "id": "40301",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40301",
+      "icon": ""
+    },
+    {
+      "id": "40302",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40302",
+      "icon": ""
+    },
+    {
+      "id": "40303",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40303",
+      "icon": ""
+    },
+    {
+      "id": "40304",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40304",
+      "icon": ""
+    },
+    {
+      "id": "40305",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40305",
+      "icon": ""
+    },
+    {
+      "id": "40306",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40306",
+      "icon": ""
+    },
+    {
+      "id": "40307",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "40307",
+      "icon": ""
+    },
+    {
+      "id": "50101",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "50101",
+      "icon": ""
+    },
+    {
+      "id": "50102",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "50102",
+      "icon": ""
+    },
+    {
+      "id": "50103",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "50103",
+      "icon": ""
+    },
+    {
+      "id": "50104",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "50104",
+      "icon": ""
+    },
+    {
+      "id": "50105",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "50105",
+      "icon": ""
+    },
+    {
+      "id": "50106",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "50106",
+      "icon": ""
+    },
+    {
+      "id": "50107",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "50107",
+      "icon": ""
+    },
+    {
+      "id": "90001",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "90001",
+      "icon": ""
+    },
+    {
+      "id": "90002",
+      "name": "$SOCCER_PLAYER_WHITE",
+      "Chinese": "球员",
+      "type": "Card",
+      "typeID": "90002",
+      "icon": ""
+    },
+    {
+      "id": "3001",
+      "name": "$CONTRACT_NAME_POWER",
+      "Chinese": "重磅合同",
+      "type": "Box",
+      "typeID": "3001",
+      "icon": ""
+    },
+    {
+      "id": "3002",
+      "name": "$CONTRACT_NAME_POWER",
+      "Chinese": "重磅合同",
+      "type": "Box",
+      "typeID": "3002",
+      "icon": ""
+    },
+    {
+      "id": "3003",
+      "name": "$CONTRACT_NAME_POWER",
+      "Chinese": "重磅合同",
+      "type": "Box",
+      "typeID": "3003",
+      "icon": ""
+    },
+    {
+      "id": "3004",
+      "name": "$CONTRACT_NAME_POWER",
+      "Chinese": "重磅合同",
+      "type": "Box",
+      "typeID": "3004",
+      "icon": ""
+    },
+    {
+      "id": "3005",
+      "name": "$CONTRACT_NAME_POWER",
+      "Chinese": "重磅合同",
+      "type": "Box",
+      "typeID": "3005",
+      "icon": ""
+    },
+    {
+      "id": "4001",
+      "name": "$box_contract_level_01",
+      "Chinese": "初级合同",
+      "type": "Box",
+      "typeID": "4001",
+      "icon": ""
+    },
+    {
+      "id": "5001",
+      "name": "$box_contract_level_02",
+      "Chinese": "中级合同",
+      "type": "Box",
+      "typeID": "5001",
+      "icon": ""
+    },
+    {
+      "id": "6001",
+      "name": "$box_contract_level_03",
+      "Chinese": "高级合同",
+      "type": "Box",
+      "typeID": "6001",
+      "icon": ""
+    },
+    {
+      "id": "7001",
+      "name": "$box_contract_level_04",
+      "Chinese": "顶级合同",
+      "type": "Box",
+      "typeID": "7001",
+      "icon": ""
+    },
+    {
+      "id": "1502",
+      "name": "$box_contract_shop_1502",
+      "Chinese": "签约1个",
+      "type": "Box",
+      "typeID": "1502",
+      "icon": ""
+    },
+    {
+      "id": "1503",
+      "name": "$box_contract_shop_1503",
+      "Chinese": "签约5个",
+      "type": "Box",
+      "typeID": "1503",
+      "icon": ""
+    },
+    {
+      "id": "1504",
+      "name": "$box_contract_shop_1504",
+      "Chinese": "签约10个",
+      "type": "Box",
+      "typeID": "1504",
+      "icon": ""
+    },
+    {
+      "id": "9001",
+      "name": "$box_contract_salary_9001",
+      "Chinese": "月卡合同",
+      "type": "Box",
+      "typeID": "9001",
+      "icon": "Diamond_Icon_09"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

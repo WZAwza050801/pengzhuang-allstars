@@ -1,0 +1,39 @@
+{
+  "version": "rules-2",
+  "goalsToWin": 3,
+  "goalsToWinSource": "rebuilt：宣传语“三球定胜负”(S01) 按先进 3 球实现",
+  "matchSeconds": 180,
+  "matchSecondsSource": "用户确认原版：整场 3 分钟倒计时（原版对战截图显示 2:56），时间到按比分判定，可平局；先进 3 球直接结束。时间到时正在滚动的那一杆打完再结算（rebuilt）",
+  "maxShots": 100,
+  "maxShotsNote": "rebuilt：防止异常对局无限进行的保险上限，正常 3 分钟内到不了",
+  "turnSeconds": 20,
+  "reconnectSeconds": 60,
+  "goalRule": "足球整体越过门线才算进球（recovered:S01 V1.3.3）",
+  "behindGoalRule": "用户确认原版：球员被撞进门线内（圆心在门线后），本杆结束（未进球）时系统把它移动到门前附近的空位（客户端播放移动动画，不是刷新）",
+  "kickoff": "开场随机一方先手；进球后失球方开球，全部复位（rebuilt）",
+  "formationSource": "横向位置 recovered：原版 1.5.5 比赛阵型表 10001「2_2_1(A)」（ST 35%/65%、CM 20%/80%、DC 50% 场宽）。三条线的纵深原表只写 50（线内居中），线的位置未恢复，rebuilt：DC 4.15 m、CM 2.9 m、ST 1.5 m（距中线）",
+  "formation": [
+    { "slot": 0, "label": "后卫", "role": "DC", "x": 0.0, "y": 4.15 },
+    { "slot": 1, "label": "左中场", "role": "CM", "x": -1.8, "y": 2.9 },
+    { "slot": 2, "label": "右中场", "role": "CM", "x": 1.8, "y": 2.9 },
+    { "slot": 3, "label": "左前锋", "role": "ST", "x": -0.9, "y": 1.5 },
+    { "slot": 4, "label": "右前锋", "role": "ST", "x": 0.9, "y": 1.5 }
+  ],
+  "lineDepth": { "DC": 4.15, "CM": 2.9, "ST": 1.5 },
+  "originalFormations": [
+    { "id": "10001", "name": "2_2_1(A)", "reqLevel": 1, "positions": ["ST;35", "ST;65", "CM;20", "CM;80", "DC;50"] },
+    { "id": "10002", "name": "1_2_2(A)", "reqLevel": 2, "positions": ["ST;50", "CM;30", "CM;70", "DC;10", "DC;90"] },
+    { "id": "10003", "name": "2_2_1(W)", "reqLevel": 3, "positions": ["ST;10", "ST;90", "CM;30", "CM;70", "DC;50"] },
+    { "id": "10004", "name": "1_2_2(S)", "reqLevel": 4, "positions": ["ST;50", "CM;20", "CM;80", "DC;35", "DC;65"] },
+    { "id": "10005", "name": "2_2_1(S)", "reqLevel": 5, "positions": ["ST;33", "ST;67", "CM;33", "CM;67", "DC;50"] },
+    { "id": "10006", "name": "2_1_2(W)", "reqLevel": 6, "positions": ["ST;10", "ST;90", "CM;50", "DC;30", "DC;70"] },
+    { "id": "10007", "name": "3_1_1(A)", "reqLevel": 7, "positions": ["ST;10", "ST;50", "ST;90", "CM;50", "DC;50"] },
+    { "id": "10008", "name": "1_1_3(D)", "reqLevel": 8, "positions": ["ST;50", "CM;50", "DC;10", "DC;50", "DC;90"] },
+    { "id": "10009", "name": "1_3_1(S)", "reqLevel": 9, "positions": ["ST;50", "CM;10", "CM;50", "CM;90", "DC;50"] }
+  ],
+  "originalFormationsSource": "recovered：02_players_and_data/formations.json（1.5.5 比赛阵型，x 为场宽百分比，纵深值均为 50）",
+  "defaultLineup": ["p07", "p06", "p08", "p01", "p02"],
+  "levels": { "max": 10, "uniformLevel": 5, "skillLevelAt": [1, 4, 7] },
+  "levelSource": "rebuilt",
+  "condition": { "enabledByDefault": false, "badChanceBase": 0.2, "badPenalty": 0.30, "penaltySource": "recovered:S03 V1.2.1 状态差全属性 -30%" }
+}

@@ -1,0 +1,5 @@
+﻿ID	备注	起始参照	起始第一次触发秒数	循环间隔 至少为1	触发事件列表
+id	Comment	StartRefer	FirstSec	Interval	EventTypes
+1	每日0点触发	NowDay	0	86400	Day_h0
+2	每周星期一0点	NowWeek	0	604800	Week_d1h0
+3	每隔8小时	NowDay	0	28800	Every_h8

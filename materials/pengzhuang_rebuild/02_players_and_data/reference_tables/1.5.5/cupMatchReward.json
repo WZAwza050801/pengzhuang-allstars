@@ -1,0 +1,203 @@
+{
+  "version": "1.5.5",
+  "table": "cupMatchReward",
+  "source_path": "assets/res/raw-assets/resources/data/cupMatchReward.txt",
+  "source_sha256": "848c2350d53b1006457137dd310662164705f5f371429e236044df09e1fef1a7",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "金球杯赛",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "matchType",
+      "original_key": "matchType",
+      "label": "杯赛类型",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "rankLevel",
+      "original_key": "rankLevel",
+      "label": "联赛等级",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "rank",
+      "original_key": "rank",
+      "label": "晋级",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "mailID",
+      "original_key": "mailID",
+      "label": "奖励邮件ID",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "regio001",
+      "matchType": "1",
+      "rankLevel": "1",
+      "rank": "1",
+      "mailID": "300003"
+    },
+    {
+      "id": "regio002",
+      "matchType": "1",
+      "rankLevel": "1",
+      "rank": "2",
+      "mailID": "300002"
+    },
+    {
+      "id": "regio003",
+      "matchType": "1",
+      "rankLevel": "1",
+      "rank": "4",
+      "mailID": "300001"
+    },
+    {
+      "id": "cup001",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "1",
+      "mailID": ""
+    },
+    {
+      "id": "cup002",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "2",
+      "mailID": ""
+    },
+    {
+      "id": "cup003",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "4",
+      "mailID": ""
+    },
+    {
+      "id": "cup004",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "8",
+      "mailID": "0"
+    },
+    {
+      "id": "cup005",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "1",
+      "mailID": ""
+    },
+    {
+      "id": "cup006",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "2",
+      "mailID": ""
+    },
+    {
+      "id": "cup007",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "4",
+      "mailID": ""
+    },
+    {
+      "id": "cup008",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "8",
+      "mailID": "0"
+    },
+    {
+      "id": "cup009",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "1",
+      "mailID": ""
+    },
+    {
+      "id": "cup010",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "2",
+      "mailID": ""
+    },
+    {
+      "id": "cup011",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "4",
+      "mailID": ""
+    },
+    {
+      "id": "cup012",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "8",
+      "mailID": "0"
+    },
+    {
+      "id": "cup013",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "1",
+      "mailID": ""
+    },
+    {
+      "id": "cup014",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "2",
+      "mailID": ""
+    },
+    {
+      "id": "cup015",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "4",
+      "mailID": ""
+    },
+    {
+      "id": "cup016",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "8",
+      "mailID": "0"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

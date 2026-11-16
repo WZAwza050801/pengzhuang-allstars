@@ -1,0 +1,19 @@
+﻿ID号	类型Crystal钻石MonthCard月卡	货币类型	价格	获得钻石数量	赠送数量	是否有首冲双倍	第三方产品ID
+id	goodsType	costType	price	crystal	bonus	ifDouble	ThridProductId
+21	Crystal	dollar	0.99	60	0	0	origin.tgr.s80001
+22	Crystal	dollar	4.99	300	20	1	origin.tgr.s80002
+23	Crystal	dollar	14.99	980	120	0	origin.tgr.s80003
+24	Crystal	dollar	29.99	1980	270	1	origin.tgr.s80004
+25	Crystal	dollar	49.99	3280	520	0	origin.tgr.s80005
+26	Crystal	dollar	99.99	6480	1320	1	origin.tgr.s80006
+27	MonthCard	dollar	4.99	300	0	0	origin.tgr.s80007
+30	RebateStore	dollar	0.99				origin.tgr.s80008
+31	RebateStore	dollar	4.99				origin.tgr.s80009
+32	RebateStore	dollar	4.99				origin.tgr.s80010
+33	RebateStore	dollar	4.99				origin.tgr.s80011
+34	RebateStore	dollar	4.99				origin.tgr.s80012
+35	RebateStore	dollar	14.99				origin.tgr.s80013
+36	RebateStore	dollar	14.99				origin.tgr.s80014
+37	RebateStore	dollar	14.99				origin.tgr.s80015
+38	RebateStore	dollar	29.99				origin.tgr.s80016
+39	RebateStore	dollar	49.99				origin.tgr.s80017

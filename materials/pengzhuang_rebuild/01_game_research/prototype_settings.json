@@ -1,0 +1,38 @@
+{
+  "warning": "以下全部为建议的原型起点，不是恢复出的原版数值。坐标、单位与行为须由开发者固定并记录。",
+  "observed_basis": {
+    "players_per_team": 5,
+    "portrait_field": true,
+    "has_curve": true,
+    "goal_requires_whole_ball_crossing": true
+  },
+  "prototype_assumptions": {
+    "target_goals": 3,
+    "match_duration_seconds": null,
+    "turn_timeout_seconds": null,
+    "formation": "2-2-1",
+    "goal_reset": "先重置双方为初始阵型；原版行为待确认",
+    "next_kickoff": "暂由失球方开球；原版行为待确认"
+  },
+  "simulation_suggestions": {
+    "fixed_step_seconds": 0.008333333333333333,
+    "field_width_units": 1.0,
+    "field_length_units": 1.65,
+    "goal_width_units": 0.28,
+    "player_radius_units": 0.033,
+    "ball_radius_units": 0.018,
+    "player_mass": 1.0,
+    "ball_mass": 0.5,
+    "max_launch_speed_units_per_second": 1.8,
+    "linear_drag_per_second": 1.2,
+    "wall_restitution": 0.8,
+    "disc_restitution": 0.9,
+    "sleep_speed_units_per_second": 0.012,
+    "sleep_hold_seconds": 0.25,
+    "curve_model": "先用与速度垂直的可调加速度做可验证近似；先确认作用对象再决定原型行为"
+  },
+  "skill_prototype": {
+    "initial_probability": 0,
+    "reason": "先完成物理；随后用固定随机种子验证少量原创技能。"
+  }
+}

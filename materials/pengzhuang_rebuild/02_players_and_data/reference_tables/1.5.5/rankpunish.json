@@ -1,0 +1,245 @@
+{
+  "version": "1.5.5",
+  "table": "rankpunish",
+  "source_path": "assets/res/raw-assets/resources/data/rankpunish.txt",
+  "source_sha256": "125988080c8155ff9f4789243d549f08ad5a3eee17608a8ffbe39fcea6ae0a7b",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "﻿小时数",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "punish",
+      "original_key": "punish",
+      "label": "扣分",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "24",
+      "punish": "0"
+    },
+    {
+      "id": "48",
+      "punish": "0"
+    },
+    {
+      "id": "72",
+      "punish": "0"
+    },
+    {
+      "id": "96",
+      "punish": "0"
+    },
+    {
+      "id": "120",
+      "punish": "0"
+    },
+    {
+      "id": "144",
+      "punish": "0"
+    },
+    {
+      "id": "168",
+      "punish": "0"
+    },
+    {
+      "id": "192",
+      "punish": "20"
+    },
+    {
+      "id": "216",
+      "punish": "20"
+    },
+    {
+      "id": "240",
+      "punish": "20"
+    },
+    {
+      "id": "264",
+      "punish": "20"
+    },
+    {
+      "id": "288",
+      "punish": "20"
+    },
+    {
+      "id": "312",
+      "punish": "20"
+    },
+    {
+      "id": "336",
+      "punish": "20"
+    },
+    {
+      "id": "360",
+      "punish": "25"
+    },
+    {
+      "id": "384",
+      "punish": "25"
+    },
+    {
+      "id": "408",
+      "punish": "25"
+    },
+    {
+      "id": "432",
+      "punish": "25"
+    },
+    {
+      "id": "456",
+      "punish": "25"
+    },
+    {
+      "id": "480",
+      "punish": "25"
+    },
+    {
+      "id": "504",
+      "punish": "25"
+    },
+    {
+      "id": "528",
+      "punish": "25"
+    },
+    {
+      "id": "552",
+      "punish": "30"
+    },
+    {
+      "id": "576",
+      "punish": "30"
+    },
+    {
+      "id": "600",
+      "punish": "30"
+    },
+    {
+      "id": "624",
+      "punish": "30"
+    },
+    {
+      "id": "648",
+      "punish": "30"
+    },
+    {
+      "id": "672",
+      "punish": "30"
+    },
+    {
+      "id": "696",
+      "punish": "30"
+    },
+    {
+      "id": "720",
+      "punish": "35"
+    },
+    {
+      "id": "744",
+      "punish": "35"
+    },
+    {
+      "id": "768",
+      "punish": "35"
+    },
+    {
+      "id": "792",
+      "punish": "35"
+    },
+    {
+      "id": "816",
+      "punish": "35"
+    },
+    {
+      "id": "840",
+      "punish": "35"
+    },
+    {
+      "id": "864",
+      "punish": "35"
+    },
+    {
+      "id": "888",
+      "punish": "40"
+    },
+    {
+      "id": "912",
+      "punish": "40"
+    },
+    {
+      "id": "936",
+      "punish": "40"
+    },
+    {
+      "id": "960",
+      "punish": "40"
+    },
+    {
+      "id": "984",
+      "punish": "40"
+    },
+    {
+      "id": "1008",
+      "punish": "40"
+    },
+    {
+      "id": "1032",
+      "punish": "40"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

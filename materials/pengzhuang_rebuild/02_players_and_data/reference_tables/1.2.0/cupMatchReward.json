@@ -1,0 +1,255 @@
+{
+  "version": "1.2.0",
+  "table": "cupMatchReward",
+  "source_path": "assets/res/raw-assets/resources/data/cupMatchReward.txt",
+  "source_sha256": "553f56b70f507146f312f318ad6ee6408b89ca1d988049efdd4afa7360ca5d8b",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "金球杯赛",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "matchType",
+      "original_key": "matchType",
+      "label": "杯赛类型",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "rankLevel",
+      "original_key": "rankLevel",
+      "label": "联赛等级",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "rank",
+      "original_key": "rank",
+      "label": "晋级",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "boxReward",
+      "original_key": "boxReward",
+      "label": "箱子奖励",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "diamond",
+      "original_key": "diamond",
+      "label": "钻石奖励",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "gold",
+      "original_key": "gold",
+      "label": "钞票奖励",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "regio001",
+      "matchType": "1",
+      "rankLevel": "1",
+      "rank": "0201",
+      "boxReward": "8001",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "regio002",
+      "matchType": "1",
+      "rankLevel": "1",
+      "rank": "0402",
+      "boxReward": "",
+      "diamond": "",
+      "gold": "3000"
+    },
+    {
+      "id": "regio003",
+      "matchType": "1",
+      "rankLevel": "1",
+      "rank": "0804",
+      "boxReward": "",
+      "diamond": "",
+      "gold": "2500"
+    },
+    {
+      "id": "cup001",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "0201",
+      "boxReward": "1504",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup002",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "0402",
+      "boxReward": "1503",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup003",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "0804",
+      "boxReward": "1502",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup004",
+      "matchType": "2",
+      "rankLevel": "2",
+      "rank": "0808",
+      "boxReward": "",
+      "diamond": "",
+      "gold": "0"
+    },
+    {
+      "id": "cup005",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "0201",
+      "boxReward": "1504",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup006",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "0402",
+      "boxReward": "1503",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup007",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "0804",
+      "boxReward": "1502",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup008",
+      "matchType": "2",
+      "rankLevel": "3",
+      "rank": "0808",
+      "boxReward": "",
+      "diamond": "",
+      "gold": "0"
+    },
+    {
+      "id": "cup009",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "0201",
+      "boxReward": "1504",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup010",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "0402",
+      "boxReward": "1503",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup011",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "0804",
+      "boxReward": "1502",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup012",
+      "matchType": "2",
+      "rankLevel": "4",
+      "rank": "0808",
+      "boxReward": "",
+      "diamond": "",
+      "gold": "0"
+    },
+    {
+      "id": "cup013",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "0201",
+      "boxReward": "1504",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup014",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "0402",
+      "boxReward": "1503",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup015",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "0804",
+      "boxReward": "1502",
+      "diamond": "",
+      "gold": ""
+    },
+    {
+      "id": "cup016",
+      "matchType": "2",
+      "rankLevel": "5",
+      "rank": "0808",
+      "boxReward": "",
+      "diamond": "",
+      "gold": "0"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

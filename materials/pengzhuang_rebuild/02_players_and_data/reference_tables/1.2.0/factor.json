@@ -1,0 +1,295 @@
+{
+  "version": "1.2.0",
+  "table": "factor",
+  "source_path": "assets/res/raw-assets/resources/data/factor.txt",
+  "source_sha256": "e26562970b802136aaf590b3f783fafb01c28fad629f9e24cecdb2eede2d03bf",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "系数名称",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "value",
+      "original_key": "value",
+      "label": "系数值",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "remarks",
+      "original_key": "remarks",
+      "label": "备注",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "Guild_Sample1",
+      "value": "180",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Arena_Sample2",
+      "value": "30",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Test_Sample3",
+      "value": "5",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Zone_Sample4",
+      "value": "500",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Player_NameMinLenght",
+      "value": "1",
+      "remarks": "玩家名最小长度"
+    },
+    {
+      "id": "Player_NameMaxLenght",
+      "value": "24",
+      "remarks": "玩家名最大长度"
+    },
+    {
+      "id": "Guild_OpenLevel",
+      "value": "3",
+      "remarks": "公会开放等级"
+    },
+    {
+      "id": "Guild_NameMinLenght",
+      "value": "1",
+      "remarks": "公会名最小长度"
+    },
+    {
+      "id": "Guild_NameMaxLenght",
+      "value": "14",
+      "remarks": "公会名最大长度"
+    },
+    {
+      "id": "Guild_DeclareMinLenght",
+      "value": "0",
+      "remarks": "公会宣言最小长度"
+    },
+    {
+      "id": "Guild_DeclareMaxLenght",
+      "value": "140",
+      "remarks": "公会宣言最大长度"
+    },
+    {
+      "id": "Guild_ChatMinLenght",
+      "value": "1",
+      "remarks": "聊天内容最小长度"
+    },
+    {
+      "id": "Guild_ChatMaxLenght",
+      "value": "140",
+      "remarks": "聊天内容最大长度"
+    },
+    {
+      "id": "Guild_CreateCost",
+      "value": "1000",
+      "remarks": "公会创建消耗"
+    },
+    {
+      "id": "Guild_BuildCost",
+      "value": "500",
+      "remarks": "公会建设消耗"
+    },
+    {
+      "id": "Guild_BuildCD",
+      "value": "86400000",
+      "remarks": "公会建设CD"
+    },
+    {
+      "id": "Guild_BuildContribution",
+      "value": "50",
+      "remarks": "公会建设获得贡献值"
+    },
+    {
+      "id": "Guild_BuildExp",
+      "value": "50",
+      "remarks": "公会建设建筑获得经验值"
+    },
+    {
+      "id": "Guild_HelpCD",
+      "value": "21600000",
+      "remarks": "公会求助CD"
+    },
+    {
+      "id": "Guild_HelpTimes",
+      "value": "180",
+      "remarks": "公会帮助捐赠次数"
+    },
+    {
+      "id": "Guild_AppLifeTime",
+      "value": "86400000",
+      "remarks": "公会申请的保留时间"
+    },
+    {
+      "id": "Guild_EventLifeTime",
+      "value": "86400000",
+      "remarks": "公会事件保留时间"
+    },
+    {
+      "id": "GuildChatCD",
+      "value": "3000",
+      "remarks": "公会聊天CD，单位毫秒"
+    },
+    {
+      "id": "RobotRankPoint",
+      "value": "500",
+      "remarks": "机器人匹配最低分"
+    },
+    {
+      "id": "FreeCrystal",
+      "value": "4000",
+      "remarks": "每日赠送钻石"
+    },
+    {
+      "id": "FreeGold",
+      "value": "2000",
+      "remarks": "每日赠送金币"
+    },
+    {
+      "id": "BattleMinWaitTime",
+      "value": "6000",
+      "remarks": "匹配最少等待时间，单位毫秒"
+    },
+    {
+      "id": "CardRareDisposeForbid",
+      "value": "5",
+      "remarks": "禁止分解的卡牌最低品质。（含）"
+    },
+    {
+      "id": "CardRareDisposeWarn",
+      "value": "4",
+      "remarks": "需要警告提示的卡牌最低品质。（含）"
+    },
+    {
+      "id": "CardLevelDisposeWarn",
+      "value": "2",
+      "remarks": "需要警告提示的卡牌最低等级。（含）"
+    },
+    {
+      "id": "CardRareDisposeOneKey",
+      "value": "3",
+      "remarks": "不能一键分解的卡牌最低品质。（含）"
+    },
+    {
+      "id": "inviteDayLimit",
+      "value": "5",
+      "remarks": "每日邀请领取上限"
+    },
+    {
+      "id": "inviteWeekLimit",
+      "value": "20",
+      "remarks": "每周邀请领取上限"
+    },
+    {
+      "id": "inviteInstallReward",
+      "value": "10",
+      "remarks": "邀请安装游戏后奖励数量"
+    },
+    {
+      "id": "inviteLinkWebSite",
+      "value": "http://pz.mjyx.com/",
+      "remarks": "邀请下载站地址"
+    },
+    {
+      "id": "Icon_RegionalMatch",
+      "value": "Image_B",
+      "remarks": "区域联赛图标"
+    },
+    {
+      "id": "Icon_CupMatch",
+      "value": "Image_A",
+      "remarks": "金球杯赛"
+    },
+    {
+      "id": "CupMatch_Cost",
+      "value": "2500",
+      "remarks": "金球杯赛参赛消耗"
+    },
+    {
+      "id": "GoldBallCupTimeCheck",
+      "value": "1",
+      "remarks": "金杯赛时间检测[0代表不检测，1代表检测]"
+    },
+    {
+      "id": "CupMatchJoinNum",
+      "value": "8",
+      "remarks": "杯赛匹配参与人数[2~8之间]"
+    },
+    {
+      "id": "BoxOpenImmediately",
+      "value": "400",
+      "remarks": "立刻打开宝箱价格系数(钻石数=剩余秒数/价格系数)"
+    },
+    {
+      "id": "FirstSpecialBoxID",
+      "value": "5002",
+      "remarks": "新手引导使用的特殊合同编号"
+    },
+    {
+      "id": "MonthCardRewardMailID",
+      "value": "200001",
+      "remarks": "月卡奖励邮件ID"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

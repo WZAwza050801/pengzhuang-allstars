@@ -1,0 +1,937 @@
+[
+  {
+    "version": "1.2.0",
+    "name": "ballBg",
+    "file": "03_art/selected_sprites/1.2.0/ballBg.png",
+    "width": 64,
+    "height": 64,
+    "source_frame": {
+      "name": "ballBg",
+      "texture": "b1663118-c08b-4201-ab08-cd8759dd410e",
+      "rect": [
+        1,
+        1,
+        62,
+        62
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        64,
+        64
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/ballBg.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "football",
+    "file": "03_art/original_images/1.2.0/texture/football.png",
+    "width": 128,
+    "height": 128,
+    "source_frame": {
+      "name": "football",
+      "texture": "d16c6bea-d226-4081-b42d-7635930fa40a",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        128,
+        128
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/football.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.2.0",
+    "name": "Background2",
+    "file": "03_art/original_images/1.2.0/texture/Background2.jpg",
+    "width": 1080,
+    "height": 1920,
+    "source_frame": {
+      "name": "Background2",
+      "texture": "0d09338c-8e36-4727-86d7-68e4a8d90e5c",
+      "rect": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1080,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Background2.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.2.0",
+    "name": "Goal_03",
+    "file": "03_art/selected_sprites/1.2.0/Goal_03.png",
+    "width": 1054,
+    "height": 203,
+    "source_frame": {
+      "name": "Goal_03",
+      "texture": "fa7d6e9a-5f3a-4c5b-9a70-705b6a08bc89",
+      "rect": [
+        28,
+        4,
+        1009,
+        176
+      ],
+      "offset": [
+        5.5,
+        9.5
+      ],
+      "originalSize": [
+        1054,
+        203
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Goal_03.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "Scenes_03",
+    "file": "03_art/original_images/1.2.0/texture/Scenes_03.jpg",
+    "width": 1080,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_03",
+      "texture": "7a26f6d3-dc9c-4f30-89c8-91d8389493d5",
+      "rect": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1080,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Scenes_03.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.2.0",
+    "name": "Tab_Background",
+    "file": "03_art/selected_sprites/1.2.0/Tab_Background.png",
+    "width": 6,
+    "height": 188,
+    "source_frame": {
+      "name": "Tab_Background",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        1320,
+        830,
+        6,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        6,
+        188
+      ],
+      "capInsets": [
+        5,
+        14,
+        5,
+        1
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/atlas/Skin.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "Scenes_02",
+    "file": "03_art/original_images/1.2.0/texture/Scenes_02.jpg",
+    "width": 1080,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_02",
+      "texture": "19795dcd-b947-4e97-92b9-1147aad9e186",
+      "rect": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1080,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Scenes_02.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.2.0",
+    "name": "Tab_Background_Shadow",
+    "file": "03_art/selected_sprites/1.2.0/Tab_Background_Shadow.png",
+    "width": 16,
+    "height": 44,
+    "source_frame": {
+      "name": "Tab_Background_Shadow",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        1320,
+        755,
+        16,
+        44
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        16,
+        44
+      ],
+      "capInsets": [
+        5,
+        0,
+        5,
+        0
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/atlas/Skin.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "Scenes_04",
+    "file": "03_art/original_images/1.2.0/texture/Scenes_04.jpg",
+    "width": 1080,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_04",
+      "texture": "df56e923-b1e5-47a2-9f6a-3b3800b3696d",
+      "rect": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1080,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Scenes_04.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.2.0",
+    "name": "Guide_Arrow",
+    "file": "03_art/selected_sprites/1.2.0/Guide_Arrow.png",
+    "width": 178,
+    "height": 156,
+    "source_frame": {
+      "name": "Guide_Arrow",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        519,
+        302,
+        178,
+        156
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        178,
+        156
+      ],
+      "rotated": 1
+    },
+    "texture_file": "03_art/original_images/1.2.0/atlas/Skin.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "Goal_01",
+    "file": "03_art/selected_sprites/1.2.0/Goal_01.png",
+    "width": 1054,
+    "height": 203,
+    "source_frame": {
+      "name": "Goal_01",
+      "texture": "6bf902ab-230a-491a-9d0d-67ff4b99825b",
+      "rect": [
+        14,
+        4,
+        1037,
+        195
+      ],
+      "offset": [
+        5.5,
+        0
+      ],
+      "originalSize": [
+        1054,
+        203
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Goal_01.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "Scenes_01",
+    "file": "03_art/original_images/1.2.0/texture/Scenes_01.jpg",
+    "width": 1080,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_01",
+      "texture": "05f05c5e-1ca9-4569-993a-8eb009a8ee72",
+      "rect": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1080,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Scenes_01.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.2.0",
+    "name": "Goal_02",
+    "file": "03_art/selected_sprites/1.2.0/Goal_02.png",
+    "width": 1054,
+    "height": 203,
+    "source_frame": {
+      "name": "Goal_02",
+      "texture": "b630f036-9ea6-4cca-9879-c38478f75eb8",
+      "rect": [
+        2,
+        3,
+        1038,
+        197
+      ],
+      "offset": [
+        -6,
+        0
+      ],
+      "originalSize": [
+        1054,
+        203
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Goal_02.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "Background",
+    "file": "03_art/original_images/1.2.0/texture/Background.jpg",
+    "width": 1242,
+    "height": 1920,
+    "source_frame": {
+      "name": "Background",
+      "texture": "d644e911-7a30-48da-9bd1-0b4169289d1c",
+      "rect": [
+        0,
+        0,
+        1242,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1242,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Background.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.2.0",
+    "name": "Lv_Background",
+    "file": "03_art/selected_sprites/1.2.0/Lv_Background.png",
+    "width": 102,
+    "height": 98,
+    "source_frame": {
+      "name": "Lv_Background",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        1620,
+        924,
+        102,
+        98
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        102,
+        98
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/atlas/Skin.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.2.0",
+    "name": "Scenes_05",
+    "file": "03_art/original_images/1.2.0/texture/Scenes_05.jpg",
+    "width": 1080,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_05",
+      "texture": "31598c78-fe61-4e5d-ac6d-c402dbb6c04f",
+      "rect": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1080,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.2.0/texture/Scenes_05.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Lv_Background",
+    "file": "03_art/selected_sprites/1.5.5/Lv_Background.png",
+    "width": 102,
+    "height": 98,
+    "source_frame": {
+      "name": "Lv_Background",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        1944,
+        785,
+        102,
+        98
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        102,
+        98
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/ID_14.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.5.5",
+    "name": "Goal_01",
+    "file": "03_art/selected_sprites/1.5.5/Goal_01.png",
+    "width": 1054,
+    "height": 203,
+    "source_frame": {
+      "name": "Goal_01",
+      "texture": "6bf902ab-230a-491a-9d0d-67ff4b99825b",
+      "rect": [
+        0,
+        1,
+        1054,
+        199
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "originalSize": [
+        1054,
+        203
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Goal_01.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.5.5",
+    "name": "Guide_Arrow",
+    "file": "03_art/selected_sprites/1.5.5/Guide_Arrow.png",
+    "width": 178,
+    "height": 156,
+    "source_frame": {
+      "name": "Guide_Arrow",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        308,
+        1588,
+        178,
+        156
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        178,
+        156
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/ID_14.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.5.5",
+    "name": "Background",
+    "file": "03_art/original_images/1.5.5/texture/Background.jpg",
+    "width": 1242,
+    "height": 1920,
+    "source_frame": {
+      "name": "Background",
+      "texture": "d644e911-7a30-48da-9bd1-0b4169289d1c",
+      "rect": [
+        0,
+        0,
+        1242,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1242,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Background.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Background2",
+    "file": "03_art/original_images/1.5.5/texture/Background2.jpg",
+    "width": 1242,
+    "height": 1920,
+    "source_frame": {
+      "name": "Background2",
+      "texture": "0d09338c-8e36-4727-86d7-68e4a8d90e5c",
+      "rect": [
+        0,
+        0,
+        1242,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1242,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Background2.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "ballBg",
+    "file": "03_art/original_images/1.5.5/texture/ballBg.png",
+    "width": 64,
+    "height": 64,
+    "source_frame": {
+      "name": "ballBg",
+      "texture": "b1663118-c08b-4201-ab08-cd8759dd410e",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        64,
+        64
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/ballBg.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "football",
+    "file": "03_art/original_images/1.5.5/texture/football.png",
+    "width": 128,
+    "height": 128,
+    "source_frame": {
+      "name": "football",
+      "texture": "d16c6bea-d226-4081-b42d-7635930fa40a",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        128,
+        128
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/football.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Scenes_02",
+    "file": "03_art/original_images/1.5.5/texture/Scenes_02.jpg",
+    "width": 1440,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_02",
+      "texture": "19795dcd-b947-4e97-92b9-1147aad9e186",
+      "rect": [
+        0,
+        0,
+        1440,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1440,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Scenes_02.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Goal_03",
+    "file": "03_art/selected_sprites/1.5.5/Goal_03.png",
+    "width": 1054,
+    "height": 203,
+    "source_frame": {
+      "name": "Goal_03",
+      "texture": "fa7d6e9a-5f3a-4c5b-9a70-705b6a08bc89",
+      "rect": [
+        21,
+        1,
+        1023,
+        188
+      ],
+      "offset": [
+        5.5,
+        6.5
+      ],
+      "originalSize": [
+        1054,
+        203
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Goal_03.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.5.5",
+    "name": "Goal_00",
+    "file": "03_art/original_images/1.5.5/texture/Goal_00.png",
+    "width": 1054,
+    "height": 203,
+    "source_frame": {
+      "name": "Goal_00",
+      "texture": "c49adbf3-8f85-4f80-b239-43966953ec00",
+      "rect": [
+        0,
+        0,
+        1054,
+        203
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1054,
+        203
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Goal_00.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Goal_02",
+    "file": "03_art/original_images/1.5.5/texture/Goal_02.png",
+    "width": 1054,
+    "height": 203,
+    "source_frame": {
+      "name": "Goal_02",
+      "texture": "b630f036-9ea6-4cca-9879-c38478f75eb8",
+      "rect": [
+        0,
+        0,
+        1054,
+        203
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1054,
+        203
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Goal_02.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Tab_Background",
+    "file": "03_art/selected_sprites/1.5.5/Tab_Background.png",
+    "width": 6,
+    "height": 188,
+    "source_frame": {
+      "name": "Tab_Background",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        1516,
+        436,
+        6,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        6,
+        188
+      ],
+      "capInsets": [
+        5,
+        14,
+        5,
+        1
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/ID_14.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.5.5",
+    "name": "Tab_Background_Shadow",
+    "file": "03_art/selected_sprites/1.5.5/Tab_Background_Shadow.png",
+    "width": 16,
+    "height": 44,
+    "source_frame": {
+      "name": "Tab_Background_Shadow",
+      "texture": "3d353489-d7de-46b2-8bc1-950af5c90579",
+      "rect": [
+        2030,
+        2,
+        16,
+        44
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        16,
+        44
+      ],
+      "capInsets": [
+        5,
+        0,
+        5,
+        0
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/ID_14.png",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对"
+  },
+  {
+    "version": "1.5.5",
+    "name": "Scenes_03",
+    "file": "03_art/original_images/1.5.5/texture/Scenes_03.jpg",
+    "width": 1440,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_03",
+      "texture": "7a26f6d3-dc9c-4f30-89c8-91d8389493d5",
+      "rect": [
+        0,
+        0,
+        1440,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1440,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Scenes_03.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Scenes_04",
+    "file": "03_art/original_images/1.5.5/texture/Scenes_04.jpg",
+    "width": 1440,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_04",
+      "texture": "df56e923-b1e5-47a2-9f6a-3b3800b3696d",
+      "rect": [
+        0,
+        0,
+        1440,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1440,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Scenes_04.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Scenes_01",
+    "file": "03_art/original_images/1.5.5/texture/Scenes_01.jpg",
+    "width": 1440,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_01",
+      "texture": "05f05c5e-1ca9-4569-993a-8eb009a8ee72",
+      "rect": [
+        0,
+        0,
+        1440,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1440,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Scenes_01.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  },
+  {
+    "version": "1.5.5",
+    "name": "Scenes_05",
+    "file": "03_art/original_images/1.5.5/texture/Scenes_05.jpg",
+    "width": 1440,
+    "height": 1920,
+    "source_frame": {
+      "name": "Scenes_05",
+      "texture": "31598c78-fe61-4e5d-ac6d-c402dbb6c04f",
+      "rect": [
+        0,
+        0,
+        1440,
+        1920
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        1440,
+        1920
+      ]
+    },
+    "texture_file": "03_art/original_images/1.5.5/texture/Scenes_05.jpg",
+    "classification": "名称筛选的参考切片，实际用途需结合画面核对",
+    "full_texture_reused": true
+  }
+]

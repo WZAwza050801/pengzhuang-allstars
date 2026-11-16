@@ -1,0 +1,1178 @@
+[
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Anthony_Martial",
+    "chinese_game_name": "马少尔",
+    "english_game_name": "Marshall"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Wayne_Rooney",
+    "chinese_game_name": "小胖",
+    "english_game_name": "Roon"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Juan_Mata",
+    "chinese_game_name": "玛塔叔叔",
+    "english_game_name": "Matador"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Memphis_Depay",
+    "chinese_game_name": "得佩",
+    "english_game_name": "Decay"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Bastian_Schweinsteiger",
+    "chinese_game_name": "小猪",
+    "english_game_name": "Swinestiger"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Marcos_Rojo",
+    "chinese_game_name": "罗货",
+    "english_game_name": "Roho"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Daley_Blind",
+    "chinese_game_name": "布琳德",
+    "english_game_name": "Blinds"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Sergio_Aguero",
+    "chinese_game_name": "阿圭罗",
+    "english_game_name": "Aquaro"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Raheem_Sterling",
+    "chinese_game_name": "思特灵",
+    "english_game_name": "Starling"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_David_Silva",
+    "chinese_game_name": "喜娃",
+    "english_game_name": "Silver"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Yaya_Toure",
+    "chinese_game_name": "土雷",
+    "english_game_name": "Tourettes"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Kevin_De_Bruyne",
+    "chinese_game_name": "丁丁",
+    "english_game_name": "Da Brown"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Vincent_Kompany",
+    "chinese_game_name": "孔向前",
+    "english_game_name": "Company"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Martin_Demichelis",
+    "chinese_game_name": "德漏勺",
+    "english_game_name": "Demichelle"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Diego_Costa",
+    "chinese_game_name": "克斯塔",
+    "english_game_name": "Costanza"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Eden_Hazard",
+    "chinese_game_name": "扎球王",
+    "english_game_name": "Hazardous"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Cesc_Fabregas",
+    "chinese_game_name": "小法",
+    "english_game_name": "Fibreglass"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Oscar",
+    "chinese_game_name": "小金人",
+    "english_game_name": "Ocarina"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Nemanja_Matic",
+    "chinese_game_name": "玛蒂七",
+    "english_game_name": "Matisse"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_John_Terry",
+    "chinese_game_name": "特队",
+    "english_game_name": "T.Johns"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Cesar_Azpilicueta",
+    "chinese_game_name": "阿紫",
+    "english_game_name": "Applicator"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Olivier_Giroud",
+    "chinese_game_name": "基努",
+    "english_game_name": "Ground"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Theo_Walcott",
+    "chinese_game_name": "小老虎",
+    "english_game_name": "Woolcat"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Alexis_Sanchez",
+    "chinese_game_name": "桑大腿",
+    "english_game_name": "Sandwichez"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Mesut_ezil",
+    "chinese_game_name": "大眼",
+    "english_game_name": "O'Zeal"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Santi_Cazorla",
+    "chinese_game_name": "卡锁啦",
+    "english_game_name": "Carloza"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Hector_Bellerin",
+    "chinese_game_name": "贝闪电",
+    "english_game_name": "Bellringer"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Per_Mertesacker",
+    "chinese_game_name": "模特撒克",
+    "english_game_name": "Metasucker"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_GaoLin",
+    "chinese_game_name": "告林斯曼",
+    "english_game_name": "Forest"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Jackson_Martinez",
+    "chinese_game_name": "杰马",
+    "english_game_name": "Martíns"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Ricardo_Goulart",
+    "chinese_game_name": "高辣条",
+    "english_game_name": "Ghoulart"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_ZhengZhi",
+    "chinese_game_name": "郑队",
+    "english_game_name": "Zheng"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Paulinho",
+    "chinese_game_name": "暴力鸟",
+    "english_game_name": "Pauline"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_HuangBowen",
+    "chinese_game_name": "世界博",
+    "english_game_name": "Yellow"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_ZhangLinfan",
+    "chinese_game_name": "张莫斯",
+    "english_game_name": "Deluxe"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Robert_Lewandowski",
+    "chinese_game_name": "莱万",
+    "english_game_name": "Lemondonki"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Thomas_Muller",
+    "chinese_game_name": "木乐",
+    "english_game_name": "Miller"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Arjen_Robben",
+    "chinese_game_name": "小飞侠",
+    "english_game_name": "Robber"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Mario_Getze",
+    "chinese_game_name": "格册",
+    "english_game_name": "Gotcha"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Arturo_Vidal",
+    "chinese_game_name": "比达二",
+    "english_game_name": "Vital"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Philipp_Lahm",
+    "chinese_game_name": "拉队",
+    "english_game_name": "Lamb"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Jerrme_Boateng",
+    "chinese_game_name": "博啊疼",
+    "english_game_name": "Booting"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Pierre_Emerick_Aubameyang",
+    "chinese_game_name": "奥巴没样",
+    "english_game_name": "Auboomerang"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Marco_Reus",
+    "chinese_game_name": "螺一丝",
+    "english_game_name": "Rues"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Henrikh_Mkhitaryan",
+    "chinese_game_name": "美西他娘",
+    "english_game_name": "Mickytarian"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Shinji_Kagawa",
+    "chinese_game_name": "香川寿司",
+    "english_game_name": "Kawasaki"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Ilkay_Gundogan",
+    "chinese_game_name": "景多安",
+    "english_game_name": "Gundog"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Mats_Hummels",
+    "chinese_game_name": "狐媚",
+    "english_game_name": "Hummers"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Matthias_Ginter",
+    "chinese_game_name": "金特二",
+    "english_game_name": "Gunter"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Paulo_Dybala",
+    "chinese_game_name": "迪吧啦",
+    "english_game_name": "Dublya"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_alvaro_Morata",
+    "chinese_game_name": "莫邋遢",
+    "english_game_name": "Morales"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Paul_Pogba",
+    "chinese_game_name": "波霸",
+    "english_game_name": "Potba"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Claudio_Marchisio",
+    "chinese_game_name": "马绩效",
+    "english_game_name": "Machismo"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Sami_Khedira",
+    "chinese_game_name": "脸哥",
+    "english_game_name": "Kadira"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Leonardo_Bonucci",
+    "chinese_game_name": "菠萝奇",
+    "english_game_name": "Bonus"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Daniele_Rugani",
+    "chinese_game_name": "鲁加尼",
+    "english_game_name": "Ranugi"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Neymar",
+    "chinese_game_name": "内少",
+    "english_game_name": "Naymer"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Luis_Suarez",
+    "chinese_game_name": "苏牙",
+    "english_game_name": "Swarez"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Andres_Iniesta",
+    "chinese_game_name": "小白",
+    "english_game_name": "Instanta"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Sergio_Busquets",
+    "chinese_game_name": "布教授",
+    "english_game_name": "Bouquets"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Javier_Mascherano",
+    "chinese_game_name": "小马哥",
+    "english_game_name": "Mascara"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Gerard_Pique",
+    "chinese_game_name": "皮主席",
+    "english_game_name": "Peekay"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Daniel_Alves",
+    "chinese_game_name": "铁达尼",
+    "english_game_name": "Halves"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Lionel_Messi",
+    "chinese_game_name": "梅球王",
+    "english_game_name": "Messy"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Karim_Benzema",
+    "chinese_game_name": "笨马",
+    "english_game_name": "Benzene"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Gareth_Bale",
+    "chinese_game_name": "大圣",
+    "english_game_name": "Bail"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Toni_Kroos",
+    "chinese_game_name": "甜菜",
+    "english_game_name": "Cruise"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Luka_Modric",
+    "chinese_game_name": "魔笛",
+    "english_game_name": "Midrich"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_James_Rodriguez",
+    "chinese_game_name": "哈罗",
+    "english_game_name": "Rodgerez"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Sergio_Ramos",
+    "chinese_game_name": "水爷",
+    "english_game_name": "Ramoos"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Pepe",
+    "chinese_game_name": "武僧",
+    "english_game_name": "Peppy"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Cristiano_Ronaldo",
+    "chinese_game_name": "小小罗",
+    "english_game_name": "Rolando"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Antoine_Griezmann",
+    "chinese_game_name": "格子",
+    "english_game_name": "Greasemann"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Fernando_Torres",
+    "chinese_game_name": "托妞",
+    "english_game_name": "Torro"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Koke",
+    "chinese_game_name": "科客",
+    "english_game_name": "Keko"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Augusto_Fernandez",
+    "chinese_game_name": "费南斯",
+    "english_game_name": "Fernando"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Yannick_Ferreira_Carrasco",
+    "chinese_game_name": "卡啦斯",
+    "english_game_name": "Cascaro"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Diego_Godin",
+    "chinese_game_name": "哥丁",
+    "english_game_name": "Gudin"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Filipe_Luis",
+    "chinese_game_name": "陆一丝",
+    "english_game_name": "Louís"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Edinson_Cavani",
+    "chinese_game_name": "咔哇泥",
+    "english_game_name": "Cavanini"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Zlatan_Ibrahimovic",
+    "chinese_game_name": "奉先",
+    "english_game_name": "Abrahamovic"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_angel_Di_Maria",
+    "chinese_game_name": "天使",
+    "english_game_name": "De Maríachi"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Marco_Verratti",
+    "chinese_game_name": "微辣帝",
+    "english_game_name": "Verrity"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Lucas_Moura",
+    "chinese_game_name": "小卢卡斯",
+    "english_game_name": "Mora"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_David_Luiz",
+    "chinese_game_name": "蓬蓬",
+    "english_game_name": "Lewis"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Thiago_Silva",
+    "chinese_game_name": "弟媳",
+    "english_game_name": "Silver"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Zinedine_Yazid_Zidane",
+    "chinese_game_name": "齐祖",
+    "english_game_name": "Zizou"
+  },
+  {
+    "version": "1.2.0",
+    "key": "PlayerName_Ronaldo_Luiz_NazarioDe_Lima",
+    "chinese_game_name": "大罗",
+    "english_game_name": "Rolando"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Anthony_Martial",
+    "chinese_game_name": "马少尔",
+    "english_game_name": "Marshall"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Wayne_Rooney",
+    "chinese_game_name": "小胖",
+    "english_game_name": "Roon"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Juan_Mata",
+    "chinese_game_name": "玛塔叔叔",
+    "english_game_name": "Matador"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Memphis_Depay",
+    "chinese_game_name": "得佩",
+    "english_game_name": "Decay"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Bastian_Schweinsteiger",
+    "chinese_game_name": "小猪",
+    "english_game_name": "Swinestiger"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Marcos_Rojo",
+    "chinese_game_name": "罗货",
+    "english_game_name": "Roho"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Daley_Blind",
+    "chinese_game_name": "布琳德",
+    "english_game_name": "Blinds"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Sergio_Aguero",
+    "chinese_game_name": "阿圭罗",
+    "english_game_name": "Aquaro"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Raheem_Sterling",
+    "chinese_game_name": "思特灵",
+    "english_game_name": "Starling"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_David_Silva",
+    "chinese_game_name": "喜娃",
+    "english_game_name": "Silver"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Yaya_Toure",
+    "chinese_game_name": "土雷",
+    "english_game_name": "Tourettes"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Kevin_De_Bruyne",
+    "chinese_game_name": "丁丁",
+    "english_game_name": "Da Brown"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Vincent_Kompany",
+    "chinese_game_name": "孔向前",
+    "english_game_name": "Company"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Martin_Demichelis",
+    "chinese_game_name": "德漏勺",
+    "english_game_name": "Demichelle"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Diego_Costa",
+    "chinese_game_name": "克斯塔",
+    "english_game_name": "Costanza"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Eden_Hazard",
+    "chinese_game_name": "扎球王",
+    "english_game_name": "Hazardous"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Cesc_Fabregas",
+    "chinese_game_name": "小法",
+    "english_game_name": "Fibreglass"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Oscar",
+    "chinese_game_name": "小金人",
+    "english_game_name": "Ocarina"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Nemanja_Matic",
+    "chinese_game_name": "玛蒂七",
+    "english_game_name": "Matisse"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_John_Terry",
+    "chinese_game_name": "特队",
+    "english_game_name": "T. Johns"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Cesar_Azpilicueta",
+    "chinese_game_name": "阿紫",
+    "english_game_name": "Applicator"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Olivier_Giroud",
+    "chinese_game_name": "基努",
+    "english_game_name": "Ground"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Theo_Walcott",
+    "chinese_game_name": "小老虎",
+    "english_game_name": "Woolcat"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Alexis_Sanchez",
+    "chinese_game_name": "桑大腿",
+    "english_game_name": "Sandwichez"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Mesut_ezil",
+    "chinese_game_name": "大眼",
+    "english_game_name": "O'Zeal"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Santi_Cazorla",
+    "chinese_game_name": "卡锁啦",
+    "english_game_name": "Carloza"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Hector_Bellerin",
+    "chinese_game_name": "贝闪电",
+    "english_game_name": "Bellringer"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Per_Mertesacker",
+    "chinese_game_name": "模特撒克",
+    "english_game_name": "Metasucker"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_GaoLin",
+    "chinese_game_name": "告林斯曼",
+    "english_game_name": "Forest"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Jackson_Martinez",
+    "chinese_game_name": "杰马",
+    "english_game_name": "Martíns"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Ricardo_Goulart",
+    "chinese_game_name": "高辣条",
+    "english_game_name": "Ghoulart"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_ZhengZhi",
+    "chinese_game_name": "郑队",
+    "english_game_name": "Zheng"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Paulinho",
+    "chinese_game_name": "暴力鸟",
+    "english_game_name": "Pauline"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_HuangBowen",
+    "chinese_game_name": "世界博",
+    "english_game_name": "Yellow"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_ZhangLinfan",
+    "chinese_game_name": "张莫斯",
+    "english_game_name": "Deluxe"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Robert_Lewandowski",
+    "chinese_game_name": "莱万",
+    "english_game_name": "Lemondonki"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Thomas_Muller",
+    "chinese_game_name": "木乐",
+    "english_game_name": "Miller"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Arjen_Robben",
+    "chinese_game_name": "小飞侠",
+    "english_game_name": "Robber"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Mario_Getze",
+    "chinese_game_name": "格册",
+    "english_game_name": "Gotcha"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Arturo_Vidal",
+    "chinese_game_name": "比达二",
+    "english_game_name": "Vital"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Philipp_Lahm",
+    "chinese_game_name": "拉队",
+    "english_game_name": "Lamb"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Jerrme_Boateng",
+    "chinese_game_name": "博啊疼",
+    "english_game_name": "Booting"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Pierre_Emerick_Aubameyang",
+    "chinese_game_name": "奥巴没样",
+    "english_game_name": "Auboomerang"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Marco_Reus",
+    "chinese_game_name": "螺一丝",
+    "english_game_name": "Rues"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Henrikh_Mkhitaryan",
+    "chinese_game_name": "美西他娘",
+    "english_game_name": "Mickytarian"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Shinji_Kagawa",
+    "chinese_game_name": "香川寿司",
+    "english_game_name": "Kawasaki"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Ilkay_Gundogan",
+    "chinese_game_name": "景多安",
+    "english_game_name": "Gundog"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Mats_Hummels",
+    "chinese_game_name": "狐媚",
+    "english_game_name": "Hummers"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Matthias_Ginter",
+    "chinese_game_name": "金特二",
+    "english_game_name": "Gunter"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Paulo_Dybala",
+    "chinese_game_name": "迪吧啦",
+    "english_game_name": "Dublya"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_alvaro_Morata",
+    "chinese_game_name": "莫邋遢",
+    "english_game_name": "Morales"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Paul_Pogba",
+    "chinese_game_name": "波霸",
+    "english_game_name": "Potba"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Claudio_Marchisio",
+    "chinese_game_name": "马绩效",
+    "english_game_name": "Machismo"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Sami_Khedira",
+    "chinese_game_name": "脸哥",
+    "english_game_name": "Kadira"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Leonardo_Bonucci",
+    "chinese_game_name": "菠萝奇",
+    "english_game_name": "Bonus"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Daniele_Rugani",
+    "chinese_game_name": "鲁加尼",
+    "english_game_name": "Ranugi"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Neymar",
+    "chinese_game_name": "内少",
+    "english_game_name": "Naymer"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Luis_Suarez",
+    "chinese_game_name": "苏牙",
+    "english_game_name": "Swarez"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Andres_Iniesta",
+    "chinese_game_name": "小白",
+    "english_game_name": "Instanta"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Sergio_Busquets",
+    "chinese_game_name": "布教授",
+    "english_game_name": "Bouquets"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Javier_Mascherano",
+    "chinese_game_name": "小马哥",
+    "english_game_name": "Mascara"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Gerard_Pique",
+    "chinese_game_name": "皮主席",
+    "english_game_name": "Peekay"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Daniel_Alves",
+    "chinese_game_name": "铁达尼",
+    "english_game_name": "Halves"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Lionel_Messi",
+    "chinese_game_name": "梅球王",
+    "english_game_name": "Messy"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Karim_Benzema",
+    "chinese_game_name": "笨马",
+    "english_game_name": "Benzene"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Gareth_Bale",
+    "chinese_game_name": "大圣",
+    "english_game_name": "Bail"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Toni_Kroos",
+    "chinese_game_name": "甜菜",
+    "english_game_name": "Cruise"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Luka_Modric",
+    "chinese_game_name": "魔笛",
+    "english_game_name": "Midrich"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_James_Rodriguez",
+    "chinese_game_name": "哈罗",
+    "english_game_name": "Rodgerez"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Sergio_Ramos",
+    "chinese_game_name": "水爷",
+    "english_game_name": "Ramoos"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Pepe",
+    "chinese_game_name": "武僧",
+    "english_game_name": "Peppy"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Cristiano_Ronaldo",
+    "chinese_game_name": "小小罗",
+    "english_game_name": "Rolando"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Antoine_Griezmann",
+    "chinese_game_name": "格子",
+    "english_game_name": "Greasemann"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Fernando_Torres",
+    "chinese_game_name": "托妞",
+    "english_game_name": "Torro"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Koke",
+    "chinese_game_name": "科客",
+    "english_game_name": "Keikor"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Augusto_Fernandez",
+    "chinese_game_name": "费南斯",
+    "english_game_name": "Fernando"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Yannick_Ferreira_Carrasco",
+    "chinese_game_name": "卡啦斯",
+    "english_game_name": "Cascaro"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Diego_Godin",
+    "chinese_game_name": "哥丁",
+    "english_game_name": "Gudin"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Filipe_Luis",
+    "chinese_game_name": "陆一丝",
+    "english_game_name": "Louís"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Edinson_Cavani",
+    "chinese_game_name": "咔哇泥",
+    "english_game_name": "Cavanini"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Zlatan_Ibrahimovic",
+    "chinese_game_name": "奉先",
+    "english_game_name": "Abrahamovic"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_angel_Di_Maria",
+    "chinese_game_name": "天使",
+    "english_game_name": "De Maríachi"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Marco_Verratti",
+    "chinese_game_name": "微辣帝",
+    "english_game_name": "Verrity"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Lucas_Moura",
+    "chinese_game_name": "小卢卡斯",
+    "english_game_name": "Mora"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_David_Luiz",
+    "chinese_game_name": "蓬蓬",
+    "english_game_name": "Lewis"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Thiago_Silva",
+    "chinese_game_name": "弟媳",
+    "english_game_name": "T. Silver"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Zinedine_Yazid_Zidane",
+    "chinese_game_name": "齐祖",
+    "english_game_name": "Zizou"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Ronaldo_Luiz_NazarioDe_Lima",
+    "chinese_game_name": "大罗",
+    "english_game_name": "Rolando"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Gonzalo_Higuain",
+    "chinese_game_name": "西瓜",
+    "english_game_name": "Higrain"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Ronaldinho_Gaucho",
+    "chinese_game_name": "小罗",
+    "english_game_name": "Gazpacho"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Arda_Turan",
+    "chinese_game_name": "图蓝",
+    "english_game_name": "Touring"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_David_Beckham",
+    "chinese_game_name": "小贝",
+    "english_game_name": "Backrum"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Fabio_Cannavaro",
+    "chinese_game_name": "卡队",
+    "english_game_name": "Carnivaro"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Paolo_Maldini",
+    "chinese_game_name": "马队",
+    "english_game_name": "Martini"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Sadio_Mane",
+    "chinese_game_name": "马大腿",
+    "english_game_name": "Money"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Roberto_Firmino",
+    "chinese_game_name": "费米",
+    "english_game_name": "Flamingo"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Daniel_Sturridge",
+    "chinese_game_name": "司徒",
+    "english_game_name": "Storage"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Philippe_Coutinho",
+    "chinese_game_name": "库鸟",
+    "english_game_name": "Cortino"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Adam_Lallana",
+    "chinese_game_name": "纳天王",
+    "english_game_name": "Lala"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Nathaniel_Clyne",
+    "chinese_game_name": "克莱鹰",
+    "english_game_name": "Incline"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Alberto_Moreno",
+    "chinese_game_name": "莫小雷",
+    "english_game_name": "Beemo"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Wesley_Sneijder",
+    "chinese_game_name": "师奶",
+    "english_game_name": "Slider"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Didier_Drogba",
+    "chinese_game_name": "魔兽",
+    "english_game_name": "Drachma"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Hamit_Altintop",
+    "chinese_game_name": "拓扑哥哥",
+    "english_game_name": "Tinroof"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Lukas_Podolski",
+    "chinese_game_name": "波尔蒂王子",
+    "english_game_name": "Pedalsky"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Goran_Pandev",
+    "chinese_game_name": "功夫熊猫",
+    "english_game_name": "Panda"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Nicolas_Burdisso",
+    "chinese_game_name": "耳帝",
+    "english_game_name": "Baradiso"
+  },
+  {
+    "version": "1.5.5",
+    "key": "PlayerName_Felipe_Melo",
+    "chinese_game_name": "霉洛",
+    "english_game_name": "Mallow"
+  }
+]

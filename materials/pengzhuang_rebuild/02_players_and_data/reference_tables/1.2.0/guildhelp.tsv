@@ -1,0 +1,5 @@
+﻿id #卡的品质	上限	单个玩家最大帮助	获得贡献
+id	maxAmount	maxHelp	contribution
+2	15	5	10
+3	9	3	25
+4	3	1	50

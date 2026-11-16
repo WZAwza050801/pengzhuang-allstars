@@ -1,0 +1,65 @@
+{
+  "version": "1.5.5",
+  "table": "guildhelp",
+  "source_path": "assets/res/raw-assets/resources/data/guildhelp.txt",
+  "source_sha256": "ddf848f27fa76fd0c61a0a99282f52547f4ec40b68b1ab42be97e187e9f40a82",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "id #卡的品质",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "maxAmount",
+      "original_key": "maxAmount",
+      "label": "上限",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "maxHelp",
+      "original_key": "maxHelp",
+      "label": "单个玩家最大帮助",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "contribution",
+      "original_key": "contribution",
+      "label": "获得贡献",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "2",
+      "maxAmount": "15",
+      "maxHelp": "5",
+      "contribution": "10"
+    },
+    {
+      "id": "3",
+      "maxAmount": "9",
+      "maxHelp": "3",
+      "contribution": "25"
+    },
+    {
+      "id": "4",
+      "maxAmount": "3",
+      "maxHelp": "1",
+      "contribution": "50"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    4,
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

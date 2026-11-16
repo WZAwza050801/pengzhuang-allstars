@@ -1,0 +1,43 @@
+{
+  "version": "1.2.0",
+  "table": "refresh_cfg",
+  "source_path": "assets/res/raw-assets/resources/data/refresh_cfg.txt",
+  "source_sha256": "3dc5cc377163a2a2bc8dce23a89d03939f854509f780b16385cbac13959e97b2",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "type",
+      "original_key": "type",
+      "label": "刷新类型",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "refreshTimeList",
+      "original_key": "refreshTimeList",
+      "label": "刷新时间",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "type": "ShopCard",
+      "refreshTimeList": "8;12;21"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

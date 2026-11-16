@@ -1,0 +1,5 @@
+﻿id	表名	名字	中文名字	效果字段	描述	中文描述
+id	table	name	chinesename	field	des	chinese
+guild	buildingguild	$GUILD	联盟	memberCount	$build_01	升级联盟可以提高联盟人数上限。
+donation	buildingdonation	$CENTER	捐赠中心	Boxclass	$build_02	升级捐赠中心可以提升联盟宝箱等级。
+						

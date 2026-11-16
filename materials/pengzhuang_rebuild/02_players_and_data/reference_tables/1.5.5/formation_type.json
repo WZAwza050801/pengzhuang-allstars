@@ -1,0 +1,235 @@
+{
+  "version": "1.5.5",
+  "table": "formation_type",
+  "source_path": "assets/res/raw-assets/resources/data/formation_type.txt",
+  "source_sha256": "1a17677fab7e1ae2b8394ea9bb34ec86771f173718d17581cb74aacd03a917e2",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "阵型ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "formationName",
+      "original_key": "formationName",
+      "label": "阵型名字",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "formationIcon",
+      "original_key": "formationIcon",
+      "label": "阵型图标",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "reqLevel",
+      "original_key": "reqLevel",
+      "label": "开启所需等级",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "needMoney",
+      "original_key": "needMoney",
+      "label": "开启金币花费",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "needCrystal",
+      "original_key": "needCrystal",
+      "label": "开启钻石花费",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "soccerPos0",
+      "original_key": "soccerPos0",
+      "label": "球员1位置(区域;x:y)",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "soccerPos1",
+      "original_key": "soccerPos1",
+      "label": "球员2位置(区域;x:y)",
+      "included": true
+    },
+    {
+      "index": 9,
+      "key": "soccerPos2",
+      "original_key": "soccerPos2",
+      "label": "球员3位置(区域;x:y)",
+      "included": true
+    },
+    {
+      "index": 10,
+      "key": "soccerPos3",
+      "original_key": "soccerPos3",
+      "label": "球员4位置(区域;x:y)",
+      "included": true
+    },
+    {
+      "index": 11,
+      "key": "soccerPos4",
+      "original_key": "soccerPos4",
+      "label": "球员5位置(区域;x:y)",
+      "included": true
+    },
+    {
+      "index": 12,
+      "key": "isPlayerUse",
+      "original_key": "isPlayerUse",
+      "label": "玩家可用阵型",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "10001",
+      "formationName": "2_2_1(A)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "1",
+      "needMoney": "1000",
+      "needCrystal": "0",
+      "soccerPos0": "ST;35:50",
+      "soccerPos1": "ST;65:50",
+      "soccerPos2": "CM;20:50",
+      "soccerPos3": "CM;80:50",
+      "soccerPos4": "DC;50:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10002",
+      "formationName": "1_2_2(A)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "2",
+      "needMoney": "2000",
+      "needCrystal": "0",
+      "soccerPos0": "ST;50:50",
+      "soccerPos1": "CM;30:50",
+      "soccerPos2": "CM;70:50",
+      "soccerPos3": "DC;10:50",
+      "soccerPos4": "DC;90:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10003",
+      "formationName": "2_2_1(W)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "3",
+      "needMoney": "4000",
+      "needCrystal": "0",
+      "soccerPos0": "ST;10:50",
+      "soccerPos1": "ST;90:50",
+      "soccerPos2": "CM;30:50",
+      "soccerPos3": "CM;70:50",
+      "soccerPos4": "DC;50:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10004",
+      "formationName": "1_2_2(S)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "4",
+      "needMoney": "8000",
+      "needCrystal": "0",
+      "soccerPos0": "ST;50:50",
+      "soccerPos1": "CM;20:50",
+      "soccerPos2": "CM;80:50",
+      "soccerPos3": "DC;35:50",
+      "soccerPos4": "DC;65:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10005",
+      "formationName": "2_2_1(S)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "5",
+      "needMoney": "9500",
+      "needCrystal": "0",
+      "soccerPos0": "ST;33:50",
+      "soccerPos1": "ST;67:50",
+      "soccerPos2": "CM;33:50",
+      "soccerPos3": "CM;67:50",
+      "soccerPos4": "DC;50:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10006",
+      "formationName": "2_1_2(W)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "6",
+      "needMoney": "11800",
+      "needCrystal": "0",
+      "soccerPos0": "ST;10:50",
+      "soccerPos1": "ST;90:50",
+      "soccerPos2": "CM;50:50",
+      "soccerPos3": "DC;30:50",
+      "soccerPos4": "DC;70:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10007",
+      "formationName": "3_1_1(A)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "7",
+      "needMoney": "14100",
+      "needCrystal": "0",
+      "soccerPos0": "ST;10:50",
+      "soccerPos1": "ST;50:50",
+      "soccerPos2": "ST;90:50",
+      "soccerPos3": "CM;50:50",
+      "soccerPos4": "DC;50:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10008",
+      "formationName": "1_1_3(D)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "8",
+      "needMoney": "16400",
+      "needCrystal": "0",
+      "soccerPos0": "ST;50:50",
+      "soccerPos1": "CM;50:50",
+      "soccerPos2": "DC;10:50",
+      "soccerPos3": "DC;50:50",
+      "soccerPos4": "DC;90:50",
+      "isPlayerUse": "1"
+    },
+    {
+      "id": "10009",
+      "formationName": "1_3_1(S)",
+      "formationIcon": "Btn_Icon_03",
+      "reqLevel": "9",
+      "needMoney": "18700",
+      "needCrystal": "0",
+      "soccerPos0": "ST;50:50",
+      "soccerPos1": "CM;10:50",
+      "soccerPos2": "CM;50:50",
+      "soccerPos3": "CM;90:50",
+      "soccerPos4": "DC;50:50",
+      "isPlayerUse": "1"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

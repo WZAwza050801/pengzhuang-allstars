@@ -1,0 +1,5 @@
+﻿ID	消耗物品ID	消耗数量	兑换的卡牌	兑换的卡牌数量	最大兑换限制
+id	costItemID	costNum	itemID	itemNum	maxBuyLimit
+1	4	45	90002	1	1
+2	4	80	50	1	1
+3	4	45	90003	1	1

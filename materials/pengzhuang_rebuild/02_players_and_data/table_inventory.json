@@ -1,0 +1,1062 @@
+[
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "source_path": "assets/res/raw-assets/resources/data/achievement_type.txt",
+    "source_sha256": "35b2a58a98091982c19cc47b08d3cced005feee882c3fb87c6970b575f53d4bc",
+    "rows": 13,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "source_path": "assets/res/raw-assets/resources/data/box.txt",
+    "source_sha256": "2d6d1acb935b4d462570f07df8e9b223481456f2efb8f5d1ac7970e52eb26330",
+    "rows": 50,
+    "source_fields": 23,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxLib",
+    "source_path": "assets/res/raw-assets/resources/data/boxLib.txt",
+    "source_sha256": "2bc7a17d96bd0677e8ae504931f1c89df41e69a62553f836bb724519aa57777f",
+    "rows": 10,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "source_path": "assets/res/raw-assets/resources/data/box_new.txt",
+    "source_sha256": "dede226298815b37b4ac6c2d2d88c2d60308e78063c2d1b5a27934be01b05054",
+    "rows": 15,
+    "source_fields": 16,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrare",
+    "source_path": "assets/res/raw-assets/resources/data/boxrare.txt",
+    "source_sha256": "40b3a38b95496f828630142684018315389f82c5bea474492fd6469d3c2f44e4",
+    "rows": 20,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrareadd",
+    "source_path": "assets/res/raw-assets/resources/data/boxrareadd.txt",
+    "source_sha256": "db4f40de59b8eaafe50cae191fc631000424bf8830387dd2054c328cd0b269a1",
+    "rows": 100,
+    "source_fields": 5,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingguild",
+    "source_path": "assets/res/raw-assets/resources/data/buildingguild.txt",
+    "source_sha256": "c211d9841a6c00672bf8dbf64434964589fdc4533caa2a2e3f6d28b745f89f88",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingstore",
+    "source_path": "assets/res/raw-assets/resources/data/buildingstore.txt",
+    "source_sha256": "ac634d0d4ebb900e2805f931e2acadbc1194e0eb73078827eb0b2a1a1caed83c",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtraining",
+    "source_path": "assets/res/raw-assets/resources/data/buildingtraining.txt",
+    "source_sha256": "d7628a07e837447f00e854981b31235953a9afecc423c0ea8d4df44b66ec62dd",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtype",
+    "source_path": "assets/res/raw-assets/resources/data/buildingtype.txt",
+    "source_sha256": "9356da3e2683ba01a63585ea9de6d8b0f99b43c4b2c19a6c52ba7930056dd846",
+    "rows": 1,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "source_path": "assets/res/raw-assets/resources/data/card.txt",
+    "source_sha256": "69e22ee3181f65cd63c246247365833f1faf456384d39128fa4b98685d547966",
+    "rows": 87,
+    "source_fields": 23,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "source_path": "assets/res/raw-assets/resources/data/card_attr.txt",
+    "source_sha256": "368f23f9244da4000d0838ebfbe668d775469399da88fd7500f78870d7e44e0f",
+    "rows": 880,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "carddailylimit",
+    "source_path": "assets/res/raw-assets/resources/data/carddailylimit.txt",
+    "source_sha256": "08feb0ad6c2224473f18f57fab25d891ccc8aa3eec83e147c6a5a98ad67fc8d6",
+    "rows": 5,
+    "source_fields": 2,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "source_path": "assets/res/raw-assets/resources/data/cardlevel.txt",
+    "source_sha256": "83266f93c7b6cdbd074a476dbc68b7254c4bd2784076496fd0517727bfdcc8b7",
+    "rows": 12,
+    "source_fields": 19,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "country",
+    "source_path": "assets/res/raw-assets/resources/data/country.txt",
+    "source_sha256": "14e35dae6caaebb3ec7b8297d4845f7d5017da0170f19d8b695c53a471c33492",
+    "rows": 195,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "source_path": "assets/res/raw-assets/resources/data/cupMatchReward.txt",
+    "source_sha256": "553f56b70f507146f312f318ad6ee6408b89ca1d988049efdd4afa7360ca5d8b",
+    "rows": 19,
+    "source_fields": 7,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyplayerrefresh",
+    "source_path": "assets/res/raw-assets/resources/data/dailyplayerrefresh.txt",
+    "source_sha256": "5d78bd483fa71e21c4fdf96293be286ebfb1d966ac7ad471cc20c5f81780b908",
+    "rows": 3,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "source_path": "assets/res/raw-assets/resources/data/dailyworldrefresh.txt",
+    "source_sha256": "427025283e2e26172e2e4c329590900959a4226257c9a0d6214c322e07f2ea9a",
+    "rows": 3,
+    "source_fields": 7,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "decompose",
+    "source_path": "assets/res/raw-assets/resources/data/decompose.txt",
+    "source_sha256": "17671474d864b2cd21fd6a62921da0d341202326f044bfd4232763b414aad491",
+    "rows": 6,
+    "source_fields": 2,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "factor",
+    "source_path": "assets/res/raw-assets/resources/data/factor.txt",
+    "source_sha256": "e26562970b802136aaf590b3f783fafb01c28fad629f9e24cecdb2eede2d03bf",
+    "rows": 43,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "source_path": "assets/res/raw-assets/resources/data/formation_type.txt",
+    "source_sha256": "4744be05809387ffa905d453e47533e33ed6eb98c97228ac201ac2e7618a60e6",
+    "rows": 9,
+    "source_fields": 11,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "freedraw",
+    "source_path": "assets/res/raw-assets/resources/data/freedraw.txt",
+    "source_sha256": "959f02e606071936fb3aec7b8199340ef8820daf3364f3c6e9dc3b451b1660f1",
+    "rows": 3,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "guild_center",
+    "source_path": "assets/res/raw-assets/resources/data/guild_center.txt",
+    "source_sha256": "e5707a5e338314dc4fa534e9d6816700f626c42ed7dc9f786a02310c4a7fcb0c",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildhelp",
+    "source_path": "assets/res/raw-assets/resources/data/guildhelp.txt",
+    "source_sha256": "fdbfca83c11b551588c1ba15777358aac6fe4115ff627f5f73807de2bdfd6081",
+    "rows": 3,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "source_path": "assets/res/raw-assets/resources/data/guildjob.txt",
+    "source_sha256": "cb916f988a19616ab9a45e5aa381354412dc31b76d0acba6c9b0cd384f8b6f21",
+    "rows": 5,
+    "source_fields": 8,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "source_path": "assets/res/raw-assets/resources/data/initplayer.txt",
+    "source_sha256": "a16c3322584aca030887ae6c8b640a24c05619d780130866a0ac7450bf5a8608",
+    "rows": 1,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "item",
+    "source_path": "assets/res/raw-assets/resources/data/item.txt",
+    "source_sha256": "ed3ad2e8c405a664f01ac80d2846909a16eb10f7712ddfc2847d68a3131b7993",
+    "rows": 119,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "keywords",
+    "source_path": "assets/res/raw-assets/resources/data/keywords.txt",
+    "source_sha256": "1f706f7e0e75d67afe6d337bbc0d309fa5ace16c57daa480d39ed559d65ef47c",
+    "rows": 2989,
+    "source_fields": 2,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "source_path": "assets/res/raw-assets/resources/data/league_match.txt",
+    "source_sha256": "2dfbb6fedbad77a126c64cd3aee4be014791286819597c8cfb6be0e165299031",
+    "rows": 5,
+    "source_fields": 10,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "mail",
+    "source_path": "assets/res/raw-assets/resources/data/mail.txt",
+    "source_sha256": "541253ca6dfd2db00754aa2b03978e6b6818ef2135eb43151e6512938956e28a",
+    "rows": 49,
+    "source_fields": 8,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "notice",
+    "source_path": "assets/res/raw-assets/resources/data/notice.txt",
+    "source_sha256": "a60712e5ea4ed2c536eaac91d426009b6d1ddad7fb4b78b4833e4b3f81ff37fb",
+    "rows": 4,
+    "source_fields": 2,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "playerlevel",
+    "source_path": "assets/res/raw-assets/resources/data/playerlevel.txt",
+    "source_sha256": "ef4c58814e115652f46d03b38255c5c233935c693d565862b67faec6c8f4a498",
+    "rows": 10,
+    "source_fields": 2,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "prize",
+    "source_path": "assets/res/raw-assets/resources/data/prize.txt",
+    "source_sha256": "f44e400c07109924d3d74d18628fa7044dc9520ba499076e69b22ba0fd409f02",
+    "rows": 9,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "random_name",
+    "source_path": "assets/res/raw-assets/resources/data/random_name.txt",
+    "source_sha256": "63d7609c25dba365f10feedc82e4e659c89dad22dece256847910e67669b6a81",
+    "rows": 261,
+    "source_fields": 4,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "random_name_en",
+    "source_path": "assets/res/raw-assets/resources/data/random_name_en.txt",
+    "source_sha256": "351c2892f0ab86795683b13ea74fbac0bb1c20eb06bc6b95dc82dafcb72a19ce",
+    "rows": 261,
+    "source_fields": 4,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "random_name_zh",
+    "source_path": "assets/res/raw-assets/resources/data/random_name_zh.txt",
+    "source_sha256": "63d7609c25dba365f10feedc82e4e659c89dad22dece256847910e67669b6a81",
+    "rows": 261,
+    "source_fields": 4,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "source_path": "assets/res/raw-assets/resources/data/recharge.txt",
+    "source_sha256": "3ae82e7e8e011fcdf44ec3ea5c7d0fe9c5f0d52ac7e6fcc3ee06e9c141c2f5cc",
+    "rows": 7,
+    "source_fields": 8,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "refresh_cfg",
+    "source_path": "assets/res/raw-assets/resources/data/refresh_cfg.txt",
+    "source_sha256": "3dc5cc377163a2a2bc8dce23a89d03939f854509f780b16385cbac13959e97b2",
+    "rows": 1,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "reward",
+    "source_path": "assets/res/raw-assets/resources/data/reward.txt",
+    "source_sha256": "001ea7330d79cc5caf5e76c5f78afc410c80085a0c0f7b4d138f42e43407de6b",
+    "rows": 49,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "season_award",
+    "source_path": "assets/res/raw-assets/resources/data/season_award.txt",
+    "source_sha256": "c592409500635ed12e955b0421c1382df6dc406ec57fee89f156114cceba7814",
+    "rows": 48,
+    "source_fields": 5,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "sharestore",
+    "source_path": "assets/res/raw-assets/resources/data/sharestore.txt",
+    "source_sha256": "f7e4bde8af4729811f74d0631e671f3f418eee0add3c0a6aca3909a333d614d4",
+    "rows": 2,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_contract",
+    "source_path": "assets/res/raw-assets/resources/data/shop_contract.txt",
+    "source_sha256": "1e9ee00356b28c65acef7e958e12d87c1830594e0443bf831ebf27907c4f075c",
+    "rows": 3,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_gold",
+    "source_path": "assets/res/raw-assets/resources/data/shop_gold.txt",
+    "source_sha256": "b7229db93958e8cf12de32c66cd1012f0fc57d986be993ae7783ead1825ebaed",
+    "rows": 3,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "source_path": "assets/res/raw-assets/resources/data/skill.txt",
+    "source_sha256": "5e5e08e81bccf960a18c4e9e3bd5b62a0d6414d770194b6b8c77e41ee84244bf",
+    "rows": 214,
+    "source_fields": 27,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "source_path": "assets/res/raw-assets/resources/data/team_badge.txt",
+    "source_sha256": "95063503000278b305217d0780300fd6f670350c66f72bc2cb92f51fcaaca094",
+    "rows": 63,
+    "source_fields": 7,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "timergift",
+    "source_path": "assets/res/raw-assets/resources/data/timergift.txt",
+    "source_sha256": "e6b1ec29ea80823a60798a95f0fc505964926629550480a4381b9448cc8295a2",
+    "rows": 2,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.2.0",
+    "table": "tip",
+    "source_path": "assets/res/raw-assets/resources/data/tip.txt",
+    "source_sha256": "5b9b9f7724990685ea67b80304a8070d3b0985ca960d8a692ef61e791d064701",
+    "rows": 19,
+    "source_fields": 3,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.k73.com/down/android/241006.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "source_path": "assets/res/raw-assets/resources/data/achievement_type.txt",
+    "source_sha256": "12d9e6a8d56f9073dc408532a3df32c201ef8053761c96f9b571c30a54fe4277",
+    "rows": 14,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "source_path": "assets/res/raw-assets/resources/data/activity.txt",
+    "source_sha256": "b0834c3d8aff0213db462716e722815a6eba758c64c05449dc44a97c0d7db776",
+    "rows": 4,
+    "source_fields": 8,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "advert_award",
+    "source_path": "assets/res/raw-assets/resources/data/advert_award.txt",
+    "source_sha256": "b32e9d5a7bd6a8e833c931d7de9ff0d2525311fd4fcbad21964c037e552d9fb1",
+    "rows": 4,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "source_path": "assets/res/raw-assets/resources/data/animation.txt",
+    "source_sha256": "abf1461050065ed5ad0a27928429750dc4d4fb20254e0f458544ecda9e1c3906",
+    "rows": 12,
+    "source_fields": 8,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "source_path": "assets/res/raw-assets/resources/data/box.txt",
+    "source_sha256": "590f33cc18c42e5c03fb9b2bf934feb7f7486d60f7b33befe7f9e20e2fd3a8e0",
+    "rows": 50,
+    "source_fields": 23,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxLib",
+    "source_path": "assets/res/raw-assets/resources/data/boxLib.txt",
+    "source_sha256": "f7dc06fe1a9219664b9d5b10e4e2fc695cf59d1168fa41cee9efd2c9e1cd2c94",
+    "rows": 10,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "source_path": "assets/res/raw-assets/resources/data/box_new.txt",
+    "source_sha256": "d93cab53e710d9195bdd393e7d452a531b9d12d906c3077c1d36fe210231fd3e",
+    "rows": 16,
+    "source_fields": 16,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrare",
+    "source_path": "assets/res/raw-assets/resources/data/boxrare.txt",
+    "source_sha256": "30c44dd80b4e6264ab67b03d642a00b79e9cf8b498547bba7156afac72eaf8ac",
+    "rows": 20,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrareadd",
+    "source_path": "assets/res/raw-assets/resources/data/boxrareadd.txt",
+    "source_sha256": "d3fd8ddb2e8ffe2019cc6e061fae309ce6d3f39dd319d568fe6e93cf4cc4c68b",
+    "rows": 100,
+    "source_fields": 5,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingdonation",
+    "source_path": "assets/res/raw-assets/resources/data/buildingdonation.txt",
+    "source_sha256": "ea743cf29c81ca754e22536bd3e48d576d6e4ec73085e7592e5ab9881a4b0c95",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingguild",
+    "source_path": "assets/res/raw-assets/resources/data/buildingguild.txt",
+    "source_sha256": "62b73a19d9068dca8c75866a6233848abf8bde87bbedcf3beb12912aa11e2c5d",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingstore",
+    "source_path": "assets/res/raw-assets/resources/data/buildingstore.txt",
+    "source_sha256": "d67261fa246f3acfc832ce2674787aa6325a9fa98a732146ae218e226c272003",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtraining",
+    "source_path": "assets/res/raw-assets/resources/data/buildingtraining.txt",
+    "source_sha256": "2ce652e4285ce92ee054afe751163b47a362ca4f36fa290fdeaff8c1c65e4ace",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "source_path": "assets/res/raw-assets/resources/data/buildingtype.txt",
+    "source_sha256": "31fe5788258161c6794aa8220330310bba2717c4de825cca87969b99ae85cbe4",
+    "rows": 3,
+    "source_fields": 7,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "source_path": "assets/res/raw-assets/resources/data/card.txt",
+    "source_sha256": "835d122cc936b87fabf7129ab6a5cb4046413ff534380af57ab70faac80d9482",
+    "rows": 137,
+    "source_fields": 31,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "source_path": "assets/res/raw-assets/resources/data/card_attr.txt",
+    "source_sha256": "389c235c650d4dc88ea0297353755c9f1583d27f46dfec4e74bdb9c3c23eba1f",
+    "rows": 1370,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "carddailylimit",
+    "source_path": "assets/res/raw-assets/resources/data/carddailylimit.txt",
+    "source_sha256": "0d172a7f24a8b56b32ce8ed95055356c4fe2569968b2bcc24789dc5f7ac7140b",
+    "rows": 5,
+    "source_fields": 2,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "source_path": "assets/res/raw-assets/resources/data/cardlevel.txt",
+    "source_sha256": "9199991b62c0086c2e92ce78d0592559c8e419b8b05e1046529ae0f02480487a",
+    "rows": 12,
+    "source_fields": 19,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "championsrank_award",
+    "source_path": "assets/res/raw-assets/resources/data/championsrank_award.txt",
+    "source_sha256": "684c956547868f406c7d09586fe9ef8b91d3a8951ff00818a9c5c04f5182e77e",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "country",
+    "source_path": "assets/res/raw-assets/resources/data/country.txt",
+    "source_sha256": "791adb5266359a66e9380073f2f6c0a290add503d1cec10b7b8fbe4e7883b582",
+    "rows": 195,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "cupMatchReward",
+    "source_path": "assets/res/raw-assets/resources/data/cupMatchReward.txt",
+    "source_sha256": "848c2350d53b1006457137dd310662164705f5f371429e236044df09e1fef1a7",
+    "rows": 19,
+    "source_fields": 5,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyplayerrefresh",
+    "source_path": "assets/res/raw-assets/resources/data/dailyplayerrefresh.txt",
+    "source_sha256": "0c44d3e2021362721e2c56d220d3b100eb2988c6e4154fd8c5af2ba3d9e965c0",
+    "rows": 3,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "source_path": "assets/res/raw-assets/resources/data/dailyworldrefresh.txt",
+    "source_sha256": "4ad11784caaad4915f718ad188c9cd0b1e52536813331a0857d92371fc8646ff",
+    "rows": 3,
+    "source_fields": 7,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "decompose",
+    "source_path": "assets/res/raw-assets/resources/data/decompose.txt",
+    "source_sha256": "5cfff66c2a1fd59d6ea5ffc3d68c1914e3201e8619082dad444cd8cb2f0ade30",
+    "rows": 6,
+    "source_fields": 2,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "dialog",
+    "source_path": "assets/res/raw-assets/resources/data/dialog.txt",
+    "source_sha256": "199fea6bb7f0d0ff877c2dd1cbf3070ea8428d3224a7de1e86ba843b5b3d73db",
+    "rows": 15,
+    "source_fields": 3,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "source_path": "assets/res/raw-assets/resources/data/donation_box.txt",
+    "source_sha256": "481bc61c93baa062e1b758da11d7a226496bf54f308e0b592f3ac4ceb9d01088",
+    "rows": 5,
+    "source_fields": 12,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "factor",
+    "source_path": "assets/res/raw-assets/resources/data/factor.txt",
+    "source_sha256": "84528ecfeecace56c6b97537470fb8eca865a5366aa70fed58597a01f1b9cfe0",
+    "rows": 67,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "source_path": "assets/res/raw-assets/resources/data/formation_training.txt",
+    "source_sha256": "f1ed5d93e29a7d094139ee78e7103f438aa488989fecd451470ada698e59131f",
+    "rows": 72,
+    "source_fields": 7,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "source_path": "assets/res/raw-assets/resources/data/formation_type.txt",
+    "source_sha256": "1a17677fab7e1ae2b8394ea9bb34ec86771f173718d17581cb74aacd03a917e2",
+    "rows": 9,
+    "source_fields": 12,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "freedraw",
+    "source_path": "assets/res/raw-assets/resources/data/freedraw.txt",
+    "source_sha256": "0d356c99417ce8de72bd8fa5f7db7263b3b2273e7c5c9dbd191f82c2dd9ba3bd",
+    "rows": 3,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "guild_center",
+    "source_path": "assets/res/raw-assets/resources/data/guild_center.txt",
+    "source_sha256": "edc41ba33ae98192a97aaa7fb889a0c7b6b56fbf0f96f6e1205ea68f7bee7c02",
+    "rows": 5,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildhelp",
+    "source_path": "assets/res/raw-assets/resources/data/guildhelp.txt",
+    "source_sha256": "ddf848f27fa76fd0c61a0a99282f52547f4ec40b68b1ab42be97e187e9f40a82",
+    "rows": 3,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "source_path": "assets/res/raw-assets/resources/data/guildjob.txt",
+    "source_sha256": "f89049fae5b2c4f60509260e98528239aa70f012f13e52da08e21a510aa709fd",
+    "rows": 5,
+    "source_fields": 8,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "source_path": "assets/res/raw-assets/resources/data/initplayer.txt",
+    "source_sha256": "149925d7d95cbfda93492cfe3dadf5aabe97cffbe29ab8f9d849da768e47ba54",
+    "rows": 1,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "source_path": "assets/res/raw-assets/resources/data/item.txt",
+    "source_sha256": "0440c999d36835bf147531309385fe658fb0b1e8918a0313716d7ba83fb575f7",
+    "rows": 184,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "keywords",
+    "source_path": "assets/res/raw-assets/resources/data/keywords.txt",
+    "source_sha256": "b071b468b9af6afc5ee9b4d1a9ccaa71f72b885437c0c533a0716ce2dc6d98be",
+    "rows": 2977,
+    "source_fields": 2,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "source_path": "assets/res/raw-assets/resources/data/league_match.txt",
+    "source_sha256": "4fcf09d64cf61e74de06ec6721fe42d6d2cf558b9147d6f4ce3663b3a79c866d",
+    "rows": 5,
+    "source_fields": 10,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "source_path": "assets/res/raw-assets/resources/data/level.txt",
+    "source_sha256": "74f3a0fa1984d9d985276c8fddce04bce9681cd3123984f2d85af2f9ffb3f6ac",
+    "rows": 12,
+    "source_fields": 10,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "levelCondition",
+    "source_path": "assets/res/raw-assets/resources/data/levelCondition.txt",
+    "source_sha256": "4a7039615b98f6b8468561fa301b86d1e26b74b2f3f0b25b9dc556e37a4d7dc0",
+    "rows": 36,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "mail",
+    "source_path": "assets/res/raw-assets/resources/data/mail.txt",
+    "source_sha256": "a6455fe3c7501fa1fa645c3cd765b4f4c2e66a41437351edbac174512cbaa994",
+    "rows": 39,
+    "source_fields": 8,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "notice",
+    "source_path": "assets/res/raw-assets/resources/data/notice.txt",
+    "source_sha256": "d0b19879e599a4a9dd77be6aa19cf32b5fef04b2c795a00006f35701e563c7ae",
+    "rows": 4,
+    "source_fields": 2,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "playerlevel",
+    "source_path": "assets/res/raw-assets/resources/data/playerlevel.txt",
+    "source_sha256": "e090f883075d573061019c646bb2bafb870fa9defa237adc9e0d29ad76cede3a",
+    "rows": 10,
+    "source_fields": 2,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "prize",
+    "source_path": "assets/res/raw-assets/resources/data/prize.txt",
+    "source_sha256": "91dea4266626dc96dc2817e1ee7c5d1ce441fbd544f163bee5fd61d0d1f222c3",
+    "rows": 12,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "random_name_en",
+    "source_path": "assets/res/raw-assets/resources/data/random_name_en.txt",
+    "source_sha256": "43556769e6e52dd7232399e66190dd855a14b23b8664c32446e7b5ec1e7a0d42",
+    "rows": 261,
+    "source_fields": 4,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "random_name_zh",
+    "source_path": "assets/res/raw-assets/resources/data/random_name_zh.txt",
+    "source_sha256": "fe616bde14c490582202c4e8267a235e7d347bcb82cedc03f612f44e5782a6af",
+    "rows": 261,
+    "source_fields": 4,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "rankpunish",
+    "source_path": "assets/res/raw-assets/resources/data/rankpunish.txt",
+    "source_sha256": "125988080c8155ff9f4789243d549f08ad5a3eee17608a8ffbe39fcea6ae0a7b",
+    "rows": 43,
+    "source_fields": 2,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "source_path": "assets/res/raw-assets/resources/data/recharge.txt",
+    "source_sha256": "0626556b4f1b82c80ce1e33811e7853c5b05780638419ef6e3d8cf03bbec4984",
+    "rows": 17,
+    "source_fields": 8,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "refresh_cfg",
+    "source_path": "assets/res/raw-assets/resources/data/refresh_cfg.txt",
+    "source_sha256": "38840579b7e17ba564a3cb750bcee35397d7777cd8ed7b87870048e6dc8406c6",
+    "rows": 1,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "reward",
+    "source_path": "assets/res/raw-assets/resources/data/reward.txt",
+    "source_sha256": "62e2f5f1777f1fd13dae5a202e0e860f45fe0038df738a46b1546b7085345b09",
+    "rows": 77,
+    "source_fields": 3,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "season_award",
+    "source_path": "assets/res/raw-assets/resources/data/season_award.txt",
+    "source_sha256": "d45c58c7ffd9a2a3443b17a7933ee646326745ba058125ea7163f95bb5fd0c22",
+    "rows": 24,
+    "source_fields": 5,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "sharestore",
+    "source_path": "assets/res/raw-assets/resources/data/sharestore.txt",
+    "source_sha256": "8f184a8c71a376420bc7512345534d1b863d6eb56d4cf5c903874eaf4fbfb3b6",
+    "rows": 3,
+    "source_fields": 6,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_contract",
+    "source_path": "assets/res/raw-assets/resources/data/shop_contract.txt",
+    "source_sha256": "35f6833ddf79b2d33b299be79081b757e6f09cf986eb60c44aed6723930e7f3c",
+    "rows": 3,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_gold",
+    "source_path": "assets/res/raw-assets/resources/data/shop_gold.txt",
+    "source_sha256": "b296943613c1978d78923a5e87a8256d82c4717b6e4af1e30f36f317361b800e",
+    "rows": 3,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "source_path": "assets/res/raw-assets/resources/data/skill.txt",
+    "source_sha256": "711d703022c6eaf8b5f84ca83327f12f477d5e3bd8f6713de311183e3d2afae7",
+    "rows": 297,
+    "source_fields": 27,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "source_path": "assets/res/raw-assets/resources/data/team_badge.txt",
+    "source_sha256": "0c27d79cf7e2750fa053240b00ba58042c5c9d0f4acb553b49026b1eb103b842",
+    "rows": 65,
+    "source_fields": 7,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "timergift",
+    "source_path": "assets/res/raw-assets/resources/data/timergift.txt",
+    "source_sha256": "23b29194eaad8f49fcdb0849305bb9abda657ca21a9c3d13208998e80d87dde6",
+    "rows": 2,
+    "source_fields": 4,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "tip",
+    "source_path": "assets/res/raw-assets/resources/data/tip.txt",
+    "source_sha256": "1e03a2006eedeae7f424bdede3b215bbdb9975cdf69a8781e237831bbc50a874",
+    "rows": 22,
+    "source_fields": 3,
+    "status": "未纳入：文本词库或消息文案",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "source_path": "assets/res/raw-assets/resources/data/trainingChapter.txt",
+    "source_sha256": "eb4b13c29f488cba3428dcf79d39e6ad4bebe47bc42f4418d4a7ae2c1a8b12f8",
+    "rows": 4,
+    "source_fields": 9,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "source_path": "assets/res/raw-assets/resources/data/trainingLevel.txt",
+    "source_sha256": "b8c3e3a071dbb07816ab66de46beb573246d9f657b82c2bca6d918b5322d1997",
+    "rows": 12,
+    "source_fields": 17,
+    "status": "已纳入",
+    "source_url": "https://www.qt6.com/apk/75837.html"
+  }
+]

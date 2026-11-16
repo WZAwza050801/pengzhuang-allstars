@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "复刻体验目标草案，未执行校准；不是原版测量值",
+  "length_unit": "L=选定球场的有效长边；实现换算到独立世界单位u",
+  "fixed_step_hz_starting_point": 120,
+  "snapshot_hz_starting_point": 20,
+  "seed": 52016,
+  "minimum_regression_shots": 200,
+  "reference_conditions": "同一基准棋子、无碰撞、无技能、无随机状态、初始静止；距离取停止时的总路程，不是端点位移",
+  "targets": [
+    {
+      "id": "free_025",
+      "power01": 0.25,
+      "travel_L_min": 0.15,
+      "travel_L_max": 0.25
+    },
+    {
+      "id": "free_050",
+      "power01": 0.5,
+      "travel_L_min": 0.35,
+      "travel_L_max": 0.5
+    },
+    {
+      "id": "free_100",
+      "power01": 1.0,
+      "travel_L_min": 0.8,
+      "travel_L_max": 1.0,
+      "settle_seconds_min": 2,
+      "settle_seconds_max": 3
+    }
+  ],
+  "notes": [
+    "空场目标在足够大的无边界测试世界测量，避免满力碰墙改变口径。",
+    "这些区间用于开发第一轮手感；后续录到原版视频后以有来源的测量目标替换。",
+    "恢复系数、质量映射、门柱与弧线目标暂不伪造数值，由AI提出可解释候选并报告。",
+    "显示帧率变化不得修改模拟步长。跨运行环境不假定浮点结果逐位一致，以服务器为准。"
+  ]
+}

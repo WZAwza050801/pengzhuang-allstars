@@ -1,0 +1,5 @@
+﻿itemId	消费类型	消费数值	购买获得金币数量
+id	costType	cost	gold
+12	Crystal	60	1000
+13	Crystal	500	10000
+14	Crystal	4500	100000

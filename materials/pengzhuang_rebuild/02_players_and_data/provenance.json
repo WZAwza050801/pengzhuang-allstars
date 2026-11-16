@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-11-14",
+  "method": "只读取公开下载文件内的明文数据和 PNG 图集，没有运行安装包。",
+  "sources": [
+    {
+      "version": "1.2.0",
+      "android_manifest": {
+        "versionCode": 2016111501,
+        "versionName": "1.2.0",
+        "installLocation": 0,
+        "package": "com.tencent.tmgp.mjyybsoccer",
+        "platformBuildVersionCode": "19",
+        "platformBuildVersionName": "4.4.2-1456859"
+      },
+      "source_page": "https://www.k73.com/down/android/241006.html",
+      "source_page_claim": "1.5.2（与实际文件内部版本不同）",
+      "download_url": "https://k.197947.com/kdx3/android/k73.com_pzqmx.apk",
+      "size_bytes": 44506458,
+      "md5": "0ecc07e4d9172422d4dbfbe088ce18b4",
+      "sha256": "4a9860a41bab38eef3598bf9057926580c6e765658257f3ca718dee7f9df1607",
+      "card_count": 87,
+      "portrait_count": 87
+    },
+    {
+      "version": "1.5.5",
+      "android_manifest": {
+        "versionCode": 2017110302,
+        "versionName": "1.5.5",
+        "installLocation": 0,
+        "package": "com.mechanist.soccer",
+        "platformBuildVersionCode": "23",
+        "platformBuildVersionName": "6.0-2704002"
+      },
+      "source_page": "https://www.qt6.com/apk/75837.html",
+      "source_page_claim": "1.5.5；页面更新时间 2018-11-13 不作为程序发布时间",
+      "download_url": "https://qt6.rxftw.com/dl2/apk/com.soccer.apk",
+      "size_bytes": 49924641,
+      "md5": "1c9b425c2d38ce858f9553f4a315dfd7",
+      "sha256": "747ea5b143636ee5849b6f06169fc0a149a93f9ef39a3f0f94341f27c56467ce",
+      "card_count": 137,
+      "portrait_count": 106
+    }
+  ],
+  "limits": [
+    "这两份文件来自第三方镜像；记录了实际包名、版本和校验值。",
+    "对应文件内的数据和素材，不保证囊括所有热更新、服务端配置、渠道及停服前最终版本。",
+    "真实中文名保留原表写法；英文名主要由字段键规范化，有需要时应对照人物照片。",
+    "个别早期头像与后期卡表搭配时，参考版本已单独记录。"
+  ]
+}

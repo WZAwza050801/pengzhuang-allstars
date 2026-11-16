@@ -1,0 +1,79 @@
+{
+  "version": "1.5.5",
+  "table": "buildingstore",
+  "source_path": "assets/res/raw-assets/resources/data/buildingstore.txt",
+  "source_sha256": "d67261fa246f3acfc832ce2674787aa6325a9fa98a732146ae218e226c272003",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "id",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "exp",
+      "original_key": "exp",
+      "label": "升级所需经验",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "store",
+      "original_key": "store",
+      "label": "效果",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "icon",
+      "original_key": "icon",
+      "label": "icon",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "exp": "2500",
+      "store": "0",
+      "icon": "Icon_02"
+    },
+    {
+      "id": "2",
+      "exp": "8250",
+      "store": "3",
+      "icon": "Icon_02"
+    },
+    {
+      "id": "3",
+      "exp": "24000",
+      "store": "6",
+      "icon": "Icon_02"
+    },
+    {
+      "id": "4",
+      "exp": "26000",
+      "store": "9",
+      "icon": "Icon_02"
+    },
+    {
+      "id": "5",
+      "exp": "0",
+      "store": "12",
+      "icon": "Icon_02"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

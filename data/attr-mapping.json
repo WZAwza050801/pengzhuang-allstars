@@ -1,0 +1,14 @@
+{
+  "version": "attrmap-1",
+  "note": "属性点 → 物理倍率（T4-a）。不是单位换算：weight 不是 kg，power 不是 N，radian 不是角度也不是弧度，precision 不是命中率。做法：属性点按 [attrMin, attrMax] 线性归一到 0–1，再在对应倍率区间内线性插值。",
+  "attrMin": 21,
+  "attrMax": 119,
+  "domainSource": "measured：data/levels.json 全部 2250 行（level_records.json，1.2.0 + 1.5.5）× 5 项属性的最小值 21、最大值 119。tools/import-levels.ts 断言每一行都落在区间内，所以任何卡、任何等级都不会被截断（旧的 40–99 会让 Lv1 低值和 Lv10 高值饱和，等级差异被抹掉）。",
+  "fromAttr": { "massMul": "weight", "speedMul": "power", "curveMul": "radian", "aimAssist": "precision", "condition": "mind" },
+  "massMul": [0.85, 1.25],
+  "speedMul": [0.92, 1.08],
+  "curveMul": [0.6, 1.4],
+  "aimAssist": [0.45, 1.0],
+  "rangeSource": "rebuilt：四个倍率区间沿用 players-2 mapping 的设计值（calibrate 检查过两端组合的稳定性），不是原版数值。材料包没有原版属性点→物理量的公式，06_physics/reference_measurements.csv 只有表头。mind 不映射物理量，只在状态模式（rules.condition，默认关闭）中降低“状态差”的概率。",
+  "calibration": "各等级实际的出手距离与弧线偏移见 docs/calibration.md「等级属性 → 物理」一节（npm run calibrate -- --check 生成）。"
+}

@@ -1,0 +1,7 @@
+﻿联赛等级	联赛名称	联赛中文	描述	描述中文	联赛icon	所需杯数	最少金币奖励	最多金币奖励	获得经验
+id	name	namechinese	des	deschinese	icon	reqCup	goldMin	goldMax	matchExp
+1	$League_match_01	丁级联赛	$achievement_4	一阶联赛	Image_01	0	20	30	5
+2	$League_match_02	丙级联赛	$achievement_5	二阶联赛	Image_02	500	25	35	7
+3	$League_match_03	乙级联赛	$achievement_6	三阶联赛	Image_03	1000	30	40	10
+4	$League_match_04	甲级联赛	$achievement_7	四阶联赛	Image_04	2000	35	45	14
+5	$League_match_05	超级联赛	$achievement_8	五阶联赛	Image_05	3000	40	50	20

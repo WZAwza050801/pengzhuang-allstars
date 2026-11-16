@@ -1,0 +1,235 @@
+{
+  "version": "1.2.0",
+  "table": "achievement_type",
+  "source_path": "assets/res/raw-assets/resources/data/achievement_type.txt",
+  "source_sha256": "35b2a58a98091982c19cc47b08d3cced005feee882c3fb87c6970b575f53d4bc",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "编号",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "key",
+      "original_key": "key",
+      "label": "key",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "name",
+      "original_key": "name",
+      "label": "成就名称",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "type",
+      "original_key": "type",
+      "label": "成就类型",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "paramList",
+      "original_key": "paramList",
+      "label": "参数1",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "prizeList",
+      "original_key": "prizeList",
+      "label": "奖励",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "awardPlayerList",
+      "original_key": "awardPlayerList",
+      "label": "玩家列表",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "descKeyList",
+      "original_key": "descKeyList",
+      "label": "描述列表",
+      "included": true
+    },
+    {
+      "index": 9,
+      "key": "desList",
+      "original_key": "desList",
+      "label": "描述",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "key": "$achievement_1",
+      "name": "超级俱乐部",
+      "type": "1",
+      "paramList": "10;30;60",
+      "prizeList": "11;12;13",
+      "awardPlayerList": "",
+      "descKeyList": "$achievement_des_1_10;$achievement_des_1_30;$achievement_des_1_60",
+      "desList": "签约10位球员;签约30位球员;签约60位球员"
+    },
+    {
+      "id": "2",
+      "key": "$achievement_2",
+      "name": "疾风之靴",
+      "type": "2",
+      "paramList": "50;200;500",
+      "prizeList": "21;22;23",
+      "awardPlayerList": "",
+      "descKeyList": "$achievement_des_2_50;$achievement_des_2_200;$achievement_des_2_500",
+      "desList": "进球数累计50个;进球数累计200个;进球数累计500个"
+    },
+    {
+      "id": "3",
+      "key": "$achievement_3",
+      "name": "球王之路",
+      "type": "3",
+      "paramList": "3;4;5",
+      "prizeList": "31;32;33",
+      "awardPlayerList": "",
+      "descKeyList": "$achievement_des_3_3;$achievement_des_3_4;$achievement_des_3_5",
+      "desList": "进入国家联赛;进入A级联赛;进入超级联赛"
+    },
+    {
+      "id": "4",
+      "key": "$achievement_4",
+      "name": "一阶联赛",
+      "type": "4",
+      "paramList": "100",
+      "prizeList": "",
+      "awardPlayerList": "10204",
+      "descKeyList": "$achievement_des_4_200",
+      "desList": "金球数量达到100"
+    },
+    {
+      "id": "5",
+      "key": "$achievement_4",
+      "name": "一阶联赛",
+      "type": "4",
+      "paramList": "400",
+      "prizeList": "",
+      "awardPlayerList": "10405",
+      "descKeyList": "$achievement_des_4_400",
+      "desList": "金球数量达到400"
+    },
+    {
+      "id": "6",
+      "key": "$achievement_5",
+      "name": "二阶联赛",
+      "type": "4",
+      "paramList": "700",
+      "prizeList": "",
+      "awardPlayerList": "40104",
+      "descKeyList": "$achievement_des_5_700",
+      "desList": "金球数量达到700"
+    },
+    {
+      "id": "7",
+      "key": "$achievement_5",
+      "name": "二阶联赛",
+      "type": "4",
+      "paramList": "900",
+      "prizeList": "",
+      "awardPlayerList": "50101",
+      "descKeyList": "$achievement_des_5_900",
+      "desList": "金球数量达到900"
+    },
+    {
+      "id": "8",
+      "key": "$achievement_6",
+      "name": "三阶联赛",
+      "type": "4",
+      "paramList": "1400",
+      "prizeList": "",
+      "awardPlayerList": "50106",
+      "descKeyList": "$achievement_des_6_1400",
+      "desList": "金球数量达到1400"
+    },
+    {
+      "id": "9",
+      "key": "$achievement_6",
+      "name": "三阶联赛",
+      "type": "4",
+      "paramList": "1800",
+      "prizeList": "",
+      "awardPlayerList": "50107",
+      "descKeyList": "$achievement_des_6_1800",
+      "desList": "金球数量达到1800"
+    },
+    {
+      "id": "10",
+      "key": "$achievement_7",
+      "name": "四阶联赛",
+      "type": "4",
+      "paramList": "2400",
+      "prizeList": "",
+      "awardPlayerList": "60103",
+      "descKeyList": "$achievement_des_7_2400",
+      "desList": "金球数量达到2400"
+    },
+    {
+      "id": "11",
+      "key": "$achievement_7",
+      "name": "四阶联赛",
+      "type": "4",
+      "paramList": "2800",
+      "prizeList": "",
+      "awardPlayerList": "10404",
+      "descKeyList": "$achievement_des_7_2800",
+      "desList": "金球数量达到2800"
+    },
+    {
+      "id": "12",
+      "key": "$achievement_8",
+      "name": "五阶联赛",
+      "type": "4",
+      "paramList": "3200",
+      "prizeList": "",
+      "awardPlayerList": "40202",
+      "descKeyList": "$achievement_des_8_3200",
+      "desList": "金球数量达到3200"
+    },
+    {
+      "id": "13",
+      "key": "$achievement_8",
+      "name": "五阶联赛",
+      "type": "4",
+      "paramList": "3400",
+      "prizeList": "",
+      "awardPlayerList": "40206",
+      "descKeyList": "$achievement_des_8_3400",
+      "desList": "金球数量达到3400"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

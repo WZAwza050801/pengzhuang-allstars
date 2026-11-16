@@ -1,0 +1,76 @@
+{
+  "version": "1.2.0",
+  "table": "sharestore",
+  "source_path": "assets/res/raw-assets/resources/data/sharestore.txt",
+  "source_sha256": "f7e4bde8af4729811f74d0631e671f3f418eee0add3c0a6aca3909a333d614d4",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "costItemID",
+      "original_key": "costItemID",
+      "label": "消耗物品ID",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "costNum",
+      "original_key": "costNum",
+      "label": "消耗数量",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "itemID",
+      "original_key": "itemID",
+      "label": "兑换的卡牌",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "itemNum",
+      "original_key": "itemNum",
+      "label": "兑换的卡牌数量",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "maxBuyLimit",
+      "original_key": "maxBuyLimit",
+      "label": "最大兑换限制",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "costItemID": "4",
+      "costNum": "45",
+      "itemID": "90002",
+      "itemNum": "1",
+      "maxBuyLimit": "1"
+    },
+    {
+      "id": "2",
+      "costItemID": "4",
+      "costNum": "80",
+      "itemID": "50",
+      "itemNum": "1",
+      "maxBuyLimit": "1"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    6,
+    6
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

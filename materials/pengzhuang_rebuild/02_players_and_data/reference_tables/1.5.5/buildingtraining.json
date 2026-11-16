@@ -1,0 +1,79 @@
+{
+  "version": "1.5.5",
+  "table": "buildingtraining",
+  "source_path": "assets/res/raw-assets/resources/data/buildingtraining.txt",
+  "source_sha256": "2ce652e4285ce92ee054afe751163b47a362ca4f36fa290fdeaff8c1c65e4ace",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "id",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "exp",
+      "original_key": "exp",
+      "label": "升级所需经验",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "strengthen",
+      "original_key": "strengthen",
+      "label": "效果",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "icon",
+      "original_key": "icon",
+      "label": "icon",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "exp": "2500",
+      "strengthen": "0",
+      "icon": "Icon_03"
+    },
+    {
+      "id": "2",
+      "exp": "8250",
+      "strengthen": "2",
+      "icon": "Icon_03"
+    },
+    {
+      "id": "3",
+      "exp": "24000",
+      "strengthen": "4",
+      "icon": "Icon_03"
+    },
+    {
+      "id": "4",
+      "exp": "26000",
+      "strengthen": "6",
+      "icon": "Icon_03"
+    },
+    {
+      "id": "5",
+      "exp": "0",
+      "strengthen": "8",
+      "icon": "Icon_03"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

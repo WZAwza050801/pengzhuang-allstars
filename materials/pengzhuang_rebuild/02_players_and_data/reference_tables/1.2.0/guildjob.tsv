@@ -1,0 +1,7 @@
+﻿	职位名字	职位中文	职位大小	数量上限	审核权限	公会设置权限	公会设置权限
+id	jobName	jobchinese	jobWeight	jobAmount	dealApp	guildEdit	kickout
+President	$PRESIDENT	主席	1	1	TRUE	TRUE	TRUE
+VicePresident	$VICEPRESIDENT	副主席	2	2	TRUE	TRUE	TRUE
+Manager	$MANAGER	经理	3	5	FALSE	FALSE	FALSE
+Adviser	$ADVISER	顾问	4	10	FALSE	FALSE	FALSE
+Member	$MEMBER	成员	5	9999999	FALSE	FALSE	FALSE

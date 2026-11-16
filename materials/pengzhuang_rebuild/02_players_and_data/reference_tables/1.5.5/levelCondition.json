@@ -1,0 +1,296 @@
+{
+  "version": "1.5.5",
+  "table": "levelCondition",
+  "source_path": "assets/res/raw-assets/resources/data/levelCondition.txt",
+  "source_sha256": "4a7039615b98f6b8468561fa301b86d1e26b74b2f3f0b25b9dc556e37a4d7dc0",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "过关条件ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "type",
+      "original_key": "type",
+      "label": "条件枚举类型",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "condition",
+      "original_key": "condition",
+      "label": "条件参数",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "description",
+      "original_key": "description",
+      "label": "条件说明",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "10001",
+      "type": "FaceShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10001"
+    },
+    {
+      "id": "10002",
+      "type": "FaceShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10002"
+    },
+    {
+      "id": "10003",
+      "type": "FaceShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10003"
+    },
+    {
+      "id": "10004",
+      "type": "ArcGoal",
+      "condition": "0",
+      "description": "$conditionDescription_10004"
+    },
+    {
+      "id": "10005",
+      "type": "ArcGoal",
+      "condition": "0",
+      "description": "$conditionDescription_10005"
+    },
+    {
+      "id": "10006",
+      "type": "ArcGoal",
+      "condition": "0",
+      "description": "$conditionDescription_10006"
+    },
+    {
+      "id": "10007",
+      "type": "HitPlayerShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10007"
+    },
+    {
+      "id": "10008",
+      "type": "HitPlayerShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10008"
+    },
+    {
+      "id": "10009",
+      "type": "HitPlayerShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10009"
+    },
+    {
+      "id": "10010",
+      "type": "HitWallShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10010"
+    },
+    {
+      "id": "10011",
+      "type": "HitWallShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10011"
+    },
+    {
+      "id": "10012",
+      "type": "HitWallShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10012"
+    },
+    {
+      "id": "10013",
+      "type": "SpringShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10013"
+    },
+    {
+      "id": "10014",
+      "type": "SpringShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10014"
+    },
+    {
+      "id": "10015",
+      "type": "SpringShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10015"
+    },
+    {
+      "id": "10016",
+      "type": "ArcGoal",
+      "condition": "0",
+      "description": "$conditionDescription_10016"
+    },
+    {
+      "id": "10017",
+      "type": "HitPlayerShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10017"
+    },
+    {
+      "id": "10018",
+      "type": "SpringShoot",
+      "condition": "0",
+      "description": "$conditionDescription_10018"
+    },
+    {
+      "id": "10019",
+      "type": "Rescue",
+      "condition": "0;0;5;0;95;30",
+      "description": "$conditionDescription_10020"
+    },
+    {
+      "id": "10020",
+      "type": "Rescue",
+      "condition": "0;0;5;0;95;30",
+      "description": "$conditionDescription_10019"
+    },
+    {
+      "id": "10021",
+      "type": "Rescue",
+      "condition": "0;0;5;0;95;30",
+      "description": "$conditionDescription_10021"
+    },
+    {
+      "id": "10022",
+      "type": "Rescue",
+      "condition": "0;1;5;0;95;25",
+      "description": "$conditionDescription_10023"
+    },
+    {
+      "id": "10023",
+      "type": "Rescue",
+      "condition": "0;1;5;0;95;25",
+      "description": "$conditionDescription_10022"
+    },
+    {
+      "id": "10024",
+      "type": "Rescue",
+      "condition": "0;1;5;0;95;25",
+      "description": "$conditionDescription_10024"
+    },
+    {
+      "id": "10025",
+      "type": "Rescue",
+      "condition": "0;2;5;0;95;20",
+      "description": "$conditionDescription_10025"
+    },
+    {
+      "id": "10026",
+      "type": "Rescue",
+      "condition": "0;2;5;0;95;20",
+      "description": "$conditionDescription_10026"
+    },
+    {
+      "id": "10027",
+      "type": "Rescue",
+      "condition": "0;2;5;0;95;20",
+      "description": "$conditionDescription_10027"
+    },
+    {
+      "id": "10028",
+      "type": "PVE",
+      "condition": "0",
+      "description": "$conditionDescription_10028"
+    },
+    {
+      "id": "10029",
+      "type": "PVE",
+      "condition": "0",
+      "description": "$conditionDescription_10029"
+    },
+    {
+      "id": "10030",
+      "type": "PVE",
+      "condition": "0",
+      "description": "$conditionDescription_10030"
+    },
+    {
+      "id": "10031",
+      "type": "PenaltyWin",
+      "condition": "",
+      "description": "$conditionDescription_10031"
+    },
+    {
+      "id": "10032",
+      "type": "Penalty",
+      "condition": "0",
+      "description": "$conditionDescription_10032"
+    },
+    {
+      "id": "10033",
+      "type": "Penalty",
+      "condition": "1;2",
+      "description": "$conditionDescription_10033"
+    },
+    {
+      "id": "10034",
+      "type": "PVEPenaltyWin",
+      "condition": "",
+      "description": "$conditionDescription_10034"
+    },
+    {
+      "id": "10035",
+      "type": "PVEPenaltyPrefect",
+      "condition": "",
+      "description": "$conditionDescription_10035"
+    },
+    {
+      "id": "10036",
+      "type": "PVEPenaltyGoal",
+      "condition": "2",
+      "description": "$conditionDescription_10036"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

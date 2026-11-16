@@ -1,0 +1,149 @@
+{
+  "version": "1.2.0",
+  "table": "recharge",
+  "source_path": "assets/res/raw-assets/resources/data/recharge.txt",
+  "source_sha256": "3ae82e7e8e011fcdf44ec3ea5c7d0fe9c5f0d52ac7e6fcc3ee06e9c141c2f5cc",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID号",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "goodsType",
+      "original_key": "goodsType",
+      "label": "类型Crystal钻石MonthCard月卡",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "costType",
+      "original_key": "costType",
+      "label": "货币类型",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "price",
+      "original_key": "price",
+      "label": "价格",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "crystal",
+      "original_key": "crystal",
+      "label": "获得钻石数量",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "bonus",
+      "original_key": "bonus",
+      "label": "赠送数量",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "ifDouble",
+      "original_key": "ifDouble",
+      "label": "是否有首冲双倍",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "ThridProductId",
+      "original_key": "ThridProductId",
+      "label": "第三方产品ID",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "21",
+      "goodsType": "Crystal",
+      "costType": "RMB",
+      "price": "6",
+      "crystal": "60",
+      "bonus": "0",
+      "ifDouble": "0",
+      "ThridProductId": "origin.s80001"
+    },
+    {
+      "id": "22",
+      "goodsType": "Crystal",
+      "costType": "RMB",
+      "price": "30",
+      "crystal": "300",
+      "bonus": "20",
+      "ifDouble": "1",
+      "ThridProductId": "origin.s80002"
+    },
+    {
+      "id": "23",
+      "goodsType": "Crystal",
+      "costType": "RMB",
+      "price": "98",
+      "crystal": "980",
+      "bonus": "120",
+      "ifDouble": "0",
+      "ThridProductId": "origin.s80003"
+    },
+    {
+      "id": "24",
+      "goodsType": "Crystal",
+      "costType": "RMB",
+      "price": "198",
+      "crystal": "1980",
+      "bonus": "270",
+      "ifDouble": "1",
+      "ThridProductId": "origin.s80004"
+    },
+    {
+      "id": "25",
+      "goodsType": "Crystal",
+      "costType": "RMB",
+      "price": "328",
+      "crystal": "3280",
+      "bonus": "520",
+      "ifDouble": "0",
+      "ThridProductId": "origin.s80005"
+    },
+    {
+      "id": "26",
+      "goodsType": "Crystal",
+      "costType": "RMB",
+      "price": "648",
+      "crystal": "6480",
+      "bonus": "1320",
+      "ifDouble": "1",
+      "ThridProductId": "origin.s80006"
+    },
+    {
+      "id": "27",
+      "goodsType": "MonthCard",
+      "costType": "RMB",
+      "price": "30",
+      "crystal": "0",
+      "bonus": "0",
+      "ifDouble": "0",
+      "ThridProductId": "origin.s80007"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

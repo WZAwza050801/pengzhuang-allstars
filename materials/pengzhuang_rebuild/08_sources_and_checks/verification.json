@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-11-14",
+  "scope": "资料内容与交付文件核查；不是游戏实现、联网测试或物理回归测试",
+  "passed": true,
+  "checks": {
+    "data_counts": {
+      "passed": true,
+      "detail": {
+        "people": 108,
+        "cards": 224,
+        "levels": 2250,
+        "skills": 511,
+        "links": 547
+      }
+    },
+    "unique_source_keys": {
+      "passed": true,
+      "detail": null
+    },
+    "skill_links_resolved": {
+      "passed": true,
+      "detail": null
+    },
+    "conflicts_and_versions": {
+      "passed": true,
+      "detail": null
+    },
+    "catalog_portrait_paths": {
+      "passed": true,
+      "detail": null
+    },
+    "generation_jobs": {
+      "passed": true,
+      "detail": null
+    },
+    "pending_names_not_in_generation": {
+      "passed": true,
+      "detail": null
+    },
+    "raw_tables_byte_hashes_and_cells": {
+      "passed": true,
+      "detail": {
+        "tables": 92,
+        "cells": 53083,
+        "errors": []
+      }
+    },
+    "portrait_pngs": {
+      "passed": true,
+      "detail": {
+        "counts": {
+          "1.5.5": 107,
+          "1.2.0": 87
+        },
+        "errors": []
+      }
+    },
+    "original_art_files": {
+      "passed": true,
+      "detail": {
+        "source_records": 90,
+        "unique_files": 90,
+        "errors": []
+      }
+    },
+    "selected_sprite_paths": {
+      "passed": true,
+      "detail": null
+    },
+    "sprite_texture_paths": {
+      "passed": true,
+      "detail": 1110
+    },
+    "five_fields_both_versions": {
+      "passed": true,
+      "detail": null
+    },
+    "offline_html_links": {
+      "passed": true,
+      "detail": []
+    },
+    "offline_catalog_count": {
+      "passed": true,
+      "detail": null
+    },
+    "xlsx_structure_and_formula_errors": {
+      "passed": true,
+      "detail": {
+        "sheets": 11,
+        "formula_count": 1405,
+        "error_cells": []
+      }
+    },
+    "xlsx_source_change_and_render_qa": {
+      "passed": true,
+      "detail": null
+    },
+    "all_json_parse": {
+      "passed": true,
+      "detail": 133
+    },
+    "no_executables_or_private_state": {
+      "passed": true,
+      "detail": null
+    }
+  },
+  "failures": []
+}

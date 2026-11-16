@@ -1,0 +1,107 @@
+{
+  "sheets": [
+    {
+      "name": "人物索引",
+      "rows": 108
+    },
+    {
+      "name": "卡牌原值",
+      "rows": 224
+    },
+    {
+      "name": "等级原值",
+      "rows": 2250
+    },
+    {
+      "name": "技能原值",
+      "rows": 511
+    },
+    {
+      "name": "技能关联",
+      "rows": 547
+    },
+    {
+      "name": "参数冲突",
+      "rows": 20
+    },
+    {
+      "name": "版本变化",
+      "rows": 87
+    },
+    {
+      "name": "阵型布局",
+      "rows": 90
+    },
+    {
+      "name": "全局系数",
+      "rows": 110
+    },
+    {
+      "name": "字段与疑点",
+      "rows": 28
+    },
+    {
+      "name": "资料目录",
+      "rows": 106
+    }
+  ],
+  "sourceChangeTest": true,
+  "versionComparisonsVerified": 87,
+  "rendered": [
+    {
+      "sheet": "人物索引",
+      "range": "A1:H13",
+      "file": "preview_01.png"
+    },
+    {
+      "sheet": "卡牌原值",
+      "range": "A1:H13",
+      "file": "preview_02.png"
+    },
+    {
+      "sheet": "等级原值",
+      "range": "A1:H13",
+      "file": "preview_03.png"
+    },
+    {
+      "sheet": "技能原值",
+      "range": "A1:H13",
+      "file": "preview_04.png"
+    },
+    {
+      "sheet": "技能关联",
+      "range": "A1:H13",
+      "file": "preview_05.png"
+    },
+    {
+      "sheet": "参数冲突",
+      "range": "A1:H13",
+      "file": "preview_06.png"
+    },
+    {
+      "sheet": "版本变化",
+      "range": "A1:H13",
+      "file": "preview_07.png"
+    },
+    {
+      "sheet": "阵型布局",
+      "range": "A1:H13",
+      "file": "preview_08.png"
+    },
+    {
+      "sheet": "全局系数",
+      "range": "A1:D13",
+      "file": "preview_09.png"
+    },
+    {
+      "sheet": "字段与疑点",
+      "range": "A1:F13",
+      "file": "preview_10.png"
+    },
+    {
+      "sheet": "资料目录",
+      "range": "A1:G13",
+      "file": "preview_11.png"
+    }
+  ]
+}

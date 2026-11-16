@@ -1,0 +1,16 @@
+﻿编号	key	成就名称	成就类型	参数1	奖励	玩家列表	描述列表	描述
+id	key	name	type	paramList	prizeList	awardPlayerList	descKeyList	desList
+1	$achievement_1	超级俱乐部	1	10;30;60	11;12;13		$achievement_des_1_10;$achievement_des_1_30;$achievement_des_1_60	签约10位球员;签约30位球员;签约60位球员
+2	$achievement_2	疾风之靴	2	50;200;500	21;22;23		$achievement_des_2_50;$achievement_des_2_200;$achievement_des_2_500	进球数累计50个;进球数累计200个;进球数累计500个
+3	$achievement_3	球王之路	3	3;4;5	31;32;33		$achievement_des_3_3;$achievement_des_3_4;$achievement_des_3_5	进入国家联赛;进入A级联赛;进入超级联赛
+4	$achievement_4	一阶联赛	4	100		10204	$achievement_des_4_200	金球数量达到100
+5	$achievement_4	一阶联赛	4	400		10405	$achievement_des_4_400	金球数量达到400
+6	$achievement_5	二阶联赛	4	700		40104	$achievement_des_5_700	金球数量达到700
+7	$achievement_5	二阶联赛	4	900		50101	$achievement_des_5_900	金球数量达到900
+8	$achievement_6	三阶联赛	4	1400		50106	$achievement_des_6_1400	金球数量达到1400
+9	$achievement_6	三阶联赛	4	1800		50107	$achievement_des_6_1800	金球数量达到1800
+10	$achievement_7	四阶联赛	4	2400		60103	$achievement_des_7_2400	金球数量达到2400
+11	$achievement_7	四阶联赛	4	2800		10404	$achievement_des_7_2800	金球数量达到2800
+12	$achievement_8	五阶联赛	4	3200		40202	$achievement_des_8_3200	金球数量达到3200
+13	$achievement_8	五阶联赛	4	3400		40206	$achievement_des_8_3400	金球数量达到3400
+14	$achievement_9	初出茅庐	5	24;30;36	41;42;43		$achievement_des_9_24;$achievement_des_9_30;$achievement_des_9_36	训练场达到24星;训练场达到30星;训练场达到36星

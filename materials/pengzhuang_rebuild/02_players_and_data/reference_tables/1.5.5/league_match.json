@@ -1,0 +1,151 @@
+{
+  "version": "1.5.5",
+  "table": "league_match",
+  "source_path": "assets/res/raw-assets/resources/data/league_match.txt",
+  "source_sha256": "4fcf09d64cf61e74de06ec6721fe42d6d2cf558b9147d6f4ce3663b3a79c866d",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "联赛等级",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "name",
+      "original_key": "name",
+      "label": "联赛名称",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "namechinese",
+      "original_key": "namechinese",
+      "label": "联赛中文",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "des",
+      "original_key": "des",
+      "label": "描述",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "deschinese",
+      "original_key": "deschinese",
+      "label": "描述中文",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "icon",
+      "original_key": "icon",
+      "label": "联赛icon",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "reqCup",
+      "original_key": "reqCup",
+      "label": "所需杯数",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "goldMin",
+      "original_key": "goldMin",
+      "label": "最少金币奖励",
+      "included": true
+    },
+    {
+      "index": 9,
+      "key": "goldMax",
+      "original_key": "goldMax",
+      "label": "最多金币奖励",
+      "included": true
+    },
+    {
+      "index": 10,
+      "key": "matchExp",
+      "original_key": "matchExp",
+      "label": "获得经验",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "name": "$League_match_01",
+      "namechinese": "丁级联赛",
+      "des": "$achievement_4",
+      "deschinese": "一阶联赛",
+      "icon": "Image_01",
+      "reqCup": "0",
+      "goldMin": "20",
+      "goldMax": "30",
+      "matchExp": "5"
+    },
+    {
+      "id": "2",
+      "name": "$League_match_02",
+      "namechinese": "丙级联赛",
+      "des": "$achievement_5",
+      "deschinese": "二阶联赛",
+      "icon": "Image_02",
+      "reqCup": "500",
+      "goldMin": "25",
+      "goldMax": "35",
+      "matchExp": "7"
+    },
+    {
+      "id": "3",
+      "name": "$League_match_03",
+      "namechinese": "乙级联赛",
+      "des": "$achievement_6",
+      "deschinese": "三阶联赛",
+      "icon": "Image_03",
+      "reqCup": "1000",
+      "goldMin": "30",
+      "goldMax": "40",
+      "matchExp": "10"
+    },
+    {
+      "id": "4",
+      "name": "$League_match_04",
+      "namechinese": "甲级联赛",
+      "des": "$achievement_7",
+      "deschinese": "四阶联赛",
+      "icon": "Image_04",
+      "reqCup": "2000",
+      "goldMin": "35",
+      "goldMax": "45",
+      "matchExp": "14"
+    },
+    {
+      "id": "5",
+      "name": "$League_match_05",
+      "namechinese": "超级联赛",
+      "des": "$achievement_8",
+      "deschinese": "五阶联赛",
+      "icon": "Image_05",
+      "reqCup": "3000",
+      "goldMin": "40",
+      "goldMax": "50",
+      "matchExp": "20"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    10,
+    10,
+    10,
+    10,
+    10
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

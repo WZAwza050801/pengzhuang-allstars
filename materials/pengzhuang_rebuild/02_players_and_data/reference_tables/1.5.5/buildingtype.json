@@ -1,0 +1,97 @@
+{
+  "version": "1.5.5",
+  "table": "buildingtype",
+  "source_path": "assets/res/raw-assets/resources/data/buildingtype.txt",
+  "source_sha256": "31fe5788258161c6794aa8220330310bba2717c4de825cca87969b99ae85cbe4",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "id",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "table",
+      "original_key": "table",
+      "label": "表名",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "name",
+      "original_key": "name",
+      "label": "名字",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "chinesename",
+      "original_key": "chinesename",
+      "label": "中文名字",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "field",
+      "original_key": "field",
+      "label": "效果字段",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "des",
+      "original_key": "des",
+      "label": "描述",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "chinese",
+      "original_key": "chinese",
+      "label": "中文描述",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "guild",
+      "table": "buildingguild",
+      "name": "$GUILD",
+      "chinesename": "联盟",
+      "field": "memberCount",
+      "des": "$build_01",
+      "chinese": "升级联盟可以提高联盟人数上限。"
+    },
+    {
+      "id": "donation",
+      "table": "buildingdonation",
+      "name": "$CENTER",
+      "chinesename": "捐赠中心",
+      "field": "Boxclass",
+      "des": "$build_02",
+      "chinese": "升级捐赠中心可以提升联盟宝箱等级。"
+    },
+    {
+      "id": null,
+      "table": null,
+      "name": null,
+      "chinesename": null,
+      "field": null,
+      "des": null,
+      "chinese": null
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    7,
+    7,
+    0
+  ],
+  "short_rows": [
+    5
+  ],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

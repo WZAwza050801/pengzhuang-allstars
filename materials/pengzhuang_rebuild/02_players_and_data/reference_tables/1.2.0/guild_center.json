@@ -1,0 +1,79 @@
+{
+  "version": "1.2.0",
+  "table": "guild_center",
+  "source_path": "assets/res/raw-assets/resources/data/guild_center.txt",
+  "source_sha256": "e5707a5e338314dc4fa534e9d6816700f626c42ed7dc9f786a02310c4a7fcb0c",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "商品ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "level",
+      "original_key": "level",
+      "label": "解锁等级",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "times",
+      "original_key": "times",
+      "label": "兑换次数",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "cost",
+      "original_key": "cost",
+      "label": "兑换消耗",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "10102",
+      "level": "1",
+      "times": "1",
+      "cost": "5000"
+    },
+    {
+      "id": "10206",
+      "level": "2",
+      "times": "1",
+      "cost": "5000"
+    },
+    {
+      "id": "40303",
+      "level": "3",
+      "times": "1",
+      "cost": "5000"
+    },
+    {
+      "id": "10201",
+      "level": "4",
+      "times": "1",
+      "cost": "5000"
+    },
+    {
+      "id": "40206",
+      "level": "5",
+      "times": "1",
+      "cost": "5000"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "gb18030",
+  "source_row_lengths": [
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

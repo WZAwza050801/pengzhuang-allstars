@@ -1,0 +1,80 @@
+{
+  "version": "1.5.5",
+  "table": "playerlevel",
+  "source_path": "assets/res/raw-assets/resources/data/playerlevel.txt",
+  "source_sha256": "e090f883075d573061019c646bb2bafb870fa9defa237adc9e0d29ad76cede3a",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "nextLevelExp",
+      "original_key": "nextLevelExp",
+      "label": "升级需要经验",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "nextLevelExp": "20"
+    },
+    {
+      "id": "2",
+      "nextLevelExp": "80"
+    },
+    {
+      "id": "3",
+      "nextLevelExp": "500"
+    },
+    {
+      "id": "4",
+      "nextLevelExp": "1000"
+    },
+    {
+      "id": "5",
+      "nextLevelExp": "2000"
+    },
+    {
+      "id": "6",
+      "nextLevelExp": "4000"
+    },
+    {
+      "id": "7",
+      "nextLevelExp": "8000"
+    },
+    {
+      "id": "8",
+      "nextLevelExp": "18000"
+    },
+    {
+      "id": "9",
+      "nextLevelExp": "30000"
+    },
+    {
+      "id": "10",
+      "nextLevelExp": "-1"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

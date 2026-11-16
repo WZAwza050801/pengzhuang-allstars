@@ -1,0 +1,5385 @@
+[
+  {
+    "player_id": "10101",
+    "game_name": "马少尔",
+    "game_name_aliases": [],
+    "real_name_original": "安东尼·马歇尔",
+    "real_name_english": "Anthony Martial",
+    "english_name_key_original": "PlayerName_Anthony_Martial",
+    "english_game_name": "Marshall",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_1001_10101",
+    "portrait_file": "portraits/1.5.5/head_1001_10101.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1001_10101.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "47bb97973ac2b47be3c5b89e664b738bfb9a7b95ae0b1ffe2d14f21e1720ee43",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1001_10101",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "安东尼·马歇尔"
+  },
+  {
+    "player_id": "10102",
+    "game_name": "小胖",
+    "game_name_aliases": [],
+    "real_name_original": "韦恩·鲁尼",
+    "real_name_english": "Wayne Rooney",
+    "english_name_key_original": "PlayerName_Wayne_Rooney",
+    "english_game_name": "Roon",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_1001_10102",
+    "portrait_file": "portraits/1.5.5/head_1001_10102.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1001_10102.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "6d58472706651b55dea1608d34d8bb086e9091bd2fab3d8eeaa230b49439687e",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10102",
+      "110102"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1001_10102",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "韦恩·鲁尼"
+  },
+  {
+    "player_id": "10103",
+    "game_name": "玛塔叔叔",
+    "game_name_aliases": [],
+    "real_name_original": "胡安·马塔",
+    "real_name_english": "Juan Mata",
+    "english_name_key_original": "PlayerName_Juan_Mata",
+    "english_game_name": "Matador",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_1001_10103",
+    "portrait_file": "portraits/1.5.5/head_1001_10103.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1001_10103.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "a9564a5cdd4e0539fe7944417913391f0760210d11ac9f5d4e259d39b7ca23f4",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10103"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1001_10103",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "胡安·马塔"
+  },
+  {
+    "player_id": "10104",
+    "game_name": "得佩",
+    "game_name_aliases": [
+      "嘚佩"
+    ],
+    "real_name_original": "孟菲斯·德佩",
+    "real_name_english": "Memphis Depay",
+    "english_name_key_original": "PlayerName_Memphis_Depay",
+    "english_game_name": "Decay",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_1001_10104",
+    "portrait_file": "portraits/1.5.5/head_1001_10104.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1001_10104.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "623f836ac8ff21aac61016788b784729e1a4e13a2c671a7335f1d6d384c55d68",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10104"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1001_10104",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "孟菲斯·德佩"
+  },
+  {
+    "player_id": "10105",
+    "game_name": "小猪",
+    "game_name_aliases": [],
+    "real_name_original": "巴斯蒂安·施魏因施泰格",
+    "real_name_english": "Bastian Schweinsteiger",
+    "english_name_key_original": "PlayerName_Bastian_Schweinsteiger",
+    "english_game_name": "Swinestiger",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_1001_10105",
+    "portrait_file": "portraits/1.5.5/head_1001_10105.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1001_10105.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "c02c7e3bc5baa97d25318d7bf95e6581f84ada10991aa04d9589d0696697f578",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10105"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1001_10105",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "巴斯蒂安·施魏因施泰格"
+  },
+  {
+    "player_id": "10106",
+    "game_name": "罗货",
+    "game_name_aliases": [],
+    "real_name_original": "马科斯·罗霍",
+    "real_name_english": "Marcos Rojo",
+    "english_name_key_original": "PlayerName_Marcos_Rojo",
+    "english_game_name": "Roho",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_1001_10106",
+    "portrait_file": "portraits/1.5.5/head_1001_10106.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1001_10106.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "2354eb0bf3eb9deec79ec7fad5ea776a814a294a8ab3a5d48e01a610bf8b83cc",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10106"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1001_10106",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马科斯·罗霍"
+  },
+  {
+    "player_id": "10107",
+    "game_name": "布琳德",
+    "game_name_aliases": [],
+    "real_name_original": "达利·布林德",
+    "real_name_english": "Daley Blind",
+    "english_name_key_original": "PlayerName_Daley_Blind",
+    "english_game_name": "Blinds",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_1001_10107",
+    "portrait_file": "portraits/1.5.5/head_1001_10107.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1001_10107.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "db71cf7b10e6cf3abf0ec7fae1f39f9bbd74841b7feb2ce9686567b4d0f77e5b",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10107"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1001_10107",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "达利·布林德"
+  },
+  {
+    "player_id": "10201",
+    "game_name": "阿圭罗",
+    "game_name_aliases": [
+      "阿KUN"
+    ],
+    "real_name_original": "塞尔吉奥·阿奎罗",
+    "real_name_english": "Sergio Agüero",
+    "english_name_key_original": "PlayerName_Sergio_Aguero",
+    "english_game_name": "Aquaro",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_1002_10201",
+    "portrait_file": "portraits/1.5.5/head_1002_10201.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1002_10201.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "2913e67b3b3cf0cb483a48737c7809531122fcf64c99eb3aba3fe4ddda486913",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10201",
+      "110201"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1002_10201",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "塞尔吉奥·阿奎罗"
+  },
+  {
+    "player_id": "10202",
+    "game_name": "思特灵",
+    "game_name_aliases": [],
+    "real_name_original": "拉希姆·斯特林",
+    "real_name_english": "Raheem Sterling",
+    "english_name_key_original": "PlayerName_Raheem_Sterling",
+    "english_game_name": "Starling",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_1002_10202",
+    "portrait_file": "portraits/1.5.5/head_1002_10202.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1002_10202.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "35958083f747faf64eb01ca03dcc9304008451a79e5c075e4440f258a2cceab9",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10202"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1002_10202",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "拉希姆·斯特林"
+  },
+  {
+    "player_id": "10203",
+    "game_name": "喜娃",
+    "game_name_aliases": [],
+    "real_name_original": "大卫·席尔瓦",
+    "real_name_english": "David Silva",
+    "english_name_key_original": "PlayerName_David_Silva",
+    "english_game_name": "Silver",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_1002_10203",
+    "portrait_file": "portraits/1.5.5/head_1002_10203.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1002_10203.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "8d28c2a9504555da4634ec52f96fe757671e88ca1d1b28ef74d9ba82e49befd4",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10203",
+      "110203"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1002_10203",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        1,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "大卫·席尔瓦"
+  },
+  {
+    "player_id": "10204",
+    "game_name": "土雷",
+    "game_name_aliases": [],
+    "real_name_original": "亚亚·图雷",
+    "real_name_english": "Yaya Toure",
+    "english_name_key_original": "PlayerName_Yaya_Toure",
+    "english_game_name": "Tourettes",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_1002_10204",
+    "portrait_file": "portraits/1.5.5/head_1002_10204.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1002_10204.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "9954d49330dc65898bc3231b4412438968268b398d74be3ee996ef00e498462b",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10204"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1002_10204",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "亚亚·图雷"
+  },
+  {
+    "player_id": "10205",
+    "game_name": "丁丁",
+    "game_name_aliases": [],
+    "real_name_original": "凯文·德布鲁因",
+    "real_name_english": "Kevin De Bruyne",
+    "english_name_key_original": "PlayerName_Kevin_De_Bruyne",
+    "english_game_name": "Da Brown",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_1002_10205",
+    "portrait_file": "portraits/1.5.5/head_1002_10205.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1002_10205.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "1b56f6d08a8572498491d89249c0302568e6d3ae981d7b61d5d0dc08094dcbdb",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10205",
+      "110205"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1002_10205",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "凯文·德布鲁因"
+  },
+  {
+    "player_id": "10206",
+    "game_name": "孔向前",
+    "game_name_aliases": [],
+    "real_name_original": "文森特·孔帕尼",
+    "real_name_english": "Vincent Kompany",
+    "english_name_key_original": "PlayerName_Vincent_Kompany",
+    "english_game_name": "Company",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "DC",
+    "rarity_code": 4,
+    "portrait_id": "head_1002_10206",
+    "portrait_file": "portraits/1.5.5/head_1002_10206.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1002_10206.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "6e602675763e1e0360a6a004efe2f80dd9ec644fc60e3f1e55e593249596fc3f",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10206",
+      "110206"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1002_10206",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "文森特·孔帕尼"
+  },
+  {
+    "player_id": "10207",
+    "game_name": "德漏勺",
+    "game_name_aliases": [],
+    "real_name_original": "马丁·德米凯利斯",
+    "real_name_english": "Martin Demichelis",
+    "english_name_key_original": "PlayerName_Martin_Demichelis",
+    "english_game_name": "Demichelle",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_1002_10207",
+    "portrait_file": "portraits/1.5.5/head_1002_10207.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1002_10207.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "9baaf2757573508adf84430608687f0067a9ee2dcbb8419a795b7c2e9409ee6f",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10207"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1002_10207",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马丁·德米凯利斯"
+  },
+  {
+    "player_id": "10301",
+    "game_name": "克斯塔",
+    "game_name_aliases": [],
+    "real_name_original": "迭戈·科斯塔",
+    "real_name_english": "Diego Costa",
+    "english_name_key_original": "PlayerName_Diego_Costa",
+    "english_game_name": "Costanza",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_1003_10301",
+    "portrait_file": "portraits/1.5.5/head_1003_10301.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1003_10301.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "c5ba10fc3d075e9bab19514247b2db35097723ed3cf2f59d35cf3f838112766a",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10301"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1003_10301",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "迭戈·科斯塔"
+  },
+  {
+    "player_id": "10302",
+    "game_name": "扎球王",
+    "game_name_aliases": [],
+    "real_name_original": "埃登·阿扎尔",
+    "real_name_english": "Eden Hazard",
+    "english_name_key_original": "PlayerName_Eden_Hazard",
+    "english_game_name": "Hazardous",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_1003_10302",
+    "portrait_file": "portraits/1.5.5/head_1003_10302.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1003_10302.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "15dad1fc4a5678c5244f19f239b0348bc426471c3294ebde5df6128a50c35f33",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10302",
+      "110302"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1003_10302",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "埃登·阿扎尔"
+  },
+  {
+    "player_id": "10303",
+    "game_name": "小法",
+    "game_name_aliases": [],
+    "real_name_original": "塞斯克·法布雷加斯",
+    "real_name_english": "Cesc Fabregas",
+    "english_name_key_original": "PlayerName_Cesc_Fabregas",
+    "english_game_name": "Fibreglass",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_1003_10303",
+    "portrait_file": "portraits/1.5.5/head_1003_10303.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1003_10303.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "b574a322742407b0108534418b771789c9111fdd4802539f4814c4c5559e046c",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10303",
+      "110303"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1003_10303",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "塞斯克·法布雷加斯"
+  },
+  {
+    "player_id": "10304",
+    "game_name": "小金人",
+    "game_name_aliases": [],
+    "real_name_original": "奥斯卡·多斯桑托斯",
+    "real_name_english": "Oscar",
+    "english_name_key_original": "PlayerName_Oscar",
+    "english_game_name": "Ocarina",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_1003_10304",
+    "portrait_file": "portraits/1.5.5/head_1003_10304.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1003_10304.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "360eb3b7d0d7f225fc986bcb0f4ea8beff28d77746c9e7ef97a6f8fe38d40039",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10304"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1003_10304",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "奥斯卡·多斯桑托斯"
+  },
+  {
+    "player_id": "10305",
+    "game_name": "玛蒂七",
+    "game_name_aliases": [],
+    "real_name_original": "内曼贾·马蒂奇",
+    "real_name_english": "Nemanja Matic",
+    "english_name_key_original": "PlayerName_Nemanja_Matic",
+    "english_game_name": "Matisse",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_1003_10305",
+    "portrait_file": "portraits/1.5.5/head_1003_10305.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1003_10305.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "8d61c04ec21f148e5a9b7fb3d13cfaaa812246d3724e97fa5427cb82e89029a7",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10305"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1003_10305",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "内曼贾·马蒂奇"
+  },
+  {
+    "player_id": "10306",
+    "game_name": "特队",
+    "game_name_aliases": [],
+    "real_name_original": "约翰·特里",
+    "real_name_english": "John Terry",
+    "english_name_key_original": "PlayerName_John_Terry",
+    "english_game_name": "T. Johns",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "position": "DC",
+    "rarity_code": 4,
+    "portrait_id": "head_1003_10306",
+    "portrait_file": "portraits/1.5.5/head_1003_10306.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1003_10306.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "c8120f60baa77e6335dde5ac26e6e17e40f89663a339377215f9889c6b908719",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10306",
+      "110306"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1003_10306",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        191,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "约翰·特里"
+  },
+  {
+    "player_id": "10307",
+    "game_name": "阿紫",
+    "game_name_aliases": [],
+    "real_name_original": "阿斯皮利奎塔",
+    "real_name_english": "Cesar Azpilicueta",
+    "english_name_key_original": "PlayerName_Cesar_Azpilicueta",
+    "english_game_name": "Applicator",
+    "club_original": "Chelsea",
+    "club_cn": "切尔西",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_1003_10307",
+    "portrait_file": "portraits/1.5.5/head_1003_10307.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1003_10307.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "106dada8d43570742554408e8ae49d3738ac535442c9e9aa70548aa447f13523",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10307"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1003_10307",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "阿斯皮利奎塔"
+  },
+  {
+    "player_id": "10401",
+    "game_name": "基努",
+    "game_name_aliases": [],
+    "real_name_original": "奥利弗·吉鲁",
+    "real_name_english": "Olivier Giroud",
+    "english_name_key_original": "PlayerName_Olivier_Giroud",
+    "english_game_name": "Ground",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "position": "ST",
+    "rarity_code": 2,
+    "portrait_id": "head_1004_10401",
+    "portrait_file": "portraits/1.5.5/head_1004_10401.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1004_10401.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "8ee061fe9e19d029d4e6d2c158697d05a6a4dcaa1d2d22ddc2726d98f4ec23fd",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10401"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1004_10401",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "奥利弗·吉鲁"
+  },
+  {
+    "player_id": "10402",
+    "game_name": "小老虎",
+    "game_name_aliases": [],
+    "real_name_original": "西奥·沃尔科特",
+    "real_name_english": "Theo Walcott",
+    "english_name_key_original": "PlayerName_Theo_Walcott",
+    "english_game_name": "Woolcat",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_1004_10402",
+    "portrait_file": "portraits/1.5.5/head_1004_10402.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1004_10402.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "5d6f8c1497f481a88a0766b62f43a58305cf08afe039c9b3e942978780886117",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10402"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1004_10402",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "西奥·沃尔科特"
+  },
+  {
+    "player_id": "10403",
+    "game_name": "桑大腿",
+    "game_name_aliases": [],
+    "real_name_original": "阿莱克西斯·桑切斯",
+    "real_name_english": "Alexis Sanchez",
+    "english_name_key_original": "PlayerName_Alexis_Sanchez",
+    "english_game_name": "Sandwichez",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_1004_10403",
+    "portrait_file": "portraits/1.5.5/head_1004_10403.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1004_10403.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "ceedab0e5dbe2a762f2613725f4c1bd7d57ceb80a9f00bc8b681b88c314b7ca0",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10403",
+      "110403"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1004_10403",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "阿莱克西斯·桑切斯"
+  },
+  {
+    "player_id": "10404",
+    "game_name": "大眼",
+    "game_name_aliases": [],
+    "real_name_original": "梅苏特·厄齐尔",
+    "real_name_english": "Mesut Özil",
+    "english_name_key_original": "PlayerName_Mesut_ezil",
+    "english_game_name": "O'Zeal",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_1004_10404",
+    "portrait_file": "portraits/1.5.5/head_1004_10404.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1004_10404.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "3654789af00b12aa003768eb132bbef2f3f8c2e820e7656e790a00da5a1c0635",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10404",
+      "110404"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1004_10404",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "梅苏特·厄齐尔"
+  },
+  {
+    "player_id": "10405",
+    "game_name": "卡锁啦",
+    "game_name_aliases": [],
+    "real_name_original": "卡索拉",
+    "real_name_english": "Santi Cazorla",
+    "english_name_key_original": "PlayerName_Santi_Cazorla",
+    "english_game_name": "Carloza",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_1004_10405",
+    "portrait_file": "portraits/1.5.5/head_1004_10405.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1004_10405.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "113b3937bdccfd7df4af797002c1e64646477b0ac9c29449a28508a98e600688",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10405"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1004_10405",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "卡索拉"
+  },
+  {
+    "player_id": "10406",
+    "game_name": "贝闪电",
+    "game_name_aliases": [],
+    "real_name_original": "埃克托·贝莱林",
+    "real_name_english": "Héctor Bellerín",
+    "english_name_key_original": "PlayerName_Hector_Bellerin",
+    "english_game_name": "Bellringer",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_1004_10406",
+    "portrait_file": "portraits/1.5.5/head_1004_10406.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1004_10406.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "a8248a44c20bb11546f173dba97168f3e75595dcb6a686da16612cbfbf819200",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10406"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1004_10406",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "埃克托·贝莱林"
+  },
+  {
+    "player_id": "10407",
+    "game_name": "模特撒克",
+    "game_name_aliases": [],
+    "real_name_original": "佩尔· 默特萨克",
+    "real_name_english": "Per Mertesacker",
+    "english_name_key_original": "PlayerName_Per_Mertesacker",
+    "english_game_name": "Metasucker",
+    "club_original": "Arsenal",
+    "club_cn": "阿森纳",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_1004_10407",
+    "portrait_file": "portraits/1.5.5/head_1004_10407.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_1004_10407.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "d4c0b3e362aaa70cc0b1e270353647ce0f646a377cdb47c43a6c5ee91b656cd6",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "10407"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_1004_10407",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "佩尔· 默特萨克"
+  },
+  {
+    "player_id": "20101",
+    "game_name": "莱万",
+    "game_name_aliases": [],
+    "real_name_original": "罗伯特·莱万多夫斯基",
+    "real_name_english": "Robert Lewandowski",
+    "english_name_key_original": "PlayerName_Robert_Lewandowski",
+    "english_game_name": "Lemondonki",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_2001_20101",
+    "portrait_file": "portraits/1.5.5/head_2001_20101.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2001_20101.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "219d986a164e7b77d376ac52cd9d12b1e2f93ac28ee34d000bbe78e3391518a5",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20101",
+      "120101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2001_20101",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "罗伯特·莱万多夫斯基"
+  },
+  {
+    "player_id": "20102",
+    "game_name": "木乐",
+    "game_name_aliases": [],
+    "real_name_original": "托马斯·穆勒",
+    "real_name_english": "Thomas Müller",
+    "english_name_key_original": "PlayerName_Thomas_Muller",
+    "english_game_name": "Miller",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_2001_20102",
+    "portrait_file": "portraits/1.5.5/head_2001_20102.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2001_20102.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "c573e7b5f85e163599951c39a3634bfbf46bc5dc90d8788a428d1753b5ee7152",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20102",
+      "120102"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2001_20102",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        381,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "托马斯·穆勒"
+  },
+  {
+    "player_id": "20103",
+    "game_name": "小飞侠",
+    "game_name_aliases": [],
+    "real_name_original": "阿尔杰·罗本",
+    "real_name_english": "Arjen Robben",
+    "english_name_key_original": "PlayerName_Arjen_Robben",
+    "english_game_name": "Robber",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_2001_20103",
+    "portrait_file": "portraits/1.5.5/head_2001_20103.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2001_20103.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "412bfeb958132d3e2e3363b69a929babd97b84d09d0b23cc3560d56fd8b0d458",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20103"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2001_20103",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "阿尔杰·罗本"
+  },
+  {
+    "player_id": "20104",
+    "game_name": "格册",
+    "game_name_aliases": [],
+    "real_name_original": "马里奥·格策",
+    "real_name_english": "Mario Götze",
+    "english_name_key_original": "PlayerName_Mario_Getze",
+    "english_game_name": "Gotcha",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_2001_20104",
+    "portrait_file": "portraits/1.5.5/head_2001_20104.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2001_20104.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "9b81a1db3cd51fd0d50e3ca4295681eb543688ac916d7ce667ff95b4edcdbec6",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20104"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2001_20104",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马里奥·格策"
+  },
+  {
+    "player_id": "20105",
+    "game_name": "比达二",
+    "game_name_aliases": [],
+    "real_name_original": "阿图罗·比达尔",
+    "real_name_english": "Arturo Vidal",
+    "english_name_key_original": "PlayerName_Arturo_Vidal",
+    "english_game_name": "Vital",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_2001_20105",
+    "portrait_file": "portraits/1.5.5/head_2001_20105.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2001_20105.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "0e9d183b78f827971055b409471d6b212c5bc2f5d3d14626bc6d75228cd8b6c6",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20105"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2001_20105",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "阿图罗·比达尔"
+  },
+  {
+    "player_id": "20106",
+    "game_name": "拉队",
+    "game_name_aliases": [],
+    "real_name_original": "菲利普·拉姆",
+    "real_name_english": "Philipp Lahm",
+    "english_name_key_original": "PlayerName_Philipp_Lahm",
+    "english_game_name": "Lamb",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_2001_20106",
+    "portrait_file": "portraits/1.5.5/head_2001_20106.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2001_20106.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "b448256ee52a19f4aa4754492d64a714f322237ea317b1f60858b1e976d28f8e",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20106",
+      "120106"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2001_20106",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "菲利普·拉姆"
+  },
+  {
+    "player_id": "20107",
+    "game_name": "博啊疼",
+    "game_name_aliases": [],
+    "real_name_original": "热罗姆·博阿滕",
+    "real_name_english": "Jérôme Boateng",
+    "english_name_key_original": "PlayerName_Jerrme_Boateng",
+    "english_game_name": "Booting",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "position": "DC",
+    "rarity_code": 4,
+    "portrait_id": "head_2001_20107",
+    "portrait_file": "portraits/1.5.5/head_2001_20107.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2001_20107.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "b1188a6f6cc3f0b773f96e5ec03b0c8cd7da8f735aa21988fcb82a86fb90aad5",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20107",
+      "120107"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2001_20107",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "热罗姆·博阿滕"
+  },
+  {
+    "player_id": "20201",
+    "game_name": "奥巴没样",
+    "game_name_aliases": [],
+    "real_name_original": "皮埃尔-埃梅里克·奥巴梅扬",
+    "real_name_english": "Pierre Emerick Aubameyang",
+    "english_name_key_original": "PlayerName_Pierre_Emerick_Aubameyang",
+    "english_game_name": "Auboomerang",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_2002_20201",
+    "portrait_file": "portraits/1.5.5/head_2002_20201.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2002_20201.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "b1e5154a8e61d62849fb3273f7217da89c4fdbd470d27c38229c453bbe45fe55",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20201",
+      "120201"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2002_20201",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "皮埃尔-埃梅里克·奥巴梅扬"
+  },
+  {
+    "player_id": "20202",
+    "game_name": "螺一丝",
+    "game_name_aliases": [],
+    "real_name_original": "马尔科·罗伊斯",
+    "real_name_english": "Marco Reus",
+    "english_name_key_original": "PlayerName_Marco_Reus",
+    "english_game_name": "Rues",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_2002_20202",
+    "portrait_file": "portraits/1.5.5/head_2002_20202.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2002_20202.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "f8e4acb69a6ef89ca9124ece40c5db6d61bada159757c268bcf4025d55f6dca8",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20202",
+      "120202"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2002_20202",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马尔科·罗伊斯"
+  },
+  {
+    "player_id": "20203",
+    "game_name": "美西他娘",
+    "game_name_aliases": [],
+    "real_name_original": "亨里克·姆希塔良",
+    "real_name_english": "Henrikh Mkhitaryan",
+    "english_name_key_original": "PlayerName_Henrikh_Mkhitaryan",
+    "english_game_name": "Mickytarian",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_2002_20203",
+    "portrait_file": "portraits/1.5.5/head_2002_20203.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2002_20203.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "9017a5e35d30ab8f108a4a62dc584dd6e9cfb635bca730f1466fa7b44a46d51b",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20203"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2002_20203",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "亨里克·姆希塔良"
+  },
+  {
+    "player_id": "20204",
+    "game_name": "香川寿司",
+    "game_name_aliases": [],
+    "real_name_original": "香川真司",
+    "real_name_english": "Shinji Kagawa",
+    "english_name_key_original": "PlayerName_Shinji_Kagawa",
+    "english_game_name": "Kawasaki",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_2002_20204",
+    "portrait_file": "portraits/1.5.5/head_2002_20204.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2002_20204.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "2f2f3dd3a462087cfc4b396420e4025456e02d7d619928154e60abc56b1499af",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20204"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2002_20204",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "香川真司"
+  },
+  {
+    "player_id": "20205",
+    "game_name": "景多安",
+    "game_name_aliases": [],
+    "real_name_original": "伊尔卡伊·京多安",
+    "real_name_english": "Ilkay Gundogan",
+    "english_name_key_original": "PlayerName_Ilkay_Gundogan",
+    "english_game_name": "Gundog",
+    "club_original": "Manchester City",
+    "club_cn": "曼城",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_2002_20205",
+    "portrait_file": "portraits/1.5.5/head_2002_20205.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2002_20205.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "36919359890762ac65dbb9ca0c2f8aeb3e8eb9bb91ae15cb085001976e9e8d0e",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20205"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2002_20205",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        571,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "伊尔卡伊·京多安"
+  },
+  {
+    "player_id": "20206",
+    "game_name": "狐媚",
+    "game_name_aliases": [],
+    "real_name_original": "马茨·胡梅尔斯",
+    "real_name_english": "Mats Hummels",
+    "english_name_key_original": "PlayerName_Mats_Hummels",
+    "english_game_name": "Hummers",
+    "club_original": "Bayern",
+    "club_cn": "拜仁慕尼黑",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_2002_20206",
+    "portrait_file": "portraits/1.5.5/head_2002_20206.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2002_20206.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "5c4c75fbff05357fbcf0707d599ab7c7090e48ffa059324e0efcc35611a96317",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20206"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2002_20206",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马茨·胡梅尔斯"
+  },
+  {
+    "player_id": "20207",
+    "game_name": "金特二",
+    "game_name_aliases": [],
+    "real_name_original": "马蒂亚斯·金特尔",
+    "real_name_english": "Matthias Ginter",
+    "english_name_key_original": "PlayerName_Matthias_Ginter",
+    "english_game_name": "Gunter",
+    "club_original": "Dortmund",
+    "club_cn": "多特蒙德",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_2002_20207",
+    "portrait_file": "portraits/1.5.5/head_2002_20207.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_2002_20207.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "275020fcca9f4d84d1aae1e4ec9c81d79b11decc940cafb145228a2f3816a5c7",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "20207"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_2002_20207",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马蒂亚斯·金特尔"
+  },
+  {
+    "player_id": "30101",
+    "game_name": "迪吧啦",
+    "game_name_aliases": [],
+    "real_name_original": "保罗·迪巴拉",
+    "real_name_english": "Paulo Dybala",
+    "english_name_key_original": "PlayerName_Paulo_Dybala",
+    "english_game_name": "Dublya",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_3001_30101",
+    "portrait_file": "portraits/1.5.5/head_3001_30101.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_3001_30101.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "5a309b3f2a0a89630dca5469e7f5db3479ff549589ae8332359d8513b68ef21c",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "30101",
+      "130101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30101",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "保罗·迪巴拉"
+  },
+  {
+    "player_id": "30102",
+    "game_name": "莫邋遢",
+    "game_name_aliases": [],
+    "real_name_original": "阿尔瓦罗·莫拉塔",
+    "real_name_english": "Álvaro Morata",
+    "english_name_key_original": "PlayerName_alvaro_Morata",
+    "english_game_name": "Morales",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_3001_30102",
+    "portrait_file": "portraits/1.5.5/head_3001_30102.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_3001_30102.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "ea09cd81fe5252764b317817bc590766c9d9f3484239fa270dedd1dcef7355af",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "30102"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30102",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "阿尔瓦罗·莫拉塔"
+  },
+  {
+    "player_id": "30103",
+    "game_name": "波霸",
+    "game_name_aliases": [],
+    "real_name_original": "保罗·博格巴",
+    "real_name_english": "Paul Pogba",
+    "english_name_key_original": "PlayerName_Paul_Pogba",
+    "english_game_name": "Potba",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_3001_30103",
+    "portrait_file": "portraits/1.5.5/head_3001_30103.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_3001_30103.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "cbaaa08e25f1ae439aca09f113a87b808da1a75772d1cac62a429fc071cf294c",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "30103",
+      "130103"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30103",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "保罗·博格巴"
+  },
+  {
+    "player_id": "30104",
+    "game_name": "马绩效",
+    "game_name_aliases": [],
+    "real_name_original": "克劳迪奥·马尔基西奥",
+    "real_name_english": "Claudio Marchisio",
+    "english_name_key_original": "PlayerName_Claudio_Marchisio",
+    "english_game_name": "Machismo",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_3001_30104",
+    "portrait_file": "portraits/1.5.5/head_3001_30104.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_3001_30104.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "a7700a017e0f1cc8bce6cfd371d4edbae70090cba079ae7afc19149fdfddcf4d",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "30104"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30104",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "克劳迪奥·马尔基西奥"
+  },
+  {
+    "player_id": "30105",
+    "game_name": "脸哥",
+    "game_name_aliases": [],
+    "real_name_original": "萨米·赫迪拉",
+    "real_name_english": "Sami Khedira",
+    "english_name_key_original": "PlayerName_Sami_Khedira",
+    "english_game_name": "Kadira",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_3001_30105",
+    "portrait_file": "portraits/1.5.5/head_3001_30105.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_3001_30105.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "d8ccf34ea506d8d0365e2ef639bc9b3b634cce2d5bd8d5449378f4683e92905f",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "30105"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30105",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "萨米·赫迪拉"
+  },
+  {
+    "player_id": "30106",
+    "game_name": "菠萝奇",
+    "game_name_aliases": [],
+    "real_name_original": "莱昂纳多·博努奇",
+    "real_name_english": "Leonardo Bonucci",
+    "english_name_key_original": "PlayerName_Leonardo_Bonucci",
+    "english_game_name": "Bonus",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_3001_30106",
+    "portrait_file": "portraits/1.5.5/head_3001_30106.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_3001_30106.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "ea0599aab93ebbb7d41a9725591edc4bdad176fdd263d8873b4c63f9266574fb",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "30106"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30106",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "莱昂纳多·博努奇"
+  },
+  {
+    "player_id": "30107",
+    "game_name": "鲁加尼",
+    "game_name_aliases": [],
+    "real_name_original": "丹尼尔·鲁加尼",
+    "real_name_english": "Daniele Rugani",
+    "english_name_key_original": "PlayerName_Daniele_Rugani",
+    "english_game_name": "Ranugi",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_3001_30107",
+    "portrait_file": "portraits/1.5.5/head_3001_30107.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_3001_30107.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "9d29256a0ec3ce7bd6c4e5f24262405210aafe930260220ab3356ceffec6a426",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "30107"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30107",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "丹尼尔·鲁加尼"
+  },
+  {
+    "player_id": "30108",
+    "game_name": "西瓜",
+    "game_name_aliases": [],
+    "real_name_original": "伊瓜因",
+    "real_name_english": "Gonzalo Higuain",
+    "english_name_key_original": "PlayerName_Gonzalo_Higuain",
+    "english_game_name": "Higrain",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_3001_30108",
+    "portrait_file": "portraits/1.5.5/head_3001_30108.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_3001_30108.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "e4eec483a29bcfb6001138b2661fd5fc79550dc538ec6266303e00bcfa3d1862",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "30108",
+      "130108"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_3001_30108",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        761,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "伊瓜因"
+  },
+  {
+    "player_id": "40101",
+    "game_name": "内少",
+    "game_name_aliases": [],
+    "real_name_original": "内马尔",
+    "real_name_english": "Neymar",
+    "english_name_key_original": "PlayerName_Neymar",
+    "english_game_name": "Naymer",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_4001_40101",
+    "portrait_file": "portraits/1.5.5/head_4001_40101.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40101.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "5ec6ccd39282376026af593ed2d74c0090b2ed32a96337caa5499aa25eb1ac30",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40101",
+      "140101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40101",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "内马尔"
+  },
+  {
+    "player_id": "40102",
+    "game_name": "苏牙",
+    "game_name_aliases": [],
+    "real_name_original": "苏亚雷斯",
+    "real_name_english": "Luis Suarez",
+    "english_name_key_original": "PlayerName_Luis_Suarez",
+    "english_game_name": "Swarez",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_4001_40102",
+    "portrait_file": "portraits/1.5.5/head_4001_40102.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40102.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "fcf82efc20ab9b7b24932f3d5cb32be688322ae9fb19d2f4c2dd637910cdc5c3",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40102",
+      "140102"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40102",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "苏亚雷斯"
+  },
+  {
+    "player_id": "40103",
+    "game_name": "小白",
+    "game_name_aliases": [],
+    "real_name_original": "安德雷斯·伊涅斯塔",
+    "real_name_english": "Andres Iniesta",
+    "english_name_key_original": "PlayerName_Andres_Iniesta",
+    "english_game_name": "Instanta",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_4001_40103",
+    "portrait_file": "portraits/1.5.5/head_4001_40103.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40103.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "0b991af2ca16913925b059192c44e0aab56ed05193a544e7752aa48e060ea128",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40103",
+      "140103"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40103",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "安德雷斯·伊涅斯塔"
+  },
+  {
+    "player_id": "40104",
+    "game_name": "布教授",
+    "game_name_aliases": [],
+    "real_name_original": "塞尔吉奥·布斯克茨",
+    "real_name_english": "Sergio Busquets",
+    "english_name_key_original": "PlayerName_Sergio_Busquets",
+    "english_game_name": "Bouquets",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_4001_40104",
+    "portrait_file": "portraits/1.5.5/head_4001_40104.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40104.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "4ae23d3ecc5ae8f3ff2d1752573acfc01ccbd1fc2b64b656f7ec4178403be99d",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40104"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40104",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "塞尔吉奥·布斯克茨"
+  },
+  {
+    "player_id": "40105",
+    "game_name": "小马哥",
+    "game_name_aliases": [],
+    "real_name_original": "哈维尔·马斯切拉诺",
+    "real_name_english": "Javier Mascherano",
+    "english_name_key_original": "PlayerName_Javier_Mascherano",
+    "english_game_name": "Mascara",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_4001_40105",
+    "portrait_file": "portraits/1.5.5/head_4001_40105.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40105.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "22a3c95d0a02c920957c4249647c6b134e54f0a55fd16b037bbfe7877f0f5d2f",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40105"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40105",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "哈维尔·马斯切拉诺"
+  },
+  {
+    "player_id": "40106",
+    "game_name": "皮主席",
+    "game_name_aliases": [],
+    "real_name_original": "杰拉德·皮克",
+    "real_name_english": "Gerard Pique",
+    "english_name_key_original": "PlayerName_Gerard_Pique",
+    "english_game_name": "Peekay",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_4001_40106",
+    "portrait_file": "portraits/1.5.5/head_4001_40106.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40106.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "5dc3bb0de355d0ffea8422783dd438d801c8fe0e254252816bb60ad5fcac4ba0",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40106"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40106",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "杰拉德·皮克"
+  },
+  {
+    "player_id": "40107",
+    "game_name": "铁达尼",
+    "game_name_aliases": [],
+    "real_name_original": "丹尼尔·阿尔维斯",
+    "real_name_english": "Daniel Alves",
+    "english_name_key_original": "PlayerName_Daniel_Alves",
+    "english_game_name": "Halves",
+    "club_original": "Juventus",
+    "club_cn": "尤文图斯",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_4001_40107",
+    "portrait_file": "portraits/1.5.5/head_4001_40107.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40107.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "bfef53e248e7aea54270eeebf4574393d49cc620e2033a8a0ed8c0188a3fe4d6",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40107"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40107",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "丹尼尔·阿尔维斯"
+  },
+  {
+    "player_id": "40108",
+    "game_name": "梅球王",
+    "game_name_aliases": [],
+    "real_name_original": "里奥·梅西",
+    "real_name_english": "Lionel Messi",
+    "english_name_key_original": "PlayerName_Lionel_Messi",
+    "english_game_name": "Messy",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "ST",
+    "rarity_code": 5,
+    "portrait_id": "head_4001_40108",
+    "portrait_file": "portraits/1.5.5/head_4001_40108.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4001_40108.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "908694388d5a8b55d008106d0db61151be52c3a3a68028830064427a5524fad4",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40108"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40108",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        589,
+        791,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "里奥·梅西"
+  },
+  {
+    "player_id": "40110",
+    "game_name": "图蓝",
+    "game_name_aliases": [],
+    "real_name_original": "阿达图兰",
+    "real_name_english": "Arda Turan",
+    "english_name_key_original": "PlayerName_Arda_Turan",
+    "english_game_name": "Touring",
+    "club_original": "F.C. Barcelona",
+    "club_cn": "巴塞罗那",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_4001_40110",
+    "portrait_file": "portraits/1.5.5/head_4001_40110.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_4001_40110.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "26e74df414664d19812a7099f4957ad81e99ffda4d6b948264e71af20ddee1c8",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "40110"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4001_40110",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "阿达图兰"
+  },
+  {
+    "player_id": "40201",
+    "game_name": "笨马",
+    "game_name_aliases": [],
+    "real_name_original": "卡里姆·本泽马",
+    "real_name_english": "Karim Benzema",
+    "english_name_key_original": "PlayerName_Karim_Benzema",
+    "english_game_name": "Benzene",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_4002_40201",
+    "portrait_file": "portraits/1.5.5/head_4002_40201.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40201.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "f19054eca7eb4f2887c14c8e9928d0701a560d08be073064f1b95ef755e011e9",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40201"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40201",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "卡里姆·本泽马"
+  },
+  {
+    "player_id": "40202",
+    "game_name": "大圣",
+    "game_name_aliases": [],
+    "real_name_original": "加雷斯·贝尔",
+    "real_name_english": "Gareth Bale",
+    "english_name_key_original": "PlayerName_Gareth_Bale",
+    "english_game_name": "Bail",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_4002_40202",
+    "portrait_file": "portraits/1.5.5/head_4002_40202.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40202.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "56d0dd902567db50d5cbffa8a660fdea8e20becd95406d96c45a2cafdd2aaa90",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40202",
+      "140202"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40202",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        951,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "加雷斯·贝尔"
+  },
+  {
+    "player_id": "40203",
+    "game_name": "甜菜",
+    "game_name_aliases": [],
+    "real_name_original": "托尼·克罗斯",
+    "real_name_english": "Toni Kroos",
+    "english_name_key_original": "PlayerName_Toni_Kroos",
+    "english_game_name": "Cruise",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_4002_40203",
+    "portrait_file": "portraits/1.5.5/head_4002_40203.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40203.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "ce24e5477c8a7f6fda75d35d196f795405d3d6e9e2df43d19dbc13d64215d234",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40203",
+      "140203"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40203",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "托尼·克罗斯"
+  },
+  {
+    "player_id": "40204",
+    "game_name": "魔笛",
+    "game_name_aliases": [],
+    "real_name_original": "卢卡·莫德里奇",
+    "real_name_english": "Luka Modric",
+    "english_name_key_original": "PlayerName_Luka_Modric",
+    "english_game_name": "Midrich",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_4002_40204",
+    "portrait_file": "portraits/1.5.5/head_4002_40204.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40204.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "7742adcf16516ae30f2cff4c7c5b28f1c4e6c4f13a768c829c9795f745083a5e",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40204"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40204",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "卢卡·莫德里奇"
+  },
+  {
+    "player_id": "40205",
+    "game_name": "哈罗",
+    "game_name_aliases": [
+      "J罗"
+    ],
+    "real_name_original": "哈梅斯·罗德里格斯",
+    "real_name_english": "James Rodriguez",
+    "english_name_key_original": "PlayerName_James_Rodriguez",
+    "english_game_name": "Rodgerez",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_4002_40205",
+    "portrait_file": "portraits/1.5.5/head_4002_40205.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40205.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "07051f4892734edabe8956ef66deaae5011529d58fcc97053d31d01cb3040c8c",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40205"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40205",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "哈梅斯·罗德里格斯"
+  },
+  {
+    "player_id": "40206",
+    "game_name": "水爷",
+    "game_name_aliases": [],
+    "real_name_original": "塞尔吉奥·拉莫斯",
+    "real_name_english": "Sergio Ramos",
+    "english_name_key_original": "PlayerName_Sergio_Ramos",
+    "english_game_name": "Ramoos",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "DC",
+    "rarity_code": 4,
+    "portrait_id": "head_4002_40206",
+    "portrait_file": "portraits/1.5.5/head_4002_40206.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40206.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "49fa6281aae3c5a820ae11cfa7f015937d5b484fe7a45db301d73119f3ba1fe3",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40206",
+      "140206"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40206",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "塞尔吉奥·拉莫斯"
+  },
+  {
+    "player_id": "40207",
+    "game_name": "武僧",
+    "game_name_aliases": [],
+    "real_name_original": "佩佩",
+    "real_name_english": "Pepe",
+    "english_name_key_original": "PlayerName_Pepe",
+    "english_game_name": "Peppy",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_4002_40207",
+    "portrait_file": "portraits/1.5.5/head_4002_40207.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40207.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "0adaa4d501b1c146348c9ac89aed15ec6c235ba935f4f8dc594f8dee72801f9b",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40207"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40207",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "佩佩"
+  },
+  {
+    "player_id": "40208",
+    "game_name": "小小罗",
+    "game_name_aliases": [
+      "C罗"
+    ],
+    "real_name_original": "克里斯蒂亚诺·罗纳尔多",
+    "real_name_english": "Cristiano Ronaldo",
+    "english_name_key_original": "PlayerName_Cristiano_Ronaldo",
+    "english_game_name": "Rolando",
+    "club_original": "Real Madrid C.F.",
+    "club_cn": "皇家马德里",
+    "position": "ST",
+    "rarity_code": 5,
+    "portrait_id": "head_4002_40208",
+    "portrait_file": "portraits/1.5.5/head_4002_40208.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4002_40208.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "36c7c7296587498efa664933d1562b85c5fb1517b76b10cf19d31ba0cb5db64d",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40208"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head.png",
+    "source_sprite_frame": {
+      "name": "head_4002_40208",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        201,
+        791,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "克里斯蒂亚诺·罗纳尔多"
+  },
+  {
+    "player_id": "40301",
+    "game_name": "格子",
+    "game_name_aliases": [],
+    "real_name_original": "安东尼·格里斯曼",
+    "real_name_english": "Antoine Griezmann",
+    "english_name_key_original": "PlayerName_Antoine_Griezmann",
+    "english_game_name": "Greasemann",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_4003_40301",
+    "portrait_file": "portraits/1.5.5/head_4003_40301.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4003_40301.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "133e1ff2b3a6211615133ec6d2ea50cbb231275bc1d23ae262a741d0d9af1754",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40301",
+      "140301"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4003_40301",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "安东尼·格里斯曼"
+  },
+  {
+    "player_id": "40302",
+    "game_name": "托妞",
+    "game_name_aliases": [],
+    "real_name_original": "费尔南多·托雷斯",
+    "real_name_english": "Fernando Torres",
+    "english_name_key_original": "PlayerName_Fernando_Torres",
+    "english_game_name": "Torro",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "position": "ST",
+    "rarity_code": 2,
+    "portrait_id": "head_4003_40302",
+    "portrait_file": "portraits/1.5.5/head_4003_40302.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4003_40302.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "4643a7a17f6d38ddc8585962097de464551ad8bf4d67fcda38ae61d59d84c9fd",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40302"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4003_40302",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "费尔南多·托雷斯"
+  },
+  {
+    "player_id": "40303",
+    "game_name": "科客",
+    "game_name_aliases": [],
+    "real_name_original": "科克",
+    "real_name_english": "Koke",
+    "english_name_key_original": "PlayerName_Koke",
+    "english_game_name": "Keikor",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_4003_40303",
+    "portrait_file": "portraits/1.5.5/head_4003_40303.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4003_40303.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "b6f0f619a43a31e8753d4ae0ef023d52e8de968d2792fdbaa23bdc6dacdc89f5",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40303",
+      "140303"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4003_40303",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "科克"
+  },
+  {
+    "player_id": "40304",
+    "game_name": "费南斯",
+    "game_name_aliases": [],
+    "real_name_original": "奥古斯托·费尔南德斯",
+    "real_name_english": "Augusto Fernandez",
+    "english_name_key_original": "PlayerName_Augusto_Fernandez",
+    "english_game_name": "Fernando",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_4003_40304",
+    "portrait_file": "portraits/1.5.5/head_4003_40304.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4003_40304.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "e5ebc20263db728c081412a8243f65a265c4f9e5de85def0bdbebe979790bc9e",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40304"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4003_40304",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "奥古斯托·费尔南德斯"
+  },
+  {
+    "player_id": "40305",
+    "game_name": "卡啦斯",
+    "game_name_aliases": [],
+    "real_name_original": "费雷拉·卡拉斯科",
+    "real_name_english": "Yannick Ferreira Carrasco",
+    "english_name_key_original": "PlayerName_Yannick_Ferreira_Carrasco",
+    "english_game_name": "Cascaro",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_4003_40305",
+    "portrait_file": "portraits/1.5.5/head_4003_40305.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4003_40305.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "42294b42c013fe33d4d9752638666736cc17f1a86b1537363d925477db426b8a",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40305"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4003_40305",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        1141,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "费雷拉·卡拉斯科"
+  },
+  {
+    "player_id": "40306",
+    "game_name": "哥丁",
+    "game_name_aliases": [],
+    "real_name_original": "迭戈·戈丁",
+    "real_name_english": "Diego Godin",
+    "english_name_key_original": "PlayerName_Diego_Godin",
+    "english_game_name": "Gudin",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_4003_40306",
+    "portrait_file": "portraits/1.5.5/head_4003_40306.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4003_40306.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "ce8168b5152c632941690afd0133a49ac1d3ef8356fb9e359deff18926ae22ce",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40306"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4003_40306",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "迭戈·戈丁"
+  },
+  {
+    "player_id": "40307",
+    "game_name": "陆一丝",
+    "game_name_aliases": [],
+    "real_name_original": "菲利佩·路易斯",
+    "real_name_english": "Filipe Luis",
+    "english_name_key_original": "PlayerName_Filipe_Luis",
+    "english_game_name": "Louís",
+    "club_original": "C. Atlético de Madrid SAD",
+    "club_cn": "马德里竞技",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_4003_40307",
+    "portrait_file": "portraits/1.5.5/head_4003_40307.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_4003_40307.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "90050c719e7276b5a788726e017c6f6e0197659e9284d6443a236460b3e3d85a",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "40307"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_4003_40307",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "菲利佩·路易斯"
+  },
+  {
+    "player_id": "50101",
+    "game_name": "咔哇泥",
+    "game_name_aliases": [],
+    "real_name_original": "埃丁森·卡瓦尼",
+    "real_name_english": "Edinson Cavani",
+    "english_name_key_original": "PlayerName_Edinson_Cavani",
+    "english_game_name": "Cavanini",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_5001_50101",
+    "portrait_file": "portraits/1.5.5/head_5001_50101.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_5001_50101.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "ced530d6ff65e1c69d6a8d0dec5abbbe0089c9d4893cc432d4a8e56e149dd5d9",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "50101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_5001_50101",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "埃丁森·卡瓦尼"
+  },
+  {
+    "player_id": "50102",
+    "game_name": "奉先",
+    "game_name_aliases": [],
+    "real_name_original": "兹拉坦·伊布拉西莫维奇",
+    "real_name_english": "Zlatan Ibrahimovic",
+    "english_name_key_original": "PlayerName_Zlatan_Ibrahimovic",
+    "english_game_name": "Abrahamovic",
+    "club_original": "Manchester United",
+    "club_cn": "曼联",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_5001_50102",
+    "portrait_file": "portraits/1.5.5/head_5001_50102.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_5001_50102.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "f8d8fe0abcdff4d3fc96c20d380c9f94636bb3c579ce3644a9dce9035d8736c9",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "50102",
+      "150102"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_5001_50102",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "兹拉坦·伊布拉西莫维奇"
+  },
+  {
+    "player_id": "50103",
+    "game_name": "天使",
+    "game_name_aliases": [],
+    "real_name_original": "安赫尔·迪马里亚",
+    "real_name_english": "Ángel Di María",
+    "english_name_key_original": "PlayerName_angel_Di_Maria",
+    "english_game_name": "De Maríachi",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_5001_50103",
+    "portrait_file": "portraits/1.5.5/head_5001_50103.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_5001_50103.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "8908d3197b943e7f16669cdbedbc474a472f4ba6a9efcca6def02dbf93dd813c",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "50103"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_5001_50103",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "安赫尔·迪马里亚"
+  },
+  {
+    "player_id": "50104",
+    "game_name": "微辣帝",
+    "game_name_aliases": [],
+    "real_name_original": "马尔科·维拉蒂",
+    "real_name_english": "Marco Verratti",
+    "english_name_key_original": "PlayerName_Marco_Verratti",
+    "english_game_name": "Verrity",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_5001_50104",
+    "portrait_file": "portraits/1.5.5/head_5001_50104.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_5001_50104.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "29269e7809c6d73550de292a85f3ca12264514b4f0e9bcbec5d0933343b7767d",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "50104"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_5001_50104",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马尔科·维拉蒂"
+  },
+  {
+    "player_id": "50105",
+    "game_name": "小卢卡斯",
+    "game_name_aliases": [],
+    "real_name_original": "卢卡斯·莫拉",
+    "real_name_english": "Lucas Moura",
+    "english_name_key_original": "PlayerName_Lucas_Moura",
+    "english_game_name": "Mora",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_5001_50105",
+    "portrait_file": "portraits/1.5.5/head_5001_50105.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_5001_50105.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "4dae20878c8198276f15d7e9304cb5a9ea4f5d0a3a84d500d014246f54d0e625",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "50105"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_5001_50105",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "卢卡斯·莫拉"
+  },
+  {
+    "player_id": "50106",
+    "game_name": "蓬蓬",
+    "game_name_aliases": [],
+    "real_name_original": "大卫·路易斯",
+    "real_name_english": "David Luiz",
+    "english_name_key_original": "PlayerName_David_Luiz",
+    "english_game_name": "Lewis",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "position": "DC",
+    "rarity_code": 3,
+    "portrait_id": "head_5001_50106",
+    "portrait_file": "portraits/1.5.5/head_5001_50106.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_5001_50106.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "fb4847c87947df8bb1de6af9dcb45176c604b87612dfe3bfa3162ec66c18733a",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "50106"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_5001_50106",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "大卫·路易斯"
+  },
+  {
+    "player_id": "50107",
+    "game_name": "弟媳",
+    "game_name_aliases": [],
+    "real_name_original": "蒂亚戈·席尔瓦",
+    "real_name_english": "Thiago Silva",
+    "english_name_key_original": "PlayerName_Thiago_Silva",
+    "english_game_name": "T. Silver",
+    "club_original": "Paris Saint-Germain",
+    "club_cn": "巴黎圣日耳曼",
+    "position": "DC",
+    "rarity_code": 4,
+    "portrait_id": "head_5001_50107",
+    "portrait_file": "portraits/1.5.5/head_5001_50107.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_5001_50107.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "4395c2c3533fb1c6f39841456f31936c56b9c9d07c3a2b855d3fc2c189eb713a",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "50107",
+      "150107"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_5001_50107",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "蒂亚戈·席尔瓦"
+  },
+  {
+    "player_id": "60101",
+    "game_name": "告林斯曼",
+    "game_name_aliases": [],
+    "real_name_original": "郜林",
+    "real_name_english": "Gao Lin",
+    "english_name_key_original": "PlayerName_GaoLin",
+    "english_game_name": "Forest",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "position": "ST",
+    "rarity_code": 1,
+    "portrait_id": "head_6001_60101",
+    "portrait_file": "portraits/1.5.5/head_6001_60101.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_6001_60101.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "b3c621a3ca48072ff53aa7e95009ce1161ec95c5d00f95f7c312fd90b45c7fb3",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "60101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_6001_60101",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        1331,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "郜林"
+  },
+  {
+    "player_id": "60102",
+    "game_name": "杰马",
+    "game_name_aliases": [
+      "J马"
+    ],
+    "real_name_original": "杰克逊·马丁内斯",
+    "real_name_english": "Jackson Martinez",
+    "english_name_key_original": "PlayerName_Jackson_Martinez",
+    "english_game_name": "Martíns",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "position": "ST",
+    "rarity_code": 2,
+    "portrait_id": "head_6001_60102",
+    "portrait_file": "portraits/1.5.5/head_6001_60102.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_6001_60102.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "8881c28937ea9104070ea8db6a853c33599a65bd273e7554456515fa58b26cc3",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "60102"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_6001_60102",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "杰克逊·马丁内斯"
+  },
+  {
+    "player_id": "60103",
+    "game_name": "高辣条",
+    "game_name_aliases": [],
+    "real_name_original": "里卡多·高拉特",
+    "real_name_english": "Ricardo Goulart",
+    "english_name_key_original": "PlayerName_Ricardo_Goulart",
+    "english_game_name": "Ghoulart",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_6001_60103",
+    "portrait_file": "portraits/1.5.5/head_6001_60103.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_6001_60103.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "4561357f33342550624f87459a5486c85e3a279cfd29c82d6487617d8211e901",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "60103"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_6001_60103",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "里卡多·高拉特"
+  },
+  {
+    "player_id": "60104",
+    "game_name": "郑队",
+    "game_name_aliases": [],
+    "real_name_original": "郑智",
+    "real_name_english": "Zheng Zhi",
+    "english_name_key_original": "PlayerName_ZhengZhi",
+    "english_game_name": "Zheng",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_6001_60104",
+    "portrait_file": "portraits/1.5.5/head_6001_60104.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_6001_60104.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "d5e8d8471c69954c127d3509f6859bedd412bc0290c9161b94e08e7275bf4823",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "60104"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_6001_60104",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "郑智"
+  },
+  {
+    "player_id": "60105",
+    "game_name": "暴力鸟",
+    "game_name_aliases": [],
+    "real_name_original": "保利尼奥",
+    "real_name_english": "Paulinho",
+    "english_name_key_original": "PlayerName_Paulinho",
+    "english_game_name": "Pauline",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_6001_60105",
+    "portrait_file": "portraits/1.5.5/head_6001_60105.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_6001_60105.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "40bb2d9bdc7142ecafb157d055af1ec19e6c730934430a1bbd59a811cf4cc8df",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "60105"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_6001_60105",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "保利尼奥"
+  },
+  {
+    "player_id": "60106",
+    "game_name": "世界博",
+    "game_name_aliases": [],
+    "real_name_original": "黄博文",
+    "real_name_english": "Huang Bowen",
+    "english_name_key_original": "PlayerName_HuangBowen",
+    "english_game_name": "Yellow",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "position": "DC",
+    "rarity_code": 1,
+    "portrait_id": "head_6001_60106",
+    "portrait_file": "portraits/1.5.5/head_6001_60106.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_6001_60106.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "891af5375bbffa3d180b3fc4eb7d925a581e8b729782a3d3ed50258332eb53bc",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "60106"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_6001_60106",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "黄博文"
+  },
+  {
+    "player_id": "60107",
+    "game_name": "张莫斯",
+    "game_name_aliases": [],
+    "real_name_original": "张琳芃",
+    "real_name_english": "Zhang Linpeng",
+    "english_name_key_original": "PlayerName_ZhangLinfan",
+    "english_game_name": "Deluxe",
+    "club_original": "广州恒大",
+    "club_cn": "广州恒大",
+    "position": "DC",
+    "rarity_code": 1,
+    "portrait_id": "head_6001_60107",
+    "portrait_file": "portraits/1.5.5/head_6001_60107.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_6001_60107.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "e7cbae04e0013b0f7c83edff39ff9766a2da94af9aa8e14ab5e9117b670a0e57",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "60107"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_6001_60107",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "张琳芃"
+  },
+  {
+    "player_id": "70101",
+    "game_name": "马队",
+    "game_name_aliases": [],
+    "real_name_original": "保罗·马尔蒂尼",
+    "real_name_english": "Paolo Maldini",
+    "english_name_key_original": "PlayerName_Paolo_Maldini",
+    "english_game_name": "Martini",
+    "club_original": "AC米兰",
+    "club_cn": "AC米兰",
+    "position": "DC",
+    "rarity_code": 5,
+    "portrait_id": "head_7001_70101",
+    "portrait_file": "portraits/1.5.5/head_7001_70101.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_7001_70101.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "47c99eebf299ab02cef42fc08b9069a70e26eaac804261db8337797ec2a86dd6",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "70101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head.png",
+    "source_sprite_frame": {
+      "name": "head_7001_70101",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        450,
+        603,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "保罗·马尔蒂尼"
+  },
+  {
+    "player_id": "80101",
+    "game_name": "马大腿",
+    "game_name_aliases": [],
+    "real_name_original": "马内",
+    "real_name_english": "Sadio Mane",
+    "english_name_key_original": "PlayerName_Sadio_Mane",
+    "english_game_name": "Money",
+    "club_original": "利物浦",
+    "club_cn": "利物浦",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_8001_80101",
+    "portrait_file": "portraits/1.5.5/head_8001_80101.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8001_80101.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "2aa1c812ed93957a14485007448e913aa01e0566d5338738d5d7008b8f42d495",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80101"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8001_80101",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "马内"
+  },
+  {
+    "player_id": "80102",
+    "game_name": "费米",
+    "game_name_aliases": [],
+    "real_name_original": "菲尔米诺",
+    "real_name_english": "Roberto Firmino",
+    "english_name_key_original": "PlayerName_Roberto_Firmino",
+    "english_game_name": "Flamingo",
+    "club_original": "利物浦",
+    "club_cn": "利物浦",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_8001_80102",
+    "portrait_file": "portraits/1.5.5/head_8001_80102.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8001_80102.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "94d694a619b57db1628a1ad3aa7b801adc3ffb8944422dabb709921199eea2bb",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80102"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8001_80102",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "菲尔米诺"
+  },
+  {
+    "player_id": "80103",
+    "game_name": "司徒",
+    "game_name_aliases": [],
+    "real_name_original": "斯图里奇",
+    "real_name_english": "Daniel Sturridge",
+    "english_name_key_original": "PlayerName_Daniel_Sturridge",
+    "english_game_name": "Storage",
+    "club_original": "利物浦",
+    "club_cn": "利物浦",
+    "position": "ST",
+    "rarity_code": 2,
+    "portrait_id": "head_8001_80103",
+    "portrait_file": "portraits/1.5.5/head_8001_80103.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8001_80103.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "76bff287961040ab220fe1bfce7a8861c17d06b977f8dd9f4f08a64cce238c58",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80103"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8001_80103",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "斯图里奇"
+  },
+  {
+    "player_id": "80104",
+    "game_name": "库鸟",
+    "game_name_aliases": [],
+    "real_name_original": "库蒂尼奥",
+    "real_name_english": "Philippe Coutinho",
+    "english_name_key_original": "PlayerName_Philippe_Coutinho",
+    "english_game_name": "Cortino",
+    "club_original": "利物浦",
+    "club_cn": "利物浦",
+    "position": "CM",
+    "rarity_code": 4,
+    "portrait_id": "head_8001_80104",
+    "portrait_file": "portraits/1.5.5/head_8001_80104.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8001_80104.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "bf3ed7debf696f96221958d1583afd6bf31d0f84794795d92b3807435225485b",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80104",
+      "180104"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8001_80104",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        1521,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "库蒂尼奥"
+  },
+  {
+    "player_id": "80105",
+    "game_name": "纳天王",
+    "game_name_aliases": [],
+    "real_name_original": "拉拉纳",
+    "real_name_english": "Adam Lallana",
+    "english_name_key_original": "PlayerName_Adam_Lallana",
+    "english_game_name": "Lala",
+    "club_original": "利物浦",
+    "club_cn": "利物浦",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_8001_80105",
+    "portrait_file": "portraits/1.5.5/head_8001_80105.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8001_80105.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "e8f8183b51988525e503d719805c224252b85ada0b22e122f6692208a1e4f41d",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80105"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8001_80105",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "拉拉纳"
+  },
+  {
+    "player_id": "80106",
+    "game_name": "克莱鹰",
+    "game_name_aliases": [],
+    "real_name_original": "克莱因",
+    "real_name_english": "Nathaniel Clyne",
+    "english_name_key_original": "PlayerName_Nathaniel_Clyne",
+    "english_game_name": "Incline",
+    "club_original": "利物浦",
+    "club_cn": "利物浦",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_8001_80106",
+    "portrait_file": "portraits/1.5.5/head_8001_80106.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8001_80106.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "a1165780f9c23cef71d022c14effe0e0f77b5413ad4f9308505d973e8b4faa56",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80106"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8001_80106",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        197,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "克莱因"
+  },
+  {
+    "player_id": "80107",
+    "game_name": "莫小雷",
+    "game_name_aliases": [],
+    "real_name_original": "莫雷诺",
+    "real_name_english": "Alberto Moreno",
+    "english_name_key_original": "PlayerName_Alberto_Moreno",
+    "english_game_name": "Beemo",
+    "club_original": "利物浦",
+    "club_cn": "利物浦",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_8001_80107",
+    "portrait_file": "portraits/1.5.5/head_8001_80107.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8001_80107.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "d3ead400848005f01df23585b437bdad856ae85c748fab3678bc5ece12fdbc4e",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80107"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8001_80107",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        393,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "莫雷诺"
+  },
+  {
+    "player_id": "80201",
+    "game_name": "师奶",
+    "game_name_aliases": [],
+    "real_name_original": "斯内德",
+    "real_name_english": "Wesley Sneijder",
+    "english_name_key_original": "PlayerName_Wesley_Sneijder",
+    "english_game_name": "Slider",
+    "club_original": "加拉塔萨雷足球俱乐部",
+    "club_cn": "加拉塔萨雷",
+    "position": "CM",
+    "rarity_code": 3,
+    "portrait_id": "head_8002_80201",
+    "portrait_file": "portraits/1.5.5/head_8002_80201.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8002_80201.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "f4e6fd407fd4d316a23ec15c727da41fbd681a3feb92e27e1ad299e19e42d113",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80201"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8002_80201",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        589,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "斯内德"
+  },
+  {
+    "player_id": "80202",
+    "game_name": "魔兽",
+    "game_name_aliases": [],
+    "real_name_original": "德罗巴",
+    "real_name_english": "Didier Drogba",
+    "english_name_key_original": "PlayerName_Didier_Drogba",
+    "english_game_name": "Drachma",
+    "club_original": "加拉塔萨雷足球俱乐部",
+    "club_cn": "加拉塔萨雷",
+    "position": "ST",
+    "rarity_code": 4,
+    "portrait_id": "head_8002_80202",
+    "portrait_file": "portraits/1.5.5/head_8002_80202.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8002_80202.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "fcba0fb02841742879a14d950231657a0218a5167801f39133c8bbe1a1d63f39",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80202",
+      "180202"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8002_80202",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        785,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "德罗巴"
+  },
+  {
+    "player_id": "80203",
+    "game_name": "拓扑哥哥",
+    "game_name_aliases": [],
+    "real_name_original": "大阿尔滕托普",
+    "real_name_english": "Hamit Altintop",
+    "english_name_key_original": "PlayerName_Hamit_Altintop",
+    "english_game_name": "Tinroof",
+    "club_original": "加拉塔萨雷足球俱乐部",
+    "club_cn": "加拉塔萨雷",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_8002_80203",
+    "portrait_file": "portraits/1.5.5/head_8002_80203.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8002_80203.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "7375dc40897c8d9e46a8e5e6c6612000e6554e6b7a987e9b3ebf153595ad4d9a",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80203"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8002_80203",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        981,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "大阿尔滕托普"
+  },
+  {
+    "player_id": "80204",
+    "game_name": "波尔蒂王子",
+    "game_name_aliases": [],
+    "real_name_original": "波多尔斯基",
+    "real_name_english": "Lukas Podolski",
+    "english_name_key_original": "PlayerName_Lukas_Podolski",
+    "english_game_name": "Pedalsky",
+    "club_original": "加拉塔萨雷足球俱乐部",
+    "club_cn": "加拉塔萨雷",
+    "position": "ST",
+    "rarity_code": 3,
+    "portrait_id": "head_8002_80204",
+    "portrait_file": "portraits/1.5.5/head_8002_80204.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8002_80204.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "9f57e92aa7a696c2dfe5b20776c7b21e17fcfbe125a0080515aa5ee25e6c91ac",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80204"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8002_80204",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1177,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "波多尔斯基"
+  },
+  {
+    "player_id": "80205",
+    "game_name": "功夫熊猫",
+    "game_name_aliases": [],
+    "real_name_original": "潘德夫",
+    "real_name_english": "Goran Pandev",
+    "english_name_key_original": "PlayerName_Goran_Pandev",
+    "english_game_name": "Panda",
+    "club_original": "加拉塔萨雷足球俱乐部",
+    "club_cn": "加拉塔萨雷",
+    "position": "CM",
+    "rarity_code": 2,
+    "portrait_id": "head_8002_80205",
+    "portrait_file": "portraits/1.5.5/head_8002_80205.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8002_80205.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "07fefdfebd21dfcd4e58f6dad1a2acca930d6e52f91228a0e2cf40d542261bc1",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80205"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8002_80205",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1373,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "潘德夫"
+  },
+  {
+    "player_id": "80206",
+    "game_name": "耳帝",
+    "game_name_aliases": [],
+    "real_name_original": "布尔迪索",
+    "real_name_english": "Nicolas Burdisso",
+    "english_name_key_original": "PlayerName_Nicolas_Burdisso",
+    "english_game_name": "Baradiso",
+    "club_original": "加拉塔萨雷足球俱乐部",
+    "club_cn": "加拉塔萨雷",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_8002_80206",
+    "portrait_file": "portraits/1.5.5/head_8002_80206.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8002_80206.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "2575f88634f6dd975259aaed9756a2c4f2f97cd8404648033f89e161073259ad",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80206"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8002_80206",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1569,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "原表身份与现实俱乐部记录有冲突，待确认",
+    "display_real_name": "布尔迪索",
+    "identity_note": "原表写 Nicolas Burdisso；加拉塔萨雷 2014-02-03 官方公告签约的是 Guillermo Enio Burdisso。保留原表，未擅自改名。"
+  },
+  {
+    "player_id": "80207",
+    "game_name": "霉洛",
+    "game_name_aliases": [],
+    "real_name_original": "梅洛",
+    "real_name_english": "Felipe Melo",
+    "english_name_key_original": "PlayerName_Felipe_Melo",
+    "english_game_name": "Mallow",
+    "club_original": "加拉塔萨雷足球俱乐部",
+    "club_cn": "加拉塔萨雷",
+    "position": "DC",
+    "rarity_code": 2,
+    "portrait_id": "head_8002_80207",
+    "portrait_file": "portraits/1.5.5/head_8002_80207.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_8002_80207.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "704c25051da69b2431ea429b6b4765bc44affc8357af7c28903a5cb1666b939a",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "80207"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head_2.png",
+    "source_sprite_frame": {
+      "name": "head_8002_80207",
+      "texture": "083bbd24-0d38-41ec-a91e-eb0a1eb5af05",
+      "rect": [
+        1765,
+        1711,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "梅洛"
+  },
+  {
+    "player_id": "90001",
+    "game_name": "齐祖",
+    "game_name_aliases": [],
+    "real_name_original": "齐达内",
+    "real_name_english": "Zinedine Zidane",
+    "english_name_key_original": "PlayerName_Zinedine_Yazid_Zidane",
+    "english_game_name": "Zizou",
+    "club_original": "Leader",
+    "club_cn": "传奇球员",
+    "position": "CM",
+    "rarity_code": 5,
+    "portrait_id": "head_9001_90001",
+    "portrait_file": "portraits/1.5.5/head_9001_90001.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_9001_90001.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "1bdce4dc8e829161c64c9e27ec0e00244504aad63bf9132672cd3ef190d9ab5e",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "90001"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head.png",
+    "source_sprite_frame": {
+      "name": "head_9001_90001",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        256,
+        603,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "齐达内"
+  },
+  {
+    "player_id": "90002",
+    "game_name": "大罗",
+    "game_name_aliases": [],
+    "real_name_original": "罗纳尔多",
+    "real_name_english": "Ronaldo Nazário",
+    "english_name_key_original": "PlayerName_Ronaldo_Luiz_NazarioDe_Lima",
+    "english_game_name": "Rolando",
+    "club_original": "Leader",
+    "club_cn": "传奇球员",
+    "position": "ST",
+    "rarity_code": 9,
+    "portrait_id": "head_9001_90002",
+    "portrait_file": "portraits/1.5.5/head_9001_90002.png",
+    "portrait_reference_for_generation": "portraits/1.2.0/head_9001_90002.png",
+    "reference_version": "1.2.0",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "f6784e1dad440a8a67f539e89196d0ef7719bbdc2e55ccf95fffc1fb7a277de2",
+    "first_recovered_in": "1.2.0",
+    "card_variant_ids": [
+      "90002"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head.png",
+    "source_sprite_frame": {
+      "name": "head_9001_90002",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        658,
+        389,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "罗纳尔多"
+  },
+  {
+    "player_id": "90003",
+    "game_name": "小贝",
+    "game_name_aliases": [],
+    "real_name_original": "贝克汉姆",
+    "real_name_english": "David Beckham",
+    "english_name_key_original": "PlayerName_David_Beckham",
+    "english_game_name": "Backrum",
+    "club_original": "Leader",
+    "club_cn": "传奇球员",
+    "position": "CM",
+    "rarity_code": 9,
+    "portrait_id": "head_9001_90003",
+    "portrait_file": "portraits/1.5.5/head_9001_90003.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_9001_90003.png",
+    "reference_version": "1.5.5",
+    "portrait_size": [
+      194,
+      188
+    ],
+    "portrait_sha256": "1528240442c5c777dbe845d6c08f3fa70b02cb262dc0be3613b37482f6b1ef76",
+    "first_recovered_in": "1.5.5",
+    "card_variant_ids": [
+      "90003"
+    ],
+    "source_card_table": "assets/res/raw-assets/resources/data/card.txt",
+    "source_head_atlas": "assets/res/raw-assets/resources/atlas/head.png",
+    "source_sprite_frame": {
+      "name": "head_9001_90003",
+      "texture": "bb1780ae-b6c3-4c9a-9d63-a1b75ebbc52e",
+      "rect": [
+        658,
+        201,
+        194,
+        188
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        194,
+        188
+      ]
+    },
+    "source_version": "1.5.5",
+    "evidence": "原名与头像编号来自同一张 card 表；用 SpriteFrame 坐标定位对应图集，按旋转与偏移复原。",
+    "identity_status": "包内原名与头像编号直接配对",
+    "display_real_name": "贝克汉姆"
+  },
+  {
+    "player_id": "40109",
+    "game_name": "小罗（候选）",
+    "display_real_name": "罗纳尔迪尼奥（待确认）",
+    "real_name_original": "",
+    "real_name_english": "Ronaldinho Gaúcho (candidate)",
+    "club_cn": "未关联卡表",
+    "position": "",
+    "portrait_id": "head_4001_40109",
+    "portrait_file": "portraits/1.5.5/head_4001_40109.png",
+    "portrait_reference_for_generation": "portraits/1.5.5/head_4001_40109.png",
+    "reference_version": "1.5.5",
+    "source_version": "1.5.5",
+    "first_recovered_in": "1.5.5",
+    "identity_status": "图像与语言表线索匹配，未找到卡牌记录，待用户确认",
+    "game_name_aliases": [],
+    "card_variant_ids": [],
+    "portrait_size": [
+      194,
+      188
+    ]
+  },
+  {
+    "player_id": null,
+    "language_key": "PlayerName_Fabio_Cannavaro",
+    "game_name": "卡队",
+    "display_real_name": "法比奥·卡纳瓦罗（语言键识别）",
+    "real_name_original": "",
+    "real_name_english": "Fabio Cannavaro",
+    "club_cn": "未关联卡表",
+    "position": "",
+    "portrait_id": "",
+    "portrait_file": null,
+    "portrait_reference_for_generation": null,
+    "reference_version": "1.5.5",
+    "source_version": "1.5.5",
+    "first_recovered_in": "1.5.5",
+    "identity_status": "仅语言表出现，未找到头像、卡牌或属性",
+    "game_name_aliases": [],
+    "card_variant_ids": []
+  }
+]

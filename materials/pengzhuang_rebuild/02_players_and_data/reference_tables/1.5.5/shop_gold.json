@@ -1,0 +1,65 @@
+{
+  "version": "1.5.5",
+  "table": "shop_gold",
+  "source_path": "assets/res/raw-assets/resources/data/shop_gold.txt",
+  "source_sha256": "b296943613c1978d78923a5e87a8256d82c4717b6e4af1e30f36f317361b800e",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "itemId",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "costType",
+      "original_key": "costType",
+      "label": "消费类型",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "cost",
+      "original_key": "cost",
+      "label": "消费数值",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "gold",
+      "original_key": "gold",
+      "label": "购买获得金币数量",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "12",
+      "costType": "Crystal",
+      "cost": "60",
+      "gold": "1000"
+    },
+    {
+      "id": "13",
+      "costType": "Crystal",
+      "cost": "500",
+      "gold": "10000"
+    },
+    {
+      "id": "14",
+      "costType": "Crystal",
+      "cost": "4500",
+      "gold": "100000"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    4,
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

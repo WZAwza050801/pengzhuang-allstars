@@ -1,0 +1,60 @@
+{
+  "version": "1.5.5",
+  "table": "decompose",
+  "source_path": "assets/res/raw-assets/resources/data/decompose.txt",
+  "source_sha256": "5cfff66c2a1fd59d6ea5ffc3d68c1914e3201e8619082dad444cd8cb2f0ade30",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "品质ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "transformation",
+      "original_key": "transformation",
+      "label": "转换系数",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "transformation": "10"
+    },
+    {
+      "id": "2",
+      "transformation": "50"
+    },
+    {
+      "id": "3",
+      "transformation": "200"
+    },
+    {
+      "id": "4",
+      "transformation": "800"
+    },
+    {
+      "id": "5",
+      "transformation": "3200"
+    },
+    {
+      "id": "9",
+      "transformation": "2400"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

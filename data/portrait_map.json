@@ -1,0 +1,555 @@
+{
+  "version": "portraits-1",
+  "size": 256,
+  "padRatio": 0.06,
+  "alphaThresh": 16,
+  "note": "原版 1.5.5 head_*.png。只做 alpha 内容框裁切、长边 6% 留白、等比缩放到 256、圆形遮罩。不重绘。无原图的球员不在 entries 里，渲染回退到 players/<id>_avatar.png。",
+  "fallbackIds": [
+    "p06",
+    "p07",
+    "p08",
+    "p09",
+    "p10",
+    "p11",
+    "p12",
+    "p13",
+    "p14",
+    "p15",
+    "p16"
+  ],
+  "excludedPortraits": [
+    "head_4001_40109"
+  ],
+  "entries": [
+    {
+      "id": "p01",
+      "srcId": "40108",
+      "portraitId": "head_4001_40108"
+    },
+    {
+      "id": "p02",
+      "srcId": "40208",
+      "portraitId": "head_4002_40208"
+    },
+    {
+      "id": "p03",
+      "srcId": "90002",
+      "portraitId": "head_9001_90002"
+    },
+    {
+      "id": "p04",
+      "srcId": "20102",
+      "portraitId": "head_2001_20102"
+    },
+    {
+      "id": "p05",
+      "srcId": "30103",
+      "portraitId": "head_3001_30103"
+    },
+    {
+      "id": "p17",
+      "srcId": "10101",
+      "portraitId": "head_1001_10101"
+    },
+    {
+      "id": "p18",
+      "srcId": "10102",
+      "portraitId": "head_1001_10102"
+    },
+    {
+      "id": "p19",
+      "srcId": "10103",
+      "portraitId": "head_1001_10103"
+    },
+    {
+      "id": "p20",
+      "srcId": "10104",
+      "portraitId": "head_1001_10104"
+    },
+    {
+      "id": "p21",
+      "srcId": "10105",
+      "portraitId": "head_1001_10105"
+    },
+    {
+      "id": "p22",
+      "srcId": "10106",
+      "portraitId": "head_1001_10106"
+    },
+    {
+      "id": "p23",
+      "srcId": "10107",
+      "portraitId": "head_1001_10107"
+    },
+    {
+      "id": "p24",
+      "srcId": "10201",
+      "portraitId": "head_1002_10201"
+    },
+    {
+      "id": "p25",
+      "srcId": "10202",
+      "portraitId": "head_1002_10202"
+    },
+    {
+      "id": "p26",
+      "srcId": "10203",
+      "portraitId": "head_1002_10203"
+    },
+    {
+      "id": "p27",
+      "srcId": "10204",
+      "portraitId": "head_1002_10204"
+    },
+    {
+      "id": "p28",
+      "srcId": "10205",
+      "portraitId": "head_1002_10205"
+    },
+    {
+      "id": "p29",
+      "srcId": "10206",
+      "portraitId": "head_1002_10206"
+    },
+    {
+      "id": "p30",
+      "srcId": "10207",
+      "portraitId": "head_1002_10207"
+    },
+    {
+      "id": "p31",
+      "srcId": "10301",
+      "portraitId": "head_1003_10301"
+    },
+    {
+      "id": "p32",
+      "srcId": "10302",
+      "portraitId": "head_1003_10302"
+    },
+    {
+      "id": "p33",
+      "srcId": "10303",
+      "portraitId": "head_1003_10303"
+    },
+    {
+      "id": "p34",
+      "srcId": "10304",
+      "portraitId": "head_1003_10304"
+    },
+    {
+      "id": "p35",
+      "srcId": "10305",
+      "portraitId": "head_1003_10305"
+    },
+    {
+      "id": "p36",
+      "srcId": "10306",
+      "portraitId": "head_1003_10306"
+    },
+    {
+      "id": "p37",
+      "srcId": "10307",
+      "portraitId": "head_1003_10307"
+    },
+    {
+      "id": "p38",
+      "srcId": "10401",
+      "portraitId": "head_1004_10401"
+    },
+    {
+      "id": "p39",
+      "srcId": "10402",
+      "portraitId": "head_1004_10402"
+    },
+    {
+      "id": "p40",
+      "srcId": "10403",
+      "portraitId": "head_1004_10403"
+    },
+    {
+      "id": "p41",
+      "srcId": "10404",
+      "portraitId": "head_1004_10404"
+    },
+    {
+      "id": "p42",
+      "srcId": "10405",
+      "portraitId": "head_1004_10405"
+    },
+    {
+      "id": "p43",
+      "srcId": "10406",
+      "portraitId": "head_1004_10406"
+    },
+    {
+      "id": "p44",
+      "srcId": "10407",
+      "portraitId": "head_1004_10407"
+    },
+    {
+      "id": "p45",
+      "srcId": "20101",
+      "portraitId": "head_2001_20101"
+    },
+    {
+      "id": "p46",
+      "srcId": "20103",
+      "portraitId": "head_2001_20103"
+    },
+    {
+      "id": "p47",
+      "srcId": "20104",
+      "portraitId": "head_2001_20104"
+    },
+    {
+      "id": "p48",
+      "srcId": "20105",
+      "portraitId": "head_2001_20105"
+    },
+    {
+      "id": "p49",
+      "srcId": "20106",
+      "portraitId": "head_2001_20106"
+    },
+    {
+      "id": "p50",
+      "srcId": "20107",
+      "portraitId": "head_2001_20107"
+    },
+    {
+      "id": "p51",
+      "srcId": "20201",
+      "portraitId": "head_2002_20201"
+    },
+    {
+      "id": "p52",
+      "srcId": "20202",
+      "portraitId": "head_2002_20202"
+    },
+    {
+      "id": "p53",
+      "srcId": "20203",
+      "portraitId": "head_2002_20203"
+    },
+    {
+      "id": "p54",
+      "srcId": "20204",
+      "portraitId": "head_2002_20204"
+    },
+    {
+      "id": "p55",
+      "srcId": "20205",
+      "portraitId": "head_2002_20205"
+    },
+    {
+      "id": "p56",
+      "srcId": "20206",
+      "portraitId": "head_2002_20206"
+    },
+    {
+      "id": "p57",
+      "srcId": "20207",
+      "portraitId": "head_2002_20207"
+    },
+    {
+      "id": "p58",
+      "srcId": "30101",
+      "portraitId": "head_3001_30101"
+    },
+    {
+      "id": "p59",
+      "srcId": "30102",
+      "portraitId": "head_3001_30102"
+    },
+    {
+      "id": "p60",
+      "srcId": "30104",
+      "portraitId": "head_3001_30104"
+    },
+    {
+      "id": "p61",
+      "srcId": "30105",
+      "portraitId": "head_3001_30105"
+    },
+    {
+      "id": "p62",
+      "srcId": "30106",
+      "portraitId": "head_3001_30106"
+    },
+    {
+      "id": "p63",
+      "srcId": "30107",
+      "portraitId": "head_3001_30107"
+    },
+    {
+      "id": "p64",
+      "srcId": "30108",
+      "portraitId": "head_3001_30108"
+    },
+    {
+      "id": "p65",
+      "srcId": "40101",
+      "portraitId": "head_4001_40101"
+    },
+    {
+      "id": "p66",
+      "srcId": "40102",
+      "portraitId": "head_4001_40102"
+    },
+    {
+      "id": "p67",
+      "srcId": "40103",
+      "portraitId": "head_4001_40103"
+    },
+    {
+      "id": "p68",
+      "srcId": "40104",
+      "portraitId": "head_4001_40104"
+    },
+    {
+      "id": "p69",
+      "srcId": "40105",
+      "portraitId": "head_4001_40105"
+    },
+    {
+      "id": "p70",
+      "srcId": "40106",
+      "portraitId": "head_4001_40106"
+    },
+    {
+      "id": "p71",
+      "srcId": "40107",
+      "portraitId": "head_4001_40107"
+    },
+    {
+      "id": "p72",
+      "srcId": "40110",
+      "portraitId": "head_4001_40110"
+    },
+    {
+      "id": "p73",
+      "srcId": "40201",
+      "portraitId": "head_4002_40201"
+    },
+    {
+      "id": "p74",
+      "srcId": "40202",
+      "portraitId": "head_4002_40202"
+    },
+    {
+      "id": "p75",
+      "srcId": "40203",
+      "portraitId": "head_4002_40203"
+    },
+    {
+      "id": "p76",
+      "srcId": "40204",
+      "portraitId": "head_4002_40204"
+    },
+    {
+      "id": "p77",
+      "srcId": "40205",
+      "portraitId": "head_4002_40205"
+    },
+    {
+      "id": "p78",
+      "srcId": "40206",
+      "portraitId": "head_4002_40206"
+    },
+    {
+      "id": "p79",
+      "srcId": "40207",
+      "portraitId": "head_4002_40207"
+    },
+    {
+      "id": "p80",
+      "srcId": "40301",
+      "portraitId": "head_4003_40301"
+    },
+    {
+      "id": "p81",
+      "srcId": "40302",
+      "portraitId": "head_4003_40302"
+    },
+    {
+      "id": "p82",
+      "srcId": "40303",
+      "portraitId": "head_4003_40303"
+    },
+    {
+      "id": "p83",
+      "srcId": "40304",
+      "portraitId": "head_4003_40304"
+    },
+    {
+      "id": "p84",
+      "srcId": "40305",
+      "portraitId": "head_4003_40305"
+    },
+    {
+      "id": "p85",
+      "srcId": "40306",
+      "portraitId": "head_4003_40306"
+    },
+    {
+      "id": "p86",
+      "srcId": "40307",
+      "portraitId": "head_4003_40307"
+    },
+    {
+      "id": "p87",
+      "srcId": "50101",
+      "portraitId": "head_5001_50101"
+    },
+    {
+      "id": "p88",
+      "srcId": "50102",
+      "portraitId": "head_5001_50102"
+    },
+    {
+      "id": "p89",
+      "srcId": "50103",
+      "portraitId": "head_5001_50103"
+    },
+    {
+      "id": "p90",
+      "srcId": "50104",
+      "portraitId": "head_5001_50104"
+    },
+    {
+      "id": "p91",
+      "srcId": "50105",
+      "portraitId": "head_5001_50105"
+    },
+    {
+      "id": "p92",
+      "srcId": "50106",
+      "portraitId": "head_5001_50106"
+    },
+    {
+      "id": "p93",
+      "srcId": "50107",
+      "portraitId": "head_5001_50107"
+    },
+    {
+      "id": "p94",
+      "srcId": "60101",
+      "portraitId": "head_6001_60101"
+    },
+    {
+      "id": "p95",
+      "srcId": "60102",
+      "portraitId": "head_6001_60102"
+    },
+    {
+      "id": "p96",
+      "srcId": "60103",
+      "portraitId": "head_6001_60103"
+    },
+    {
+      "id": "p97",
+      "srcId": "60104",
+      "portraitId": "head_6001_60104"
+    },
+    {
+      "id": "p98",
+      "srcId": "60105",
+      "portraitId": "head_6001_60105"
+    },
+    {
+      "id": "p99",
+      "srcId": "60106",
+      "portraitId": "head_6001_60106"
+    },
+    {
+      "id": "p100",
+      "srcId": "60107",
+      "portraitId": "head_6001_60107"
+    },
+    {
+      "id": "p101",
+      "srcId": "70101",
+      "portraitId": "head_7001_70101"
+    },
+    {
+      "id": "p102",
+      "srcId": "80101",
+      "portraitId": "head_8001_80101"
+    },
+    {
+      "id": "p103",
+      "srcId": "80102",
+      "portraitId": "head_8001_80102"
+    },
+    {
+      "id": "p104",
+      "srcId": "80103",
+      "portraitId": "head_8001_80103"
+    },
+    {
+      "id": "p105",
+      "srcId": "80104",
+      "portraitId": "head_8001_80104"
+    },
+    {
+      "id": "p106",
+      "srcId": "80105",
+      "portraitId": "head_8001_80105"
+    },
+    {
+      "id": "p107",
+      "srcId": "80106",
+      "portraitId": "head_8001_80106"
+    },
+    {
+      "id": "p108",
+      "srcId": "80107",
+      "portraitId": "head_8001_80107"
+    },
+    {
+      "id": "p109",
+      "srcId": "80201",
+      "portraitId": "head_8002_80201"
+    },
+    {
+      "id": "p110",
+      "srcId": "80202",
+      "portraitId": "head_8002_80202"
+    },
+    {
+      "id": "p111",
+      "srcId": "80203",
+      "portraitId": "head_8002_80203"
+    },
+    {
+      "id": "p112",
+      "srcId": "80204",
+      "portraitId": "head_8002_80204"
+    },
+    {
+      "id": "p113",
+      "srcId": "80205",
+      "portraitId": "head_8002_80205"
+    },
+    {
+      "id": "p114",
+      "srcId": "80206",
+      "portraitId": "head_8002_80206"
+    },
+    {
+      "id": "p115",
+      "srcId": "80207",
+      "portraitId": "head_8002_80207"
+    },
+    {
+      "id": "p116",
+      "srcId": "90001",
+      "portraitId": "head_9001_90001"
+    },
+    {
+      "id": "p117",
+      "srcId": "90003",
+      "portraitId": "head_9001_90003"
+    }
+  ]
+}

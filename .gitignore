@@ -1,0 +1,54 @@
+# dependencies & build
+node_modules/
+dist/
+*.log
+vite.log
+_build.log
+_e2e*.log
+_net.log
+
+# secrets — keep .env.example
+.env
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# python
+__pycache__/
+*.py[cod]
+
+# local agent / browser dumps
+.qwen/
+.playwright-mcp/
+test-results/
+playwright-report/
+blob-report/
+
+# archives and local backups
+backups/
+*.zip
+
+# art generation intermediates (runtime assets live in client/public)
+art/ai/
+art/ai-sample/
+art/ai-v2/
+art/cutout/
+
+# run diagnostics, probe dumps, watcher logs — keep STAGE_* / DECISIONS / TASK_QUEUE
+runs/_diag/
+runs/*.log
+runs/*.out.txt
+runs/*.err.txt
+runs/*.rc.txt
+runs/*.fc.txt
+runs/_*.png
+runs/_*.jpg
+runs/_*.txt
+runs/_*.cjs
+runs/_*.json.bak

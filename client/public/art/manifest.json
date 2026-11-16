@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-15T08:56:40.213Z",
+  "source": "art/{cutout,raw}",
+  "note": "cutout = 抠图/重绘，raw = 原图；缺失字段为 null，前端切换时需回退。",
+  "playerCount": 16,
+  "withCutout": 16,
+  "withRaw": 16,
+  "players": [
+    {
+      "id": "01",
+      "cutout": "/art/cutout/p01.png",
+      "raw": "/art/raw/p01.jpg",
+      "cutoutBytes": 742423,
+      "rawBytes": 226192,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "02",
+      "cutout": "/art/cutout/p02.png",
+      "raw": "/art/raw/p02.jpg",
+      "cutoutBytes": 566263,
+      "rawBytes": 194808,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "03",
+      "cutout": "/art/cutout/p03.png",
+      "raw": "/art/raw/p03.jpg",
+      "cutoutBytes": 548137,
+      "rawBytes": 190575,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "04",
+      "cutout": "/art/cutout/p04.png",
+      "raw": "/art/raw/p04.jpg",
+      "cutoutBytes": 489127,
+      "rawBytes": 180233,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "05",
+      "cutout": "/art/cutout/p05.png",
+      "raw": "/art/raw/p05.jpg",
+      "cutoutBytes": 609841,
+      "rawBytes": 198616,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "06",
+      "cutout": "/art/cutout/p06.png",
+      "raw": "/art/raw/p06.jpg",
+      "cutoutBytes": 653793,
+      "rawBytes": 208136,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "07",
+      "cutout": "/art/cutout/p07.png",
+      "raw": "/art/raw/p07.jpg",
+      "cutoutBytes": 590744,
+      "rawBytes": 194464,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "08",
+      "cutout": "/art/cutout/p08.png",
+      "raw": "/art/raw/p08.jpg",
+      "cutoutBytes": 676107,
+      "rawBytes": 226311,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "09",
+      "cutout": "/art/cutout/p09.png",
+      "raw": "/art/raw/p09.jpg",
+      "cutoutBytes": 730440,
+      "rawBytes": 216452,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "10",
+      "cutout": "/art/cutout/p10.png",
+      "raw": "/art/raw/p10.jpg",
+      "cutoutBytes": 490999,
+      "rawBytes": 169838,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "11",
+      "cutout": "/art/cutout/p11.png",
+      "raw": "/art/raw/p11.jpg",
+      "cutoutBytes": 573854,
+      "rawBytes": 193444,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "12",
+      "cutout": "/art/cutout/p12.png",
+      "raw": "/art/raw/p12.jpg",
+      "cutoutBytes": 657330,
+      "rawBytes": 212750,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "13",
+      "cutout": "/art/cutout/p13.png",
+      "raw": "/art/raw/p13.jpg",
+      "cutoutBytes": 685879,
+      "rawBytes": 217189,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "14",
+      "cutout": "/art/cutout/p14.png",
+      "raw": "/art/raw/p14.jpg",
+      "cutoutBytes": 731934,
+      "rawBytes": 232227,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "15",
+      "cutout": "/art/cutout/p15.png",
+      "raw": "/art/raw/p15.jpg",
+      "cutoutBytes": 706079,
+      "rawBytes": 219817,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    },
+    {
+      "id": "16",
+      "cutout": "/art/cutout/p16.png",
+      "raw": "/art/raw/p16.jpg",
+      "cutoutBytes": 849372,
+      "rawBytes": 248957,
+      "cutoutWidth": 864,
+      "cutoutHeight": 1152
+    }
+  ]
+}

@@ -1,0 +1,1442 @@
+[
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10001",
+    "name": "2_2_1(A)",
+    "positions": [
+      "ST;35:50",
+      "ST;65:50",
+      "CM;20:50",
+      "CM;80:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 1,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10002",
+    "name": "1_2_2(A)",
+    "positions": [
+      "ST;50:50",
+      "CM;30:50",
+      "CM;70:50",
+      "DC;10:50",
+      "DC;90:50"
+    ],
+    "ball": "",
+    "req_level": 2,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10003",
+    "name": "2_2_1(W)",
+    "positions": [
+      "ST;10:50",
+      "ST;90:50",
+      "CM;30:50",
+      "CM;70:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 3,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10004",
+    "name": "1_2_2(S)",
+    "positions": [
+      "ST;50:50",
+      "CM;20:50",
+      "CM;80:50",
+      "DC;35:50",
+      "DC;65:50"
+    ],
+    "ball": "",
+    "req_level": 4,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10005",
+    "name": "2_2_1(S)",
+    "positions": [
+      "ST;33:50",
+      "ST;67:50",
+      "CM;33:50",
+      "CM;67:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 5,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10006",
+    "name": "2_1_2(W)",
+    "positions": [
+      "ST;10:50",
+      "ST;90:50",
+      "CM;50:50",
+      "DC;30:50",
+      "DC;70:50"
+    ],
+    "ball": "",
+    "req_level": 6,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10007",
+    "name": "3_1_1(A)",
+    "positions": [
+      "ST;10:50",
+      "ST;50:50",
+      "ST;90:50",
+      "CM;50:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 7,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10008",
+    "name": "1_1_3(D)",
+    "positions": [
+      "ST;50:50",
+      "CM;50:50",
+      "DC;10:50",
+      "DC;50:50",
+      "DC;90:50"
+    ],
+    "ball": "",
+    "req_level": 8,
+    "available": ""
+  },
+  {
+    "version": "1.2.0",
+    "kind": "比赛阵型",
+    "id": "10009",
+    "name": "1_3_1(S)",
+    "positions": [
+      "ST;50:50",
+      "CM;10:50",
+      "CM;50:50",
+      "CM;90:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 9,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10001",
+    "name": "2_2_1(A)",
+    "positions": [
+      "ST;35:50",
+      "ST;65:50",
+      "CM;20:50",
+      "CM;80:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 1,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10002",
+    "name": "1_2_2(A)",
+    "positions": [
+      "ST;50:50",
+      "CM;30:50",
+      "CM;70:50",
+      "DC;10:50",
+      "DC;90:50"
+    ],
+    "ball": "",
+    "req_level": 2,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10003",
+    "name": "2_2_1(W)",
+    "positions": [
+      "ST;10:50",
+      "ST;90:50",
+      "CM;30:50",
+      "CM;70:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 3,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10004",
+    "name": "1_2_2(S)",
+    "positions": [
+      "ST;50:50",
+      "CM;20:50",
+      "CM;80:50",
+      "DC;35:50",
+      "DC;65:50"
+    ],
+    "ball": "",
+    "req_level": 4,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10005",
+    "name": "2_2_1(S)",
+    "positions": [
+      "ST;33:50",
+      "ST;67:50",
+      "CM;33:50",
+      "CM;67:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 5,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10006",
+    "name": "2_1_2(W)",
+    "positions": [
+      "ST;10:50",
+      "ST;90:50",
+      "CM;50:50",
+      "DC;30:50",
+      "DC;70:50"
+    ],
+    "ball": "",
+    "req_level": 6,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10007",
+    "name": "3_1_1(A)",
+    "positions": [
+      "ST;10:50",
+      "ST;50:50",
+      "ST;90:50",
+      "CM;50:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 7,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10008",
+    "name": "1_1_3(D)",
+    "positions": [
+      "ST;50:50",
+      "CM;50:50",
+      "DC;10:50",
+      "DC;50:50",
+      "DC;90:50"
+    ],
+    "ball": "",
+    "req_level": 8,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "比赛阵型",
+    "id": "10009",
+    "name": "1_3_1(S)",
+    "positions": [
+      "ST;50:50",
+      "CM;10:50",
+      "CM;50:50",
+      "CM;90:50",
+      "DC;50:50"
+    ],
+    "ball": "",
+    "req_level": 9,
+    "available": "1"
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10001",
+    "name": "",
+    "positions": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10002",
+    "name": "",
+    "positions": [
+      "46;62",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "48;81",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10003",
+    "name": "",
+    "positions": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10004",
+    "name": "",
+    "positions": [
+      "66;73",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "50;90",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10005",
+    "name": "",
+    "positions": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10006",
+    "name": "",
+    "positions": [
+      "68;35",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "51;80",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10007",
+    "name": "",
+    "positions": [
+      "40;80",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10008",
+    "name": "",
+    "positions": [
+      "50;60",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "50;90",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10009",
+    "name": "",
+    "positions": [
+      "62;72",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10010",
+    "name": "",
+    "positions": [
+      "55;45",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "75;80",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10011",
+    "name": "",
+    "positions": [
+      "48;68",
+      "38;83",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10012",
+    "name": "",
+    "positions": [
+      "50;46",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "30;88",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10013",
+    "name": "",
+    "positions": [
+      "56;65",
+      "38;74",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10014",
+    "name": "",
+    "positions": [
+      "55;51",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "55;80",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10015",
+    "name": "",
+    "positions": [
+      "45;80",
+      "42;60",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10016",
+    "name": "",
+    "positions": [
+      "65;55",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "45;90",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10017",
+    "name": "",
+    "positions": [
+      "36;78",
+      "52;69",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10018",
+    "name": "",
+    "positions": [
+      "65;49",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "42;87",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10019",
+    "name": "",
+    "positions": [
+      "50;80",
+      "60;95",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10020",
+    "name": "",
+    "positions": [
+      "50;60",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "25;75",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10021",
+    "name": "",
+    "positions": [
+      "50;80",
+      "70;60",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10022",
+    "name": "",
+    "positions": [
+      "50;60",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "10;70",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10023",
+    "name": "",
+    "positions": [
+      "74;63",
+      "55;90",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10024",
+    "name": "",
+    "positions": [
+      "52;58",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "80;75",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10025",
+    "name": "",
+    "positions": [
+      "55;85",
+      "65;95",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10026",
+    "name": "",
+    "positions": [
+      "40;60",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "20;80",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10027",
+    "name": "",
+    "positions": [
+      "55;42",
+      "65;80",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10028",
+    "name": "",
+    "positions": [
+      "40;7",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "20;5",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10029",
+    "name": "",
+    "positions": [
+      "48;92",
+      "85;75",
+      "",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10030",
+    "name": "",
+    "positions": [
+      "60;60",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "83;89",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10031",
+    "name": "",
+    "positions": [
+      "62;60",
+      "86;52",
+      "57;70",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10032",
+    "name": "",
+    "positions": [
+      "63;34",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "66;77",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10033",
+    "name": "",
+    "positions": [
+      "25;65",
+      "33;95",
+      "53;83",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10034",
+    "name": "",
+    "positions": [
+      "60;53",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "12;68",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10035",
+    "name": "",
+    "positions": [
+      "44;5",
+      "55;42",
+      "65;80",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10036",
+    "name": "",
+    "positions": [
+      "68;15",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "20;8",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10037",
+    "name": "",
+    "positions": [
+      "25;5",
+      "55;20",
+      "10;40",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10038",
+    "name": "",
+    "positions": [
+      "75;10",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "30;23",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10039",
+    "name": "",
+    "positions": [
+      "25;5",
+      "55;20",
+      "90;40",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10040",
+    "name": "",
+    "positions": [
+      "28;21",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "75;10",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10041",
+    "name": "",
+    "positions": [
+      "16;37",
+      "55;32",
+      "62;18",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10042",
+    "name": "",
+    "positions": [
+      "83;32",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "31;24",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10043",
+    "name": "",
+    "positions": [
+      "27;43",
+      "55;20",
+      "80;33",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10044",
+    "name": "",
+    "positions": [
+      "35;13",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "74;8",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10045",
+    "name": "",
+    "positions": [
+      "16;17",
+      "62;8",
+      "40;19",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10046",
+    "name": "",
+    "positions": [
+      "77;20",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "22;6",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10047",
+    "name": "",
+    "positions": [
+      "46;12",
+      "59;18",
+      "79;16",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10048",
+    "name": "",
+    "positions": [
+      "26;8",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "60;4",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10049",
+    "name": "",
+    "positions": [
+      "85;5",
+      "60;15",
+      "30;20",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10050",
+    "name": "",
+    "positions": [
+      "40;10",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "60;3",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10051",
+    "name": "",
+    "positions": [
+      "51;15",
+      "82;10",
+      "32;36",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10052",
+    "name": "",
+    "positions": [
+      "69;19",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "41;8",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10053",
+    "name": "",
+    "positions": [
+      "16;33",
+      "45;22",
+      "50;12",
+      "",
+      ""
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10054",
+    "name": "",
+    "positions": [
+      "71;21",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "ball": "36;9",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10055",
+    "name": "",
+    "positions": [
+      "35;60",
+      "65;60",
+      "20;75",
+      "80;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10056",
+    "name": "",
+    "positions": [
+      "35;40",
+      "65;40",
+      "20;25",
+      "80;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10057",
+    "name": "",
+    "positions": [
+      "10;60",
+      "90;60",
+      "30;75",
+      "70;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10058",
+    "name": "",
+    "positions": [
+      "10;40",
+      "90;40",
+      "30;25",
+      "70;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10059",
+    "name": "",
+    "positions": [
+      "30;60",
+      "70;60",
+      "30;75",
+      "70;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10060",
+    "name": "",
+    "positions": [
+      "10;40",
+      "90;40",
+      "30;25",
+      "80;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10061",
+    "name": "",
+    "positions": [
+      "35;60",
+      "65;60",
+      "20;75",
+      "80;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10062",
+    "name": "",
+    "positions": [
+      "35;40",
+      "65;40",
+      "20;25",
+      "80;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10063",
+    "name": "",
+    "positions": [
+      "50;60",
+      "30;75",
+      "70;75",
+      "10;90",
+      "90;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10064",
+    "name": "",
+    "positions": [
+      "50;40",
+      "30;25",
+      "70;25",
+      "10;10",
+      "90;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10065",
+    "name": "",
+    "positions": [
+      "10;60",
+      "90;60",
+      "30;75",
+      "70;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10066",
+    "name": "",
+    "positions": [
+      "10;40",
+      "90;40",
+      "30;25",
+      "70;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10067",
+    "name": "",
+    "positions": [
+      "35;60",
+      "65;60",
+      "20;75",
+      "80;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10068",
+    "name": "",
+    "positions": [
+      "35;40",
+      "65;40",
+      "20;25",
+      "80;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10069",
+    "name": "",
+    "positions": [
+      "10;60",
+      "90;60",
+      "30;75",
+      "70;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10070",
+    "name": "",
+    "positions": [
+      "10;40",
+      "90;40",
+      "30;25",
+      "70;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10071",
+    "name": "",
+    "positions": [
+      "30;60",
+      "70;60",
+      "30;75",
+      "70;75",
+      "50;90"
+    ],
+    "ball": "",
+    "req_level": null,
+    "available": ""
+  },
+  {
+    "version": "1.5.5",
+    "kind": "训练布局",
+    "id": "10072",
+    "name": "",
+    "positions": [
+      "10;40",
+      "90;40",
+      "30;25",
+      "80;25",
+      "50;10"
+    ],
+    "ball": "50;50",
+    "req_level": null,
+    "available": ""
+  }
+]

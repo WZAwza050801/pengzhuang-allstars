@@ -1,0 +1,7 @@
+﻿id	宝箱等级	宝箱名称key	宝箱名称	图集	图标	捐赠消耗	捐赠获得	可捐赠次数	需捐赠总次数	宝箱获得	贡献度
+id	Moneybox_level	nameKEY	box_Name	atlas	icon	donationList	rewardList	singletimes	times	boxrewardList	contribution
+1	1级	$Donation_box	联盟宝箱	ShopIcon	Diamond_Icon_10	1;10	3;2	2	10	1;100	5
+2	2级	$Donation_box	联盟宝箱	ShopIcon	Diamond_Icon_10	1;20	3;3	2	10	1;200	5
+3	3级	$Donation_box	联盟宝箱	ShopIcon	Diamond_Icon_10	1;30	3;5	2	10	1;300	5
+4	4级	$Donation_box	联盟宝箱	ShopIcon	Diamond_Icon_10	1;40	3;7	2	10	1;400	5
+5	5级	$Donation_box	联盟宝箱	ShopIcon	Diamond_Icon_10	1;50	3;10	2	10	1;500	5

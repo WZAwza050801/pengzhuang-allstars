@@ -1,0 +1,26 @@
+{
+  "portrait_entries": 107,
+  "person_entries": 108,
+  "card_mapped_people": 106,
+  "extra_unbound_portraits": 1,
+  "name_only_people": 1,
+  "card_records": {
+    "1.2.0": 87,
+    "1.5.5": 137
+  },
+  "level_records": {
+    "1.2.0": 880,
+    "1.5.5": 1370
+  },
+  "skill_records": {
+    "1.2.0": 214,
+    "1.5.5": 297
+  },
+  "included_tables": 92,
+  "inventory_tables": 106,
+  "conflicting_cards": 20,
+  "cross_version_comparable_cards": 87,
+  "changed_base_cards": 3,
+  "unresolved_name_items": 2,
+  "checked_at": "2026-11-14"
+}

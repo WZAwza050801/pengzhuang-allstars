@@ -1,0 +1,6 @@
+﻿章节ID	章节名字	章节标题序号	关卡ID列表	获得章节奖励所需星数	章节星数奖励	背景图	球门场景	宝箱位置
+id	chapterName	chapterTitle	levelIDList	chapterPrizeStarList	chapterPrizeList	sceneBg	gateName	chapterBox
+10001	$chapterName_10001	1	10001;10002;10003	3;6;9	610011;610012;610013	ID_88	ID_89	250;-520
+10002	$chapterName_10002	2	10004;10005;10006	3;6;9	610021;610022;610023	ID_90	ID_91	-230;240
+10003	$chapterName_10003	3	10007;10008;10009	3;6;9	610031;610032;610033	ID_92	ID_93	230;-400
+10004	$chapterName_10004	4	10010;10011;10012	3;6;9	610041;610042;610043	ID_94	ID_95	-250;-520

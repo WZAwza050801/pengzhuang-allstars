@@ -1,0 +1,79 @@
+{
+  "version": "1.5.5",
+  "table": "championsrank_award",
+  "source_path": "assets/res/raw-assets/resources/data/championsrank_award.txt",
+  "source_sha256": "684c956547868f406c7d09586fe9ef8b91d3a8951ff00818a9c5c04f5182e77e",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "id",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "rankList",
+      "original_key": "rankList",
+      "label": "排名",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "mailID",
+      "original_key": "mailID",
+      "label": "邮件ID",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "rewardDesc",
+      "original_key": "rewardDesc",
+      "label": "奖励中文描述",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "rankList": "1",
+      "mailID": "400001",
+      "rewardDesc": "钻石*600"
+    },
+    {
+      "id": "2",
+      "rankList": "2",
+      "mailID": "400002",
+      "rewardDesc": "钻石*550"
+    },
+    {
+      "id": "3",
+      "rankList": "3",
+      "mailID": "400003",
+      "rewardDesc": "钻石*450"
+    },
+    {
+      "id": "4",
+      "rankList": "4;20",
+      "mailID": "400004",
+      "rewardDesc": "钻石*300"
+    },
+    {
+      "id": "5",
+      "rankList": "21;100",
+      "mailID": "400005",
+      "rewardDesc": "钻石*150"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

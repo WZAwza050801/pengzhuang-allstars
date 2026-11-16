@@ -1,0 +1,58 @@
+{
+  "version": "1.5.5",
+  "table": "timergift",
+  "source_path": "assets/res/raw-assets/resources/data/timergift.txt",
+  "source_sha256": "23b29194eaad8f49fcdb0849305bb9abda657ca21a9c3d13208998e80d87dde6",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "cnt",
+      "original_key": "cnt",
+      "label": "最大数量",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "interval",
+      "original_key": "interval",
+      "label": "获取间隔s",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "progress",
+      "original_key": "progress",
+      "label": "任务达成",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "cnt": "3",
+      "interval": "14400",
+      "progress": "0"
+    },
+    {
+      "id": "2",
+      "cnt": "2",
+      "interval": "86400",
+      "progress": "8"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    4,
+    4
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

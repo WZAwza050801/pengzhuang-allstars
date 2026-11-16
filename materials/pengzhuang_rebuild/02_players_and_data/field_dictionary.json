@@ -1,0 +1,5466 @@
+[
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "key",
+    "original_key": "key",
+    "source_label": "key",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "成就名称",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "成就类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "paramList",
+    "original_key": "paramList",
+    "source_label": "参数1",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "prizeList",
+    "original_key": "prizeList",
+    "source_label": "奖励",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "awardPlayerList",
+    "original_key": "awardPlayerList",
+    "source_label": "玩家列表",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "descKeyList",
+    "original_key": "descKeyList",
+    "source_label": "描述列表",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "achievement_type",
+    "field": "desList",
+    "original_key": "desList",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "简介",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "chineseName",
+    "original_key": "chineseName",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "rank",
+    "original_key": "rank",
+    "source_label": "段位",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "unlockTime",
+    "original_key": "unlockTime",
+    "source_label": "解锁时间s",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "goldMin",
+    "original_key": "goldMin",
+    "source_label": "金币下限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "goldMax",
+    "original_key": "goldMax",
+    "source_label": "金币上限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "crystalMin",
+    "original_key": "crystalMin",
+    "source_label": "水晶下限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "crystalMax",
+    "original_key": "crystalMax",
+    "source_label": "水晶上限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "cardNum",
+    "original_key": "cardNum",
+    "source_label": "卡牌总数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "rareNumList",
+    "original_key": "rareNumList",
+    "source_label": "保底卡数(除红卡)",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "extCardNum",
+    "original_key": "extCardNum",
+    "source_label": "额外卡数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "extWeightList",
+    "original_key": "extWeightList",
+    "source_label": "额外卡权重",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "extRareList",
+    "original_key": "extRareList",
+    "source_label": "额外卡品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "playerNumMinList",
+    "original_key": "playerNumMinList",
+    "source_label": "球员数min",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "playerNumMaxList",
+    "original_key": "playerNumMaxList",
+    "source_label": "球员数max",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "redRate",
+    "original_key": "redRate",
+    "source_label": "红卡概率",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "redNumMin",
+    "original_key": "redNumMin",
+    "source_label": "红卡球员min",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "redNumMax",
+    "original_key": "redNumMax",
+    "source_label": "红卡球员max",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "redMin",
+    "original_key": "redMin",
+    "source_label": "红卡数最小数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box",
+    "field": "redMax",
+    "original_key": "redMax",
+    "source_label": "红卡数最大数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxLib",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "卡库编号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxLib",
+    "field": "cardList",
+    "original_key": "cardList",
+    "source_label": "卡牌列表",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxLib",
+    "field": "cardWeightList",
+    "original_key": "cardWeightList",
+    "source_label": "卡牌权重列表",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "简介",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "chineseName",
+    "original_key": "chineseName",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "des",
+    "original_key": "des",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "chinese",
+    "original_key": "chinese",
+    "source_label": "描述中文",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "rank",
+    "original_key": "rank",
+    "source_label": "段位",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "cardNumMin",
+    "original_key": "cardNumMin",
+    "source_label": "抽卡次数下限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "cardNumMax",
+    "original_key": "cardNumMax",
+    "source_label": "抽卡次数上限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "unlockTime",
+    "original_key": "unlockTime",
+    "source_label": "解锁时间",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "matchExp",
+    "original_key": "matchExp",
+    "source_label": "获得队伍经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "cardLibList",
+    "original_key": "cardLibList",
+    "source_label": "卡库",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "cardLibWeightList",
+    "original_key": "cardLibWeightList",
+    "source_label": "权重",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "cardLibMinList",
+    "original_key": "cardLibMinList",
+    "source_label": "库下限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "box_new",
+    "field": "cardLibMaxList",
+    "original_key": "cardLibMaxList",
+    "source_label": "库上限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrare",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrare",
+    "field": "quality",
+    "original_key": "quality",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrare",
+    "field": "arenaLevel",
+    "original_key": "arenaLevel",
+    "source_label": "竞技场等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrare",
+    "field": "dropRate",
+    "original_key": "dropRate",
+    "source_label": "掉落权重",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrare",
+    "field": "dropMin",
+    "original_key": "dropMin",
+    "source_label": "爆率下限（100个箱子）",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrare",
+    "field": "dropMax",
+    "original_key": "dropMax",
+    "source_label": "爆率上限（100个箱子）",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrareadd",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "箱子序号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrareadd",
+    "field": "weightAdd1",
+    "original_key": "weightAdd1",
+    "source_label": "rare1",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrareadd",
+    "field": "weightAdd2",
+    "original_key": "weightAdd2",
+    "source_label": "rare2",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrareadd",
+    "field": "weightAdd3",
+    "original_key": "weightAdd3",
+    "source_label": "rare3",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "boxrareadd",
+    "field": "weightAdd4",
+    "original_key": "weightAdd4",
+    "source_label": "rare4",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingguild",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingguild",
+    "field": "exp",
+    "original_key": "exp",
+    "source_label": "升级所需经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingguild",
+    "field": "memberCount",
+    "original_key": "memberCount",
+    "source_label": "效果",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingguild",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "icon",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingstore",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingstore",
+    "field": "exp",
+    "original_key": "exp",
+    "source_label": "升级所需经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingstore",
+    "field": "store",
+    "original_key": "store",
+    "source_label": "效果",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingstore",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "icon",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtraining",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtraining",
+    "field": "exp",
+    "original_key": "exp",
+    "source_label": "升级所需经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtraining",
+    "field": "strengthen",
+    "original_key": "strengthen",
+    "source_label": "效果",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtraining",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "icon",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtype",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtype",
+    "field": "table",
+    "original_key": "table",
+    "source_label": "表名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtype",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "名字",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtype",
+    "field": "field",
+    "original_key": "field",
+    "source_label": "效果字段",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtype",
+    "field": "des",
+    "original_key": "des",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "buildingtype",
+    "field": "chinese",
+    "original_key": "chinese",
+    "source_label": "中文描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "chinesename",
+    "original_key": "chinesename",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "real_name_source",
+    "original_key": "",
+    "source_label": "原名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "名字",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "club",
+    "original_key": "club",
+    "source_label": "俱乐部",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "基础价格",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "matchUnlock",
+    "original_key": "matchUnlock",
+    "source_label": "解锁竞技场",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "clubId",
+    "original_key": "clubId",
+    "source_label": "球队ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "position",
+    "original_key": "position",
+    "source_label": "位置",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "weight",
+    "original_key": "weight",
+    "source_label": "重量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "power",
+    "original_key": "power",
+    "source_label": "力度",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "mind",
+    "original_key": "mind",
+    "source_label": "心理",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "radian",
+    "original_key": "radian",
+    "source_label": "弧度",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "precision",
+    "original_key": "precision",
+    "source_label": "精准",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "growOrder",
+    "original_key": "growOrder",
+    "source_label": "成长顺序",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "growPer",
+    "original_key": "growPer",
+    "source_label": "成长百分比",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "skillUnlockLv",
+    "original_key": "skillUnlockLv",
+    "source_label": "技能等级对应的球员等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "skillId",
+    "original_key": "skillId",
+    "source_label": "解锁技能id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "headIcon",
+    "original_key": "headIcon",
+    "source_label": "头像icon",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "clubIcon",
+    "original_key": "clubIcon",
+    "source_label": "队服ICON",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "chineseDescription",
+    "original_key": "chineseDescription",
+    "source_label": "描述内容",
+    "included": false
+  },
+  {
+    "version": "1.2.0",
+    "table": "card",
+    "field": "description",
+    "original_key": "description",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "oldId",
+    "original_key": "oldId",
+    "source_label": "原ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "chinesename",
+    "original_key": "chinesename",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "weight",
+    "original_key": "weight",
+    "source_label": "重量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "power",
+    "original_key": "power",
+    "source_label": "力度",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "mind",
+    "original_key": "mind",
+    "source_label": "心理",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "radian",
+    "original_key": "radian",
+    "source_label": "弧度",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "card_attr",
+    "field": "precision",
+    "original_key": "precision",
+    "source_label": "精准",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "carddailylimit",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "卡牌品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "carddailylimit",
+    "field": "dailyLimit",
+    "original_key": "dailyLimit",
+    "source_label": "每日限购",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelExp1",
+    "original_key": "nextLevelExp1",
+    "source_label": "绿卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelGold1",
+    "original_key": "nextLevelGold1",
+    "source_label": "绿卡金币",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "playerExp1",
+    "original_key": "playerExp1",
+    "source_label": "绿卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelExp2",
+    "original_key": "nextLevelExp2",
+    "source_label": "蓝卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelGold2",
+    "original_key": "nextLevelGold2",
+    "source_label": "蓝卡金币",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "playerExp2",
+    "original_key": "playerExp2",
+    "source_label": "蓝卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelExp3",
+    "original_key": "nextLevelExp3",
+    "source_label": "紫卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelGold3",
+    "original_key": "nextLevelGold3",
+    "source_label": "紫卡金币",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "playerExp3",
+    "original_key": "playerExp3",
+    "source_label": "紫卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelExp4",
+    "original_key": "nextLevelExp4",
+    "source_label": "橙卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelGold4",
+    "original_key": "nextLevelGold4",
+    "source_label": "橙卡金币",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "playerExp4",
+    "original_key": "playerExp4",
+    "source_label": "橙卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelExp5",
+    "original_key": "nextLevelExp5",
+    "source_label": "红卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelGold5",
+    "original_key": "nextLevelGold5",
+    "source_label": "红卡金币",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "playerExp5",
+    "original_key": "playerExp5",
+    "source_label": "红卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelExp9",
+    "original_key": "nextLevelExp9",
+    "source_label": "元老卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "nextLevelGold9",
+    "original_key": "nextLevelGold9",
+    "source_label": "元老卡金币",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cardlevel",
+    "field": "playerExp9",
+    "original_key": "playerExp9",
+    "source_label": "元老卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "country",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "country",
+    "field": "key",
+    "original_key": "key",
+    "source_label": "key值",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "country",
+    "field": "country",
+    "original_key": "country",
+    "source_label": "国家名称",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "金球杯赛",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "field": "matchType",
+    "original_key": "matchType",
+    "source_label": "杯赛类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "field": "rankLevel",
+    "original_key": "rankLevel",
+    "source_label": "联赛等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "field": "rank",
+    "original_key": "rank",
+    "source_label": "晋级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "field": "boxReward",
+    "original_key": "boxReward",
+    "source_label": "箱子奖励",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "field": "diamond",
+    "original_key": "diamond",
+    "source_label": "钻石奖励",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "cupMatchReward",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "钞票奖励",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyplayerrefresh",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyplayerrefresh",
+    "field": "Comment",
+    "original_key": "Comment",
+    "source_label": "备注",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyplayerrefresh",
+    "field": "StartRefer",
+    "original_key": "StartRefer",
+    "source_label": "起始参照",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyplayerrefresh",
+    "field": "FirstSec",
+    "original_key": "FirstSec",
+    "source_label": "起始第一次触发秒数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyplayerrefresh",
+    "field": "Interval",
+    "original_key": "Interval",
+    "source_label": "循环间隔 至少为1",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyplayerrefresh",
+    "field": "EventTypes",
+    "original_key": "EventTypes",
+    "source_label": "触发事件列表",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "field": "Comment",
+    "original_key": "Comment",
+    "source_label": "备注",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "field": "StartRefer",
+    "original_key": "StartRefer",
+    "source_label": "起始参照",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "field": "FirstSec",
+    "original_key": "FirstSec",
+    "source_label": "起始第一次触发秒数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "field": "Interval",
+    "original_key": "Interval",
+    "source_label": "循环间隔 至少为1",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "field": "EventTypes",
+    "original_key": "EventTypes",
+    "source_label": "触发事件列表",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "dailyworldrefresh",
+    "field": "EventValues",
+    "original_key": "EventValues",
+    "source_label": "事件值",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "decompose",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "品质ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "decompose",
+    "field": "transformation",
+    "original_key": "transformation",
+    "source_label": "转换系数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "factor",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "系数名称",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "factor",
+    "field": "value",
+    "original_key": "value",
+    "source_label": "系数值",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "factor",
+    "field": "remarks",
+    "original_key": "remarks",
+    "source_label": "备注",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "阵型ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "formationName",
+    "original_key": "formationName",
+    "source_label": "阵型名字",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "formationIcon",
+    "original_key": "formationIcon",
+    "source_label": "阵型图标",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "reqLevel",
+    "original_key": "reqLevel",
+    "source_label": "开启所需等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "needMoney",
+    "original_key": "needMoney",
+    "source_label": "开启金币花费",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "needCrystal",
+    "original_key": "needCrystal",
+    "source_label": "开启钻石花费",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "soccerPos0",
+    "original_key": "soccerPos0",
+    "source_label": "球员1位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "soccerPos1",
+    "original_key": "soccerPos1",
+    "source_label": "球员2位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "soccerPos2",
+    "original_key": "soccerPos2",
+    "source_label": "球员3位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "soccerPos3",
+    "original_key": "soccerPos3",
+    "source_label": "球员4位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "formation_type",
+    "field": "soccerPos4",
+    "original_key": "soccerPos4",
+    "source_label": "球员5位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "freedraw",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "freedraw",
+    "field": "cnt",
+    "original_key": "cnt",
+    "source_label": "最大免费次数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "freedraw",
+    "field": "interval",
+    "original_key": "interval",
+    "source_label": "刷新时间",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guild_center",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "商品ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guild_center",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "解锁等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guild_center",
+    "field": "times",
+    "original_key": "times",
+    "source_label": "兑换次数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guild_center",
+    "field": "cost",
+    "original_key": "cost",
+    "source_label": "兑换消耗",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildhelp",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id #卡的品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildhelp",
+    "field": "maxAmount",
+    "original_key": "maxAmount",
+    "source_label": "上限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildhelp",
+    "field": "maxHelp",
+    "original_key": "maxHelp",
+    "source_label": "单个玩家最大帮助",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildhelp",
+    "field": "contribution",
+    "original_key": "contribution",
+    "source_label": "获得贡献",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "jobName",
+    "original_key": "jobName",
+    "source_label": "职位名字",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "jobchinese",
+    "original_key": "jobchinese",
+    "source_label": "职位中文",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "jobWeight",
+    "original_key": "jobWeight",
+    "source_label": "职位大小",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "jobAmount",
+    "original_key": "jobAmount",
+    "source_label": "数量上限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "dealApp",
+    "original_key": "dealApp",
+    "source_label": "审核权限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "guildEdit",
+    "original_key": "guildEdit",
+    "source_label": "公会设置权限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "guildjob",
+    "field": "kickout",
+    "original_key": "kickout",
+    "source_label": "公会设置权限",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "唯一ID    等级  金币  钻石  卡牌列表    阵容信息1   阵容信息2   阵容信息3   初始开放阵型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "crystal",
+    "original_key": "crystal",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "cardList",
+    "original_key": "cardList",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "team1List",
+    "original_key": "team1List",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "team2List",
+    "original_key": "team2List",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "team3List",
+    "original_key": "team3List",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "initplayer",
+    "field": "formation",
+    "original_key": "formation",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "item",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "item",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "名字",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "item",
+    "field": "Chinese",
+    "original_key": "Chinese",
+    "source_label": "中文",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "item",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "item",
+    "field": "typeID",
+    "original_key": "typeID",
+    "source_label": "型分类后的id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "item",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "联赛等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "联赛名称",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "namechinese",
+    "original_key": "namechinese",
+    "source_label": "联赛中文",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "des",
+    "original_key": "des",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "deschinese",
+    "original_key": "deschinese",
+    "source_label": "描述中文",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "联赛icon",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "reqCup",
+    "original_key": "reqCup",
+    "source_label": "所需杯数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "goldMin",
+    "original_key": "goldMin",
+    "source_label": "最少金币奖励",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "goldMax",
+    "original_key": "goldMax",
+    "source_label": "最多金币奖励",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "league_match",
+    "field": "matchExp",
+    "original_key": "matchExp",
+    "source_label": "获得经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "playerlevel",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "playerlevel",
+    "field": "nextLevelExp",
+    "original_key": "nextLevelExp",
+    "source_label": "升级需要经验",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "prize",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "prize",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "金币",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "prize",
+    "field": "crystal",
+    "original_key": "crystal",
+    "source_label": "钻石",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID号",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "goodsType",
+    "original_key": "goodsType",
+    "source_label": "类型Crystal钻石MonthCard月卡",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "costType",
+    "original_key": "costType",
+    "source_label": "货币类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "price",
+    "original_key": "price",
+    "source_label": "价格",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "crystal",
+    "original_key": "crystal",
+    "source_label": "获得钻石数量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "bonus",
+    "original_key": "bonus",
+    "source_label": "赠送数量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "ifDouble",
+    "original_key": "ifDouble",
+    "source_label": "是否有首冲双倍",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "recharge",
+    "field": "ThridProductId",
+    "original_key": "ThridProductId",
+    "source_label": "第三方产品ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "refresh_cfg",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "refresh_cfg",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "刷新类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "refresh_cfg",
+    "field": "refreshTimeList",
+    "original_key": "refreshTimeList",
+    "source_label": "刷新时间",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "reward",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "排名ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "reward",
+    "field": "itemList",
+    "original_key": "itemList",
+    "source_label": "物品ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "reward",
+    "field": "countList",
+    "original_key": "countList",
+    "source_label": "获得",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "season_award",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "排名ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "season_award",
+    "field": "rankList",
+    "original_key": "rankList",
+    "source_label": "排名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "season_award",
+    "field": "leaguelevel",
+    "original_key": "leaguelevel",
+    "source_label": "联赛等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "season_award",
+    "field": "reward",
+    "original_key": "reward",
+    "source_label": "获得",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "season_award",
+    "field": "mailID",
+    "original_key": "mailID",
+    "source_label": "邮件ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "sharestore",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "sharestore",
+    "field": "costItemID",
+    "original_key": "costItemID",
+    "source_label": "消耗物品ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "sharestore",
+    "field": "costNum",
+    "original_key": "costNum",
+    "source_label": "消耗数量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "sharestore",
+    "field": "itemID",
+    "original_key": "itemID",
+    "source_label": "兑换的卡牌",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "sharestore",
+    "field": "itemNum",
+    "original_key": "itemNum",
+    "source_label": "兑换的卡牌数量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "sharestore",
+    "field": "maxBuyLimit",
+    "original_key": "maxBuyLimit",
+    "source_label": "最大兑换限制",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_contract",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "boxId",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_contract",
+    "field": "rankLevel",
+    "original_key": "rankLevel",
+    "source_label": "竞技场等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_contract",
+    "field": "costType",
+    "original_key": "costType",
+    "source_label": "消费类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_contract",
+    "field": "cost",
+    "original_key": "cost",
+    "source_label": "消费数值",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_gold",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "itemId",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_gold",
+    "field": "costType",
+    "original_key": "costType",
+    "source_label": "消费类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_gold",
+    "field": "cost",
+    "original_key": "cost",
+    "source_label": "消费数值",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "shop_gold",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "购买获得金币数量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "技能id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "extraId",
+    "original_key": "extraId",
+    "source_label": "额外技能",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "skillname",
+    "original_key": "skillname",
+    "source_label": "技能名",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "chineseSkillname",
+    "original_key": "chineseSkillname",
+    "source_label": "技能中文名称",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "skillicon",
+    "original_key": "skillicon",
+    "source_label": "技能ICON",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "triggerCondition",
+    "original_key": "triggerCondition",
+    "source_label": "触发阶段一条件id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "startFirstExhibit",
+    "original_key": "startFirstExhibit",
+    "source_label": "阶段一开始表现",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "firstExhibitTime",
+    "original_key": "firstExhibitTime",
+    "source_label": "阶段一开始时间",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "firstExhibit",
+    "original_key": "firstExhibit",
+    "source_label": "阶段一表现",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "firstExhibitType",
+    "original_key": "firstExhibitType",
+    "source_label": "阶段一表现类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "triggerTypeList",
+    "original_key": "triggerTypeList",
+    "source_label": "条件id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "tipType",
+    "original_key": "tipType",
+    "source_label": "技能触发提示",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "secondExhibit",
+    "original_key": "secondExhibit",
+    "source_label": "技能完全触发的表现",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "secondExhibitType",
+    "original_key": "secondExhibitType",
+    "source_label": "技能完全触发的表现类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "exhibitSimple",
+    "original_key": "exhibitSimple",
+    "source_label": "效果表现是否简化",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "triggerPerList",
+    "original_key": "triggerPerList",
+    "source_label": "触发率%",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "effectTarget",
+    "original_key": "effectTarget",
+    "source_label": "效果对象",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "targetTip",
+    "original_key": "targetTip",
+    "source_label": "目标触发提示",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "targetTipchinese",
+    "original_key": "targetTipchinese",
+    "source_label": "目标触发提示中文",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "effectIdList",
+    "original_key": "effectIdList",
+    "source_label": "效果id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "effectValueList",
+    "original_key": "effectValueList",
+    "source_label": "效果值",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "duration",
+    "original_key": "duration",
+    "source_label": "持续回合",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "overLaps",
+    "original_key": "overLaps",
+    "source_label": "可叠层数",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "技能等级",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "skillDes",
+    "original_key": "skillDes",
+    "source_label": "技能描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "skill",
+    "field": "chineseSkillDes",
+    "original_key": "chineseSkillDes",
+    "source_label": "技能中文描述",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "﻿队徽id",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "类型",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "field": "giveCardList",
+    "original_key": "giveCardList",
+    "source_label": "新手赠送的球员",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "俱乐部名称",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "field": "Chinese",
+    "original_key": "Chinese",
+    "source_label": "中文",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "team_badge",
+    "field": "shirt",
+    "original_key": "shirt",
+    "source_label": "俱乐部球服",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "timergift",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "timergift",
+    "field": "cnt",
+    "original_key": "cnt",
+    "source_label": "最大数量",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "timergift",
+    "field": "interval",
+    "original_key": "interval",
+    "source_label": "获取间隔s",
+    "included": true
+  },
+  {
+    "version": "1.2.0",
+    "table": "timergift",
+    "field": "progress",
+    "original_key": "progress",
+    "source_label": "任务达成",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "key",
+    "original_key": "key",
+    "source_label": "key",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "成就名称",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "成就类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "paramList",
+    "original_key": "paramList",
+    "source_label": "参数1",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "prizeList",
+    "original_key": "prizeList",
+    "source_label": "奖励",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "awardPlayerList",
+    "original_key": "awardPlayerList",
+    "source_label": "玩家列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "descKeyList",
+    "original_key": "descKeyList",
+    "source_label": "描述列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "achievement_type",
+    "field": "desList",
+    "original_key": "desList",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "活动ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "Type",
+    "original_key": "Type",
+    "source_label": "类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "MailID",
+    "original_key": "MailID",
+    "source_label": "邮件ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "Open",
+    "original_key": "Open",
+    "source_label": "默认状态",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "BeginTime",
+    "original_key": "BeginTime",
+    "source_label": "开始时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "EndTime",
+    "original_key": "EndTime",
+    "source_label": "结束时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "CloseTime",
+    "original_key": "CloseTime",
+    "source_label": "关闭时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "activity",
+    "field": "Json",
+    "original_key": "Json",
+    "source_label": "默认配置(json格式)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "advert_award",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "advert_award",
+    "field": "times",
+    "original_key": "times",
+    "source_label": "次数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "advert_award",
+    "field": "rewardID",
+    "original_key": "rewardID",
+    "source_label": "奖励ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "soccerID",
+    "original_key": "soccerID",
+    "source_label": "动画演示球员",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "intervalTime",
+    "original_key": "intervalTime",
+    "source_label": "循环间隔时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "countPerLoop",
+    "original_key": "countPerLoop",
+    "source_label": "每个循环内演示次数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "lineDirection",
+    "original_key": "lineDirection",
+    "source_label": "直线方向",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "linePower",
+    "original_key": "linePower",
+    "source_label": "直线力度",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "arcDirection",
+    "original_key": "arcDirection",
+    "source_label": "弧线方向",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "animation",
+    "field": "arcPower",
+    "original_key": "arcPower",
+    "source_label": "弧线力度",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "简介",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "chineseName",
+    "original_key": "chineseName",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "rank",
+    "original_key": "rank",
+    "source_label": "段位",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "unlockTime",
+    "original_key": "unlockTime",
+    "source_label": "解锁时间s",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "goldMin",
+    "original_key": "goldMin",
+    "source_label": "金币下限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "goldMax",
+    "original_key": "goldMax",
+    "source_label": "金币上限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "crystalMin",
+    "original_key": "crystalMin",
+    "source_label": "水晶下限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "crystalMax",
+    "original_key": "crystalMax",
+    "source_label": "水晶上限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "cardNum",
+    "original_key": "cardNum",
+    "source_label": "卡牌总数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "rareNumList",
+    "original_key": "rareNumList",
+    "source_label": "保底卡数(除红卡)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "extCardNum",
+    "original_key": "extCardNum",
+    "source_label": "额外卡数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "extWeightList",
+    "original_key": "extWeightList",
+    "source_label": "额外卡权重",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "extRareList",
+    "original_key": "extRareList",
+    "source_label": "额外卡品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "playerNumMinList",
+    "original_key": "playerNumMinList",
+    "source_label": "球员数min",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "playerNumMaxList",
+    "original_key": "playerNumMaxList",
+    "source_label": "球员数max",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "redRate",
+    "original_key": "redRate",
+    "source_label": "红卡概率",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "redNumMin",
+    "original_key": "redNumMin",
+    "source_label": "红卡球员min",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "redNumMax",
+    "original_key": "redNumMax",
+    "source_label": "红卡球员max",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "redMin",
+    "original_key": "redMin",
+    "source_label": "红卡数最小数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box",
+    "field": "redMax",
+    "original_key": "redMax",
+    "source_label": "红卡数最大数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxLib",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "卡库编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxLib",
+    "field": "cardList",
+    "original_key": "cardList",
+    "source_label": "卡牌列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxLib",
+    "field": "cardWeightList",
+    "original_key": "cardWeightList",
+    "source_label": "卡牌权重列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "简介",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "chineseName",
+    "original_key": "chineseName",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "des",
+    "original_key": "des",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "chinese",
+    "original_key": "chinese",
+    "source_label": "描述中文",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "rank",
+    "original_key": "rank",
+    "source_label": "段位",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "cardNumMin",
+    "original_key": "cardNumMin",
+    "source_label": "抽卡次数下限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "cardNumMax",
+    "original_key": "cardNumMax",
+    "source_label": "抽卡次数上限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "unlockTime",
+    "original_key": "unlockTime",
+    "source_label": "解锁时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "matchExp",
+    "original_key": "matchExp",
+    "source_label": "获得队伍经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "cardLibList",
+    "original_key": "cardLibList",
+    "source_label": "卡库",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "cardLibWeightList",
+    "original_key": "cardLibWeightList",
+    "source_label": "权重",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "cardLibMinList",
+    "original_key": "cardLibMinList",
+    "source_label": "库下限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "box_new",
+    "field": "cardLibMaxList",
+    "original_key": "cardLibMaxList",
+    "source_label": "库上限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrare",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrare",
+    "field": "quality",
+    "original_key": "quality",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrare",
+    "field": "arenaLevel",
+    "original_key": "arenaLevel",
+    "source_label": "竞技场等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrare",
+    "field": "dropRate",
+    "original_key": "dropRate",
+    "source_label": "掉落权重",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrare",
+    "field": "dropMin",
+    "original_key": "dropMin",
+    "source_label": "爆率下限（100个箱子）",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrare",
+    "field": "dropMax",
+    "original_key": "dropMax",
+    "source_label": "爆率上限（100个箱子）",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrareadd",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "箱子序号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrareadd",
+    "field": "weightAdd1",
+    "original_key": "weightAdd1",
+    "source_label": "rare1",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrareadd",
+    "field": "weightAdd2",
+    "original_key": "weightAdd2",
+    "source_label": "rare2",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrareadd",
+    "field": "weightAdd3",
+    "original_key": "weightAdd3",
+    "source_label": "rare3",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "boxrareadd",
+    "field": "weightAdd4",
+    "original_key": "weightAdd4",
+    "source_label": "rare4",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingdonation",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingdonation",
+    "field": "exp",
+    "original_key": "exp",
+    "source_label": "升级所需经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingdonation",
+    "field": "boxlevel",
+    "original_key": "boxlevel",
+    "source_label": "成员数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingdonation",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "icon",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingguild",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingguild",
+    "field": "exp",
+    "original_key": "exp",
+    "source_label": "升级所需经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingguild",
+    "field": "memberCount",
+    "original_key": "memberCount",
+    "source_label": "成员数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingguild",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "icon",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingstore",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingstore",
+    "field": "exp",
+    "original_key": "exp",
+    "source_label": "升级所需经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingstore",
+    "field": "store",
+    "original_key": "store",
+    "source_label": "效果",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingstore",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "icon",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtraining",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtraining",
+    "field": "exp",
+    "original_key": "exp",
+    "source_label": "升级所需经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtraining",
+    "field": "strengthen",
+    "original_key": "strengthen",
+    "source_label": "效果",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtraining",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "icon",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "field": "table",
+    "original_key": "table",
+    "source_label": "表名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "field": "chinesename",
+    "original_key": "chinesename",
+    "source_label": "中文名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "field": "field",
+    "original_key": "field",
+    "source_label": "效果字段",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "field": "des",
+    "original_key": "des",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "buildingtype",
+    "field": "chinese",
+    "original_key": "chinese",
+    "source_label": "中文描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "chinesename",
+    "original_key": "chinesename",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "real_name_source",
+    "original_key": "",
+    "source_label": "原名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "club",
+    "original_key": "club",
+    "source_label": "俱乐部",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "基础价格",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "matchUnlock",
+    "original_key": "matchUnlock",
+    "source_label": "解锁竞技场",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "clubId",
+    "original_key": "clubId",
+    "source_label": "球队ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "position",
+    "original_key": "position",
+    "source_label": "位置",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "weight",
+    "original_key": "weight",
+    "source_label": "重量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "power",
+    "original_key": "power",
+    "source_label": "力度",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "mind",
+    "original_key": "mind",
+    "source_label": "心理",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "radian",
+    "original_key": "radian",
+    "source_label": "弧度",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "precision",
+    "original_key": "precision",
+    "source_label": "精准",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "growOrder",
+    "original_key": "growOrder",
+    "source_label": "成长顺序",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "growPer",
+    "original_key": "growPer",
+    "source_label": "成长百分比",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "skillUnlockLv",
+    "original_key": "skillUnlockLv",
+    "source_label": "解锁LV",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "skillId",
+    "original_key": "skillId",
+    "source_label": "解锁技能ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "normalCard",
+    "original_key": "normalCard",
+    "source_label": "对应普卡",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "foilCard",
+    "original_key": "foilCard",
+    "source_label": "对应闪卡",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "upgradeItem",
+    "original_key": "upgradeItem",
+    "source_label": "升级需求物品ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "upgradeCost",
+    "original_key": "upgradeCost",
+    "source_label": "升级数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "flashSkillUnlockLv",
+    "original_key": "flashSkillUnlockLv",
+    "source_label": "天赋LV",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "flashSkillId",
+    "original_key": "flashSkillId",
+    "source_label": "天赋技能id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "description",
+    "original_key": "description",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "chineseDescription",
+    "original_key": "chineseDescription",
+    "source_label": "描述内容",
+    "included": false
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "headatlas",
+    "original_key": "headatlas",
+    "source_label": "头像图集",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "headIcon",
+    "original_key": "headIcon",
+    "source_label": "头像ICON",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "shirtatlas",
+    "original_key": "shirtatlas",
+    "source_label": "队服图集",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card",
+    "field": "clubIcon",
+    "original_key": "clubIcon",
+    "source_label": "队服ICON",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "oldId",
+    "original_key": "oldId",
+    "source_label": "原ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "chinesename",
+    "original_key": "chinesename",
+    "source_label": "中文名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "weight",
+    "original_key": "weight",
+    "source_label": "重量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "power",
+    "original_key": "power",
+    "source_label": "力度",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "mind",
+    "original_key": "mind",
+    "source_label": "心理",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "radian",
+    "original_key": "radian",
+    "source_label": "弧度",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "card_attr",
+    "field": "precision",
+    "original_key": "precision",
+    "source_label": "精准",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "carddailylimit",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "卡牌品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "carddailylimit",
+    "field": "dailyLimit",
+    "original_key": "dailyLimit",
+    "source_label": "每日限购",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelExp1",
+    "original_key": "nextLevelExp1",
+    "source_label": "绿卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelGold1",
+    "original_key": "nextLevelGold1",
+    "source_label": "绿卡金币",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "playerExp1",
+    "original_key": "playerExp1",
+    "source_label": "绿卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelExp2",
+    "original_key": "nextLevelExp2",
+    "source_label": "蓝卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelGold2",
+    "original_key": "nextLevelGold2",
+    "source_label": "蓝卡金币",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "playerExp2",
+    "original_key": "playerExp2",
+    "source_label": "蓝卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelExp3",
+    "original_key": "nextLevelExp3",
+    "source_label": "紫卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelGold3",
+    "original_key": "nextLevelGold3",
+    "source_label": "紫卡金币",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "playerExp3",
+    "original_key": "playerExp3",
+    "source_label": "紫卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelExp4",
+    "original_key": "nextLevelExp4",
+    "source_label": "橙卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelGold4",
+    "original_key": "nextLevelGold4",
+    "source_label": "橙卡金币",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "playerExp4",
+    "original_key": "playerExp4",
+    "source_label": "橙卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelExp5",
+    "original_key": "nextLevelExp5",
+    "source_label": "红卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelGold5",
+    "original_key": "nextLevelGold5",
+    "source_label": "红卡金币",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "playerExp5",
+    "original_key": "playerExp5",
+    "source_label": "红卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelExp9",
+    "original_key": "nextLevelExp9",
+    "source_label": "元老卡碎片",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "nextLevelGold9",
+    "original_key": "nextLevelGold9",
+    "source_label": "元老卡金币",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cardlevel",
+    "field": "playerExp9",
+    "original_key": "playerExp9",
+    "source_label": "元老卡升级经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "championsrank_award",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "championsrank_award",
+    "field": "rankList",
+    "original_key": "rankList",
+    "source_label": "排名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "championsrank_award",
+    "field": "mailID",
+    "original_key": "mailID",
+    "source_label": "邮件ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "championsrank_award",
+    "field": "rewardDesc",
+    "original_key": "rewardDesc",
+    "source_label": "奖励中文描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "country",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "country",
+    "field": "key",
+    "original_key": "key",
+    "source_label": "key值",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "country",
+    "field": "country",
+    "original_key": "country",
+    "source_label": "国家名称",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cupMatchReward",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "金球杯赛",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cupMatchReward",
+    "field": "matchType",
+    "original_key": "matchType",
+    "source_label": "杯赛类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cupMatchReward",
+    "field": "rankLevel",
+    "original_key": "rankLevel",
+    "source_label": "联赛等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cupMatchReward",
+    "field": "rank",
+    "original_key": "rank",
+    "source_label": "晋级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "cupMatchReward",
+    "field": "mailID",
+    "original_key": "mailID",
+    "source_label": "奖励邮件ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyplayerrefresh",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyplayerrefresh",
+    "field": "Comment",
+    "original_key": "Comment",
+    "source_label": "备注",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyplayerrefresh",
+    "field": "StartRefer",
+    "original_key": "StartRefer",
+    "source_label": "起始参照",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyplayerrefresh",
+    "field": "FirstSec",
+    "original_key": "FirstSec",
+    "source_label": "起始第一次触发秒数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyplayerrefresh",
+    "field": "Interval",
+    "original_key": "Interval",
+    "source_label": "循环间隔 至少为1",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyplayerrefresh",
+    "field": "EventTypes",
+    "original_key": "EventTypes",
+    "source_label": "触发事件列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "field": "Comment",
+    "original_key": "Comment",
+    "source_label": "备注",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "field": "StartRefer",
+    "original_key": "StartRefer",
+    "source_label": "起始参照",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "field": "FirstSec",
+    "original_key": "FirstSec",
+    "source_label": "起始第一次触发秒数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "field": "Interval",
+    "original_key": "Interval",
+    "source_label": "循环间隔 至少为1",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "field": "EventTypes",
+    "original_key": "EventTypes",
+    "source_label": "触发事件列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "dailyworldrefresh",
+    "field": "EventValues",
+    "original_key": "EventValues",
+    "source_label": "事件值",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "decompose",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "品质ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "decompose",
+    "field": "transformation",
+    "original_key": "transformation",
+    "source_label": "转换系数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "Moneybox_level",
+    "original_key": "Moneybox_level",
+    "source_label": "宝箱等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "nameKEY",
+    "original_key": "nameKEY",
+    "source_label": "宝箱名称key",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "box_Name",
+    "original_key": "box_Name",
+    "source_label": "宝箱名称",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "atlas",
+    "original_key": "atlas",
+    "source_label": "图集",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "donationList",
+    "original_key": "donationList",
+    "source_label": "捐赠消耗",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "rewardList",
+    "original_key": "rewardList",
+    "source_label": "捐赠获得",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "singletimes",
+    "original_key": "singletimes",
+    "source_label": "可捐赠次数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "times",
+    "original_key": "times",
+    "source_label": "需捐赠总次数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "boxrewardList",
+    "original_key": "boxrewardList",
+    "source_label": "宝箱获得",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "donation_box",
+    "field": "contribution",
+    "original_key": "contribution",
+    "source_label": "贡献度",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "factor",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "系数名称",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "factor",
+    "field": "value",
+    "original_key": "value",
+    "source_label": "系数值",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "factor",
+    "field": "remarks",
+    "original_key": "remarks",
+    "source_label": "备注",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "阵型ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "field": "soccerPos0",
+    "original_key": "soccerPos0",
+    "source_label": "球员1位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "field": "soccerPos1",
+    "original_key": "soccerPos1",
+    "source_label": "球员2位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "field": "soccerPos2",
+    "original_key": "soccerPos2",
+    "source_label": "球员3位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "field": "soccerPos3",
+    "original_key": "soccerPos3",
+    "source_label": "球员4位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "field": "soccerPos4",
+    "original_key": "soccerPos4",
+    "source_label": "球员5位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_training",
+    "field": "ballPos",
+    "original_key": "ballPos",
+    "source_label": "足球位置",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "阵型ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "formationName",
+    "original_key": "formationName",
+    "source_label": "阵型名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "formationIcon",
+    "original_key": "formationIcon",
+    "source_label": "阵型图标",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "reqLevel",
+    "original_key": "reqLevel",
+    "source_label": "开启所需等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "needMoney",
+    "original_key": "needMoney",
+    "source_label": "开启金币花费",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "needCrystal",
+    "original_key": "needCrystal",
+    "source_label": "开启钻石花费",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "soccerPos0",
+    "original_key": "soccerPos0",
+    "source_label": "球员1位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "soccerPos1",
+    "original_key": "soccerPos1",
+    "source_label": "球员2位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "soccerPos2",
+    "original_key": "soccerPos2",
+    "source_label": "球员3位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "soccerPos3",
+    "original_key": "soccerPos3",
+    "source_label": "球员4位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "soccerPos4",
+    "original_key": "soccerPos4",
+    "source_label": "球员5位置(区域;x:y)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "formation_type",
+    "field": "isPlayerUse",
+    "original_key": "isPlayerUse",
+    "source_label": "玩家可用阵型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "freedraw",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "freedraw",
+    "field": "cnt",
+    "original_key": "cnt",
+    "source_label": "最大免费次数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "freedraw",
+    "field": "interval",
+    "original_key": "interval",
+    "source_label": "刷新时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guild_center",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "商品ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guild_center",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "解锁等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guild_center",
+    "field": "times",
+    "original_key": "times",
+    "source_label": "兑换次数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guild_center",
+    "field": "cost",
+    "original_key": "cost",
+    "source_label": "兑换消耗",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildhelp",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "id #卡的品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildhelp",
+    "field": "maxAmount",
+    "original_key": "maxAmount",
+    "source_label": "上限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildhelp",
+    "field": "maxHelp",
+    "original_key": "maxHelp",
+    "source_label": "单个玩家最大帮助",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildhelp",
+    "field": "contribution",
+    "original_key": "contribution",
+    "source_label": "获得贡献",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "jobName",
+    "original_key": "jobName",
+    "source_label": "职位名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "jobchinese",
+    "original_key": "jobchinese",
+    "source_label": "职位中文",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "jobWeight",
+    "original_key": "jobWeight",
+    "source_label": "职位大小",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "jobAmount",
+    "original_key": "jobAmount",
+    "source_label": "数量上限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "dealApp",
+    "original_key": "dealApp",
+    "source_label": "审核权限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "guildEdit",
+    "original_key": "guildEdit",
+    "source_label": "公会设置权限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "guildjob",
+    "field": "kickout",
+    "original_key": "kickout",
+    "source_label": "公会设置权限",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "唯一ID    等级  金币  钻石  卡牌列表    阵容信息1   阵容信息2   阵容信息3   初始开放阵型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "crystal",
+    "original_key": "crystal",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "cardList",
+    "original_key": "cardList",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "team1List",
+    "original_key": "team1List",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "team2List",
+    "original_key": "team2List",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "team3List",
+    "original_key": "team3List",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "initplayer",
+    "field": "formation",
+    "original_key": "formation",
+    "source_label": "",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "typeID",
+    "original_key": "typeID",
+    "source_label": "型分类后的id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "description",
+    "original_key": "description",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "Chinese",
+    "original_key": "Chinese",
+    "source_label": "中文",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "atlas",
+    "original_key": "atlas",
+    "source_label": "图集",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "item",
+    "field": "rewardList",
+    "original_key": "rewardList",
+    "source_label": "对应奖励",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "联赛等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "联赛名称",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "namechinese",
+    "original_key": "namechinese",
+    "source_label": "联赛中文",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "des",
+    "original_key": "des",
+    "source_label": "描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "deschinese",
+    "original_key": "deschinese",
+    "source_label": "描述中文",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "联赛icon",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "reqCup",
+    "original_key": "reqCup",
+    "source_label": "所需杯数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "goldMin",
+    "original_key": "goldMin",
+    "source_label": "最少金币奖励",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "goldMax",
+    "original_key": "goldMax",
+    "source_label": "最多金币奖励",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "league_match",
+    "field": "matchExp",
+    "original_key": "matchExp",
+    "source_label": "获得经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "通用关卡ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "posX",
+    "original_key": "posX",
+    "source_label": "关卡点坐标X",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "posY",
+    "original_key": "posY",
+    "source_label": "关卡点坐标Y",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "levelPath",
+    "original_key": "levelPath",
+    "source_label": "关卡路径配置(角度;数量）",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "openLevel",
+    "original_key": "openLevel",
+    "source_label": "开启等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "repeated",
+    "original_key": "repeated",
+    "source_label": "是否可重复挑战",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "levelSceneID",
+    "original_key": "levelSceneID",
+    "source_label": "关卡场景ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "formationID",
+    "original_key": "formationID",
+    "source_label": "敌方球员阵型（阵型ID）",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "cardList",
+    "original_key": "cardList",
+    "source_label": "敌方球员列表(CardID)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "level",
+    "field": "conditionID",
+    "original_key": "conditionID",
+    "source_label": "过关条件(过关条件ID)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "levelCondition",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "过关条件ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "levelCondition",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "条件枚举类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "levelCondition",
+    "field": "condition",
+    "original_key": "condition",
+    "source_label": "条件参数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "levelCondition",
+    "field": "description",
+    "original_key": "description",
+    "source_label": "条件说明",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "playerlevel",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "playerlevel",
+    "field": "nextLevelExp",
+    "original_key": "nextLevelExp",
+    "source_label": "升级需要经验",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "prize",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "编号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "prize",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "金币",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "prize",
+    "field": "crystal",
+    "original_key": "crystal",
+    "source_label": "钻石",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "rankpunish",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "﻿小时数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "rankpunish",
+    "field": "punish",
+    "original_key": "punish",
+    "source_label": "扣分",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "goodsType",
+    "original_key": "goodsType",
+    "source_label": "类型Crystal钻石MonthCard月卡",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "costType",
+    "original_key": "costType",
+    "source_label": "货币类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "price",
+    "original_key": "price",
+    "source_label": "价格",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "crystal",
+    "original_key": "crystal",
+    "source_label": "获得钻石数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "bonus",
+    "original_key": "bonus",
+    "source_label": "赠送数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "ifDouble",
+    "original_key": "ifDouble",
+    "source_label": "是否有首冲双倍",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "recharge",
+    "field": "ThridProductId",
+    "original_key": "ThridProductId",
+    "source_label": "第三方产品ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "refresh_cfg",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "refresh_cfg",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "刷新类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "refresh_cfg",
+    "field": "refreshTimeList",
+    "original_key": "refreshTimeList",
+    "source_label": "刷新时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "reward",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "奖励ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "reward",
+    "field": "itemList",
+    "original_key": "itemList",
+    "source_label": "物品ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "reward",
+    "field": "countList",
+    "original_key": "countList",
+    "source_label": "获得",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "season_award",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "排名ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "season_award",
+    "field": "rankList",
+    "original_key": "rankList",
+    "source_label": "排名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "season_award",
+    "field": "leaguelevel",
+    "original_key": "leaguelevel",
+    "source_label": "联赛等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "season_award",
+    "field": "reward",
+    "original_key": "reward",
+    "source_label": "获得",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "season_award",
+    "field": "mailID",
+    "original_key": "mailID",
+    "source_label": "邮件ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "sharestore",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "sharestore",
+    "field": "costItemID",
+    "original_key": "costItemID",
+    "source_label": "消耗物品ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "sharestore",
+    "field": "costNum",
+    "original_key": "costNum",
+    "source_label": "消耗数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "sharestore",
+    "field": "itemID",
+    "original_key": "itemID",
+    "source_label": "兑换的卡牌",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "sharestore",
+    "field": "itemNum",
+    "original_key": "itemNum",
+    "source_label": "兑换的卡牌数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "sharestore",
+    "field": "maxBuyLimit",
+    "original_key": "maxBuyLimit",
+    "source_label": "最大兑换限制",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_contract",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "boxId",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_contract",
+    "field": "rankLevel",
+    "original_key": "rankLevel",
+    "source_label": "竞技场等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_contract",
+    "field": "costType",
+    "original_key": "costType",
+    "source_label": "消费类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_contract",
+    "field": "cost",
+    "original_key": "cost",
+    "source_label": "消费数值",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_gold",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "itemId",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_gold",
+    "field": "costType",
+    "original_key": "costType",
+    "source_label": "消费类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_gold",
+    "field": "cost",
+    "original_key": "cost",
+    "source_label": "消费数值",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "shop_gold",
+    "field": "gold",
+    "original_key": "gold",
+    "source_label": "购买获得金币数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "技能id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "extraId",
+    "original_key": "extraId",
+    "source_label": "额外技能",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "skillname",
+    "original_key": "skillname",
+    "source_label": "技能名",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "chineseSkillname",
+    "original_key": "chineseSkillname",
+    "source_label": "技能中文名称",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "rare",
+    "original_key": "rare",
+    "source_label": "品质",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "skillicon",
+    "original_key": "skillicon",
+    "source_label": "技能ICON",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "triggerCondition",
+    "original_key": "triggerCondition",
+    "source_label": "触发阶段一条件id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "startFirstExhibit",
+    "original_key": "startFirstExhibit",
+    "source_label": "阶段一开始表现",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "firstExhibitTime",
+    "original_key": "firstExhibitTime",
+    "source_label": "阶段一开始时间",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "firstExhibit",
+    "original_key": "firstExhibit",
+    "source_label": "阶段一表现",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "firstExhibitType",
+    "original_key": "firstExhibitType",
+    "source_label": "阶段一表现类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "triggerTypeList",
+    "original_key": "triggerTypeList",
+    "source_label": "条件id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "tipType",
+    "original_key": "tipType",
+    "source_label": "技能触发提示",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "secondExhibit",
+    "original_key": "secondExhibit",
+    "source_label": "技能完全触发的表现",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "secondExhibitType",
+    "original_key": "secondExhibitType",
+    "source_label": "技能完全触发的表现类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "exhibitSimple",
+    "original_key": "exhibitSimple",
+    "source_label": "效果表现是否简化",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "triggerPerList",
+    "original_key": "triggerPerList",
+    "source_label": "触发率%",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "effectTarget",
+    "original_key": "effectTarget",
+    "source_label": "效果对象",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "targetTip",
+    "original_key": "targetTip",
+    "source_label": "目标触发提示",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "targetTipchinese",
+    "original_key": "targetTipchinese",
+    "source_label": "目标触发提示中文",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "effectIdList",
+    "original_key": "effectIdList",
+    "source_label": "效果id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "effectValueList",
+    "original_key": "effectValueList",
+    "source_label": "效果值",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "duration",
+    "original_key": "duration",
+    "source_label": "持续回合",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "overLaps",
+    "original_key": "overLaps",
+    "source_label": "可叠层数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "level",
+    "original_key": "level",
+    "source_label": "技能等级",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "skillDes",
+    "original_key": "skillDes",
+    "source_label": "技能描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "skill",
+    "field": "chineseSkillDes",
+    "original_key": "chineseSkillDes",
+    "source_label": "技能中文描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "﻿队徽id",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "field": "type",
+    "original_key": "type",
+    "source_label": "类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "field": "icon",
+    "original_key": "icon",
+    "source_label": "图标",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "field": "giveCardList",
+    "original_key": "giveCardList",
+    "source_label": "新手赠送的球员",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "field": "name",
+    "original_key": "name",
+    "source_label": "俱乐部名称",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "field": "Chinese",
+    "original_key": "Chinese",
+    "source_label": "中文",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "team_badge",
+    "field": "shirt",
+    "original_key": "shirt",
+    "source_label": "俱乐部球服",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "timergift",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "timergift",
+    "field": "cnt",
+    "original_key": "cnt",
+    "source_label": "最大数量",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "timergift",
+    "field": "interval",
+    "original_key": "interval",
+    "source_label": "获取间隔s",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "timergift",
+    "field": "progress",
+    "original_key": "progress",
+    "source_label": "任务达成",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "章节ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "chapterName",
+    "original_key": "chapterName",
+    "source_label": "章节名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "chapterTitle",
+    "original_key": "chapterTitle",
+    "source_label": "章节标题序号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "levelIDList",
+    "original_key": "levelIDList",
+    "source_label": "关卡ID列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "chapterPrizeStarList",
+    "original_key": "chapterPrizeStarList",
+    "source_label": "获得章节奖励所需星数",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "chapterPrizeList",
+    "original_key": "chapterPrizeList",
+    "source_label": "章节星数奖励",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "sceneBg",
+    "original_key": "sceneBg",
+    "source_label": "背景图",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "gateName",
+    "original_key": "gateName",
+    "source_label": "球门场景",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingChapter",
+    "field": "chapterBox",
+    "original_key": "chapterBox",
+    "source_label": "宝箱位置",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "id",
+    "original_key": "id",
+    "source_label": "训练场ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "levelType",
+    "original_key": "levelType",
+    "source_label": "关卡类型",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "levelID",
+    "original_key": "levelID",
+    "source_label": "通用关卡(通用关卡ID)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "levelTitle",
+    "original_key": "levelTitle",
+    "source_label": "关卡标题序号",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "levelName",
+    "original_key": "levelName",
+    "source_label": "关卡名字",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "description",
+    "original_key": "description",
+    "source_label": "关卡描述",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "preLevelID",
+    "original_key": "preLevelID",
+    "source_label": "前置关卡",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "chapterID",
+    "original_key": "chapterID",
+    "source_label": "对应章节",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "formationID",
+    "original_key": "formationID",
+    "source_label": "我方球员阵型（阵型ID）",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "soccerID",
+    "original_key": "soccerID",
+    "source_label": "球员位置（阵型ID）",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "rewardID",
+    "original_key": "rewardID",
+    "source_label": "通关奖励(奖励ID)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "firstReward",
+    "original_key": "firstReward",
+    "source_label": "首胜奖励(奖励ID)",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "animationID",
+    "original_key": "animationID",
+    "source_label": "关卡动画",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "cardList",
+    "original_key": "cardList",
+    "source_label": "指定我方球员ID列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "skillList",
+    "original_key": "skillList",
+    "source_label": "我方球员技能列表",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "dialogID",
+    "original_key": "dialogID",
+    "source_label": "对话ID",
+    "included": true
+  },
+  {
+    "version": "1.5.5",
+    "table": "trainingLevel",
+    "field": "levelAccess",
+    "original_key": "levelAccess",
+    "source_label": "直接通过",
+    "included": true
+  }
+]

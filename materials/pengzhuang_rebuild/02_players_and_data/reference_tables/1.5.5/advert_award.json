@@ -1,0 +1,61 @@
+{
+  "version": "1.5.5",
+  "table": "advert_award",
+  "source_path": "assets/res/raw-assets/resources/data/advert_award.txt",
+  "source_sha256": "b32e9d5a7bd6a8e833c931d7de9ff0d2525311fd4fcbad21964c037e552d9fb1",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "id",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "times",
+      "original_key": "times",
+      "label": "次数",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "rewardID",
+      "original_key": "rewardID",
+      "label": "奖励ID",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1001",
+      "times": "3",
+      "rewardID": "100025"
+    },
+    {
+      "id": "1002",
+      "times": "6",
+      "rewardID": "100026"
+    },
+    {
+      "id": "1003",
+      "times": "9",
+      "rewardID": "100027"
+    },
+    {
+      "id": "1004",
+      "times": "15",
+      "rewardID": "100028"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3,
+    3,
+    3,
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

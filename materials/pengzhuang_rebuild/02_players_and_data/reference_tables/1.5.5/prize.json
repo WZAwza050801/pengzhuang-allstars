@@ -1,0 +1,109 @@
+{
+  "version": "1.5.5",
+  "table": "prize",
+  "source_path": "assets/res/raw-assets/resources/data/prize.txt",
+  "source_sha256": "91dea4266626dc96dc2817e1ee7c5d1ce441fbd544f163bee5fd61d0d1f222c3",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "编号",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "gold",
+      "original_key": "gold",
+      "label": "金币",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "crystal",
+      "original_key": "crystal",
+      "label": "钻石",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "11",
+      "gold": "100",
+      "crystal": "20"
+    },
+    {
+      "id": "12",
+      "gold": "500",
+      "crystal": "60"
+    },
+    {
+      "id": "13",
+      "gold": "1500",
+      "crystal": "150"
+    },
+    {
+      "id": "21",
+      "gold": "500",
+      "crystal": "50"
+    },
+    {
+      "id": "22",
+      "gold": "1000",
+      "crystal": "100"
+    },
+    {
+      "id": "23",
+      "gold": "2000",
+      "crystal": "200"
+    },
+    {
+      "id": "31",
+      "gold": "1000",
+      "crystal": "100"
+    },
+    {
+      "id": "32",
+      "gold": "2000",
+      "crystal": "200"
+    },
+    {
+      "id": "33",
+      "gold": "3000",
+      "crystal": "300"
+    },
+    {
+      "id": "41",
+      "gold": "500",
+      "crystal": "50"
+    },
+    {
+      "id": "42",
+      "gold": "700",
+      "crystal": "70"
+    },
+    {
+      "id": "43",
+      "gold": "1000",
+      "crystal": "100"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

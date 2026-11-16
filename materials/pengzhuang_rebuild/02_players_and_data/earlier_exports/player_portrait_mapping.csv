@@ -1,0 +1,107 @@
+﻿player_id,game_name,real_name_original,real_name_english,club_cn,position,portrait_id,portrait_reference_for_generation,reference_version,first_recovered_in,card_variant_ids
+10101,马少尔,安东尼·马歇尔,Anthony Martial,曼联,ST,head_1001_10101,portraits_1_2_0/head_1001_10101.png,1.2.0,1.2.0,10101
+10102,小胖,韦恩·鲁尼,Wayne Rooney,曼联,ST,head_1001_10102,portraits_1_2_0/head_1001_10102.png,1.2.0,1.2.0,10102;110102
+10103,玛塔叔叔,胡安·马塔,Juan Mata,曼联,CM,head_1001_10103,portraits_1_2_0/head_1001_10103.png,1.2.0,1.2.0,10103
+10104,得佩,孟菲斯·德佩,Memphis Depay,曼联,CM,head_1001_10104,portraits_1_2_0/head_1001_10104.png,1.2.0,1.2.0,10104
+10105,小猪,巴斯蒂安·施魏因施泰格,Bastian Schweinsteiger,曼联,CM,head_1001_10105,portraits_1_2_0/head_1001_10105.png,1.2.0,1.2.0,10105
+10106,罗货,马科斯·罗霍,Marcos Rojo,曼联,DC,head_1001_10106,portraits_1_2_0/head_1001_10106.png,1.2.0,1.2.0,10106
+10107,布琳德,达利·布林德,Daley Blind,曼联,DC,head_1001_10107,portraits_1_2_0/head_1001_10107.png,1.2.0,1.2.0,10107
+10201,阿圭罗,塞尔吉奥·阿奎罗,Sergio Agüero,曼城,ST,head_1002_10201,portraits_1_2_0/head_1002_10201.png,1.2.0,1.2.0,10201;110201
+10202,思特灵,拉希姆·斯特林,Raheem Sterling,曼城,ST,head_1002_10202,portraits_1_2_0/head_1002_10202.png,1.2.0,1.2.0,10202
+10203,喜娃,大卫·席尔瓦,David Silva,曼城,CM,head_1002_10203,portraits_1_2_0/head_1002_10203.png,1.2.0,1.2.0,10203;110203
+10204,土雷,亚亚·图雷,Yaya Toure,曼城,CM,head_1002_10204,portraits_1_2_0/head_1002_10204.png,1.2.0,1.2.0,10204
+10205,丁丁,凯文·德布鲁因,Kevin De Bruyne,曼城,CM,head_1002_10205,portraits_1_2_0/head_1002_10205.png,1.2.0,1.2.0,10205;110205
+10206,孔向前,文森特·孔帕尼,Vincent Kompany,曼城,DC,head_1002_10206,portraits_1_2_0/head_1002_10206.png,1.2.0,1.2.0,10206;110206
+10207,德漏勺,马丁·德米凯利斯,Martin Demichelis,曼城,DC,head_1002_10207,portraits_1_2_0/head_1002_10207.png,1.2.0,1.2.0,10207
+10301,克斯塔,迭戈·科斯塔,Diego Costa,切尔西,ST,head_1003_10301,portraits_1_2_0/head_1003_10301.png,1.2.0,1.2.0,10301
+10302,扎球王,埃登·阿扎尔,Eden Hazard,切尔西,CM,head_1003_10302,portraits_1_2_0/head_1003_10302.png,1.2.0,1.2.0,10302;110302
+10303,小法,塞斯克·法布雷加斯,Cesc Fabregas,切尔西,CM,head_1003_10303,portraits_1_2_0/head_1003_10303.png,1.2.0,1.2.0,10303;110303
+10304,小金人,奥斯卡·多斯桑托斯,Oscar,切尔西,CM,head_1003_10304,portraits_1_2_0/head_1003_10304.png,1.2.0,1.2.0,10304
+10305,玛蒂七,内曼贾·马蒂奇,Nemanja Matic,切尔西,CM,head_1003_10305,portraits_1_2_0/head_1003_10305.png,1.2.0,1.2.0,10305
+10306,特队,约翰·特里,John Terry,切尔西,DC,head_1003_10306,portraits_1_2_0/head_1003_10306.png,1.2.0,1.2.0,10306;110306
+10307,阿紫,阿斯皮利奎塔,Cesar Azpilicueta,切尔西,DC,head_1003_10307,portraits_1_2_0/head_1003_10307.png,1.2.0,1.2.0,10307
+10401,基努,奥利弗·吉鲁,Olivier Giroud,阿森纳,ST,head_1004_10401,portraits_1_2_0/head_1004_10401.png,1.2.0,1.2.0,10401
+10402,小老虎,西奥·沃尔科特,Theo Walcott,阿森纳,ST,head_1004_10402,portraits_1_2_0/head_1004_10402.png,1.2.0,1.2.0,10402
+10403,桑大腿,阿莱克西斯·桑切斯,Alexis Sanchez,阿森纳,CM,head_1004_10403,portraits_1_2_0/head_1004_10403.png,1.2.0,1.2.0,10403;110403
+10404,大眼,梅苏特·厄齐尔,Mesut Özil,阿森纳,CM,head_1004_10404,portraits_1_2_0/head_1004_10404.png,1.2.0,1.2.0,10404;110404
+10405,卡锁啦,卡索拉,Santi Cazorla,阿森纳,CM,head_1004_10405,portraits_1_2_0/head_1004_10405.png,1.2.0,1.2.0,10405
+10406,贝闪电,埃克托·贝莱林,Héctor Bellerín,阿森纳,DC,head_1004_10406,portraits_1_2_0/head_1004_10406.png,1.2.0,1.2.0,10406
+10407,模特撒克,佩尔· 默特萨克,Per Mertesacker,阿森纳,DC,head_1004_10407,portraits_1_2_0/head_1004_10407.png,1.2.0,1.2.0,10407
+20101,莱万,罗伯特·莱万多夫斯基,Robert Lewandowski,拜仁慕尼黑,ST,head_2001_20101,portraits_1_2_0/head_2001_20101.png,1.2.0,1.2.0,20101;120101
+20102,木乐,托马斯·穆勒,Thomas Müller,拜仁慕尼黑,ST,head_2001_20102,portraits_1_2_0/head_2001_20102.png,1.2.0,1.2.0,20102;120102
+20103,小飞侠,阿尔杰·罗本,Arjen Robben,拜仁慕尼黑,CM,head_2001_20103,portraits_1_2_0/head_2001_20103.png,1.2.0,1.2.0,20103
+20104,格册,马里奥·格策,Mario Götze,多特蒙德,CM,head_2001_20104,portraits_1_2_0/head_2001_20104.png,1.2.0,1.2.0,20104
+20105,比达二,阿图罗·比达尔,Arturo Vidal,拜仁慕尼黑,CM,head_2001_20105,portraits_1_2_0/head_2001_20105.png,1.2.0,1.2.0,20105
+20106,拉队,菲利普·拉姆,Philipp Lahm,拜仁慕尼黑,CM,head_2001_20106,portraits_1_2_0/head_2001_20106.png,1.2.0,1.2.0,20106;120106
+20107,博啊疼,热罗姆·博阿滕,Jérôme Boateng,拜仁慕尼黑,DC,head_2001_20107,portraits_1_2_0/head_2001_20107.png,1.2.0,1.2.0,20107;120107
+20201,奥巴没样,皮埃尔-埃梅里克·奥巴梅扬,Pierre Emerick Aubameyang,多特蒙德,ST,head_2002_20201,portraits_1_2_0/head_2002_20201.png,1.2.0,1.2.0,20201;120201
+20202,螺一丝,马尔科·罗伊斯,Marco Reus,多特蒙德,ST,head_2002_20202,portraits_1_2_0/head_2002_20202.png,1.2.0,1.2.0,20202;120202
+20203,美西他娘,亨里克·姆希塔良,Henrikh Mkhitaryan,曼联,CM,head_2002_20203,portraits_1_2_0/head_2002_20203.png,1.2.0,1.2.0,20203
+20204,香川寿司,香川真司,Shinji Kagawa,多特蒙德,CM,head_2002_20204,portraits_1_2_0/head_2002_20204.png,1.2.0,1.2.0,20204
+20205,景多安,伊尔卡伊·京多安,Ilkay Gundogan,曼城,CM,head_2002_20205,portraits_1_2_0/head_2002_20205.png,1.2.0,1.2.0,20205
+20206,狐媚,马茨·胡梅尔斯,Mats Hummels,拜仁慕尼黑,DC,head_2002_20206,portraits_1_2_0/head_2002_20206.png,1.2.0,1.2.0,20206
+20207,金特二,马蒂亚斯·金特尔,Matthias Ginter,多特蒙德,DC,head_2002_20207,portraits_1_2_0/head_2002_20207.png,1.2.0,1.2.0,20207
+30101,迪吧啦,保罗·迪巴拉,Paulo Dybala,尤文图斯,ST,head_3001_30101,portraits_1_2_0/head_3001_30101.png,1.2.0,1.2.0,30101;130101
+30102,莫邋遢,阿尔瓦罗·莫拉塔,Álvaro Morata,皇家马德里,ST,head_3001_30102,portraits_1_2_0/head_3001_30102.png,1.2.0,1.2.0,30102
+30103,波霸,保罗·博格巴,Paul Pogba,曼联,CM,head_3001_30103,portraits_1_2_0/head_3001_30103.png,1.2.0,1.2.0,30103;130103
+30104,马绩效,克劳迪奥·马尔基西奥,Claudio Marchisio,尤文图斯,CM,head_3001_30104,portraits_1_2_0/head_3001_30104.png,1.2.0,1.2.0,30104
+30105,脸哥,萨米·赫迪拉,Sami Khedira,尤文图斯,CM,head_3001_30105,portraits_1_2_0/head_3001_30105.png,1.2.0,1.2.0,30105
+30106,菠萝奇,莱昂纳多·博努奇,Leonardo Bonucci,尤文图斯,DC,head_3001_30106,portraits_1_2_0/head_3001_30106.png,1.2.0,1.2.0,30106
+30107,鲁加尼,丹尼尔·鲁加尼,Daniele Rugani,尤文图斯,DC,head_3001_30107,portraits_1_2_0/head_3001_30107.png,1.2.0,1.2.0,30107
+30108,西瓜,伊瓜因,Gonzalo Higuain,尤文图斯,ST,head_3001_30108,portraits/head_3001_30108.png,1.5.5,1.5.5,30108;130108
+40101,内少,内马尔,Neymar,巴塞罗那,ST,head_4001_40101,portraits_1_2_0/head_4001_40101.png,1.2.0,1.2.0,40101;140101
+40102,苏牙,苏亚雷斯,Luis Suarez,巴塞罗那,ST,head_4001_40102,portraits_1_2_0/head_4001_40102.png,1.2.0,1.2.0,40102;140102
+40103,小白,安德雷斯·伊涅斯塔,Andres Iniesta,巴塞罗那,CM,head_4001_40103,portraits_1_2_0/head_4001_40103.png,1.2.0,1.2.0,40103;140103
+40104,布教授,塞尔吉奥·布斯克茨,Sergio Busquets,巴塞罗那,CM,head_4001_40104,portraits_1_2_0/head_4001_40104.png,1.2.0,1.2.0,40104
+40105,小马哥,哈维尔·马斯切拉诺,Javier Mascherano,巴塞罗那,CM,head_4001_40105,portraits_1_2_0/head_4001_40105.png,1.2.0,1.2.0,40105
+40106,皮主席,杰拉德·皮克,Gerard Pique,巴塞罗那,DC,head_4001_40106,portraits_1_2_0/head_4001_40106.png,1.2.0,1.2.0,40106
+40107,铁达尼,丹尼尔·阿尔维斯,Daniel Alves,尤文图斯,DC,head_4001_40107,portraits_1_2_0/head_4001_40107.png,1.2.0,1.2.0,40107
+40108,梅球王,里奥·梅西,Lionel Messi,巴塞罗那,ST,head_4001_40108,portraits_1_2_0/head_4001_40108.png,1.2.0,1.2.0,40108
+40110,图蓝,阿达图兰,Arda Turan,巴塞罗那,CM,head_4001_40110,portraits/head_4001_40110.png,1.5.5,1.5.5,40110
+40201,笨马,卡里姆·本泽马,Karim Benzema,皇家马德里,ST,head_4002_40201,portraits_1_2_0/head_4002_40201.png,1.2.0,1.2.0,40201
+40202,大圣,加雷斯·贝尔,Gareth Bale,皇家马德里,ST,head_4002_40202,portraits_1_2_0/head_4002_40202.png,1.2.0,1.2.0,40202;140202
+40203,甜菜,托尼·克罗斯,Toni Kroos,皇家马德里,CM,head_4002_40203,portraits_1_2_0/head_4002_40203.png,1.2.0,1.2.0,40203;140203
+40204,魔笛,卢卡·莫德里奇,Luka Modric,皇家马德里,CM,head_4002_40204,portraits_1_2_0/head_4002_40204.png,1.2.0,1.2.0,40204
+40205,哈罗,哈梅斯·罗德里格斯,James Rodriguez,皇家马德里,CM,head_4002_40205,portraits_1_2_0/head_4002_40205.png,1.2.0,1.2.0,40205
+40206,水爷,塞尔吉奥·拉莫斯,Sergio Ramos,皇家马德里,DC,head_4002_40206,portraits_1_2_0/head_4002_40206.png,1.2.0,1.2.0,40206;140206
+40207,武僧,佩佩,Pepe,皇家马德里,DC,head_4002_40207,portraits_1_2_0/head_4002_40207.png,1.2.0,1.2.0,40207
+40208,小小罗,克里斯蒂亚诺·罗纳尔多,Cristiano Ronaldo,皇家马德里,ST,head_4002_40208,portraits_1_2_0/head_4002_40208.png,1.2.0,1.2.0,40208
+40301,格子,安东尼·格里斯曼,Antoine Griezmann,马德里竞技,ST,head_4003_40301,portraits_1_2_0/head_4003_40301.png,1.2.0,1.2.0,40301;140301
+40302,托妞,费尔南多·托雷斯,Fernando Torres,马德里竞技,ST,head_4003_40302,portraits_1_2_0/head_4003_40302.png,1.2.0,1.2.0,40302
+40303,科客,科克,Koke,马德里竞技,CM,head_4003_40303,portraits_1_2_0/head_4003_40303.png,1.2.0,1.2.0,40303;140303
+40304,费南斯,奥古斯托·费尔南德斯,Augusto Fernandez,马德里竞技,CM,head_4003_40304,portraits_1_2_0/head_4003_40304.png,1.2.0,1.2.0,40304
+40305,卡啦斯,费雷拉·卡拉斯科,Yannick Ferreira Carrasco,马德里竞技,CM,head_4003_40305,portraits_1_2_0/head_4003_40305.png,1.2.0,1.2.0,40305
+40306,哥丁,迭戈·戈丁,Diego Godin,马德里竞技,DC,head_4003_40306,portraits_1_2_0/head_4003_40306.png,1.2.0,1.2.0,40306
+40307,陆一丝,菲利佩·路易斯,Filipe Luis,马德里竞技,DC,head_4003_40307,portraits_1_2_0/head_4003_40307.png,1.2.0,1.2.0,40307
+50101,咔哇泥,埃丁森·卡瓦尼,Edinson Cavani,巴黎圣日耳曼,ST,head_5001_50101,portraits_1_2_0/head_5001_50101.png,1.2.0,1.2.0,50101
+50102,奉先,兹拉坦·伊布拉西莫维奇,Zlatan Ibrahimovic,曼联,ST,head_5001_50102,portraits_1_2_0/head_5001_50102.png,1.2.0,1.2.0,50102;150102
+50103,天使,安赫尔·迪马里亚,Ángel Di María,巴黎圣日耳曼,CM,head_5001_50103,portraits_1_2_0/head_5001_50103.png,1.2.0,1.2.0,50103
+50104,微辣帝,马尔科·维拉蒂,Marco Verratti,巴黎圣日耳曼,CM,head_5001_50104,portraits_1_2_0/head_5001_50104.png,1.2.0,1.2.0,50104
+50105,小卢卡斯,卢卡斯·莫拉,Lucas Moura,巴黎圣日耳曼,CM,head_5001_50105,portraits_1_2_0/head_5001_50105.png,1.2.0,1.2.0,50105
+50106,蓬蓬,大卫·路易斯,David Luiz,巴黎圣日耳曼,DC,head_5001_50106,portraits_1_2_0/head_5001_50106.png,1.2.0,1.2.0,50106
+50107,弟媳,蒂亚戈·席尔瓦,Thiago Silva,巴黎圣日耳曼,DC,head_5001_50107,portraits_1_2_0/head_5001_50107.png,1.2.0,1.2.0,50107;150107
+60101,告林斯曼,郜林,Gao Lin,广州恒大,ST,head_6001_60101,portraits_1_2_0/head_6001_60101.png,1.2.0,1.2.0,60101
+60102,杰马,杰克逊·马丁内斯,Jackson Martinez,广州恒大,ST,head_6001_60102,portraits_1_2_0/head_6001_60102.png,1.2.0,1.2.0,60102
+60103,高辣条,里卡多·高拉特,Ricardo Goulart,广州恒大,CM,head_6001_60103,portraits_1_2_0/head_6001_60103.png,1.2.0,1.2.0,60103
+60104,郑队,郑智,Zheng Zhi,广州恒大,CM,head_6001_60104,portraits_1_2_0/head_6001_60104.png,1.2.0,1.2.0,60104
+60105,暴力鸟,保利尼奥,Paulinho,广州恒大,CM,head_6001_60105,portraits_1_2_0/head_6001_60105.png,1.2.0,1.2.0,60105
+60106,世界博,黄博文,Huang Bowen,广州恒大,DC,head_6001_60106,portraits_1_2_0/head_6001_60106.png,1.2.0,1.2.0,60106
+60107,张莫斯,张琳芃,Zhang Linpeng,广州恒大,DC,head_6001_60107,portraits_1_2_0/head_6001_60107.png,1.2.0,1.2.0,60107
+70101,马队,保罗·马尔蒂尼,Paolo Maldini,AC米兰,DC,head_7001_70101,portraits/head_7001_70101.png,1.5.5,1.5.5,70101
+80101,马大腿,马内,Sadio Mane,利物浦,ST,head_8001_80101,portraits/head_8001_80101.png,1.5.5,1.5.5,80101
+80102,费米,菲尔米诺,Roberto Firmino,利物浦,ST,head_8001_80102,portraits/head_8001_80102.png,1.5.5,1.5.5,80102
+80103,司徒,斯图里奇,Daniel Sturridge,利物浦,ST,head_8001_80103,portraits/head_8001_80103.png,1.5.5,1.5.5,80103
+80104,库鸟,库蒂尼奥,Philippe Coutinho,利物浦,CM,head_8001_80104,portraits/head_8001_80104.png,1.5.5,1.5.5,80104;180104
+80105,纳天王,拉拉纳,Adam Lallana,利物浦,CM,head_8001_80105,portraits/head_8001_80105.png,1.5.5,1.5.5,80105
+80106,克莱鹰,克莱因,Nathaniel Clyne,利物浦,DC,head_8001_80106,portraits/head_8001_80106.png,1.5.5,1.5.5,80106
+80107,莫小雷,莫雷诺,Alberto Moreno,利物浦,DC,head_8001_80107,portraits/head_8001_80107.png,1.5.5,1.5.5,80107
+80201,师奶,斯内德,Wesley Sneijder,加拉塔萨雷,CM,head_8002_80201,portraits/head_8002_80201.png,1.5.5,1.5.5,80201
+80202,魔兽,德罗巴,Didier Drogba,加拉塔萨雷,ST,head_8002_80202,portraits/head_8002_80202.png,1.5.5,1.5.5,80202;180202
+80203,拓扑哥哥,大阿尔滕托普,Hamit Altintop,加拉塔萨雷,CM,head_8002_80203,portraits/head_8002_80203.png,1.5.5,1.5.5,80203
+80204,波尔蒂王子,波多尔斯基,Lukas Podolski,加拉塔萨雷,ST,head_8002_80204,portraits/head_8002_80204.png,1.5.5,1.5.5,80204
+80205,功夫熊猫,潘德夫,Goran Pandev,加拉塔萨雷,CM,head_8002_80205,portraits/head_8002_80205.png,1.5.5,1.5.5,80205
+80206,耳帝,布尔迪索,Nicolas Burdisso,加拉塔萨雷,DC,head_8002_80206,portraits/head_8002_80206.png,1.5.5,1.5.5,80206
+80207,霉洛,梅洛,Felipe Melo,加拉塔萨雷,DC,head_8002_80207,portraits/head_8002_80207.png,1.5.5,1.5.5,80207
+90001,齐祖,齐达内,Zinedine Zidane,传奇球员,CM,head_9001_90001,portraits/head_9001_90001.png,1.5.5,1.5.5,90001
+90002,大罗,罗纳尔多,Ronaldo Nazário,传奇球员,ST,head_9001_90002,portraits_1_2_0/head_9001_90002.png,1.2.0,1.2.0,90002
+90003,小贝,贝克汉姆,David Beckham,传奇球员,CM,head_9001_90003,portraits/head_9001_90003.png,1.5.5,1.5.5,90003

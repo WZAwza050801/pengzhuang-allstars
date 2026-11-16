@@ -1,0 +1,12 @@
+{
+  "source_image_records": 90,
+  "unique_non_portrait_images": 90,
+  "sprite_metadata_records": {
+    "1.2.0": 696,
+    "1.5.5": 885
+  },
+  "scope": "两版非头像atlas、texture与font的PNG/JPG；不含全套特效序列或音频",
+  "selected_sprite_records": 33,
+  "full_texture_reused": 19,
+  "extracted_sprite_files": 14
+}

@@ -1,0 +1,127 @@
+{
+  "version": "1.5.5",
+  "table": "trainingChapter",
+  "source_path": "assets/res/raw-assets/resources/data/trainingChapter.txt",
+  "source_sha256": "eb4b13c29f488cba3428dcf79d39e6ad4bebe47bc42f4418d4a7ae2c1a8b12f8",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "章节ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "chapterName",
+      "original_key": "chapterName",
+      "label": "章节名字",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "chapterTitle",
+      "original_key": "chapterTitle",
+      "label": "章节标题序号",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "levelIDList",
+      "original_key": "levelIDList",
+      "label": "关卡ID列表",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "chapterPrizeStarList",
+      "original_key": "chapterPrizeStarList",
+      "label": "获得章节奖励所需星数",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "chapterPrizeList",
+      "original_key": "chapterPrizeList",
+      "label": "章节星数奖励",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "sceneBg",
+      "original_key": "sceneBg",
+      "label": "背景图",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "gateName",
+      "original_key": "gateName",
+      "label": "球门场景",
+      "included": true
+    },
+    {
+      "index": 9,
+      "key": "chapterBox",
+      "original_key": "chapterBox",
+      "label": "宝箱位置",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "10001",
+      "chapterName": "$chapterName_10001",
+      "chapterTitle": "1",
+      "levelIDList": "10001;10002;10003",
+      "chapterPrizeStarList": "3;6;9",
+      "chapterPrizeList": "610011;610012;610013",
+      "sceneBg": "ID_88",
+      "gateName": "ID_89",
+      "chapterBox": "250;-520"
+    },
+    {
+      "id": "10002",
+      "chapterName": "$chapterName_10002",
+      "chapterTitle": "2",
+      "levelIDList": "10004;10005;10006",
+      "chapterPrizeStarList": "3;6;9",
+      "chapterPrizeList": "610021;610022;610023",
+      "sceneBg": "ID_90",
+      "gateName": "ID_91",
+      "chapterBox": "-230;240"
+    },
+    {
+      "id": "10003",
+      "chapterName": "$chapterName_10003",
+      "chapterTitle": "3",
+      "levelIDList": "10007;10008;10009",
+      "chapterPrizeStarList": "3;6;9",
+      "chapterPrizeList": "610031;610032;610033",
+      "sceneBg": "ID_92",
+      "gateName": "ID_93",
+      "chapterBox": "230;-400"
+    },
+    {
+      "id": "10004",
+      "chapterName": "$chapterName_10004",
+      "chapterTitle": "4",
+      "levelIDList": "10010;10011;10012",
+      "chapterPrizeStarList": "3;6;9",
+      "chapterPrizeList": "610041;610042;610043",
+      "sceneBg": "ID_94",
+      "gateName": "ID_95",
+      "chapterBox": "-250;-520"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    9,
+    9,
+    9,
+    9
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

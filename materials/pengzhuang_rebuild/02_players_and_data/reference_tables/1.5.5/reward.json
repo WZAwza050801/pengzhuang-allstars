@@ -1,0 +1,499 @@
+{
+  "version": "1.5.5",
+  "table": "reward",
+  "source_path": "assets/res/raw-assets/resources/data/reward.txt",
+  "source_sha256": "62e2f5f1777f1fd13dae5a202e0e860f45fe0038df738a46b1546b7085345b09",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "奖励ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "itemList",
+      "original_key": "itemList",
+      "label": "物品ID",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "countList",
+      "original_key": "countList",
+      "label": "获得",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "100001",
+      "itemList": "2",
+      "countList": "550"
+    },
+    {
+      "id": "100002",
+      "itemList": "2",
+      "countList": "525"
+    },
+    {
+      "id": "100003",
+      "itemList": "2",
+      "countList": "500"
+    },
+    {
+      "id": "100004",
+      "itemList": "2",
+      "countList": "440"
+    },
+    {
+      "id": "100005",
+      "itemList": "2",
+      "countList": "420"
+    },
+    {
+      "id": "100006",
+      "itemList": "2",
+      "countList": "400"
+    },
+    {
+      "id": "100007",
+      "itemList": "2",
+      "countList": "420"
+    },
+    {
+      "id": "100008",
+      "itemList": "2",
+      "countList": "395"
+    },
+    {
+      "id": "100009",
+      "itemList": "2",
+      "countList": "370"
+    },
+    {
+      "id": "100010",
+      "itemList": "2",
+      "countList": "310"
+    },
+    {
+      "id": "100011",
+      "itemList": "2",
+      "countList": "290"
+    },
+    {
+      "id": "100012",
+      "itemList": "2",
+      "countList": "270"
+    },
+    {
+      "id": "100013",
+      "itemList": "2",
+      "countList": "290"
+    },
+    {
+      "id": "100014",
+      "itemList": "2",
+      "countList": "265"
+    },
+    {
+      "id": "100015",
+      "itemList": "2",
+      "countList": "240"
+    },
+    {
+      "id": "100016",
+      "itemList": "2",
+      "countList": "190"
+    },
+    {
+      "id": "100017",
+      "itemList": "2",
+      "countList": "170"
+    },
+    {
+      "id": "100018",
+      "itemList": "2",
+      "countList": "150"
+    },
+    {
+      "id": "100019",
+      "itemList": "2",
+      "countList": "170"
+    },
+    {
+      "id": "100020",
+      "itemList": "2",
+      "countList": "145"
+    },
+    {
+      "id": "100021",
+      "itemList": "2",
+      "countList": "120"
+    },
+    {
+      "id": "100022",
+      "itemList": "2",
+      "countList": "80"
+    },
+    {
+      "id": "100023",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "100024",
+      "itemList": "2",
+      "countList": "40"
+    },
+    {
+      "id": "100025",
+      "itemList": "12;22",
+      "countList": "100;50"
+    },
+    {
+      "id": "100026",
+      "itemList": "12;22",
+      "countList": "150;50"
+    },
+    {
+      "id": "100027",
+      "itemList": "12;22",
+      "countList": "250;100"
+    },
+    {
+      "id": "100028",
+      "itemList": "1502",
+      "countList": "1"
+    },
+    {
+      "id": "200001",
+      "itemList": "2;9001",
+      "countList": "50;1"
+    },
+    {
+      "id": "200002",
+      "itemList": "9014",
+      "countList": "1"
+    },
+    {
+      "id": "200011",
+      "itemList": "40108",
+      "countList": "1"
+    },
+    {
+      "id": "200012",
+      "itemList": "40208",
+      "countList": "1"
+    },
+    {
+      "id": "200013",
+      "itemList": "90001",
+      "countList": "1"
+    },
+    {
+      "id": "300001",
+      "itemList": "1",
+      "countList": "500"
+    },
+    {
+      "id": "300002",
+      "itemList": "1",
+      "countList": "1000"
+    },
+    {
+      "id": "300003",
+      "itemList": "1",
+      "countList": "2000"
+    },
+    {
+      "id": "410001",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410002",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410003",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410004",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410005",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410006",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410007",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410008",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410009",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410010",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410011",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "410012",
+      "itemList": "1",
+      "countList": "0"
+    },
+    {
+      "id": "510001",
+      "itemList": "1",
+      "countList": "50"
+    },
+    {
+      "id": "510002",
+      "itemList": "1",
+      "countList": "50"
+    },
+    {
+      "id": "510003",
+      "itemList": "1",
+      "countList": "50"
+    },
+    {
+      "id": "510004",
+      "itemList": "1",
+      "countList": "80"
+    },
+    {
+      "id": "510005",
+      "itemList": "1",
+      "countList": "80"
+    },
+    {
+      "id": "510006",
+      "itemList": "1",
+      "countList": "80"
+    },
+    {
+      "id": "510007",
+      "itemList": "1",
+      "countList": "100"
+    },
+    {
+      "id": "510008",
+      "itemList": "1",
+      "countList": "100"
+    },
+    {
+      "id": "510009",
+      "itemList": "1",
+      "countList": "100"
+    },
+    {
+      "id": "510010",
+      "itemList": "1",
+      "countList": "100"
+    },
+    {
+      "id": "510011",
+      "itemList": "1",
+      "countList": "100"
+    },
+    {
+      "id": "510012",
+      "itemList": "1",
+      "countList": "100"
+    },
+    {
+      "id": "610011",
+      "itemList": "2",
+      "countList": "30"
+    },
+    {
+      "id": "610012",
+      "itemList": "2",
+      "countList": "40"
+    },
+    {
+      "id": "610013",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "610021",
+      "itemList": "2",
+      "countList": "40"
+    },
+    {
+      "id": "610022",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "610023",
+      "itemList": "2",
+      "countList": "90"
+    },
+    {
+      "id": "610031",
+      "itemList": "2",
+      "countList": "40"
+    },
+    {
+      "id": "610032",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "610033",
+      "itemList": "2",
+      "countList": "90"
+    },
+    {
+      "id": "610041",
+      "itemList": "2",
+      "countList": "40"
+    },
+    {
+      "id": "610042",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "610043",
+      "itemList": "2",
+      "countList": "90"
+    },
+    {
+      "id": "400001",
+      "itemList": "2",
+      "countList": "600"
+    },
+    {
+      "id": "400002",
+      "itemList": "2",
+      "countList": "550"
+    },
+    {
+      "id": "400003",
+      "itemList": "2",
+      "countList": "450"
+    },
+    {
+      "id": "400004",
+      "itemList": "2",
+      "countList": "300"
+    },
+    {
+      "id": "400005",
+      "itemList": "2",
+      "countList": "150"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

@@ -1,0 +1,17 @@
+{
+  "url": "https://www.youtube.com/watch?v=euDrVEFqia0",
+  "title": "Total Soccer - TR",
+  "uploader_display_name": "Mechanist Games",
+  "uploader_url": "https://www.youtube.com/@mechanistgames247",
+  "metadata_endpoint": "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=euDrVEFqia0&format=json",
+  "discovered_on": "https://www.tamindir.com/indir/total-soccer/",
+  "checked_at": "2026-11-14",
+  "status": "标题和上传者显示名经 YouTube oEmbed 核实；未播放、未逐帧核验；时长、原始发布日期及完整可播放性未确认",
+  "third_party_embed_date": "2017-11-22（Tamindir 结构化元数据，不作 YouTube 日期）",
+  "analysis_next": [
+    "核对是不是同一版画面",
+    "记录拖动、放手、首次碰球和完全停下的时间",
+    "观察弧线到底作用于哪一个物体",
+    "确认进球后的重置和下一次开球归属"
+  ]
+}

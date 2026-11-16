@@ -1,0 +1,91 @@
+{
+  "version": "1.2.0",
+  "table": "initplayer",
+  "source_path": "assets/res/raw-assets/resources/data/initplayer.txt",
+  "source_sha256": "a16c3322584aca030887ae6c8b640a24c05619d780130866a0ac7450bf5a8608",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "唯一ID    等级  金币  钻石  卡牌列表    阵容信息1   阵容信息2   阵容信息3   初始开放阵型",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "level",
+      "original_key": "level",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "gold",
+      "original_key": "gold",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "crystal",
+      "original_key": "crystal",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "cardList",
+      "original_key": "cardList",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "team1List",
+      "original_key": "team1List",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "team2List",
+      "original_key": "team2List",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "team3List",
+      "original_key": "team3List",
+      "label": "",
+      "included": true
+    },
+    {
+      "index": 9,
+      "key": "formation",
+      "original_key": "formation",
+      "label": "",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "level": "1",
+      "gold": "1000",
+      "crystal": "0",
+      "cardList": "60102;10401;20204;60104;40307",
+      "team1List": "10101;10102;10103;10104;10105",
+      "team2List": "10101;10102;10103;10104;10105",
+      "team3List": "10101;10102;10103;10104;10105",
+      "formation": "10001"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    9
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

@@ -1,0 +1,439 @@
+{
+  "version": "1.5.5",
+  "table": "factor",
+  "source_path": "assets/res/raw-assets/resources/data/factor.txt",
+  "source_sha256": "84528ecfeecace56c6b97537470fb8eca865a5366aa70fed58597a01f1b9cfe0",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "系数名称",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "value",
+      "original_key": "value",
+      "label": "系数值",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "remarks",
+      "original_key": "remarks",
+      "label": "备注",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "Guild_Sample1",
+      "value": "180",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Arena_Sample2",
+      "value": "30",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Test_Sample3",
+      "value": "5",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Zone_Sample4",
+      "value": "500",
+      "remarks": "命名如左，系统_具体项目"
+    },
+    {
+      "id": "Player_NameMinLenght",
+      "value": "1",
+      "remarks": "玩家名最小长度"
+    },
+    {
+      "id": "Player_NameMaxLenght",
+      "value": "24",
+      "remarks": "玩家名最大长度"
+    },
+    {
+      "id": "Guild_OpenLevel",
+      "value": "3",
+      "remarks": "公会开放等级"
+    },
+    {
+      "id": "Guild_NameMinLenght",
+      "value": "1",
+      "remarks": "公会名最小长度"
+    },
+    {
+      "id": "Guild_NameMaxLenght",
+      "value": "14",
+      "remarks": "公会名最大长度"
+    },
+    {
+      "id": "Guild_DeclareMinLenght",
+      "value": "0",
+      "remarks": "公会宣言最小长度"
+    },
+    {
+      "id": "Guild_DeclareMaxLenght",
+      "value": "140",
+      "remarks": "公会宣言最大长度"
+    },
+    {
+      "id": "Guild_ChatMinLenght",
+      "value": "1",
+      "remarks": "聊天内容最小长度"
+    },
+    {
+      "id": "Guild_ChatMaxLenght",
+      "value": "140",
+      "remarks": "聊天内容最大长度"
+    },
+    {
+      "id": "Guild_CreateCost",
+      "value": "1000",
+      "remarks": "公会创建消耗"
+    },
+    {
+      "id": "Guild_BuildCost",
+      "value": "500",
+      "remarks": "公会建设消耗"
+    },
+    {
+      "id": "Guild_BuildCD",
+      "value": "86400000",
+      "remarks": "公会建设CD"
+    },
+    {
+      "id": "Guild_BuildContribution",
+      "value": "50",
+      "remarks": "公会建设获得贡献值"
+    },
+    {
+      "id": "Guild_BuildExp",
+      "value": "50",
+      "remarks": "公会建设建筑获得经验值"
+    },
+    {
+      "id": "Guild_HelpCD",
+      "value": "28800000",
+      "remarks": "公会求助CD"
+    },
+    {
+      "id": "Guild_HelpTimes",
+      "value": "20",
+      "remarks": "公会帮助捐赠次数"
+    },
+    {
+      "id": "Guild_AppLifeTime",
+      "value": "86400000",
+      "remarks": "公会申请的保留时间"
+    },
+    {
+      "id": "Guild_EventLifeTime",
+      "value": "86400000",
+      "remarks": "公会事件保留时间"
+    },
+    {
+      "id": "GuildChatCD",
+      "value": "3000",
+      "remarks": "公会聊天CD，单位毫秒"
+    },
+    {
+      "id": "RobotRankPoint",
+      "value": "500",
+      "remarks": "机器人匹配最低分"
+    },
+    {
+      "id": "FreeCrystal",
+      "value": "4000",
+      "remarks": "每日赠送钻石"
+    },
+    {
+      "id": "FreeGold",
+      "value": "2000",
+      "remarks": "每日赠送金币"
+    },
+    {
+      "id": "BattleMinWaitTime",
+      "value": "6000",
+      "remarks": "匹配最少等待时间，单位毫秒"
+    },
+    {
+      "id": "CardRareDisposeForbid",
+      "value": "5",
+      "remarks": "禁止分解的卡牌最低品质。（含）"
+    },
+    {
+      "id": "CardRareDisposeWarn",
+      "value": "4",
+      "remarks": "需要警告提示的卡牌最低品质。（含）"
+    },
+    {
+      "id": "CardLevelDisposeWarn",
+      "value": "2",
+      "remarks": "需要警告提示的卡牌最低等级。（含）"
+    },
+    {
+      "id": "CardRareDisposeOneKey",
+      "value": "3",
+      "remarks": "不能一键分解的卡牌最低品质。（含）"
+    },
+    {
+      "id": "inviteDayLimit",
+      "value": "5",
+      "remarks": "每日邀请领取上限"
+    },
+    {
+      "id": "inviteWeekLimit",
+      "value": "20",
+      "remarks": "每周邀请领取上限"
+    },
+    {
+      "id": "inviteInstallReward",
+      "value": "10",
+      "remarks": "邀请安装游戏后奖励数量"
+    },
+    {
+      "id": "inviteLinkWebSite",
+      "value": "http://pz.mjyx.com/",
+      "remarks": "邀请下载站地址"
+    },
+    {
+      "id": "Icon_RegionalMatch",
+      "value": "Image_B",
+      "remarks": "区域联赛图标"
+    },
+    {
+      "id": "Icon_CupMatch",
+      "value": "Image_A",
+      "remarks": "金球杯赛"
+    },
+    {
+      "id": "CupMatch_Cost",
+      "value": "500",
+      "remarks": "金球杯赛参赛消耗"
+    },
+    {
+      "id": "GoldBallCupTimeCheck",
+      "value": "1",
+      "remarks": "金杯赛时间检测[0代表不检测，1代表检测]"
+    },
+    {
+      "id": "CupMatchJoinNum",
+      "value": "8",
+      "remarks": "杯赛匹配参与人数[2~8之间]"
+    },
+    {
+      "id": "BoxOpenImmediately",
+      "value": "400",
+      "remarks": "立刻打开宝箱价格系数(钻石数=剩余秒数/价格系数)"
+    },
+    {
+      "id": "FirstSpecialBoxID",
+      "value": "5002",
+      "remarks": "新手引导使用的特殊合同编号"
+    },
+    {
+      "id": "MonthCardRewardMailID",
+      "value": "200001",
+      "remarks": "月卡奖励邮件ID"
+    },
+    {
+      "id": "MonthCardNeedMinDay",
+      "value": "0",
+      "remarks": "购买月卡时剩余最低天数，-1表示无限制。"
+    },
+    {
+      "id": "TrainingLevelStartID",
+      "value": "10001",
+      "remarks": "训练场起始关卡ID。"
+    },
+    {
+      "id": "ArenaMatchingRatio_S",
+      "value": "560",
+      "remarks": "竞技场匹配算法公式方差相关系数S"
+    },
+    {
+      "id": "FirstChargeRewardID",
+      "value": "200002",
+      "remarks": "首充奖励邮件ID"
+    },
+    {
+      "id": "MJCupTimes",
+      "value": "50",
+      "remarks": "梦加杯赛可得橙色兑换券次数"
+    },
+    {
+      "id": "ChampionsCupTime",
+      "value": "10",
+      "remarks": "冠军杯赛次数"
+    },
+    {
+      "id": "PraiseCost",
+      "value": "100",
+      "remarks": "点赞消耗"
+    },
+    {
+      "id": "TauntCost",
+      "value": "100",
+      "remarks": "点踩消耗"
+    },
+    {
+      "id": "CupWinGetCouponOrange_8",
+      "value": "1",
+      "remarks": "8进4获胜获得橙闪卡兑换券"
+    },
+    {
+      "id": "CupWinGetCouponOrange_4",
+      "value": "1",
+      "remarks": "4进2获胜获得橙闪卡兑换券"
+    },
+    {
+      "id": "CupWinGetCouponOrange_2",
+      "value": "3",
+      "remarks": "2进1获胜获得橙闪卡兑换券"
+    },
+    {
+      "id": "CupLoseGetCouponOrange",
+      "value": "1",
+      "remarks": "2进1失败获得橙闪卡兑换券"
+    },
+    {
+      "id": "DailyGetCouponOrange",
+      "value": "20",
+      "remarks": "每日获得橙色兑换券上限"
+    },
+    {
+      "id": "DailyGetCouponRed",
+      "value": "20",
+      "remarks": "每日获得红色兑换券上限"
+    },
+    {
+      "id": "FirstRecharge",
+      "value": "5",
+      "remarks": "首充活动"
+    },
+    {
+      "id": "MonthCard",
+      "value": "4",
+      "remarks": "月卡活动"
+    },
+    {
+      "id": "AccumRecharge",
+      "value": "3",
+      "remarks": "累计充值活动"
+    },
+    {
+      "id": "WheelOfFortune",
+      "value": "2",
+      "remarks": "幸运大转盘"
+    },
+    {
+      "id": "LimitedPackage",
+      "value": "1",
+      "remarks": "限时礼包"
+    },
+    {
+      "id": "watchingADMinusGiftTime",
+      "value": "600",
+      "remarks": "广告缩短的合同时间[秒]"
+    },
+    {
+      "id": "AD_Watch_CoolDelay",
+      "value": "60",
+      "remarks": "广告观看的冷却时间"
+    },
+    {
+      "id": "IsEnableIAP",
+      "value": "1",
+      "remarks": "应用内购的开关(0 表示关闭，1 表示开启)"
+    },
+    {
+      "id": "IsEnableActivity_FirstCharge",
+      "value": "0",
+      "remarks": "首充活动开关(0表示关闭，1表示开启)"
+    },
+    {
+      "id": "IsEnableActivity_MonthCard",
+      "value": "0",
+      "remarks": "月卡活动开关(0表示关闭，1表示开启)"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "taptap_original_1",
+    "url": "https://img.tapimg.net/market/images/482ab6db7e4716c82269ad4006a91d19.jpg",
+    "page": "https://www.taptap.cn/app/13833",
+    "kind": "官方入驻页面宣传图原始文件",
+    "file": "references/taptap_original_1.jpg",
+    "width": 1242,
+    "height": 2208,
+    "bytes": 321725,
+    "sha256": "5aef26004d64ab8324295d0cec97eb8024640c9e2cc12aaca1f242c36e3a5b03",
+    "status": "downloaded"
+  },
+  {
+    "id": "taptap_original_2",
+    "url": "https://img.tapimg.net/market/images/3c60ef03c1cad99b044efe56b4d8adf2.jpg",
+    "page": "https://www.taptap.cn/app/13833",
+    "kind": "官方入驻页面宣传图原始文件",
+    "file": "references/taptap_original_2.jpg",
+    "width": 1242,
+    "height": 2208,
+    "bytes": 385945,
+    "sha256": "4bbaf97db836cbbecd1db433c9be02064a61c14e0a48a9b1fc6de09fa570d096",
+    "status": "downloaded"
+  },
+  {
+    "id": "taptap_original_3",
+    "url": "https://img.tapimg.net/market/images/27fe63f307682b9cc66304a43a581ac2.jpg",
+    "page": "https://www.taptap.cn/app/13833",
+    "kind": "官方入驻页面宣传图原始文件",
+    "file": "references/taptap_original_3.jpg",
+    "width": 1242,
+    "height": 2208,
+    "bytes": 408424,
+    "sha256": "c242ee2ce9f13d575abb974e27a957791925a83afe40cf3addbe78abb5615b1e",
+    "status": "downloaded"
+  },
+  {
+    "id": "taptap_original_4",
+    "url": "https://img.tapimg.net/market/images/cacaad05cff6eace3a4e760c868ef421.jpg",
+    "page": "https://www.taptap.cn/app/13833",
+    "kind": "官方入驻页面宣传图原始文件",
+    "file": "references/taptap_original_4.jpg",
+    "width": 1242,
+    "height": 2208,
+    "bytes": 436959,
+    "sha256": "e86973d06de04675f9914897a6cc68bbd5b1611d926f3b8700b6065db4e5d7fe",
+    "status": "downloaded"
+  },
+  {
+    "id": "taptap_original_5",
+    "url": "https://img.tapimg.net/market/images/9ad5a9c9bdb55d07224cc9fe5edbf72d.jpg",
+    "page": "https://www.taptap.cn/app/13833",
+    "kind": "官方入驻页面宣传图原始文件",
+    "file": "references/taptap_original_5.jpg",
+    "width": 1242,
+    "height": 2208,
+    "bytes": 436604,
+    "sha256": "5670ab09149fb641d48f9ad24d4086f7aea0b86c904d7173838936e733432978",
+    "status": "downloaded"
+  },
+  {
+    "id": "club_press_1",
+    "url": "https://image.9game.cn/2016/10/26/14627607.jpg",
+    "page": "https://www.9game.cn/news/1255667.html",
+    "kind": "2016-10-26 媒体宣传图",
+    "file": "references/club_press_1.png",
+    "width": 500,
+    "height": 267,
+    "bytes": 322743,
+    "sha256": "7cd6a209367f298a6b2f79641c2a9fec026612eaf0543914e82fb426bac2d5e8",
+    "status": "downloaded"
+  },
+  {
+    "id": "club_press_2",
+    "url": "https://image.9game.cn/2016/10/26/14627609.jpg",
+    "page": "https://www.9game.cn/news/1255667.html",
+    "kind": "2016-10-26 媒体宣传图",
+    "file": "references/club_press_2.png",
+    "width": 375,
+    "height": 500,
+    "bytes": 437766,
+    "sha256": "cd5a75facdd2971f2ca61b487957d5fe16ab27cb3f15550e36fc4e728dece460",
+    "status": "downloaded"
+  },
+  {
+    "id": "club_press_3",
+    "url": "https://image.9game.cn/2016/10/26/14627610.jpg",
+    "page": "https://www.9game.cn/news/1255667.html",
+    "kind": "2016-10-26 媒体宣传图",
+    "file": "references/club_press_3.png",
+    "width": 375,
+    "height": 500,
+    "bytes": 455784,
+    "sha256": "c9cd48621bd5db0800d2f537b2e29cbfce94f2ebce24479ea456fc70dc2175bd",
+    "status": "downloaded"
+  },
+  {
+    "id": "club_press_4",
+    "url": "https://image.9game.cn/2016/10/26/14627611.jpg",
+    "page": "https://www.9game.cn/news/1255667.html",
+    "kind": "2016-10-26 媒体宣传图",
+    "file": "references/club_press_4.png",
+    "width": 375,
+    "height": 500,
+    "bytes": 431359,
+    "sha256": "7a8d33c105f43f8bfbdcb27b5ed78452c3f9df04348d89d4bd85cb44ad2debbe",
+    "status": "downloaded"
+  },
+  {
+    "id": "user_contract_2021",
+    "url": "https://img2-tc.tapimg.com/bbcode/etag/FooXvmdfpY1nDA7M1HBmyXmJ9kv2.jpg/_tap_ugc.jpg",
+    "page": "https://www.taptap.cn/moment/122781514378251212?group_id=1102",
+    "kind": "2021-03-21 玩家帖子图片，需检查是否同一游戏",
+    "file": "references/user_contract_2021.jpg",
+    "width": 620,
+    "height": 2044,
+    "bytes": 126309,
+    "sha256": "4f08f343ebab3dd971d0a04ca4597001c80fab62d2189f9123043f92e3c7f206",
+    "status": "downloaded"
+  }
+]

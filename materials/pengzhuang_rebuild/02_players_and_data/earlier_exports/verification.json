@@ -1,0 +1,12 @@
+{
+  "players": 106,
+  "cards": 137,
+  "foil_cards": 31,
+  "early_portraits": 87,
+  "later_portraits": 106,
+  "all_portrait_hashes_verified": true,
+  "embedded_images": 106,
+  "generation_jobs": 106,
+  "checked_at": "2026-11-14",
+  "visual_review": "首批12人与各图集原图已目视检查；独立头像按原始SpriteFrame逐条定位；HTML未进行浏览器交互测试。"
+}

@@ -1,0 +1,175 @@
+{
+  "version": "1.5.5",
+  "table": "donation_box",
+  "source_path": "assets/res/raw-assets/resources/data/donation_box.txt",
+  "source_sha256": "481bc61c93baa062e1b758da11d7a226496bf54f308e0b592f3ac4ceb9d01088",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "id",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "Moneybox_level",
+      "original_key": "Moneybox_level",
+      "label": "宝箱等级",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "nameKEY",
+      "original_key": "nameKEY",
+      "label": "宝箱名称key",
+      "included": true
+    },
+    {
+      "index": 4,
+      "key": "box_Name",
+      "original_key": "box_Name",
+      "label": "宝箱名称",
+      "included": true
+    },
+    {
+      "index": 5,
+      "key": "atlas",
+      "original_key": "atlas",
+      "label": "图集",
+      "included": true
+    },
+    {
+      "index": 6,
+      "key": "icon",
+      "original_key": "icon",
+      "label": "图标",
+      "included": true
+    },
+    {
+      "index": 7,
+      "key": "donationList",
+      "original_key": "donationList",
+      "label": "捐赠消耗",
+      "included": true
+    },
+    {
+      "index": 8,
+      "key": "rewardList",
+      "original_key": "rewardList",
+      "label": "捐赠获得",
+      "included": true
+    },
+    {
+      "index": 9,
+      "key": "singletimes",
+      "original_key": "singletimes",
+      "label": "可捐赠次数",
+      "included": true
+    },
+    {
+      "index": 10,
+      "key": "times",
+      "original_key": "times",
+      "label": "需捐赠总次数",
+      "included": true
+    },
+    {
+      "index": 11,
+      "key": "boxrewardList",
+      "original_key": "boxrewardList",
+      "label": "宝箱获得",
+      "included": true
+    },
+    {
+      "index": 12,
+      "key": "contribution",
+      "original_key": "contribution",
+      "label": "贡献度",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "1",
+      "Moneybox_level": "1级",
+      "nameKEY": "$Donation_box",
+      "box_Name": "联盟宝箱",
+      "atlas": "ShopIcon",
+      "icon": "Diamond_Icon_10",
+      "donationList": "1;10",
+      "rewardList": "3;2",
+      "singletimes": "2",
+      "times": "10",
+      "boxrewardList": "1;100",
+      "contribution": "5"
+    },
+    {
+      "id": "2",
+      "Moneybox_level": "2级",
+      "nameKEY": "$Donation_box",
+      "box_Name": "联盟宝箱",
+      "atlas": "ShopIcon",
+      "icon": "Diamond_Icon_10",
+      "donationList": "1;20",
+      "rewardList": "3;3",
+      "singletimes": "2",
+      "times": "10",
+      "boxrewardList": "1;200",
+      "contribution": "5"
+    },
+    {
+      "id": "3",
+      "Moneybox_level": "3级",
+      "nameKEY": "$Donation_box",
+      "box_Name": "联盟宝箱",
+      "atlas": "ShopIcon",
+      "icon": "Diamond_Icon_10",
+      "donationList": "1;30",
+      "rewardList": "3;5",
+      "singletimes": "2",
+      "times": "10",
+      "boxrewardList": "1;300",
+      "contribution": "5"
+    },
+    {
+      "id": "4",
+      "Moneybox_level": "4级",
+      "nameKEY": "$Donation_box",
+      "box_Name": "联盟宝箱",
+      "atlas": "ShopIcon",
+      "icon": "Diamond_Icon_10",
+      "donationList": "1;40",
+      "rewardList": "3;7",
+      "singletimes": "2",
+      "times": "10",
+      "boxrewardList": "1;400",
+      "contribution": "5"
+    },
+    {
+      "id": "5",
+      "Moneybox_level": "5级",
+      "nameKEY": "$Donation_box",
+      "box_Name": "联盟宝箱",
+      "atlas": "ShopIcon",
+      "icon": "Diamond_Icon_10",
+      "donationList": "1;50",
+      "rewardList": "3;10",
+      "singletimes": "2",
+      "times": "10",
+      "boxrewardList": "1;500",
+      "contribution": "5"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    12,
+    12,
+    12,
+    12,
+    12
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}

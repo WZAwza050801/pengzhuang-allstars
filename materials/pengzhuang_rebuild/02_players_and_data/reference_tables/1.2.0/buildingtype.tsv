@@ -1,0 +1,3 @@
+﻿id	表名	名字	效果字段	描述	中文描述
+id	table	name	field	des	chinese
+guild	buildingguild	联盟	memberCount	$build_01	升级联盟可以提高联盟人数上限。

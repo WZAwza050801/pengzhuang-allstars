@@ -1,0 +1,331 @@
+{
+  "version": "1.2.0",
+  "table": "reward",
+  "source_path": "assets/res/raw-assets/resources/data/reward.txt",
+  "source_sha256": "001ea7330d79cc5caf5e76c5f78afc410c80085a0c0f7b4d138f42e43407de6b",
+  "columns": [
+    {
+      "index": 1,
+      "key": "id",
+      "original_key": "id",
+      "label": "排名ID",
+      "included": true
+    },
+    {
+      "index": 2,
+      "key": "itemList",
+      "original_key": "itemList",
+      "label": "物品ID",
+      "included": true
+    },
+    {
+      "index": 3,
+      "key": "countList",
+      "original_key": "countList",
+      "label": "获得",
+      "included": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "100001",
+      "itemList": "2",
+      "countList": "500"
+    },
+    {
+      "id": "100002",
+      "itemList": "2",
+      "countList": "400"
+    },
+    {
+      "id": "100003",
+      "itemList": "2",
+      "countList": "325"
+    },
+    {
+      "id": "100004",
+      "itemList": "2",
+      "countList": "275"
+    },
+    {
+      "id": "100005",
+      "itemList": "2",
+      "countList": "250"
+    },
+    {
+      "id": "100006",
+      "itemList": "2",
+      "countList": "225"
+    },
+    {
+      "id": "100007",
+      "itemList": "2",
+      "countList": "200"
+    },
+    {
+      "id": "100008",
+      "itemList": "2",
+      "countList": "175"
+    },
+    {
+      "id": "100009",
+      "itemList": "2",
+      "countList": "150"
+    },
+    {
+      "id": "100010",
+      "itemList": "2",
+      "countList": "125"
+    },
+    {
+      "id": "100011",
+      "itemList": "2",
+      "countList": "100"
+    },
+    {
+      "id": "100012",
+      "itemList": "2",
+      "countList": "75"
+    },
+    {
+      "id": "100013",
+      "itemList": "2",
+      "countList": "400"
+    },
+    {
+      "id": "100014",
+      "itemList": "2",
+      "countList": "320"
+    },
+    {
+      "id": "100015",
+      "itemList": "2",
+      "countList": "260"
+    },
+    {
+      "id": "100016",
+      "itemList": "2",
+      "countList": "220"
+    },
+    {
+      "id": "100017",
+      "itemList": "2",
+      "countList": "200"
+    },
+    {
+      "id": "100018",
+      "itemList": "2",
+      "countList": "180"
+    },
+    {
+      "id": "100019",
+      "itemList": "2",
+      "countList": "160"
+    },
+    {
+      "id": "100020",
+      "itemList": "2",
+      "countList": "140"
+    },
+    {
+      "id": "100021",
+      "itemList": "2",
+      "countList": "120"
+    },
+    {
+      "id": "100022",
+      "itemList": "2",
+      "countList": "100"
+    },
+    {
+      "id": "100023",
+      "itemList": "2",
+      "countList": "80"
+    },
+    {
+      "id": "100024",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "100025",
+      "itemList": "2",
+      "countList": "300"
+    },
+    {
+      "id": "100026",
+      "itemList": "2",
+      "countList": "240"
+    },
+    {
+      "id": "100027",
+      "itemList": "2",
+      "countList": "195"
+    },
+    {
+      "id": "100028",
+      "itemList": "2",
+      "countList": "165"
+    },
+    {
+      "id": "100029",
+      "itemList": "2",
+      "countList": "150"
+    },
+    {
+      "id": "100030",
+      "itemList": "2",
+      "countList": "135"
+    },
+    {
+      "id": "100031",
+      "itemList": "2",
+      "countList": "120"
+    },
+    {
+      "id": "100032",
+      "itemList": "2",
+      "countList": "105"
+    },
+    {
+      "id": "100033",
+      "itemList": "2",
+      "countList": "90"
+    },
+    {
+      "id": "100034",
+      "itemList": "2",
+      "countList": "75"
+    },
+    {
+      "id": "100035",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "100036",
+      "itemList": "2",
+      "countList": "45"
+    },
+    {
+      "id": "100037",
+      "itemList": "2",
+      "countList": "200"
+    },
+    {
+      "id": "100038",
+      "itemList": "2",
+      "countList": "160"
+    },
+    {
+      "id": "100039",
+      "itemList": "2",
+      "countList": "130"
+    },
+    {
+      "id": "100040",
+      "itemList": "2",
+      "countList": "110"
+    },
+    {
+      "id": "100041",
+      "itemList": "2",
+      "countList": "100"
+    },
+    {
+      "id": "100042",
+      "itemList": "2",
+      "countList": "90"
+    },
+    {
+      "id": "100043",
+      "itemList": "2",
+      "countList": "80"
+    },
+    {
+      "id": "100044",
+      "itemList": "2",
+      "countList": "70"
+    },
+    {
+      "id": "100045",
+      "itemList": "2",
+      "countList": "60"
+    },
+    {
+      "id": "100046",
+      "itemList": "2",
+      "countList": "50"
+    },
+    {
+      "id": "100047",
+      "itemList": "2",
+      "countList": "40"
+    },
+    {
+      "id": "100048",
+      "itemList": "2",
+      "countList": "30"
+    },
+    {
+      "id": "200001",
+      "itemList": "2;9001",
+      "countList": "50;1"
+    }
+  ],
+  "omitted_columns": [],
+  "source_encoding": "utf-8-sig",
+  "source_row_lengths": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "short_rows": [],
+  "interpretation": "单元格保留源字符串；null表示源行缺少该列，空字符串表示存在空单元格，两者都不是零；分号列表未擅自合并。"
+}
