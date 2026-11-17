@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "roots": ["client/public", "art", "materials", "research", "data", "pengzhuang_research.html"],
+  "excludePrefixes": ["data/rooms/"],
+  "rules": [
+    {"prefix":"client/public/assets/players_original/","category":"original-player-portraits","evidence":"art/import_original_portraits.py; data/portrait_map.json"},
+    {"prefix":"client/public/assets/orig_ui/","category":"original-ui","evidence":"art/extract_atlas.py; materials/pengzhuang_rebuild/03_art"},
+    {"prefix":"client/public/assets/fields/","category":"field-derived-assets","evidence":"art/build_field_skins.py; data/fields.json skins[].source"},
+    {"prefix":"client/public/assets/players/","category":"rebuilt-player-assets","evidence":"docs/art-pipeline.md (historical); data/settings.json; client/src/portraits.ts"},
+    {"prefix":"client/public/assets/skills/","category":"skill-icon-assets","evidence":"materials/pengzhuang_rebuild/03_art; exact derivation/rights requires owner review"},
+    {"prefix":"client/public/art/","category":"raw-and-cutout-runtime-copies","evidence":"tools/gen-art.ts; art/raw"},
+    {"prefix":"client/public/","category":"runtime-other-unverified","evidence":"No more specific source evidence; review required"},
+    {"prefix":"art/","category":"art-source-and-tools","evidence":"Source scripts and images; no repository license declaration"},
+    {"prefix":"materials/","category":"recovered-reference-package","evidence":"materials/pengzhuang_rebuild/08_sources_and_checks/SOURCES.md"},
+    {"prefix":"research/","category":"historical-research","evidence":"research/text.txt; research/stripped.html"},
+    {"prefix":"data/","category":"runtime-game-data","evidence":"docs/roster-provenance.json; docs/gameplay-defaults.md; per-file source fields"},
+    {"prefix":"pengzhuang_research.html","category":"historical-research","evidence":"Embedded research document; not a commercial-use grant"}
+  ]
+}
