@@ -100,11 +100,11 @@ describe('PostgreSQL 17 persistence', () => {
     await expect(migrateDatabase(db, { direction: 'down' })).rejects.toThrow('explicit');
     expect(await migrateDatabase(db, { direction: 'down', allowRollback: true })).toHaveLength(1);
     expect(
-      (await db.query<{ exists: string | null }>("SELECT to_regclass('sessions') AS exists")).rows[0].exists,
+      (await db.query<{ exists: string | null }>("SELECT to_regclass('profiles') AS exists")).rows[0].exists,
     ).toBeNull();
     expect(await migrateDatabase(db)).toHaveLength(1);
-    expect((await db.query<{ exists: string | null }>("SELECT to_regclass('sessions') AS exists")).rows[0].exists).toBe(
-      'sessions',
+    expect((await db.query<{ exists: string | null }>("SELECT to_regclass('profiles') AS exists")).rows[0].exists).toBe(
+      'profiles',
     );
   });
 });

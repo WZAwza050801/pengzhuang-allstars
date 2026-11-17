@@ -602,6 +602,20 @@
 - 回滚：独立任务提交可回退；不改变游戏、资源、网络协议或生产支持范围。
 - 下一项：选择依赖满足的未完成任务；APP-01 仍需原生构建工具链，ACC-01 仍需真实 PostgreSQL，AST-06 仍需真机资源验收。
 
+### DAT-01
+
+- 状态：完成
+- 开始：2026-11-18 02:53 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 15b9c44
+- 范围：建立云存档与资产/比赛/outbox 的 PostgreSQL schema、参数化 repository 和数据字典；真实验证持有权约束、余额/精度、索引及迁移。初始化奖励与升级/结算业务留给依赖本结构的后续任务。
+- 实现：新增 10 张业务表，静态定义/持有卡/用户/本场 piece 标识分离；组合 FK 保证阵容卡归属、BAL-05 单定义单卡、非负钱包与金额 int64、账本业务域唯一键、比赛版本/参与者快照、outbox 待处理部分索引。UserDataRepository/MatchDataRepository 注入同一 SqlExecutor，金额显式字符串输出，分页限制 1–100。
+- 验证：隔离 PostgreSQL 17.12 集成 3 文件 / 22 项通过，新增 8 项覆盖数据库约束、跨用户阵容、金额精度/JSON、账本唯一、跨仓储事务回滚、比赛快照及 outbox due/EXPLAIN；最新迁移 down/up 通过。全套 `npm run check`（101 单元、5 契约）、`npm run build` 和规划检查通过。
+- 证据：本提交；packages/persistence/migrations/202611180002_user_data.mjs；packages/persistence/src/user-data.ts；tests/user-data.integration.test.ts；docs/engineering/user-data.md；docs/productization/reports/DAT-01.md。
+- 风险与剩余：业务表及仓储验收完成；DAT-02 负责幂等初始化/云存档读取，DAT-03 校验整套阵容，DAT-04 提供真实报价/锁/幂等资产操作，NET-04 接入可靠结算，均未在本任务中冒称完成。
+- 回滚：本地测试显式 migration down 按逆序删除本次业务表；生产使用前向兼容迁移，不回滚真实资产数据。
+- 下一项：DAT-02 与 ACC-02，依赖均满足。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

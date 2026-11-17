@@ -378,7 +378,7 @@
 
 现有入口与范围：现有 localStorage/profile/lineup 与静态卡牌数据；用户状态放 PostgreSQL。
 
-- [ ] **DAT-01** 建立用户业务 schema
+- [x] **DAT-01** 建立用户业务 schema
   - 依赖：ARC-04、ACC-01、BAL-05
   - 实施：建 profile/owned_cards/lineups/wallet/ledger/matches/outbox；约束与索引；bigint 接口字符串。
   - 产物：版本 migration、数据字典、repository。
