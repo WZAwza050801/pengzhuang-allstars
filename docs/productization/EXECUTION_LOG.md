@@ -580,6 +580,7 @@
 - 开始：2026-11-18 02:18 Asia/Shanghai
 - 负责人：Codex
 - 分支与起始提交：docs/productization-roadmap / c3c2fc5
+- 补验：2026-11-18 / 121495e；同步第 40 项前发现 test:qa 依赖已有测试客户端构建产物，补齐显式 build:test-client 步骤。移开旧目录、确认不存在后实跑 `npm run test:qa`：两轮单元/契约、4 次并行 E2E 及故意失败清理检查全部通过。
 - 范围：稳定本地基础测试的端口、临时存储、构建产物与进程清理；补充可重复 runner 和不依赖生产数据的基础 CI。不覆盖真实 PostgreSQL、真实设备或后续业务集成验收。
 - 实现：测试环境唯一允许 `PORT=0` 交由系统分配；E2E 从服务端 `server_started` 事件读取实际端口，静态服务也默认使用临时端口。E2E 截图和模式诊断改写入忽略的 `work/e2e-artifacts`（可由 `E2E_ARTIFACT_DIR` 覆盖），并等待子服务退出后再清除临时房间存储。新增 `test:qa`：构建后连续两轮单元/契约、每轮两个并行 E2E，另保留端口验证失败非零及清理。GitHub Actions 基础作业固定 Node 24.22.1、Chromium、静态检查和同一 runner。
 - 验证：先补 `APP_ENV=test, PORT=0` 配置用例（6/6 通过）。`npm run typecheck`、`npm run lint`、`npm run build` 通过。`npm run test:qa` 通过：两轮单元与契约、每轮两个并行 E2E 均通过；占用 Web 端口的 E2E 按预期非零退出，runner 断言未留下 `allstars-e2e-*` 临时房间目录。E2E 独立单跑为 18 PASS / 0 SKIP / 0 FAIL。
