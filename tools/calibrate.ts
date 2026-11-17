@@ -355,8 +355,10 @@ function main() {
   const checkOnly = process.argv.includes('--check');
   const base = clone(DEFAULT_DATA.physics);
   if (checkOnly) {
-    const { md } = report(base, { mode: 'check' });
+    const { m, md } = report(base, { mode: 'check' });
     console.log(md);
+    const failed = (Object.keys(TARGETS) as (keyof typeof TARGETS)[]).filter(key => m[key] < TARGETS[key].lo - 1e-9 || m[key] > TARGETS[key].hi + 1e-9);
+    if (failed.length) { console.error(`Calibration targets failed: ${failed.join(', ')}`); process.exitCode = 1; }
     return;
   }
   const t0 = Date.now();

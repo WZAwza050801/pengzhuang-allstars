@@ -343,6 +343,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### BAL-04
+
+- 状态：完成
+- 开始：2026-11-17 14:41 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 5179e6bf14af0c0366c8174e7ded2b83019d9065
+- 范围：以正式ShotRunner核实校准，测AI耗时分位并接入可取消、超预算降级和不阻塞交互的真实路径。
+- 实现：校准目标保留并接入真实可取消AI预算/Worker截止/回退，旧输出一致且阻止过期作业污染状态。
+- 验证：check54unit/4契约、physics18/net176、build/Chromium13通过；10校准目标通过；27旧输出一致，真实Worker截止1501ms仍响应。
+- 证据：本提交（git log -- docs/productization/reports/BAL-04.md 可定位）；docs/productization/reports/BAL-04.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

@@ -53,7 +53,9 @@
     "balance:mapping": "tsx tools/export-balance-mapping.ts --write",
     "check:balance-mapping": "tsx tools/export-balance-mapping.ts",
     "skills:rules": "tsx tools/export-skill-rules.ts --write",
-    "check:skills": "tsx tools/export-skill-rules.ts"
+    "check:skills": "tsx tools/export-skill-rules.ts",
+    "ai:bench": "tsx tools/ai-latency.ts",
+    "test:ai-browser": "node tools/ai-browser.mjs"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

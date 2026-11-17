@@ -1,0 +1,1854 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "5179e6b",
+  "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+  "node": "v24.22.1",
+  "hardware": {
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "logicalCpus": 3,
+    "totalMemoryBytes": 10452459520
+  },
+  "warmupCalls": 1,
+  "scenarios": [
+    {
+      "id": "seed-101-stage-0",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 1199730244,
+        "turn": 0,
+        "shotNo": 0,
+        "score": [
+          0,
+          0
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": 4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": true
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": -4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": 0,
+          "y": 0
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-101-stage-1",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 2335519190,
+        "turn": 1,
+        "shotNo": 3,
+        "score": [
+          0,
+          0
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": -0.13722863073961492,
+            "y": 4.546164122501741,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9659724902739228,
+            "y": 2.149472607264688,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 0.4290464845354227,
+            "y": -3.6403936764257168,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 2.3612853722800953,
+            "y": 0.04561937093592276,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": -0.1423302745884101,
+            "y": -4.27,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 1.606056528863949,
+            "y": -3.23406735749756,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 2.2423664155272762,
+            "y": 1.070412549233257,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": -2.846059021200504,
+          "y": 0.8777371177521749
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-101-stage-2",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 3471308136,
+        "turn": 0,
+        "shotNo": 6,
+        "score": [
+          0,
+          0
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": -0.13722863073961492,
+            "y": 4.546164122501741,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.7612339773430843,
+            "y": -0.21614902711219752,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 0.8106358759485444,
+            "y": -4.2484284469038345,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 2.3612853722800953,
+            "y": 0.04561937093592276,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": -0.14276222303301764,
+            "y": -4.398345453412832,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 2.427219093598853,
+            "y": -4.246653368378504,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -2.2283309707918355,
+            "y": -2.863293938728943,
+            "out": 0,
+            "frozen": 0,
+            "anchored": true,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 2.2423664155272762,
+            "y": 1.070412549233257,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.23322909839261147,
+            "y": -3.638064717494708,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": -0.4301087491005641,
+          "y": -2.834567390812111
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-202-stage-0",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 1199730345,
+        "turn": 0,
+        "shotNo": 0,
+        "score": [
+          0,
+          0
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": 4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": true
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": -4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": true,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": 0,
+          "y": 0
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-202-stage-1",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 503953478,
+        "turn": 0,
+        "shotNo": 3,
+        "score": [
+          0,
+          1
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": 4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": true
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": true
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": -4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": 0,
+          "y": 0
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-202-stage-2",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 4103143907,
+        "turn": 1,
+        "shotNo": 6,
+        "score": [
+          0,
+          1
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": 4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.9250985693317482,
+            "y": 3.0932663601499266,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": -1.1866329432318379,
+            "y": 2.500126447499141,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9326304324312447,
+            "y": 2.0127238998444352,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": -4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 2.3926854504846924,
+            "y": -3.806483007809679,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 2.5360802267795672,
+            "y": 1.1189526784381494,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": true
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": -1.552236384633696,
+          "y": -0.5085892270544102
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-303-stage-0",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 1199730446,
+        "turn": 0,
+        "shotNo": 0,
+        "score": [
+          0,
+          0
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": 4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": -4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": 0,
+          "y": 0
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-303-stage-1",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 503953579,
+        "turn": 1,
+        "shotNo": 3,
+        "score": [
+          0,
+          0
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": 4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 2.229732147922687,
+            "y": 4.537630308976313,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0.03649905812096705,
+            "y": -4.876513716382245,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8010413369738885,
+            "y": -2.9457033489076863,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": -0.7233076337997999,
+            "y": -0.9301856631443151,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.6088264241872331,
+            "y": -4.261197651445277,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": 1.1431560932321434,
+          "y": -0.682063072745315
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    },
+    {
+      "id": "seed-303-stage-2",
+      "state": {
+        "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+        "rng": 3471308338,
+        "turn": 1,
+        "shotNo": 6,
+        "score": [
+          1,
+          0
+        ],
+        "pieces": [
+          {
+            "id": "0-0",
+            "side": 0,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": 4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-1",
+            "side": 0,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-2",
+            "side": 0,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": 2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-3",
+            "side": 0,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "0-4",
+            "side": 0,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": 1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-0",
+            "side": 1,
+            "playerId": "p07",
+            "slot": 0,
+            "level": 5,
+            "cond": 1,
+            "x": 0,
+            "y": -4.15,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-1",
+            "side": 1,
+            "playerId": "p06",
+            "slot": 1,
+            "level": 5,
+            "cond": 1,
+            "x": 1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-2",
+            "side": 1,
+            "playerId": "p08",
+            "slot": 2,
+            "level": 5,
+            "cond": 1,
+            "x": -1.8,
+            "y": -2.9,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-3",
+            "side": 1,
+            "playerId": "p01",
+            "slot": 3,
+            "level": 5,
+            "cond": 1,
+            "x": 0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          },
+          {
+            "id": "1-4",
+            "side": 1,
+            "playerId": "p02",
+            "slot": 4,
+            "level": 5,
+            "cond": 1,
+            "x": -0.9,
+            "y": -1.5,
+            "out": 0,
+            "frozen": 0,
+            "anchored": false,
+            "ready": false
+          }
+        ],
+        "ball": {
+          "x": 0,
+          "y": 0
+        },
+        "over": false,
+        "winner": -1,
+        "endReason": "",
+        "extraUsed": false
+      }
+    }
+  ],
+  "observations": [
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 278.348937,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 164.98872200000005,
+      "input": {
+        "pieceId": "1-2",
+        "dirX": -0.24793591036424453,
+        "dirY": 0.9687764367241047,
+        "power": 0.85,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 287.9504220000001,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7874121691856963,
+        "dirY": -0.6164268616942941,
+        "power": 0.8,
+        "curve": 0.35
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 304.52280799999994,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 188.4780740000001,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 182.60618000000022,
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.5331471915217363,
+        "dirY": 0.8460225009847463,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 148.3379030000001,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 189.57011199999988,
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.225595361613172,
+        "dirY": 0.9742210903170913,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "elapsedMs": 182.515719,
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.6373643487357037,
+        "dirY": 0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 150.19806900000003,
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.623709189194978,
+        "dirY": -0.781656476537963,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 128.14395100000002,
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.6034972156357643,
+        "dirY": 0.7973651050302363,
+        "power": 0.6,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 155.73892800000021,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7466596337557779,
+        "dirY": -0.665206277270207,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 141.37769000000026,
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.623709189194978,
+        "dirY": -0.781656476537963,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 154.98759100000007,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6841952757690688,
+        "dirY": -0.7292988582297987,
+        "power": 1,
+        "curve": 0.7
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 168.6537169999997,
+      "input": {
+        "pieceId": "1-2",
+        "dirX": 0.022018160000576114,
+        "dirY": 0.9997575709291673,
+        "power": 0.8,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 162.26330400000006,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.5887404322281831,
+        "dirY": -0.8083221532654986,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 163.96039999999994,
+      "input": {
+        "pieceId": "1-1",
+        "dirX": -0.275968510542119,
+        "dirY": 0.9611666771112929,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "elapsedMs": 148.69253800000024,
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.588740432228183,
+        "dirY": 0.8083221532654986,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 181.8216139999995,
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.6221527097914704,
+        "dirY": -0.7828959098750807,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 166.4635640000006,
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.6019095211249091,
+        "dirY": 0.7985642919509878,
+        "power": 0.6,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 188.59045499999957,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7479817022162338,
+        "dirY": -0.6637193481809197,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 182.13930300000084,
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.6221527097914704,
+        "dirY": -0.7828959098750807,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 200.5878819999998,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6856449914812702,
+        "dirY": -0.7279360862442863,
+        "power": 1,
+        "curve": 0.7
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 207.3314560000008,
+      "input": {
+        "pieceId": "1-2",
+        "dirX": 0.14274799640407176,
+        "dirY": 0.9897590664008201,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 186.71982000000025,
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.59034756780971,
+        "dirY": -0.8071491492785952,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 168.52007099999992,
+      "input": {
+        "pieceId": "1-1",
+        "dirX": -0.2740555519334995,
+        "dirY": 0.961713863087366,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "elapsedMs": 163.25919299999987,
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.59034756780971,
+        "dirY": 0.8071491492785952,
+        "power": 1,
+        "curve": 0
+      }
+    }
+  ],
+  "summary": {
+    "easy": {
+      "samples": 9,
+      "p50": 188.4780740000001,
+      "p95": 304.52280799999994,
+      "max": 304.52280799999994
+    },
+    "normal": {
+      "samples": 9,
+      "p50": 154.98759100000007,
+      "p95": 168.6537169999997,
+      "max": 168.6537169999997
+    },
+    "hard": {
+      "samples": 9,
+      "p50": 182.13930300000084,
+      "p95": 207.3314560000008,
+      "max": 207.3314560000008
+    }
+  }
+}

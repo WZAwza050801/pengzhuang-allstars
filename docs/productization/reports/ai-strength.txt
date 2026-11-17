@@ -1,0 +1,3 @@
+normal vs random: 6-0-0 (W-D-L), goals 18:0, avg shots/match 21.5, think avg 175 ms, max 503 ms
+easy vs random: 6-0-0 (W-D-L), goals 18:1, avg shots/match 31.5, think avg 182 ms, max 269 ms
+hard vs normal: 4-0-0 (W-D-L), goals 12:6, avg shots/match 9.3, think avg 170 ms, max 236 ms

@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "timeout": {
+    "status": "timeout",
+    "elapsedMs": 1501,
+    "framesDuringBlocked": 91,
+    "clicks": 1
+  },
+  "cancelled": {
+    "status": "aborted"
+  },
+  "realWorker": {
+    "jobMs": 1181,
+    "epoch": {
+      "shotNo": 0,
+      "turn": 0,
+      "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1"
+    },
+    "stats": {
+      "evaluated": 63,
+      "elapsedMs": 752.3000000044703,
+      "reason": "budget"
+    },
+    "input": {
+      "pieceId": "0-3",
+      "dirX": 0.623709189194978,
+      "dirY": -0.781656476537963,
+      "power": 1,
+      "curve": 0
+    }
+  },
+  "created": 3,
+  "terminated": 3,
+  "errors": []
+}
