@@ -8,6 +8,10 @@ test('catalog scans actual runtime resources and all player/field/audio bindings
   expect(c.aliases.filter((a) => a.usage === 'portrait')).toHaveLength(117);
   expect(c.aliases.filter((a) => a.usage === 'field-scene')).toHaveLength(5);
   expect(c.aliases.filter((a) => a.usage === 'audio')).toHaveLength(9);
+  expect(c.aliases.filter((a) => a.usage === 'card-portrait')).toHaveLength(117);
+  expect(c.aliases.filter((a) => a.usage === 'card-frame')).toHaveLength(15);
+  const mapping = c.assets.find((a) => a.path === '/assets/cards/atlas.json');
+  expect(mapping).toMatchObject({ kind: 'data', width: null, height: null, priority: 'lobby' });
   for (const a of c.assets) {
     expect(a.sha256).toMatch(/^[a-f0-9]{64}$/);
     expect(a.source.evidence.length).toBeGreaterThan(0);
@@ -21,6 +25,7 @@ test('catalog scans actual runtime resources and all player/field/audio bindings
 test('schema rejects duplicate IDs, unresolved aliases, unsafe paths, invalid anchors and fabricated release approval', () => {
   const c = createAssetCatalog();
   const image = c.assets.find((a) => a.kind === 'image')!;
+  const metadata = c.assets.find((a) => a.kind === 'data')!;
   for (const bad of [
     { ...c, assets: [...c.assets, c.assets[0]] },
     { ...c, aliases: [...c.aliases, c.aliases[0]] },
@@ -28,6 +33,8 @@ test('schema rejects duplicate IDs, unresolved aliases, unsafe paths, invalid an
     { ...c, assets: [{ ...image, path: '/materials/secret.png' }] },
     { ...c, assets: [{ ...image, anchors: { bad: { x: 2, y: 1, space: 'normalized' } } }] },
     { ...c, assets: [{ ...image, releaseAllowed: true }] },
+    { ...c, assets: [{ ...metadata, path: null }] },
+    { ...c, assets: [{ ...metadata, width: 128 }] },
   ])
     expect(AssetCatalogSchema.safeParse(bad).success).toBe(false);
   expect(() => imageSize(Buffer.from('corrupt'))).toThrow();

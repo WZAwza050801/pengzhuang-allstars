@@ -2,11 +2,13 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
+    maxWorkers: 4,
     projects: [
       {
         test: {
           name: 'unit',
           environment: 'node',
+          setupFiles: ['tests/node-transport.setup.ts'],
           include: ['tests/**/*.test.ts'],
           exclude: ['**/*.contract.test.ts', '**/*.integration.test.ts'],
         },

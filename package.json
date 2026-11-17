@@ -61,7 +61,10 @@
     "test:balance": "vitest run --project unit tests/balance tests/economy tests/skills.test.ts tests/modes.test.ts tests/releases.test.ts tests/experiments.test.ts",
     "balance:experiment": "tsx tools/balance-experiments.ts --write",
     "check:balance-experiment": "tsx tools/balance-experiments.ts --check",
-    "check:balance-release": "tsx tools/balance-experiments.ts --check --require-publishable"
+    "check:balance-release": "tsx tools/balance-experiments.ts --check --require-publishable",
+    "cards:atlas": "tsx tools/card-atlas.ts",
+    "check:cards": "tsx tools/card-atlas.ts --check",
+    "test:cards-browser": "node tools/card-browser.mjs"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

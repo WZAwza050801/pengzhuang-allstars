@@ -1,8 +1,13 @@
 {
-  "version": 3,
+  "version": 4,
   "roots": ["client/public", "art", "materials", "research", "data", "pengzhuang_research.html"],
   "excludePrefixes": ["data/rooms/", "art/ai/", "art/ai-sample/", "art/ai-v2/", "art/cutout/", "art/__pycache__/"],
   "rules": [
+    {
+      "prefix": "client/public/assets/cards/",
+      "category": "rebuilt-card-atlas",
+      "evidence": "tools/card-textures.mjs original geometric drawing; tools/card-atlas.ts; docs/engineering/card-atlas.md; not a commercial-release approval"
+    },
     {
       "prefix": "client/public/assets/players_original/",
       "category": "original-player-portraits",

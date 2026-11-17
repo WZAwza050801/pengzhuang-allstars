@@ -10,3 +10,4 @@ export * from './game-definitions';
 export * from './ai';
 export * from './economy';
 export * from './modes';
+export * from './card-atlas';

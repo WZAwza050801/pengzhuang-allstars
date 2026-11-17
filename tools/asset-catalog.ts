@@ -11,6 +11,7 @@ import players from '../data/players.json';
 import portraits from '../data/portrait_map.json';
 import provenance from '../config/asset-sources.json';
 import policy from '../config/asset-catalog-policy.json';
+import { verifyCardAtlas } from './card-atlas';
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
 const fileId = (p: string) => p.replaceAll('/', '.');
@@ -57,6 +58,7 @@ function files(directory: string): string[] {
 }
 /** All public images are enumerated; alias references provide the verified dynamic expansions. */
 export function createAssetCatalog(root = ROOT): AssetCatalog {
+  const cardAtlas = verifyCardAtlas(root);
   const publicDir = path.join(root, 'client/public');
   const assets: AssetCatalog['assets'] = [];
   const aliases: AssetCatalog['aliases'] = [];
@@ -67,20 +69,21 @@ export function createAssetCatalog(root = ROOT): AssetCatalog {
     const rule = provenance.rules.find((r) => sourcePath.startsWith(r.prefix));
     if (!rule) throw new Error(`Missing provenance: ${rel}`);
     const bytes = readFileSync(full),
-      dimensions = imageSize(bytes);
+      isData = rel.endsWith('.json'),
+      dimensions = isData ? { width: null, height: null } : imageSize(bytes);
     assets.push({
       id: fileId(rel),
-      kind: 'image',
+      kind: isData ? 'data' : 'image',
       path: `/${rel}`,
       bytes: bytes.length,
       sha256: sha(bytes),
       ...dimensions,
-      anchors: { center: { x: 0.5, y: 0.5, space: 'normalized' } },
+      anchors: isData ? {} : { center: { x: 0.5, y: 0.5, space: 'normalized' } },
       category: rule.category,
       priority:
         rel === 'favicon.ico'
           ? 'critical'
-          : rel.startsWith('assets/orig_ui/')
+          : rel.startsWith('assets/orig_ui/') || rel.startsWith('assets/cards/')
             ? 'lobby'
             : rel.startsWith('art/')
               ? 'optional'
@@ -145,6 +148,15 @@ export function createAssetCatalog(root = ROOT): AssetCatalog {
       original ? `assets/players_original/${original}.png` : `assets/players/${player.id}_avatar.png`,
       'portrait',
     );
+  }
+  for (const portrait of cardAtlas.portraits) {
+    const page = cardAtlas.pages.find((p) => p.id === portrait.pageId)!;
+    alias(`player.${portrait.playerId}.cardPortrait`, page.path.slice(1), 'card-portrait');
+  }
+  alias('card.atlas', 'assets/cards/atlas.json', 'card-data');
+  for (const frame of cardAtlas.frames) {
+    const page = cardAtlas.pages.find((p) => p.id === frame.pageId)!;
+    alias(`card.frame.${frame.quality}.${frame.state}`, page.path.slice(1), 'card-frame');
   }
   for (let i = 1; i <= 5; i++) alias(`lobby.stadium.${i}`, `assets/orig_ui/stadium/Image_0${i}.png`, 'lobby-field');
   const sfx = readFileSync(path.join(root, 'client/src/sfx.ts'), 'utf8');

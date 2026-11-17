@@ -5,7 +5,7 @@ const anchor = z.strictObject({ x: z.number(), y: z.number(), space: z.enum(['pi
 export const CatalogAssetSchema = z
   .strictObject({
     id,
-    kind: z.enum(['image', 'procedural-audio', 'procedural-field']),
+    kind: z.enum(['image', 'data', 'procedural-audio', 'procedural-field']),
     path: z
       .string()
       .regex(/^\/(?:assets|art)\/[A-Za-z0-9_./-]+$|^\/favicon\.ico$/)
@@ -27,7 +27,9 @@ export const CatalogAssetSchema = z
   .superRefine((a, ctx) => {
     if (a.kind === 'image' && (!a.path || !a.width || !a.height))
       ctx.addIssue({ code: 'custom', message: 'Image needs path and dimensions' });
-    if (a.kind !== 'image' && (a.path !== null || a.width !== null || a.height !== null))
+    if (a.kind === 'data' && (!a.path || a.width !== null || a.height !== null))
+      ctx.addIssue({ code: 'custom', message: 'Data resources need a path and no image dimensions' });
+    if (a.kind !== 'image' && a.kind !== 'data' && (a.path !== null || a.width !== null || a.height !== null))
       ctx.addIssue({ code: 'custom', message: 'Procedural assets have no image path or dimensions' });
     if (a.releaseAllowed && (a.rights !== 'verified' || !a.rightsEvidence))
       ctx.addIssue({ code: 'custom', message: 'Release requires verified evidence' });
@@ -49,7 +51,17 @@ export const AssetCatalogSchema = z
       z.strictObject({
         id,
         target: id,
-        usage: z.enum(['portrait', 'field-art', 'field-scene', 'lobby-field', 'audio', 'field-generated']),
+        usage: z.enum([
+          'portrait',
+          'field-art',
+          'field-scene',
+          'lobby-field',
+          'audio',
+          'field-generated',
+          'card-portrait',
+          'card-frame',
+          'card-data',
+        ]),
       }),
     ),
   })

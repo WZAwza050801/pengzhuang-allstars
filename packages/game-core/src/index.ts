@@ -9,3 +9,4 @@ export * from './balance';
 export * from './skill-policy';
 export * from './economy';
 export * from './modes';
+export * from './card-atlas';

@@ -1,0 +1,33 @@
+{
+  "atlasVersion": "cards-afa521c06111808d",
+  "views": [
+    {
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "drawn": 117,
+      "pages": 3,
+      "frames": 15
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 2,
+      "drawn": 6,
+      "pages": 3,
+      "frames": 15
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "drawn": 6,
+      "pages": 3,
+      "frames": 15
+    }
+  ],
+  "legacyLoaded": 117,
+  "gutterChecks": 528,
+  "retryAfterFailure": true,
+  "consoleErrorsAndWarnings": []
+}

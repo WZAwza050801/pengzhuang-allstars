@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "policyVersion": 3,
+  "policyVersion": 4,
   "entries": [
     {
       "path": "art/avatar.py",
@@ -707,9 +707,53 @@
       "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
     },
     {
+      "path": "client/public/assets/cards/atlas.json",
+      "bytes": 31142,
+      "sha256": "c809cdae384af57393f220e0bdeab314a53c6a167879d4f982f179b7bdf555ef",
+      "usage": "runtime",
+      "category": "rebuilt-card-atlas",
+      "sourceEvidence": "tools/card-textures.mjs original geometric drawing; tools/card-atlas.ts; docs/engineering/card-atlas.md; not a commercial-release approval",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/cards/card-frames.png",
+      "bytes": 43657,
+      "sha256": "81f65bf2a138d5230cb85319027cce10648820c41731e8982e1c617aa3868716",
+      "usage": "runtime",
+      "category": "rebuilt-card-atlas",
+      "sourceEvidence": "tools/card-textures.mjs original geometric drawing; tools/card-atlas.ts; docs/engineering/card-atlas.md; not a commercial-release approval",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/cards/portraits-0.png",
+      "bytes": 329849,
+      "sha256": "845ce92a714fb54e4b5cad40b0d346d6bf38a6e7b7499d1f0e80e14331dcefc2",
+      "usage": "runtime",
+      "category": "rebuilt-card-atlas",
+      "sourceEvidence": "tools/card-textures.mjs original geometric drawing; tools/card-atlas.ts; docs/engineering/card-atlas.md; not a commercial-release approval",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/cards/portraits-1.png",
+      "bytes": 281462,
+      "sha256": "c38d4bebb92e25ed336b979239520189aa935596ab50dff9b5a8d5c73fea09ed",
+      "usage": "runtime",
+      "category": "rebuilt-card-atlas",
+      "sourceEvidence": "tools/card-textures.mjs original geometric drawing; tools/card-atlas.ts; docs/engineering/card-atlas.md; not a commercial-release approval",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
       "path": "client/public/assets/catalog.json",
-      "bytes": 259455,
-      "sha256": "f6bedb8768d2fc8a30c4c0cf9e4a91b3b58e9aae119be08e9581e93156fb2b0e",
+      "bytes": 279967,
+      "sha256": "a557c07193c196b2208bef5a367398797398fa8dac446e63d50dced05230313f",
       "usage": "runtime",
       "category": "runtime-other-unverified",
       "sourceEvidence": "No more specific source evidence; review required",

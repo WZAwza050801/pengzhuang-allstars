@@ -64,6 +64,21 @@
 - 回滚：独立任务提交；register 不激活、activate 旧版会清灰度、disable 不删除历史包；旧局及回放继续原快照。
 - 下一项：AST-02。
 
+### AST-02
+
+- 状态：完成
+- 开始：2026-11-17 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / 39c93e6
+- 范围：全部 117 名球员的原创程序化占位图、五品质三状态卡框、带 2px 留边的图集与严格映射；资源来源记录及全卡联系表/DPR 加载验收。保留旧 Demo 的原版头像入口，本项新增可供后续组件和发布替换使用的资源。
+- 计划：contracts 的图集契约与纯布局；可复现导出器；与目录校验器绑定；Canvas 卡片绘制与独立验收页；输出尺寸/锚点/裁切规格及实际加载证据。名字、等级及位置标签动态绘制，不烘焙进纹理。
+- 实现：严格图集与身份契约、原创程序化导出器、Canvas 绘制与隔离验收页；目录增加 data 类型使元数据变更参与缓存版本，来源/权利状态显式保留；修复 Node 单元测试传输与并发配置。
+- 验证：完整 check（单元 80/80、契约 5/5）；build；cards-browser 全量 117 卡/15 框/3 页、528 留边采样、DPR1/2/3、断图重试；游戏 Chromium 15/15，0 SKIP/FAIL/JS 错误；房间/重启连续 30 次通过。
+- 证据：本提交（git log -- docs/productization/reports/AST-02.md 可定位）；reports/AST-02.md、reports/card-atlas/browser.json 与三张已检查截图；docs/engineering/card-atlas.md。
+- 风险与剩余：新增图是明确标记的原创几何占位；商用批准仍为 0，未替代 REL-01；运行时缓存与发布裁剪留给 AST-05，真机留给 AST-06。
+- 回滚：独立任务提交；旧头像入口和玩法数据保持兼容。
+- 下一项：AST-03。
+
 ### FND-01
 
 - 状态：完成

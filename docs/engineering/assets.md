@@ -13,3 +13,5 @@
 当前所有资源的商业再分发授权均未核实，releaseAllowed=false；不能将原版、重建或自行编写代码描述为已经获得完整商业发行授权。REL-01取得证据或替换后再修改来源策略。缺凭据不阻止本地工程验收。
 
 程序化场地hash还包含quality、field-art和camera的源文件hash，避免这些绘制依赖变化时目录版本不变；bytes为这些源文件字节数之和，不是网络图片尺寸。source.evidence列出完整纳入列表。
+
+卡牌规范见 [card-atlas.md](card-atlas.md)。player.<id>.cardPortrait、card.frame.<quality>.<state> 与 card.atlas 绑定原创占位图集；旧 portrait 绑定保留。图集 JSON 为 data 条目，有路径/hash/字节数、没有图像尺寸；身份或稀有度元数据变化也改变总目录版本。不得把 JSON 当图像解码或因图片 hash 未变而复用旧映射。

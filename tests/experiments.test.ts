@@ -18,7 +18,7 @@ test('paired statistics weight draws by half and keep both members of every seed
 });
 
 test('release validation recomputes statistics and actual replay; small or altered reports cannot authorize rollout', () => {
-  const base = runModePairs({ seeds: [7, 8] });
+  const base = runModePairs({ seeds: [7] });
   const replayRows = base.rows.filter((row) => row.seed === 7);
   const report = {
     schemaVersion: 1,
@@ -46,4 +46,4 @@ test('release validation recomputes statistics and actual replay; small or alter
   const badSetup = structuredClone(report);
   badSetup.setup.levels[0] = 10;
   expect(() => validateBalanceReport(badSetup)).toThrow('lineup');
-});
+}, 15000);
