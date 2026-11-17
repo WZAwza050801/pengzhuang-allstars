@@ -25,6 +25,7 @@ files.push(
   'tools/check-plan.mjs',
 );
 let bad = 0;
+files.push('tools/check-boundaries.mjs', 'tools/export-contracts.ts');
 for (const name of files) {
   const full = path.join(root, name);
   const options = { ...(await prettier.resolveConfig(full)), filepath: full };

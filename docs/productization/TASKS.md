@@ -69,7 +69,7 @@
   - 验收：核心无 DOM/wx/数据库依赖；旧命令仍能运行且行为不变。
   - 验证：typecheck/build/physics/net；依赖扫描拒绝核心引入平台包。
 
-- [ ] **ARC-02** 建立 schema 和版本化契约
+- [x] **ARC-02** 建立 schema 和版本化契约
   - 依赖：ARC-01
   - 实施：提取 HTTP DTO、房间消息、稳定错误码；Zod 校验未知输入；生成接口文档；区分协议与数据版本。
   - 产物：contracts 包、API/消息 schema 与契约测试。

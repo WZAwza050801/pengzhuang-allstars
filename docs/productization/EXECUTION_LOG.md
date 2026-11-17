@@ -119,6 +119,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### ARC-02
+
+- 状态：完成
+- 开始：2026-11-17 12:33 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 702c774b98ff06fb44e7a4d730af63b6c572346d
+- 范围：提取共享消息校验，新增严格HTTP DTO、稳定错误码/版本和可校验接口文档，保留v1网络行为。
+- 实现：共享v1消息校验和严格HTTP DTO/错误/版本，自动生成OpenAPI并保持旧入口兼容。
+- 验证：4项契约、check、OpenAPI一致性、server构建和176项原联机回归通过。
+- 证据：本提交（git log -- docs/productization/reports/ARC-02.md 可定位）；docs/productization/reports/ARC-02.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。
