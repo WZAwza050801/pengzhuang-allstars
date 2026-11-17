@@ -32,6 +32,8 @@ npm run test:e2e
 node tools/check-plan.mjs
 ```
 
+日常开发运行 `npm run check`（工具链、Lint、增量格式、类型、配置、任务和资源检查、单元测试）。新增代码放入 config/tests/packages 时自动纳入严格规则；`npm run format` 只格式化这些模块和新工具，避免重排旧游戏代码。完整游戏回归仍运行 `npm test` 与浏览器测试。
+
 浏览器测试需要安装与项目 Playwright 版本一致的 Chromium：`npx playwright install chromium`。这组命令适用于当前 Demo；尚未实施的数据库、小游戏与 App 命令在规划中有明确标记。
 
 联机说明见 [docs/how-to-play-online.md](docs/how-to-play-online.md)。历史记录见 `runs/`；当其中内容与当前实现或新规划不同，以现行代码、测试和已记录决策为准。

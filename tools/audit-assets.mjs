@@ -20,15 +20,19 @@ function inspect(name) {
   const rule = policy.rules.find((r) => name.startsWith(r.prefix));
   if (!rule) throw new Error(`No provenance rule: ${name}`);
   entries.push({
-    path: name, bytes: stat.size, sha256: createHash('sha256').update(readFileSync(full)).digest('hex'),
+    path: name,
+    bytes: stat.size,
+    sha256: createHash('sha256').update(readFileSync(full)).digest('hex'),
     usage: name.startsWith('client/public/') || name.startsWith('data/') ? 'runtime' : 'source-reference',
-    category: rule.category, sourceEvidence: rule.evidence,
-    rights: 'unverified', releaseAllowed: false,
+    category: rule.category,
+    sourceEvidence: rule.evidence,
+    rights: 'unverified',
+    releaseAllowed: false,
     releaseReason: 'No verifiable commercial redistribution grant in the repository; owner review/replacement required',
   });
 }
 for (const directory of policy.roots) inspect(directory);
-entries.sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
+entries.sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
 const inventory = { schemaVersion: 1, policyVersion: policy.version, entries };
 const content = `${JSON.stringify(inventory, null, 2)}\n`;
 if (process.argv.includes('--write')) writeFileSync(target, content);
@@ -38,4 +42,11 @@ else if (!existsSync(target) || readFileSync(target, 'utf8') !== content) {
 }
 const categories = {};
 for (const entry of entries) categories[entry.category] = (categories[entry.category] ?? 0) + 1;
-console.log(JSON.stringify({ files: entries.length, runtime: entries.filter((e) => e.usage === 'runtime').length, categories, releaseApproved: 0 }));
+console.log(
+  JSON.stringify({
+    files: entries.length,
+    runtime: entries.filter((e) => e.usage === 'runtime').length,
+    categories,
+    releaseApproved: 0,
+  }),
+);

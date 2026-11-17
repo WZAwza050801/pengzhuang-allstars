@@ -77,6 +77,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### FND-05
+
+- 状态：完成
+- 开始：2026-11-17 12:23 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / aa7c348911590d6e73f9493c82a75bacb1bcfc22
+- 范围：接入真实lint、格式检查、Vitest单元测试与check聚合，验证错误会使检查失败。
+- 实现：真实ESLint/Prettier/Vitest与check聚合，明确增量格式范围和精确旧工具例外。
+- 验证：check全通过，5项配置单测通过；类型/格式/lint/未知依赖四类反例均非零。
+- 证据：本提交（git log -- docs/productization/reports/FND-05.md 可定位）；docs/productization/reports/FND-05.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

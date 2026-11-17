@@ -13,7 +13,10 @@ export function inspectTaskDocument(source, log) {
   const tasks = new Map();
   if (!matches.length) errors.push('没有识别到任务复选框');
   for (const line of source.split('\n')) {
-    if (/^- \[[^\]]*\] \*\*[A-Z]{2,4}-\d/.test(line) && !/^- \[([ xX])\] \*\*([A-Z]{2,4}-\d{2}[a-z]?)\*\* .+$/.test(line)) {
+    if (
+      /^- \[[^\]]*\] \*\*[A-Z]{2,4}-\d/.test(line) &&
+      !/^- \[([ xX])\] \*\*([A-Z]{2,4}-\d{2}[a-z]?)\*\* .+$/.test(line)
+    ) {
       errors.push(`任务格式错误：${line}`);
     }
   }
@@ -53,7 +56,10 @@ export function inspectTaskDocument(source, log) {
   const visiting = new Set();
   const visited = new Set();
   function visit(id, chain) {
-    if (visiting.has(id)) { errors.push(`依赖成环：${[...chain, id].join(' -> ')}`); return; }
+    if (visiting.has(id)) {
+      errors.push(`依赖成环：${[...chain, id].join(' -> ')}`);
+      return;
+    }
     if (visited.has(id) || !tasks.has(id)) return;
     visiting.add(id);
     for (const dep of tasks.get(id).dependencies) visit(dep, [...chain, id]);
@@ -63,7 +69,9 @@ export function inspectTaskDocument(source, log) {
   for (const id of tasks.keys()) visit(id, []);
   const all = [...tasks.values()];
   return {
-    errors, total: all.length, done: all.filter((t) => t.done).length,
+    errors,
+    total: all.length,
+    done: all.filter((t) => t.done).length,
     groups: [...new Set(all.map((t) => t.id.split('-')[0]))],
     ready: all.filter((t) => !t.done && t.dependencies.every((id) => tasks.get(id)?.done)).map((t) => t.id),
   };
@@ -87,9 +95,17 @@ function checkLinks(root, files) {
 
 export function inspectPlan(root) {
   const dir = path.join(root, 'docs/productization');
-  const result = inspectTaskDocument(fs.readFileSync(path.join(dir, 'TASKS.md'), 'utf8'), fs.readFileSync(path.join(dir, 'EXECUTION_LOG.md'), 'utf8'));
+  const result = inspectTaskDocument(
+    fs.readFileSync(path.join(dir, 'TASKS.md'), 'utf8'),
+    fs.readFileSync(path.join(dir, 'EXECUTION_LOG.md'), 'utf8'),
+  );
   const files = ['README.md', 'AGENTS.md'].map((f) => path.join(root, f));
-  files.push(...fs.readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => path.join(dir, f)));
+  files.push(
+    ...fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => path.join(dir, f)),
+  );
   result.errors.push(...checkLinks(root, files));
   result.documents = files.length;
   return result;
@@ -98,12 +114,17 @@ export function inspectPlan(root) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const rootIndex = args.indexOf('--root');
-  const root = rootIndex < 0 ? path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..') : path.resolve(args[rootIndex + 1]);
+  const root =
+    rootIndex < 0
+      ? path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+      : path.resolve(args[rootIndex + 1]);
   try {
     const result = inspectPlan(root);
     if (args.includes('--json')) console.log(JSON.stringify(result, null, 2));
     else {
-      console.log(`计划检查：${result.total} 项 / ${result.groups.length} 工作包 / ${result.done} 已完成 / ${result.documents} 文档`);
+      console.log(
+        `计划检查：${result.total} 项 / ${result.groups.length} 工作包 / ${result.done} 已完成 / ${result.documents} 文档`,
+      );
       console.log(`可领取：${result.ready.join('、') || '暂无，请检查依赖或进行中任务'}`);
       for (const error of result.errors) console.error(`ERROR ${error}`);
       if (!result.errors.length) console.log('PASS 编号、依赖、完成记录与本地链接');

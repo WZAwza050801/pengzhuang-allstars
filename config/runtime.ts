@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { z } from 'zod';
 
-const flag = z.preprocess((v) => v === 'true' ? true : v === 'false' ? false : v, z.boolean());
+const flag = z.preprocess((v) => (v === 'true' ? true : v === 'false' ? false : v), z.boolean());
 const schema = z.object({
   mode: z.enum(['local', 'test', 'staging', 'production']),
   port: z.coerce.number().int().min(1).max(65535),
@@ -20,7 +20,9 @@ const schema = z.object({
   assetOrigin: z.url().optional(),
   logLevel: z.enum(['debug', 'info', 'warn', 'error']),
 });
-export type RuntimeConfig = Readonly<Omit<z.infer<typeof schema>, 'allowedOrigins'> & { allowedOrigins: readonly string[] }>;
+export type RuntimeConfig = Readonly<
+  Omit<z.infer<typeof schema>, 'allowedOrigins'> & { allowedOrigins: readonly string[] }
+>;
 
 export class ConfigurationError extends Error {
   constructor(readonly fields: readonly string[]) {
@@ -35,7 +37,9 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
   const deployed = mode === 'production' || mode === 'staging';
   const origin = env.PUBLIC_ORIGIN || `http://localhost:${env.PORT || 2567}`;
   const parsed = schema.safeParse({
-    mode, port: env.PORT ?? '2567', publicOrigin: origin,
+    mode,
+    port: env.PORT ?? '2567',
+    publicOrigin: origin,
     databaseUrl: mode === 'test' ? env.TEST_DATABASE_URL : env.DATABASE_URL,
     sessionSigningKey: env.SESSION_SIGNING_KEY,
     roomStoreDir: env.ROOM_STORE_DIR || path.resolve('data/rooms'),
@@ -43,18 +47,30 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
     cookieSecure: env.COOKIE_SECURE ?? deployed,
     allowedOrigins: env.ALLOWED_ORIGINS ? env.ALLOWED_ORIGINS.split(',').map((v) => v.trim()) : [origin],
     wechatEnabled: env.WECHAT_ENABLED ?? false,
-    wechatAppId: env.WECHAT_APP_ID, wechatSecret: env.WECHAT_APP_SECRET,
-    emailProvider: env.EMAIL_PROVIDER ?? 'disabled', smtpUrl: env.SMTP_URL,
-    assetOrigin: env.ASSET_ORIGIN, logLevel: env.LOG_LEVEL ?? 'info',
+    wechatAppId: env.WECHAT_APP_ID,
+    wechatSecret: env.WECHAT_APP_SECRET,
+    emailProvider: env.EMAIL_PROVIDER ?? 'disabled',
+    smtpUrl: env.SMTP_URL,
+    assetOrigin: env.ASSET_ORIGIN,
+    logLevel: env.LOG_LEVEL ?? 'info',
   });
-  if (!parsed.success) throw new ConfigurationError(parsed.error.issues.map((i) => String(i.path[0] ?? 'configuration')));
+  if (!parsed.success)
+    throw new ConfigurationError(parsed.error.issues.map((i) => String(i.path[0] ?? 'configuration')));
   const cfg = parsed.data;
   const bad: string[] = [];
   if (env.NODE_ENV === 'production' && !deployed) bad.push('APP_ENV');
   const safeOrigin = (value: string, secure: boolean) => {
     const url = new URL(value);
-    return ['http:', 'https:'].includes(url.protocol) && (!secure || url.protocol === 'https:') &&
-      !url.hostname.includes('*') && !url.username && !url.password && !url.search && !url.hash && url.pathname === '/';
+    return (
+      ['http:', 'https:'].includes(url.protocol) &&
+      (!secure || url.protocol === 'https:') &&
+      !url.hostname.includes('*') &&
+      !url.username &&
+      !url.password &&
+      !url.search &&
+      !url.hash &&
+      url.pathname === '/'
+    );
   };
   if (!safeOrigin(cfg.publicOrigin, deployed)) bad.push('publicOrigin');
   if (cfg.allowedOrigins.some((v) => !safeOrigin(v, deployed))) bad.push('allowedOrigins');
@@ -62,16 +78,24 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
   if (cfg.databaseUrl) {
     try {
       const db = new URL(cfg.databaseUrl);
-      if (!['postgres:', 'postgresql:'].includes(db.protocol) || !db.hostname || db.pathname.length < 2) bad.push('databaseUrl');
+      if (!['postgres:', 'postgresql:'].includes(db.protocol) || !db.hostname || db.pathname.length < 2)
+        bad.push('databaseUrl');
       if (mode === 'test' && !/(?:^|[_-])test(?:[_-]|$)/i.test(db.pathname.slice(1))) bad.push('TEST_DATABASE_URL');
-    } catch { bad.push('databaseUrl'); }
+    } catch {
+      bad.push('databaseUrl');
+    }
   }
   if (mode === 'test' && env.DATABASE_URL && !env.TEST_DATABASE_URL) bad.push('TEST_DATABASE_URL');
   if (deployed) {
     if (!env.PUBLIC_ORIGIN) bad.push('PUBLIC_ORIGIN');
     if (!cfg.databaseUrl) bad.push('databaseUrl');
     const key = cfg.sessionSigningKey ?? '';
-    if (!/^[A-Za-z0-9_-]{43,}$/.test(key) || new Set(key).size < 12 || /example|placeholder|changeme|development/i.test(key)) bad.push('sessionSigningKey');
+    if (
+      !/^[A-Za-z0-9_-]{43,}$/.test(key) ||
+      new Set(key).size < 12 ||
+      /example|placeholder|changeme|development/i.test(key)
+    )
+      bad.push('sessionSigningKey');
     if (cfg.devAuthBypass) bad.push('devAuthBypass');
     if (!cfg.cookieSecure) bad.push('cookieSecure');
     if (cfg.emailProvider === 'mailpit') bad.push('emailProvider');
@@ -80,13 +104,27 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
   if (cfg.emailProvider === 'smtp') {
     try {
       const url = new URL(cfg.smtpUrl ?? '');
-      if (!['smtp:', 'smtps:'].includes(url.protocol) || !url.hostname || (deployed && url.protocol !== 'smtps:')) bad.push('smtpUrl');
-    } catch { bad.push('smtpUrl'); }
+      if (!['smtp:', 'smtps:'].includes(url.protocol) || !url.hostname || (deployed && url.protocol !== 'smtps:'))
+        bad.push('smtpUrl');
+    } catch {
+      bad.push('smtpUrl');
+    }
   }
   if (bad.length) throw new ConfigurationError(bad);
-  return Object.freeze({ ...cfg, allowedOrigins: Object.freeze([...cfg.allowedOrigins]), roomStoreDir: path.resolve(cfg.roomStoreDir) });
+  return Object.freeze({
+    ...cfg,
+    allowedOrigins: Object.freeze([...cfg.allowedOrigins]),
+    roomStoreDir: path.resolve(cfg.roomStoreDir),
+  });
 }
 
 export function describeRuntimeConfig(cfg: Readonly<RuntimeConfig>) {
-  return { mode: cfg.mode, port: cfg.port, publicOrigin: cfg.publicOrigin, databaseConfigured: Boolean(cfg.databaseUrl), wechatEnabled: cfg.wechatEnabled, emailProvider: cfg.emailProvider };
+  return {
+    mode: cfg.mode,
+    port: cfg.port,
+    publicOrigin: cfg.publicOrigin,
+    databaseConfigured: Boolean(cfg.databaseUrl),
+    wechatEnabled: cfg.wechatEnabled,
+    emailProvider: cfg.emailProvider,
+  };
 }
