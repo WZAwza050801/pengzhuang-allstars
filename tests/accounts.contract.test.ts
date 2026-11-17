@@ -5,6 +5,7 @@ import {
   LogoutSchema,
   SessionListQuerySchema,
   SessionListSchema,
+  WechatLoginSchema,
 } from '../packages/contracts/src/accounts';
 
 test('account contracts reject authority claims, invalid list bounds and credential disclosure', () => {
@@ -24,4 +25,11 @@ test('account contracts reject authority claims, invalid list bounds and credent
   expect(SessionListSchema.safeParse({ sessions: [session], nextCursor: null }).success).toBe(true);
   for (const extra of [{ refreshTokenHash: 'private' }, { ip: 'private' }, { userAgent: 'private' }])
     expect(SessionListSchema.safeParse({ sessions: [{ ...session, ...extra }], nextCursor: null }).success).toBe(false);
+});
+
+test('WeChat code is the only accepted login authority and remains opaque within bounds', () => {
+  expect(WechatLoginSchema.safeParse({ code: "opaque'&value" }).success).toBe(true);
+  for (const code of ['', 'a'.repeat(257), 'bad\ncode', '\u0000', ' bad', 'bad\u007f'])
+    expect(WechatLoginSchema.safeParse({ code }).success).toBe(false);
+  expect(WechatLoginSchema.safeParse({ code: 'valid', appId: 'forged' }).success).toBe(false);
 });

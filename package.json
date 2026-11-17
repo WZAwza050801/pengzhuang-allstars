@@ -45,6 +45,7 @@
     "test:contract": "vitest run --project contract",
     "docs:contracts": "tsx tools/export-contracts.ts",
     "test:integration": "node tools/run-pg-tests.mjs",
+    "verify:wechat": "tsx tools/verify-wechat-login.ts",
     "db:migrate": "tsx tools/migrate.ts",
     "db:rollback": "tsx tools/migrate.ts --down",
     "check:game-config": "tsx tools/export-game-config.ts --check",

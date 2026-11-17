@@ -9,6 +9,7 @@ import {
   SessionListQuerySchema,
   SessionListSchema,
   RevokeSessionResultSchema,
+  WechatLoginSchema,
 } from './accounts';
 export { MoneySchema } from './money';
 
@@ -83,6 +84,7 @@ export const QueueSchema = z.strictObject({
 export const HTTP_CONTRACTS = [
   { method: 'get', path: '/api/v1/auth/csrf', operationId: 'csrf' },
   { method: 'post', path: '/api/v1/auth/refresh', operationId: 'refresh', body: RefreshSchema },
+  { method: 'post', path: '/api/v1/auth/wechat/exchange', operationId: 'wechatExchange', body: WechatLoginSchema },
   {
     method: 'post',
     path: '/api/v1/auth/logout',

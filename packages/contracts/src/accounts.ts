@@ -2,6 +2,16 @@ import { z } from 'zod';
 import { MoneySchema } from './money';
 
 export const DeviceKindSchema = z.enum(['desktop', 'mobile', 'tablet', 'unknown']);
+export const WechatLoginSchema = z.strictObject({
+  code: z
+    .string()
+    .min(1)
+    .max(256)
+    .refine(
+      (value) =>
+        !/\s/u.test(value) && Array.from(value).every((char) => char.charCodeAt(0) > 32 && char.charCodeAt(0) !== 127),
+    ),
+});
 export type DeviceKind = z.infer<typeof DeviceKindSchema>;
 export const CurrentUserSchema = z.strictObject({
   userId: z.uuid(),

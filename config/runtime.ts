@@ -13,8 +13,8 @@ const schema = z.object({
   cookieSecure: flag,
   allowedOrigins: z.array(z.url()).min(1),
   wechatEnabled: flag,
-  wechatAppId: z.string().trim().min(1).optional(),
-  wechatSecret: z.string().trim().min(1).optional(),
+  wechatAppId: z.string().trim().min(1).max(128).optional(),
+  wechatSecret: z.string().trim().min(1).max(256).optional(),
   emailProvider: z.enum(['disabled', 'mailpit', 'smtp']),
   smtpUrl: z.string().optional(),
   mailFrom: z.email().optional(),
@@ -89,7 +89,7 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
     }
   }
   if (mode === 'test' && env.DATABASE_URL && !env.TEST_DATABASE_URL) bad.push('TEST_DATABASE_URL');
-  if (deployed || cfg.emailProvider !== 'disabled') {
+  if (deployed || cfg.emailProvider !== 'disabled' || cfg.wechatEnabled) {
     const key = cfg.sessionSigningKey ?? '';
     if (
       !/^[A-Za-z0-9_-]{43,}$/.test(key) ||
@@ -106,6 +106,8 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
     if (cfg.emailProvider === 'mailpit') bad.push('emailProvider');
   }
   if (cfg.wechatEnabled && (!cfg.wechatAppId || !cfg.wechatSecret)) bad.push('wechatCredentials');
+  if (cfg.wechatEnabled && !cfg.databaseUrl) bad.push('databaseUrl');
+  if (cfg.wechatEnabled && cfg.devAuthBypass) bad.push('devAuthBypass');
   if (deployed && cfg.emailProvider !== 'disabled' && !cfg.mailFrom) bad.push('mailFrom');
   if (cfg.emailProvider === 'smtp' || cfg.emailProvider === 'mailpit') {
     try {

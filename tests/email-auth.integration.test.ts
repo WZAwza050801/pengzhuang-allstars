@@ -1,6 +1,6 @@
 import { randomBytes, randomUUID, createHash } from 'node:crypto';
 import { spawn, type ChildProcess } from 'node:child_process';
-import { request as httpRequest } from 'node:http';
+import { jsonRequest } from './helpers/json-http';
 import net from 'node:net';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
@@ -25,34 +25,7 @@ async function port() {
   return address.port;
 }
 function request(origin: string, route: string, body?: unknown, headers: Record<string, string> = {}) {
-  return new Promise<{
-    status: number;
-    headers: Record<string, string | string[] | undefined>;
-    data: ReturnType<typeof JSON.parse>;
-  }>((resolve, reject) => {
-    const call = httpRequest(
-      new URL(route, origin),
-      { method: body === undefined ? 'GET' : 'POST', headers: { 'content-type': 'application/json', ...headers } },
-      (response) => {
-        const chunks: Buffer[] = [];
-        response.on('data', (chunk: Buffer) => chunks.push(chunk));
-        response.on('end', () => {
-          try {
-            resolve({
-              status: response.statusCode ?? 0,
-              headers: response.headers,
-              data: JSON.parse(Buffer.concat(chunks).toString()),
-            });
-          } catch (error) {
-            reject(error);
-          }
-        });
-      },
-    );
-    call.setTimeout(15000, () => call.destroy(new Error('Test HTTP timeout')));
-    call.once('error', reject);
-    call.end(body === undefined ? undefined : JSON.stringify(body));
-  });
+  return jsonRequest(origin, route, { method: body === undefined ? 'GET' : 'POST', body, headers });
 }
 
 describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {

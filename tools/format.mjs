@@ -67,6 +67,7 @@ files.push(
   'tools/export-game-config.ts',
   'tools/migrate.ts',
   'tools/run-pg-tests.mjs',
+  'tools/verify-wechat-login.ts',
 );
 let bad = 0;
 files.push('tools/check-boundaries.mjs', 'tools/export-contracts.ts');

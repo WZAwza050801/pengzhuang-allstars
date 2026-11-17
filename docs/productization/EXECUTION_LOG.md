@@ -661,6 +661,21 @@
 - 回滚：任务独立提交可回退；迁移 down 仅隔离本地/测试，不恢复已撤销的会话。
 - 下一项：先核实 ACC-05 的真实微信环境；若缺失则保持未勾选，继续已满足依赖的 ACC-06 / DAT-02。第 50 项同步 GitHub。
 
+### ACC-05
+
+- 状态：阻塞
+- 开始：2026-11-18 04:30 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / b84103b
+- 范围：微信小游戏 code 服务端交换、应用隔离映射、持久化单次 code 防重放、配置/错误脱敏与 Cookie 会话接入。先完成官方契约、mock provider + 真实数据库/HTTP 验证；不将本地契约测试记为真实微信验收。
+- 外部条件：进程/用户环境无 WECHAT_ENABLED、WECHAT_APP_ID、WECHAT_APP_SECRET，仓库仅有 .env.example；当前未提供授权测试 app 的新鲜 code。真实交换/过期/重放未验证前保持未勾选，之后继续不依赖微信条件的 ACC-06/DAT 工作。
+- 实现：固定官方 HTTPS 交换、5 秒整体超时/8192 字节上限/禁重定向/错误脱敏；AppID/OpenID 唯一身份映射，未核实 UnionID 不合并。持久 HMAC code 占用与 IP 限流，网络结果不明也不能重放，身份/账号/会话/成功标记同事务，唯一竞争只重试本地事务一次。Web Cookie 适配接入真实运行时，默认关闭；原生凭据交付留给 WX 平台 adapter。
+- 验证：核对官方 code2Session、wx.login、小游戏登录、UnionID 文档。6 文件 / 65 集成项通过、0 跳过，微信 11 项为 mock 上游 + 真实 PostgreSQL/HTTP；原真实 SMTP/浏览器回归保留。完整 check 为 116 单元/7 契约及静态检查通过；生产构建和原游戏 E2E 18/18 通过。verify:wechat 缺配置时按预期在 configuration 阶段非零退出，不连数据库/上游、不生成成功报告；修改验收工具隔离目录/报告后再次 format/typecheck/lint 与缺配置守卫通过。没有真实微信验收结果。
+- 证据：本提交；tests/wechat-provider.test.ts、tests/wechat.integration.test.ts；共享真实 JSON HTTP helper；docs/engineering/wechat-identity.md；docs/productization/reports/ACC-05.md；tools/verify-wechat-login.ts。
+- 风险与剩余：未取得已授权测试 app 的 AppID/Secret 及有效/过期 code，整项保持未勾选；不能把 mock 当真实登录。真实验收命令只允许本机 _test 数据库及独立房间目录，成功且清理完成后才写独立不含凭证的报告。已异步询问测试资格，未收到配置。无新增外部依赖，本轮未使用远端服务器；临时数据库/Mailpit 均停止。
+- 回滚：默认关闭微信；独立代码提交可回退。迁移 down 仅隔离本地/测试，凭证不写入 Git/日志。
+- 下一项：继续 ACC-06；具备私有配置后按验收文档运行 verify:wechat，补充真实有效/过期/重放及会话证据才勾选 ACC-05。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

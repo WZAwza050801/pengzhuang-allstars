@@ -9,6 +9,9 @@ import { emailAuthModule } from './api/email-auth';
 import { Sessions } from './accounts/sessions';
 import { WebSessions } from './api/web-sessions';
 import { currentUserModule } from './api/current-user';
+import { WechatProvider } from './accounts/wechat-provider';
+import { WechatAccounts } from './accounts/wechat-accounts';
+import { wechatAuthModule } from './api/wechat-auth';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -18,8 +21,10 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     ? new EmailAccounts(database, createAccountMail(config), config.sessionSigningKey!) : null;
   const web = database && config.sessionSigningKey
     ? new WebSessions(new Sessions(database, config.sessionSigningKey, new URL(config.publicOrigin).origin), config, config.sessionSigningKey) : null;
+  const wechat = database && config.wechatEnabled
+    ? new WechatAccounts(database, new WechatProvider({ appId: config.wechatAppId!, secret: config.wechatSecret! }), config.sessionSigningKey!) : null;
   const server = createGameServer({
-    modules: web ? [web.module(), currentUserModule(web), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : [])] : [],
+    modules: web ? [web.module(), currentUserModule(web), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : [])] : [],
     repository: database, resolveData: gameConfiguration.resolveData,
     roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : [])] : [],
     onError: (event) => console.error(JSON.stringify({ event: 'http_error', ...event })),

@@ -112,3 +112,22 @@ test('mail encryption requires a strong key and production rejects local capture
     'smtp',
   );
 });
+
+test('enabled WeChat requires durable storage and a strong session key even when email is disabled', () => {
+  const valid = {
+    WECHAT_ENABLED: 'true',
+    WECHAT_APP_ID: 'wx0000000000000001',
+    WECHAT_APP_SECRET: 'server-test-secret',
+    SESSION_SIGNING_KEY: randomBytes(32).toString('base64url'),
+    DATABASE_URL: 'postgres://localhost/game_local',
+  };
+  assert.equal(readRuntimeConfig(valid).wechatEnabled, true);
+  for (const override of [
+    { SESSION_SIGNING_KEY: '' },
+    { DATABASE_URL: '' },
+    { DEV_AUTH_BYPASS: 'true' },
+    { WECHAT_APP_SECRET: '' },
+  ])
+    assert.throws(() => readRuntimeConfig({ ...valid, ...override }), ConfigurationError);
+  assert.ok(!JSON.stringify(describeRuntimeConfig(readRuntimeConfig(valid))).includes(valid.WECHAT_APP_SECRET));
+});

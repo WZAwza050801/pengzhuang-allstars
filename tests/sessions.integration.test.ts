@@ -1,7 +1,7 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { build } from 'esbuild';
 import path from 'node:path';
-import { request as httpRequest } from 'node:http';
+import { jsonRequest } from './helpers/json-http';
 import { Router } from 'express';
 import { chromium } from 'playwright';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
@@ -19,31 +19,7 @@ import { LoginStateModel } from '../packages/client-model/src/account';
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 function request(origin: string, route: string, method = 'GET', headers: Record<string, string> = {}, body?: unknown) {
-  return new Promise<{
-    status: number;
-    headers: import('node:http').IncomingHttpHeaders;
-    data: ReturnType<typeof JSON.parse>;
-  }>((resolve, reject) => {
-    const call = httpRequest(
-      new URL(route, origin),
-      { method, headers: { 'content-type': 'application/json', ...headers } },
-      (res) => {
-        const chunks: Buffer[] = [];
-        res.on('data', (chunk: Buffer) => chunks.push(chunk));
-        res.on('end', () => {
-          try {
-            const content = Buffer.concat(chunks).toString();
-            resolve({ status: res.statusCode ?? 0, headers: res.headers, data: content ? JSON.parse(content) : null });
-          } catch (error) {
-            reject(error);
-          }
-        });
-      },
-    );
-    call.setTimeout(15000, () => call.destroy(new Error('Test HTTP timeout')));
-    call.on('error', reject);
-    call.end(body === undefined ? undefined : JSON.stringify(body));
-  });
+  return jsonRequest(origin, route, { method, headers, body });
 }
 
 describe('secure sessions with real PostgreSQL and browser cookies', () => {
