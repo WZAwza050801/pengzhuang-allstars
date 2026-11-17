@@ -2,6 +2,7 @@ import { expect, test } from 'vitest';
 import {
   decodeBody,
   UpgradeSchema,
+  CraftSchema,
   RegisterSchema,
   LineupSchema,
   MoneySchema,
@@ -16,7 +17,7 @@ import {
 import { parseReady as serverReady } from '../server/validation';
 
 test('HTTP body schemas reject authority claims and malformed numbers', () => {
-  expect(decodeBody(UpgradeSchema, { expectedRevision: 0 }).ok).toBe(true);
+  expect(decodeBody(UpgradeSchema, { expectedRevision: 0, expectedEconomyVersion: 'economy-1' }).ok).toBe(true);
   for (const body of [
     { expectedRevision: Infinity },
     { expectedRevision: NaN },
@@ -24,7 +25,19 @@ test('HTTP body schemas reject authority claims and malformed numbers', () => {
     { expectedRevision: 0, price: 0 },
     { expectedRevision: 0, resultingLevel: 10 },
   ])
-    expect(decodeBody(UpgradeSchema, body).ok).toBe(false);
+    expect(decodeBody(UpgradeSchema, { ...body, expectedEconomyVersion: 'economy-1' }).ok).toBe(false);
+  expect(decodeBody(UpgradeSchema, { expectedRevision: 0 }).ok).toBe(false);
+  expect(
+    decodeBody(CraftSchema, { playerDefId: 'p03', expectedRevision: 0, expectedEconomyVersion: 'economy-1' }).ok,
+  ).toBe(true);
+  expect(
+    decodeBody(CraftSchema, {
+      playerDefId: 'p03',
+      expectedRevision: 0,
+      expectedEconomyVersion: 'economy-1',
+      price: '1',
+    }).ok,
+  ).toBe(false);
   expect(
     RegisterSchema.safeParse({ email: 'x@y.org', password: 'a'.repeat(12), nickname: '玩家', role: 'admin' }).success,
   ).toBe(false);

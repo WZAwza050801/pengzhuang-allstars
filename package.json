@@ -35,7 +35,7 @@
     "format": "node tools/format.mjs --write",
     "test:unit": "vitest run --project unit",
     "audit:assets": "node tools/audit-assets.mjs",
-    "check": "npm run check:toolchain && npm run check:boundaries && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config && npm run check:assets && npm run check:balance-data && npm run check:balance-mapping && npm run check:skills",
+    "check": "npm run check:toolchain && npm run check:boundaries && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config && npm run check:assets && npm run check:balance-data && npm run check:balance-mapping && npm run check:skills && npm run check:economy",
     "check:boundaries": "node tools/check-boundaries.mjs",
     "test:contract": "vitest run --project contract",
     "docs:contracts": "tsx tools/export-contracts.ts",
@@ -55,7 +55,10 @@
     "skills:rules": "tsx tools/export-skill-rules.ts --write",
     "check:skills": "tsx tools/export-skill-rules.ts",
     "ai:bench": "tsx tools/ai-latency.ts",
-    "test:ai-browser": "node tools/ai-browser.mjs"
+    "test:ai-browser": "node tools/ai-browser.mjs",
+    "balance:economy": "tsx tools/economy-simulation.ts --write",
+    "check:economy": "tsx tools/economy-simulation.ts",
+    "test:balance": "vitest run --project unit tests/balance*.test.ts tests/economy*.test.ts tests/skills.test.ts"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

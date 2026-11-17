@@ -8,3 +8,4 @@ export * from './assets';
 export * from './physics';
 export * from './game-definitions';
 export * from './ai';
+export * from './economy';

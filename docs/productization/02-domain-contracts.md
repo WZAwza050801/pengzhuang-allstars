@@ -69,7 +69,8 @@ CREATE UNIQUE INDEX lineup_slot_once ON lineup_slots (lineup_id, slot);
 | PATCH /me/profile | nickname、avatarAssetId；revision 乐观锁；不允许改 level/currency/role |
 | GET /me/cards /me/wallet /me/lineups | 服务端资产与阵容 |
 | PUT /me/lineups/:id | ownedCardIds + expectedRevision；必须验证持有权和位置规则 |
-| POST /me/cards/:id/upgrade | 目标卡、expectedRevision、Idempotency-Key；服务端算成本 |
+| POST /me/cards/:id/upgrade | 目标卡、expectedRevision、expectedEconomyVersion、Idempotency-Key；服务端算成本 |
+| POST /me/cards/craft | playerDefId、expectedRevision、expectedEconomyVersion、Idempotency-Key；服务端验证未持有并算碎片成本 |
 | GET /me/matches | 分页战绩；私有完整事件只对本人/获授权管理员开放 |
 | POST /matches/tickets | 验证登录/封禁/阵容，生成短时一次性房间票据 |
 | GET /me/active-match | 仅返回自己仍可恢复的比赛与重新入场方式 |
@@ -88,6 +89,7 @@ type ApiResult<T> =
 
 interface UpgradeCardRequest {
   expectedRevision: number;
+  expectedEconomyVersion: string; // 对比当前生效价格版本，不能用历史低价升级
   // 不接收客户端提供的 price / resultingLevel / balance。
 }
 ```
@@ -107,7 +109,7 @@ interface UpgradeCardRequest {
 
 ## 5. 持有权、升级与乐观锁
 
-升级服务的事务顺序：以稳定顺序锁定用户资产和卡牌；校验持有权/revision/等级上限；从冻结的 economyVersion 算成本；扣余额、升级、追加流水、写幂等结果及 outbox；一次提交。失败全部回滚。
+升级服务的事务顺序：以稳定顺序锁定用户资产和卡牌；校验持有权/revision/等级上限；对比 expectedEconomyVersion 与当前生效价格版本，冻结该版本算成本；扣余额、升级、追加流水、写幂等结果及 outbox；一次提交。失败全部回滚。历史比赛奖励使用可信 outcome 绑定的历史版本；升级/合成不能请求旧版低价。BAL-05 纯规则与后续账本接入约束见 [economy.md](../engineering/economy.md)。
 
 示意代码不是可复制即上线的完整实现：
 

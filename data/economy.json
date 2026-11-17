@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "version": "economy-2",
+  "status": "engineering-default",
+  "sourceType": "rebuilt",
+  "sourceNote": "Nonpaid initial proposal, not recovered commercial prices. Existing reward/shop reference tables remain historical evidence; Crystal purchase flows are disabled.",
+  "paymentsEnabled": false,
+  "inventoryModel": "unique-definition",
+  "maxLevel": 10,
+  "starter": {
+    "grantId": "starter-v1",
+    "coins": "300",
+    "fragments": "0",
+    "playerDefIds": [
+      "p07",
+      "p06",
+      "p08",
+      "p01",
+      "p02"
+    ]
+  },
+  "upgrade": {
+    "baseCoins": "100",
+    "growthNumerator": 3,
+    "growthDenominator": 2,
+    "rounding": "half-up",
+    "consumesDuplicateCards": false
+  },
+  "matchRewards": {
+    "win": "50",
+    "draw": "35",
+    "loss": "20",
+    "dailyCoinsCap": "300"
+  },
+  "qualification": {
+    "minActionsByUser": 2,
+    "minDurationSeconds": 30,
+    "allowForfeitRewards": false
+  },
+  "dailyResetOffsetMinutes": 480,
+  "participationCard": {
+    "qualifiedMatches": 3,
+    "dailyCap": 1,
+    "selection": "qualified-day-rotation",
+    "progressScope": "carry-until-claim"
+  },
+  "duplicateFragments": {
+    "1": "5",
+    "2": "10",
+    "3": "15",
+    "4": "30",
+    "5": "50",
+    "9": "100"
+  },
+  "rebuiltRarityByQuality": {
+    "white": 1,
+    "green": 2,
+    "blue": 3,
+    "purple": 4,
+    "orange": 5
+  },
+  "craft": {
+    "costMultiplier": 10,
+    "pool": "implemented-or-no-skill"
+  },
+  "ledgerKinds": [
+    "account.starter",
+    "match.reward",
+    "participation.card",
+    "card.duplicate",
+    "card.upgrade",
+    "card.craft",
+    "admin.correction",
+    "mission.reward",
+    "mail.reward",
+    "achievement.reward"
+  ]
+}

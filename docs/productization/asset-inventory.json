@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "policyVersion": 1,
+  "policyVersion": 2,
   "entries": [
     {
       "path": "art/avatar.py",
@@ -3914,6 +3914,17 @@
       "usage": "runtime",
       "category": "runtime-game-data",
       "sourceEvidence": "docs/roster-provenance.json; docs/gameplay-defaults.md; per-file source fields",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "data/economy.json",
+      "bytes": 1700,
+      "sha256": "5b2ebe472a009c6afa6515588e0c2a00da9d3a25950979beda43016c9f9b545c",
+      "usage": "runtime",
+      "category": "rebuilt-economy-config",
+      "sourceEvidence": "docs/engineering/economy.md; data/economy.json engineering-default sourceNote; no commercial-price claim",
       "rights": "unverified",
       "releaseAllowed": false,
       "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"

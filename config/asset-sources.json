@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "roots": ["client/public", "art", "materials", "research", "data", "pengzhuang_research.html"],
   "excludePrefixes": ["data/rooms/"],
   "rules": [
@@ -52,6 +52,11 @@
       "prefix": "research/",
       "category": "historical-research",
       "evidence": "research/text.txt; research/stripped.html"
+    },
+    {
+      "prefix": "data/economy.json",
+      "category": "rebuilt-economy-config",
+      "evidence": "docs/engineering/economy.md; data/economy.json engineering-default sourceNote; no commercial-price claim"
     },
     {
       "prefix": "data/",

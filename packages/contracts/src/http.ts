@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { PROTOCOL_VERSION } from '../../../shared/protocol';
+import { VersionIdSchema } from './configuration';
 import { parseNickname } from './game-validation';
 
 export const API_VERSION = 'v1';
@@ -53,7 +54,12 @@ export const LineupSchema = z.strictObject({
     .refine((ids) => new Set(ids).size === ids.length, 'Duplicate card'),
   expectedRevision: revision,
 });
-export const UpgradeSchema = z.strictObject({ expectedRevision: revision });
+export const UpgradeSchema = z.strictObject({ expectedRevision: revision, expectedEconomyVersion: VersionIdSchema });
+export const CraftSchema = z.strictObject({
+  playerDefId: z.string().regex(/^p[0-9]{2,4}$/),
+  expectedRevision: revision,
+  expectedEconomyVersion: VersionIdSchema,
+});
 export const MatchTicketSchema = z.strictObject({
   mode: z.enum(['friend', 'ranked', 'growth']),
   lineupId: z.uuid(),
@@ -72,6 +78,7 @@ export const HTTP_CONTRACTS = [
   { method: 'patch', path: '/api/v1/me/profile', operationId: 'updateProfile', body: ProfileSchema },
   { method: 'put', path: '/api/v1/me/lineups/{id}', operationId: 'saveLineup', body: LineupSchema },
   { method: 'post', path: '/api/v1/me/cards/{id}/upgrade', operationId: 'upgradeCard', body: UpgradeSchema },
+  { method: 'post', path: '/api/v1/me/cards/craft', operationId: 'craftCard', body: CraftSchema },
   { method: 'post', path: '/api/v1/matches/tickets', operationId: 'matchTicket', body: MatchTicketSchema },
   { method: 'post', path: '/api/v1/matchmaking/entries', operationId: 'enterQueue', body: QueueSchema },
 ] as const;
