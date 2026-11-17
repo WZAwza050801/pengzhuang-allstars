@@ -70,6 +70,52 @@ try {
       2,
     ) + '\n',
   );
+  const audit = await browser.newPage({ viewport: { width: 840, height: 900 }, deviceScaleFactor: 3 });
+  await audit.goto(url + '?audit=1');
+  await audit.waitForFunction(() => window.__fieldCalibration?.ready);
+  const cdp = await audit.context().newCDPSession(audit);
+  await cdp.send('Performance.enable');
+  await cdp.send('HeapProfiler.collectGarbage');
+  const before = (await cdp.send('Performance.getMetrics')).metrics.find((m) => m.name === 'JSHeapUsedSize')?.value;
+  const resources = await audit.evaluate(() => window.__fieldCalibration.resourceAudit());
+  await cdp.send('HeapProfiler.collectGarbage');
+  const after = (await cdp.send('Performance.getMetrics')).metrics.find((m) => m.name === 'JSHeapUsedSize')?.value;
+  for (const row of resources) {
+    if (
+      row.before.avatars > 32 ||
+      row.before.art > 4 ||
+      row.before.canvases > 2 ||
+      row.after.avatars ||
+      row.after.art ||
+      row.after.canvases ||
+      row.after.backingPixels ||
+      !row.after.disposed
+    )
+      throw new Error('Renderer resource leak');
+  }
+  const low = resources.find((r) => r.before.quality === 'low').before.backingPixels;
+  const high = resources.find((r) => r.before.quality === 'high').before.backingPixels;
+  if (!(low < high)) throw new Error('Low quality did not reduce backing textures');
+  await writeFile(
+    path.join(out, 'resources.json'),
+    JSON.stringify(
+      {
+        cycles: resources.length,
+        deviceScaleFactor: 3,
+        beforeHeapBytes: before,
+        afterHeapBytes: after,
+        heapDeltaBytes: after - before,
+        resources,
+      },
+      null,
+      2,
+    ) + '\n',
+  );
+  await cdp.detach();
+  await audit.close();
+  console.log(
+    `Renderer resources: ${resources.length} cycles, all caches released, heap delta ${after - before} bytes`,
+  );
   console.log(
     `Field calibration: ${result.rows.length} skin/side captures, max transform error ${Math.max(...result.rows.map((r) => r.maxErrorM))}m, 0 JS errors`,
   );

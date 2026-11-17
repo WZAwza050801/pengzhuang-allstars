@@ -242,6 +242,25 @@ async function main() {
         return suspended && window.__pz.canAim();
       });
       record('平台前后台输入恢复', lifecycle ? 'PASS' : 'FAIL', 'pagehide 禁止出手，pageshow 恢复');
+      await page.click('.menu-btn');
+      await page.selectOption('.quality','low');
+      const qualityLow = await page.evaluate(()=>window.__pz.resources().quality==='low');
+      await page.selectOption('.quality','high');
+      const qualityHigh = await page.evaluate(()=>window.__pz.resources().quality==='high');
+      await page.click('.menu .close');
+      record('比赛画质切换', qualityLow && qualityHigh ? 'PASS' : 'FAIL', '菜单实际切换流畅/精细，物理状态保持');
+      const shot = await page.evaluate(() => {
+        const st = window.__pz.state();
+        const p = st.pieces.find(p => p.side === st.turn && p.out === 0 && p.frozen === 0);
+        return {before:st.shotNo,from:window.__pz.screenOf(p.x,p.y),to:window.__pz.screenOf(p.x,p.y+.9)};
+      });
+      await page.mouse.move(shot.from.x,shot.from.y);await page.mouse.down();await page.mouse.move(shot.to.x,shot.to.y);await page.mouse.up();
+      await page.waitForFunction(()=>window.__pz.playing(),null,{timeout:5000});
+      const resumed = await page.evaluate(before => {
+        window.dispatchEvent(new Event('pagehide'));window.dispatchEvent(new Event('pageshow'));
+        return !window.__pz.playing() && window.__pz.state().shotNo>before;
+      },shot.before);
+      record('后台回放丢弃', resumed ? 'PASS' : 'FAIL', '中途切后台后跳到最新权威终态，不补播过期动画');
       await page.click('.menu-btn'); await page.click('.menu .exit');
       const released = await page.evaluate(() => !window.__pz && !!document.querySelector('.shell'));
       record('比赛宿主释放', released ? 'PASS' : 'FAIL', '退出回大厅并释放自动化句柄');

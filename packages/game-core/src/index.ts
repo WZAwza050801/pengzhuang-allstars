@@ -4,3 +4,4 @@ export * from './field';
 export * from './camera';
 export * from './drag';
 export * from './field-art';
+export * from './playback';

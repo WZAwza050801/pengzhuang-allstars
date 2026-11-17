@@ -1,5 +1,6 @@
 import type { FieldGeometry, PhysicsConfig } from '../../shared/data';
 import type { Side } from '../../shared/physics';
+import { QUALITY_PROFILES, type Quality } from './quality';
 import { portraitUrl } from './portraits';
 import { fieldArtMapping } from '../../packages/game-core/src/field-art';
 import { fieldOutline } from '../../packages/game-core/src/field';
@@ -103,8 +104,10 @@ export class Renderer {
   private readonly g: FieldGeometry;
   private readonly p: PhysicsConfig;
   private outline: [number, number][] = [];
-  private grassCache: HTMLCanvasElement | null = null;
-  private grassKey = '';
+  private staticCache: HTMLCanvasElement | null = null;
+  private staticKey = '';
+  private disposed = false;
+  private quality: Quality = 'high';
   /** Static layers of the "drawn" skin (backdrop, hedge, grass, walls) at canvas resolution. */
   private drawnCache: HTMLCanvasElement | null = null;
   private drawnKey = '';
@@ -130,10 +133,11 @@ export class Renderer {
 
   avatar(playerId: string) {
     const cached = this.avatars.get(playerId);
-    if (cached) return cached;
+    if (cached) { this.avatars.delete(playerId); this.avatars.set(playerId, cached); return cached; }
     const img = new Image();
     img.src = portraitUrl(playerId);
     this.avatars.set(playerId, img);
+    this.trimImages(this.avatars, 32);
     return img;
   }
 
@@ -161,6 +165,7 @@ export class Renderer {
       img = new Image();
       img.src = `/${src}`;
       this.artImages.set(src, img);
+      this.trimImages(this.artImages, 4);
     }
     return img.complete && img.naturalWidth ? img : null;
   }
@@ -171,7 +176,7 @@ export class Renderer {
     for (const src of [this.skin.art, this.skin.scene]) {
       if (!src) continue;
       let image = this.artImages.get(src);
-      if (!image) { image = new Image(); image.src = `/${src}`; this.artImages.set(src, image); }
+      if (!image) { image = new Image(); image.src = `/${src}`; this.artImages.set(src, image); this.trimImages(this.artImages, 4); }
       images.push(image);
     }
     this.springImage();
@@ -197,6 +202,7 @@ export class Renderer {
       img = new Image();
       img.src = `/${src}`;
       this.artImages.set(src, img);
+      this.trimImages(this.artImages, 4);
     }
     return img.complete && img.naturalWidth ? img : null;
   }
@@ -224,14 +230,15 @@ export class Renderer {
 
   resize() {
     const r = this.canvas.getBoundingClientRect();
-    this.dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    this.dpr = Math.min(window.devicePixelRatio || 1, QUALITY_PROFILES[this.quality].maxDpr);
     // Hidden/zero-sized stages may occur during platform transitions; keep the previous camera until visible.
     if (r.width <= 0 || r.height <= 0) return;
     const layout = fieldViewport(this.g, { width: r.width, height: r.height, dpr: this.dpr, side: this.camera.side, scene: this.sceneBox(), reserveBottom: this.reserveBottom });
     this.camera = layout.camera;
     this.canvas.width = layout.backing.width;
     this.canvas.height = layout.backing.height;
-    this.grassCache = null;
+    this.staticKey = '';
+    this.drawnKey = '';
     if (this.overlay) {
       this.overlay.width = Math.round(window.innerWidth * this.dpr);
       this.overlay.height = Math.round(window.innerHeight * this.dpr);
@@ -260,23 +267,71 @@ export class Renderer {
     this.ctx.setTransform(...cameraMatrix(this.camera, this.dpr));
   }
 
+  setQuality(quality: Quality) { if (this.quality !== quality) { this.quality = quality; this.resize(); } }
+
+  private trimImages(cache: Map<string, HTMLImageElement>, max: number) {
+    while (cache.size > max) {
+      const key = cache.keys().next().value!;
+      cache.get(key)!.removeAttribute('src'); cache.delete(key);
+    }
+  }
+
+  /** Bounded resource counters for lifecycle acceptance, not a claim about device-wide GPU memory. */
+  resourceStats() {
+    return { quality: this.quality, avatars: this.avatars.size, art: this.artImages.size,
+      floorColors: this.floorColors.size, canvases: Number(!!this.staticCache) + Number(!!this.drawnCache),
+      backingPixels: this.canvas.width * this.canvas.height, disposed: this.disposed };
+  }
+
+  dispose() {
+    if (this.disposed) return;
+    this.disposed = true;
+    for (const image of [...this.avatars.values(), ...this.artImages.values(), ...(this.springImg ? [this.springImg] : [])]) image.removeAttribute('src');
+    this.avatars.clear(); this.artImages.clear(); this.floorColors.clear(); this.springImg = null;
+    for (const canvas of [this.staticCache, this.drawnCache, this.overlay, this.canvas]) if (canvas) { canvas.width = 0; canvas.height = 0; }
+    this.staticCache = null; this.drawnCache = null; this.overlay = null; this.octx = null;
+  }
+
   draw(sc: Scene) {
-    const ctx = this.ctx;
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = this.skin.outside;
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.sceneDrawn = this.drawScene();
+    if (this.disposed) return;
+    this.drawStaticLayer();
     this.worldTransform();
-    this.drawField();
     this.drawSprings(sc.springHits, sc.now);
+    this.drawShadowLayer(sc);
+    this.drawTrajectoryLayer(sc);
+    this.drawActorLayer(sc);
+    this.drawGoalFronts();
+    this.drawEffects(sc.effects.slice(-QUALITY_PROFILES[this.quality].maxEffects), sc.now);
+    this.drawOverlay(sc.aim);
+  }
+
+  private drawStaticLayer() {
+    // Readiness participates in the key so the procedural fallback is replaced after an image decodes.
+    const art = this.artImage(), scene = this.sceneImage();
+    const key = `${this.skin.id}|${this.canvas.width}|${this.canvas.height}|${this.cx}|${this.cy}|${this.s}|${this.flip}|${this.quality}|${art?.naturalWidth ?? 0}|${scene?.naturalWidth ?? 0}`;
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (this.staticCache && this.staticKey === key) { this.ctx.drawImage(this.staticCache, 0, 0); return; }
+    this.ctx.fillStyle = this.skin.outside;
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.sceneDrawn = this.drawScene();
+    this.worldTransform(); this.drawField();
+    const cache = this.staticCache ?? document.createElement('canvas');
+    cache.width = this.canvas.width; cache.height = this.canvas.height;
+    cache.getContext('2d')!.drawImage(this.canvas, 0, 0);
+    this.staticCache = cache; this.staticKey = key;
+  }
+
+  private drawShadowLayer(sc: Scene) {
+    if (!QUALITY_PROFILES[this.quality].shadows) return;
     for (const p of sc.pieces) if (p.out === 0) this.drawShadow(p.x, p.y, this.p.disc.radius);
-    this.drawTrail(sc.trail, sc.now);
     this.drawShadow(sc.ball.x, sc.ball.y, this.p.ball.radius);
+  }
+  private drawTrajectoryLayer(sc: Scene) {
+    if (QUALITY_PROFILES[this.quality].trail) this.drawTrail(sc.trail, sc.now);
+  }
+  private drawActorLayer(sc: Scene) {
     this.drawBall(sc.ball.x, sc.ball.y, sc.ball.spin);
     for (const p of sc.pieces) if (p.out === 0) this.drawPiece(p, sc);
-    this.drawGoalFronts();
-    this.drawEffects(sc.effects, sc.now);
-    this.drawOverlay(sc.aim);
   }
 
   /**
@@ -327,6 +382,7 @@ export class Renderer {
     }
     const color = n ? `rgb(${Math.round(r / n)},${Math.round(g / n)},${Math.round(b / n)})` : this.skin.outside;
     this.floorColors.set(img.src, color);
+    if (this.floorColors.size > 4) this.floorColors.delete(this.floorColors.keys().next().value!);
     return color;
   }
 

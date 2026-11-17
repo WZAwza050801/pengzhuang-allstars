@@ -7,6 +7,8 @@ import { Renderer, TEAM_COLORS, type Aim, type Effect, type ScenePiece, type Ski
 import { sfx } from './sfx';
 import type { PlatformServices, Viewport } from '@pengzhuang/platform';
 import { createGamePlatform } from './webPlatform';
+import { samplePlayback } from '../../packages/game-core/src/playback';
+import { chooseQuality, type Quality } from './quality';
 import { dragIntent, gestureCurve } from '../../packages/game-core/src/drag';
 
 const data = DEFAULT_DATA;
@@ -18,6 +20,7 @@ const OPEN_FIELD = { ...data.geometry, width: 2000, length: 2000 };
 
 export interface GameOptions {
   platform?: PlatformServices;
+  quality?: Quality | 'auto';
   skinId: string;
   onExit: () => void;
   onRematch?: () => void;
@@ -59,6 +62,7 @@ export class GameView {
   private gesture = false;
   private relocating: { start: number; from: Map<string, { x: number; y: number }> } | null = null;
   private trail: { x: number; y: number; t: number }[] = [];
+  private timers = new Set<ReturnType<typeof setTimeout>>();
 
   constructor(root: HTMLElement, host: MatchHost, opts: GameOptions) {
     this.root = root;
@@ -87,6 +91,7 @@ export class GameView {
           <div class="panel">
             <h3>菜单</h3>
             <label>场地外观 <select class="skin"></select></label>
+            <label>画质 <select class="quality"><option value="auto">自动</option><option value="low">流畅</option><option value="medium">标准</option><option value="high">精细</option></select></label>
             <button class="surrender">认输</button>
             <button class="exit">返回大厅</button>
             <button class="close">继续比赛</button>
@@ -108,6 +113,8 @@ export class GameView {
     const skin = (FIELD_SKINS.find((s) => s.id === opts.skinId) ?? FIELD_SKINS[0]) as Skin;
     const canvas = q('.stage canvas') as HTMLCanvasElement;
     this.r = new Renderer(canvas, data.geometry, data.physics, skin);
+    const capabilities = { cores: navigator.hardwareConcurrency, memoryGiB: (navigator as Navigator & { deviceMemory?: number }).deviceMemory, reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches };
+    this.r.setQuality(opts.quality && opts.quality !== 'auto' ? opts.quality : chooseQuality(capabilities));
     this.r.attachOverlay(q('.aim-layer') as HTMLCanvasElement);
     this.r.flip = host.viewSide === 1;
 
@@ -116,6 +123,12 @@ export class GameView {
     skinSel.addEventListener('change', () => {
       this.r.skin = (FIELD_SKINS.find((s) => s.id === skinSel.value) ?? FIELD_SKINS[0]) as Skin;
       localStorage.setItem('pz_skin', skinSel.value);
+      this.onResize();
+    });
+    const qualitySel = q('.quality') as HTMLSelectElement;
+    qualitySel.value = opts.quality ?? 'auto';
+    qualitySel.addEventListener('change', () => {
+      this.r.setQuality(qualitySel.value === 'auto' ? chooseQuality(capabilities) : qualitySel.value as Quality);
       this.onResize();
     });
     q('.menu-btn').addEventListener('click', () => this.el.menu.classList.remove('hidden'));
@@ -155,6 +168,7 @@ export class GameView {
         return { x: rect.left + s.x, y: rect.top + s.y, scale: this.r.scale };
       },
       portraits: () => this.r.boundAvatars(),
+      resources: () => this.r.resourceStats(),
     };
     (window as unknown as { __pz: unknown }).__pz = this.debugHandle;
     this.unsubscribers.push(this.platform.lifecycle.onChange((state) => state === 'background' ? this.suspend() : this.resume()));
@@ -225,24 +239,31 @@ export class GameView {
     this.setCurve(0);
   }
 
-  private finishPlayback() {
+  private schedule(callback: () => void, ms: number) {
+    const timer = setTimeout(() => { this.timers.delete(timer); if (!this.disposed) callback(); }, ms);
+    this.timers.add(timer);
+  }
+
+  private finishPlayback(animate = true) {
     const p = this.play!;
     this.play = null;
     this.state = p.packet.state;
     const moved = p.packet.events.find((e) => e.type === 'relocate');
-    if (moved?.type === 'relocate') {
+    if (animate && moved?.type === 'relocate') {
       const frame = p.packet.frames[p.packet.frames.length - 1];
       const from = new Map<string, { x: number; y: number }>();
       p.packet.ids.forEach((id, j) => j > 0 && moved.ids.includes(id) && from.set(id, { x: frame[j * 2] / 1000, y: frame[j * 2 + 1] / 1000 }));
       this.relocating = { start: performance.now(), from };
     }
     const goal = p.packet.events.find((e) => e.type === 'goal');
-    this.showEvents(p.packet.events.filter((e) => e.type !== 'goal'));
-    if (goal && !p.goalShown) this.showEvents([goal]);
-    this.showEvents(p.packet.turnEvents);
+    if (animate) {
+      this.showEvents(p.packet.events.filter((e) => e.type !== 'goal'));
+      if (goal && !p.goalShown) this.showEvents([goal]);
+      this.showEvents(p.packet.turnEvents);
+    }
     this.syncHud();
-    if (this.state.over) setTimeout(() => this.showResult(), goal ? 1200 : 300);
-    else if (this.host.mySides.includes(this.state.turn)) sfx.turn();
+    if (this.state.over) { if (animate) this.schedule(() => this.showResult(), goal ? 1200 : 300); else this.showResult(); }
+    else if (animate && this.host.mySides.includes(this.state.turn)) sfx.turn();
     this.host.playbackDone();
   }
 
@@ -363,17 +384,14 @@ export class GameView {
     if (this.play) {
       const { packet, start, before } = this.play;
       const t = Math.max(0, (now - start) / 1000);
-      const fi = t * packet.recordHz;
-      const last = packet.frames.length - 1;
-      const i0 = Math.min(last, Math.floor(fi)), i1 = Math.min(last, i0 + 1), k = Math.min(1, fi - i0);
-      const f0 = packet.frames[i0], f1 = packet.frames[i1];
-      const at = (j: number) => ({ x: (f0[j * 2] + (f1[j * 2] - f0[j * 2]) * k) / 1000, y: (f0[j * 2 + 1] + (f1[j * 2 + 1] - f0[j * 2 + 1]) * k) / 1000 });
+      const sample = samplePlayback(packet.frames, packet.recordHz, t);
+      const at = (j: number) => sample.positions[j];
       ball = at(0);
       const pos = new Map<string, { x: number; y: number }>();
       packet.ids.forEach((id, j) => j > 0 && pos.set(id, at(j)));
       pieces = before.pieces.map((p) => ({ ...p, ...(pos.get(p.id) ?? {}) }));
       this.spawnSimEvents(t);
-      if (fi >= last) this.finishPlayback();
+      if (sample.complete) this.finishPlayback();
     } else {
       pieces = this.state.pieces;
       ball = this.state.ball;
@@ -394,7 +412,7 @@ export class GameView {
     this.lastBall = { ...ball };
     this.trail.push({ x: ball.x, y: ball.y, t: now });
     this.trail = this.trail.filter((p) => now - p.t < 260);
-    this.effects = this.effects.filter((e) => now - e.t0 < e.dur);
+    this.effects = this.effects.filter((e) => now - e.t0 < e.dur).slice(-128);
     this.r.draw({
       pieces,
       ball: { ...ball, spin: this.ballSpin },
@@ -522,8 +540,8 @@ export class GameView {
     d.querySelector('b')!.textContent = text;
     if (sub) d.querySelector('small')!.textContent = sub;
     this.el.toasts.appendChild(d);
-    setTimeout(() => d.classList.add('out'), 2600);
-    setTimeout(() => d.remove(), 3100);
+    this.schedule(() => d.classList.add('out'), 2600);
+    this.schedule(() => d.remove(), 3100);
   }
 
   private bannerShow(title: string, sub: string, color: string) {
@@ -572,10 +590,13 @@ export class GameView {
     this.cancelAim();
     cancelAnimationFrame(this.raf);
     this.platform.audio.pause();
+    this.effects = []; this.trail = []; this.relocating = null;
   }
 
   resume() {
     if (this.disposed || !this.suspended) return;
+    if (this.play) this.finishPlayback(false);
+    this.effects = []; this.trail = []; this.relocating = null;
     this.suspended = false;
     this.platform.audio.resume();
     this.onResize();
@@ -585,10 +606,13 @@ export class GameView {
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    for (const timer of this.timers) clearTimeout(timer);
+    this.timers.clear();
     cancelAnimationFrame(this.raf);
     window.removeEventListener('keydown', this.onKey);
     for (const unsubscribe of this.unsubscribers) unsubscribe();
     this.unsubscribers.length = 0;
+    this.r?.dispose();
     this.platform.dispose();
     const debug = window as unknown as { __pz?: unknown };
     if (debug.__pz === this.debugHandle) delete debug.__pz;
