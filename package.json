@@ -12,6 +12,8 @@
   "scripts": {
     "preinstall": "node tools/check-toolchain.mjs",
     "check:toolchain": "node tools/check-toolchain.mjs",
+    "test:config": "node --import tsx --test tests/config.test.ts",
+    "check:config": "tsx tools/check-config.ts",
     "dev": "vite --config client/vite.config.ts",
     "dev:server": "tsx watch server/index.ts",
     "dev:client": "vite --config client/vite.config.ts",
@@ -35,7 +37,8 @@
     "colyseus": "0.16.5",
     "colyseus.js": "0.16.22",
     "express": "4.21.2",
-    "planck": "1.4.2"
+    "planck": "1.4.2",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/express": "4.17.21",

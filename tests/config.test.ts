@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import { randomBytes } from 'node:crypto';
+import { test } from 'node:test';
+import { ConfigurationError, describeRuntimeConfig, readRuntimeConfig } from '../config/runtime';
+
+const production = () => ({ APP_ENV: 'production', PUBLIC_ORIGIN: 'https://game.example.org', DATABASE_URL: 'postgresql://game:secret@localhost/game', SESSION_SIGNING_KEY: randomBytes(32).toString('base64url') });
+test('local defaults preserve existing port and store', () => {
+  const cfg = readRuntimeConfig({});
+  assert.equal(cfg.port, 2567);
+  assert.equal(cfg.devAuthBypass, false);
+  assert.equal(cfg.cookieSecure, false);
+  assert.ok(Object.isFrozen(cfg.allowedOrigins));
+});
+test('port, flag and origin validation rejects malformed input', () => {
+  for (const env of [{ PORT: '0' }, { PORT: '65536' }, { PORT: 'wat' }, { DEV_AUTH_BYPASS: 'yes' }, { PUBLIC_ORIGIN: 'https://example.org/path' }, { ALLOWED_ORIGINS: '*' }, { ALLOWED_ORIGINS: 'https://*.example.org' }]) {
+    assert.throws(() => readRuntimeConfig(env), ConfigurationError);
+  }
+  assert.equal(readRuntimeConfig({ DEV_AUTH_BYPASS: 'false' }).devAuthBypass, false);
+  assert.throws(() => readRuntimeConfig({ NODE_ENV: 'production', APP_ENV: 'local', DEV_AUTH_BYPASS: 'true' }), ConfigurationError);
+});
+test('production accepts strong config but rejects unsafe options', () => {
+  assert.equal(readRuntimeConfig(production()).mode, 'production');
+  for (const override of [{ PUBLIC_ORIGIN: 'http://example.org' }, { PUBLIC_ORIGIN: '' }, { SESSION_SIGNING_KEY: 'x'.repeat(43) }, { DEV_AUTH_BYPASS: 'true' }, { COOKIE_SECURE: 'false' }, { EMAIL_PROVIDER: 'mailpit' }, { DATABASE_URL: '' }]) {
+    assert.throws(() => readRuntimeConfig({ ...production(), ...override }), ConfigurationError);
+  }
+});
+test('test environment never falls back to the production DSN', () => {
+  assert.throws(() => readRuntimeConfig({ APP_ENV: 'test', DATABASE_URL: production().DATABASE_URL }), ConfigurationError);
+  assert.throws(() => readRuntimeConfig({ APP_ENV: 'test', TEST_DATABASE_URL: 'postgres://localhost/production' }), ConfigurationError);
+  assert.equal(readRuntimeConfig({ APP_ENV: 'test', DATABASE_URL: production().DATABASE_URL, TEST_DATABASE_URL: 'postgres://localhost/game_test' }).databaseUrl, 'postgres://localhost/game_test');
+});
+test('enabled providers require credentials and errors redact values', () => {
+  assert.throws(() => readRuntimeConfig({ WECHAT_ENABLED: 'true' }), ConfigurationError);
+  const secret = 'DO_NOT_LOG_THIS_SECRET';
+  try { readRuntimeConfig({ ...production(), DATABASE_URL: secret, SMTP_URL: secret, EMAIL_PROVIDER: 'smtp' }); assert.fail('must reject'); }
+  catch (error) { assert.ok(error instanceof ConfigurationError); assert.ok(!error.message.includes(secret)); }
+  assert.ok(!JSON.stringify(describeRuntimeConfig(readRuntimeConfig(production()))).includes('secret'));
+});
