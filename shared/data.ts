@@ -1,4 +1,8 @@
-import fieldsJson from '../data/fields.json';
+import rawFieldsJson from '../data/fields.json';
+import { FieldDefinitionsSchema } from '../packages/contracts/src/field';
+import type { FieldGeometry } from '../packages/game-core/src/field';
+export type { FieldGeometry } from '../packages/game-core/src/field';
+const fieldsJson = FieldDefinitionsSchema.parse(rawFieldsJson);
 import { freezeSnapshot } from '../packages/game-core/src/snapshot';
 import physicsJson from '../data/physics.json';
 import playersJson from '../data/players.json';
@@ -8,7 +12,6 @@ import attrMapJson from '../data/attr-mapping.json';
 // Named imports so the bundler can drop `others` (1.2.0 and variant-card rows), which the runtime never reads.
 import { version as levelsVersion, players as levelTable } from '../data/levels.json';
 
-export type FieldGeometry = typeof fieldsJson.geometry;
 export type PhysicsConfig = typeof physicsJson;
 export type RulesConfig = typeof rulesJson;
 export type PlayerDef = (typeof playersJson.players)[number];

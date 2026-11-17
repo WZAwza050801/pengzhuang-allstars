@@ -110,7 +110,7 @@
 
 现有入口与范围：data/fields.json、physics.json、shared/physics.ts/aim.ts、render.ts；不默认上 3D。
 
-- [ ] **FLD-01** 规范球场几何数据
+- [x] **FLD-01** 规范球场几何数据
   - 依赖：FND-01、ARC-02
   - 实施：校验尺寸/单位/来源；提取 geometry schema 与边界生成入口；禁止皮肤私有碰撞尺寸。
   - 产物：几何 schema、数据字典、来源标记。

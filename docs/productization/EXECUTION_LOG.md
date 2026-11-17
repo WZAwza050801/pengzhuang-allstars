@@ -189,6 +189,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### FLD-01
+
+- 状态：完成
+- 开始：2026-11-17 13:27 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 0a25539eec144f8a279e4838efb5e459b8fccd7b
+- 范围：校验唯一球场几何，提取边界生成和严格schema，保留原尺寸及皮肤共享约束。
+- 实现：提取唯一纯几何入口及严格数据schema，补来源字典并拒绝皮肤私有碰撞尺寸。
+- 验证：check含19unit/4契约、physics18/18及完整build通过，原配置hash未变。
+- 证据：本提交（git log -- docs/productization/reports/FLD-01.md 可定位）；docs/productization/reports/FLD-01.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。
