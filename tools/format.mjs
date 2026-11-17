@@ -53,6 +53,7 @@ files.push(
   'client/src/cardSprites.ts',
   'tools/economy-simulation.ts',
   'tools/format.mjs',
+  'tools/web-page-fixture.mjs',
   'tools/check-config.ts',
   'tools/validate-balance-data.ts',
   'tools/export-balance-mapping.ts',
@@ -62,6 +63,13 @@ files.push(
   'tools/check-plan.mjs',
 );
 files.push(
+  'client/src/accounts/context.tsx',
+  'client/src/accounts/forms.tsx',
+  'client/src/accounts/access-pages.tsx',
+  'client/src/accounts/profile-page.tsx',
+  'client/src/accounts/routes.tsx',
+  'client/src/accounts/link-token.ts',
+  'client/src/accounts/pages.module.css',
   'tools/field-capture.mjs',
   'tools/asset-catalog.ts',
   'tools/export-game-config.ts',

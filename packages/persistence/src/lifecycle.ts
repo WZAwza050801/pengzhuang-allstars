@@ -71,6 +71,16 @@ export class LifecycleRepository {
       ).rowCount === 1
     );
   }
+  async identities(userId: string) {
+    const { rows } = await this.sql.query<{ provider: string }>(
+      'SELECT DISTINCT provider FROM auth_identities WHERE user_id = $1',
+      [userId],
+    );
+    return {
+      email: rows.some((row) => row.provider === 'email'),
+      wechat: rows.some((row) => row.provider === 'wechat'),
+    };
+  }
   async audit(
     userId: string,
     action: AuditAction,

@@ -90,4 +90,12 @@ export class LoginStateModel {
   retry(): Promise<void> {
     return this.intent ? this.logout(this.intent.allSessions) : this.restore();
   }
+  /** A confirmed login/deletion changes the cookie identity; discard earlier reads. */
+  sessionChanged(authenticated: boolean): Promise<void> {
+    ++this.generation;
+    this.loading = null;
+    this.intent = null;
+    this.set({ status: 'anonymous', user: null, error: null });
+    return authenticated ? this.restore() : Promise.resolve();
+  }
 }

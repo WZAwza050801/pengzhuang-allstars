@@ -1,5 +1,33 @@
 import { z } from 'zod';
-import { ApiErrorSchema } from '../../contracts/src/http';
+import {
+  ApiErrorSchema,
+  RegisterSchema,
+  LoginSchema,
+  VerifyEmailSchema,
+  ResetRequestSchema,
+  ResetPasswordSchema,
+} from '../../contracts/src/http';
+import {
+  AuthOptionsSchema,
+  AccountAcceptedSchema,
+  SignedInSchema,
+  EmailVerifiedSchema,
+  PasswordResetSchema,
+} from '../../contracts/src/accounts';
+import {
+  ReauthenticateSchema,
+  LinkIdentitySchema,
+  ConfirmIdentitySchema,
+  DeletionRecoverySchema,
+  ReauthenticatedSchema,
+  IdentityLinkedSchema,
+  IdentityStatusSchema,
+  DeletionPolicySchema,
+  DeletionRequestedSchema,
+  DeletionStatusSchema,
+  DeletionCancelledSchema,
+  DeleteAccountSchema,
+} from '../../contracts/src/lifecycle';
 import {
   CurrentUserSchema,
   LogoutResultSchema,
@@ -105,5 +133,63 @@ export class WebAccountClient implements AccountPort {
       body: { allSessions: intent.allSessions },
       headers: { 'Idempotency-Key': intent.operationId },
     });
+  }
+  options() {
+    return this.call('/auth/options', AuthOptionsSchema);
+  }
+  private submit<I, O>(
+    path: string,
+    input: z.ZodType<I>,
+    output: z.ZodType<O>,
+    body: unknown,
+    protectedRequest = false,
+    method: HttpRequest['method'] = 'POST',
+  ): Promise<AccountResponse<O>> {
+    const parsed = input.safeParse(body);
+    if (!parsed.success) return Promise.resolve({ ok: false, error: { code: 'INVALID_REQUEST', retryable: false } });
+    const run = () => this.write(path, output, { method, body: parsed.data });
+    return protectedRequest ? this.protected(run) : run();
+  }
+  register(body: unknown) {
+    return this.submit('/auth/register', RegisterSchema, AccountAcceptedSchema, body);
+  }
+  login(body: unknown) {
+    return this.submit('/auth/login', LoginSchema, SignedInSchema, body);
+  }
+  verify(body: unknown) {
+    return this.submit('/auth/email/verify', VerifyEmailSchema, EmailVerifiedSchema, body);
+  }
+  verificationRequest(body: unknown) {
+    return this.submit('/auth/email/verification-request', ResetRequestSchema, AccountAcceptedSchema, body);
+  }
+  resetRequest(body: unknown) {
+    return this.submit('/auth/password/reset-request', ResetRequestSchema, AccountAcceptedSchema, body);
+  }
+  resetPassword(body: unknown) {
+    return this.submit('/auth/password/reset', ResetPasswordSchema, PasswordResetSchema, body);
+  }
+  reauthenticate(body: unknown) {
+    return this.submit('/me/reauthenticate', ReauthenticateSchema, ReauthenticatedSchema, body);
+  }
+  linkEmail(body: unknown) {
+    return this.submit('/me/identities/link', LinkIdentitySchema, AccountAcceptedSchema, body, true);
+  }
+  confirmLink(token: string) {
+    return this.submit('/me/identities/confirm', ConfirmIdentitySchema, IdentityLinkedSchema, { token }, true);
+  }
+  deletionPolicy() {
+    return this.protected(() => this.call('/me/deletion-policy', DeletionPolicySchema));
+  }
+  identities() {
+    return this.protected(() => this.call('/me/identities', IdentityStatusSchema));
+  }
+  deleteAccount() {
+    return this.submit('/me', DeleteAccountSchema, DeletionRequestedSchema, { confirm: 'DELETE' }, true, 'DELETE');
+  }
+  deletionStatus(body: unknown) {
+    return this.submit('/auth/deletion/status', DeletionRecoverySchema, DeletionStatusSchema, body);
+  }
+  cancelDeletion(body: unknown) {
+    return this.submit('/auth/deletion/cancel', DeletionRecoverySchema, DeletionCancelledSchema, body);
   }
 }

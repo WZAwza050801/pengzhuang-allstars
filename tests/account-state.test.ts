@@ -7,6 +7,31 @@ const user: CurrentUser = { userId: randomUUID(), sessionId: randomUUID(), profi
 const success = <T>(data: T): AccountResponse<T> => ({ ok: true, data });
 const offline: AccountResponse<never> = { ok: false, error: { code: 'NETWORK_ERROR', retryable: true } };
 
+test('a confirmed cookie identity change discards a read that started before the new login', async () => {
+  let old!: (value: AccountResponse<CurrentUser>) => void;
+  let count = 0;
+  const replacement = { ...user, userId: randomUUID(), sessionId: randomUUID() };
+  const model = new LoginStateModel(
+    {
+      current: () =>
+        ++count === 1
+          ? new Promise((resolve) => {
+              old = resolve;
+            })
+          : Promise.resolve(success(replacement)),
+      logout: async () => success({ loggedOut: true }),
+    },
+    randomUUID,
+  );
+  const pending = model.restore();
+  await model.sessionChanged(true);
+  old(success(user));
+  await pending;
+  expect(model.snapshot.user).toEqual(replacement);
+  await model.sessionChanged(false);
+  expect(model.snapshot).toMatchObject({ status: 'anonymous', user: null });
+});
+
 test('restoration coalesces and a late current-user response cannot resurrect a logged-out account', async () => {
   let finish!: (result: AccountResponse<CurrentUser>) => void;
   let calls = 0;

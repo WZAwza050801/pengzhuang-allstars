@@ -42,7 +42,7 @@ export function LobbyScreen({ context, onNavigate }: { context: NavigationContex
       </div>
       <section className={styles.infoCard} aria-labelledby="account-title">
         <h2 id="account-title">账号与资产</h2>
-        <p>账号、余额和持有卡会在后续服务接入后显示；当前页面不会把本地演示值当成账户数据。</p>
+        <p>{context.session === 'authenticated' ? '账号已登录，可在“我的”管理设备与账号安全。云端阵容和余额尚未开放。' : '在“我的”登录或注册账号，也可以继续本地练习。云端阵容和余额尚未开放。'}</p>
       </section>
       <section className={styles.infoCard} aria-labelledby="rules-title">
         <h2 id="rules-title">练习规则</h2>

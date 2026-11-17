@@ -38,7 +38,7 @@ await account.logout(true);
 
 current/list/revoke 的并发 401 合并为一次 refresh，最多重放原请求一次；迟到的并发 401 复用已完成的刷新结果，包括失败，避免刷新风暴。网络失败保留可重试错误；真实 401 转为 anonymous。
 
-LoginStateModel 不依赖浏览器全局对象；恢复 single-flight，退出立即清除内存用户并使此前请求 generation 失效，迟到 `/me` 不能复活登录。退出失败保留相同 operationId/范围，只能显式重试原意图，未完成时不可静默改为全部设备。pending 状态不得作为已退出成功显示。页面刷新重新确认服务端状态，不自动重发丢失的旧意图。界面与生命周期接线由 ACC-07 实施，原生安全凭证由 APP 任务实施。
+LoginStateModel 不依赖浏览器全局对象；恢复 single-flight，退出立即清除内存用户并使此前请求 generation 失效，迟到 `/me` 不能复活登录。退出失败保留相同 operationId/范围，只能显式重试原意图，未完成时不可静默改为全部设备。pending 状态不得作为已退出成功显示。页面刷新重新确认服务端状态，不自动重发丢失的旧意图。界面与生命周期接线见 [Web 账号页面](web-accounts.md)，原生安全凭证由 APP 任务实施。
 
 ## 迁移与证据
 

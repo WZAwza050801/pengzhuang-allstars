@@ -13,25 +13,25 @@
     }
   },
   "bundle": {
-    "matchChunk": "matchScreen-C4xBU72G.js",
-    "matchChunkBytes": 1991,
-    "initialResourceBytes": 592583,
+    "matchChunk": "matchScreen-1o2xkwjT.js",
+    "matchChunkBytes": 1997,
+    "initialResourceBytes": 609428,
     "matchChunkLoadedBeforeNavigation": false,
     "fieldResourceLoadedBeforeNavigation": false
   },
   "firstScreen": {
-    "interactiveMs": 3925
+    "interactiveMs": 3961
   },
   "frames": {
     "samples": 180,
     "p50Ms": 16.7,
     "p95Ms": 16.7,
-    "maxMs": 16.8
+    "maxMs": 166.6
   },
   "tenMatches": {
-    "baselineHeapBytes": 6417684,
-    "afterHeapBytes": 7317680,
-    "growthBytes": 899996
+    "baselineHeapBytes": 7187892,
+    "afterHeapBytes": 8084340,
+    "growthBytes": 896448
   },
   "consoleErrors": []
 }

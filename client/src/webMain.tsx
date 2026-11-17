@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 import './style.css';
 import './ui/components.css';
+import { captureAccountLink } from './accounts/link-token';
+
+captureAccountLink();
 
 const app = document.getElementById('app');
 

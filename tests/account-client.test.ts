@@ -14,6 +14,26 @@ const failure = (code: 'UNAUTHENTICATED' | 'UNAVAILABLE', status = 401) => ({
 const csrf = () =>
   success({ csrfToken: `${randomBytes(32).toString('base64url')}.${randomBytes(32).toString('base64url')}` });
 
+test('credential failures are never refreshed or replayed; invalid registration stays at the boundary', async () => {
+  const requests: string[] = [];
+  const api = new WebAccountClient({
+    request: async (url) => {
+      requests.push(url);
+      return url.endsWith('/csrf') ? csrf() : failure('UNAUTHENTICATED');
+    },
+  });
+  expect(await api.register({ email: 'x@example.test', password: 'short', nickname: '昵称' })).toMatchObject({
+    ok: false,
+    error: { code: 'INVALID_REQUEST' },
+  });
+  expect(requests).toHaveLength(0);
+  expect(await api.login({ email: 'x@example.test', password: 'wrong' })).toMatchObject({ ok: false });
+  expect(await api.reauthenticate({ method: 'password', password: 'wrong' })).toMatchObject({ ok: false });
+  expect(requests.filter((url) => url.endsWith('/login'))).toHaveLength(1);
+  expect(requests.filter((url) => url.endsWith('/reauthenticate'))).toHaveLength(1);
+  expect(requests.some((url) => url.endsWith('/refresh'))).toBe(false);
+});
+
 test('late parallel 401 responses share a failed refresh result and do not start a refresh storm', async () => {
   let reads = 0;
   let refreshes = 0;

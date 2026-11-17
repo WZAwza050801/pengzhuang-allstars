@@ -21,3 +21,22 @@ export const DeletionRecoverySchema = z.discriminatedUnion('method', [
   z.strictObject({ method: z.literal('password'), email, password }),
   z.strictObject({ method: z.literal('wechat'), code: WechatLoginSchema.shape.code }),
 ]);
+export const ReauthenticatedSchema = z.strictObject({ authenticatedUntil: z.iso.datetime() });
+export const IdentityLinkedSchema = z.strictObject({ linked: z.literal(true) });
+export const IdentityStatusSchema = z.strictObject({ email: z.boolean(), wechat: z.boolean() });
+export const DeletionPolicySchema = z.strictObject({
+  enabled: z.boolean(),
+  graceHours: z.number().int().min(0).max(2160),
+  version: z.string().min(1).max(80),
+});
+export const DeletionRequestedSchema = z.strictObject({
+  requested: z.literal(true),
+  executeAt: z.iso.datetime(),
+  policyVersion: z.string().min(1).max(80),
+});
+export const DeletionStatusSchema = z.strictObject({
+  status: z.enum(['none', 'pending', 'cancelled', 'completed']),
+  executeAt: z.iso.datetime().nullable(),
+  policyVersion: z.string().min(1).max(80).nullable(),
+});
+export const DeletionCancelledSchema = z.strictObject({ cancelled: z.literal(true) });

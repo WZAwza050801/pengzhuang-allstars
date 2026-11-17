@@ -1,44 +1,14 @@
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
-import http from 'node:http';
+import { existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { startWebPageFixture } from './web-page-fixture.mjs';
 
 const ROOT = process.cwd();
 const CLIENT = path.join(ROOT, 'work', 'test-client');
 const REPORT_DIR = path.join(ROOT, 'docs', 'productization', 'reports', 'web-04');
 const REPORT = path.join(REPORT_DIR, 'browser.json');
 const MiB = 1024 * 1024;
-
-function contentType(file) {
-  if (file.endsWith('.html')) return 'text/html';
-  if (file.endsWith('.js')) return 'text/javascript';
-  if (file.endsWith('.css')) return 'text/css';
-  if (file.endsWith('.json')) return 'application/json';
-  if (file.endsWith('.svg')) return 'image/svg+xml';
-  if (file.endsWith('.webp')) return 'image/webp';
-  if (file.endsWith('.png')) return 'image/png';
-  if (file.endsWith('.jpg') || file.endsWith('.jpeg')) return 'image/jpeg';
-  return 'application/octet-stream';
-}
-
-async function startWeb() {
-  return new Promise((resolve, reject) => {
-    const server = http.createServer((request, response) => {
-      const url = new URL(request.url ?? '/', 'http://localhost');
-      let file = path.resolve(CLIENT, `.${decodeURIComponent(url.pathname)}`);
-      if (!file.startsWith(CLIENT)) {
-        response.writeHead(403).end();
-        return;
-      }
-      if (!existsSync(file) || statSync(file).isDirectory()) file = path.join(CLIENT, 'index.html');
-      response.writeHead(200, { 'content-type': contentType(file), 'cache-control': 'no-store' });
-      response.end(readFileSync(file));
-    });
-    server.once('error', reject);
-    server.listen(0, '127.0.0.1', () => resolve(server));
-  });
-}
 
 function percentile(values, fraction) {
   const sorted = [...values].sort((a, b) => a - b);
@@ -67,10 +37,8 @@ if (!existsSync(path.join(CLIENT, 'index.html'))) throw new Error('缺少 work/t
 const matchChunk = readdirSync(path.join(CLIENT, 'assets')).find((file) => /^matchScreen-.*\.js$/.test(file));
 assert.ok(matchChunk, '练习赛必须作为独立动态 chunk，不能进入大厅首屏包');
 
-const server = await startWeb();
-const address = server.address();
-if (!address || typeof address === 'string') throw new Error('静态测试服务未提供端口');
-const base = `http://127.0.0.1:${address.port}/`;
+const server = await startWebPageFixture(CLIENT);
+const base = server.base;
 const report = {
   environment: {
     browser: 'Chromium headless',
@@ -157,5 +125,5 @@ try {
   console.log(`Web performance: first screen ${report.firstScreen.interactiveMs}ms, p95 ${report.frames.p95Ms}ms, ten-match heap ${report.tenMatches.growthBytes}B`);
 } finally {
   await browser?.close();
-  await new Promise((resolve) => server.close(resolve));
+  await server.close();
 }

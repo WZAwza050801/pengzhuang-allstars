@@ -10,6 +10,10 @@ export function lifecycleModules(lifecycle: AccountLifecycle, web: WebSessions):
   return [{ area: 'me', createRouter() {
     const router = Router(); router.use(web.boundary, web.requireAccess);
     router.get('/deletion-policy', (_req, res) => res.json({ ok: true, data: lifecycle.policy, requestId: res.locals.requestId }));
+    router.get('/identities', asyncRoute(async (req, res) => {
+      if (Object.keys(req.query).length) throw new ApiError('INVALID_REQUEST', 400);
+      res.json({ ok: true, data: await lifecycle.identityStatus(res.locals.principal as Principal), requestId: res.locals.requestId });
+    }));
     router.post('/reauthenticate', asyncRoute(async (req, res) => {
       const input = ReauthenticateSchema.safeParse(req.body);
       if (!input.success || Object.keys(req.query).length) throw new ApiError('INVALID_REQUEST', 400);

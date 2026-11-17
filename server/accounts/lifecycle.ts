@@ -111,6 +111,9 @@ export class AccountLifecycle {
       return { requested: true, executeAt: row.execute_at.toISOString(), policyVersion: this.policy.version };
     });
   }
+  identityStatus(principal: Principal) {
+    return this.db.transaction(async (tx) => (await this.active(tx, principal)).identities(principal.userId));
+  }
   private async recovery<T>(proof: { method: 'password'; email: string; password: string } | { method: 'wechat'; code: string }, source: string, work: (tx: SqlExecutor, repo: LifecycleRepository, userId: string) => Promise<T>): Promise<T> {
     await this.rate('recovery', source, proof.method === 'password' ? proof.email.toLowerCase() : source);
     const run = async (tx: SqlExecutor, userId: string) => {

@@ -2,18 +2,12 @@ import assert from 'node:assert/strict';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
-import { createServer } from 'vite';
+import { startWebPageFixture } from './web-page-fixture.mjs';
 
 const reportDirectory = fileURLToPath(new URL('../docs/productization/reports/', import.meta.url));
 const reportPath = `${reportDirectory}UI-02-browser.json`;
-const server = await createServer({
-  configFile: fileURLToPath(new URL('../client/vite.config.ts', import.meta.url)),
-  server: { host: '127.0.0.1', port: 0, open: false },
-});
-
-await server.listen();
-const base = server.resolvedUrls.local?.[0];
-if (!base) throw new Error('Vite did not expose a local browser URL');
+const server = await startWebPageFixture();
+const base = server.base;
 
 const browser = await chromium.launch({ headless: true });
 const report = { base, views: [], recoveredMountFailure: false, consoleErrors: [] };

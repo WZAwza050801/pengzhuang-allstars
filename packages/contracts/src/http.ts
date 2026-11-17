@@ -11,6 +11,7 @@ import {
   SessionListSchema,
   RevokeSessionResultSchema,
   WechatLoginSchema,
+  AuthOptionsSchema,
 } from './accounts';
 export { MoneySchema } from './money';
 import {
@@ -19,6 +20,7 @@ import {
   ConfirmIdentitySchema,
   DeleteAccountSchema,
   DeletionRecoverySchema,
+  IdentityStatusSchema,
 } from './lifecycle';
 
 export const API_VERSION = 'v1';
@@ -89,6 +91,8 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
+  { method: 'get', path: '/api/v1/auth/options', operationId: 'authOptions', response: AuthOptionsSchema },
+  { method: 'get', path: '/api/v1/me/identities', operationId: 'identityStatus', response: IdentityStatusSchema },
   { method: 'get', path: '/api/v1/auth/csrf', operationId: 'csrf' },
   { method: 'post', path: '/api/v1/auth/refresh', operationId: 'refresh', body: RefreshSchema },
   { method: 'post', path: '/api/v1/me/reauthenticate', operationId: 'reauthenticate', body: ReauthenticateSchema },

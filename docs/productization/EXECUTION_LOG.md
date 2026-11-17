@@ -691,6 +691,21 @@
 - 回滚：独立提交回退；新增迁移 down 仅隔离测试；生产不可回退恢复已经移除的个人资料。
 - 下一项：ACC-07，或依赖已满足的 DAT-02；累计 44 项，第 50 项按用户规则同步 GitHub。
 
+### ACC-07
+
+- 状态：完成
+- 开始：2026-11-18 05:48 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 27947f4
+- 范围：复用 WebAccountClient/LoginStateModel 和现有 React 页面壳，完成邮箱注册/收信/验证/找回/登录、设备会话、近期认证/绑定/注销入口及登录回跳；不伪造大厅资产，不暴露生产微信 code 输入工具。
+- 计划与验收：扩展严格请求/响应契约和公共客户端；账号状态驱动导航，写请求单次提交，token fragment 仅内存并立即移除，跨标签失效恢复。真实 PostgreSQL/SMTP/Chromium 验证注册到退出、找回/限流/跨标签、401 无风暴、匿名练习和小屏键盘/溢出；不在 localStorage 存密码或 token。
+- 实现：真实 React 账号页面、能力/绑定状态读取及严格公共客户端；邮箱注册/收信/验证/找回、登录守卫与回跳、设备/全部退出、绑定与注销查询/取消。token 启动即移除 fragment、仅留内存；敏感失败不重放密码，跨标签只广播固定事件，旧响应不覆盖新身份，单次提交和组件销毁清理。注销确认后完整加载恢复页，避免匿名守卫竞争。关联只读服务和布局/性能 fixture 是本界面所需，不改玩法/经济。
+- 验证：真实 PostgreSQL 17.12/Mailpit 1.34.0/Chromium `npm run test:integration` 8 文件/87 项，含账号页 9 项；`npm run check` 119 单元/8 契约、195 文件格式及静态/生成检查通过；build 通过；web-shell 三档与 web-layout 八档/大字体/键盘通过；web-performance 首屏 3961ms、帧 p95 16.7ms、十局堆增长 896448B，通过；当前构建产物 `node tools/e2e-browser.mjs` 18 PASS/0 SKIP/0 FAIL，0 console/pageerror。
+- 证据：本提交（`git log -- docs/productization/reports/ACC-07.md` 可定位）、[ACC-07 报告](reports/ACC-07.md)、[Web 账号说明](../engineering/web-accounts.md)、账号截图及更新布局/性能证据。
+- 风险与剩余：真实微信/设备、素材授权、既有依赖和平衡门槛保留；绑定 UI 的无邮箱初始身份为可信测试 fixture，后续 SMTP/KDF/API 均真实，不冒称微信平台通过。纯微信操作由小游戏提供；后续 DAT/UI/NET 才提供真实资产大厅/房间票据。未新增依赖、未使用远端，临时数据库/Mailpit 正常停止。
+- 回滚：独立提交回退，保留 ACC-06 服务与数据库迁移。
+- 下一项：DAT-02。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

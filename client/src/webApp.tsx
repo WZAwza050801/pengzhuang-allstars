@@ -10,10 +10,13 @@ import {
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams, useSearchParams } from 'react-router';
 import { LobbyScreen, PlaceholderScreen, UnavailableScreen, type NavigateTarget } from './webScreens';
 import styles from './webShell.module.css';
+import { AccountProvider, useAccount } from './accounts/context';
 
 const PracticeMatchScreen = lazy(async () => ({ default: (await import('./matchScreen')).PracticeMatchScreen }));
+const AccountScreen = lazy(() => import('./accounts/routes'));
 
 function useNavigationContext(): NavigationContext {
+  const { login, options } = useAccount();
   const [network, setNetwork] = useState<NavigationContext['network']>(() => (navigator.onLine ? 'online' : 'offline'));
 
   useEffect(() => {
@@ -28,8 +31,8 @@ function useNavigationContext(): NavigationContext {
   }, []);
 
   return useMemo(
-    () => ({ session: 'anonymous', network, service: 'ready', features: DEFAULT_FEATURES }),
-    [network],
+    () => ({ session: login.user ? 'authenticated' : login.status === 'unknown' || login.status === 'loading' ? 'loading' : 'anonymous', network, service: 'ready', features: { ...DEFAULT_FEATURES, accounts: !!(options?.emailEnabled || options?.wechatMiniProgram) } }),
+    [network, login.user, login.status, options],
   );
 }
 
@@ -96,6 +99,7 @@ function FutureRoute({ context, target, title, detail }: { context: NavigationCo
 }
 
 function Shell({ context }: { context: NavigationContext }) {
+  const { login } = useAccount();
   const navigate = useNavigate();
   const location = useLocation();
   const [notice, setNotice] = useState<string | null>(null);
@@ -121,7 +125,7 @@ function Shell({ context }: { context: NavigationContext }) {
         ? 'growth'
         : location.pathname === '/club'
           ? 'club'
-          : location.pathname.startsWith('/profile') || location.pathname === '/settings'
+          : location.pathname.startsWith('/profile') || location.pathname === '/settings' || location.pathname === '/login' || location.pathname.startsWith('/account/')
             ? 'profile'
             : 'lobby';
 
@@ -129,8 +133,8 @@ function Shell({ context }: { context: NavigationContext }) {
     <main className={`${styles.application} pz-ui`}>
       <header className={styles.header}>
         <div>
-          <p className={styles.eyebrow}>Web 页面壳</p>
-          <strong>访客</strong>
+          <p className={styles.eyebrow}>碰撞全明星</p>
+          <strong>{login.user?.profile?.nickname ?? (login.user ? '已登录账号' : '访客')}</strong>
         </div>
         <p role="status">{context.network === 'online' ? '本地练习可用' : '离线模式'}</p>
       </header>
@@ -148,11 +152,12 @@ function Shell({ context }: { context: NavigationContext }) {
         <Routes>
           <Route path="/" element={<LobbyScreen context={context} onNavigate={onNavigate} />} />
           <Route path="/match/:matchId?" element={<MatchRoute context={context} />} />
-          <Route path="/login" element={<FutureRoute context={context} target={{ page: 'login' }} title="登录" detail="账号服务将在 ACC 系列任务接入；当前不会创建模拟会话。" />} />
+          <Route path="/login" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
+          <Route path="/account/*" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
           <Route path="/lineup" element={<FutureRoute context={context} target={{ page: 'lineup' }} title="阵容" detail="持有卡与阵容保存依赖云存档，接入后显示真实数据。" />} />
           <Route path="/growth" element={<FutureRoute context={context} target={{ page: 'growth' }} title="成长" detail="成长内容将在资产与运营任务完成后开放。" />} />
           <Route path="/club" element={<FutureRoute context={context} target={{ page: 'club' }} title="俱乐部" detail="俱乐部功能尚未接入服务端。" />} />
-          <Route path="/profile" element={<PlaceholderScreen title="我的" detail="游客可修改本地偏好；账号资料与设备会话随后接入。" />} />
+          <Route path="/profile" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
           <Route path="/settings" element={<PlaceholderScreen title="设置" detail="画质和音频在比赛菜单中调整；安全凭据不会写入普通本地偏好。" />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -174,7 +179,8 @@ function Shell({ context }: { context: NavigationContext }) {
   );
 }
 
-export function WebApp() {
+function ConnectedApp() {
   useVisualViewportHeight();
   return <Shell context={useNavigationContext()} />;
 }
+export function WebApp() { return <AccountProvider><ConnectedApp /></AccountProvider>; }
