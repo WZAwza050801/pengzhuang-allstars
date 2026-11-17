@@ -5,6 +5,8 @@ import { foldAimPath } from '../../shared/aim';
 import type { MatchHost, ShotPacket } from './host';
 import { Renderer, TEAM_COLORS, type Aim, type Effect, type ScenePiece, type Skin } from './render';
 import { sfx } from './sfx';
+import type { PlatformServices, Viewport } from '@pengzhuang/platform';
+import { createGamePlatform } from './webPlatform';
 
 const data = DEFAULT_DATA;
 const MAX_DRAG = 2.4; // metres of pull for full power
@@ -14,6 +16,7 @@ const RELOCATE_MS = 450;
 const OPEN_FIELD = { ...data.geometry, width: 2000, length: 2000 };
 
 export interface GameOptions {
+  platform?: PlatformServices;
   skinId: string;
   onExit: () => void;
   onRematch?: () => void;
@@ -41,6 +44,10 @@ export class GameView {
   private effects: Effect[] = [];
   private raf = 0;
   private disposed = false;
+  private suspended = false;
+  private readonly platform: PlatformServices;
+  private readonly unsubscribers: (() => void)[] = [];
+  private debugHandle: unknown = null;
   private lastPreviewKey = '';
   private readonly el: Record<string, HTMLElement> = {};
   private ballSpin = 0;
@@ -56,6 +63,8 @@ export class GameView {
     this.root = root;
     this.host = host;
     this.opts = opts;
+    this.platform = opts.platform ?? createGamePlatform();
+    try {
     root.innerHTML = `
       <div class="game">
         <div class="hud-top">
@@ -121,7 +130,7 @@ export class GameView {
     canvas.addEventListener('pointerup', (e) => this.onUp(e));
     canvas.addEventListener('pointercancel', () => this.cancelAim());
     window.addEventListener('keydown', this.onKey);
-    window.addEventListener('resize', this.onResize);
+    this.unsubscribers.push(this.platform.viewport.subscribe(() => this.onResize()));
     this.onResize();
 
     host.start({
@@ -132,7 +141,7 @@ export class GameView {
     });
     this.raf = requestAnimationFrame(this.frame);
     // automation handle for tools/e2e-*.mjs
-    (window as unknown as { __pz: unknown }).__pz = {
+    this.debugHandle = {
       state: () => this.state,
       playing: () => !!this.play,
       canAim: () => this.canAim(),
@@ -146,6 +155,9 @@ export class GameView {
       },
       portraits: () => this.r.boundAvatars(),
     };
+    (window as unknown as { __pz: unknown }).__pz = this.debugHandle;
+    this.unsubscribers.push(this.platform.lifecycle.onChange((state) => state === 'background' ? this.suspend() : this.resume()));
+    } catch (error) { this.dispose(); throw error; }
   }
 
   private onResize = () => {
@@ -253,6 +265,7 @@ export class GameView {
 
   // ------------------------------------------------------------ input
   private canAim() {
+    if (this.disposed || this.suspended) return false;
     return !!this.state && !this.play && !this.relocating && !this.state.over && this.host.mySides.includes(this.state.turn);
   }
 
@@ -365,7 +378,7 @@ export class GameView {
 
   // ------------------------------------------------------------ rendering
   private frame = (now: number) => {
-    if (this.disposed) return;
+    if (this.disposed || this.suspended) return;
     this.raf = requestAnimationFrame(this.frame);
     if (!this.state) return;
     let pieces: ScenePiece[];
@@ -574,12 +587,35 @@ export class GameView {
     this.opts.onExit();
   }
 
+  resize(_viewport: Viewport) { this.onResize(); }
+
+  suspend() {
+    if (this.disposed || this.suspended) return;
+    this.suspended = true;
+    this.cancelAim();
+    cancelAnimationFrame(this.raf);
+    this.platform.audio.pause();
+  }
+
+  resume() {
+    if (this.disposed || !this.suspended) return;
+    this.suspended = false;
+    this.platform.audio.resume();
+    this.onResize();
+    this.raf = requestAnimationFrame(this.frame);
+  }
+
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
     cancelAnimationFrame(this.raf);
     window.removeEventListener('keydown', this.onKey);
-    window.removeEventListener('resize', this.onResize);
+    for (const unsubscribe of this.unsubscribers) unsubscribe();
+    this.unsubscribers.length = 0;
+    this.platform.dispose();
+    const debug = window as unknown as { __pz?: unknown };
+    if (debug.__pz === this.debugHandle) delete debug.__pz;
+    this.debugHandle = null;
     this.host.dispose();
   }
 }

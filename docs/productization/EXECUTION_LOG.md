@@ -133,6 +133,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### ARC-03
+
+- 状态：完成
+- 开始：2026-11-17 12:38 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 10c2a442844fba210d347309d848cf6fc089504d
+- 范围：实现平台接口、Web存储/网络/生命周期/viewport适配及可取消宿主桥，接入实际比赛暂停和释放。
+- 实现：新增Web平台存储/网络/viewport/生命周期和异步宿主桥，实际GameView接入暂停恢复及完整释放。
+- 验证：check含11项unit/4项契约通过；真实HTTP/WS文本二进制、build和Chromium9项（0skip/0error）通过。
+- 证据：本提交（git log -- docs/productization/reports/ARC-03.md 可定位）；docs/productization/reports/ARC-03.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

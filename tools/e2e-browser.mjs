@@ -209,6 +209,21 @@ async function main() {
     }
   }
 
+  if (await page.$('.game')) {
+    try {
+      await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+      const lifecycle = await page.evaluate(() => {
+        window.dispatchEvent(new Event('pagehide'));
+        const suspended = !window.__pz.canAim();
+        window.dispatchEvent(new Event('pageshow'));
+        return suspended && window.__pz.canAim();
+      });
+      record('平台前后台输入恢复', lifecycle ? 'PASS' : 'FAIL', 'pagehide 禁止出手，pageshow 恢复');
+      await page.click('.menu-btn'); await page.click('.menu .exit');
+      const released = await page.evaluate(() => !window.__pz && !!document.querySelector('.shell'));
+      record('比赛宿主释放', released ? 'PASS' : 'FAIL', '退出回大厅并释放自动化句柄');
+    } catch (e) { record('平台生命周期验收', 'FAIL', e.message.slice(0, 180)); }
+  }
   record('运行时 JS 错误', errors.length === 0 ? 'PASS' : 'FAIL', errors.length ? errors.slice(0, 3).join(' | ').slice(0, 300) : 'console error / pageerror 均为 0');
 
   const failed = results.filter((r) => r.status === 'FAIL');

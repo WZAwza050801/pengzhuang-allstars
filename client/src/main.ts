@@ -1,7 +1,8 @@
 import './style.css';
 import { DEFAULT_DATA, FIELD_SKINS } from '../../shared/data';
 import type { AiLevel } from '../../shared/ai';
-import { GameView } from './game';
+import { GameView, type GameOptions } from './game';
+import { createHostBridge } from '@pengzhuang/platform';
 import { LocalHost } from './localHost';
 import { OnlineHost, type OnlineStatus } from './onlineHost';
 import { isMuted, setMuted } from './sfx';
@@ -9,7 +10,7 @@ import { activeLineup, mountLineup, randomLineup } from './lineup';
 
 const app = document.getElementById('app')!;
 
-let current: GameView | null = null;
+let current: { dispose(): Promise<void> } | null = null;
 
 type Tab = 'shop' | 'lineup' | 'play' | 'achieve' | 'club';
 const TABS: { id: Tab; label: string; icon: string; open: boolean }[] = [
@@ -363,7 +364,12 @@ function onlineLobby(host: OnlineHost, roomCode: string) {
 function start(makeHost: () => LocalHost | OnlineHost, opts?: { roomCode?: string }) {
   const skinId = currentSkin();
   const host = makeHost();
-  current = new GameView(app, host, { skinId, onExit: () => menu(), onRematch: () => { current?.dispose(); start(makeHost, opts); } });
+  const bridge = createHostBridge<HTMLElement, { host: LocalHost | OnlineHost; options: GameOptions }>((root, context) => new GameView(root, context.host, context.options));
+  current = bridge;
+  void bridge.mount(app, { host, options: { skinId, onExit: () => menu(), onRematch: () => { void current?.dispose(); start(makeHost, opts); } } }).catch(() => {
+    host.dispose();
+    if (current === bridge) { menu(); toast('无法进入比赛，请重试'); }
+  });
   if (opts?.roomCode) {
     // The code is what the other player types: show it once, prominently.
     app.querySelector('.lobby')?.remove();

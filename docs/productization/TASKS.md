@@ -76,7 +76,7 @@
   - 验收：额外字段/非法数字/超大输入拒绝；客户端与服务端共用版本定义。
   - 验证：test:contract 覆盖正常、边界、旧版本及错误响应。
 
-- [ ] **ARC-03** 提取平台服务与宿主桥接
+- [x] **ARC-03** 提取平台服务与宿主桥接
   - 依赖：ARC-02
   - 实施：按接口抽 storage/network/audio/lifecycle/viewport；消除核心导入时访问全局；提取 GameHostBridge。
   - 产物：Web 适配器、平台接口与可注入测试替身。
