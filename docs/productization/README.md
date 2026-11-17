@@ -2,7 +2,7 @@
 
 版本：2026-11-16 / v1。适用仓库：`WZAwza050801/pengzhuang-allstars`。
 
-当前交接：**40/112 项已完成，剩余 72 项保留清单**。[ACC-01 长期用户和身份持久化](reports/ACC-01.md) 与 [DAT-01 用户业务数据](reports/DAT-01.md) 已在本地 PostgreSQL 17.12 上完成真实验收，后续账号与业务存档任务已解锁。此前完成的 [Web 性能优化](reports/WEB-04.md)、[测试隔离](reports/QA-01.md) 与 [跨端兼容矩阵](reports/QA-03.md) 继续生效。[AST-06 Web 子集](reports/AST-06.md) 已验证，真机按用户要求暂缓，整项保持未勾选。初始平衡实验未达到放量门槛，发布校验已阻断；实验与回滚工具完成不代表数值已平衡。此前的 [25 项报告](reports/PROGRESS-25.md) 为历史交接。状态以 TASKS 和 EXECUTION_LOG 为准。
+当前交接：**41/112 项已完成，剩余 71 项保留清单**。[ACC-02 邮箱注册、验证与找回](reports/ACC-02.md) 已经真实 PostgreSQL + Mailpit SMTP 验收；下一项为 ACC-03 安全会话。[ACC-01](reports/ACC-01.md) 与 [DAT-01](reports/DAT-01.md) 的持久化基线继续生效，第 40 项已同步 GitHub。此前完成的 [Web 性能优化](reports/WEB-04.md)、[测试隔离](reports/QA-01.md) 与 [跨端兼容矩阵](reports/QA-03.md) 继续生效。[AST-06 Web 子集](reports/AST-06.md) 已验证，真机按用户要求暂缓，整项保持未勾选。初始平衡实验未达到放量门槛，发布校验已阻断；素材授权和已有依赖审计门槛也仍保留。此前的 [25 项报告](reports/PROGRESS-25.md) 为历史交接。状态以 TASKS 和 EXECUTION_LOG 为准。
 
 这是一套供后续 Agent 实施的工程规格，不代表功能已实现，也不保证任何 AI 在缺少设备、平台资格或产品决策时能够无人值守完成发行。目标是把可自动完成的代码任务和必须获得真实证据的任务拆清楚。
 

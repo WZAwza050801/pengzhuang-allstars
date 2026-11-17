@@ -15,7 +15,9 @@ for (const item of HTTP_CONTRACTS) {
         : {}),
       requestBody: { required: true, content: { 'application/json': { schema: z.toJSONSchema(item.body) } } },
       responses: {
-        '200': { description: 'Service-specific success envelope; implemented by the corresponding business task' },
+        ['successStatus' in item ? String(item.successStatus) : '200']: {
+          description: 'Service-specific success envelope; implemented by the corresponding business task',
+        },
         '400': {
           description: 'Invalid request',
           content: { 'application/json': { schema: z.toJSONSchema(ApiErrorSchema) } },

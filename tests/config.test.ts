@@ -83,3 +83,32 @@ test('enabled providers require credentials and errors redact values', () => {
   }
   assert.ok(!JSON.stringify(describeRuntimeConfig(readRuntimeConfig(production()))).includes('secret'));
 });
+test('mail encryption requires a strong key and production rejects local capture and plaintext SMTP', () => {
+  assert.throws(() => readRuntimeConfig({ EMAIL_PROVIDER: 'mailpit' }), ConfigurationError);
+  const SESSION_SIGNING_KEY = randomBytes(32).toString('base64url');
+  assert.equal(readRuntimeConfig({ EMAIL_PROVIDER: 'mailpit', SESSION_SIGNING_KEY }).emailProvider, 'mailpit');
+  assert.throws(
+    () => readRuntimeConfig({ EMAIL_PROVIDER: 'mailpit', SESSION_SIGNING_KEY, SMTP_URL: 'smtp://remote.example:1025' }),
+    ConfigurationError,
+  );
+  assert.throws(() => readRuntimeConfig({ ...production(), EMAIL_PROVIDER: 'mailpit' }), ConfigurationError);
+  assert.throws(
+    () =>
+      readRuntimeConfig({
+        ...production(),
+        EMAIL_PROVIDER: 'smtp',
+        SMTP_URL: 'smtp://mail.example',
+        MAIL_FROM: 'no-reply@example.org',
+      }),
+    ConfigurationError,
+  );
+  assert.equal(
+    readRuntimeConfig({
+      ...production(),
+      EMAIL_PROVIDER: 'smtp',
+      SMTP_URL: 'smtps://mail.example',
+      MAIL_FROM: 'no-reply@example.org',
+    }).emailProvider,
+    'smtp',
+  );
+});

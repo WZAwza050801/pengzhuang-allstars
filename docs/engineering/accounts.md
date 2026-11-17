@@ -10,4 +10,6 @@ ACC-01 只建立账户边界与持久化契约；注册、密码派生、邮件�
 | `verification_tokens` | `user_id`, `purpose`, `token_hash`, `expires_at`, `used_at` | purpose 限为 email verification、password reset、identity link；同 purpose/hash 唯一，只能在未使用且未过期时原子消费。 |
 | `sessions` | `id`, `user_id`, `refresh_token_hash`, `family_id`, `expires_at`, `revoked_at`, `device_label` | refresh hash 唯一；按 `user_id, revoked_at` 建索引。会话 ID 与对战 seat token 是不同概念。 |
 
+ACC-02 增量：`users.registration_nickname` 保留注册昵称草稿，后续 DAT-02 初始化资料使用；`auth_identities.verified_at` 记录邮箱验证。`EmailAuthRepository.authenticate` 只在内部回调中核对密码 hash，公开返回仍仅可信 userId，不返回 hash。`auth_rate_limits` 为持久化限流；`account_mail_jobs` 为加密的短期邮件投递队列，发送/终止后清空密文。流程与保留边界见 [email-accounts.md](email-accounts.md)。
+
 外键全部引用 `users(id)` 并使用 `RESTRICT`，所以硬删除账户必须先经过账户匿名化/清理流程，不能让级联删除悄悄移除审计所需证据。迁移的 `down` 只适用于本地/测试，由迁移器的显式回滚开关保护。

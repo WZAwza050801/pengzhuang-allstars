@@ -42,6 +42,10 @@ export const RegisterSchema = z.strictObject({
   nickname,
 });
 export const LoginSchema = z.strictObject({ email: z.email().max(254), password: z.string().min(1).max(256) });
+const accountToken = z.string().regex(/^[A-Za-z0-9_-]{43}$/);
+export const VerifyEmailSchema = z.strictObject({ token: accountToken });
+export const ResetRequestSchema = z.strictObject({ email: z.email().max(254) });
+export const ResetPasswordSchema = z.strictObject({ token: accountToken, password: z.string().min(12).max(256) });
 export const ProfileSchema = z.strictObject({
   nickname,
   avatarAssetId: z.string().regex(/^[A-Za-z0-9_-]{1,64}$/),
@@ -73,8 +77,24 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
-  { method: 'post', path: '/api/v1/auth/register', operationId: 'register', body: RegisterSchema },
+  { method: 'post', path: '/api/v1/auth/register', operationId: 'register', body: RegisterSchema, successStatus: 202 },
   { method: 'post', path: '/api/v1/auth/login', operationId: 'login', body: LoginSchema },
+  { method: 'post', path: '/api/v1/auth/email/verify', operationId: 'verifyEmail', body: VerifyEmailSchema },
+  {
+    method: 'post',
+    path: '/api/v1/auth/email/verification-request',
+    operationId: 'requestEmailVerification',
+    body: ResetRequestSchema,
+    successStatus: 202,
+  },
+  {
+    method: 'post',
+    path: '/api/v1/auth/password/reset-request',
+    operationId: 'requestPasswordReset',
+    body: ResetRequestSchema,
+    successStatus: 202,
+  },
+  { method: 'post', path: '/api/v1/auth/password/reset', operationId: 'resetPassword', body: ResetPasswordSchema },
   { method: 'patch', path: '/api/v1/me/profile', operationId: 'updateProfile', body: ProfileSchema },
   { method: 'put', path: '/api/v1/me/lineups/{id}', operationId: 'saveLineup', body: LineupSchema },
   { method: 'post', path: '/api/v1/me/cards/{id}/upgrade', operationId: 'upgradeCard', body: UpgradeSchema },

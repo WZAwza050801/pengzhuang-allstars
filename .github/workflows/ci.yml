@@ -16,6 +16,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - name: Install pinned Mailpit for real SMTP acceptance
+        run: |
+          curl -fsSL https://github.com/axllent/mailpit/releases/download/v1.34.0/mailpit-linux-amd64.tar.gz -o "$RUNNER_TEMP/mailpit.tar.gz"
+          echo "af236b42f171b1c74f0ac5ff444f44d36f2f2ecc0134f5a2f1d4e307e56a0d2c  $RUNNER_TEMP/mailpit.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/mailpit.tar.gz" -C "$RUNNER_TEMP" mailpit
+          echo "MAILPIT_TEST_BIN=$RUNNER_TEMP/mailpit" >> "$GITHUB_ENV"
       - run: npm run check
       - run: npm run test:qa
       - run: npm run test:integration

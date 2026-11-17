@@ -17,6 +17,7 @@ const schema = z.object({
   wechatSecret: z.string().trim().min(1).optional(),
   emailProvider: z.enum(['disabled', 'mailpit', 'smtp']),
   smtpUrl: z.string().optional(),
+  mailFrom: z.email().optional(),
   assetOrigin: z.url().optional(),
   logLevel: z.enum(['debug', 'info', 'warn', 'error']),
 });
@@ -51,6 +52,7 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
     wechatSecret: env.WECHAT_APP_SECRET,
     emailProvider: env.EMAIL_PROVIDER ?? 'disabled',
     smtpUrl: env.SMTP_URL,
+    mailFrom: env.MAIL_FROM,
     assetOrigin: env.ASSET_ORIGIN,
     logLevel: env.LOG_LEVEL ?? 'info',
   });
@@ -87,9 +89,7 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
     }
   }
   if (mode === 'test' && env.DATABASE_URL && !env.TEST_DATABASE_URL) bad.push('TEST_DATABASE_URL');
-  if (deployed) {
-    if (!env.PUBLIC_ORIGIN) bad.push('PUBLIC_ORIGIN');
-    if (!cfg.databaseUrl) bad.push('databaseUrl');
+  if (deployed || cfg.emailProvider !== 'disabled') {
     const key = cfg.sessionSigningKey ?? '';
     if (
       !/^[A-Za-z0-9_-]{43,}$/.test(key) ||
@@ -97,15 +97,23 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
       /example|placeholder|changeme|development/i.test(key)
     )
       bad.push('sessionSigningKey');
+  }
+  if (deployed) {
+    if (!env.PUBLIC_ORIGIN) bad.push('PUBLIC_ORIGIN');
+    if (!cfg.databaseUrl) bad.push('databaseUrl');
     if (cfg.devAuthBypass) bad.push('devAuthBypass');
     if (!cfg.cookieSecure) bad.push('cookieSecure');
     if (cfg.emailProvider === 'mailpit') bad.push('emailProvider');
   }
   if (cfg.wechatEnabled && (!cfg.wechatAppId || !cfg.wechatSecret)) bad.push('wechatCredentials');
-  if (cfg.emailProvider === 'smtp') {
+  if (deployed && cfg.emailProvider !== 'disabled' && !cfg.mailFrom) bad.push('mailFrom');
+  if (cfg.emailProvider === 'smtp' || cfg.emailProvider === 'mailpit') {
     try {
-      const url = new URL(cfg.smtpUrl ?? '');
+      const url = new URL(cfg.smtpUrl ?? (cfg.emailProvider === 'mailpit' ? 'smtp://127.0.0.1:1025' : ''));
       if (!['smtp:', 'smtps:'].includes(url.protocol) || !url.hostname || (deployed && url.protocol !== 'smtps:'))
+        bad.push('smtpUrl');
+      if (url.search || url.hash || !['', '/'].includes(url.pathname)) bad.push('smtpUrl');
+      if (cfg.emailProvider === 'mailpit' && !['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname))
         bad.push('smtpUrl');
     } catch {
       bad.push('smtpUrl');

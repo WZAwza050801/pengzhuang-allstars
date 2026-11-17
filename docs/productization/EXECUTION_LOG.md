@@ -617,6 +617,20 @@
 - 回滚：本地测试显式 migration down 按逆序删除本次业务表；生产使用前向兼容迁移，不回滚真实资产数据。
 - 下一项：DAT-02 与 ACC-02，依赖均满足。
 
+### ACC-02
+
+- 状态：完成
+- 开始：2026-11-18 03:10 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 0324161
+- 范围：Argon2id 密码、注册/验证/找回/密码校验 API、真实 SMTP adapter、本地 Mailpit 收信与 PostgreSQL 事务验收，包含防枚举/持久化限流/失败回滚。安全 Cookie 与刷新旋转由 ACC-03 接入。
+- 实现：Argon2id v19/64MiB/t3/p1、四个并行 KDF 上限；邮箱验证/找回/重发与一次性 token hash；锁账户原子消费、密码重置撤销会话；持久化 IP/邮箱限流和一致的不存在账号响应。加密数据库邮件队列同注册事务提交，worker 在真实 SMTP 投递后清除密文，有界退避/重启恢复；运行时接入路由及 worker 启停。staging/production 禁止 Mailpit/开发绕过，SMTP 要求 TLS 与明确发件地址。
+- 验证：真实 PostgreSQL 17.12 + Mailpit 1.34.0，4 文件 / 33 集成项通过（邮箱 HTTP/SMTP/运行时 11 项），无跳过。全套 check 通过（104 单元、5 契约），生产客户端构建通过；最初生产 E2E 发现工作区 import 打包错误，改为现有 server 相对源码导入后重建服务端并真实 E2E 18/18 通过。五次本机 KDF 78/78/82/85/72ms；官方 npm audit 中新增依赖无条目，已有树仍 15 high/14 moderate/2 low/0 critical，保留发行门槛。
+- 证据：本提交；tests/email-auth.integration.test.ts；tests/passwords.test.ts；docs/engineering/email-accounts.md；docs/productization/reports/ACC-02.md；契约文档与 CI 固定 Mailpit 下载校验。
+- 风险与剩余：本地 SMTP 真实投递已验收；外部邮件供应商的凭证/域名/到达率未在此冒称通过。登录当前验证凭据并返回可信 userId，ACC-03 接入签名会话/Cookie，ACC-07 接入邮件链接页面。密钥轮换前排空邮件队列或对未送达项重新签发；已有依赖审计项和平衡/素材发布门槛仍未解除。
+- 回滚：新增 migration 仅本地/测试显式 down；生产前向兼容。邮箱流程默认 disabled，可停入口并保留待处理记录；不擅自删除凭据或修改生产权限。
+- 下一项：ACC-03（依赖满足）。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

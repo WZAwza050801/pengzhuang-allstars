@@ -11,6 +11,8 @@ $env:PG_TEST_BIN_DIR='C:/Users/31168/AppData/Local/pengzhuang-toolchains/postgre
 npm run test:integration
 ```
 
+ACC-02 的集成套件还需真实 Mailpit，不能跳过投递测试。Windows 下载 [Mailpit v1.34.0](https://github.com/axllent/mailpit/releases/tag/v1.34.0) 的 `mailpit-windows-amd64.zip`，校验 SHA256 为 `8f080d41374bf22686606374a0a483c8563c1bf29ae078179792392ff8c911d7` 后解压，设置 `$env:MAILPIT_TEST_BIN` 为 `mailpit.exe` 的绝对路径，再运行同一命令。测试自启回环 SMTP/HTTP 端口，数据库位于本轮 PostgreSQL 的 fixture 临时目录，测试后结束 Mailpit 并清理。CI 固定同版本 Linux 包及发布摘要，不向外部邮箱投递。
+
 runner 检查 PostgreSQL 主版本为 17，使用 OS 临时目录、SCRAM 随机密码、16MB shared_buffers、20 个连接上限和 `127.0.0.1` 监听。每次运行的迁移 fixture 目录独立。原生工具清除继承的 PGHOST/PGPORT/PGPASSWORD 等连接设置，测试子进程只收到新建测试库的 DSN。初始化/启动失败和测试失败均非零退出；清理失败会保留临时目录并报错，不假称完成。
 
 手动迁移先配置 local 的 DATABASE_URL 或 test 的 TEST_DATABASE_URL，再执行 `npm run db:migrate`。`npm run db:rollback` 仅允许 local/test 显式操作，生产只做已评审的前向兼容迁移/修复。示例文件只列字段，不写真实密码。
