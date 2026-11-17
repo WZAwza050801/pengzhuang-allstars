@@ -707,6 +707,17 @@
       "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
     },
     {
+      "path": "client/public/assets/catalog.json",
+      "bytes": 259361,
+      "sha256": "118c967e0a4a740de4bb01828857585576d721e9bea536ccdd8df2168601acc1",
+      "usage": "runtime",
+      "category": "runtime-other-unverified",
+      "sourceEvidence": "No more specific source evidence; review required",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
       "path": "client/public/assets/fields/scene_01.webp",
       "bytes": 123806,
       "sha256": "e89e53581d1f38299a509dc8ba0bfd63a0a9853b926fe507d459cec28c08aae0",

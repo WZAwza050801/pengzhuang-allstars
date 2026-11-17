@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "excluded": [
+    { "path": "assets/catalog.json", "reason": "Generated catalogue; excluded from its own content hash" },
+    {
+      "path": "art/manifest.json",
+      "reason": "Historical volatile export metadata; image copies are catalogued separately"
+    },
+    { "path": "assets/players/g03", "reason": "Empty legacy artifact, no runtime reference; preserved for review" }
+  ]
+}

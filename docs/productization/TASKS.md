@@ -220,7 +220,7 @@
 
 现有入口与范围：art/、client/public/、portrait_map、资源 manifest；引用 FND-03 授权分类。
 
-- [ ] **AST-01** 统一资源 manifest 和命名
+- [x] **AST-01** 统一资源 manifest 和命名
   - 依赖：FND-03、ARC-05
   - 实施：为场地/卡牌/UI/音频列 ID/hash/尺寸/锚点/来源/授权/优先级；区分 source 与 runtime。
   - 产物：资产 manifest、引用规则、来源清单。

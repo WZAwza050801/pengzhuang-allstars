@@ -20,7 +20,7 @@
     "build": "npm run build:art && npm run build:client && npm run build:server",
     "build:art": "tsx tools/gen-art.ts",
     "build:avatars": "python art/gen_placeholders.py",
-    "build:client": "vite build --config client/vite.config.ts",
+    "build:client": "npm run check:assets && vite build --config client/vite.config.ts",
     "build:server": "esbuild server/index.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/server/index.js --packages=external --sourcemap",
     "start": "node dist/server/index.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -35,7 +35,7 @@
     "format": "node tools/format.mjs --write",
     "test:unit": "vitest run --project unit",
     "audit:assets": "node tools/audit-assets.mjs",
-    "check": "npm run check:toolchain && npm run check:boundaries && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config",
+    "check": "npm run check:toolchain && npm run check:boundaries && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config && npm run check:assets",
     "check:boundaries": "node tools/check-boundaries.mjs",
     "test:contract": "vitest run --project contract",
     "docs:contracts": "tsx tools/export-contracts.ts",
@@ -44,7 +44,9 @@
     "db:rollback": "tsx tools/migrate.ts --down",
     "check:game-config": "tsx tools/export-game-config.ts --check",
     "export:game-config": "tsx tools/export-game-config.ts --write",
-    "test:field": "vitest run --project unit tests/field*.test.ts"
+    "test:field": "vitest run --project unit tests/field*.test.ts",
+    "assets:catalog": "tsx tools/asset-catalog.ts --write",
+    "check:assets": "tsx tools/asset-catalog.ts"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",
