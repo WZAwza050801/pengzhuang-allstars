@@ -89,6 +89,48 @@ async function waitHealth(timeoutMs = 40000) {
   return { ok: false, body: last };
 }
 
+async function playMouseShot(page) {
+  await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+  const plan = await page.evaluate(() => {
+    const state = window.__pz.state();
+    const piece = state.pieces.find((p) => p.side === state.turn && p.out === 0 && p.frozen === 0);
+    const distance = Math.hypot(state.ball.x - piece.x, state.ball.y - piece.y);
+    const dx = (state.ball.x - piece.x) / distance;
+    const dy = (state.ball.y - piece.y) / distance;
+    const pull = 0.32 * 0.6 + 2.4 * 0.8;
+    return { before: state.shotNo, from: window.__pz.screenOf(piece.x, piece.y), to: window.__pz.screenOf(piece.x - dx * pull, piece.y - dy * pull) };
+  });
+  await page.mouse.move(plan.from.x, plan.from.y);
+  await page.mouse.down();
+  await page.mouse.move(plan.to.x, plan.to.y);
+  await page.mouse.up();
+  await page.waitForFunction((before) => window.__pz.state().shotNo > before, plan.before, { timeout: 15000 });
+  return true;
+}
+
+async function playCurvedTouchShot(page) {
+  await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+  const plan = await page.evaluate(() => {
+    const state = window.__pz.state();
+    const piece = state.pieces.find((p) => p.side === state.turn && p.out === 0 && p.frozen === 0);
+    return { before: state.shotNo, points: [[0, 0], [-0.15, 0.3], [-0.2, 0.6], [0, 1.1]].map(([x, y]) => window.__pz.screenOf(piece.x + x, piece.y + y)) };
+  });
+  const cdp = await page.context().newCDPSession(page);
+  try {
+    await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true });
+    const point = (p) => ({ x: p.x, y: p.y, id: 1 });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [point(plan.points[0])] });
+    for (const item of plan.points.slice(1)) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [point(item)] });
+    const curved = await page.evaluate(() => Math.abs(window.__pz.curve()) > 0);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await page.waitForFunction((before) => window.__pz.state().shotNo > before, plan.before, { timeout: 15000 });
+    return curved;
+  } finally {
+    await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: false });
+    await cdp.detach();
+  }
+}
+
 async function main() {
   // 0) 前置：必须先 npm run build
   const missing = [path.join(DIST_CLIENT, 'index.html'), DIST_SERVER].filter((f) => !fs.existsSync(f));
@@ -239,6 +281,83 @@ async function main() {
 
   if (await page.$('.game')) {
     try {
+      const planAim = () => page.evaluate(() => {
+        const state = window.__pz.state();
+        const piece = state.pieces.find((p) => p.side === state.turn && p.out === 0 && p.frozen === 0);
+        return { before: state.shotNo, from: window.__pz.screenOf(piece.x, piece.y), to: window.__pz.screenOf(piece.x, piece.y + 1.2) };
+      });
+
+      await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+      const keyboardAim = await planAim();
+      await page.mouse.move(keyboardAim.from.x, keyboardAim.from.y); await page.mouse.down(); await page.mouse.move(keyboardAim.to.x, keyboardAim.to.y);
+      const keyboardSafety = await page.evaluate(() => {
+        const input = document.createElement('input');
+        input.type = 'text';
+        document.body.append(input);
+        input.focus();
+        return window.__pz.curve();
+      });
+      await page.keyboard.press('ArrowRight');
+      const keyboardCurve = await page.evaluate(() => window.__pz.curve());
+      await page.evaluate(() => document.querySelector('.stage canvas').dispatchEvent(new PointerEvent('pointercancel', { bubbles: true, pointerId: 1 })));
+      await page.mouse.up();
+
+      await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+      const multiAim = await planAim();
+      await page.mouse.move(multiAim.from.x, multiAim.from.y); await page.mouse.down(); await page.mouse.move(multiAim.to.x, multiAim.to.y);
+      const multiPointer = await page.evaluate(() => {
+        const state = window.__pz.state();
+        const current = state.pieces.find((p) => p.side === state.turn && p.out === 0 && p.frozen === 0);
+        const canvas = document.querySelector('.stage canvas');
+        const before = JSON.stringify(window.__pz.aim());
+        const original = canvas.setPointerCapture;
+        Object.defineProperty(canvas, 'setPointerCapture', { configurable: true, value: () => undefined });
+        try {
+          const point = window.__pz.screenOf(current.x, current.y);
+          canvas.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: point.x, clientY: point.y, pointerId: 99, pointerType: 'touch', isPrimary: false }));
+        } finally {
+          Object.defineProperty(canvas, 'setPointerCapture', { configurable: true, value: original });
+        }
+        return before === JSON.stringify(window.__pz.aim());
+      });
+      await page.evaluate(() => document.querySelector('.stage canvas').dispatchEvent(new PointerEvent('pointercancel', { bubbles: true, pointerId: 1 })));
+      await page.mouse.up();
+
+      await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+      const lostAim = await planAim();
+      await page.mouse.move(lostAim.from.x, lostAim.from.y); await page.mouse.down(); await page.mouse.move(lostAim.to.x, lostAim.to.y);
+      await page.evaluate(() => document.querySelector('.stage canvas').dispatchEvent(new PointerEvent('lostpointercapture', { bubbles: true, pointerId: 1 })));
+      const lostCapture = await page.evaluate(() => !window.__pz.aim());
+      await page.mouse.up();
+      await page.waitForTimeout(100);
+      const noLostShot = await page.evaluate((before) => window.__pz.state().shotNo === before, lostAim.before);
+
+      await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+      const leaveAim = await planAim();
+      await page.mouse.move(leaveAim.from.x, leaveAim.from.y); await page.mouse.down(); await page.mouse.move(leaveAim.to.x, leaveAim.to.y);
+      await page.evaluate(() => document.querySelector('.stage canvas').dispatchEvent(new PointerEvent('pointerleave', { bubbles: true, pointerId: 1 })));
+      const leaveCancelled = await page.evaluate(() => !window.__pz.aim());
+      await page.mouse.up();
+      await page.waitForTimeout(100);
+      const noLeaveShot = await page.evaluate((before) => window.__pz.state().shotNo === before, leaveAim.before);
+
+      await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+      const resizeAim = await planAim();
+      await page.mouse.move(resizeAim.from.x, resizeAim.from.y); await page.mouse.down(); await page.mouse.move(resizeAim.to.x, resizeAim.to.y);
+      await page.setViewportSize({ width: 1180, height: 760 });
+      await page.waitForFunction(() => !window.__pz.aim(), null, { timeout: 5000 });
+      const resizeCancelled = true;
+      await page.mouse.up();
+      await page.waitForTimeout(100);
+      const noResizeShot = await page.evaluate((before) => window.__pz.state().shotNo === before, resizeAim.before);
+
+      const inputSafety = { keyboard: keyboardSafety === keyboardCurve, multiPointer, lostCapture, noLostShot, leaveCancelled, noLeaveShot, resizeCancelled, noResizeShot };
+      record('输入边界与快捷键', Object.values(inputSafety).every(Boolean) ? 'PASS' : 'FAIL', Object.values(inputSafety).every(Boolean) ? '文本输入不截获方向键；多指、失捕获、离场与缩放均取消瞄准且不误发球' : JSON.stringify(inputSafety));
+    } catch (e) { record('输入边界与快捷键', 'FAIL', e.message.slice(0, 180)); }
+  }
+
+  if (await page.$('.game')) {
+    try {
       await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
       const lifecycle = await page.evaluate(() => {
         window.dispatchEvent(new Event('pagehide'));
@@ -289,13 +408,19 @@ async function main() {
   const modeContexts = [];
   try {
     const pages = [];
-    for (const viewport of [{ width: 1200, height: 900 }, { width: 390, height: 844 }]) {
-      const context = await browser.newContext({ viewport });
+    for (const { viewport, deviceScaleFactor } of [
+      { viewport: { width: 1200, height: 900 }, deviceScaleFactor: 1 },
+      { viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 },
+    ]) {
+      const context = await browser.newContext({ viewport, deviceScaleFactor });
+      await context.addInitScript((serverPort) => {
+        localStorage.setItem('pz_server', `http://127.0.0.1:${serverPort}`);
+      }, SERVER_PORT);
       modeContexts.push(context);
       const peer = await context.newPage();
       peer.on('pageerror', e => errors.push(e.message));
       peer.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
-      await peer.goto(`http://127.0.0.1:${SERVER_PORT}/?legacy=1`);
+      await peer.goto(`http://127.0.0.1:${WEB_PORT}/?legacy=1`);
       pages.push(peer);
     }
     const [a, b] = pages;
@@ -309,7 +434,18 @@ async function main() {
     await a.screenshot({ path: path.join(ROOT, 'docs/productization/reports/mode-lobby.png') });
     await a.click('.ready'); await b.click('.ready');
     await Promise.all(pages.map(p => p.waitForSelector('.game canvas')));
+    await Promise.all(pages.map(p => p.waitForFunction(() => window.__pz?.canAim, null, { timeout: 5000 })));
+    const debugHandles = await Promise.all(pages.map(p => p.evaluate(() => ({ hasHandle: !!window.__pz, canAim: typeof window.__pz?.canAim, game: !!document.querySelector('.game') }))));
+    if (!debugHandles.every((value) => value.hasHandle && value.canAim === 'function' && value.game)) throw new Error(`测试调试句柄未就绪：${JSON.stringify(debugHandles)}`);
     record('均衡好友赛双浏览器开局', 'PASS', '独立桌面/移动视口均从规则摘要进入比赛');
+    const sideOneView = await b.evaluate(() => {
+      const north = window.__pz.screenOf(0, -1);
+      const south = window.__pz.screenOf(0, 1);
+      return north.y > south.y;
+    });
+    const ownerShot = await playMouseShot(a);
+    const guestCurve = await playCurvedTouchShot(b);
+    record('side 1 视角触屏弧线', sideOneView && ownerShot && guestCurve ? 'PASS' : 'FAIL', 'side 1 保持我方在下；对端真实触屏弧线出手后权威杆数推进');
   } catch (e) { record('均衡好友赛浏览器验收', 'FAIL', e.message.slice(0, 180)); }
   finally { await Promise.all(modeContexts.map(context => context.close())); }
   record('运行时 JS 错误', errors.length === 0 ? 'PASS' : 'FAIL', errors.length ? errors.slice(0, 3).join(' | ').slice(0, 300) : 'console error / pageerror 均为 0');

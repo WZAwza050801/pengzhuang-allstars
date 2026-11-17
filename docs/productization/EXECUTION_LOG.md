@@ -545,6 +545,20 @@
 - 回滚：独立任务提交可回退；保留 UI-02 Canvas 桥接和旧入口兼容路径。
 - 下一项：选择依赖已满足的未完成任务；WEB-02 仍待 FLD-02。
 
+### WEB-02
+
+- 状态：完成
+- 开始：2026-11-18 01:14 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 733db3f
+- 范围：在既有 FLD-02 相机/手势数学与 Canvas 宿主上补齐鼠标、触摸、键盘输入边界和 side 1 视角验收；不改变物理、球场几何或线上权威规则。
+- 实现：GameView 只接收首个主指针；输入框/选择框/文本域/可编辑节点获得焦点时不截获 Esc 或方向键。Esc、pointercancel、pointerleave、lostpointercapture、窗口失焦和 viewport 变动均取消瞄准并释放捕获；释放已丢失的捕获安全忽略。补充 Chromium 场景，实际鼠标、CDP touch、文本焦点、多指、失捕获、离场、缩放和双方联机视角均由真实 Canvas/服务端通路验收。
+- 验证：`npm run format` 通过；`npm run test:e2e` 18 PASS / 0 SKIP / 0 FAIL（桌面 DPR 1 side 0 鼠标、移动 390x844 DPR 3 side 1 CDP touch）；`npm run check`、`npm run build` 与 `node tools/check-plan.mjs` 在本提交前通过。
+- 证据：本提交；`docs/productization/reports/WEB-02.md`；`tools/e2e-browser.mjs`。FLD-02 已验证 4 视口 × 2 视角 × 3 DPR × 2 布局的 48 组统一坐标/手势矩阵，本任务未改动该数学。
+- 风险与剩余：本任务验收完成。WEB-03 承担 Firefox/Safari/辅助技术矩阵；真机与 App/WebView 验收不以本任务 Chromium 自动化替代。
+- 回滚：独立任务提交可回退；保持 FLD-02 相机与输入数学接口兼容。
+- 下一项：WEB-03（待 WEB-02、UI-07）。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

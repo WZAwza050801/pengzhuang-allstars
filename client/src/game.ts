@@ -18,6 +18,15 @@ const CURVE_STEP = 0.1;
 const RELOCATE_MS = 450;
 const OPEN_FIELD = { ...data.geometry, width: 2000, length: 2000 };
 
+function isEditableTarget(target: EventTarget | null) {
+  return (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLSelectElement ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLElement && target.isContentEditable)
+  );
+}
+
 export interface GameOptions {
   platform?: PlatformServices;
   quality?: Quality | 'auto';
@@ -142,8 +151,11 @@ export class GameView {
     canvas.addEventListener('pointerdown', (e) => this.onDown(e));
     canvas.addEventListener('pointermove', (e) => this.onMove(e));
     canvas.addEventListener('pointerup', (e) => this.onUp(e));
-    canvas.addEventListener('pointercancel', () => this.cancelAim());
+    canvas.addEventListener('pointercancel', this.onPointerAbort);
+    canvas.addEventListener('pointerleave', this.onPointerAbort);
+    canvas.addEventListener('lostpointercapture', this.onPointerAbort);
     window.addEventListener('keydown', this.onKey);
+    window.addEventListener('blur', this.onWindowBlur);
     this.unsubscribers.push(this.platform.viewport.subscribe(() => this.onResize()));
     this.onResize();
 
@@ -178,6 +190,7 @@ export class GameView {
   }
 
   private onResize = () => {
+    this.cancelAim();
     const game = this.root.querySelector('.game') as HTMLElement;
     game.classList.toggle('scene', this.r.sceneMode);
     this.r.reserveBottom = this.r.sceneMode ? (this.root.querySelector('.hud-bottom') as HTMLElement).offsetHeight : 0;
@@ -195,7 +208,11 @@ export class GameView {
   };
 
   private onKey = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') this.cancelAim();
+    if (e.defaultPrevented || isEditableTarget(e.target) || isEditableTarget(document.activeElement)) return;
+    if (e.key === 'Escape' && this.aim) {
+      e.preventDefault();
+      this.cancelAim();
+    }
     if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && this.canAim() && !this.gesture) {
       e.preventDefault();
       this.setCurve(this.curve + (e.key === 'ArrowLeft' ? -CURVE_STEP : CURVE_STEP));
@@ -300,7 +317,7 @@ export class GameView {
 
   private onDown(e: PointerEvent) {
     sfx.unlock();
-    if (!this.canAim()) return;
+    if (!e.isPrimary || this.aimPointer !== null || !this.canAim()) return;
     const w = this.local(e);
     const id = this.pieceAt(w);
     if (!id) return;
@@ -338,14 +355,19 @@ export class GameView {
     this.host.shoot(input);
   }
 
-  private cancelAim() {
-    if (this.aimPointer !== null) {
-      try { this.r.canvas.releasePointerCapture(this.aimPointer); } catch { /* already released */ }
-    }
+  private onPointerAbort = (e: PointerEvent) => this.cancelAim(e.pointerId);
+
+  private onWindowBlur = () => this.cancelAim();
+
+  private cancelAim = (pointerId?: number) => {
+    const captured = this.aimPointer;
+    if (captured === null || (pointerId !== undefined && pointerId !== captured)) return;
     this.aim = null;
     this.aimPointer = null;
     this.gesture = false;
-  }
+    this.lastPreviewKey = '';
+    try { this.r.canvas.releasePointerCapture(captured); } catch { /* already released */ }
+  };
 
   private updateAim(w: { x: number; y: number }) {
     const a = this.aim!;
@@ -612,6 +634,7 @@ export class GameView {
     this.timers.clear();
     cancelAnimationFrame(this.raf);
     window.removeEventListener('keydown', this.onKey);
+    window.removeEventListener('blur', this.onWindowBlur);
     for (const unsubscribe of this.unsubscribers) unsubscribe();
     this.unsubscribers.length = 0;
     this.r?.dispose();
