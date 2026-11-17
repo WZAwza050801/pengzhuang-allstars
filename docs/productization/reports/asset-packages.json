@@ -1,0 +1,747 @@
+{
+  "schemaVersion": 1,
+  "sourceVersion": "assets-ce2c8c60078b9388",
+  "version": "assets-de2336fa3f534fc8",
+  "scope": "public resources; application JS/CSS measured by build report",
+  "packages": [
+    {
+      "id": "boot",
+      "ids": [
+        "favicon.ico"
+      ],
+      "bytes": 125676,
+      "decodedRgbaBytes": 1024
+    },
+    {
+      "id": "lobby",
+      "ids": [
+        "assets.cards.atlas.json",
+        "assets.cards.card-frames.png",
+        "assets.cards.portraits-0.png",
+        "assets.cards.portraits-1.png",
+        "assets.orig_ui.Background.jpg",
+        "assets.orig_ui.Box_01.png",
+        "assets.orig_ui.Box_02.png",
+        "assets.orig_ui.Box_Quality_01.png",
+        "assets.orig_ui.Box_Quality_02.png",
+        "assets.orig_ui.Box_Quality_03.png",
+        "assets.orig_ui.Box_Quality_04.png",
+        "assets.orig_ui.Box_Select.png",
+        "assets.orig_ui.Btn_00.png",
+        "assets.orig_ui.Btn_02.png",
+        "assets.orig_ui.Btn_03.png",
+        "assets.orig_ui.Btn_04.png",
+        "assets.orig_ui.Btn_Icon_01.png",
+        "assets.orig_ui.Btn_Icon_02.png",
+        "assets.orig_ui.Btn_Icon_03.png",
+        "assets.orig_ui.Btn_Icon_04.png",
+        "assets.orig_ui.Btn_Icon_05.png",
+        "assets.orig_ui.Btn_Icon_06.png",
+        "assets.orig_ui.Btn_Icon_07.png",
+        "assets.orig_ui.Btn_Icon_08.png",
+        "assets.orig_ui.Btn_Icon_09.png",
+        "assets.orig_ui.Ico_01.png",
+        "assets.orig_ui.Ico_02.png",
+        "assets.orig_ui.Ico_03.png",
+        "assets.orig_ui.Logo_zh.png",
+        "assets.orig_ui.Lv_Add.png",
+        "assets.orig_ui.Lv_Background.png",
+        "assets.orig_ui.Player_Attributes_01.png",
+        "assets.orig_ui.Player_Attributes_02.png",
+        "assets.orig_ui.Player_Attributes_03.png",
+        "assets.orig_ui.Player_Attributes_04.png",
+        "assets.orig_ui.Player_Attributes_05.png",
+        "assets.orig_ui.stadium.Image_01.png",
+        "assets.orig_ui.stadium.Image_02.png",
+        "assets.orig_ui.stadium.Image_03.png",
+        "assets.orig_ui.stadium.Image_04.png",
+        "assets.orig_ui.stadium.Image_05.png",
+        "assets.orig_ui.stadium.Img_01.png",
+        "assets.orig_ui.Store_Icon_01.png",
+        "assets.orig_ui.Store_Icon_05.png",
+        "assets.orig_ui.Tab_03.png",
+        "assets.orig_ui.Tab_05.png",
+        "assets.orig_ui.Tab_Icon_01.png",
+        "assets.orig_ui.Tab_Icon_02.png",
+        "assets.orig_ui.Tab_Icon_03.png",
+        "assets.orig_ui.Tab_Icon_04.png",
+        "assets.orig_ui.Tab_Icon_06.png",
+        "assets.orig_ui.Tab_Right.png",
+        "assets.orig_ui.Windos_TipsBox_Close.png",
+        "assets.orig_ui.Windos_TipsBox.png",
+        "assets.ui.chrome-dark.png",
+        "assets.ui.chrome-light.png",
+        "assets.ui.pack.json",
+        "assets.ui.stadiums.png"
+      ],
+      "bytes": 1581694,
+      "decodedRgbaBytes": 38239432
+    },
+    {
+      "id": "matchCommon",
+      "ids": [
+        "assets.fields.spring_corner.png",
+        "assets.players_original.head_1001_10101.png",
+        "assets.players_original.head_1001_10102.png",
+        "assets.players_original.head_1001_10103.png",
+        "assets.players_original.head_1001_10104.png",
+        "assets.players_original.head_1001_10105.png",
+        "assets.players_original.head_1001_10106.png",
+        "assets.players_original.head_1001_10107.png",
+        "assets.players_original.head_1002_10201.png",
+        "assets.players_original.head_1002_10202.png",
+        "assets.players_original.head_1002_10203.png",
+        "assets.players_original.head_1002_10204.png",
+        "assets.players_original.head_1002_10205.png",
+        "assets.players_original.head_1002_10206.png",
+        "assets.players_original.head_1002_10207.png",
+        "assets.players_original.head_1003_10301.png",
+        "assets.players_original.head_1003_10302.png",
+        "assets.players_original.head_1003_10303.png",
+        "assets.players_original.head_1003_10304.png",
+        "assets.players_original.head_1003_10305.png",
+        "assets.players_original.head_1003_10306.png",
+        "assets.players_original.head_1003_10307.png",
+        "assets.players_original.head_1004_10401.png",
+        "assets.players_original.head_1004_10402.png",
+        "assets.players_original.head_1004_10403.png",
+        "assets.players_original.head_1004_10404.png",
+        "assets.players_original.head_1004_10405.png",
+        "assets.players_original.head_1004_10406.png",
+        "assets.players_original.head_1004_10407.png",
+        "assets.players_original.head_2001_20101.png",
+        "assets.players_original.head_2001_20102.png",
+        "assets.players_original.head_2001_20103.png",
+        "assets.players_original.head_2001_20104.png",
+        "assets.players_original.head_2001_20105.png",
+        "assets.players_original.head_2001_20106.png",
+        "assets.players_original.head_2001_20107.png",
+        "assets.players_original.head_2002_20201.png",
+        "assets.players_original.head_2002_20202.png",
+        "assets.players_original.head_2002_20203.png",
+        "assets.players_original.head_2002_20204.png",
+        "assets.players_original.head_2002_20205.png",
+        "assets.players_original.head_2002_20206.png",
+        "assets.players_original.head_2002_20207.png",
+        "assets.players_original.head_3001_30101.png",
+        "assets.players_original.head_3001_30102.png",
+        "assets.players_original.head_3001_30103.png",
+        "assets.players_original.head_3001_30104.png",
+        "assets.players_original.head_3001_30105.png",
+        "assets.players_original.head_3001_30106.png",
+        "assets.players_original.head_3001_30107.png",
+        "assets.players_original.head_3001_30108.png",
+        "assets.players_original.head_4001_40101.png",
+        "assets.players_original.head_4001_40102.png",
+        "assets.players_original.head_4001_40103.png",
+        "assets.players_original.head_4001_40104.png",
+        "assets.players_original.head_4001_40105.png",
+        "assets.players_original.head_4001_40106.png",
+        "assets.players_original.head_4001_40107.png",
+        "assets.players_original.head_4001_40108.png",
+        "assets.players_original.head_4001_40110.png",
+        "assets.players_original.head_4002_40201.png",
+        "assets.players_original.head_4002_40202.png",
+        "assets.players_original.head_4002_40203.png",
+        "assets.players_original.head_4002_40204.png",
+        "assets.players_original.head_4002_40205.png",
+        "assets.players_original.head_4002_40206.png",
+        "assets.players_original.head_4002_40207.png",
+        "assets.players_original.head_4002_40208.png",
+        "assets.players_original.head_4003_40301.png",
+        "assets.players_original.head_4003_40302.png",
+        "assets.players_original.head_4003_40303.png",
+        "assets.players_original.head_4003_40304.png",
+        "assets.players_original.head_4003_40305.png",
+        "assets.players_original.head_4003_40306.png",
+        "assets.players_original.head_4003_40307.png",
+        "assets.players_original.head_5001_50101.png",
+        "assets.players_original.head_5001_50102.png",
+        "assets.players_original.head_5001_50103.png",
+        "assets.players_original.head_5001_50104.png",
+        "assets.players_original.head_5001_50105.png",
+        "assets.players_original.head_5001_50106.png",
+        "assets.players_original.head_5001_50107.png",
+        "assets.players_original.head_6001_60101.png",
+        "assets.players_original.head_6001_60102.png",
+        "assets.players_original.head_6001_60103.png",
+        "assets.players_original.head_6001_60104.png",
+        "assets.players_original.head_6001_60105.png",
+        "assets.players_original.head_6001_60106.png",
+        "assets.players_original.head_6001_60107.png",
+        "assets.players_original.head_7001_70101.png",
+        "assets.players_original.head_8001_80101.png",
+        "assets.players_original.head_8001_80102.png",
+        "assets.players_original.head_8001_80103.png",
+        "assets.players_original.head_8001_80104.png",
+        "assets.players_original.head_8001_80105.png",
+        "assets.players_original.head_8001_80106.png",
+        "assets.players_original.head_8001_80107.png",
+        "assets.players_original.head_8002_80201.png",
+        "assets.players_original.head_8002_80202.png",
+        "assets.players_original.head_8002_80203.png",
+        "assets.players_original.head_8002_80204.png",
+        "assets.players_original.head_8002_80205.png",
+        "assets.players_original.head_8002_80206.png",
+        "assets.players_original.head_8002_80207.png",
+        "assets.players_original.head_9001_90001.png",
+        "assets.players_original.head_9001_90002.png",
+        "assets.players_original.head_9001_90003.png",
+        "assets.players.p06_avatar.png",
+        "assets.players.p07_avatar.png",
+        "assets.players.p08_avatar.png",
+        "assets.players.p09_avatar.png",
+        "assets.players.p10_avatar.png",
+        "assets.players.p11_avatar.png",
+        "assets.players.p12_avatar.png",
+        "assets.players.p13_avatar.png",
+        "assets.players.p14_avatar.png",
+        "assets.players.p15_avatar.png",
+        "assets.players.p16_avatar.png",
+        "assets.skills.skill_010_10101.png",
+        "assets.skills.skill_020_10102.png",
+        "assets.skills.skill_030_10103.png",
+        "assets.skills.skill_040_10201.png",
+        "assets.skills.skill_050_10203.png",
+        "assets.skills.skill_060_10204.png",
+        "assets.skills.skill_070_10206.png",
+        "assets.skills.skill_080_10302.png",
+        "assets.skills.skill_090_10303.png",
+        "assets.skills.skill_100_10306.png",
+        "assets.skills.skill_110_10402.png",
+        "assets.skills.skill_120_10403.png",
+        "assets.skills.skill_130_10404.png",
+        "assets.skills.skill_140_60103.png",
+        "assets.skills.skill_150_20101.png",
+        "assets.skills.skill_160_20102.png",
+        "assets.skills.skill_170_20104.png",
+        "assets.skills.skill_180_20106.png",
+        "assets.skills.skill_190_20201.png",
+        "assets.skills.skill_200_20202.png",
+        "assets.skills.skill_210_30101.png",
+        "assets.skills.skill_220_30104.png",
+        "assets.skills.skill_230_40101.png",
+        "assets.skills.skill_240_40102.png",
+        "assets.skills.skill_250_40103.png",
+        "assets.skills.skill_260_40106.png",
+        "assets.skills.skill_270_40202.png",
+        "assets.skills.skill_280_40203.png",
+        "assets.skills.skill_290_40206.png",
+        "assets.skills.skill_300_40207.png",
+        "assets.skills.skill_310_40301.png",
+        "assets.skills.skill_320_40303.png",
+        "assets.skills.skill_330_50102.png",
+        "assets.skills.skill_340_50103.png",
+        "assets.skills.skill_350_50107.png",
+        "assets.skills.skill_360_40108.png",
+        "assets.skills.skill_370_40208.png",
+        "assets.skills.skill_380_30103.png",
+        "assets.skills.skill_400_10105.png",
+        "assets.skills.skill_410_10107.png",
+        "assets.skills.skill_430_10205.png",
+        "assets.skills.skill_440_10301.png",
+        "assets.skills.skill_450_10304.png",
+        "assets.skills.skill_460_10307.png",
+        "assets.skills.skill_480_20103.png",
+        "assets.skills.skill_500_20107.png",
+        "assets.skills.skill_520_20205.png",
+        "assets.skills.skill_530_20206.png",
+        "assets.skills.skill_540_30102.png",
+        "assets.skills.skill_550_40104.png",
+        "assets.skills.skill_560_40105.png",
+        "assets.skills.skill_570_40107.png",
+        "assets.skills.skill_580_40201.png",
+        "assets.skills.skill_600_40205.png",
+        "assets.skills.skill_610_40306.png",
+        "assets.skills.skill_620_50101.png",
+        "assets.skills.skill_640_50106.png",
+        "assets.skills.skill_650_90001.png",
+        "assets.skills.skill_660_90002.png",
+        "assets.skills.skill_670_90003.png",
+        "assets.skills.skill_680_40110.png",
+        "assets.skills.skill_690_30108.png",
+        "assets.skills.skill_700_80101.png",
+        "assets.skills.skill_710_80102.png",
+        "assets.skills.skill_720_80104.png",
+        "assets.skills.skill_790_80201.png",
+        "assets.skills.skill_800_80204.png",
+        "assets.skills.skill_810_80202.png",
+        "assets.skills.skill_820_70101.png"
+      ],
+      "bytes": 10556362,
+      "decodedRgbaBytes": 37801984
+    },
+    {
+      "id": "matchLow",
+      "ids": [
+        "assets.fields.low.field-11e641a5209c.webp",
+        "assets.fields.low.field-1907ae4344b1.webp",
+        "assets.fields.low.field-56f42c593b41.webp",
+        "assets.fields.low.field-83a36bd462e6.webp",
+        "assets.fields.low.field-9ef3508c7421.webp",
+        "assets.fields.low.field-a2873bc992fd.webp",
+        "assets.fields.low.field-a965af8b4b6e.webp",
+        "assets.fields.low.field-d2c2961561a1.webp",
+        "assets.fields.low.field-d93a6d774b3e.webp",
+        "assets.fields.low.field-fb0a7e40b174.webp",
+        "assets.fields.low.manifest.json"
+      ],
+      "bytes": 332698,
+      "decodedRgbaBytes": 16081920
+    },
+    {
+      "id": "matchHigh",
+      "ids": [
+        "assets.fields.scene_01_full.webp",
+        "assets.fields.scene_01.webp",
+        "assets.fields.scene_02_full.webp",
+        "assets.fields.scene_02.webp",
+        "assets.fields.scene_03_full.webp",
+        "assets.fields.scene_03.webp",
+        "assets.fields.scene_04_full.webp",
+        "assets.fields.scene_04.webp",
+        "assets.fields.scene_05_full.webp",
+        "assets.fields.scene_05.webp"
+      ],
+      "bytes": 1490466,
+      "decodedRgbaBytes": 85104080
+    }
+  ],
+  "totalBytes": 14086896,
+  "removedBytes": 17188681,
+  "removed": [
+    {
+      "id": "art.cutout.p01.png",
+      "path": "/art/cutout/p01.png",
+      "bytes": 742423,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p02.png",
+      "path": "/art/cutout/p02.png",
+      "bytes": 566263,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p03.png",
+      "path": "/art/cutout/p03.png",
+      "bytes": 548137,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p04.png",
+      "path": "/art/cutout/p04.png",
+      "bytes": 489127,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p05.png",
+      "path": "/art/cutout/p05.png",
+      "bytes": 609841,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p06.png",
+      "path": "/art/cutout/p06.png",
+      "bytes": 653793,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p07.png",
+      "path": "/art/cutout/p07.png",
+      "bytes": 590744,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p08.png",
+      "path": "/art/cutout/p08.png",
+      "bytes": 676107,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p09.png",
+      "path": "/art/cutout/p09.png",
+      "bytes": 730440,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p10.png",
+      "path": "/art/cutout/p10.png",
+      "bytes": 490999,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p11.png",
+      "path": "/art/cutout/p11.png",
+      "bytes": 573854,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p12.png",
+      "path": "/art/cutout/p12.png",
+      "bytes": 657330,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p13.png",
+      "path": "/art/cutout/p13.png",
+      "bytes": 685879,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p14.png",
+      "path": "/art/cutout/p14.png",
+      "bytes": 731934,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p15.png",
+      "path": "/art/cutout/p15.png",
+      "bytes": 706079,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.cutout.p16.png",
+      "path": "/art/cutout/p16.png",
+      "bytes": 849372,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p01.jpg",
+      "path": "/art/raw/p01.jpg",
+      "bytes": 226192,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p02.jpg",
+      "path": "/art/raw/p02.jpg",
+      "bytes": 194808,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p03.jpg",
+      "path": "/art/raw/p03.jpg",
+      "bytes": 190575,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p04.jpg",
+      "path": "/art/raw/p04.jpg",
+      "bytes": 180233,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p05.jpg",
+      "path": "/art/raw/p05.jpg",
+      "bytes": 198616,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p06.jpg",
+      "path": "/art/raw/p06.jpg",
+      "bytes": 208136,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p07.jpg",
+      "path": "/art/raw/p07.jpg",
+      "bytes": 194464,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p08.jpg",
+      "path": "/art/raw/p08.jpg",
+      "bytes": 226311,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p09.jpg",
+      "path": "/art/raw/p09.jpg",
+      "bytes": 216452,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p10.jpg",
+      "path": "/art/raw/p10.jpg",
+      "bytes": 169838,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p11.jpg",
+      "path": "/art/raw/p11.jpg",
+      "bytes": 193444,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p12.jpg",
+      "path": "/art/raw/p12.jpg",
+      "bytes": 212750,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p13.jpg",
+      "path": "/art/raw/p13.jpg",
+      "bytes": 217189,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p14.jpg",
+      "path": "/art/raw/p14.jpg",
+      "bytes": 232227,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p15.jpg",
+      "path": "/art/raw/p15.jpg",
+      "bytes": 219817,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "art.raw.p16.jpg",
+      "path": "/art/raw/p16.jpg",
+      "bytes": 248957,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Black_Translucent_Bottom.png",
+      "path": "/assets/orig_ui/Black_Translucent_Bottom.png",
+      "bytes": 733,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_00.png",
+      "path": "/assets/orig_ui/Box_00.png",
+      "bytes": 79,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_LvBg.png",
+      "path": "/assets/orig_ui/Box_LvBg.png",
+      "bytes": 454,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_Quality_01_Bg.png",
+      "path": "/assets/orig_ui/Box_Quality_01_Bg.png",
+      "bytes": 12209,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_Quality_02_Bg.png",
+      "path": "/assets/orig_ui/Box_Quality_02_Bg.png",
+      "bytes": 11680,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_Quality_03_Bg.png",
+      "path": "/assets/orig_ui/Box_Quality_03_Bg.png",
+      "bytes": 11126,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_Quality_04_Bg.png",
+      "path": "/assets/orig_ui/Box_Quality_04_Bg.png",
+      "bytes": 11514,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_Quality_05_Bg.png",
+      "path": "/assets/orig_ui/Box_Quality_05_Bg.png",
+      "bytes": 11257,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Box_Quality_05.png",
+      "path": "/assets/orig_ui/Box_Quality_05.png",
+      "bytes": 7658,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Btn_01.png",
+      "path": "/assets/orig_ui/Btn_01.png",
+      "bytes": 2318,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Btn_05.png",
+      "path": "/assets/orig_ui/Btn_05.png",
+      "bytes": 2284,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Btn_06.png",
+      "path": "/assets/orig_ui/Btn_06.png",
+      "bytes": 3248,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Btn_Box2_00.png",
+      "path": "/assets/orig_ui/Btn_Box2_00.png",
+      "bytes": 4419,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Btn_GamePlay.png",
+      "path": "/assets/orig_ui/Btn_GamePlay.png",
+      "bytes": 15083,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Btn_Return.png",
+      "path": "/assets/orig_ui/Btn_Return.png",
+      "bytes": 4255,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.LineUp_01.png",
+      "path": "/assets/orig_ui/LineUp_01.png",
+      "bytes": 10829,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.List_04.png",
+      "path": "/assets/orig_ui/List_04.png",
+      "bytes": 3525,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Lv_ProgressBar_03.png",
+      "path": "/assets/orig_ui/Lv_ProgressBar_03.png",
+      "bytes": 5667,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.stadium.Image_A.png",
+      "path": "/assets/orig_ui/stadium/Image_A.png",
+      "bytes": 64856,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.stadium.Image_B.png",
+      "path": "/assets/orig_ui/stadium/Image_B.png",
+      "bytes": 64598,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Tab_01.png",
+      "path": "/assets/orig_ui/Tab_01.png",
+      "bytes": 4336,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Tab_02.png",
+      "path": "/assets/orig_ui/Tab_02.png",
+      "bytes": 1578,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Tab_04.png",
+      "path": "/assets/orig_ui/Tab_04.png",
+      "bytes": 4485,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Tab_06.png",
+      "path": "/assets/orig_ui/Tab_06.png",
+      "bytes": 1648,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Tab_Icon_05.png",
+      "path": "/assets/orig_ui/Tab_Icon_05.png",
+      "bytes": 26553,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Tab_Icon_07.png",
+      "path": "/assets/orig_ui/Tab_Icon_07.png",
+      "bytes": 16429,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.TeamLogo_default.png",
+      "path": "/assets/orig_ui/TeamLogo_default.png",
+      "bytes": 5954,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Title_Bg01.png",
+      "path": "/assets/orig_ui/Title_Bg01.png",
+      "bytes": 16291,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.orig_ui.Title_Bg03.png",
+      "path": "/assets/orig_ui/Title_Bg03.png",
+      "bytes": 36393,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p06_full.png",
+      "path": "/assets/players/p06_full.png",
+      "bytes": 299104,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p07_full.png",
+      "path": "/assets/players/p07_full.png",
+      "bytes": 244698,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p08_full.png",
+      "path": "/assets/players/p08_full.png",
+      "bytes": 291280,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p09_full.png",
+      "path": "/assets/players/p09_full.png",
+      "bytes": 320138,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p10_full.png",
+      "path": "/assets/players/p10_full.png",
+      "bytes": 232091,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p11_full.png",
+      "path": "/assets/players/p11_full.png",
+      "bytes": 247145,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p12_full.png",
+      "path": "/assets/players/p12_full.png",
+      "bytes": 295488,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p13_full.png",
+      "path": "/assets/players/p13_full.png",
+      "bytes": 292135,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p14_full.png",
+      "path": "/assets/players/p14_full.png",
+      "bytes": 306165,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p15_full.png",
+      "path": "/assets/players/p15_full.png",
+      "bytes": 310165,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p16_full.png",
+      "path": "/assets/players/p16_full.png",
+      "bytes": 356482,
+      "reason": "not-referenced"
+    }
+  ],
+  "releaseApproved": 0
+}

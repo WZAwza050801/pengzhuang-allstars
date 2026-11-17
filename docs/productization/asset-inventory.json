@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "policyVersion": 5,
+  "policyVersion": 6,
   "entries": [
     {
       "path": "art/avatar.py",
@@ -752,11 +752,132 @@
     },
     {
       "path": "client/public/assets/catalog.json",
-      "bytes": 288051,
-      "sha256": "b45d1dcf9a8ce37ffe01022312895f7b1f42ece4a13ac2185133973fedda1e3f",
+      "bytes": 298590,
+      "sha256": "412b8fdfd79f3352045d9c17a82b85fb0cf1bcdfd3f182c582fa2fad7637e2e3",
       "usage": "runtime",
       "category": "runtime-other-unverified",
       "sourceEvidence": "No more specific source evidence; review required",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-11e641a5209c.webp",
+      "bytes": 34680,
+      "sha256": "698d737742d9022348dc04f749eeed3e403d0fd1872413334ad1516404b13006",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-1907ae4344b1.webp",
+      "bytes": 46104,
+      "sha256": "866deef33dc9a32a5ef5e865abdd0bfba7c324d8c46e9a4ef93aed3106cbc86a",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-56f42c593b41.webp",
+      "bytes": 17652,
+      "sha256": "322f9f60c2eed730bb0f2542b34be5a102956c811a2bd0d73713f3c168ef8a4b",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-83a36bd462e6.webp",
+      "bytes": 36348,
+      "sha256": "63342c7ecf4556dbf5db909882a395d09f41c83406c5e2f0831fa923f18d1174",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-9ef3508c7421.webp",
+      "bytes": 41482,
+      "sha256": "010808ec6ca8abd92db031d3f4c5a5e4ff9fb614812f3c3116ec18e4fabaeb33",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-a2873bc992fd.webp",
+      "bytes": 20546,
+      "sha256": "8ce110f27b9f390fa1efedaf5162249171ca7e23648b036fe00c52e90dd84348",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-a965af8b4b6e.webp",
+      "bytes": 25058,
+      "sha256": "052b478ef287edfd9448788ddc0660e47e0e04c771e938e8b763e139eda06710",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-d2c2961561a1.webp",
+      "bytes": 39912,
+      "sha256": "b7519dd64b22dd6b088522178b477e58d29afaa33f1dbaf8fd31f0f94214f996",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-d93a6d774b3e.webp",
+      "bytes": 36166,
+      "sha256": "ad94886b7c194d822fe919cd79a5b9268342a37c3db7a284324835d0201d8804",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/field-fb0a7e40b174.webp",
+      "bytes": 30330,
+      "sha256": "7e7a309fa4e06f2b59fc2184d45e69799beb87d6d0fa53a489736b8ea3d7c42a",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/fields/low/manifest.json",
+      "bytes": 4420,
+      "sha256": "0fc4bf5c3560a22c223d144038534e64e4da12584a4f2a6c8243d69902479436",
+      "usage": "runtime",
+      "category": "rebuilt-low-resolution",
+      "sourceEvidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
       "rights": "unverified",
       "releaseAllowed": false,
       "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"

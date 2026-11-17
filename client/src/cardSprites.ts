@@ -1,15 +1,18 @@
 import type { CardAtlas } from '../../packages/contracts/src/card-atlas';
+import type { WebAssetScene } from './assets';
 export type CardState = CardAtlas['frames'][number]['state'];
 export const CARD_LABELS = { white: '白色', green: '绿色', blue: '蓝色', purple: '紫色', orange: '橙色' };
 export const CARD_STATE_LABELS = { normal: '正常', selected: '已选择', disabled: '不可用' };
 const POSITION_LABELS: Record<string, string> = { FW: '前锋', MF: '中场', DF: '后卫', GK: '门将' };
 
-export async function loadCardPages(atlas: CardAtlas): Promise<Map<string, HTMLImageElement>> {
+export async function loadCardPages(
+  atlas: CardAtlas,
+  resources: WebAssetScene,
+): Promise<Map<string, HTMLImageElement>> {
   const rows = await Promise.all(
     atlas.pages.map(async (page) => {
-      const image = new Image();
-      image.src = page.path;
-      await image.decode();
+      const image = resources.bind(page.path);
+      await resources.wait(image);
       if (image.naturalWidth !== page.width || image.naturalHeight !== page.height)
         throw new Error('Card page dimensions differ');
       return [page.id, image] as const;

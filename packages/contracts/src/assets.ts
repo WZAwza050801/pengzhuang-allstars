@@ -65,6 +65,8 @@ export const AssetCatalogSchema = z
           'ui-icon',
           'ui-stadium',
           'ui-data',
+          'low-resolution',
+          'asset-variants',
         ]),
       }),
     ),

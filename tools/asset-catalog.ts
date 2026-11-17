@@ -9,10 +9,12 @@ import { PROTOCOL_VERSION } from '../shared/protocol';
 import fields from '../data/fields.json';
 import players from '../data/players.json';
 import portraits from '../data/portrait_map.json';
+import displayCatalog from '../data/player_catalog.json';
 import provenance from '../config/asset-sources.json';
 import policy from '../config/asset-catalog-policy.json';
 import { verifyCardAtlas } from './card-atlas';
 import { verifyUiPack } from './ui-assets';
+import { verifyAssetVariants } from './asset-variants';
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
 const fileId = (p: string) => p.replaceAll('/', '.');
@@ -57,10 +59,52 @@ function files(directory: string): string[] {
       return s.isDirectory() ? files(full) : s.isFile() ? [full] : [];
     });
 }
+/** Explicit URLs and the finite legacy UI naming domain used by both validation and packaging. */
+export function runtimeReferencedPaths(root = ROOT): Set<string> {
+  const required = new Set<string>();
+  for (const entry of displayCatalog.entries)
+    for (const skill of entry.skills) required.add(`/assets/skills/${skill.icon}.png`);
+  for (const source of [...files(path.join(root, 'client/src')), path.join(root, 'client/index.html')].filter((p) =>
+    /\.(ts|css|html)$/.test(p),
+  )) {
+    const text = readFileSync(source, 'utf8');
+    for (const match of text.matchAll(/\/(?:assets|art)\/[A-Za-z0-9_./-]+\.(?:png|jpg|webp|ico)/g))
+      required.add(match[0]);
+    if (!source.endsWith('.ts')) continue;
+    const tree = ts.createSourceFile(source, text, ts.ScriptTarget.Latest, true);
+    const visit = (node: ts.Node) => {
+      if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'ui') {
+        const input = node.arguments[0];
+        if (input && ts.isStringLiteral(input)) required.add(`/assets/orig_ui/${input.text}.png`);
+        else if (
+          input &&
+          ts.isBinaryExpression(input) &&
+          input.operatorToken.kind === ts.SyntaxKind.PlusToken &&
+          ts.isStringLiteral(input.left)
+        ) {
+          const prefix = input.left.text,
+            domain = policy.dynamicUi.find((v) => v.prefix === prefix);
+          if (!domain) throw new Error(`Unenumerated UI prefix: ${prefix}`);
+          for (const value of domain.values) required.add(`/assets/orig_ui/${prefix}${value}.png`);
+        }
+      }
+      if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
+        if (/^(?:Btn_Icon_|Store_Icon_|Tab_Icon_|Ico_|Logo_|Image_|Img_|Player_Attributes_)\w+$/.test(node.text))
+          required.add(`/assets/orig_ui/${/^(?:Image_|Img_)/.test(node.text) ? 'stadium/' : ''}${node.text}.png`);
+        if (/(?:^|\/)materials\/|(?:^|\/)art\/raw\//.test(node.text) && !node.text.startsWith('/art/'))
+          throw new Error(`Runtime source-directory reference: ${source}`);
+      }
+      ts.forEachChild(node, visit);
+    };
+    visit(tree);
+  }
+  return required;
+}
 /** All public images are enumerated; alias references provide the verified dynamic expansions. */
 export function createAssetCatalog(root = ROOT): AssetCatalog {
   const cardAtlas = verifyCardAtlas(root);
   const uiPack = verifyUiPack(root);
+  const variants = verifyAssetVariants(root);
   const publicDir = path.join(root, 'client/public');
   const assets: AssetCatalog['assets'] = [];
   const aliases: AssetCatalog['aliases'] = [];
@@ -171,34 +215,16 @@ export function createAssetCatalog(root = ROOT): AssetCatalog {
     );
   }
   const sfx = readFileSync(path.join(root, 'client/src/sfx.ts'), 'utf8');
+  alias('asset.variants', 'assets/fields/low/manifest.json', 'asset-variants');
+  for (const variant of variants.variants)
+    alias(`low.${fileId(variant.sourcePath.slice(1))}`, variant.path.slice(1), 'low-resolution');
   for (const name of ['hit', 'kick', 'wall', 'spring', 'post', 'shoot', 'goal', 'skill', 'turn']) {
     if (!new RegExp(`\\b${name}:`).test(sfx)) throw new Error(`Unknown procedural audio ${name}`);
     aliases.push({ id: `audio.${name}`, target: 'procedural.audio', usage: 'audio' });
   }
   // Static paths in TS/CSS/HTML, plus enumerated dynamic UI tokens, are all checked against actual files.
-  for (const source of [...files(path.join(root, 'client/src')), path.join(root, 'client/index.html')].filter((p) =>
-    /\.(ts|css|html)$/.test(p),
-  )) {
-    const text = readFileSync(source, 'utf8');
-    const required = new Set(
-      [...text.matchAll(/\/(?:assets|art)\/[A-Za-z0-9_./-]+\.(?:png|jpg|webp|ico)/g)].map((m) => m[0]),
-    );
-    if (source.endsWith('.ts')) {
-      const tree = ts.createSourceFile(source, text, ts.ScriptTarget.Latest, true);
-      const visit = (node: ts.Node) => {
-        if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
-          if (/^(?:Btn_Icon_|Store_Icon_|Tab_Icon_|Ico_|Logo_|Image_|Img_)\w+$/.test(node.text))
-            required.add(`/assets/orig_ui/${/^(?:Image_|Img_)/.test(node.text) ? 'stadium/' : ''}${node.text}.png`);
-          if (/(?:^|\/)materials\/|(?:^|\/)art\/raw\//.test(node.text) && !node.text.startsWith('/art/'))
-            throw new Error(`Runtime source-directory reference: ${source}`);
-        }
-        ts.forEachChild(node, visit);
-      };
-      visit(tree);
-    }
-    for (const ref of required)
-      if (!assets.some((a) => a.path === ref)) throw new Error(`Missing referenced resource: ${ref}`);
-  }
+  for (const ref of runtimeReferencedPaths(root))
+    if (!assets.some((a) => a.path === ref)) throw new Error(`Missing referenced resource: ${ref}`);
   assets.sort((a, b) => a.id.localeCompare(b.id, 'en'));
   aliases.sort((a, b) => a.id.localeCompare(b.id, 'en'));
   const payload = {

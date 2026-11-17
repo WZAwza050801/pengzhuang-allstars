@@ -1,12 +1,12 @@
 import type { UiPack } from '../../packages/contracts/src/ui';
 import { nineSlice } from '../../packages/game-core/src/ui-resources';
-export async function loadUiPages(pack: UiPack) {
+import type { WebAssetScene } from './assets';
+export async function loadUiPages(pack: UiPack, resources: WebAssetScene) {
   return new Map(
     await Promise.all(
       pack.pages.map(async (page) => {
-        const image = new Image();
-        image.src = page.path;
-        await image.decode();
+        const image = resources.bind(page.path);
+        await resources.wait(image);
         if (image.naturalWidth !== page.width || image.naturalHeight !== page.height)
           throw new Error('UI page dimensions differ');
         return [page.id, image] as const;

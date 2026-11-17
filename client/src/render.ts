@@ -2,6 +2,7 @@ import type { FieldGeometry, PhysicsConfig } from '../../shared/data';
 import type { Side } from '../../shared/physics';
 import { QUALITY_PROFILES, type Quality } from './quality';
 import { portraitUrl } from './portraits';
+import { WebAssetScene } from './assets';
 import { fieldArtMapping } from '../../packages/game-core/src/field-art';
 import { fieldOutline } from '../../packages/game-core/src/field';
 import { worldToView, viewToWorld, clientToWorld, cameraMatrix, fieldViewport, type Camera } from '../../packages/game-core/src/camera';
@@ -108,6 +109,7 @@ export class Renderer {
   private staticKey = '';
   private disposed = false;
   private quality: Quality = 'high';
+  private readonly resources = new WebAssetScene();
   /** Static layers of the "drawn" skin (backdrop, hedge, grass, walls) at canvas resolution. */
   private drawnCache: HTMLCanvasElement | null = null;
   private drawnKey = '';
@@ -135,7 +137,7 @@ export class Renderer {
     const cached = this.avatars.get(playerId);
     if (cached) { this.avatars.delete(playerId); this.avatars.set(playerId, cached); return cached; }
     const img = new Image();
-    img.src = portraitUrl(playerId);
+    this.resources.bind(portraitUrl(playerId), img);
     this.avatars.set(playerId, img);
     this.trimImages(this.avatars, 32);
     return img;
@@ -145,7 +147,7 @@ export class Renderer {
   boundAvatars() {
     return [...this.avatars.entries()].map(([playerId, img]) => ({
       playerId,
-      src: img.currentSrc || img.src,
+      src: this.resources.source(img),
       complete: img.complete && img.naturalWidth > 0,
     }));
   }
@@ -163,7 +165,7 @@ export class Renderer {
     let img = this.artImages.get(src);
     if (!img) {
       img = new Image();
-      img.src = `/${src}`;
+      this.resources.bind(`/${src}`, img, this.quality === 'low' ? 'low' : 'high');
       this.artImages.set(src, img);
       this.trimImages(this.artImages, 4);
     }
@@ -176,12 +178,12 @@ export class Renderer {
     for (const src of [this.skin.art, this.skin.scene]) {
       if (!src) continue;
       let image = this.artImages.get(src);
-      if (!image) { image = new Image(); image.src = `/${src}`; this.artImages.set(src, image); this.trimImages(this.artImages, 4); }
+      if (!image) { image = new Image(); this.resources.bind(`/${src}`, image, this.quality === 'low' ? 'low' : 'high'); this.artImages.set(src, image); this.trimImages(this.artImages, 4); }
       images.push(image);
     }
     this.springImage();
     if (this.springImg) images.push(this.springImg);
-    await Promise.all(images.map(image => image.decode()));
+    await Promise.all(images.map(image => this.resources.wait(image)));
   }
 
   /**
@@ -200,7 +202,7 @@ export class Renderer {
     let img = this.artImages.get(src);
     if (!img) {
       img = new Image();
-      img.src = `/${src}`;
+      this.resources.bind(`/${src}`, img, this.quality === 'low' ? 'low' : 'high');
       this.artImages.set(src, img);
       this.trimImages(this.artImages, 4);
     }
@@ -267,12 +269,12 @@ export class Renderer {
     this.ctx.setTransform(...cameraMatrix(this.camera, this.dpr));
   }
 
-  setQuality(quality: Quality) { if (this.quality !== quality) { this.quality = quality; this.resize(); } }
+  setQuality(quality: Quality) { if (this.quality !== quality) { this.quality = quality; for (const image of this.artImages.values()) this.resources.release(image); this.artImages.clear(); this.floorColors.clear(); this.resize(); } }
 
   private trimImages(cache: Map<string, HTMLImageElement>, max: number) {
     while (cache.size > max) {
       const key = cache.keys().next().value!;
-      cache.get(key)!.removeAttribute('src'); cache.delete(key);
+      this.resources.release(cache.get(key)!); cache.delete(key);
     }
   }
 
@@ -280,12 +282,13 @@ export class Renderer {
   resourceStats() {
     return { quality: this.quality, avatars: this.avatars.size, art: this.artImages.size,
       floorColors: this.floorColors.size, canvases: Number(!!this.staticCache) + Number(!!this.drawnCache),
-      backingPixels: this.canvas.width * this.canvas.height, disposed: this.disposed };
+      backingPixels: this.canvas.width * this.canvas.height, disposed: this.disposed, assets: this.resources.stats() };
   }
 
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    this.resources.dispose();
     for (const image of [...this.avatars.values(), ...this.artImages.values(), ...(this.springImg ? [this.springImg] : [])]) image.removeAttribute('src');
     this.avatars.clear(); this.artImages.clear(); this.floorColors.clear(); this.springImg = null;
     for (const canvas of [this.staticCache, this.drawnCache, this.overlay, this.canvas]) if (canvas) { canvas.width = 0; canvas.height = 0; }
@@ -824,7 +827,7 @@ export class Renderer {
   private springImage(): HTMLImageElement | null {
     if (!this.springImg) {
       const img = new Image();
-      img.src = '/assets/fields/spring_corner.png';
+      this.resources.bind('/assets/fields/spring_corner.png', img);
       this.springImg = img;
     }
     return this.springImg.complete && this.springImg.naturalWidth > 0 ? this.springImg : null;

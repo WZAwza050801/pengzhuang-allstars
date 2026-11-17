@@ -12,6 +12,7 @@ import { loadUiPages, drawUiSprite } from './uiSprites';
 import { sfx, setMuted, isMuted, disposeAudio } from './sfx';
 import './uiDebug.css';
 import './ui/generated/tokens.css';
+import { WebAssetScene } from './assets';
 declare global {
   interface Window {
     __uiAudit?: { version: string; sprites: number; pages: number; theme: string; fontScale: number };
@@ -49,10 +50,10 @@ async function main() {
   const status = root.querySelector<HTMLElement>('[role=status]')!;
   try {
     const tokens = UiTokensSchema.parse(rawTokens);
-    const response = await fetch('/assets/ui/pack.json');
-    if (!response.ok) throw new Error('UI manifest unavailable');
-    const pack = UiPackSchema.parse(await response.json()),
-      images = await loadUiPages(pack);
+    const resources = new WebAssetScene();
+    window.addEventListener('pagehide', () => resources.dispose(), { once: true });
+    const pack = UiPackSchema.parse(await resources.data('ui.pack')),
+      images = await loadUiPages(pack, resources);
     const controls = document.createElement('div');
     controls.className = 'ui-controls';
     controls.innerHTML =

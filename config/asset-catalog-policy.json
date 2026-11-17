@@ -1,5 +1,12 @@
 {
   "schemaVersion": 1,
+  "dynamicUi": [
+    {
+      "prefix": "Box_Quality_",
+      "values": ["01", "02", "03", "04"],
+      "evidence": "client/src/lineup.ts QUALITY_FRAME; white and green share 01"
+    }
+  ],
   "excluded": [
     { "path": "assets/catalog.json", "reason": "Generated catalogue; excluded from its own content hash" },
     {

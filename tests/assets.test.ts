@@ -13,6 +13,7 @@ test('catalog scans actual runtime resources and all player/field/audio bindings
   expect(c.aliases.filter((a) => a.usage === 'ui-surface')).toHaveLength(18);
   expect(c.aliases.filter((a) => a.usage === 'ui-icon')).toHaveLength(16);
   expect(c.aliases.filter((a) => a.usage === 'ui-stadium')).toHaveLength(5);
+  expect(c.aliases.filter((a) => a.usage === 'low-resolution')).toHaveLength(10);
   const mapping = c.assets.find((a) => a.path === '/assets/cards/atlas.json');
   expect(mapping).toMatchObject({ kind: 'data', width: null, height: null, priority: 'lobby' });
   for (const a of c.assets) {

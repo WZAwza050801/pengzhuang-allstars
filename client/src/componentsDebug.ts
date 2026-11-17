@@ -4,6 +4,7 @@ import * as UI from './ui/components';
 import { statePresentation, type UiState, type UiTheme } from './ui/semantics';
 import './ui/components.css';
 import './componentsDebug.css';
+import { WebAssetScene } from './assets';
 declare global {
   interface Window {
     __componentsAudit?: { components: number; theme: UiTheme; states: UiState[]; cardVersion: string };
@@ -33,10 +34,10 @@ async function main() {
   status.textContent = '加载组件资源…';
   root.append(status);
   try {
-    const response = await fetch('/assets/cards/atlas.json');
-    if (!response.ok) throw new Error('No cards');
-    const atlas = CardAtlasSchema.parse(await response.json()),
-      images = await loadCardPages(atlas);
+    const resources = new WebAssetScene();
+    window.addEventListener('pagehide', () => resources.dispose(), { once: true });
+    const atlas = CardAtlasSchema.parse(await resources.data('card.atlas')),
+      images = await loadCardPages(atlas, resources);
     const render = () => {
       activeDialog?.dispose();
       content.replaceChildren();

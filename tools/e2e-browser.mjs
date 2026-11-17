@@ -175,6 +175,9 @@ async function main() {
     } else {
       try {
         await page.waitForFunction(() => window.__pz && window.__pz.canAim && window.__pz.canAim(), null, { timeout: 20000 });
+        await page.waitForFunction(()=>{const portraits=window.__pz.portraits();return portraits.length===new Set(window.__pz.state().pieces.map(p=>p.playerId)).size&&portraits.every(p=>p.complete)&&window.__pz.resources().assets.cache?.inFlight===0;},null,{timeout:15000});
+        const resourceState=await page.evaluate(()=>window.__pz.resources().assets);
+        record('比赛图片校验与容量',resourceState.failures===0&&resourceState.decodedBytes<=resourceState.decodedLimit&&resourceState.cache.memoryBytes<=resourceState.cache.memoryLimit?'PASS':'FAIL','实际球员图片解码、hash 缓存与场景预算通过');
         const before = await page.evaluate(() => window.__pz.state().shotNo);
         const pl = await page.evaluate(() => {
           const st = window.__pz.state();

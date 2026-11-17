@@ -1,6 +1,7 @@
 import { CardAtlasSchema, CARD_QUALITIES } from '../../packages/contracts/src/card-atlas';
 import { CARD_LABELS, CARD_STATE_LABELS, drawPlayerCard, loadCardPages, type CardState } from './cardSprites';
 import './cardDebug.css';
+import { WebAssetScene } from './assets';
 
 declare global {
   interface Window {
@@ -13,11 +14,11 @@ async function main() {
   root.innerHTML =
     '<h1>球员卡资源验收</h1><p>原创程序化占位图 · 不代表球员真实肖像 · 名字与状态实时绘制</p><p role="status">加载图集…</p>';
   const status = root.querySelector<HTMLElement>('[role=status]')!;
+  const resources = new WebAssetScene();
+  window.addEventListener('pagehide', () => resources.dispose(), { once: true });
   try {
-    const response = await fetch('/assets/cards/atlas.json');
-    if (!response.ok) throw new Error('Card manifest unavailable');
-    const atlas = CardAtlasSchema.parse(await response.json());
-    const images = await loadCardPages(atlas);
+    const atlas = CardAtlasSchema.parse(await resources.data('card.atlas'));
+    const images = await loadCardPages(atlas, resources);
     const dpr = Math.min(3, window.devicePixelRatio || 1);
     const canvasFor = (width: number, height: number) => {
       const canvas = document.createElement('canvas');

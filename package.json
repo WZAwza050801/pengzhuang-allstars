@@ -35,7 +35,7 @@
     "format": "node tools/format.mjs --write",
     "test:unit": "vitest run --project unit",
     "audit:assets": "node tools/audit-assets.mjs",
-    "check": "npm run check:toolchain && npm run check:boundaries && npm run check:ui-tokens && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config && npm run check:assets && npm run check:balance-data && npm run check:balance-mapping && npm run check:skills && npm run check:economy && npm run check:balance-experiment",
+    "check": "npm run check:toolchain && npm run check:boundaries && npm run check:ui-tokens && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config && npm run check:assets && npm run check:asset-package && npm run check:balance-data && npm run check:balance-mapping && npm run check:skills && npm run check:economy && npm run check:balance-experiment",
     "check:boundaries": "node tools/check-boundaries.mjs",
     "test:contract": "vitest run --project contract",
     "docs:contracts": "tsx tools/export-contracts.ts",
@@ -70,7 +70,13 @@
     "test:ui-browser": "node tools/ui-browser.mjs",
     "ui:tokens": "tsx tools/ui-tokens.ts --write",
     "check:ui-tokens": "tsx tools/ui-tokens.ts",
-    "test:components-browser": "node tools/components-browser.mjs"
+    "test:components-browser": "node tools/components-browser.mjs",
+    "assets:variants": "tsx tools/asset-variants.ts",
+    "check:asset-variants": "tsx tools/asset-variants.ts --check",
+    "assets:package": "tsx tools/asset-packages.ts --write",
+    "check:asset-package": "tsx tools/asset-packages.ts",
+    "check:asset-release": "tsx tools/asset-packages.ts --release",
+    "test:assets-browser": "node tools/assets-browser.mjs"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

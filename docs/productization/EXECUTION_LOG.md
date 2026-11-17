@@ -104,10 +104,25 @@
 - 计划：生成一致性和状态/大整数格式边界测试；共享展示语义；Web 组件与窄 Canvas 绘制适配；真实浏览器组件交互、空错加载/禁用、模态焦点、亮暗与大字体验收；独立提交可回滚。
 - 实现：单源 Web CSS/Canvas 数据、构建时生成一致性检查；19 类组件目录/可操作样例和共享状态；卡品质色接入同一输入，PNG 不变；修复非可操作状态颜色和模态反向焦点循环。
 - 验证：完整 check（单元 86/86、契约 5/5）；build；19 类/六状态 DOM-Canvas 像素与资格、焦点循环/恢复、重试、卡牌、分页、亮暗/200%/DPR1/2/3；卡牌与 UI 图集浏览器回归通过；游戏 Chromium 15/15，0 SKIP/FAIL/JS 错误。
-- 证据：本提交（git log -- docs/productization/reports/AST-04.md 可定位）；reports/AST-04.md、reports/components/browser.json 与六张已检查截图；docs/engineering/ui-components.md。
+- 证据：本提交（git log -- docs/productization/reports/AST-04.md 可定位）；reports/AST-04.md、reports/components/browser.json 与六张截图，实看联系表与暗色 Canvas；docs/engineering/ui-components.md。
 - 风险与剩余：演示数据仅用于组件验收；微信实际组件/输入适配、React 业务壳和真实账号/资产仍按后续依赖实施。
 - 回滚：独立提交；保留旧 Demo 兼容入口。
 - 下一项：AST-05。
+
+### AST-05
+
+- 状态：完成
+- 开始：2026-11-17 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / 91b2651
+- 范围：按场景取消/释放、基于 hash 的有界内存/持久缓存、损坏重取与远程失败回退；接入实际比赛图片加载，保留程序化降级；低分辨率场地档与按引用过滤构建资源，生成场景包体报告。商业发布批准仍遵守 REL-01。
+- 计划：先验证去重/取消/损坏/版本/容量；实现可注入字节管理与 Web 适配，比赛宿主释放；导出低分辨率资源及过滤发布目录；真实浏览器注入缓存损坏/离线/取消与游戏回归。
+- 实现：共享/取消的 hash 字节管理与 Web 有界缓存、比赛与新图集场景接入、原有程序化降级、十张低纹理、有限动态引用枚举、过滤构建和五类包索引；修复包体统计重复计图和裁剪遗漏旧动态卡框/属性/技能图标。
+- 验证：完整 check（单元 92/92、契约 5/5）；build/最终过滤客户端重建；真实 CacheStorage 损坏/离线/版本/取消/容量、低纹理和断图出手；真实构建逐张检查 106 张详情、864 次图片解码、0 控制台错误/警告；卡牌/UI/组件浏览器回归通过；游戏 E2E 16/16，0 SKIP/FAIL/JS 错误；商用资源门槛按预期退出 1。
+- 证据：本提交（git log -- docs/productization/reports/AST-05.md 可定位）；reports/AST-05.md、reports/asset-cache/browser.json 与实看截图、reports/asset-packages.json；docs/engineering/asset-loading.md。
+- 风险与剩余：过滤去掉 72 项/17,188,681 B，批准仍为 0；逻辑 Web 场景包不等于微信分包或真机预算通过；旧大厅静态 HTTP 资源由后续 UI 壳迁移。
+- 回滚：独立提交；取消过滤可恢复原全量本地包，旧兼容入口与物理数据不变。
+- 下一项：AST-06。
 
 ### FND-01
 

@@ -1,8 +1,13 @@
 {
-  "version": 5,
+  "version": 6,
   "roots": ["client/public", "art", "materials", "research", "data", "pengzhuang_research.html"],
   "excludePrefixes": ["data/rooms/", "art/ai/", "art/ai-sample/", "art/ai-v2/", "art/cutout/", "art/__pycache__/"],
   "rules": [
+    {
+      "prefix": "client/public/assets/fields/low/",
+      "category": "rebuilt-low-resolution",
+      "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified"
+    },
     {
       "prefix": "client/public/assets/ui/",
       "category": "rebuilt-ui-pack",

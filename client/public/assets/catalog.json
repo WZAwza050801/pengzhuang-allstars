@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "assets-88738f8e640f10c2",
+  "version": "assets-ce2c8c60078b9388",
   "minProtocol": 1,
   "maxProtocol": 1,
   "assets": [
@@ -933,6 +933,286 @@
       "releaseAllowed": false,
       "rightsEvidence": null,
       "geometryVersion": null
+    },
+    {
+      "id": "assets.fields.low.field-11e641a5209c.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-11e641a5209c.webp",
+      "bytes": 34680,
+      "sha256": "698d737742d9022348dc04f749eeed3e403d0fd1872413334ad1516404b13006",
+      "width": 576,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-1907ae4344b1.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-1907ae4344b1.webp",
+      "bytes": 46104,
+      "sha256": "866deef33dc9a32a5ef5e865abdd0bfba7c324d8c46e9a4ef93aed3106cbc86a",
+      "width": 576,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-56f42c593b41.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-56f42c593b41.webp",
+      "bytes": 17652,
+      "sha256": "322f9f60c2eed730bb0f2542b34be5a102956c811a2bd0d73713f3c168ef8a4b",
+      "width": 471,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-83a36bd462e6.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-83a36bd462e6.webp",
+      "bytes": 36348,
+      "sha256": "63342c7ecf4556dbf5db909882a395d09f41c83406c5e2f0831fa923f18d1174",
+      "width": 576,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-9ef3508c7421.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-9ef3508c7421.webp",
+      "bytes": 41482,
+      "sha256": "010808ec6ca8abd92db031d3f4c5a5e4ff9fb614812f3c3116ec18e4fabaeb33",
+      "width": 576,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-a2873bc992fd.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-a2873bc992fd.webp",
+      "bytes": 20546,
+      "sha256": "8ce110f27b9f390fa1efedaf5162249171ca7e23648b036fe00c52e90dd84348",
+      "width": 471,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-a965af8b4b6e.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-a965af8b4b6e.webp",
+      "bytes": 25058,
+      "sha256": "052b478ef287edfd9448788ddc0660e47e0e04c771e938e8b763e139eda06710",
+      "width": 471,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-d2c2961561a1.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-d2c2961561a1.webp",
+      "bytes": 39912,
+      "sha256": "b7519dd64b22dd6b088522178b477e58d29afaa33f1dbaf8fd31f0f94214f996",
+      "width": 576,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-d93a6d774b3e.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-d93a6d774b3e.webp",
+      "bytes": 36166,
+      "sha256": "ad94886b7c194d822fe919cd79a5b9268342a37c3db7a284324835d0201d8804",
+      "width": 471,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.field-fb0a7e40b174.webp",
+      "kind": "image",
+      "path": "/assets/fields/low/field-fb0a7e40b174.webp",
+      "bytes": 30330,
+      "sha256": "7e7a309fa4e06f2b59fc2184d45e69799beb87d6d0fa53a489736b8ea3d7c42a",
+      "width": 471,
+      "height": 768,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
+    },
+    {
+      "id": "assets.fields.low.manifest.json",
+      "kind": "data",
+      "path": "/assets/fields/low/manifest.json",
+      "bytes": 4420,
+      "sha256": "0fc4bf5c3560a22c223d144038534e64e4da12584a4f2a6c8243d69902479436",
+      "width": null,
+      "height": null,
+      "anchors": {},
+      "category": "rebuilt-low-resolution",
+      "priority": "match",
+      "source": {
+        "evidence": "tools/asset-variants.ts deterministic full-image resize of field assets; original source rights remain unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": "field-2"
     },
     {
       "id": "assets.fields.scene_01_full.webp",
@@ -8594,8 +8874,8 @@
       "id": "procedural.field",
       "kind": "procedural-field",
       "path": null,
-      "bytes": 59740,
-      "sha256": "2e9e93afbd6162000cd6c019ecabba134e5114b3cf6ebfc02cbeca4d226028db",
+      "bytes": 60239,
+      "sha256": "9ef8e7f7bc685053f4a0a5ca09935cbf8d081f07fad9cc74240d465e4f13df3e",
       "width": null,
       "height": null,
       "anchors": {},
@@ -8612,6 +8892,11 @@
     }
   ],
   "aliases": [
+    {
+      "id": "asset.variants",
+      "target": "assets.fields.low.manifest.json",
+      "usage": "asset-variants"
+    },
     {
       "id": "audio.goal",
       "target": "procedural.audio",
@@ -8831,6 +9116,56 @@
       "id": "lobby.stadium.5",
       "target": "assets.orig_ui.stadium.Image_05.png",
       "usage": "lobby-field"
+    },
+    {
+      "id": "low.assets.fields.scene_01_full.webp",
+      "target": "assets.fields.low.field-9ef3508c7421.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_01.webp",
+      "target": "assets.fields.low.field-fb0a7e40b174.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_02_full.webp",
+      "target": "assets.fields.low.field-1907ae4344b1.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_02.webp",
+      "target": "assets.fields.low.field-d93a6d774b3e.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_03_full.webp",
+      "target": "assets.fields.low.field-d2c2961561a1.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_03.webp",
+      "target": "assets.fields.low.field-a2873bc992fd.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_04_full.webp",
+      "target": "assets.fields.low.field-11e641a5209c.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_04.webp",
+      "target": "assets.fields.low.field-56f42c593b41.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_05_full.webp",
+      "target": "assets.fields.low.field-83a36bd462e6.webp",
+      "usage": "low-resolution"
+    },
+    {
+      "id": "low.assets.fields.scene_05.webp",
+      "target": "assets.fields.low.field-a965af8b4b6e.webp",
+      "usage": "low-resolution"
     },
     {
       "id": "player.p01.cardPortrait",
