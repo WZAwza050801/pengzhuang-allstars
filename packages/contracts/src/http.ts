@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { PROTOCOL_VERSION } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { parseNickname } from './game-validation';
+import { EmailAddressSchema, PasswordProofSchema, NewPasswordSchema, AccountTokenSchema } from './credentials';
 import {
   CurrentUserSchema,
   LogoutSchema,
@@ -12,6 +13,13 @@ import {
   WechatLoginSchema,
 } from './accounts';
 export { MoneySchema } from './money';
+import {
+  ReauthenticateSchema,
+  LinkIdentitySchema,
+  ConfirmIdentitySchema,
+  DeleteAccountSchema,
+  DeletionRecoverySchema,
+} from './lifecycle';
 
 export const API_VERSION = 'v1';
 export const SUPPORTED_PROTOCOL_VERSIONS: readonly number[] = Object.freeze([PROTOCOL_VERSION]);
@@ -41,15 +49,14 @@ const nickname = z
   .max(64)
   .refine((v) => v === v.trim() && parseNickname(v).ok, 'Invalid nickname');
 export const RegisterSchema = z.strictObject({
-  email: z.email().max(254),
-  password: z.string().min(12).max(256),
+  email: EmailAddressSchema,
+  password: NewPasswordSchema,
   nickname,
 });
-export const LoginSchema = z.strictObject({ email: z.email().max(254), password: z.string().min(1).max(256) });
-const accountToken = z.string().regex(/^[A-Za-z0-9_-]{43}$/);
-export const VerifyEmailSchema = z.strictObject({ token: accountToken });
-export const ResetRequestSchema = z.strictObject({ email: z.email().max(254) });
-export const ResetPasswordSchema = z.strictObject({ token: accountToken, password: z.string().min(12).max(256) });
+export const LoginSchema = z.strictObject({ email: EmailAddressSchema, password: PasswordProofSchema });
+export const VerifyEmailSchema = z.strictObject({ token: AccountTokenSchema });
+export const ResetRequestSchema = z.strictObject({ email: EmailAddressSchema });
+export const ResetPasswordSchema = z.strictObject({ token: AccountTokenSchema, password: NewPasswordSchema });
 export const RefreshSchema = z.strictObject({});
 export const ProfileSchema = z.strictObject({
   nickname,
@@ -84,6 +91,24 @@ export const QueueSchema = z.strictObject({
 export const HTTP_CONTRACTS = [
   { method: 'get', path: '/api/v1/auth/csrf', operationId: 'csrf' },
   { method: 'post', path: '/api/v1/auth/refresh', operationId: 'refresh', body: RefreshSchema },
+  { method: 'post', path: '/api/v1/me/reauthenticate', operationId: 'reauthenticate', body: ReauthenticateSchema },
+  {
+    method: 'post',
+    path: '/api/v1/me/identities/link',
+    operationId: 'linkIdentity',
+    body: LinkIdentitySchema,
+    successStatuses: [200, 202],
+  },
+  {
+    method: 'post',
+    path: '/api/v1/me/identities/confirm',
+    operationId: 'confirmIdentity',
+    body: ConfirmIdentitySchema,
+  },
+  { method: 'delete', path: '/api/v1/me', operationId: 'deleteAccount', body: DeleteAccountSchema, successStatus: 202 },
+  { method: 'get', path: '/api/v1/me/deletion-policy', operationId: 'deletionPolicy' },
+  { method: 'post', path: '/api/v1/auth/deletion/status', operationId: 'deletionStatus', body: DeletionRecoverySchema },
+  { method: 'post', path: '/api/v1/auth/deletion/cancel', operationId: 'cancelDeletion', body: DeletionRecoverySchema },
   { method: 'post', path: '/api/v1/auth/wechat/exchange', operationId: 'wechatExchange', body: WechatLoginSchema },
   {
     method: 'post',

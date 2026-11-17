@@ -2,7 +2,7 @@
 
 版本：2026-11-16 / v1。适用仓库：`WZAwza050801/pengzhuang-allstars`。
 
-当前交接：**43/112 项已完成，剩余 69 项保留清单**。[ACC-05 微信 provider](reports/ACC-05.md) 已完成可本地验证的代码与 65 项集成回归，但缺授权测试 app 的真实凭据/code，整项保持未勾选；下一项继续 ACC-06，DAT-02 依赖也已满足。[ACC-04 当前用户及设备会话](reports/ACC-04.md) 与 [ACC-03](reports/ACC-03.md) 的安全会话/登录状态模型继续生效。[ACC-02](reports/ACC-02.md)、[ACC-01](reports/ACC-01.md) 与 [DAT-01](reports/DAT-01.md) 的账户/持久化基线继续生效，第 40 项已同步 GitHub，按每十项规则下一次在第 50 项同步。此前完成的 [Web 性能优化](reports/WEB-04.md)、[测试隔离](reports/QA-01.md) 与 [跨端兼容矩阵](reports/QA-03.md) 继续生效。[AST-06 Web 子集](reports/AST-06.md) 已验证，真机按用户要求暂缓，整项保持未勾选。初始平衡实验未达到放量门槛，发布校验已阻断；素材授权和已有依赖审计门槛也仍保留。此前的 [25 项报告](reports/PROGRESS-25.md) 为历史交接。状态以 TASKS 和 EXECUTION_LOG 为准。
+当前交接：**44/112 项已完成，剩余 68 项保留清单**。[ACC-06 生命周期](reports/ACC-06.md) 已完成绑定、注销排期/恢复与内部封禁，78 项集成回归通过；下一项继续 ACC-07，DAT-02 依赖也已满足。[ACC-05 微信 provider](reports/ACC-05.md) 缺授权测试 app 的真实凭据/code，整项保持未勾选。[ACC-04 当前用户及设备会话](reports/ACC-04.md) 与 [ACC-03](reports/ACC-03.md) 的安全会话/登录状态模型继续生效。[ACC-02](reports/ACC-02.md)、[ACC-01](reports/ACC-01.md) 与 [DAT-01](reports/DAT-01.md) 的账户/持久化基线继续生效，第 40 项已同步 GitHub，按每十项规则下一次在第 50 项同步。此前完成的 [Web 性能优化](reports/WEB-04.md)、[测试隔离](reports/QA-01.md) 与 [跨端兼容矩阵](reports/QA-03.md) 继续生效。[AST-06 Web 子集](reports/AST-06.md) 已验证，真机按用户要求暂缓，整项保持未勾选。初始平衡实验未达到放量门槛，发布校验已阻断；素材授权和已有依赖审计门槛也仍保留。此前的 [25 项报告](reports/PROGRESS-25.md) 为历史交接。状态以 TASKS 和 EXECUTION_LOG 为准。
 
 这是一套供后续 Agent 实施的工程规格，不代表功能已实现，也不保证任何 AI 在缺少设备、平台资格或产品决策时能够无人值守完成发行。目标是把可自动完成的代码任务和必须获得真实证据的任务拆清楚。
 

@@ -23,6 +23,7 @@ for (const item of HTTP_CONTRACTS) {
       schema: { type: 'string', format: 'uuid' },
     });
   paths[item.path] = {
+    ...(paths[item.path] as Record<string, unknown> | undefined),
     [item.method]: {
       operationId: item.operationId,
       ...(parameters.length ? { parameters } : {}),
@@ -30,27 +31,34 @@ for (const item of HTTP_CONTRACTS) {
         ? { requestBody: { required: true, content: { 'application/json': { schema: z.toJSONSchema(item.body) } } } }
         : {}),
       responses: {
-        ['successStatus' in item ? String(item.successStatus) : '200']: {
-          description: 'Service-specific success envelope; implemented by the corresponding business task',
-          ...('response' in item
-            ? {
-                content: {
-                  'application/json': {
-                    schema: {
-                      type: 'object',
-                      required: ['ok', 'data', 'requestId'],
-                      additionalProperties: false,
-                      properties: {
-                        ok: { const: true },
-                        data: z.toJSONSchema(item.response),
-                        requestId: { type: 'string', minLength: 1 },
+        ...Object.fromEntries(
+          ('successStatuses' in item ? item.successStatuses : ['successStatus' in item ? item.successStatus : 200]).map(
+            (status) => [
+              String(status),
+              {
+                description: 'Service-specific success envelope; implemented by the corresponding business task',
+                ...('response' in item
+                  ? {
+                      content: {
+                        'application/json': {
+                          schema: {
+                            type: 'object',
+                            required: ['ok', 'data', 'requestId'],
+                            additionalProperties: false,
+                            properties: {
+                              ok: { const: true },
+                              data: z.toJSONSchema(item.response),
+                              requestId: { type: 'string', minLength: 1 },
+                            },
+                          },
+                        },
                       },
-                    },
-                  },
-                },
-              }
-            : {}),
-        },
+                    }
+                  : {}),
+              },
+            ],
+          ),
+        ),
         '400': {
           description: 'Invalid request',
           content: { 'application/json': { schema: z.toJSONSchema(ApiErrorSchema) } },

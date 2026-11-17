@@ -131,3 +131,18 @@ test('enabled WeChat requires durable storage and a strong session key even when
     assert.throws(() => readRuntimeConfig({ ...valid, ...override }), ConfigurationError);
   assert.ok(!JSON.stringify(describeRuntimeConfig(readRuntimeConfig(valid))).includes(valid.WECHAT_APP_SECRET));
 });
+
+test('production account deletion requires an explicit versioned policy and delay', () => {
+  assert.equal(readRuntimeConfig(production()).accountDeletionEnabled, false);
+  assert.equal(readRuntimeConfig({}).accountDeletionGraceHours, 168);
+  assert.throws(() => readRuntimeConfig({ ...production(), ACCOUNT_DELETION_ENABLED: 'true' }), ConfigurationError);
+  const cfg = readRuntimeConfig({
+    ...production(),
+    ACCOUNT_DELETION_ENABLED: 'true',
+    ACCOUNT_DELETION_GRACE_HOURS: '24',
+    ACCOUNT_RETENTION_POLICY: 'reviewed-test-v1',
+  });
+  assert.equal(cfg.accountDeletionGraceHours, 24);
+  assert.equal(cfg.accountDeletionEnabled, true);
+  assert.throws(() => readRuntimeConfig({ ACCOUNT_DELETION_GRACE_HOURS: '-1' }), ConfigurationError);
+});

@@ -2,6 +2,8 @@
 
 当前用户与会话操作复用 [安全会话](sessions.md) 的签名、Cookie、CSRF、CORS 和即时数据库撤销检查。API 不接受客户端指定 userId；HTTP 中间件给出可信 `{userId, sessionId}`，业务事务取用户→会话锁后再次确认账户 active、会话有效，避免认证后到写入前发生撤销。
 
+近期重新认证、身份绑定、注销排期/取消与内部封禁见 [account-lifecycle.md](account-lifecycle.md)。解封或取消注销后，已撤销的会话必须重新登录。
+
 | 接口 | 请求和响应 data |
 |---|---|
 | `GET /api/v1/me` | `{userId, sessionId, profile}`；profile 是真实数据库资料或 null，包含 nickname/avatarAssetId/level/exp/version。没有档案不伪造等级或余额，初始化归 DAT-02。 |

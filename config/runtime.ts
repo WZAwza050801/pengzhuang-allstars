@@ -20,6 +20,9 @@ const schema = z.object({
   mailFrom: z.email().optional(),
   assetOrigin: z.url().optional(),
   logLevel: z.enum(['debug', 'info', 'warn', 'error']),
+  accountDeletionEnabled: flag,
+  accountDeletionGraceHours: z.coerce.number().int().min(0).max(2160),
+  accountRetentionPolicy: z.string().regex(/^[A-Za-z0-9_.-]{1,80}$/),
 });
 export type RuntimeConfig = Readonly<
   Omit<z.infer<typeof schema>, 'allowedOrigins'> & { allowedOrigins: readonly string[] }
@@ -55,6 +58,9 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
     mailFrom: env.MAIL_FROM,
     assetOrigin: env.ASSET_ORIGIN,
     logLevel: env.LOG_LEVEL ?? 'info',
+    accountDeletionEnabled: env.ACCOUNT_DELETION_ENABLED ?? !deployed,
+    accountDeletionGraceHours: env.ACCOUNT_DELETION_GRACE_HOURS ?? 168,
+    accountRetentionPolicy: env.ACCOUNT_RETENTION_POLICY ?? 'local-development-v1',
   });
   if (!parsed.success)
     throw new ConfigurationError(parsed.error.issues.map((i) => String(i.path[0] ?? 'configuration')));
@@ -108,6 +114,8 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
   if (cfg.wechatEnabled && (!cfg.wechatAppId || !cfg.wechatSecret)) bad.push('wechatCredentials');
   if (cfg.wechatEnabled && !cfg.databaseUrl) bad.push('databaseUrl');
   if (cfg.wechatEnabled && cfg.devAuthBypass) bad.push('devAuthBypass');
+  if (deployed && cfg.accountDeletionEnabled && (!env.ACCOUNT_RETENTION_POLICY || !env.ACCOUNT_DELETION_GRACE_HOURS))
+    bad.push('accountDeletionPolicy');
   if (deployed && cfg.emailProvider !== 'disabled' && !cfg.mailFrom) bad.push('mailFrom');
   if (cfg.emailProvider === 'smtp' || cfg.emailProvider === 'mailpit') {
     try {

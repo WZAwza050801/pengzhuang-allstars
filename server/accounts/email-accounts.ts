@@ -16,11 +16,10 @@ import type { DeviceKind } from '../../packages/contracts/src/accounts';
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 const normalizeEmail = (value: string) => value.trim().toLowerCase();
 const accepted = Object.freeze({ accepted: true });
-type MailPurpose = 'email-verification' | 'password-reset';
+type MailPurpose = 'email-verification' | 'password-reset' | 'identity-link';
 type MailPayload = { to: string; token: string };
 
 export class EmailAccounts {
-  private readonly passwords = new Passwords();
   private readonly mailKey: Buffer;
   private timer: ReturnType<typeof setInterval> | undefined;
   private delivery: Promise<void> | null = null;
@@ -29,6 +28,7 @@ export class EmailAccounts {
     private readonly db: Database,
     private readonly mail: AccountMail,
     signingKey: string,
+    private readonly passwords = new Passwords(),
   ) {
     this.mailKey = createHmac('sha256', signingKey).update('account-mail-encryption-v1').digest();
   }
@@ -69,7 +69,7 @@ export class EmailAccounts {
     }
   }
 
-  private async issue(tx: SqlExecutor, userId: string, email: string, purpose: MailPurpose): Promise<void> {
+  async queueToken(tx: SqlExecutor, userId: string, email: string, purpose: MailPurpose): Promise<string> {
     const token = randomBytes(32).toString('base64url');
     const tokenHash = digest(token);
     await new AccountRepository(tx).createVerificationToken({
@@ -79,6 +79,7 @@ export class EmailAccounts {
       expiresAt: new Date(Date.now() + 30 * 60_000),
     });
     await new EmailAuthRepository(tx).enqueueMail(purpose, tokenHash, this.seal({ to: email, token }));
+    return tokenHash;
   }
 
   async register(input: { email: string; password: string; nickname: string }, source: string) {
@@ -89,7 +90,7 @@ export class EmailAccounts {
       try {
         await this.db.transaction(async (tx) => {
           const userId = await new EmailAuthRepository(tx).createAccount(email, passwordHash, input.nickname);
-          await this.issue(tx, userId, email, 'email-verification');
+          await this.queueToken(tx, userId, email, 'email-verification');
         });
       } catch (error) {
         if (!(error instanceof DuplicateIdentityError)) throw error;
@@ -117,7 +118,7 @@ export class EmailAccounts {
     return this.conceal(async () => {
       await this.db.transaction(async (tx) => {
         const userId = await new EmailAuthRepository(tx).verifiedActiveUser(email);
-        if (userId) await this.issue(tx, userId, email, 'password-reset');
+        if (userId) await this.queueToken(tx, userId, email, 'password-reset');
       });
       return accepted;
     });
@@ -132,7 +133,7 @@ export class EmailAccounts {
         const userId = await repository.unverifiedActiveUser(email);
         if (userId) {
           await repository.invalidateTokens(userId, 'email-verification');
-          await this.issue(tx, userId, email, 'email-verification');
+          await this.queueToken(tx, userId, email, 'email-verification');
         }
       });
       return accepted;

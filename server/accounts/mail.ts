@@ -2,7 +2,7 @@ import { createTransport } from 'nodemailer';
 import type { RuntimeConfig } from '../../config/runtime';
 
 export interface AccountMail {
-  send(input: { to: string; purpose: 'email-verification' | 'password-reset'; token: string }): Promise<void>;
+  send(input: { to: string; purpose: 'email-verification' | 'password-reset' | 'identity-link'; token: string }): Promise<void>;
 }
 export class MailDeliveryError extends Error {
   constructor() {
@@ -37,13 +37,13 @@ export function createAccountMail(config: RuntimeConfig): AccountMail {
   });
   return {
     async send({ to, purpose, token }) {
-      const url = new URL(purpose === 'email-verification' ? '/account/verify' : '/account/reset', config.publicOrigin);
+      const url = new URL(purpose === 'email-verification' ? '/account/verify' : purpose === 'identity-link' ? '/account/link' : '/account/reset', config.publicOrigin);
       url.hash = token;
       try {
         const result = await transport.sendMail({
           from: config.mailFrom ?? 'no-reply@example.test',
           to,
-          subject: purpose === 'email-verification' ? '验证碰撞全明星邮箱' : '重设碰撞全明星密码',
+          subject: purpose === 'email-verification' ? '验证碰撞全明星邮箱' : purpose === 'identity-link' ? '绑定碰撞全明星邮箱' : '重设碰撞全明星密码',
           text: `请在30分钟内打开以下链接完成操作。若非本人操作，请忽略此邮件。\n${url.toString()}\n`,
         });
         if (result.rejected?.length || !result.accepted?.length) throw new MailDeliveryError();

@@ -6,13 +6,18 @@ export function jsonRequest(
   route: string,
   options: { method?: string; body?: unknown; headers?: Record<string, string> } = {},
 ) {
+  const payload = options.body === undefined ? undefined : JSON.stringify(options.body);
   return new Promise<{ status: number; headers: IncomingHttpHeaders; data: ReturnType<typeof JSON.parse> }>(
     (resolve, reject) => {
       const call = httpRequest(
         new URL(route, origin),
         {
           method: options.method ?? 'GET',
-          headers: { 'content-type': 'application/json', ...options.headers },
+          headers: {
+            'content-type': 'application/json',
+            ...(payload === undefined ? {} : { 'content-length': String(Buffer.byteLength(payload)) }),
+            ...options.headers,
+          },
         },
         (res) => {
           const chunks: Buffer[] = [];
@@ -35,7 +40,7 @@ export function jsonRequest(
       );
       call.setTimeout(15000, () => call.destroy(new Error('Test HTTP timeout')));
       call.once('error', reject);
-      call.end(options.body === undefined ? undefined : JSON.stringify(options.body));
+      call.end(payload);
     },
   );
 }

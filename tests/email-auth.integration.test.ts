@@ -1,7 +1,6 @@
 import { randomBytes, randomUUID, createHash } from 'node:crypto';
-import { spawn, type ChildProcess } from 'node:child_process';
+import { freePort as port, startMailpit } from './helpers/mailpit';
 import { jsonRequest } from './helpers/json-http';
-import net from 'node:net';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 import { AccountRepository, Database, EmailAuthRepository, migrateDatabase } from '@pengzhuang/persistence';
@@ -14,16 +13,7 @@ import { startRuntime } from '../server/runtime';
 import { Sessions } from '../server/accounts/sessions';
 import { WebSessions } from '../server/api/web-sessions';
 
-const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const tokenHash = (token: string) => createHash('sha256').update(token).digest('hex');
-async function port() {
-  const probe = net.createServer();
-  await new Promise<void>((resolve) => probe.listen(0, '127.0.0.1', resolve));
-  const address = probe.address();
-  if (!address || typeof address === 'string') throw new Error('No test port');
-  await new Promise<void>((resolve) => probe.close(() => resolve()));
-  return address.port;
-}
 function request(origin: string, route: string, body?: unknown, headers: Record<string, string> = {}) {
   return jsonRequest(origin, route, { method: body === undefined ? 'GET' : 'POST', body, headers });
 }
@@ -32,9 +22,8 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
   let db: Database;
   let accounts: EmailAccounts;
   let server: ReturnType<typeof createGameServer>;
-  let mailpit: ChildProcess;
+  let mailpit: Awaited<ReturnType<typeof startMailpit>>;
   let origin: string;
-  let inbox: string;
   let smtpPort: number;
   let csrf: string;
   const signingKey = randomBytes(32).toString('base64url');
@@ -55,41 +44,10 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
       throw new Error('Isolated PostgreSQL and fixture directory required');
     db = new Database({ connectionString: config.databaseUrl });
     await migrateDatabase(db);
-    smtpPort = await port();
-    inbox = `http://127.0.0.1:${await port()}`;
-    const env = { ...process.env };
-    for (const key of Object.keys(env)) if (key.startsWith('MP_')) delete env[key];
-    mailpit = spawn(
-      process.env.MAILPIT_TEST_BIN ?? 'mailpit',
-      [
-        '--smtp',
-        `127.0.0.1:${smtpPort}`,
-        '--listen',
-        new URL(inbox).host,
-        '--database',
-        path.join(process.env.PG_TEST_TMP_DIR, 'auth-mailpit.db'),
-        '--disable-version-check',
-        '--quiet',
-      ],
-      { env, stdio: 'ignore', windowsHide: true },
-    );
-    let failed = false;
-    mailpit.on('error', () => {
-      failed = true;
-    });
-    let ready = false;
-    for (let index = 0; index < 100; index++) {
-      if (failed || mailpit.exitCode !== null)
-        throw new Error('Real Mailpit binary required (MAILPIT_TEST_BIN); no delivery mock allowed');
-      try {
-        ready = (await request(inbox, '/api/v1/messages')).status === 200;
-      } catch {
-        /* Startup wait. */
-      }
-      if (ready) break;
-      await pause(50);
-    }
-    if (!ready) throw new Error('Mailpit did not become ready');
+    // HTTP suites share only an ephemeral cluster; each owns its loopback rate-budget fixture.
+    await db.query('DELETE FROM auth_rate_limits');
+    mailpit = await startMailpit('auth-mailpit');
+    smtpPort = mailpit.smtpPort;
     accounts = new EmailAccounts(db, createAccountMail(mailConfig()), signingKey);
     const web = new WebSessions(new Sessions(db, signingKey, 'http://localhost:2567'), mailConfig(), signingKey);
     server = createGameServer({
@@ -109,11 +67,7 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
     await accounts?.close();
     await server?.close();
     await db?.close();
-    if (mailpit && mailpit.exitCode === null) {
-      const exited = new Promise((resolve) => mailpit.once('exit', resolve));
-      mailpit.kill();
-      await exited;
-    }
+    await mailpit?.close();
   });
 
   const post = (route: string, body: unknown, headers?: Record<string, string>) =>
@@ -124,17 +78,7 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
       ...headers,
     });
   async function deliveredToken(email: string, purpose: 'verify' | 'reset', exclude?: string): Promise<string> {
-    for (let index = 0; index < 100; index++) {
-      const list = (await request(inbox, '/api/v1/messages')).data;
-      for (const item of list.messages ?? []) {
-        if (!item.To?.some((to: { Address: string }) => to.Address === email)) continue;
-        const message = (await request(inbox, `/api/v1/message/${item.ID}`)).data;
-        const found = String(message.Text).match(new RegExp(`/account/${purpose}#([A-Za-z0-9_-]{43})`))?.[1];
-        if (found && found !== exclude) return found;
-      }
-      await pause(50);
-    }
-    throw new Error('Expected real SMTP delivery was not observed');
+    return mailpit.token(email, purpose, exclude);
   }
   async function verifiedAccount(email: string) {
     expect((await post('register', { email, password, nickname: '玩家' })).status).toBe(202);

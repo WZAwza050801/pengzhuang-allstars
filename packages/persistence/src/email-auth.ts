@@ -82,7 +82,7 @@ export class EmailAuthRepository {
 
   async invalidateTokens(userId: string, purpose: VerificationPurpose): Promise<void> {
     await this.sql.query(
-      'UPDATE verification_tokens SET used_at = now() WHERE user_id = $1 AND purpose = $2::verification_purpose AND used_at IS NULL',
+      'UPDATE verification_tokens SET used_at = clock_timestamp() WHERE user_id = $1 AND purpose = $2::verification_purpose AND used_at IS NULL',
       [userId, purpose],
     );
   }
@@ -119,7 +119,7 @@ export class EmailAuthRepository {
   async claimMail(): Promise<{
     id: string;
     encrypted_payload: string;
-    purpose: 'email-verification' | 'password-reset';
+    purpose: VerificationPurpose;
     attempts: number;
     valid: boolean;
   } | null> {
@@ -128,7 +128,7 @@ export class EmailAuthRepository {
         await this.sql.query<{
           id: string;
           encrypted_payload: string;
-          purpose: 'email-verification' | 'password-reset';
+          purpose: VerificationPurpose;
           attempts: number;
           valid: boolean;
         }>(
