@@ -15,3 +15,5 @@
 程序化场地hash还包含quality、field-art和camera的源文件hash，避免这些绘制依赖变化时目录版本不变；bytes为这些源文件字节数之和，不是网络图片尺寸。source.evidence列出完整纳入列表。
 
 卡牌规范见 [card-atlas.md](card-atlas.md)。player.<id>.cardPortrait、card.frame.<quality>.<state> 与 card.atlas 绑定原创占位图集；旧 portrait 绑定保留。图集 JSON 为 data 条目，有路径/hash/字节数、没有图像尺寸；身份或稀有度元数据变化也改变总目录版本。不得把 JSON 当图像解码或因图片 hash 未变而复用旧映射。
+
+UI 资源见 [ui-assets.md](ui-assets.md)，ui.pack 与 ui.surface/ui.icon/ui.stadium 别名绑定可缩放程序化占位；pack 包含九种既有 audio 别名对应的音源指纹。大厅/比赛宿主应在用户操作后解锁声音，并遵守静音与生命周期。

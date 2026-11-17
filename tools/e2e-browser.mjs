@@ -274,10 +274,11 @@ async function main() {
   await production.goto(`http://127.0.0.1:${SERVER_PORT}/`);
   await production.fill('.nick','production');await production.click('.btn-play');await production.uncheck('.timer');await production.click('[data-bot="easy"]');
   await production.waitForSelector('.game canvas');
-  const noHandle=await production.evaluate(()=>!window.__pz&&!window.__fieldCalibration&&!window.__aiAudit&&!window.__cardAudit);
+  const noHandle=await production.evaluate(()=>!window.__pz&&!window.__fieldCalibration&&!window.__aiAudit&&!window.__cardAudit&&!window.__uiAudit);
   const html=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/field-debug.html`)).text();
   const cardHtml=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/card-debug.html`)).text();
-  const noEntry=!html.includes('/src/fieldDebug.ts')&&!cardHtml.includes('/src/cardDebug.ts')&&!fs.existsSync(path.join(ROOT,'dist/client/field-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/ai-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/card-debug.html'));
+  const uiHtml=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/ui-debug.html`)).text();
+  const noEntry=!html.includes('/src/fieldDebug.ts')&&!cardHtml.includes('/src/cardDebug.ts')&&!uiHtml.includes('/src/uiDebug.ts')&&!fs.existsSync(path.join(ROOT,'dist/client/field-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/ai-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/card-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/ui-debug.html'));
   record('生产包调试隔离', noHandle && noEntry ? 'PASS' : 'FAIL', '实际生产页可进入比赛，调试句柄和调试HTML均未发布');
   await production.close();
   const modeContexts = [];

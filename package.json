@@ -64,7 +64,10 @@
     "check:balance-release": "tsx tools/balance-experiments.ts --check --require-publishable",
     "cards:atlas": "tsx tools/card-atlas.ts",
     "check:cards": "tsx tools/card-atlas.ts --check",
-    "test:cards-browser": "node tools/card-browser.mjs"
+    "test:cards-browser": "node tools/card-browser.mjs",
+    "ui:assets": "tsx tools/ui-assets.ts",
+    "check:ui-assets": "tsx tools/ui-assets.ts --check",
+    "test:ui-browser": "node tools/ui-browser.mjs"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

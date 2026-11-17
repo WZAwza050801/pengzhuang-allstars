@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "policyVersion": 4,
+  "policyVersion": 5,
   "entries": [
     {
       "path": "art/avatar.py",
@@ -752,8 +752,8 @@
     },
     {
       "path": "client/public/assets/catalog.json",
-      "bytes": 279967,
-      "sha256": "a557c07193c196b2208bef5a367398797398fa8dac446e63d50dced05230313f",
+      "bytes": 288051,
+      "sha256": "c9d7ee5abb4269e5ad7711b0c3fa1523ce164757fad1af41af540833be7816c8",
       "usage": "runtime",
       "category": "runtime-other-unverified",
       "sourceEvidence": "No more specific source evidence; review required",
@@ -3925,6 +3925,50 @@
       "usage": "runtime",
       "category": "skill-icon-assets",
       "sourceEvidence": "materials/pengzhuang_rebuild/03_art; exact derivation/rights requires owner review",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/ui/chrome-dark.png",
+      "bytes": 20523,
+      "sha256": "680ae24d632f63bf2ab5dea013b04233bdf6a771e3b24a468acf61116f06fdad",
+      "usage": "runtime",
+      "category": "rebuilt-ui-pack",
+      "sourceEvidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/ui/chrome-light.png",
+      "bytes": 21037,
+      "sha256": "edaa6ec1f637836028e6ce964c3bc43642a734310a4587bab9ec8a2f13d650b0",
+      "usage": "runtime",
+      "category": "rebuilt-ui-pack",
+      "sourceEvidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/ui/pack.json",
+      "bytes": 8853,
+      "sha256": "bb0bb24a243fd5f775487e3272cb77828ac83d0a8232ce6e0ffd94636c173100",
+      "usage": "runtime",
+      "category": "rebuilt-ui-pack",
+      "sourceEvidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"
+    },
+    {
+      "path": "client/public/assets/ui/stadiums.png",
+      "bytes": 46952,
+      "sha256": "ac0381d129f71b35c9b568063c3b9ad2acebf11e090f05a656d8a07b10729717",
+      "usage": "runtime",
+      "category": "rebuilt-ui-pack",
+      "sourceEvidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
       "rights": "unverified",
       "releaseAllowed": false,
       "releaseReason": "No verifiable commercial redistribution grant in the repository; owner review/replacement required"

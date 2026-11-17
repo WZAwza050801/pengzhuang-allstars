@@ -1,0 +1,61 @@
+{
+  "version": "ui-assets-6ad0eb2623767426",
+  "views": [
+    {
+      "theme": "light",
+      "font": "1",
+      "width": 1280,
+      "height": 900,
+      "dpr": 1,
+      "overflow": false,
+      "clipped": false,
+      "version": "ui-assets-6ad0eb2623767426",
+      "sprites": 39,
+      "pages": 3,
+      "fontScale": 1
+    },
+    {
+      "theme": "dark",
+      "font": "1",
+      "width": 1280,
+      "height": 900,
+      "dpr": 1,
+      "overflow": false,
+      "clipped": false,
+      "version": "ui-assets-6ad0eb2623767426",
+      "sprites": 39,
+      "pages": 3,
+      "fontScale": 1
+    },
+    {
+      "theme": "light",
+      "font": "2",
+      "width": 390,
+      "height": 844,
+      "dpr": 2,
+      "overflow": false,
+      "clipped": false,
+      "version": "ui-assets-6ad0eb2623767426",
+      "sprites": 39,
+      "pages": 3,
+      "fontScale": 2
+    },
+    {
+      "theme": "dark",
+      "font": "2",
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "overflow": false,
+      "clipped": false,
+      "version": "ui-assets-6ad0eb2623767426",
+      "sprites": 39,
+      "pages": 3,
+      "fontScale": 2
+    }
+  ],
+  "audioUserGesture": true,
+  "muted": true,
+  "retryAfterFailure": true,
+  "consoleErrorsAndWarnings": []
+}

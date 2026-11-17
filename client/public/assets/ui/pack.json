@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "gutter": 2,
+  "source": "original-procedural-placeholder",
+  "pages": [
+    {
+      "id": "chrome-light",
+      "path": "/assets/ui/chrome-light.png",
+      "width": 512,
+      "height": 208,
+      "bytes": 21037,
+      "sha256": "edaa6ec1f637836028e6ce964c3bc43642a734310a4587bab9ec8a2f13d650b0"
+    },
+    {
+      "id": "chrome-dark",
+      "path": "/assets/ui/chrome-dark.png",
+      "width": 512,
+      "height": 208,
+      "bytes": 20523,
+      "sha256": "680ae24d632f63bf2ab5dea013b04233bdf6a771e3b24a468acf61116f06fdad"
+    },
+    {
+      "id": "stadiums",
+      "path": "/assets/ui/stadiums.png",
+      "width": 1300,
+      "height": 196,
+      "bytes": 46952,
+      "sha256": "ac0381d129f71b35c9b568063c3b9ad2acebf11e090f05a656d8a07b10729717"
+    }
+  ],
+  "sprites": [
+    {
+      "id": "surface.light.primary.normal",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 2,
+      "y": 2,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.primary.selected",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 70,
+      "y": 2,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.primary.disabled",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 138,
+      "y": 2,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.secondary.normal",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 2,
+      "y": 70,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.secondary.selected",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 70,
+      "y": 70,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.secondary.disabled",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 138,
+      "y": 70,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.panel.normal",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 2,
+      "y": 138,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.panel.selected",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 70,
+      "y": 138,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.light.panel.disabled",
+      "kind": "surface",
+      "pageId": "chrome-light",
+      "x": 138,
+      "y": 138,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "icon.light.back",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 218,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.light.settings",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 270,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.light.ball",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 322,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.light.lineup",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 374,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.light.mail",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 218,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.light.trophy",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 270,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.light.check",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 322,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.light.close",
+      "kind": "icon",
+      "pageId": "chrome-light",
+      "x": 374,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "surface.dark.primary.normal",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 2,
+      "y": 2,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.primary.selected",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 70,
+      "y": 2,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.primary.disabled",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 138,
+      "y": 2,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.secondary.normal",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 2,
+      "y": 70,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.secondary.selected",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 70,
+      "y": 70,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.secondary.disabled",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 138,
+      "y": 70,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.panel.normal",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 2,
+      "y": 138,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.panel.selected",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 70,
+      "y": 138,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "surface.dark.panel.disabled",
+      "kind": "surface",
+      "pageId": "chrome-dark",
+      "x": 138,
+      "y": 138,
+      "width": 64,
+      "height": 64,
+      "inset": 16
+    },
+    {
+      "id": "icon.dark.back",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 218,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.dark.settings",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 270,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.dark.ball",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 322,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.dark.lineup",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 374,
+      "y": 2,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.dark.mail",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 218,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.dark.trophy",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 270,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.dark.check",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 322,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "icon.dark.close",
+      "kind": "icon",
+      "pageId": "chrome-dark",
+      "x": 374,
+      "y": 54,
+      "width": 48,
+      "height": 48,
+      "inset": 0
+    },
+    {
+      "id": "stadium.scene_01",
+      "kind": "stadium",
+      "pageId": "stadiums",
+      "x": 2,
+      "y": 2,
+      "width": 256,
+      "height": 192,
+      "inset": 0
+    },
+    {
+      "id": "stadium.scene_02",
+      "kind": "stadium",
+      "pageId": "stadiums",
+      "x": 262,
+      "y": 2,
+      "width": 256,
+      "height": 192,
+      "inset": 0
+    },
+    {
+      "id": "stadium.scene_03",
+      "kind": "stadium",
+      "pageId": "stadiums",
+      "x": 522,
+      "y": 2,
+      "width": 256,
+      "height": 192,
+      "inset": 0
+    },
+    {
+      "id": "stadium.scene_04",
+      "kind": "stadium",
+      "pageId": "stadiums",
+      "x": 782,
+      "y": 2,
+      "width": 256,
+      "height": 192,
+      "inset": 0
+    },
+    {
+      "id": "stadium.scene_05",
+      "kind": "stadium",
+      "pageId": "stadiums",
+      "x": 1042,
+      "y": 2,
+      "width": 256,
+      "height": 192,
+      "inset": 0
+    }
+  ],
+  "version": "ui-assets-6ad0eb2623767426",
+  "tokensVersion": "ui-1",
+  "generatorSha256": "5502f5a3781273f9ae9e60e2744fde14f5a1d0b7f70fa0f88916071f3e5d2992",
+  "generatorEngine": "chromium-159.0.8154.6",
+  "audio": {
+    "ids": [
+      "hit",
+      "kick",
+      "wall",
+      "spring",
+      "post",
+      "shoot",
+      "goal",
+      "skill",
+      "turn"
+    ],
+    "sourcePath": "client/src/sfx.ts",
+    "sha256": "419e0a2673254f0e2506d32e6afeb76fccb19c80f68bb4c11f4eef933f7a113b",
+    "strategy": "user-gesture-procedural"
+  }
+}

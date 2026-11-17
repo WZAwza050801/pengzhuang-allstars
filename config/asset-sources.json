@@ -1,8 +1,13 @@
 {
-  "version": 4,
+  "version": 5,
   "roots": ["client/public", "art", "materials", "research", "data", "pengzhuang_research.html"],
   "excludePrefixes": ["data/rooms/", "art/ai/", "art/ai-sample/", "art/ai-v2/", "art/cutout/", "art/__pycache__/"],
   "rules": [
+    {
+      "prefix": "client/public/assets/ui/",
+      "category": "rebuilt-ui-pack",
+      "evidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified"
+    },
     {
       "prefix": "client/public/assets/cards/",
       "category": "rebuilt-card-atlas",

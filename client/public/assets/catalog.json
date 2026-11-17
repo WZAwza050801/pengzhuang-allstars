@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "assets-8d3a29ec6b656a66",
+  "version": "assets-759f446273d80363",
   "minProtocol": 1,
   "maxProtocol": 1,
   "assets": [
@@ -8447,6 +8447,104 @@
       "geometryVersion": null
     },
     {
+      "id": "assets.ui.chrome-dark.png",
+      "kind": "image",
+      "path": "/assets/ui/chrome-dark.png",
+      "bytes": 20523,
+      "sha256": "680ae24d632f63bf2ab5dea013b04233bdf6a771e3b24a468acf61116f06fdad",
+      "width": 512,
+      "height": 208,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-ui-pack",
+      "priority": "lobby",
+      "source": {
+        "evidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": null
+    },
+    {
+      "id": "assets.ui.chrome-light.png",
+      "kind": "image",
+      "path": "/assets/ui/chrome-light.png",
+      "bytes": 21037,
+      "sha256": "edaa6ec1f637836028e6ce964c3bc43642a734310a4587bab9ec8a2f13d650b0",
+      "width": 512,
+      "height": 208,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-ui-pack",
+      "priority": "lobby",
+      "source": {
+        "evidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": null
+    },
+    {
+      "id": "assets.ui.pack.json",
+      "kind": "data",
+      "path": "/assets/ui/pack.json",
+      "bytes": 8853,
+      "sha256": "bb0bb24a243fd5f775487e3272cb77828ac83d0a8232ce6e0ffd94636c173100",
+      "width": null,
+      "height": null,
+      "anchors": {},
+      "category": "rebuilt-ui-pack",
+      "priority": "lobby",
+      "source": {
+        "evidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": null
+    },
+    {
+      "id": "assets.ui.stadiums.png",
+      "kind": "image",
+      "path": "/assets/ui/stadiums.png",
+      "bytes": 46952,
+      "sha256": "ac0381d129f71b35c9b568063c3b9ad2acebf11e090f05a656d8a07b10729717",
+      "width": 1300,
+      "height": 196,
+      "anchors": {
+        "center": {
+          "x": 0.5,
+          "y": 0.5,
+          "space": "normalized"
+        }
+      },
+      "category": "rebuilt-ui-pack",
+      "priority": "lobby",
+      "source": {
+        "evidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",
+        "kind": "rebuilt"
+      },
+      "rights": "unverified",
+      "releaseAllowed": false,
+      "rightsEvidence": null,
+      "geometryVersion": null
+    },
+    {
       "id": "favicon.ico",
       "kind": "image",
       "path": "/favicon.ico",
@@ -9903,6 +10001,206 @@
       "id": "player.p99.portrait",
       "target": "assets.players_original.head_6001_60106.png",
       "usage": "portrait"
+    },
+    {
+      "id": "ui.icon.dark.back",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.dark.ball",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.dark.check",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.dark.close",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.dark.lineup",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.dark.mail",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.dark.settings",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.dark.trophy",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.back",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.ball",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.check",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.close",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.lineup",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.mail",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.settings",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.icon.light.trophy",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-icon"
+    },
+    {
+      "id": "ui.pack",
+      "target": "assets.ui.pack.json",
+      "usage": "ui-data"
+    },
+    {
+      "id": "ui.stadium.scene_01",
+      "target": "assets.ui.stadiums.png",
+      "usage": "ui-stadium"
+    },
+    {
+      "id": "ui.stadium.scene_02",
+      "target": "assets.ui.stadiums.png",
+      "usage": "ui-stadium"
+    },
+    {
+      "id": "ui.stadium.scene_03",
+      "target": "assets.ui.stadiums.png",
+      "usage": "ui-stadium"
+    },
+    {
+      "id": "ui.stadium.scene_04",
+      "target": "assets.ui.stadiums.png",
+      "usage": "ui-stadium"
+    },
+    {
+      "id": "ui.stadium.scene_05",
+      "target": "assets.ui.stadiums.png",
+      "usage": "ui-stadium"
+    },
+    {
+      "id": "ui.surface.dark.panel.disabled",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.panel.normal",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.panel.selected",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.primary.disabled",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.primary.normal",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.primary.selected",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.secondary.disabled",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.secondary.normal",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.dark.secondary.selected",
+      "target": "assets.ui.chrome-dark.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.panel.disabled",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.panel.normal",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.panel.selected",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.primary.disabled",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.primary.normal",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.primary.selected",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.secondary.disabled",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.secondary.normal",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
+    },
+    {
+      "id": "ui.surface.light.secondary.selected",
+      "target": "assets.ui.chrome-light.png",
+      "usage": "ui-surface"
     }
   ]
 }

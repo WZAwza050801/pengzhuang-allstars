@@ -12,6 +12,7 @@ import portraits from '../data/portrait_map.json';
 import provenance from '../config/asset-sources.json';
 import policy from '../config/asset-catalog-policy.json';
 import { verifyCardAtlas } from './card-atlas';
+import { verifyUiPack } from './ui-assets';
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
 const fileId = (p: string) => p.replaceAll('/', '.');
@@ -59,6 +60,7 @@ function files(directory: string): string[] {
 /** All public images are enumerated; alias references provide the verified dynamic expansions. */
 export function createAssetCatalog(root = ROOT): AssetCatalog {
   const cardAtlas = verifyCardAtlas(root);
+  const uiPack = verifyUiPack(root);
   const publicDir = path.join(root, 'client/public');
   const assets: AssetCatalog['assets'] = [];
   const aliases: AssetCatalog['aliases'] = [];
@@ -83,7 +85,7 @@ export function createAssetCatalog(root = ROOT): AssetCatalog {
       priority:
         rel === 'favicon.ico'
           ? 'critical'
-          : rel.startsWith('assets/orig_ui/') || rel.startsWith('assets/cards/')
+          : rel.startsWith('assets/orig_ui/') || rel.startsWith('assets/cards/') || rel.startsWith('assets/ui/')
             ? 'lobby'
             : rel.startsWith('art/')
               ? 'optional'
@@ -159,6 +161,15 @@ export function createAssetCatalog(root = ROOT): AssetCatalog {
     alias(`card.frame.${frame.quality}.${frame.state}`, page.path.slice(1), 'card-frame');
   }
   for (let i = 1; i <= 5; i++) alias(`lobby.stadium.${i}`, `assets/orig_ui/stadium/Image_0${i}.png`, 'lobby-field');
+  alias('ui.pack', 'assets/ui/pack.json', 'ui-data');
+  for (const sprite of uiPack.sprites) {
+    const page = uiPack.pages.find((p) => p.id === sprite.pageId)!;
+    alias(
+      `ui.${sprite.id}`,
+      page.path.slice(1),
+      sprite.kind === 'surface' ? 'ui-surface' : sprite.kind === 'icon' ? 'ui-icon' : 'ui-stadium',
+    );
+  }
   const sfx = readFileSync(path.join(root, 'client/src/sfx.ts'), 'utf8');
   for (const name of ['hit', 'kick', 'wall', 'spring', 'post', 'shoot', 'goal', 'skill', 'turn']) {
     if (!new RegExp(`\\b${name}:`).test(sfx)) throw new Error(`Unknown procedural audio ${name}`);
