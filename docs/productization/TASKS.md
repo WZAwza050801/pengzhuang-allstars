@@ -62,7 +62,7 @@
 
 现有入口与范围：shared/、client/src/host.ts/localHost.ts/onlineHost.ts、server/app.ts/index.ts；目标目录分批迁移。
 
-- [ ] **ARC-01** 增量建立 workspace 和依赖方向
+- [x] **ARC-01** 增量建立 workspace 和依赖方向
   - 依赖：FND-05、FND-06
   - 实施：提取纯 game-core 首个模块；npm workspaces 与路径重导出保持旧入口；禁止一次性大搬迁。
   - 产物：workspace 骨架、依赖边界、迁移映射。

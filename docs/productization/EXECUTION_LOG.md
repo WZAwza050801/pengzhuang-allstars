@@ -105,6 +105,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### ARC-01
+
+- 状态：完成
+- 开始：2026-11-17 12:29 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / d09dc938bfaee29a4d5eabd7c5b238970f853f7e
+- 范围：提取纯TypeScript游戏核心到workspace，旧shared路径重导出；增加依赖方向检查并回归原命令。
+- 实现：建立私有game-core workspace，迁移实际RNG实现并保留shared重导出；AST检查可移植边界。
+- 验证：workspace链接、check/6项unit、build、physics18/18和net176通过；node:fs边界反例被拒绝。
+- 证据：本提交（git log -- docs/productization/reports/ARC-01.md 可定位）；docs/productization/reports/ARC-01.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。
