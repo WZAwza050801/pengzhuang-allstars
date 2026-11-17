@@ -1,0 +1,97 @@
+{
+  "views": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": false,
+      "previewVisible": true
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": false,
+      "previewVisible": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": false,
+      "previewVisible": true
+    },
+    {
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": false,
+      "previewVisible": true
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": false,
+      "previewVisible": true
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": true,
+      "previewVisible": true
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": true,
+      "previewVisible": true
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "overflow": false,
+      "actionVisible": true,
+      "navigationVisible": true,
+      "asideVisible": true,
+      "previewVisible": true
+    }
+  ],
+  "keyboard": {
+    "actionBottom": 257.09375,
+    "navBottom": 420
+  },
+  "consoleErrors": []
+}

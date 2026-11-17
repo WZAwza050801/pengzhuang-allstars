@@ -32,6 +32,24 @@ function useNavigationContext(): NavigationContext {
   );
 }
 
+function useVisualViewportHeight() {
+  useEffect(() => {
+    const root = document.documentElement;
+    const viewport = window.visualViewport;
+    const update = () => root.style.setProperty('--web-viewport-height', `${Math.round(viewport?.height ?? window.innerHeight)}px`);
+    update();
+    window.addEventListener('resize', update);
+    viewport?.addEventListener('resize', update);
+    viewport?.addEventListener('scroll', update);
+    return () => {
+      window.removeEventListener('resize', update);
+      viewport?.removeEventListener('resize', update);
+      viewport?.removeEventListener('scroll', update);
+      root.style.removeProperty('--web-viewport-height');
+    };
+  }, []);
+}
+
 function unavailableReason(reason: string) {
   return (
     {
@@ -93,10 +111,19 @@ function Shell({ context }: { context: NavigationContext }) {
     [context, navigate],
   );
 
-  const activePage = location.pathname === '/lineup' ? 'lineup' : location.pathname === '/growth' ? 'growth' : location.pathname === '/club' ? 'club' : location.pathname.startsWith('/profile') || location.pathname === '/settings' ? 'profile' : 'lobby';
+  const activePage =
+    location.pathname === '/lineup'
+      ? 'lineup'
+      : location.pathname === '/growth'
+        ? 'growth'
+        : location.pathname === '/club'
+          ? 'club'
+          : location.pathname.startsWith('/profile') || location.pathname === '/settings'
+            ? 'profile'
+            : 'lobby';
 
   return (
-    <main className={`${styles.application} pz-ui pz-safe-area`}>
+    <main className={`${styles.application} pz-ui`}>
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>Web 页面壳</p>
@@ -104,14 +131,16 @@ function Shell({ context }: { context: NavigationContext }) {
         </div>
         <p role="status">{context.network === 'online' ? '本地练习可用' : '离线模式'}</p>
       </header>
-      {notice && (
-        <div className={styles.notice} role="status">
-          <span>{notice}</span>
-          <button aria-label="关闭提示" type="button" onClick={() => setNotice(null)}>
-            关闭
-          </button>
-        </div>
-      )}
+      <div className={styles.noticeSlot}>
+        {notice && (
+          <div className={styles.notice} role="status">
+            <span>{notice}</span>
+            <button aria-label="关闭提示" type="button" onClick={() => setNotice(null)}>
+              关闭
+            </button>
+          </div>
+        )}
+      </div>
       <div className={styles.content}>
         <Routes>
           <Route path="/" element={<LobbyScreen context={context} onNavigate={onNavigate} />} />
@@ -143,5 +172,6 @@ function Shell({ context }: { context: NavigationContext }) {
 }
 
 export function WebApp() {
+  useVisualViewportHeight();
   return <Shell context={useNavigationContext()} />;
 }

@@ -531,6 +531,20 @@
 - 回滚：独立 migration 和提交可回退；migration down 只允许本地/测试显式执行。
 - 下一项：ACC-02（待 ACC-01）。
 
+### WEB-01
+
+- 状态：完成
+- 开始：2026-11-18 00:52 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 07186dd
+- 范围：完善 React Web 大厅的桌面三栏与移动布局，覆盖安全区、dvh、大字体、软键盘可见区域和 320–1920px 主操作不裁切；不接入尚未实现的账号、资产或远端数据。
+- 实现：桌面大厅采用左侧主导航、中央本地练习球场和右侧辅助面板；移动端保留顶部状态与底部主导航。以 visualViewport 高度驱动应用壳，安全区内边距、dvh 回退、大字体缩放和可滚动内容区均不改变 Canvas 比赛几何。云端内容明确标注为待接入，未伪造账号、资产、公告或阵容数据。
+- 验证：`npm run test:web-layout` 通过；Chromium 覆盖 320x568、360x800、390x844、430x932、768x1024、1280x720、1440x900、1920x1080，均无横向溢出、球场预览/主操作/导航可见，桌面辅助面板仅在 >=1024px 显示；1.4 倍大字体和 420px 软键盘可见视口均通过。`npm run test:web-shell` 通过；完整 `npm run check` 通过（100 单元、5 契约）；完整 `npm run build` 通过；`npm run test:e2e` 16/16 通过。
+- 证据：本提交；docs/productization/reports/WEB-01.md；docs/productization/reports/web-01/browser.json 与同目录规范视口截图。
+- 风险与剩余：本任务验收完成。WEB-02 负责比赛输入与双方视角；WEB-03 再做多引擎可访问性兼容。真实账号/公告/阵容摘要依赖 ACC/DAT/UI 后续任务。
+- 回滚：独立任务提交可回退；保留 UI-02 Canvas 桥接和旧入口兼容路径。
+- 下一项：选择依赖已满足的未完成任务；WEB-02 仍待 FLD-02。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

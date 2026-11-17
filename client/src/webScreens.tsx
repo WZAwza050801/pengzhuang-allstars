@@ -8,19 +8,37 @@ export interface NavigateTarget {
 export function LobbyScreen({ context, onNavigate }: { context: NavigationContext; onNavigate: NavigateTarget }) {
   return (
     <section className={styles.lobby} aria-labelledby="lobby-title">
-      <div className={styles.hero}>
-        <p className={styles.eyebrow}>游客可用 · 本地练习</p>
-        <h1 id="lobby-title">碰撞全明星</h1>
-        <p>5v5 回合制弹射足球。练习模式直接进入对战，不读取或写入账号资产。</p>
-        {context.network === 'offline' && <p className={styles.warning}>当前离线：仍可进行本地练习。</p>}
-        <div className={styles.actions}>
-          <button className="pz-button pz-primary" type="button" onClick={() => onNavigate({ page: 'match', mode: 'practice' })}>
-            开始练习
-          </button>
-          <button className="pz-button" type="button" onClick={() => onNavigate({ page: 'room' })}>
-            好友约战
-          </button>
+      <div className={styles.lobbyLayout}>
+        <div className={styles.hero}>
+          <p className={styles.eyebrow}>游客可用 · 本地练习</p>
+          <h1 id="lobby-title">碰撞全明星</h1>
+          <p>5v5 回合制弹射足球。练习模式直接进入对战，不读取或写入账号资产。</p>
+          {context.network === 'offline' && <p className={styles.warning}>当前离线：仍可进行本地练习。</p>}
+          <div className={styles.stadiumPreview} data-stadium-preview="true" role="img" aria-label="本地练习赛球场展示">
+            <div>
+              <strong>本地练习</strong>
+              <span>3 分钟 · 先进 3 球</span>
+            </div>
+          </div>
+          <div className={styles.actions}>
+            <button className="pz-button pz-primary" type="button" onClick={() => onNavigate({ page: 'match', mode: 'practice' })}>
+              开始练习
+            </button>
+            <button className="pz-button" type="button" onClick={() => onNavigate({ page: 'room' })}>
+              好友约战
+            </button>
+          </div>
         </div>
+        <aside className={styles.lobbyAside} data-lobby-aside="true" aria-label="大厅辅助信息">
+          <section className={styles.asideCard}>
+            <h2>本地规则</h2>
+            <p>拖拽己方球员后松开即可出手；电脑为普通难度。</p>
+          </section>
+          <section className={styles.asideCard}>
+            <h2>云端内容</h2>
+            <p>公告、任务、邮件和真实阵容会在相应服务接入后显示，不以本地示例替代。</p>
+          </section>
+        </aside>
       </div>
       <section className={styles.infoCard} aria-labelledby="account-title">
         <h2 id="account-title">账号与资产</h2>

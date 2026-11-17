@@ -1,3 +1,8 @@
+:global(:root) {
+  --web-font-scale: 1;
+  --web-viewport-height: 100dvh;
+}
+
 :global(html),
 :global(body) {
   display: block;
@@ -7,7 +12,7 @@
 :global(#app) {
   width: 100%;
   max-width: none;
-  height: 100dvh;
+  height: var(--web-viewport-height);
   margin: 0;
   overflow: hidden;
 }
@@ -15,7 +20,7 @@
 @media (min-width: 780px) {
   :global(#app) {
     width: 100vw;
-    height: 100dvh;
+    height: var(--web-viewport-height);
     border-radius: 0;
     box-shadow: none;
   }
@@ -24,8 +29,11 @@
 .application {
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr) auto;
-  min-height: 100%;
+  height: 100%;
+  min-height: 0;
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   background: var(--ui-background);
+  font-size: calc(var(--ui-body) * var(--web-font-scale));
 }
 
 .header,
@@ -39,7 +47,7 @@
 .header {
   justify-content: space-between;
   gap: var(--ui-space-12);
-  padding: var(--ui-space-12) var(--ui-space-16);
+  padding: calc(var(--ui-space-12) + env(safe-area-inset-top)) var(--ui-space-16) var(--ui-space-12);
   border-bottom: 1px solid var(--ui-border);
   background: var(--ui-panel);
 }
@@ -55,13 +63,13 @@
 
 .header > p {
   color: var(--ui-muted);
-  font-size: 14px;
+  font-size: 0.875em;
   text-align: right;
 }
 
 .eyebrow {
   color: var(--ui-muted);
-  font-size: 13px;
+  font-size: 0.8125em;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -72,6 +80,10 @@
   padding: var(--ui-space-8) var(--ui-space-16);
   color: var(--ui-ink);
   background: color-mix(in srgb, var(--ui-accent) 18%, var(--ui-panel));
+}
+
+.noticeSlot {
+  min-height: 0;
 }
 
 .notice button,
@@ -100,6 +112,11 @@
   gap: var(--ui-space-16);
 }
 
+.lobbyLayout {
+  display: grid;
+  gap: var(--ui-space-16);
+}
+
 .hero,
 .infoCard,
 .placeholder {
@@ -114,9 +131,38 @@
   padding: clamp(var(--ui-space-16), 4vw, 40px);
 }
 
+.stadiumPreview {
+  display: flex;
+  align-items: end;
+  min-height: clamp(160px, 30vh, 300px);
+  overflow: hidden;
+  border: 1px solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) - 4px);
+  background:
+    linear-gradient(0deg, color-mix(in srgb, var(--ui-scrim) 70%, transparent), transparent 60%),
+    url('/assets/fields/scene_01.webp') center / cover;
+}
+
+.stadiumPreview > div {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: var(--ui-space-12);
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+
+.stadiumPreview strong {
+  font-size: 1.25em;
+}
+
+.stadiumPreview span {
+  font-size: 0.875em;
+}
+
 .lobby h1,
 .placeholder h1 {
-  font-size: clamp(32px, 7vw, 52px);
+  font-size: clamp(2em, 7vw, 3.25em);
   line-height: 1.1;
 }
 
@@ -142,11 +188,37 @@
 }
 
 .infoCard h2 {
-  font-size: 18px;
+  font-size: 1.125em;
 }
 
 .infoCard p {
   margin-top: var(--ui-space-8);
+}
+
+.lobbyAside {
+  display: none;
+}
+
+.asideCard {
+  display: grid;
+  gap: var(--ui-space-8);
+  padding: var(--ui-space-16);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-panel);
+}
+
+.asideCard h2,
+.asideCard p {
+  margin: 0;
+}
+
+.asideCard h2 {
+  font-size: 1.125em;
+}
+
+.asideCard p {
+  color: var(--ui-muted);
 }
 
 .placeholder {
@@ -160,11 +232,12 @@
   gap: 2px;
   border-top: 1px solid var(--ui-border);
   background: var(--ui-panel);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .mainNav button {
   flex: 1;
-  padding: var(--ui-space-8) 2px calc(var(--ui-space-8) + env(safe-area-inset-bottom));
+  padding: var(--ui-space-8) 2px;
 }
 
 .mainNav button[aria-current='page'] {
@@ -237,7 +310,7 @@
   }
 
   .header,
-  .notice {
+  .noticeSlot {
     grid-column: 1 / -1;
   }
 
@@ -265,5 +338,22 @@
 
   .activeNav {
     box-shadow: inset 3px 0 0 var(--ui-accent);
+  }
+}
+
+@media (min-width: 1024px) {
+  .lobby {
+    width: min(100%, 1320px);
+  }
+
+  .lobbyLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+    align-items: stretch;
+  }
+
+  .lobbyAside {
+    display: grid;
+    align-content: start;
+    gap: var(--ui-space-16);
   }
 }
