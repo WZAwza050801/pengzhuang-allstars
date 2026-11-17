@@ -1,7 +1,7 @@
 /**
  * test:e2e — 构建产物的真实浏览器冒烟验收。
  *
- * 做什么：起 dist/server + 静态托管 dist/client，用真实 Chromium 打开页面，
+ * 做什么：起 dist/server + 静态托管测试客户端，用真实 Chromium 打开页面，
  *         校验服务端 /healthz、页面/canvas 渲染、无 JS 错误，并尽力打一杆球。
  * 不做什么：**不冒充联机对局**。两个独立客户端联机的完整对局由 `npm run test:net`
  *         与 OnlineHost 场景覆盖；本脚本只验证「构建产物真的能启动、能玩」。
@@ -16,7 +16,7 @@ import http from 'node:http';
 const ROOT = process.cwd();
 const SERVER_PORT = Number(process.env.E2E_SERVER_PORT || 2567);
 const WEB_PORT = Number(process.env.E2E_WEB_PORT || 4173);
-const DIST_CLIENT = path.join(ROOT, 'dist', 'client');
+const DIST_CLIENT = path.join(ROOT, 'work', 'test-client');
 const DIST_SERVER = path.join(ROOT, 'dist', 'server', 'index.js');
 const OUT = path.join(ROOT, 'docs', 'screens');
 
@@ -94,7 +94,7 @@ async function main() {
     record('构建产物', 'FAIL', `缺少 ${missing.join(', ')}；请先执行 npm run build`);
     return 1;
   }
-  record('构建产物', 'PASS', `dist/client/index.html 与 dist/server/index.js 均存在`);
+  record('构建产物', 'PASS', `work/test-client 与 dist/server/index.js 均存在`);
 
   fs.mkdirSync(OUT, { recursive: true });
 
@@ -114,9 +114,9 @@ async function main() {
   // 2) 静态站点
   try {
     webServer = await startWeb();
-    record('静态托管 dist/client', 'PASS', `http://127.0.0.1:${WEB_PORT}`);
+    record('静态托管测试客户端', 'PASS', `http://127.0.0.1:${WEB_PORT}`);
   } catch (e) {
-    record('静态托管 dist/client', 'FAIL', e.message);
+    record('静态托管测试客户端', 'FAIL', e.message);
     return 1;
   }
 
@@ -266,6 +266,17 @@ async function main() {
       record('比赛宿主释放', released ? 'PASS' : 'FAIL', '退出回大厅并释放自动化句柄');
     } catch (e) { record('平台生命周期验收', 'FAIL', e.message.slice(0, 180)); }
   }
+  const production = await ctx.newPage();
+  production.on('pageerror',e=>errors.push(e.message));
+  production.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+  await production.goto(`http://127.0.0.1:${SERVER_PORT}/`);
+  await production.fill('.nick','production');await production.click('.btn-play');await production.uncheck('.timer');await production.click('[data-bot="easy"]');
+  await production.waitForSelector('.game canvas');
+  const noHandle=await production.evaluate(()=>!window.__pz&&!window.__fieldCalibration);
+  const html=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/field-debug.html`)).text();
+  const noEntry=!html.includes('/src/fieldDebug.ts')&&!fs.existsSync(path.join(ROOT,'dist/client/field-debug.html'));
+  record('生产包调试隔离', noHandle && noEntry ? 'PASS' : 'FAIL', '实际生产页可进入比赛，调试句柄和调试HTML均未发布');
+  await production.close();
   record('运行时 JS 错误', errors.length === 0 ? 'PASS' : 'FAIL', errors.length ? errors.slice(0, 3).join(' | ').slice(0, 300) : 'console error / pageerror 均为 0');
 
   const failed = results.filter((r) => r.status === 'FAIL');

@@ -100,19 +100,25 @@ export function createAssetCatalog(root = ROOT): AssetCatalog {
     aliases.push({ id, target: fileId(rel), usage });
   };
   const raw = (id: string, filename: string, kind: 'procedural-field' | 'procedural-audio') => {
-    const b = readFileSync(path.join(root, filename));
+    const filenames =
+      kind === 'procedural-field'
+        ? [filename, 'client/src/quality.ts', 'packages/game-core/src/field-art.ts', 'packages/game-core/src/camera.ts']
+        : [filename];
+    const sources = filenames.map((name) => ({ path: name, bytes: readFileSync(path.join(root, name)) }));
+    const b = canonicalJson(sources.map((source) => ({ path: source.path, sha256: sha(source.bytes) })));
+
     assets.push({
       id,
       kind,
       path: null,
-      bytes: b.length,
+      bytes: sources.reduce((sum, source) => sum + source.bytes.length, 0),
       sha256: sha(b),
       width: null,
       height: null,
       anchors: {},
       category: kind,
       priority: 'match',
-      source: { evidence: filename, kind: 'rebuilt' },
+      source: { evidence: filenames.join('; '), kind: 'rebuilt' },
       rights: 'unverified',
       releaseAllowed: false,
       rightsEvidence: null,

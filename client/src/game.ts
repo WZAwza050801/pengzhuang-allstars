@@ -155,6 +155,7 @@ export class GameView {
     });
     this.raf = requestAnimationFrame(this.frame);
     // automation handle for tools/e2e-*.mjs
+    if (import.meta.env.DEV || import.meta.env.MODE === 'test') {
     this.debugHandle = {
       state: () => this.state,
       playing: () => !!this.play,
@@ -171,6 +172,7 @@ export class GameView {
       resources: () => this.r.resourceStats(),
     };
     (window as unknown as { __pz: unknown }).__pz = this.debugHandle;
+    }
     this.unsubscribers.push(this.platform.lifecycle.onChange((state) => state === 'background' ? this.suspend() : this.resume()));
     } catch (error) { this.dispose(); throw error; }
   }

@@ -18,6 +18,8 @@ for (const dir of ['config', 'tests', 'packages']) walk(dir);
 files.push(
   'eslint.config.mjs',
   'vitest.config.ts',
+  'client/src/fieldDebug.ts',
+  'client/src/quality.ts',
   'tools/format.mjs',
   'tools/check-config.ts',
   'tools/check-toolchain.mjs',

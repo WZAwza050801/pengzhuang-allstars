@@ -11,3 +11,5 @@
 保留并显式排除三项：自引用的catalog.json、历史带时间戳art/manifest.json、空遗留文件assets/players/g03。具体原因在config/asset-catalog-policy.json；没有删除原文件。现有public/art/raw/cutout是公开目录副本，当前标为optional，发布精简由AST-05负责。
 
 当前所有资源的商业再分发授权均未核实，releaseAllowed=false；不能将原版、重建或自行编写代码描述为已经获得完整商业发行授权。REL-01取得证据或替换后再修改来源策略。缺凭据不阻止本地工程验收。
+
+程序化场地hash还包含quality、field-art和camera的源文件hash，避免这些绘制依赖变化时目录版本不变；bytes为这些源文件字节数之和，不是网络图片尺寸。source.evidence列出完整纳入列表。

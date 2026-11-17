@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "assets-9b502dc981eb5682",
+  "version": "assets-375bd10bc72169f2",
   "minProtocol": 1,
   "maxProtocol": 1,
   "assets": [
@@ -8379,7 +8379,7 @@
       "kind": "procedural-audio",
       "path": null,
       "bytes": 2730,
-      "sha256": "419e0a2673254f0e2506d32e6afeb76fccb19c80f68bb4c11f4eef933f7a113b",
+      "sha256": "cf75adb673a683e10ead09cf7f77582f5f68764f3a8a6141a44a7987cf5c3a98",
       "width": null,
       "height": null,
       "anchors": {},
@@ -8398,15 +8398,15 @@
       "id": "procedural.field",
       "kind": "procedural-field",
       "path": null,
-      "bytes": 53487,
-      "sha256": "2574dc37b8102ddb09f0f614ed5bbf619e67326ea48f65bd9a50999f93d211f3",
+      "bytes": 59740,
+      "sha256": "2e9e93afbd6162000cd6c019ecabba134e5114b3cf6ebfc02cbeca4d226028db",
       "width": null,
       "height": null,
       "anchors": {},
       "category": "procedural-field",
       "priority": "match",
       "source": {
-        "evidence": "client/src/render.ts",
+        "evidence": "client/src/render.ts; client/src/quality.ts; packages/game-core/src/field-art.ts; packages/game-core/src/camera.ts",
         "kind": "rebuilt"
       },
       "rights": "unverified",

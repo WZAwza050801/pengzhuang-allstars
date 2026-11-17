@@ -708,8 +708,8 @@
     },
     {
       "path": "client/public/assets/catalog.json",
-      "bytes": 259361,
-      "sha256": "1a799ec728e216fa1b08fdfa732b5ebd74f3bb8e5ea4a38b00874994c6f85368",
+      "bytes": 259455,
+      "sha256": "f6bedb8768d2fc8a30c4c0cf9e4a91b3b58e9aae119be08e9581e93156fb2b0e",
       "usage": "runtime",
       "category": "runtime-other-unverified",
       "sourceEvidence": "No more specific source evidence; review required",

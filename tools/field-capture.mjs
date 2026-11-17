@@ -111,6 +111,35 @@ try {
       2,
     ) + '\n',
   );
+  const matrix3 = await audit.evaluate(() => window.__fieldCalibration.matrixAudit());
+  const matrix1 = await page.evaluate(() => window.__fieldCalibration.matrixAudit());
+  const matrix = [...matrix1, ...matrix3];
+  if (matrix.length !== 144 || matrix.some((row) => row.error >= 1e-6))
+    throw new Error('Field viewport/drag matrix failed');
+  await writeFile(
+    path.join(out, 'viewports.json'),
+    JSON.stringify(
+      { cases: matrix.length, maxIntentError: Math.max(...matrix.map((row) => row.error)), matrix },
+      null,
+      2,
+    ) + '\n',
+  );
+  for (const [width, height] of [
+    [320, 568],
+    [390, 844],
+    [768, 1024],
+    [1440, 900],
+  ])
+    for (const side of [0, 1]) {
+      const scenario = await browser.newPage({ viewport: { width: width + 24, height: Math.min(height + 200, 1200) } });
+      await scenario.goto(`${url}?skin=scene_01&side=${side}&width=${width}&height=${height}`);
+      await scenario.waitForFunction(() => window.__fieldCalibration?.ready);
+      await scenario
+        .locator('canvas')
+        .screenshot({ path: path.join(out, `viewport-${width}x${height}-side${side}.png`) });
+      await scenario.close();
+    }
+  console.log(`Field viewport/drag matrix: ${matrix.length} cases, 8 actual viewport screenshots`);
   await cdp.detach();
   await audit.close();
   console.log(

@@ -27,7 +27,7 @@
     "calibrate": "tsx tools/calibrate.ts",
     "test:physics": "tsx tools/physics-tests.ts",
     "test:net": "tsx tools/net-tests.ts",
-    "test:e2e": "node tools/e2e-browser.mjs",
+    "test:e2e": "npm run build:test-client && node tools/e2e-browser.mjs",
     "test": "npm run test:physics && npm run test:net",
     "backup": "tsx tools/backup.ts",
     "lint": "eslint .",
@@ -46,7 +46,8 @@
     "export:game-config": "tsx tools/export-game-config.ts --write",
     "test:field": "vitest run --project unit tests/field*.test.ts",
     "assets:catalog": "tsx tools/asset-catalog.ts --write",
-    "check:assets": "tsx tools/asset-catalog.ts"
+    "check:assets": "tsx tools/asset-catalog.ts",
+    "build:test-client": "npm run check:assets && vite build --config client/vite.config.ts --mode test --outDir ../work/test-client"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

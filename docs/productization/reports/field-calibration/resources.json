@@ -1,9 +1,9 @@
 {
   "cycles": 15,
   "deviceScaleFactor": 3,
-  "beforeHeapBytes": 3338036,
-  "afterHeapBytes": 3757308,
-  "heapDeltaBytes": 419272,
+  "beforeHeapBytes": 3348380,
+  "afterHeapBytes": 3769092,
+  "heapDeltaBytes": 420712,
   "resources": [
     {
       "before": {
