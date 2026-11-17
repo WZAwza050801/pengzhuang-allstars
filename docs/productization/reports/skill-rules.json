@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 1,
+  "semanticVersion": "skill-timing-1",
+  "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+  "lifecycle": {
+    "preturn": "beginTurn at a new action; never on reconnect",
+    "preview": "rng=null; never rolls onShot",
+    "counters": "end of owner full turn; not after first extra action",
+    "goal": "reset all statuses; conceding side kickoff; no extra action",
+    "end": "no new skills, passes, resolution or result overwrite",
+    "reconnect": "restore RNG and status flags; do not call beginTurn"
+  },
+  "effects": {
+    "shooterBuff": {
+      "trigger": "preturn",
+      "duration": "current-action",
+      "stack": "multiply-selected-shooter-only"
+    },
+    "extraAction": {
+      "trigger": "preturn",
+      "duration": "owner-turn",
+      "stack": "one-extra-action-until-owner-turn-ends"
+    },
+    "ballBoost": {
+      "trigger": "onShot",
+      "duration": "current-shot",
+      "stack": "first-eligible-ball-contact-only"
+    },
+    "sendOffOnHit": {
+      "trigger": "onShot",
+      "duration": "owner-turn-end",
+      "stack": "set-duration-on-unique-opponents-hit"
+    },
+    "freezeOnHit": {
+      "trigger": "onShot",
+      "duration": "owner-turn-end",
+      "stack": "maximum-remaining-duration"
+    },
+    "anchor": {
+      "trigger": "defense",
+      "duration": "current-action",
+      "stack": "static-if-frozen-or-anchored"
+    },
+    "halfMassAura": {
+      "trigger": "passive",
+      "duration": "while-on-pitch-in-own-half",
+      "stack": "strongest-aura-per-side; multiply-shooter-buff"
+    }
+  },
+  "probabilityExperiment": {
+    "fixture": "only p01 alien enabled; current unmodified probabilities",
+    "seed": 42,
+    "cardLevel": 10,
+    "samples": 10000,
+    "triggered": 2022,
+    "expected": 0.2,
+    "observed": 0.2022,
+    "wilson95": [
+      0.19444288432374895,
+      0.2101858335080088
+    ],
+    "declaredTestTolerance": 0.02
+  },
+  "skills": [
+    {
+      "id": "alien",
+      "trigger": "preturn",
+      "effect": {
+        "type": "shooterBuff",
+        "speedMul": 1.15,
+        "massMul": 1.5
+      },
+      "probability": [
+        0.1,
+        0.15,
+        0.2
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "recovered:S03",
+      "effectSource": "rebuilt（公告只给出概率，未说明效果）",
+      "policy": {
+        "trigger": "preturn",
+        "duration": "current-action",
+        "stack": "multiply-selected-shooter-only"
+      }
+    },
+    {
+      "id": "fox",
+      "trigger": "onShot",
+      "effect": {
+        "type": "ballBoost",
+        "ballSpeedMul": 1.35,
+        "requireInBox": true
+      },
+      "probability": [
+        0.2,
+        0.25,
+        0.3
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "recovered:S03",
+      "effectSource": "rebuilt（按技能名设计）",
+      "policy": {
+        "trigger": "onShot",
+        "duration": "current-shot",
+        "stack": "first-eligible-ball-contact-only"
+      }
+    },
+    {
+      "id": "king",
+      "trigger": "preturn",
+      "effect": {
+        "type": "shooterBuff",
+        "curveMul": 2,
+        "speedMul": 1.1
+      },
+      "probability": [
+        0.15,
+        0.2,
+        0.25
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "rebuilt",
+      "policy": {
+        "trigger": "preturn",
+        "duration": "current-action",
+        "stack": "multiply-selected-shooter-only"
+      }
+    },
+    {
+      "id": "rocket",
+      "trigger": "preturn",
+      "effect": {
+        "type": "shooterBuff",
+        "speedMul": 1.3
+      },
+      "probability": [
+        0.15,
+        0.2,
+        0.25
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "rebuilt",
+      "policy": {
+        "trigger": "preturn",
+        "duration": "current-action",
+        "stack": "multiply-selected-shooter-only"
+      }
+    },
+    {
+      "id": "sendoff",
+      "trigger": "onShot",
+      "effect": {
+        "type": "sendOffOnHit"
+      },
+      "probability": [
+        0.1,
+        0.15,
+        0.2
+      ],
+      "durationTurns": 2,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "recovered:S04 + rebuilt（原句有歧义：触碰对象按“对方球员”、回合按“该球员所属方的回合”解释）",
+      "policy": {
+        "trigger": "onShot",
+        "duration": "owner-turn-end",
+        "stack": "set-duration-on-unique-opponents-hit"
+      }
+    },
+    {
+      "id": "tank",
+      "trigger": "onShot",
+      "effect": {
+        "type": "freezeOnHit"
+      },
+      "probability": [
+        0.1,
+        0.15,
+        0.2
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 3,
+      "nameSource": "recovered:S09（海外图 Moving Tank）",
+      "effectSource": "observed:S09 + rebuilt（具体效果按海外文案推断）",
+      "policy": {
+        "trigger": "onShot",
+        "duration": "owner-turn-end",
+        "stack": "maximum-remaining-duration"
+      }
+    },
+    {
+      "id": "guardian",
+      "trigger": "passive",
+      "effect": {
+        "type": "halfMassAura",
+        "massMul": [
+          1.3,
+          1.4,
+          1.5
+        ]
+      },
+      "probability": [
+        1,
+        1,
+        1
+      ],
+      "durationTurns": 0,
+      "unlockLevel": 1,
+      "nameSource": "observed:S05 press_2 球员详情弹窗（LV1 守护神）",
+      "effectSource": "observed:S05（详情文字可辨认“己方半场…重量50%”）；等级分档 rebuilt",
+      "policy": {
+        "trigger": "passive",
+        "duration": "while-on-pitch-in-own-half",
+        "stack": "strongest-aura-per-side; multiply-shooter-buff"
+      }
+    },
+    {
+      "id": "wall",
+      "trigger": "defense",
+      "effect": {
+        "type": "anchor"
+      },
+      "probability": [
+        0.2,
+        0.25,
+        0.3
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "rebuilt",
+      "policy": {
+        "trigger": "defense",
+        "duration": "current-action",
+        "stack": "static-if-frozen-or-anchored"
+      }
+    },
+    {
+      "id": "cannon",
+      "trigger": "onShot",
+      "effect": {
+        "type": "ballBoost",
+        "ballSpeedMul": 1.3,
+        "requireInBox": false
+      },
+      "probability": [
+        0.15,
+        0.2,
+        0.25
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "rebuilt",
+      "policy": {
+        "trigger": "onShot",
+        "duration": "current-shot",
+        "stack": "first-eligible-ball-contact-only"
+      }
+    },
+    {
+      "id": "charge",
+      "trigger": "preturn",
+      "effect": {
+        "type": "shooterBuff",
+        "massMul": 1.6
+      },
+      "probability": [
+        0.15,
+        0.2,
+        0.25
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "rebuilt",
+      "policy": {
+        "trigger": "preturn",
+        "duration": "current-action",
+        "stack": "multiply-selected-shooter-only"
+      }
+    },
+    {
+      "id": "extra",
+      "trigger": "preturn",
+      "effect": {
+        "type": "extraAction"
+      },
+      "probability": [
+        0.08,
+        0.1,
+        0.12
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "recovered:S04 证实“额外行动”效果存在；归属该球员与概率为 rebuilt",
+      "policy": {
+        "trigger": "preturn",
+        "duration": "owner-turn",
+        "stack": "one-extra-action-until-owner-turn-ends"
+      }
+    },
+    {
+      "id": "flash",
+      "trigger": "preturn",
+      "effect": {
+        "type": "shooterBuff",
+        "speedMul": 1.25
+      },
+      "probability": [
+        0.15,
+        0.2,
+        0.25
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "rebuilt",
+      "policy": {
+        "trigger": "preturn",
+        "duration": "current-action",
+        "stack": "multiply-selected-shooter-only"
+      }
+    },
+    {
+      "id": "banana",
+      "trigger": "preturn",
+      "effect": {
+        "type": "shooterBuff",
+        "curveMul": 1.8
+      },
+      "probability": [
+        0.2,
+        0.25,
+        0.3
+      ],
+      "durationTurns": 1,
+      "unlockLevel": 1,
+      "nameSource": "rebuilt",
+      "effectSource": "rebuilt",
+      "policy": {
+        "trigger": "preturn",
+        "duration": "current-action",
+        "stack": "multiply-selected-shooter-only"
+      }
+    }
+  ],
+  "unsupportedSourcePlayers": [
+    "p101",
+    "p102",
+    "p103",
+    "p105",
+    "p109",
+    "p110",
+    "p112",
+    "p116",
+    "p117",
+    "p17",
+    "p18",
+    "p19",
+    "p20",
+    "p21",
+    "p23",
+    "p24",
+    "p25",
+    "p26",
+    "p27",
+    "p28",
+    "p29",
+    "p31",
+    "p32",
+    "p33",
+    "p34",
+    "p36",
+    "p37",
+    "p39",
+    "p40",
+    "p41",
+    "p42",
+    "p45",
+    "p46",
+    "p47",
+    "p48",
+    "p49",
+    "p50",
+    "p51",
+    "p52",
+    "p53",
+    "p55",
+    "p56",
+    "p58",
+    "p59",
+    "p60",
+    "p64",
+    "p65",
+    "p66",
+    "p67",
+    "p68",
+    "p69",
+    "p70",
+    "p71",
+    "p72",
+    "p73",
+    "p74",
+    "p75",
+    "p76",
+    "p77",
+    "p78",
+    "p79",
+    "p80",
+    "p82",
+    "p85",
+    "p87",
+    "p88",
+    "p89",
+    "p90",
+    "p92",
+    "p93",
+    "p96"
+  ]
+}

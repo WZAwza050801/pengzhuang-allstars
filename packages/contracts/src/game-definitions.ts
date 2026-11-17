@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { SKILL_EFFECT_POLICIES } from '../../game-core/src/skill-policy';
 import { VersionIdSchema } from './configuration';
 import { FieldGeometrySchema } from './field';
 import { PhysicsConfigSchema } from './physics';
@@ -215,13 +216,7 @@ export const GameDefinitionsSchema = z
     for (const s of skills) {
       if (s.unlockLevel > data.rules.levels.max || s.probability.length !== order.length)
         fail(`Invalid skill levels: ${s.id}`);
-      const allowed: Record<string, readonly string[]> = {
-        preturn: ['shooterBuff', 'extraAction'],
-        onShot: ['ballBoost', 'sendOffOnHit', 'freezeOnHit'],
-        defense: ['anchor'],
-        passive: ['halfMassAura'],
-      };
-      if (!allowed[s.trigger].includes(s.effect.type)) fail(`Unsupported trigger/effect: ${s.id}`);
+      if (SKILL_EFFECT_POLICIES[s.effect.type].trigger !== s.trigger) fail(`Unsupported trigger/effect: ${s.id}`);
       if (s.trigger === 'passive' && (s.durationTurns !== 0 || s.probability.some((p) => p !== 1)))
         fail(`Invalid passive semantics: ${s.id}`);
       if (s.trigger !== 'passive' && s.durationTurns < 1) fail(`Invalid active duration: ${s.id}`);

@@ -109,6 +109,7 @@ function prob(skill: SkillDef, level: number) {
 
 /** Roll pre-turn skills for the side to move and defence skills for the other side. */
 export function beginTurn(st: MatchState, data: GameData): MatchEvent[] {
+  if (st.over) return [];
   const ev: MatchEvent[] = [];
   const rng = { s: st.rng };
   for (const p of st.pieces) {
@@ -295,6 +296,8 @@ export interface ShotOutcome {
 
 /** Authoritative resolution of one validated shot. Mutates `st` and begins the next turn. */
 export function resolveShot(st: MatchState, data: GameData, input: ShotInput): ShotOutcome {
+  const invalid = validateShot(st, data, st.turn, input);
+  if (invalid) throw new Error(`Invalid authoritative shot: ${invalid}`);
   const rng = { s: st.rng };
   const ev: MatchEvent[] = [];
   const side = st.turn;
@@ -354,6 +357,7 @@ export function resolveShot(st: MatchState, data: GameData, input: ShotInput): S
 
 /** Turn timeout or voluntary skip. Counts toward the shot limit. */
 export function passTurn(st: MatchState, data: GameData, reason: string): MatchEvent[] {
+  if (st.over) return [];
   const ev: MatchEvent[] = [{ type: 'pass', side: st.turn, reason }];
   st.shotNo++;
   st.extraUsed = false;
@@ -374,6 +378,7 @@ export function endByTime(st: MatchState): MatchEvent[] {
 }
 
 export function forfeit(st: MatchState, loser: Side, reason: string): MatchEvent[] {
+  if (st.over) return [];
   st.over = true;
   st.winner = (1 - loser) as Side;
   st.endReason = reason;
