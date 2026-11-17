@@ -147,6 +147,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### ARC-04
+
+- 状态：完成
+- 开始：2026-11-17 12:50 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / ae8d2d4ce6882f1ed68cc6f54dcb0ab7a1710b90
+- 范围：接入真实PostgreSQL17、参数化SQL与跨repository事务、受控并发迁移和隔离数据库集成测试。
+- 实现：真实PostgreSQL17与pg事务/repository、advisory并发迁移和隔离集成runner，生产禁止隐式down。
+- 验证：check通过；真实PG17的并发迁移、跨repo回滚、SQL参数/精度、DDL失败回滚和down/up共5项通过。
+- 证据：本提交（git log -- docs/productization/reports/ARC-04.md 可定位）；docs/productization/reports/ARC-04.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

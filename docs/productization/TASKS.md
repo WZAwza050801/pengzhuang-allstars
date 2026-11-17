@@ -83,7 +83,7 @@
   - 验收：切后台/resize/dispose 有统一语义；平台代码不污染物理。
   - 验证：无 window 环境导入核心；挂载/卸载/订阅释放测试。
 
-- [ ] **ARC-04** 建立数据库和事务接口
+- [x] **ARC-04** 建立数据库和事务接口
   - 依赖：ARC-02、FND-04
   - 实施：接 PostgreSQL/pg/SQL migrations；建立 repository 与事务注入；测试用独立 DB；处理连接池/关闭。
   - 产物：persistence 包、首个真实 migration、集成测试环境。
