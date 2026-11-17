@@ -123,7 +123,9 @@ test('runtime starts and closes sequentially; bind failure releases resources an
     const again = await startRuntime(config, 0);
     await again.close();
     const occupied = createServer();
-    await new Promise<void>((resolve) => occupied.listen(0, '127.0.0.1', resolve));
+    // Occupy the same wildcard address as Colyseus; Windows can bind an IPv4-only
+    // listener alongside a wildcard IPv6 listener on the same port.
+    await new Promise<void>((resolve) => occupied.listen(0, resolve));
     const addr = occupied.address();
     if (!addr || typeof addr === 'string') throw new Error('No port');
     try {

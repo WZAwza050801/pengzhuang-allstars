@@ -21,6 +21,19 @@
 
 ## 任务执行记录
 
+### 本地验证恢复（BAL-06 前置）
+
+- 状态：完成
+- 开始：2026-11-17 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / 1eb0cc4
+- 范围：修复 Windows 端口占用测试的地址族不一致，并让 Lint 排除 Git 已忽略的历史临时脚本；不提前勾选 QA-01。
+- 复现：上轮实跑单元测试 60/61，端口占用场景未拒绝；npm run check 在 .qwen 和 runs/_*.cjs 报 113 个 Lint 错误。
+- 实现：占用端口的测试夹具使用与运行时相同的通配监听地址；增加两个对应的 Lint ignore。资源来源策略升级 v3，排除 .gitignore 已列明的美术生成中间目录与 Python 缓存；原有 987 项资源的 hash、来源与权利状态均未改变。
+- 验证：Node 24.22.1/npm 11.9.0；server.test.ts 2/2；完整 npm run check 退出 0，单元 61/61、契约 4/4、资源与数值/经济检查全部通过。
+- 证据：本提交（git log -- tests/server.test.ts 可定位）；未改游戏规则或提前勾选任何产品任务。
+- 下一项：BAL-06。
+
 ### FND-01
 
 - 状态：完成

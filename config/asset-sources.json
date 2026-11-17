@@ -1,7 +1,7 @@
 {
-  "version": 2,
+  "version": 3,
   "roots": ["client/public", "art", "materials", "research", "data", "pengzhuang_research.html"],
-  "excludePrefixes": ["data/rooms/"],
+  "excludePrefixes": ["data/rooms/", "art/ai/", "art/ai-sample/", "art/ai-v2/", "art/cutout/", "art/__pycache__/"],
   "rules": [
     {
       "prefix": "client/public/assets/players_original/",

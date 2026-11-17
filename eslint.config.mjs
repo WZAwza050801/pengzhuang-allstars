@@ -12,6 +12,8 @@ export default ts.config(
       'research/**',
       'art/**',
       'docs/**',
+      '.qwen/**',
+      'runs/_*.cjs',
       'tools/_scratch*',
     ],
   },
