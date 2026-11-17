@@ -20,6 +20,8 @@ export class VersionedRegistry<T> {
     Readonly<{ payload: T; sha256: string; minProtocol: number; maxProtocol: number }>
   >();
   private active: string | null = null;
+  private readonly disabled = new Set<string>();
+  private canary: { version: string; percent: number } | null = null;
   constructor(
     private readonly payloadSchema: z.ZodType<T>,
     private readonly protocol = PROTOCOL_VERSION,
@@ -48,7 +50,28 @@ export class VersionedRegistry<T> {
   }
   activate(version: string): void {
     this.get(version);
+    if (this.disabled.has(version)) throw new Error('Config version disabled');
     this.active = version;
+    this.canary = null;
+  }
+  rollout(version: string, percent: number): void {
+    this.get(version);
+    this.get();
+    if (!Number.isInteger(percent) || percent < 0 || percent > 100) throw new Error('Invalid rollout percent');
+    if (this.disabled.has(version)) throw new Error('Config version disabled');
+    this.canary = percent ? { version, percent } : null;
+  }
+  forNewSession(serverCohort: string): T {
+    if (typeof serverCohort !== 'string' || !serverCohort.length || serverCohort.length > 256)
+      throw new Error('Invalid server cohort');
+    const bucket = createHash('sha256').update(serverCohort).digest().readUInt32BE(0) % 10000;
+    return this.canary && bucket < this.canary.percent * 100 ? this.get(this.canary.version) : this.get();
+  }
+  disable(version: string): void {
+    this.get(version);
+    if (version === this.active) throw new Error('Cannot disable active configuration; rollback first');
+    this.disabled.add(version);
+    if (this.canary?.version === version) this.canary = null;
   }
   get(version = this.active): T {
     const entry = version ? this.entries.get(version) : undefined;
@@ -59,12 +82,42 @@ export class VersionedRegistry<T> {
     return {
       schemaVersion: 1,
       active: this.active,
+      rollout: this.canary ? { ...this.canary } : null,
       versions: [...this.entries].map(([version, entry]) => ({
         version,
         sha256: entry.sha256,
         minProtocol: entry.minProtocol,
         maxProtocol: entry.maxProtocol,
+        disabled: this.disabled.has(version),
       })),
     };
   }
+}
+
+/** JSON Pointer paths; arrays are replaced atomically so index shifts cannot disguise a change. */
+export function diffConfiguration(before: unknown, after: unknown) {
+  canonicalJson(before);
+  canonicalJson(after);
+  const result: { path: string; before: unknown; after: unknown }[] = [];
+  function compare(left: unknown, right: unknown, pointer: string) {
+    if (left === right || (left !== undefined && right !== undefined && canonicalJson(left) === canonicalJson(right)))
+      return;
+    if (
+      left &&
+      right &&
+      typeof left === 'object' &&
+      typeof right === 'object' &&
+      !Array.isArray(left) &&
+      !Array.isArray(right)
+    ) {
+      for (const key of [...new Set([...Object.keys(left), ...Object.keys(right)])].sort())
+        compare(
+          (left as Record<string, unknown>)[key],
+          (right as Record<string, unknown>)[key],
+          `${pointer}/${key.replace(/~/g, '~0').replace(/\//g, '~1')}`,
+        );
+    } else result.push({ path: pointer || '/', before: structuredClone(left), after: structuredClone(right) });
+  }
+  compare(before, after, '');
+  return result;
 }

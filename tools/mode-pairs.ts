@@ -15,13 +15,15 @@ export function runModePairs(options: {
   mode?: ModeId;
   lineup?: string[];
   maxEvaluations?: number;
+  level?: number;
 }) {
   const data = options.data ?? DEFAULT_DATA,
     mode = options.mode ?? 'friend',
     rules = rulesForMode(data, mode);
   const lineup = options.lineup ?? ['p01', 'p02', 'p03', 'p04', 'p05'];
   const selection = resolveModeLineup(data, rules, lineup, {
-    owned: lineup.map((playerDefId) => ({ playerDefId, level: 5 })),
+    owned: lineup.map((playerDefId) => ({ playerDefId, level: options.level ?? 5 })),
+    levels: lineup.map(() => options.level ?? 5),
   });
   const maxEvaluations = options.maxEvaluations ?? 2;
   const rows = [];

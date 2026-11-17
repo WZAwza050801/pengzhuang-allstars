@@ -26,6 +26,7 @@ files.push(
   'tools/ai-browser.mjs',
   'tools/ai-latency.ts',
   'tools/mode-pairs.ts',
+  'tools/balance-experiments.ts',
   'tools/economy-simulation.ts',
   'tools/format.mjs',
   'tools/check-config.ts',

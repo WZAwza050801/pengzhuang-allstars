@@ -111,8 +111,8 @@ export class MatchRoom extends Room {
   private static readonly pendingRestores = new Map<string, RoomRecord>();
   private static sharedStore: RoomStore | null = null;
   private static sharedTiming: Partial<MatchTiming> = {};
-  private static dataProvider: (version?: string) => GameData = (version) => { if (version && version !== DEFAULT_DATA.version) throw netError('config-mismatch'); return DEFAULT_DATA; };
-  static useDataProvider(provider: (version?: string) => GameData): () => void { const previous = MatchRoom.dataProvider; MatchRoom.dataProvider = provider; return () => { MatchRoom.dataProvider = previous; }; }
+  private static dataProvider: (version?: string, serverCohort?: string) => GameData = (version) => { if (version && version !== DEFAULT_DATA.version) throw netError('config-mismatch'); return DEFAULT_DATA; };
+  static useDataProvider(provider: (version?: string, serverCohort?: string) => GameData): () => void { const previous = MatchRoom.dataProvider; MatchRoom.dataProvider = provider; return () => { MatchRoom.dataProvider = previous; }; }
 
   /** Rooms keep the store they were created with. Pass null to stop persisting rooms created from now on. */
   static useStore(store: RoomStore | null): void {
@@ -144,7 +144,7 @@ export class MatchRoom extends Room {
     return typeof key === 'string' ? MatchRoom.pendingRestores.get(key) : undefined;
   }
 
-  protected resolveGameData(version?: string): GameData { return MatchRoom.dataProvider(version); }
+  protected resolveGameData(version?: string, serverCohort?: string): GameData { return MatchRoom.dataProvider(version, serverCohort); }
   protected resolveStore(): RoomStore | null { return MatchRoom.sharedStore; }
   protected resolveClock(): ServerClock { return systemClock; }
   protected authenticate(options: unknown): GuestIdentity { return authenticateJoin(options); }
@@ -174,7 +174,7 @@ export class MatchRoom extends Room {
 
   override async onCreate(options: unknown): Promise<void> {
     const record = MatchRoom.restoreRecordFor(options);
-    this.data = freezeSnapshot(this.resolveGameData(record?.configVersion));
+    this.data = freezeSnapshot(this.resolveGameData(record?.configVersion, randomUUID()));
     if (record?.modeRules) this.rules = verifyModeRules(this.data, record.modeRules);
     else {
       const mode = !record && isRecord(options) ? options.mode : undefined;

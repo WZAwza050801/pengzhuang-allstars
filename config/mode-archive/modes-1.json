@@ -1,0 +1,43 @@
+{
+  "modes": {
+    "friend": {
+      "fixedLevel": 5,
+      "label": "均衡好友赛",
+      "levelPolicy": "uniform",
+      "ratingScope": null,
+      "requiresOwnership": false,
+      "rewardScope": null,
+      "supportedSkillsOnly": false
+    },
+    "growth": {
+      "fixedLevel": null,
+      "label": "持有卡赛事",
+      "levelPolicy": "owned",
+      "ratingScope": "growth",
+      "requiresOwnership": true,
+      "rewardScope": "growth",
+      "supportedSkillsOnly": true
+    },
+    "practice": {
+      "fixedLevel": null,
+      "label": "自由练习",
+      "levelPolicy": "selectable",
+      "ratingScope": null,
+      "requiresOwnership": false,
+      "rewardScope": null,
+      "supportedSkillsOnly": false
+    },
+    "ranked": {
+      "fixedLevel": 5,
+      "label": "均衡排位",
+      "levelPolicy": "uniform",
+      "ratingScope": "ranked",
+      "requiresOwnership": true,
+      "rewardScope": "ranked",
+      "supportedSkillsOnly": true
+    }
+  },
+  "schemaVersion": 1,
+  "status": "engineering-default",
+  "version": "modes-1"
+}

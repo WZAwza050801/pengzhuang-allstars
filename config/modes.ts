@@ -1,15 +1,25 @@
 import policy from './mode-policy.json';
+import archivedPolicy from './mode-archive/modes-1.json';
 import { ModePolicySchema, ModeRulesSchema, type ModeId, type ModeRules } from '../packages/contracts/src/modes';
 import { canonicalJson, freezeSnapshot } from '../packages/game-core/src/snapshot';
 import type { GameData } from '../shared/data';
 
 export const MODE_POLICY = freezeSnapshot(ModePolicySchema.parse(policy));
-export function rulesForMode(data: GameData, mode: ModeId): ModeRules {
+const archives = new Map([[archivedPolicy.version, freezeSnapshot(ModePolicySchema.parse(archivedPolicy))]]);
+if (
+  archives.has(MODE_POLICY.version) &&
+  canonicalJson(archives.get(MODE_POLICY.version)) !== canonicalJson(MODE_POLICY)
+)
+  throw new Error('Mode archive version conflict');
+archives.set(MODE_POLICY.version, MODE_POLICY);
+export function rulesForMode(data: GameData, mode: ModeId, modesVersion = MODE_POLICY.version): ModeRules {
+  const selected = archives.get(modesVersion);
+  if (!selected) throw new Error('Mode archive unavailable');
   return freezeSnapshot(
     ModeRulesSchema.parse({
-      ...MODE_POLICY.modes[mode],
+      ...selected.modes[mode],
       schemaVersion: 1,
-      modesVersion: MODE_POLICY.version,
+      modesVersion: selected.version,
       mode,
       gameDataVersion: data.version,
       minLevel: 1,
@@ -30,7 +40,7 @@ export function rulesForMode(data: GameData, mode: ModeId): ModeRules {
 }
 export function verifyModeRules(data: GameData, input: unknown): ModeRules {
   const parsed = ModeRulesSchema.parse(input);
-  const expected = rulesForMode(data, parsed.mode);
+  const expected = rulesForMode(data, parsed.mode, parsed.modesVersion);
   if (canonicalJson(expected) !== canonicalJson(parsed)) throw new Error('Mode rules mismatch');
   return expected;
 }

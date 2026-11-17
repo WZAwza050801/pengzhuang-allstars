@@ -49,6 +49,21 @@
 - 回滚：独立任务提交；旧协议可选字段和旧练习存档继续兼容，不改物理配置。
 - 下一项：BAL-07。
 
+### BAL-07
+
+- 状态：完成
+- 开始：2026-11-17 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / b524d9e
+- 范围：1000 场固定种子配对实验、可复现报告与敏感性分析；发布校验器；基于现有配置注册表的差异、按服务端分组灰度、停用/回滚和旧局回放验证。保留已确认的物理、技能和奖励默认，不为过门槛修改玩法。
+- 计划：先复用 8 场实验器扩展批次与统计；为注册表增加灰度和停用，房间使用服务端生成的 cohort；验证旧快照/历史回放不变并保存基线配置档案。发布校验失败会如实记录，不作为自动调参授权。
+- 实现：1000 场/500 seed 配对 + 40 场敏感性、配置指纹及真实历史重放校验；稳定服务端 cohort 灰度、停用/回滚、完整 diff、物理与模式基线归档。修正 test:balance 在 Windows 上不展开 shell 通配符导致漏跑的问题。
+- 验证：完整 npm run check 退出 0（单元 77/77、契约 5/5）；test:balance 31/31；build；physics 18/18、net 176/0；Chromium PASS=15/SKIP=0/FAIL=0。实验报告校验退出 0；严格发布检查按预期退出 1。
+- 证据：本提交（git log -- docs/productization/reports/BAL-07.md 可定位）；reports/BAL-07.md、reports/balance-experiment.json、reports/BALANCE_REPORT_TEMPLATE.md；docs/engineering/balance-release.md。
+- 风险与剩余：先手半分得分率 57.3%，近似 95% 区间 54.30%–60.30%，未达到 5pp 放量门槛。保持现有参数与灰度关闭；正式账本及跨重启控制留给 DAT/OPS，未声称平衡或生产灰度完成。
+- 回滚：独立任务提交；register 不激活、activate 旧版会清灰度、disable 不删除历史包；旧局及回放继续原快照。
+- 下一项：AST-02。
+
 ### FND-01
 
 - 状态：完成

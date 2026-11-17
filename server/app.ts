@@ -113,8 +113,8 @@ export function createGameServer(options: GameServerOptions = {}) {
     greet: false,
   });
   class RuntimeRoom extends MatchRoom {
-    protected override resolveGameData(version?: string) {
-      return options.resolveData ? deps.resolveData(version) : super.resolveGameData(version);
+    protected override resolveGameData(version?: string, serverCohort?: string) {
+      return options.resolveData ? deps.resolveData(version, serverCohort) : super.resolveGameData(version, serverCohort);
     }
     protected override resolveStore() { return options.roomStore === undefined ? super.resolveStore() : deps.roomStore; }
     protected override resolveClock() { return deps.clock; }

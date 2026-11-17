@@ -11,7 +11,7 @@ export interface OutcomeSink<T = unknown> { record(outcome: T): Promise<'stored'
 export interface ServiceDependencies {
   repository: SqlExecutor | null;
   clock: ServerClock;
-  resolveData(version?: string): GameData;
+  resolveData(version?: string, serverCohort?: string): GameData;
   roomStore: RoomStore | null;
   outcomeSink: OutcomeSink | null;
 }
