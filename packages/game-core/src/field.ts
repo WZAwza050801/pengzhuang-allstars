@@ -78,3 +78,44 @@ function segDist(px: number, py: number, ax: number, ay: number, bx: number, by:
   const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)));
   return Math.hypot(px - ax - t * dx, py - ay - t * dy);
 }
+
+/** Goal posts are shared by collision construction and development overlays. */
+export function fieldPosts(g: FieldGeometry) {
+  return [-1, 1].flatMap((sy) =>
+    [-1, 1].map((sx) => ({ x: (sx * g.goalWidth) / 2, y: (sy * g.length) / 2, radius: g.postRadius })),
+  );
+}
+export function fieldOutline(g: FieldGeometry): [number, number][] {
+  const W = g.width / 2,
+    L = g.length / 2,
+    c = g.cornerCut;
+  return [
+    [-W + c, -L],
+    [W - c, -L],
+    [W, -L + c],
+    [W, L - c],
+    [W - c, L],
+    [-W + c, L],
+    [-W, L - c],
+    [-W, -L + c],
+  ];
+}
+/** Sweep the whole-circle threshold. Existing out-of-bounds positions never count as a newly scored goal. */
+export function goalCrossing(
+  g: FieldGeometry,
+  radius: number,
+  before: { x: number; y: number },
+  after: { x: number; y: number },
+): null | { scoredBy: 0 | 1; x: number } {
+  if (![radius, before.x, before.y, after.x, after.y].every(Number.isFinite) || radius <= 0) return null;
+  const line = g.length / 2 + radius;
+  for (const sign of [-1, 1] as const) {
+    if (sign * before.y > line || sign * after.y <= line) continue;
+    const fraction = (sign * line - before.y) / (after.y - before.y);
+    if (fraction < 0 || fraction > 1) continue;
+    const x = before.x + (after.x - before.x) * fraction;
+    if (Math.abs(x) + radius > g.goalWidth / 2) continue;
+    return { scoredBy: sign === -1 ? 0 : 1, x };
+  }
+  return null;
+}

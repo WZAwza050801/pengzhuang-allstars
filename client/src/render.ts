@@ -1,6 +1,7 @@
 import type { FieldGeometry, PhysicsConfig } from '../../shared/data';
 import type { Side } from '../../shared/physics';
 import { portraitUrl } from './portraits';
+import { fieldOutline } from '../../packages/game-core/src/field';
 import { worldToView, viewToWorld, clientToWorld, cameraMatrix, fieldViewport, type Camera } from '../../packages/game-core/src/camera';
 
 export interface Skin {
@@ -117,8 +118,7 @@ export class Renderer {
     this.g = g;
     this.p = p;
     this.skin = skin;
-    const W = g.width / 2, L = g.length / 2, c = g.cornerCut;
-    this.outline = [[-W + c, -L], [W - c, -L], [W, -L + c], [W, L - c], [W - c, L], [-W + c, L], [-W, L - c], [-W, -L + c]];
+    this.outline = fieldOutline(g);
   }
 
   attachOverlay(c: HTMLCanvasElement) {

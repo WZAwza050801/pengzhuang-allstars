@@ -1,6 +1,6 @@
 import { World, Vec2, Circle, Edge, Settings, type Body, type Contact, type Fixture } from 'planck';
 import type { FieldGeometry, PhysicsConfig } from './data';
-import { fieldSegments } from '../packages/game-core/src/field';
+import { fieldSegments, fieldPosts, goalCrossing } from '../packages/game-core/src/field';
 export { fieldSegments, insideField, type FieldSegment, type SegmentKind } from '../packages/game-core/src/field';
 
 /**
@@ -120,10 +120,9 @@ export class SimWorld {
         userData: { kind: s.kind, id: s.kind === 'spring' ? `spring${s.corner}` : s.kind, corner: s.corner, n: s.n } as Tag,
       });
     }
-    const L = geom.length / 2, gw = geom.goalWidth / 2;
-    for (const sy of [-1, 1]) for (const sx of [-1, 1]) {
-      const post = this.world.createBody({ position: Vec2(sx * gw, sy * L) });
-      post.createFixture(new Circle(geom.postRadius), { userData: { kind: 'post', id: 'post' } as Tag });
+    for (const point of fieldPosts(geom)) {
+      const post = this.world.createBody({ position: Vec2(point.x, point.y) });
+      post.createFixture(new Circle(point.radius), { userData: { kind: 'post', id: 'post' } as Tag });
     }
 
     const dr = phys.disc.radius;
@@ -350,6 +349,7 @@ export class ShotRunner {
       }
     }
 
+    const beforeBall = this.pos(sim.ball);
     sim.world.step(sim.dt, phys.velocityIterations, phys.positionIterations);
     this.step++;
 
@@ -386,10 +386,9 @@ export class ShotRunner {
     }
 
     if (!this.goal) {
-      const L = this.geom.length / 2, br = phys.ball.radius;
       const bp = sim.ball.getPosition();
-      if (bp.y < -L - br) this.goal = { scoredBy: 0, t: this.t, x: bp.x };
-      else if (bp.y > L + br) this.goal = { scoredBy: 1, t: this.t, x: bp.x };
+      const crossing = goalCrossing(this.geom, phys.ball.radius, beforeBall, bp);
+      if (crossing) this.goal = { ...crossing, t: this.t };
       if (this.goal) {
         this.goalStep = this.step;
         this.events.push({ t: this.t, type: 'goal', a: String(this.goal.scoredBy), b: '', speed: 0, x: bp.x, y: bp.y });
