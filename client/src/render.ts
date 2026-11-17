@@ -1,6 +1,7 @@
 import type { FieldGeometry, PhysicsConfig } from '../../shared/data';
 import type { Side } from '../../shared/physics';
 import { portraitUrl } from './portraits';
+import { worldToView, viewToWorld, clientToWorld, cameraMatrix, fieldViewport, type Camera } from '../../packages/game-core/src/camera';
 
 export interface Skin {
   id: string;
@@ -79,10 +80,12 @@ export class Renderer {
   readonly canvas: HTMLCanvasElement;
   private readonly ctx: CanvasRenderingContext2D;
   private dpr = 1;
-  private s = 1;
-  private cx = 0;
-  private cy = 0;
-  flip = false;
+  private camera: Camera = { cx: 0, cy: 0, scale: 1, side: 0 };
+  private get s() { return this.camera.scale; }
+  private get cx() { return this.camera.cx; }
+  private get cy() { return this.camera.cy; }
+  get flip() { return this.camera.side === 1; }
+  set flip(value: boolean) { this.camera.side = value ? 1 : 0; }
   skin: Skin;
   private readonly avatars = new Map<string, HTMLImageElement>();
   /** Original corner assembly (stone + coil + dirt), grass keyed out. */
@@ -160,11 +163,6 @@ export class Renderer {
     return img.complete && img.naturalWidth ? img : null;
   }
 
-  /** World extents shown on screen (metres), including walls and goal pockets. */
-  private extents() {
-    return { w: this.g.width + 0.9, h: this.g.length + 2 * this.g.goalDepth + 0.7 };
-  }
-
   /**
    * Where the full original scene sits in world metres. artCrop is the playable rectangle in the
    * scene's pixels, so one scene pixel is width/(right-left) metres and the crop lands on [-W,W]x[-L,L].
@@ -203,30 +201,19 @@ export class Renderer {
     const b = this.sceneBox();
     if (!b) return null;
     const px = b.k * this.s;
-    const left = this.cx + b.x0 * this.s;
-    const top = this.cy + b.y0 * this.s;
+    const { x: left, y: top } = worldToView({ x: b.x0, y: b.y0 }, { ...this.camera, side: 0 });
     return { x: left + SCENE_BAR.left * px, y: top, w: (SCENE_BAR.right - SCENE_BAR.left) * px, h: SCENE_BAR.bottom * px, px };
   }
 
   resize() {
     const r = this.canvas.getBoundingClientRect();
     this.dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-    this.canvas.width = Math.round(r.width * this.dpr);
-    this.canvas.height = Math.round(r.height * this.dpr);
-    const b = this.sceneBox();
-    if (b) {
-      // Keep the walls and the inner edge of the stands in view; the scene's top (score bar) is pinned to the top edge,
-      // and the bottom goal pocket stays clear of the bottom bar. The rest of the scene may run under that bar.
-      const lowest = this.g.length / 2 + this.g.goalDepth + 0.15 - b.y0;
-      this.s = Math.min(r.width / (this.g.width + 0.8), (r.height - this.reserveBottom) / lowest);
-      this.cx = r.width / 2 - (b.x0 + b.w / 2) * this.s;
-      this.cy = -b.y0 * this.s;
-    } else {
-      const e = this.extents();
-      this.s = Math.min(r.width / e.w, r.height / e.h);
-      this.cx = r.width / 2;
-      this.cy = r.height / 2;
-    }
+    // Hidden/zero-sized stages may occur during platform transitions; keep the previous camera until visible.
+    if (r.width <= 0 || r.height <= 0) return;
+    const layout = fieldViewport(this.g, { width: r.width, height: r.height, dpr: this.dpr, side: this.camera.side, scene: this.sceneBox(), reserveBottom: this.reserveBottom });
+    this.camera = layout.camera;
+    this.canvas.width = layout.backing.width;
+    this.canvas.height = layout.backing.height;
     this.grassCache = null;
     if (this.overlay) {
       this.overlay.width = Math.round(window.innerWidth * this.dpr);
@@ -240,18 +227,20 @@ export class Renderer {
   }
 
   toScreen(x: number, y: number) {
-    const k = this.flip ? -1 : 1;
-    return { x: this.cx + x * this.s * k, y: this.cy + y * this.s * k };
+    return worldToView({ x, y }, this.camera);
   }
 
   toWorld(sx: number, sy: number) {
-    const k = this.flip ? -1 : 1;
-    return { x: ((sx - this.cx) / this.s) * k, y: ((sy - this.cy) / this.s) * k };
+    return viewToWorld({ x: sx, y: sy }, this.camera);
+  }
+
+  clientToWorld(x: number, y: number) {
+    const rect = this.canvas.getBoundingClientRect();
+    return clientToWorld({ x, y }, { x: rect.left, y: rect.top }, this.camera);
   }
 
   private worldTransform() {
-    const k = (this.flip ? -1 : 1) * this.s * this.dpr;
-    this.ctx.setTransform(k, 0, 0, k, this.cx * this.dpr, this.cy * this.dpr);
+    this.ctx.setTransform(...cameraMatrix(this.camera, this.dpr));
   }
 
   draw(sc: Scene) {
@@ -746,8 +735,7 @@ export class Renderer {
     octx.clearRect(0, 0, o.width, o.height);
     if (!aim) return;
     const r = this.canvas.getBoundingClientRect();
-    const k = (this.flip ? -1 : 1) * this.s * this.dpr;
-    octx.setTransform(k, 0, 0, k, (r.left + this.cx) * this.dpr, (r.top + this.cy) * this.dpr);
+    octx.setTransform(...cameraMatrix(this.camera, this.dpr, { x: r.left, y: r.top }));
     this.drawPowerRing(aim, octx);
     this.drawAimOver(aim, octx);
   }

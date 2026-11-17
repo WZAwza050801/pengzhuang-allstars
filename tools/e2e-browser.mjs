@@ -212,6 +212,29 @@ async function main() {
   if (await page.$('.game')) {
     try {
       await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
+      const touch = await page.evaluate(() => {
+        const state = window.__pz.state();
+        const piece = state.pieces.filter(p => p.side === state.turn && p.out === 0 && p.frozen === 0)
+          .sort((a,b) => Math.hypot(a.x,a.y)-Math.hypot(b.x,b.y))[0];
+        return { before: state.shotNo, points: [[0,0],[-0.15,0.3],[-0.2,0.6],[0,1.1]].map(([x,y]) => window.__pz.screenOf(piece.x+x,piece.y+y)) };
+      });
+      const cdp = await page.context().newCDPSession(page);
+      try {
+        await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true });
+        const point = p => ({ x:p.x, y:p.y, id:1 });
+        await cdp.send('Input.dispatchTouchEvent', { type:'touchStart', touchPoints:[point(touch.points[0])] });
+        for (const p of touch.points.slice(1)) await cdp.send('Input.dispatchTouchEvent', { type:'touchMove', touchPoints:[point(p)] });
+        const curved = await page.evaluate(() => !!window.__pz.aim() && Math.abs(window.__pz.curve()) > 0);
+        await cdp.send('Input.dispatchTouchEvent', { type:'touchEnd', touchPoints:[] });
+        await page.waitForFunction(before => window.__pz.state().shotNo > before, touch.before, { timeout:15000 });
+        record('浏览器触屏弧线出手', curved ? 'PASS' : 'FAIL', 'CDP真实touch输入，弯曲拖拽产生非零弧线并推进杆数');
+      } finally { await cdp.send('Emulation.setTouchEmulationEnabled', { enabled:false }); await cdp.detach(); }
+    } catch (e) { record('浏览器触屏弧线出手', 'FAIL', e.message.slice(0,180)); }
+  }
+
+  if (await page.$('.game')) {
+    try {
+      await page.waitForFunction(() => window.__pz?.canAim(), null, { timeout: 30000 });
       const lifecycle = await page.evaluate(() => {
         window.dispatchEvent(new Event('pagehide'));
         const suspended = !window.__pz.canAim();

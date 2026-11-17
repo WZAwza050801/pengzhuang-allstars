@@ -43,7 +43,8 @@
     "db:migrate": "tsx tools/migrate.ts",
     "db:rollback": "tsx tools/migrate.ts --down",
     "check:game-config": "tsx tools/export-game-config.ts --check",
-    "export:game-config": "tsx tools/export-game-config.ts --write"
+    "export:game-config": "tsx tools/export-game-config.ts --write",
+    "test:field": "vitest run --project unit tests/field*.test.ts"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

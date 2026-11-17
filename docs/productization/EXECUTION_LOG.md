@@ -203,6 +203,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### FLD-02
+
+- 状态：完成
+- 开始：2026-11-17 13:29 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / b315b53f07eddb14e7e8b31b261eccc91c2e56f7
+- 范围：统一相机、内容布局、DPR与拖拽数学，接入渲染/输入/HUD并验证双视角。
+- 实现：相机/布局/DPR和拖拽数学统一并实际接入渲染、HUD与输入，保留原手感常数。
+- 验证：48种布局4800点误差与意图一致；check21unit/4契约、build、Chromium10项0skip/0error通过。
+- 证据：本提交（git log -- docs/productization/reports/FLD-02.md 可定位）；docs/productization/reports/FLD-02.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

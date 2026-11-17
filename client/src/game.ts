@@ -7,6 +7,7 @@ import { Renderer, TEAM_COLORS, type Aim, type Effect, type ScenePiece, type Ski
 import { sfx } from './sfx';
 import type { PlatformServices, Viewport } from '@pengzhuang/platform';
 import { createGamePlatform } from './webPlatform';
+import { dragIntent, gestureCurve } from '../../packages/game-core/src/drag';
 
 const data = DEFAULT_DATA;
 const MAX_DRAG = 2.4; // metres of pull for full power
@@ -200,25 +201,7 @@ export class GameView {
    * A circular arc whose sagitta is a quarter of the chord gives full curve.
    */
   private gestureCurve(): number {
-    const path = this.dragPath, a = this.aim!;
-    if (path.length < 3) return 0;
-    const p0 = path[0], pe = a.pointer;
-    const cx = pe.x - p0.x, cy = pe.y - p0.y;
-    const c = Math.hypot(cx, cy);
-    if (c < 0.5) return 0;
-    // shot direction is opposite to the pull; shooter's right of d=(dx,dy) is (-dy, dx) in y-down coordinates
-    const dx = -cx / c, dy = -cy / c;
-    const rx = -dy, ry = dx;
-    let len = 0, acc = 0;
-    const pts = [...path, pe];
-    for (let i = 1; i < pts.length; i++) {
-      const s = Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
-      const mx = (pts[i].x + pts[i - 1].x) / 2 - p0.x, my = (pts[i].y + pts[i - 1].y) / 2 - p0.y;
-      acc += (mx * rx + my * ry) * s;
-      len += s;
-    }
-    if (len <= 0) return 0;
-    return Math.max(-1, Math.min(1, ((acc / len) / c) * 6));
+    return gestureCurve(this.dragPath, this.aim!.pointer);
   }
 
   // ------------------------------------------------------------ host events
@@ -277,8 +260,7 @@ export class GameView {
   }
 
   private local(e: PointerEvent) {
-    const rect = this.r.canvas.getBoundingClientRect();
-    return this.r.toWorld(e.clientX - rect.left, e.clientY - rect.top);
+    return this.r.clientToWorld(e.clientX, e.clientY);
   }
 
   private pieceAt(w: { x: number; y: number }) {
@@ -328,11 +310,8 @@ export class GameView {
     this.updateAim(this.local(e));
     this.cancelAim();
     if (!a.valid || !this.canAim()) return;
-    const dx = a.from.x - a.pointer.x, dy = a.from.y - a.pointer.y;
-    const input: ShotInput = { pieceId: a.pieceId, dirX: dx, dirY: dy, power: round3(a.power), curve: this.curve };
-    const l = Math.hypot(dx, dy);
-    input.dirX = round6(dx / l);
-    input.dirY = round6(dy / l);
+    const drag = dragIntent(a.from, a.pointer, data.physics.disc.radius, MAX_DRAG);
+    const input: ShotInput = { pieceId: a.pieceId, dirX: round6(drag.dirX), dirY: round6(drag.dirY), power: round3(drag.power), curve: this.curve };
     this.host.shoot(input);
   }
 
@@ -349,10 +328,8 @@ export class GameView {
     const a = this.aim!;
     a.pointer = w;
     if (this.gesture) this.setCurve(this.gestureCurve());
-    const dx = a.from.x - w.x, dy = a.from.y - w.y;
-    const dist = Math.hypot(dx, dy);
-    const pull = Math.max(0, dist - data.physics.disc.radius * 0.6);
-    a.power = Math.min(1, pull / MAX_DRAG);
+    const { dx, dy, distance: dist, power } = dragIntent(a.from, w, data.physics.disc.radius, MAX_DRAG);
+    a.power = power;
     a.valid = a.power >= data.physics.shot.minPower;
     if (!a.valid) {
       a.path = [];
