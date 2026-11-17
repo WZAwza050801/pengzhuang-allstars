@@ -37,7 +37,7 @@
       "scrim": "#07141e"
     }
   },
-  "quality": { "white": "#748f96", "green": "#247442", "blue": "#166a9a", "purple": "#8147a4", "orange": "#c55e00" },
+  "quality": { "white": "#a8b3bd", "green": "#2f9a1e", "blue": "#1f74c8", "purple": "#9b2fc0", "orange": "#c55a00" },
   "stadium": {
     "grass": "#337b54",
     "stripe": "#408c60",

@@ -420,9 +420,9 @@
       "inset": 0
     }
   ],
-  "version": "ui-assets-6ad0eb2623767426",
+  "version": "ui-assets-3701433072f38103",
   "tokensVersion": "ui-1",
-  "generatorSha256": "5502f5a3781273f9ae9e60e2744fde14f5a1d0b7f70fa0f88916071f3e5d2992",
+  "generatorSha256": "2acea7dcf237d8ae92938847b9fea4aa7bb870d400a94d4dfb6dba4422de2354",
   "generatorEngine": "chromium-159.0.8154.6",
   "audio": {
     "ids": [

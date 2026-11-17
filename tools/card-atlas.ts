@@ -7,6 +7,7 @@ import players from '../data/players.json';
 import { CardAtlasSchema, type CardAtlas } from '../packages/contracts/src/card-atlas';
 import { layoutCardAtlas, validateCardBindings } from '../packages/game-core/src/card-atlas';
 import { canonicalJson } from '../packages/game-core/src/snapshot';
+import { UiTokensSchema } from '../packages/contracts/src/ui';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const target = path.join(root, 'client/public/assets/cards/atlas.json');
@@ -14,7 +15,7 @@ const sha = (value: Buffer | string) => createHash('sha256').update(value).diges
 function generatorHash(rootPath = root) {
   return sha(
     canonicalJson(
-      ['tools/card-textures.mjs', 'packages/game-core/src/card-atlas.ts'].map((file) => ({
+      ['tools/card-textures.mjs', 'packages/game-core/src/card-atlas.ts', 'config/ui-tokens.json'].map((file) => ({
         file,
         sha256: sha(readFileSync(path.join(rootPath, file))),
       })),
@@ -45,6 +46,7 @@ export function verifyCardAtlas(rootPath = root): CardAtlas {
 }
 async function exportCardAtlas() {
   const layout = layoutCardAtlas(players.players);
+  const tokens = UiTokensSchema.parse(JSON.parse(readFileSync(path.join(root, 'config/ui-tokens.json'), 'utf8')));
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage();
@@ -54,6 +56,7 @@ async function exportCardAtlas() {
     mkdirSync(path.dirname(target), { recursive: true });
     for (const definition of layout.pages) {
       const request = {
+        quality: tokens.quality,
         page: definition,
         portraits: layout.portraits.filter((p) => p.pageId === definition.id),
         frames: layout.frames.filter((f) => f.pageId === definition.id),

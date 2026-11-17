@@ -709,7 +709,7 @@
     {
       "path": "client/public/assets/cards/atlas.json",
       "bytes": 31142,
-      "sha256": "c809cdae384af57393f220e0bdeab314a53c6a167879d4f982f179b7bdf555ef",
+      "sha256": "52bf8354571e43d13e2b960389cae1f6e277e7806d6cdd9ddff0aa54875c4d8c",
       "usage": "runtime",
       "category": "rebuilt-card-atlas",
       "sourceEvidence": "tools/card-textures.mjs original geometric drawing; tools/card-atlas.ts; docs/engineering/card-atlas.md; not a commercial-release approval",
@@ -753,7 +753,7 @@
     {
       "path": "client/public/assets/catalog.json",
       "bytes": 288051,
-      "sha256": "c9d7ee5abb4269e5ad7711b0c3fa1523ce164757fad1af41af540833be7816c8",
+      "sha256": "b45d1dcf9a8ce37ffe01022312895f7b1f42ece4a13ac2185133973fedda1e3f",
       "usage": "runtime",
       "category": "runtime-other-unverified",
       "sourceEvidence": "No more specific source evidence; review required",
@@ -3954,7 +3954,7 @@
     {
       "path": "client/public/assets/ui/pack.json",
       "bytes": 8853,
-      "sha256": "bb0bb24a243fd5f775487e3272cb77828ac83d0a8232ce6e0ffd94636c173100",
+      "sha256": "b7cdeb02dcb7b5a622185fb17acfbe1c04fcd057b8bd38b49bfbd948fe70b10c",
       "usage": "runtime",
       "category": "rebuilt-ui-pack",
       "sourceEvidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",

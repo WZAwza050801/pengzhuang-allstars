@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "assets-759f446273d80363",
+  "version": "assets-88738f8e640f10c2",
   "minProtocol": 1,
   "maxProtocol": 1,
   "assets": [
@@ -841,7 +841,7 @@
       "kind": "data",
       "path": "/assets/cards/atlas.json",
       "bytes": 31142,
-      "sha256": "c809cdae384af57393f220e0bdeab314a53c6a167879d4f982f179b7bdf555ef",
+      "sha256": "52bf8354571e43d13e2b960389cae1f6e277e7806d6cdd9ddff0aa54875c4d8c",
       "width": null,
       "height": null,
       "anchors": {},
@@ -8503,7 +8503,7 @@
       "kind": "data",
       "path": "/assets/ui/pack.json",
       "bytes": 8853,
-      "sha256": "bb0bb24a243fd5f775487e3272cb77828ac83d0a8232ce6e0ffd94636c173100",
+      "sha256": "b7cdeb02dcb7b5a622185fb17acfbe1c04fcd057b8bd38b49bfbd948fe70b10c",
       "width": null,
       "height": null,
       "anchors": {},

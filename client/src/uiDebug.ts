@@ -1,4 +1,4 @@
-import rawTokens from '../../config/ui-tokens.json';
+import rawTokens from './ui/generated/tokens.canvas.json';
 import {
   UiPackSchema,
   UiTokensSchema,
@@ -11,6 +11,7 @@ import {
 import { loadUiPages, drawUiSprite } from './uiSprites';
 import { sfx, setMuted, isMuted, disposeAudio } from './sfx';
 import './uiDebug.css';
+import './ui/generated/tokens.css';
 declare global {
   interface Window {
     __uiAudit?: { version: string; sprites: number; pages: number; theme: string; fontScale: number };
@@ -69,11 +70,9 @@ async function main() {
       observer?.disconnect();
       gallery.replaceChildren();
       const selected = theme.value as 'light' | 'dark',
-        palette = tokens.themes[selected],
         scale = Number(font.value);
       document.documentElement.dataset.theme = selected;
-      for (const [key, value] of Object.entries(palette))
-        document.documentElement.style.setProperty(`--ui-${key}`, value);
+      document.documentElement.dataset.uiTheme = selected;
       gallery.style.fontSize = `${tokens.typography.body * scale}px`;
       const canvasEntries: { canvas: HTMLCanvasElement; id: string; target: HTMLElement }[] = [];
       function sprite(parent: HTMLElement, id: string, width?: number, height?: number) {

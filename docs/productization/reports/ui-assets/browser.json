@@ -1,5 +1,5 @@
 {
-  "version": "ui-assets-6ad0eb2623767426",
+  "version": "ui-assets-3701433072f38103",
   "views": [
     {
       "theme": "light",
@@ -9,7 +9,7 @@
       "dpr": 1,
       "overflow": false,
       "clipped": false,
-      "version": "ui-assets-6ad0eb2623767426",
+      "version": "ui-assets-3701433072f38103",
       "sprites": 39,
       "pages": 3,
       "fontScale": 1
@@ -22,7 +22,7 @@
       "dpr": 1,
       "overflow": false,
       "clipped": false,
-      "version": "ui-assets-6ad0eb2623767426",
+      "version": "ui-assets-3701433072f38103",
       "sprites": 39,
       "pages": 3,
       "fontScale": 1
@@ -35,7 +35,7 @@
       "dpr": 2,
       "overflow": false,
       "clipped": false,
-      "version": "ui-assets-6ad0eb2623767426",
+      "version": "ui-assets-3701433072f38103",
       "sprites": 39,
       "pages": 3,
       "fontScale": 2
@@ -48,7 +48,7 @@
       "dpr": 3,
       "overflow": false,
       "clipped": false,
-      "version": "ui-assets-6ad0eb2623767426",
+      "version": "ui-assets-3701433072f38103",
       "sprites": 39,
       "pages": 3,
       "fontScale": 2

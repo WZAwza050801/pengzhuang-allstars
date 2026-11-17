@@ -94,6 +94,21 @@
 - 回滚：独立提交；旧 Demo 入口兼容，不改玩法。
 - 下一项：AST-04。
 
+### AST-04
+
+- 状态：完成
+- 开始：2026-11-17 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / 0f973a1
+- 范围：从 ui-tokens 单一输入生成 Web CSS 与 Canvas 数据；实现可复用语义组件和隔离样例页，列明 props/状态/动作；用同一状态模型验证 Web/Canvas 语义、对比度、焦点和失败重试。业务账号/资产接入仍按 UI/ACC/DAT 依赖推进。
+- 计划：生成一致性和状态/大整数格式边界测试；共享展示语义；Web 组件与窄 Canvas 绘制适配；真实浏览器组件交互、空错加载/禁用、模态焦点、亮暗与大字体验收；独立提交可回滚。
+- 实现：单源 Web CSS/Canvas 数据、构建时生成一致性检查；19 类组件目录/可操作样例和共享状态；卡品质色接入同一输入，PNG 不变；修复非可操作状态颜色和模态反向焦点循环。
+- 验证：完整 check（单元 86/86、契约 5/5）；build；19 类/六状态 DOM-Canvas 像素与资格、焦点循环/恢复、重试、卡牌、分页、亮暗/200%/DPR1/2/3；卡牌与 UI 图集浏览器回归通过；游戏 Chromium 15/15，0 SKIP/FAIL/JS 错误。
+- 证据：本提交（git log -- docs/productization/reports/AST-04.md 可定位）；reports/AST-04.md、reports/components/browser.json 与六张已检查截图；docs/engineering/ui-components.md。
+- 风险与剩余：演示数据仅用于组件验收；微信实际组件/输入适配、React 业务壳和真实账号/资产仍按后续依赖实施。
+- 回滚：独立提交；保留旧 Demo 兼容入口。
+- 下一项：AST-05。
+
 ### FND-01
 
 - 状态：完成

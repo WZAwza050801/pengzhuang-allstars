@@ -1,10 +1,10 @@
 // Original geometric placeholders. No recovered portraits, logos, fonts or external images are sampled.
-globalThis.renderCardAtlas = ({ page, portraits, frames }) => {
+globalThis.renderCardAtlas = ({ page, portraits, frames, quality }) => {
   const canvas = document.createElement('canvas');
   canvas.width = page.width;
   canvas.height = page.height;
   const target = canvas.getContext('2d');
-  const colors = { white: '#a8b3bd', green: '#2f9a1e', blue: '#1f74c8', purple: '#9b2fc0', orange: '#c55a00' };
+  const colors = quality;
   const portrait = (ctx, area) => {
     const seed = Number(area.playerId.slice(1));
     const jersey = { FW: '#166b98', MF: '#187a61', DF: '#ad4c37', GK: '#925d18' }[area.position];

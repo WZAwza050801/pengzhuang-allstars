@@ -20,7 +20,7 @@
     "build": "npm run build:art && npm run build:client && npm run build:server",
     "build:art": "tsx tools/gen-art.ts",
     "build:avatars": "python art/gen_placeholders.py",
-    "build:client": "npm run check:assets && npm run check:balance-data && vite build --config client/vite.config.ts",
+    "build:client": "npm run check:ui-tokens && npm run check:assets && npm run check:balance-data && vite build --config client/vite.config.ts",
     "build:server": "npm run check:balance-data && esbuild server/index.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/server/index.js --packages=external --sourcemap",
     "start": "node dist/server/index.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -35,7 +35,7 @@
     "format": "node tools/format.mjs --write",
     "test:unit": "vitest run --project unit",
     "audit:assets": "node tools/audit-assets.mjs",
-    "check": "npm run check:toolchain && npm run check:boundaries && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config && npm run check:assets && npm run check:balance-data && npm run check:balance-mapping && npm run check:skills && npm run check:economy && npm run check:balance-experiment",
+    "check": "npm run check:toolchain && npm run check:boundaries && npm run check:ui-tokens && npm run lint && npm run format:check && npm run typecheck && npm run check:config && node tools/check-plan.mjs && npm run audit:assets && npm run test:unit && npm run test:contract && npm run docs:contracts -- --check && npm run check:game-config && npm run check:assets && npm run check:balance-data && npm run check:balance-mapping && npm run check:skills && npm run check:economy && npm run check:balance-experiment",
     "check:boundaries": "node tools/check-boundaries.mjs",
     "test:contract": "vitest run --project contract",
     "docs:contracts": "tsx tools/export-contracts.ts",
@@ -67,7 +67,10 @@
     "test:cards-browser": "node tools/card-browser.mjs",
     "ui:assets": "tsx tools/ui-assets.ts",
     "check:ui-assets": "tsx tools/ui-assets.ts --check",
-    "test:ui-browser": "node tools/ui-browser.mjs"
+    "test:ui-browser": "node tools/ui-browser.mjs",
+    "ui:tokens": "tsx tools/ui-tokens.ts --write",
+    "check:ui-tokens": "tsx tools/ui-tokens.ts",
+    "test:components-browser": "node tools/components-browser.mjs"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",
