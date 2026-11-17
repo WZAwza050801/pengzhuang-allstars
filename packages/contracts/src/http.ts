@@ -3,6 +3,7 @@ import { PROTOCOL_VERSION } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { parseNickname } from './game-validation';
 import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
+import { LineupPageQuerySchema, LineupPageSchema, SavedLineupSchema } from './lineups';
 import { EmailAddressSchema, PasswordProofSchema, NewPasswordSchema, AccountTokenSchema } from './credentials';
 import {
   CurrentUserSchema,
@@ -92,6 +93,14 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
+  {
+    method: 'get',
+    path: '/api/v1/me/lineups',
+    operationId: 'lineups',
+    query: LineupPageQuerySchema,
+    response: LineupPageSchema,
+  },
+  { method: 'get', path: '/api/v1/me/lineups/{id}', operationId: 'lineup', response: SavedLineupSchema },
   { method: 'get', path: '/api/v1/me/profile', operationId: 'profile', response: UserProfileSchema },
   {
     method: 'get',
@@ -170,7 +179,13 @@ export const HTTP_CONTRACTS = [
     body: ProfileSchema,
     response: UserProfileSchema,
   },
-  { method: 'put', path: '/api/v1/me/lineups/{id}', operationId: 'saveLineup', body: LineupSchema },
+  {
+    method: 'put',
+    path: '/api/v1/me/lineups/{id}',
+    operationId: 'saveLineup',
+    body: LineupSchema,
+    response: SavedLineupSchema,
+  },
   { method: 'post', path: '/api/v1/me/cards/{id}/upgrade', operationId: 'upgradeCard', body: UpgradeSchema },
   { method: 'post', path: '/api/v1/me/cards/craft', operationId: 'craftCard', body: CraftSchema },
   { method: 'post', path: '/api/v1/matches/tickets', operationId: 'matchTicket', body: MatchTicketSchema },

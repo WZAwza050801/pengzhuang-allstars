@@ -5,6 +5,7 @@ import { ApiError } from '../api/http';
 import { AccessTokens, UUID } from './access-tokens';
 import type { Principal } from './access-tokens';
 import type { InitializeAccount } from './player-data';
+import { requireActivePrincipal } from './authorization';
 import { DeviceKindSchema, SessionCursorSchema, type DeviceKind } from '../../packages/contracts/src/accounts';
 import { UserDataRepository } from '../../packages/persistence/src/user-data';
 
@@ -66,16 +67,7 @@ export class Sessions {
 
   private active<T>(principal: Principal, work: (tx: SqlExecutor, repo: SessionRepository) => Promise<T>) {
     return this.db.transaction(async (tx) => {
-      const repo = new SessionRepository(tx);
-      const state = await repo.lock(principal.sessionId);
-      if (
-        !state ||
-        state.user_id !== principal.userId ||
-        state.revoked_at ||
-        !state.unexpired ||
-        state.status !== 'active'
-      )
-        throw new ApiError('UNAUTHENTICATED', 401);
+      const repo = await requireActivePrincipal(tx, principal);
       return work(tx, repo);
     });
   }

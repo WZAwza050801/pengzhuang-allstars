@@ -6,9 +6,9 @@
 |---|---|
 | `player_definitions` | 静态定义 ID 注册表，`p` 加 2–4 位数字；由服务端可信配置注册。旧 ID 保留以读取历史卡，不复制物理/技能数值。 |
 | `profiles` | userId 唯一；nickname/avatarAssetId、level、exp、version 与创建/更新时间；exp 非负 bigint，版本非负整数。 |
-| `owned_cards` | 数据库生成 UUID；userId、playerDefId 为独立外键；每用户同定义唯一（BAL-05）；level 1–10、exp/version 非负。`(id,user_id)` 供组合外键校验归属。 |
+| `owned_cards` | 数据库生成 UUID；userId、playerDefId 为独立外键；每用户同定义唯一（BAL-05）；level 1–10、exp/version 非负。DAT-03 增加 active/disabled；`(id,user_id)` 供组合外键校验归属。 |
 | `lineups` | 独立 UUID、userId、name、revision；按 userId/id 索引。 |
-| `lineup_slots` | `(lineup_id,slot)` 唯一、slot 0–4；同阵容不得重复同卡；组合外键保证阵容和卡属于同一用户。保存五卡及位置合法性由 DAT-03 服务整体验证。 |
+| `lineup_slots` | `(lineup_id,slot)` 唯一、slot 0–4；同阵容不得重复同卡；组合外键保证阵容和卡属于同一用户。[DAT-03 服务](lineups.md) 原子验证五槽、持有权/状态/等级及模式，保留职业可跨槽的既有规则。 |
 | `wallets` | `(user_id,currency)` 唯一，currency 仅 coins/fragments；balance 非负 int64、version 非负。 |
 | `asset_ledger` | 独立流水 UUID；userId/currency 组合外键；delta 有符号 int64、balanceAfter 非负；reason/sourceId/idempotencyKey/payloadHash。唯一域为 `(userId,reason,idempotencyKey,currency)`，支持同业务多币种流水。按用户/时间/id 索引。 |
 | `matches` | 数据库 UUID、mode、configVersion、protocolVersion、status、result、创建/完成时间；按 status/时间索引。 |

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { Database, type SqlExecutor } from '../../packages/persistence/src/database';
 import { UserDataRepository, MatchDataRepository, type UserProfile } from '../../packages/persistence/src/user-data';
-import { SessionRepository } from '../../packages/persistence/src/sessions';
+import { requireActivePrincipal } from './authorization';
 import { grantStarter } from '../../packages/game-core/src/economy';
 import { canonicalJson } from '../../packages/game-core/src/snapshot';
 import { parseSetLineup, parseNickname } from '../../packages/contracts/src/game-validation';
@@ -47,8 +47,7 @@ export class PlayerData {
   };
   private active<T>(principal: Principal, work: (tx: SqlExecutor, repo: UserDataRepository) => Promise<T>) {
     return this.db.transaction(async (tx) => {
-      const session = await new SessionRepository(tx).lock(principal.sessionId);
-      if (!session || session.user_id !== principal.userId || session.revoked_at || !session.unexpired || session.status !== 'active') throw new ApiError('UNAUTHENTICATED', 401);
+      await requireActivePrincipal(tx, principal);
       await this.initialize(tx, principal.userId);
       return work(tx, new UserDataRepository(tx));
     });

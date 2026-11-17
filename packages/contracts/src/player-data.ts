@@ -11,6 +11,7 @@ export const OwnedCardSchema = z.strictObject({
   level: z.number().int().min(1).max(10),
   exp: MoneySchema,
   version: z.number().int().min(0),
+  status: z.enum(['active', 'disabled']),
 });
 export const CardPageQuerySchema = z.strictObject({
   cursor: z.uuid().optional(),

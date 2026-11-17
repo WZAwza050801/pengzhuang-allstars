@@ -3,7 +3,7 @@ import { AccountRepository, DuplicateIdentityError } from '../../packages/persis
 import { Database, type SqlExecutor } from '../../packages/persistence/src/database';
 import { EmailAuthRepository } from '../../packages/persistence/src/email-auth';
 import { LifecycleRepository, type BanReason } from '../../packages/persistence/src/lifecycle';
-import { SessionRepository } from '../../packages/persistence/src/sessions';
+import { requireActivePrincipal } from './authorization';
 import { ApiError } from '../api/http';
 import type { Principal } from './access-tokens';
 import type { Passwords } from './passwords';
@@ -25,8 +25,7 @@ export class AccountLifecycle {
     if (!a || !b) throw new ApiError('RATE_LIMITED', 429, true);
   }
   private async active(tx: SqlExecutor, principal: Principal, recent = false) {
-    const state = await new SessionRepository(tx).lock(principal.sessionId);
-    if (!state || state.user_id !== principal.userId || state.status !== 'active' || state.revoked_at || !state.unexpired) throw new ApiError('UNAUTHENTICATED', 401);
+    await requireActivePrincipal(tx, principal);
     const repo = new LifecycleRepository(tx);
     if (recent && !await repo.recent(principal.sessionId)) throw new ApiError('FORBIDDEN', 403);
     return repo;

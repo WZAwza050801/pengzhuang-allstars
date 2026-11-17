@@ -100,13 +100,19 @@ describe('PostgreSQL 17 persistence', () => {
     await expect(migrateDatabase(db, { direction: 'down' })).rejects.toThrow('explicit');
     expect(await migrateDatabase(db, { direction: 'down', allowRollback: true })).toHaveLength(1);
     expect(
-      (await db.query<{ exists: string | null }>("SELECT to_regclass('account_initializations') AS exists")).rows[0]
-        .exists,
-    ).toBeNull();
+      (
+        await db.query(
+          "SELECT column_name FROM information_schema.columns WHERE table_name = 'owned_cards' AND column_name = 'status'",
+        )
+      ).rows,
+    ).toHaveLength(0);
     expect(await migrateDatabase(db)).toHaveLength(1);
     expect(
-      (await db.query<{ exists: string | null }>("SELECT to_regclass('account_initializations') AS exists")).rows[0]
-        .exists,
-    ).toBe('account_initializations');
+      (
+        await db.query(
+          "SELECT column_name FROM information_schema.columns WHERE table_name = 'owned_cards' AND column_name = 'status'",
+        )
+      ).rows,
+    ).toHaveLength(1);
   });
 });

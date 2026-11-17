@@ -68,7 +68,7 @@ CREATE UNIQUE INDEX lineup_slot_once ON lineup_slots (lineup_id, slot);
 | DELETE /me | 注销申请、冷静期/保留策略按发行要求配置，最终匿名化与审计隔离 |
 | PATCH /me/profile | nickname、avatarAssetId；revision 乐观锁；不允许改 level/currency/role |
 | GET /me/cards /me/wallet /me/lineups | 服务端资产与阵容 |
-| PUT /me/lineups/:id | ownedCardIds + expectedRevision；必须验证持有权和位置规则 |
+| PUT /me/lineups/:id | ownedCardIds + expectedRevision；验证持有权、五槽顺序/唯一占用；当前沿用任意职业可落位，职业标签是推荐，见 [阵容规则](../engineering/lineups.md) |
 | POST /me/cards/:id/upgrade | 目标卡、expectedRevision、expectedEconomyVersion、Idempotency-Key；服务端算成本 |
 | POST /me/cards/craft | playerDefId、expectedRevision、expectedEconomyVersion、Idempotency-Key；服务端验证未持有并算碎片成本 |
 | GET /me/matches | 分页战绩；私有完整事件只对本人/获授权管理员开放 |

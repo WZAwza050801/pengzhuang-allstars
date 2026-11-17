@@ -721,6 +721,23 @@
 - 回滚：独立提交回退；新增 schema down 仅隔离测试，已发放资产不做反向删除。
 - 下一项：DAT-03。
 
+### DAT-03
+
+- 状态：完成
+- 开始：2026-11-18 06:32 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 1af09ac
+- 范围：本人阵容读取/保存、持有卡与版本/重复/位置/模式校验、服务端参赛快照；复用既有模式等级和技能规则，不信任客户端定义/等级。房间票据和实际入局由 NET 后续接入。
+- 位置证据：旧 client/src/lineup.ts 的 valid/place 允许跨职业落位，ROLE_POS 只用于 defaultSet/randomLineup 推荐；shared parseSetLineup/createMatch 同样没有职业硬绑定。固定初始 p07/p06/p08 是 GK/DF/DF，与 DC/CM/CM 槽并不相等，因此不新增职业限制。位置校验按既有五槽顺序、边界和唯一占用，具体职业保留展示；初始单元失败暴露了错误假设，已按当前代码修正。
+- 必要关联：新增阵容服务时发现四处业务事务重复同一用户/会话 active 校验，抽取 requireActivePrincipal 并让原会话/生命周期/云存档复用，保持用户→会话锁顺序和拒绝语义，防止后续资产操作继续复制后产生偏差。
+- 计划与验收：保存使用用户/会话/阵容/卡锁和 revision，失败不半写；同一旧版本只一项成功。真实 PostgreSQL/HTTP 验证合法、越权、重复、未知/不支持卡、模式固定/持有等级、卡变化与快照冻结、失败回滚和封禁即时失效。
+- 实现：阵容分页/本人读取/PUT 原子保存与 revision 冲突；卡归属/唯一/active/等级和五槽验证。新增 owned_cards 状态迁移，服务端构建深冻结模式快照，分别保留持有等级和实际参赛等级、版本、槽/职业及实际属性/技能；复用既有 BAL 规则，跨职业落位保持原玩法。提供与 NET 票据同事务组合的内部入口，未开放客户端快照上传。
+- 验证：`npm run test:integration` 10 文件/107 项（阵容 11），包括真实 HTTP/数据库、并发、槽插入故障回滚、卡锁等待后取新等级、禁用和未实现技能、快照冻结、实际 createMatch 等级及生产挂载；`npm run check` 122 单元/8 契约、204 文件格式及静态/生成检查通过；build 通过；e2e 18 PASS/0 SKIP/0 FAIL，0 console/pageerror。
+- 证据：本提交（`git log -- docs/productization/reports/DAT-03.md` 可定位）、[DAT-03 报告](reports/DAT-03.md)、[位置/模式/API 说明](../engineering/lineups.md)。
+- 风险与剩余：NET-01/03 需把快照与票据签发同事务并在消费/重连复核；创建/删除预设和资料页面后续按实际产品范围接入。真实微信、真机、素材、平衡及依赖审计门槛保留；无新外部依赖，未使用远端，临时 PostgreSQL/Mailpit 正常停止。
+- 回滚：独立提交回退，保留已保存数据；若需迁移仅隔离测试 down。
+- 下一项：DAT-04。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

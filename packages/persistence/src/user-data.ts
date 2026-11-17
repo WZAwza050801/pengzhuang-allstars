@@ -16,6 +16,7 @@ export interface OwnedCard {
   level: number;
   exp: string;
   version: number;
+  status: 'active' | 'disabled';
 }
 export interface Wallet {
   userId: string;
@@ -36,7 +37,7 @@ export interface LedgerEntry {
 }
 
 const profileColumns = 'user_id AS "userId", nickname, avatar_asset_id AS "avatarAssetId", level, exp::text, version';
-const cardColumns = 'id, user_id AS "userId", player_def_id AS "playerDefId", level, exp::text, version';
+const cardColumns = 'id, user_id AS "userId", player_def_id AS "playerDefId", level, exp::text, version, status';
 const walletColumns = 'user_id AS "userId", currency, balance::text, version';
 const ledgerColumns =
   'id, user_id AS "userId", currency, delta::text, balance_after::text AS "balanceAfter", reason, source_id AS "sourceId", idempotency_key AS "idempotencyKey", payload_hash AS "payloadHash"';
