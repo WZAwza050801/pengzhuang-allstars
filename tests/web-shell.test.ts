@@ -4,6 +4,7 @@ import {
   cancelViewRequest,
   completeViewRequest,
   createViewRequestState,
+  toWebPath,
 } from '../packages/client-model/src/web-shell';
 
 test('a late view request result cannot replace a newer request', () => {
@@ -33,4 +34,11 @@ test('cancelling the active request makes its later completion inert', () => {
 
   expect(cancelled).toEqual({ generation: request.id, status: 'idle' });
   expect(completeViewRequest(cancelled, request.id, { kind: 'ready' })).toEqual(cancelled);
+});
+
+test('web paths only derive from validated internal navigation targets', () => {
+  expect(toWebPath({ page: 'lobby' })).toBe('/');
+  expect(toWebPath({ page: 'room', code: 'A1B2C3' })).toBe('/room/A1B2C3');
+  expect(toWebPath({ page: 'match', mode: 'practice' })).toBe('/match?mode=practice');
+  expect(toWebPath({ page: 'result', mode: 'friend', matchId: 'match-1' })).toBe('/result/match-1?mode=friend');
 });

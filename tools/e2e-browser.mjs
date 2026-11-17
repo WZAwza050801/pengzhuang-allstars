@@ -137,7 +137,7 @@ async function main() {
 
   // 3) 起始界面（首页是昵称/模式设置，canvas 要进入对局后才创建）
   try {
-    await page.goto(`http://127.0.0.1:${WEB_PORT}/`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.goto(`http://127.0.0.1:${WEB_PORT}/?legacy=1`, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForFunction(() => document.querySelector('#app')?.children.length > 0, null, { timeout: 15000 });
     await page.screenshot({ path: path.join(OUT, 'e2e-build-boot.png') });
     record('起始界面渲染', 'PASS', '#app 已挂载子节点');
@@ -274,7 +274,7 @@ async function main() {
   const production = await ctx.newPage();
   production.on('pageerror',e=>errors.push(e.message));
   production.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-  await production.goto(`http://127.0.0.1:${SERVER_PORT}/`);
+  await production.goto(`http://127.0.0.1:${SERVER_PORT}/?legacy=1`);
   await production.fill('.nick','production');await production.click('.btn-play');await production.uncheck('.timer');await production.click('[data-bot="easy"]');
   await production.waitForSelector('.game canvas');
   const noHandle=await production.evaluate(()=>!window.__pz&&!window.__fieldCalibration&&!window.__aiAudit&&!window.__cardAudit&&!window.__uiAudit&&!window.__componentsAudit&&!window.__workflowAudit);
@@ -295,7 +295,7 @@ async function main() {
       const peer = await context.newPage();
       peer.on('pageerror', e => errors.push(e.message));
       peer.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
-      await peer.goto(`http://127.0.0.1:${SERVER_PORT}/`);
+      await peer.goto(`http://127.0.0.1:${SERVER_PORT}/?legacy=1`);
       pages.push(peer);
     }
     const [a, b] = pages;

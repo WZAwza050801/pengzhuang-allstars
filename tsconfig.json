@@ -17,6 +17,7 @@
     "useDefineForClassFields": false,
     "allowImportingTsExtensions": false,
     "isolatedModules": true,
+    "jsx": "react-jsx",
     "types": [
       "node",
       "vite/client"

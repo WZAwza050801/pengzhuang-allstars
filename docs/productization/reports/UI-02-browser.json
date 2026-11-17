@@ -1,0 +1,31 @@
+{
+  "base": "http://127.0.0.1:5173/",
+  "views": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "overflow": false,
+      "navigationDirection": "column"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "navigationDirection": "row"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "overflow": false,
+      "navigationDirection": "row"
+    }
+  ],
+  "recoveredMountFailure": true,
+  "consoleErrors": []
+}

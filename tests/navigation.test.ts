@@ -30,7 +30,10 @@ test('offline/maintenance/update block new remote flows but keep local practice 
     const state = { ...context, ...changed };
     expect(resolveNavigation({ page: 'room' }, state).kind).toBe('blocked');
     expect(resolveNavigation({ page: 'queue', mode: 'ranked' }, state).kind).toBe('blocked');
-    expect(resolveNavigation({ page: 'match', mode: 'practice' }, state).kind).toBe('show');
+    expect(resolveNavigation({ page: 'match', mode: 'practice' }, state)).toEqual({
+      kind: 'show',
+      target: { page: 'match', mode: 'practice' },
+    });
   }
   expect(
     resolveNavigation(

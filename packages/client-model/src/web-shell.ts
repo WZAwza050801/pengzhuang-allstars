@@ -13,11 +13,7 @@ export function beginViewRequest(state: ViewRequestState): { id: number; state: 
   return { id, state: { generation: id, status: 'pending' } };
 }
 
-export function completeViewRequest(
-  state: ViewRequestState,
-  id: number,
-  result: ViewRequestResult,
-): ViewRequestState {
+export function completeViewRequest(state: ViewRequestState, id: number, result: ViewRequestResult): ViewRequestState {
   if (state.generation !== id || state.status !== 'pending') return state;
   return result.kind === 'ready'
     ? { generation: id, status: 'ready' }
@@ -26,4 +22,31 @@ export function completeViewRequest(
 
 export function cancelViewRequest(state: ViewRequestState, id: number): ViewRequestState {
   return state.generation === id && state.status === 'pending' ? { generation: id, status: 'idle' } : state;
+}
+import type { NavigationTarget } from './navigation';
+
+export function toWebPath(target: NavigationTarget): string {
+  switch (target.page) {
+    case 'lobby':
+      return '/';
+    case 'login':
+    case 'lineup':
+    case 'growth':
+    case 'club':
+    case 'profile':
+    case 'settings':
+      return `/${target.page}`;
+    case 'inbox':
+      return `/inbox/${target.section}`;
+    case 'queue':
+      return `/queue/${target.mode}`;
+    case 'room':
+      return target.code ? `/room/${target.code}` : '/room';
+    case 'match': {
+      const base = target.matchId ? `/match/${encodeURIComponent(target.matchId)}` : '/match';
+      return `${base}?mode=${target.mode}`;
+    }
+    case 'result':
+      return `/result/${encodeURIComponent(target.matchId)}?mode=${target.mode}`;
+  }
 }

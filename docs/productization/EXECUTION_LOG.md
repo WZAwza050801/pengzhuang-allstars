@@ -503,6 +503,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### UI-02
+
+- 状态：完成
+- 开始：2026-11-17 23:58 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 632693c1a1b90178d6821be832dd0de32fe49b9b
+- 范围：增量建立 React 19 + React Router 7 Web 页面壳、路由状态机与 Canvas 对战宿主，保留既有 DOM 入口直到新路径闭环。
+- 实现：引入 React 19 + React Router 7 页面壳和响应式安全区布局；client-model 管理可取消的视图请求与内部路径；练习赛经 HostBridge 挂载既有 Canvas GameView，退出时释放订阅、音频、宿主和本地 Host。账号、资产及在线比赛保持后续任务接入，未伪造远端数据。
+- 验证：完整 `npm run check` 通过（100 单元、5 契约）；完整 build 通过；navigation 与 web-shell 单元 7 项通过；web-shell Chromium 覆盖 1280/390/320、禁止入口和连续两次进入/退出，0 console error，并注入一次 Canvas 挂载失败后确认可重试；既有 Chromium E2E 16/16 通过，包含出手、触屏弧线、前后台、画质、资源预算、双端好友赛与宿主释放。
+- 证据：本提交；docs/productization/reports/UI-02.md；docs/productization/reports/UI-02-browser.json。
+- 风险与剩余：账号、资产、正式匹配和结算 API 由后续 ACC/DAT/NET/UI 任务接入；本任务不伪造远端业务数据。React Router 已升至 7.18.5 并消除本次新增依赖的审计高危项；审计余下 Express/Colyseus 传递高危项需要跨主版本迁移，留待独立架构任务处理。
+- 回滚：独立任务提交可回退；保留旧入口以便恢复。
+- 下一项：选择依赖已满足的未完成任务；UI-03 待 ACC-04、DAT-02。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。
