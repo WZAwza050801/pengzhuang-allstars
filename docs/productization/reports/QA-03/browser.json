@@ -1,0 +1,56 @@
+{
+  "environment": {
+    "server": "127.0.0.1:ephemeral",
+    "browsers": {
+      "chromium": "159.0.8154.6",
+      "firefox": "159.0",
+      "webkit": "27.2"
+    }
+  },
+  "cases": [
+    {
+      "engine": "chromium",
+      "viewport": "desktop-1280",
+      "status": "pass",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "firefox",
+      "viewport": "desktop-1280",
+      "status": "pass",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "firefox",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "warning: [JavaScript Warning: \"Layout was forced before the page was fully loaded. If stylesheets are not yet loaded this may cause a flash of unstyled content.\" {file: \"chrome://juggler/content/content/main.js\" line: 100}]"
+      ]
+    },
+    {
+      "engine": "webkit",
+      "viewport": "desktop-1280",
+      "status": "pass",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

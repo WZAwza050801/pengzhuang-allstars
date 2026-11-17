@@ -2,7 +2,7 @@
 
 版本：2026-11-16 / v1。适用仓库：`WZAwza050801/pengzhuang-allstars`。
 
-当前交接：**37/112 项已完成，剩余 75 项保留清单**。按 2026-11-17 用户继续指令顺序实施；[UI-01 页面流与线框](reports/UI-01.md)、[UI-02 Web 页面壳](reports/UI-02.md)、[WEB-01 响应式大厅布局](reports/WEB-01.md)、[WEB-02 多输入及双方视角](reports/WEB-02.md)、[WEB-04 首屏与运行性能](reports/WEB-04.md) 与 [QA-01 测试运行隔离](reports/QA-01.md) 已完成。[AST-06 Web 子集](reports/AST-06.md) 已验证，真机按用户要求暂缓，整项保持未勾选。初始平衡实验未达到放量门槛，发布校验已阻断；实验与回滚工具完成不代表数值已平衡。此前的 [25 项报告](reports/PROGRESS-25.md) 为历史交接。状态以 TASKS 和 EXECUTION_LOG 为准。
+当前交接：**38/112 项已完成，剩余 74 项保留清单**。按 2026-11-17 用户继续指令顺序实施；[UI-01 页面流与线框](reports/UI-01.md)、[UI-02 Web 页面壳](reports/UI-02.md)、[WEB-01 响应式大厅布局](reports/WEB-01.md)、[WEB-02 多输入及双方视角](reports/WEB-02.md)、[WEB-04 首屏与运行性能](reports/WEB-04.md)、[QA-01 测试运行隔离](reports/QA-01.md) 与 [QA-03 跨端兼容矩阵](reports/QA-03.md) 已完成。[AST-06 Web 子集](reports/AST-06.md) 已验证，真机按用户要求暂缓，整项保持未勾选。初始平衡实验未达到放量门槛，发布校验已阻断；实验与回滚工具完成不代表数值已平衡。此前的 [25 项报告](reports/PROGRESS-25.md) 为历史交接。状态以 TASKS 和 EXECUTION_LOG 为准。
 
 这是一套供后续 Agent 实施的工程规格，不代表功能已实现，也不保证任何 AI 在缺少设备、平台资格或产品决策时能够无人值守完成发行。目标是把可自动完成的代码任务和必须获得真实证据的任务拆清楚。
 

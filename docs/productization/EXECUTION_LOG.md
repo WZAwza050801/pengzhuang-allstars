@@ -587,6 +587,20 @@
 - 回滚：独立任务提交可回退；常规运行端口下限和生产配置约束不变，端口 0 只在 test 模式有效。
 - 下一项：QA-03（依赖满足）；APP-01、ACC-01、AST-06 分别仍受原生工具链、PostgreSQL、真机条件限制。
 
+### QA-03
+
+- 状态：完成
+- 开始：2026-11-18 02:40 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 9d1dc2b
+- 范围：定义当前 Web 的支持/验收矩阵并实际运行 Chromium、Firefox、WebKit 代表路径；提供 iOS/Android/微信后续真机记录模板。真实设备、原生壳和微信环境均不在本轮冒充完成。
+- 实现：新增兼容策略、物理设备记录模板和 `test:compatibility`。该 runner 使用构建后的静态 Web 客户端，在 Chromium、Firefox、WebKit 的桌面 1280×720 DPR 1 与移动 390×844 DPR 3 真实引擎中走“大厅→练习赛→退出”；捕获 page error 与页面 console error/warning。Firefox 的 `chrome://juggler` 自动化内部 warning 单独保留在报告，不与应用页面错误混同。默认结果写入忽略的 `work/compatibility`，显式环境变量才写入验收快照。
+- 验证：PowerShell 下 `$env:COMPATIBILITY_REPORT='docs/productization/reports/QA-03/browser.json'; npm run test:compatibility` 通过，Chromium 159.0.8154.6、Firefox 159.0、WebKit 27.2 共 6/6 代表用例通过；所有页面 error 列表为空。既有 WEB-01 的 8 视口/大字体/软键盘证据、WEB-02 的鼠标/真实 CDP touch/键盘输入边界和 WEB-04 的弱网/资源恢复证据已纳入策略，未重新标记为物理设备。
+- 证据：本提交；`docs/productization/COMPATIBILITY.md`；`docs/productization/reports/QA-03.md`；`docs/productization/reports/QA-03/browser.json`；`docs/productization/reports/QA-03-device-template.md`；`tools/compatibility-browser.mjs`。
+- 风险与剩余：Playwright WebKit 不是 iPhone Safari 真机。iPhone 15 Pro、Android Chrome/WebView、微信双系统和 App 仍为未测；解除条件和记录字段已写入模板，对应 WX-06/APP-05/AST-06 不得使用此报告代替真机结果。
+- 回滚：独立任务提交可回退；不改变游戏、资源、网络协议或生产支持范围。
+- 下一项：选择依赖满足的未完成任务；APP-01 仍需原生构建工具链，ACC-01 仍需真实 PostgreSQL，AST-06 仍需真机资源验收。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。
