@@ -164,7 +164,10 @@ export function createWebPlatform(options: {
             method: settings.method ?? 'GET',
             signal: abort.signal,
             credentials: 'same-origin',
-            headers: settings.body === undefined ? undefined : { 'content-type': 'application/json' },
+            headers: {
+              ...settings.headers,
+              ...(settings.body === undefined ? {} : { 'content-type': 'application/json' }),
+            },
             body: settings.body === undefined ? undefined : JSON.stringify(settings.body),
           });
           const chunks: Uint8Array[] = [];

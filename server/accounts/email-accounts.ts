@@ -11,6 +11,7 @@ import { ApiError } from '../api/http';
 import { type AccountMail } from './mail';
 import { Passwords } from './passwords';
 import type { Sessions } from './sessions';
+import type { DeviceKind } from '../../packages/contracts/src/accounts';
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 const normalizeEmail = (value: string) => value.trim().toLowerCase();
@@ -97,14 +98,14 @@ export class EmailAccounts {
     });
   }
 
-  async login(input: { email: string; password: string }, source: string, session: { service: Sessions; csrf: string }) {
+  async login(input: { email: string; password: string }, source: string, session: { service: Sessions; csrf: string; deviceKind?: DeviceKind }) {
     const email = normalizeEmail(input.email);
     await this.rate('login', source, email);
     return this.conceal(async () => {
       return this.db.transaction(async (tx) => {
         const userId = await new EmailAuthRepository(tx).authenticate(email, (hash) => this.passwords.matches(input.password, hash));
         if (!userId) throw new ApiError('UNAUTHENTICATED', 401);
-        const credentials = await session.service.issue(tx, userId, session.csrf);
+        const credentials = await session.service.issue(tx, userId, session.csrf, session.deviceKind);
         return { userId, credentials };
       });
     });

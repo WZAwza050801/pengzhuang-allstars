@@ -413,7 +413,15 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
     expect((await post('register', { email, password, nickname: '装配' })).status).toBe(202);
     const token = await deliveredToken(email, 'verify');
     expect((await post('email/verify', { token })).status).toBe(200);
-    expect((await post('login', { email, password })).status).toBe(200);
+    const login = await post('login', { email, password });
+    expect(login.status).toBe(200);
+    const credentials = (login.headers['set-cookie'] as string[]).map((value) => value.split(';')[0]).join('; ');
+    const headers = { cookie: `pz_csrf=${csrf}; ${credentials}` };
+    expect((await request(origin, '/api/v1/me', undefined, headers)).data.data.userId).toBe(login.data.data.userId);
+    expect((await post('logout', { allSessions: false }, { ...headers, 'Idempotency-Key': randomUUID() })).status).toBe(
+      200,
+    );
+    expect((await request(origin, '/api/v1/me', undefined, headers)).status).toBe(401);
     await server.close();
   });
 });

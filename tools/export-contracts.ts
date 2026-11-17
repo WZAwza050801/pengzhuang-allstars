@@ -7,18 +7,49 @@ import { ModeRulesSchema, ModeOutcomeSchema } from '../packages/contracts/src/mo
 
 const paths: Record<string, unknown> = {};
 for (const item of HTTP_CONTRACTS) {
+  const parameters: unknown[] = item.path.includes('{id}')
+    ? [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }]
+    : [];
+  if ('query' in item) {
+    const query = z.toJSONSchema(item.query);
+    for (const [name, schema] of Object.entries(query.properties ?? {}))
+      parameters.push({ name, in: 'query', required: false, schema });
+  }
+  if (item.operationId === 'logout')
+    parameters.push({
+      name: 'Idempotency-Key',
+      in: 'header',
+      required: true,
+      schema: { type: 'string', format: 'uuid' },
+    });
   paths[item.path] = {
     [item.method]: {
       operationId: item.operationId,
-      ...(item.path.includes('{id}')
-        ? { parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }] }
-        : {}),
+      ...(parameters.length ? { parameters } : {}),
       ...('body' in item
         ? { requestBody: { required: true, content: { 'application/json': { schema: z.toJSONSchema(item.body) } } } }
         : {}),
       responses: {
         ['successStatus' in item ? String(item.successStatus) : '200']: {
           description: 'Service-specific success envelope; implemented by the corresponding business task',
+          ...('response' in item
+            ? {
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'object',
+                      required: ['ok', 'data', 'requestId'],
+                      additionalProperties: false,
+                      properties: {
+                        ok: { const: true },
+                        data: z.toJSONSchema(item.response),
+                        requestId: { type: 'string', minLength: 1 },
+                      },
+                    },
+                  },
+                },
+              }
+            : {}),
         },
         '400': {
           description: 'Invalid request',

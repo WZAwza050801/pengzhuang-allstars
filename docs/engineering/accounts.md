@@ -14,4 +14,6 @@ ACC-02 增量：`users.registration_nickname` 保留注册昵称草稿，后续 
 
 ACC-03 增量：`sessions.refresh_generation`、`csrf_token_hash` 与 family 索引；`session_refresh_history(token_hash, session_id, generation, consumed_at)` 保留已消费刷新凭证的哈希以检测重放，session/generation 唯一。签发/旋转/撤销、30 天绝对有效期与 10 秒并发宽限见 [sessions.md](sessions.md)。此内部仓储的 hash 不作为公开账户 DTO 返回。
 
+ACC-04 增量：`session_logout_actions(session_id, operation_id, all_sessions, completed_at)`，operation_id 全局 UUID 主键；回执与撤销原子提交，通过原会话 CSRF 绑定只能确认已有结果。活跃会话列表增加 user/created_at/id 索引，公开只输出粗粒度设备类型，不返回原始 UA/IP/凭证。接口与断网重试见 [account-management.md](account-management.md)。
+
 外键全部引用 `users(id)` 并使用 `RESTRICT`，所以硬删除账户必须先经过账户匿名化/清理流程，不能让级联删除悄悄移除审计所需证据。迁移的 `down` 只适用于本地/测试，由迁移器的显式回滚开关保护。

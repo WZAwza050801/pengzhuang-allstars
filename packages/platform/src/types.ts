@@ -22,6 +22,7 @@ export interface HttpRequest {
   body?: unknown;
   signal?: AbortSignal;
   timeoutMs?: number;
+  headers?: Readonly<Record<string, string>>;
 }
 export interface SocketHandlers {
   open(): void;

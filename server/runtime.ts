@@ -8,6 +8,7 @@ import { createAccountMail } from './accounts/mail';
 import { emailAuthModule } from './api/email-auth';
 import { Sessions } from './accounts/sessions';
 import { WebSessions } from './api/web-sessions';
+import { currentUserModule } from './api/current-user';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -18,7 +19,7 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
   const web = database && config.sessionSigningKey
     ? new WebSessions(new Sessions(database, config.sessionSigningKey, new URL(config.publicOrigin).origin), config, config.sessionSigningKey) : null;
   const server = createGameServer({
-    modules: web ? [web.module(), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : [])] : [],
+    modules: web ? [web.module(), currentUserModule(web), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : [])] : [],
     repository: database, resolveData: gameConfiguration.resolveData,
     roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : [])] : [],
     onError: (event) => console.error(JSON.stringify({ event: 'http_error', ...event })),

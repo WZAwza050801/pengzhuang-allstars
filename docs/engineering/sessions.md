@@ -21,7 +21,7 @@ access 使用 HS256 白名单、`typ=at+jwt`、固定 audience `pengzhuang-api`�
 
 每次 `authenticate` 再查真实数据库的 user/status/session/expiry/revocation；不缓存“未撤销”结果。`WebSessions.requireAccess` 将 `{userId,sessionId}` 放到 `res.locals.principal`，Cookie 写请求还查会话 CSRF 绑定。只读调用也支持 Authorization Bearer；同一请求同时带 Bearer 与 access Cookie 时拒绝。原生写入协议由后续平台任务定义，现有 Web 模块仍要求 CSRF。
 
-当前用户/设备列表/退出属于 ACC-04；房间票据/重连属于 NET，尚未在旧 Demo 房间上冒称完成鉴权。后续业务写入在自己的事务内重新确认账户/会话及所有权，不能仅凭中间件的查询结果绕过结算时权限校验。
+当前用户/设备列表/退出和登录状态模型见 [account-management.md](account-management.md)；房间票据/重连属于 NET，尚未在旧 Demo 房间上冒称完成鉴权。后续业务写入在自己的事务内重新确认账户/会话及所有权，不能仅凭中间件的查询结果绕过结算时权限校验。
 
 ## 刷新旋转与竞争
 

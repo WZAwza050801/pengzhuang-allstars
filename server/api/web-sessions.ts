@@ -2,6 +2,8 @@ import { createHmac, randomBytes } from 'node:crypto';
 import { Router, type Request, type RequestHandler, type Response } from 'express';
 import type { RuntimeConfig } from '../../config/runtime';
 import { RefreshSchema } from '../../packages/contracts/src/http';
+import { LogoutSchema, type DeviceKind } from '../../packages/contracts/src/accounts';
+import { UUID } from '../accounts/access-tokens';
 import { ACCESS_SECONDS } from '../accounts/access-tokens';
 import { equalSecret, REFRESH_SECONDS, type SessionCredentials, type Sessions } from '../accounts/sessions';
 import { ApiError, asyncRoute } from './http';
@@ -71,11 +73,11 @@ export class WebSessions {
         if (
           !origin ||
           !['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method ?? '') ||
-          headers.some((v) => !['content-type', 'x-csrf-token', 'authorization'].includes(v))
+          headers.some((v) => !['content-type', 'x-csrf-token', 'authorization', 'idempotency-key'].includes(v))
         )
           throw new ApiError('FORBIDDEN', 403);
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-CSRF-Token, Authorization');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-CSRF-Token, Authorization, Idempotency-Key');
         res.status(204).end();
         return;
       }
@@ -93,6 +95,18 @@ export class WebSessions {
       maxAge: Math.min(ACCESS_SECONDS * 1000, remaining),
     });
     res.cookie(this.names.refresh, credentials.refreshToken, { ...common, maxAge: remaining });
+  }
+  clearCredentials(res: Response): void {
+    const options = { secure: this.config.cookieSecure, sameSite: 'lax' as const, path: '/', httpOnly: true };
+    res.clearCookie(this.names.access, options);
+    res.clearCookie(this.names.refresh, options);
+  }
+  deviceKind(req: Request): DeviceKind {
+    const agent = req.get('User-Agent') ?? '';
+    if (/iPad|Tablet/i.test(agent)) return 'tablet';
+    if (/Android|iPhone|iPod|Mobile/i.test(agent)) return 'mobile';
+    if (/Windows|Macintosh|X11|Linux/i.test(agent)) return 'desktop';
+    return 'unknown';
   }
   readonly requireAccess: RequestHandler = asyncRoute(async (req, res, next) => {
     const cookie = this.cookie(req, this.names.access);
@@ -137,6 +151,17 @@ export class WebSessions {
             res.json({ ok: true, data: { refreshed: true }, requestId: res.locals.requestId });
           }),
         );
+        router.post('/logout', asyncRoute(async (req, res) => {
+          const input = LogoutSchema.safeParse(req.body);
+          const operationId = req.get('Idempotency-Key');
+          if (!input.success || !operationId || !UUID.test(operationId) || Object.keys(req.query).length)
+            throw new ApiError('INVALID_REQUEST', 400);
+          const token = this.cookie(req, this.names.refresh);
+          const sessionId = await this.sessions.logout(token, this.csrf(req), operationId, input.data.allSessions);
+          // A retry may carry cookies from a later login in another tab.
+          if (!sessionId || token?.split('.')[0] === sessionId) this.clearCredentials(res);
+          res.json({ ok: true, data: { loggedOut: true }, requestId: res.locals.requestId });
+        }));
         return router;
       },
     };

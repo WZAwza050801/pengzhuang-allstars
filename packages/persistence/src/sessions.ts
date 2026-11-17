@@ -36,6 +36,7 @@ export class SessionRepository {
     refreshHash: string;
     csrfHash: string;
     durationSeconds: number;
+    deviceKind: string;
   }): Promise<Date | null> {
     // Same lock order as password reset/login: user first, then session.
     const user = await this.sql.query("SELECT id FROM users WHERE id = $1 AND status = 'active' FOR UPDATE", [
@@ -44,9 +45,17 @@ export class SessionRepository {
     if (!user.rowCount) return null;
     const result = await this.sql.query<{ expires_at: Date }>(
       `WITH timing AS (SELECT clock_timestamp() AS issued)
-       INSERT INTO sessions(id, user_id, family_id, refresh_token_hash, csrf_token_hash, created_at, expires_at)
-       SELECT $1, $2, $3, $4, $5, issued, issued + $6 * interval '1 second' FROM timing RETURNING expires_at`,
-      [input.id, input.userId, input.familyId, input.refreshHash, input.csrfHash, input.durationSeconds],
+       INSERT INTO sessions(id, user_id, family_id, refresh_token_hash, csrf_token_hash, created_at, expires_at, device_label)
+       SELECT $1, $2, $3, $4, $5, issued, issued + $6 * interval '1 second', $7 FROM timing RETURNING expires_at`,
+      [
+        input.id,
+        input.userId,
+        input.familyId,
+        input.refreshHash,
+        input.csrfHash,
+        input.durationSeconds,
+        input.deviceKind,
+      ],
     );
     return result.rows[0].expires_at;
   }
@@ -94,6 +103,64 @@ export class SessionRepository {
     await this.sql.query(
       'UPDATE sessions SET revoked_at = clock_timestamp() WHERE family_id = $1 AND revoked_at IS NULL',
       [familyId],
+    );
+  }
+
+  async listOwned(userId: string, limit: number, cursor?: { createdAt: string; id: string }) {
+    return (
+      await this.sql.query<{
+        id: string;
+        device_label: string | null;
+        created_at: Date;
+        expires_at: Date;
+        cursor_time: string;
+      }>(
+        `SELECT id, device_label, created_at, expires_at,
+       to_char(created_at AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.US"Z"') AS cursor_time
+       FROM sessions WHERE user_id = $1 AND revoked_at IS NULL AND expires_at > clock_timestamp()
+       AND csrf_token_hash IS NOT NULL AND ($2::timestamptz IS NULL OR (created_at, id) < ($2::timestamptz, $3::uuid))
+       ORDER BY created_at DESC, id DESC LIMIT $4`,
+        [userId, cursor?.createdAt ?? null, cursor?.id ?? null, limit + 1],
+      )
+    ).rows;
+  }
+
+  async revokeOwned(userId: string, sessionId: string): Promise<boolean> {
+    return (
+      (
+        await this.sql.query(
+          'UPDATE sessions SET revoked_at = COALESCE(revoked_at, clock_timestamp()) WHERE user_id = $1 AND id = $2',
+          [userId, sessionId],
+        )
+      ).rowCount === 1
+    );
+  }
+
+  async revokeAll(userId: string): Promise<void> {
+    await this.sql.query(
+      'UPDATE sessions SET revoked_at = clock_timestamp() WHERE user_id = $1 AND revoked_at IS NULL',
+      [userId],
+    );
+  }
+
+  async logoutAction(
+    operationId: string,
+  ): Promise<{ session_id: string; all_sessions: boolean; csrf_token_hash: string } | null> {
+    return (
+      (
+        await this.sql.query<{ session_id: string; all_sessions: boolean; csrf_token_hash: string }>(
+          `SELECT a.session_id, a.all_sessions, s.csrf_token_hash FROM session_logout_actions a
+           JOIN sessions s ON s.id = a.session_id WHERE a.operation_id = $1`,
+          [operationId],
+        )
+      ).rows[0] ?? null
+    );
+  }
+
+  async recordLogout(sessionId: string, operationId: string, allSessions: boolean): Promise<void> {
+    await this.sql.query(
+      'INSERT INTO session_logout_actions(session_id, operation_id, all_sessions) VALUES ($1, $2, $3)',
+      [sessionId, operationId, allSessions],
     );
   }
 }

@@ -34,7 +34,7 @@ export function emailAuthModule(accounts: EmailAccounts, web: WebSessions): ApiM
         asyncRoute(async (req, res) => {
           const input = LoginSchema.safeParse(req.body);
           if (!input.success) throw new ApiError('INVALID_REQUEST', 400);
-          const result = await accounts.login(input.data, req.socket.remoteAddress ?? 'unknown', { service: web.sessions, csrf: web.csrf(req) });
+          const result = await accounts.login(input.data, req.socket.remoteAddress ?? 'unknown', { service: web.sessions, csrf: web.csrf(req), deviceKind: web.deviceKind(req) });
           web.setCredentials(res, result.credentials);
           res.json({
             ok: true,

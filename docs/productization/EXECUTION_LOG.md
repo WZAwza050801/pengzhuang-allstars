@@ -646,6 +646,21 @@
 - 回滚：独立提交可回退，数据库只在隔离测试显式 down；不删除真实会话记录。
 - 下一项：ACC-04（依赖满足）；第 50 项完成时按用户要求同步 GitHub。
 
+### ACC-04
+
+- 状态：完成
+- 开始：2026-11-18 03:55 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 18c42ed
+- 范围：可信当前用户、本人会话游标列表/撤销、当前及全部退出、Web 调用适配器与登录状态 client-model。档案未初始化时如实返回 null，DAT-02 负责初始化；房间实际票据仍由 NET-01 实现并复用会话即时校验。
+- 计划与验收：固定请求/响应 schema；用户→会话锁序、退出持久幂等及安全 Cookie 清除；真实 PostgreSQL/HTTP/浏览器验证跨用户隔离、退出/全部撤销/响应丢失重试、刷新竞争与客户端迟到响应。无权限依赖、凭证或真机阻塞时不假勾选。
+- 实现：/me 与真实可空档案、本人活跃会话微秒游标分页/粗粒度设备信息、撤销及当前/全部退出；业务事务重新锁定校验可信会话，回执与撤销原子提交。全局退出幂等键 + 原会话 CSRF 绑定可确认清 Cookie 后的丢失响应，新登录不被旧重试撤销或清 Cookie。新增平台实际网络 adapter 与可移植 LoginStateModel，原请求最多重试一次、合并刷新含失败结果、退出意图/迟到响应隔离。
+- 验证：真实 PostgreSQL 17.12 + Mailpit 1.34.0，5 文件 / 54 集成项通过、0 跳过；会话 20 项与真实 SMTP 邮箱 12 项，含 Chromium 实际 adapter 四请求一次刷新、跨标签退出后恢复为匿名；包含跨用户越权、微秒分页、零年游标、全部撤销/响应体丢失/已清 Cookie/之后新登录、事务失败回滚、刷新竞争。完整 check 为 112 单元/6 契约及静态校验通过；生产构建与游戏 E2E 18/18 通过。
+- 证据：本提交；tests/account-state.test.ts、tests/account-client.test.ts、tests/accounts.contract.test.ts、tests/sessions.integration.test.ts、tests/email-auth.integration.test.ts；docs/engineering/account-management.md；docs/productization/reports/ACC-04.md；生成请求/响应契约。
+- 风险与剩余：档案初始化归 DAT-02，账号界面/生命周期归 ACC-07；真实房间票据尚属 NET-01/03，必须绑定 sessionId 与即时状态检查，本项不把游客 Demo 房间标为已鉴权。仅补齐已有依赖声明，无新增外部版本；真机、已有发行门槛未解除。测试数据库/Mailpit 均已停止，本轮未使用远端服务器。
+- 回滚：任务独立提交可回退；迁移 down 仅隔离本地/测试，不恢复已撤销的会话。
+- 下一项：先核实 ACC-05 的真实微信环境；若缺失则保持未勾选，继续已满足依赖的 ACC-06 / DAT-02。第 50 项同步 GitHub。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

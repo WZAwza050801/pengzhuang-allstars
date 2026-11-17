@@ -2,6 +2,15 @@ import { z } from 'zod';
 import { PROTOCOL_VERSION } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { parseNickname } from './game-validation';
+import {
+  CurrentUserSchema,
+  LogoutSchema,
+  LogoutResultSchema,
+  SessionListQuerySchema,
+  SessionListSchema,
+  RevokeSessionResultSchema,
+} from './accounts';
+export { MoneySchema } from './money';
 
 export const API_VERSION = 'v1';
 export const SUPPORTED_PROTOCOL_VERSIONS: readonly number[] = Object.freeze([PROTOCOL_VERSION]);
@@ -30,12 +39,6 @@ const nickname = z
   .string()
   .max(64)
   .refine((v) => v === v.trim() && parseNickname(v).ok, 'Invalid nickname');
-export const MoneySchema = z
-  .string()
-  .regex(/^(0|[1-9][0-9]*)$/)
-  .max(19)
-  .refine((v) => v.length < 19 || v <= '9223372036854775807', 'PostgreSQL bigint maximum exceeded')
-  .describe('Nonnegative PostgreSQL bigint serialized as a decimal string');
 export const RegisterSchema = z.strictObject({
   email: z.email().max(254),
   password: z.string().min(12).max(256),
@@ -80,6 +83,27 @@ export const QueueSchema = z.strictObject({
 export const HTTP_CONTRACTS = [
   { method: 'get', path: '/api/v1/auth/csrf', operationId: 'csrf' },
   { method: 'post', path: '/api/v1/auth/refresh', operationId: 'refresh', body: RefreshSchema },
+  {
+    method: 'post',
+    path: '/api/v1/auth/logout',
+    operationId: 'logout',
+    body: LogoutSchema,
+    response: LogoutResultSchema,
+  },
+  { method: 'get', path: '/api/v1/me', operationId: 'currentUser', response: CurrentUserSchema },
+  {
+    method: 'get',
+    path: '/api/v1/me/sessions',
+    operationId: 'sessions',
+    query: SessionListQuerySchema,
+    response: SessionListSchema,
+  },
+  {
+    method: 'delete',
+    path: '/api/v1/me/sessions/{id}',
+    operationId: 'revokeSession',
+    response: RevokeSessionResultSchema,
+  },
   { method: 'post', path: '/api/v1/auth/register', operationId: 'register', body: RegisterSchema, successStatus: 202 },
   { method: 'post', path: '/api/v1/auth/login', operationId: 'login', body: LoginSchema },
   { method: 'post', path: '/api/v1/auth/email/verify', operationId: 'verifyEmail', body: VerifyEmailSchema },
