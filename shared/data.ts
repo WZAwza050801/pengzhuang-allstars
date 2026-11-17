@@ -4,13 +4,18 @@ import type { FieldGeometry } from '../packages/game-core/src/field';
 export type { FieldGeometry } from '../packages/game-core/src/field';
 const fieldsJson = FieldDefinitionsSchema.parse(rawFieldsJson);
 import { freezeSnapshot } from '../packages/game-core/src/snapshot';
-import physicsJson from '../data/physics.json';
-import playersJson from '../data/players.json';
-import skillsJson from '../data/skills.json';
-import rulesJson from '../data/rules.json';
-import attrMapJson from '../data/attr-mapping.json';
+import rawPhysics from '../data/physics.json';
+import { PhysicsConfigSchema } from '../packages/contracts/src/physics';
+import { GameDefinitionsSchema } from '../packages/contracts/src/game-definitions';
+import rawPlayers from '../data/players.json';
+import rawSkills from '../data/skills.json';
+import rawRules from '../data/rules.json';
+import rawMapping from '../data/attr-mapping.json';
 // Named imports so the bundler can drop `others` (1.2.0 and variant-card rows), which the runtime never reads.
-import { version as levelsVersion, players as levelTable } from '../data/levels.json';
+import { version as levelsVersion, players as rawLevels } from '../data/levels.json';
+
+const definitions = GameDefinitionsSchema.parse({ geometry: fieldsJson.geometry, physics: rawPhysics, players: rawPlayers, skills: rawSkills, rules: rawRules, mapping: rawMapping, levels: { version: levelsVersion, players: rawLevels } });
+const physicsJson = definitions.physics, playersJson = definitions.players, skillsJson = definitions.skills, rulesJson = definitions.rules, attrMapJson = definitions.mapping, levelTable = definitions.levels.players;
 
 export type PhysicsConfig = typeof physicsJson;
 export type RulesConfig = typeof rulesJson;
@@ -59,6 +64,7 @@ export interface GameData {
 }
 
 export function buildGameData(physics: PhysicsConfig = physicsJson): GameData {
+  physics = PhysicsConfigSchema.parse(physics);
   const players: Record<string, PlayerDef> = {};
   for (const p of playersJson.players) players[p.id] = p;
   const skills: Record<string, SkillDef> = {};

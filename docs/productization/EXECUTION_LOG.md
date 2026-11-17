@@ -301,6 +301,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### BAL-01
+
+- 状态：完成
+- 开始：2026-11-17 14:06 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 76cc9f8e47128f2a48d19bd0ddd4ac4cfe61e8d0
+- 范围：核实117球员/106原表/11重建数据，建立完整数值schema、引用与来源校验及损坏输入反例。
+- 实现：完整数值schema与跨表/概率/时序校验接入实际加载，逐值核对2250源记录和117球员来源并澄清旧说明。
+- 验证：check36unit/4契约、physics18/net176、build及Chromium13通过；源码数值和hash未改。
+- 证据：本提交（git log -- docs/productization/reports/BAL-01.md 可定位）；docs/productization/reports/BAL-01.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

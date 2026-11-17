@@ -3,7 +3,18 @@ import ts from 'typescript-eslint';
 import globals from 'globals';
 
 export default ts.config(
-  { ignores: ['node_modules/**', 'dist/**', 'materials/**', 'research/**', 'art/**', 'docs/**', 'tools/_scratch*'] },
+  {
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'work/**',
+      'materials/**',
+      'research/**',
+      'art/**',
+      'docs/**',
+      'tools/_scratch*',
+    ],
+  },
   js.configs.recommended,
   ...ts.configs.recommended,
   {

@@ -22,6 +22,7 @@ files.push(
   'client/src/quality.ts',
   'tools/format.mjs',
   'tools/check-config.ts',
+  'tools/validate-balance-data.ts',
   'tools/check-toolchain.mjs',
   'tools/audit-assets.mjs',
   'tools/check-plan.mjs',

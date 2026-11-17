@@ -165,7 +165,7 @@
 
 现有入口与范围：data/players.json/levels.json/skills.json/attr-mapping.json/rules.json、shared/match.ts、calibrate/ai-bench。
 
-- [ ] **BAL-01** 清理数值来源与导入校验
+- [x] **BAL-01** 清理数值来源与导入校验
   - 依赖：FND-01、ARC-05
   - 实施：核对 106 原表/11 重建球员；检查全部等级/引用/概率/范围；消除旧说明矛盾并保留来源。
   - 产物：数据 schema、导入校验、差异报告。
