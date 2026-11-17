@@ -40,6 +40,13 @@ export class EmailAuthRepository {
 
   /** The hash stays inside this trusted credential boundary and never becomes a public account DTO. */
   async authenticate(email: string, check: (hash: string | null) => Promise<boolean>): Promise<string | null> {
+    await this.sql.query(
+      `SELECT u.id FROM users u JOIN auth_identities i ON i.user_id = u.id
+       WHERE i.provider = 'email' AND i.provider_app_id = 'primary' AND i.provider_subject = $1 FOR UPDATE OF u`,
+      [email],
+    );
+    // A joined credential read made before a lock wait can retain the old password.
+    // Use a fresh READ COMMITTED statement after the user lock is acquired.
     const result = await this.sql.query<{
       id: string;
       status: string;
@@ -48,7 +55,7 @@ export class EmailAuthRepository {
     }>(
       `SELECT u.id, u.status, i.verified_at, c.password_hash FROM users u
        JOIN auth_identities i ON i.user_id = u.id LEFT JOIN password_credentials c ON c.user_id = u.id
-       WHERE i.provider = 'email' AND i.provider_app_id = 'primary' AND i.provider_subject = $1 FOR UPDATE OF u`,
+       WHERE i.provider = 'email' AND i.provider_app_id = 'primary' AND i.provider_subject = $1`,
       [email],
     );
     const row = result.rows[0];
@@ -81,7 +88,10 @@ export class EmailAuthRepository {
   }
 
   async revokeSessions(userId: string): Promise<void> {
-    await this.sql.query('UPDATE sessions SET revoked_at = now() WHERE user_id = $1 AND revoked_at IS NULL', [userId]);
+    await this.sql.query(
+      'UPDATE sessions SET revoked_at = clock_timestamp() WHERE user_id = $1 AND revoked_at IS NULL',
+      [userId],
+    );
   }
 
   async rateLimit(keyHash: string, windowSeconds: number, maximum: number): Promise<boolean> {

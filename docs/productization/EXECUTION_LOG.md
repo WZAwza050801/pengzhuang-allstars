@@ -631,6 +631,21 @@
 - 回滚：新增 migration 仅本地/测试显式 down；生产前向兼容。邮箱流程默认 disabled，可停入口并保留待处理记录；不擅自删除凭据或修改生产权限。
 - 下一项：ACC-03（依赖满足）。
 
+### ACC-03
+
+- 状态：完成
+- 开始：2026-11-18 03:31 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 00bd571
+- 范围：签名访问凭证、数据库即时撤销校验、安全 Cookie/CSRF/CORS、持久化刷新旋转及并发宽限；登录与会话签发同事务，复用 ACC-02 邮箱入口。当前用户/设备管理 API 留给 ACC-04。
+- 计划与验收：新增会话迁移、仓储、签名及 HTTP 中间件；真实 PostgreSQL 验证错误签名/claims、撤销、并发刷新幂等、宽限外重放与重置竞争；核对浏览器 Cookie 行为、契约和构建。默认关闭邮件的旧本地 Demo 继续可启动。
+- 实现：jose HS256/typ/issuer/audience/必需 claims 及 15 分钟寿命校验；访问鉴权每次查账户、数据库会话到期和撤销。Secure/HttpOnly/Host Cookie、签名并绑定会话的 CSRF、精确 CORS 预检；数据库实际时钟计算 30 天绝对会话。刷新 hash/history/family 原子旋转，10 秒并发幂等，宽限外重放先提交撤销再拒绝。邮箱登录强制同事务签发会话；旧无绑定会话由迁移显式撤销。
+- 验证：真实 PostgreSQL 17.12 + Mailpit 1.34.0，5 文件 / 46 集成项通过、0 跳过，含 Chromium HttpOnly/双标签四次并发刷新；完整 check 为 105 单元/5 契约及静态检查通过。生产构建和游戏 E2E 18/18 通过；最后 SQL 撤销时间修正后再次 check 与 build:server 通过。先以失败回归复现再修正：等待用户锁后旧密码快照、撤销事务起始时间早于新会话 createdAt；30 天毫秒边界也由数据库单次时钟消除。官方 audit 新增 jose 无条目，原树仍 31 项审计记录。
+- 证据：本提交；tests/access-tokens.test.ts、tests/sessions.integration.test.ts、tests/email-auth.integration.test.ts；docs/engineering/sessions.md；docs/productization/reports/ACC-03.md；生成契约文档。
+- 风险与剩余：ACC-04 当前用户/设备管理、ACC-07 页面与 NET 房间鉴权未在此冒称完成；真机继续暂缓，已有发行门槛仍保留。测试遇到 Windows 临时文件锁，runner 增加有界清理重试，之后成功/预期失败运行均停止数据库并清理；旧 allstars-pg-test-9LdS5w 的手动删除被自动审批拒绝，目录暂留、进程已停止。本轮未使用远端服务器资源。
+- 回滚：独立提交可回退，数据库只在隔离测试显式 down；不删除真实会话记录。
+- 下一项：ACC-04（依赖满足）；第 50 项完成时按用户要求同步 GitHub。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

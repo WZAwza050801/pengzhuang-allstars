@@ -6,6 +6,8 @@ import { createRoomStore } from './roomStore';
 import { EmailAccounts } from './accounts/email-accounts';
 import { createAccountMail } from './accounts/mail';
 import { emailAuthModule } from './api/email-auth';
+import { Sessions } from './accounts/sessions';
+import { WebSessions } from './api/web-sessions';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -13,8 +15,10 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
   const database = config.databaseUrl ? new Database({ connectionString: config.databaseUrl }) : null;
   const emailAccounts = database && config.emailProvider !== 'disabled'
     ? new EmailAccounts(database, createAccountMail(config), config.sessionSigningKey!) : null;
+  const web = database && config.sessionSigningKey
+    ? new WebSessions(new Sessions(database, config.sessionSigningKey, new URL(config.publicOrigin).origin), config, config.sessionSigningKey) : null;
   const server = createGameServer({
-    modules: emailAccounts ? [emailAuthModule(emailAccounts, config.allowedOrigins)] : [],
+    modules: web ? [web.module(), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : [])] : [],
     repository: database, resolveData: gameConfiguration.resolveData,
     roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : [])] : [],
     onError: (event) => console.error(JSON.stringify({ event: 'http_error', ...event })),

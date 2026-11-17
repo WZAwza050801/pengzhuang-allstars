@@ -262,7 +262,7 @@ export class AccountRepository {
 
   async revokeSession(input: { userId: string; sessionId: string }): Promise<boolean> {
     const result = await this.sql.query(
-      'UPDATE sessions SET revoked_at = now() WHERE id = $1 AND user_id = $2 AND revoked_at IS NULL',
+      'UPDATE sessions SET revoked_at = clock_timestamp() WHERE id = $1 AND user_id = $2 AND revoked_at IS NULL',
       [input.sessionId, input.userId],
     );
     return result.rowCount === 1;

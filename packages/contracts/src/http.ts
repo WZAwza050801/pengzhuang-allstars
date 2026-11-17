@@ -46,6 +46,7 @@ const accountToken = z.string().regex(/^[A-Za-z0-9_-]{43}$/);
 export const VerifyEmailSchema = z.strictObject({ token: accountToken });
 export const ResetRequestSchema = z.strictObject({ email: z.email().max(254) });
 export const ResetPasswordSchema = z.strictObject({ token: accountToken, password: z.string().min(12).max(256) });
+export const RefreshSchema = z.strictObject({});
 export const ProfileSchema = z.strictObject({
   nickname,
   avatarAssetId: z.string().regex(/^[A-Za-z0-9_-]{1,64}$/),
@@ -77,6 +78,8 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
+  { method: 'get', path: '/api/v1/auth/csrf', operationId: 'csrf' },
+  { method: 'post', path: '/api/v1/auth/refresh', operationId: 'refresh', body: RefreshSchema },
   { method: 'post', path: '/api/v1/auth/register', operationId: 'register', body: RegisterSchema, successStatus: 202 },
   { method: 'post', path: '/api/v1/auth/login', operationId: 'login', body: LoginSchema },
   { method: 'post', path: '/api/v1/auth/email/verify', operationId: 'verifyEmail', body: VerifyEmailSchema },

@@ -190,6 +190,12 @@ try {
     cleaned &&
     path.dirname(temporary) === path.resolve(os.tmpdir()) &&
     path.basename(temporary).startsWith('allstars-pg-test-')
-  )
-    rmSync(temporary, { recursive: true, force: true });
+  ) {
+    try {
+      rmSync(temporary, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
+    } catch {
+      console.error('Test PostgreSQL temporary directory cleanup failed after bounded retries');
+      process.exitCode = 1;
+    }
+  }
 }

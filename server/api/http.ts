@@ -17,8 +17,8 @@ export const requestId: RequestHandler = (_req, res, next) => {
   res.setHeader('X-Request-Id', res.locals.requestId);
   next();
 };
-export function asyncRoute(fn: (req: Request, res: Response) => Promise<unknown>): RequestHandler {
-  return (req, res, next) => { Promise.resolve().then(() => fn(req, res)).catch(next); };
+export function asyncRoute(fn: (req: Request, res: Response, next: NextFunction) => Promise<unknown>): RequestHandler {
+  return (req, res, next) => { Promise.resolve().then(() => fn(req, res, next)).catch(next); };
 }
 export function sendApiError(res: Response, error: ApiError) {
   return res.status(error.status).json({ ok: false, error: { code: error.code, message: error.message, retryable: error.retryable }, requestId: res.locals.requestId });

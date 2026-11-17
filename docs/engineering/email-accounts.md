@@ -1,6 +1,6 @@
 # 邮箱账号与密码（ACC-02）
 
-运行时在配置数据库且 `EMAIL_PROVIDER` 启用时挂载邮箱账号 API。注册和找回仅接受意图，所有凭据/用户状态/一次性 token 均由服务端处理。ACC-03 将接入签名会话与 Cookie；当前 `/auth/login` 实际验证密码、邮箱已验证状态与 active 状态，返回可信 userId，尚不发放业务会话。
+运行时在配置数据库且 `EMAIL_PROVIDER` 启用时挂载邮箱账号 API。注册和找回仅接受意图，所有凭据/用户状态/一次性 token 均由服务端处理。`/auth/login` 验证密码、邮箱已验证状态与 active 状态，同事务签发会话并写入安全 Cookie；JSON 仍仅返回可信 userId。会话与 CSRF 调用约定见 [sessions.md](sessions.md)。
 
 | POST `/api/v1/auth` 路径 | 请求与结果 |
 |---|---|
@@ -11,7 +11,7 @@
 | `/password/reset-request` | email；已验证 active 账号生成找回邮件；不存在邮箱也返回相同 202。 |
 | `/password/reset` | token/password；锁定账户后消费 token、修改 hash、失效同用户其他找回 token、撤销全部会话，同一事务。 |
 
-请求均为严格 JSON schema，不接受客户端 userId、role、verifiedAt 等权威字段；密码注册/重设为 12–256 字符，不截断 Unicode。邮箱固定为去除首尾空白后全小写，不移除 `+` 标签、不合并点号别名。边界 schema 仍拒绝带空白的原始邮箱。Origin 若存在必须在允许列表，返回 no-store/no-referrer；不信任客户端 X-Forwarded-For 获取限流地址。
+请求均为严格 JSON schema，不接受客户端 userId、role、verifiedAt 等权威字段；密码注册/重设为 12–256 字符，不截断 Unicode。邮箱固定为去除首尾空白后全小写，不移除 `+` 标签、不合并点号别名。边界 schema 仍拒绝带空白的原始邮箱。Web 写入要求允许的 Origin 和签名 CSRF Cookie/匹配头，返回 no-store/no-referrer；不信任客户端 X-Forwarded-For 获取限流地址。
 
 ## 密码与限流
 

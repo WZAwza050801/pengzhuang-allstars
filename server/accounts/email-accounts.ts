@@ -10,6 +10,7 @@ import { EmailAuthRepository } from '../../packages/persistence/src/email-auth';
 import { ApiError } from '../api/http';
 import { type AccountMail } from './mail';
 import { Passwords } from './passwords';
+import type { Sessions } from './sessions';
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 const normalizeEmail = (value: string) => value.trim().toLowerCase();
@@ -96,15 +97,16 @@ export class EmailAccounts {
     });
   }
 
-  async login(input: { email: string; password: string }, source: string): Promise<{ userId: string }> {
+  async login(input: { email: string; password: string }, source: string, session: { service: Sessions; csrf: string }) {
     const email = normalizeEmail(input.email);
     await this.rate('login', source, email);
     return this.conceal(async () => {
-      const userId = await this.db.transaction((tx) =>
-        new EmailAuthRepository(tx).authenticate(email, (hash) => this.passwords.matches(input.password, hash)),
-      );
-      if (!userId) throw new ApiError('UNAUTHENTICATED', 401);
-      return { userId };
+      return this.db.transaction(async (tx) => {
+        const userId = await new EmailAuthRepository(tx).authenticate(email, (hash) => this.passwords.matches(input.password, hash));
+        if (!userId) throw new ApiError('UNAUTHENTICATED', 401);
+        const credentials = await session.service.issue(tx, userId, session.csrf);
+        return { userId, credentials };
+      });
     });
   }
 

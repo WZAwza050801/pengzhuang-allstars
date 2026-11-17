@@ -9,19 +9,14 @@ import {
 import type { ApiModule } from './modules';
 import { ApiError, asyncRoute } from './http';
 import type { EmailAccounts } from '../accounts/email-accounts';
+import type { WebSessions } from './web-sessions';
 
-export function emailAuthModule(accounts: EmailAccounts, allowedOrigins: readonly string[]): ApiModule {
+export function emailAuthModule(accounts: EmailAccounts, web: WebSessions): ApiModule {
   return {
     area: 'auth',
     createRouter() {
       const router = Router();
-      router.use((req, res, next) => {
-        res.setHeader('Cache-Control', 'no-store');
-        res.setHeader('Referrer-Policy', 'no-referrer');
-        const origin = req.get('Origin');
-        if (origin && !allowedOrigins.includes(origin)) return next(new ApiError('FORBIDDEN', 403));
-        next();
-      });
+      router.use(web.boundary);
       router.post(
         '/register',
         asyncRoute(async (req, res) => {
@@ -39,9 +34,11 @@ export function emailAuthModule(accounts: EmailAccounts, allowedOrigins: readonl
         asyncRoute(async (req, res) => {
           const input = LoginSchema.safeParse(req.body);
           if (!input.success) throw new ApiError('INVALID_REQUEST', 400);
+          const result = await accounts.login(input.data, req.socket.remoteAddress ?? 'unknown', { service: web.sessions, csrf: web.csrf(req) });
+          web.setCredentials(res, result.credentials);
           res.json({
             ok: true,
-            data: await accounts.login(input.data, req.socket.remoteAddress ?? 'unknown'),
+            data: { userId: result.userId },
             requestId: res.locals.requestId,
           });
         }),

@@ -13,7 +13,9 @@ for (const item of HTTP_CONTRACTS) {
       ...(item.path.includes('{id}')
         ? { parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }] }
         : {}),
-      requestBody: { required: true, content: { 'application/json': { schema: z.toJSONSchema(item.body) } } },
+      ...('body' in item
+        ? { requestBody: { required: true, content: { 'application/json': { schema: z.toJSONSchema(item.body) } } } }
+        : {}),
       responses: {
         ['successStatus' in item ? String(item.successStatus) : '200']: {
           description: 'Service-specific success envelope; implemented by the corresponding business task',

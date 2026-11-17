@@ -11,6 +11,8 @@ import { EmailAccounts } from '../server/accounts/email-accounts';
 import { createAccountMail } from '../server/accounts/mail';
 import { emailAuthModule } from '../server/api/email-auth';
 import { startRuntime } from '../server/runtime';
+import { Sessions } from '../server/accounts/sessions';
+import { WebSessions } from '../server/api/web-sessions';
 
 const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const tokenHash = (token: string) => createHash('sha256').update(token).digest('hex');
@@ -61,6 +63,7 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
   let origin: string;
   let inbox: string;
   let smtpPort: number;
+  let csrf: string;
   const signingKey = randomBytes(32).toString('base64url');
   const password = 'correct-horse-游戏-12345';
   const source = () => randomUUID();
@@ -115,15 +118,17 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
     }
     if (!ready) throw new Error('Mailpit did not become ready');
     accounts = new EmailAccounts(db, createAccountMail(mailConfig()), signingKey);
+    const web = new WebSessions(new Sessions(db, signingKey, 'http://localhost:2567'), mailConfig(), signingKey);
     server = createGameServer({
       repository: db,
       clientDirectory: null,
-      modules: [emailAuthModule(accounts, ['http://localhost:2567'])],
+      modules: [web.module(), emailAuthModule(accounts, web)],
     });
     await server.gameServer.listen(0);
     const address = server.httpServer.address();
     if (!address || typeof address === 'string') throw new Error('No HTTP port');
     origin = `http://127.0.0.1:${address.port}`;
+    csrf = (await request(origin, '/api/v1/auth/csrf')).data.data.csrfToken;
     accounts.startMailDelivery();
   }, 30000);
 
@@ -139,7 +144,12 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
   });
 
   const post = (route: string, body: unknown, headers?: Record<string, string>) =>
-    request(origin, `/api/v1/auth/${route}`, body, headers);
+    request(origin, `/api/v1/auth/${route}`, body, {
+      origin: 'http://localhost:2567',
+      cookie: `pz_csrf=${csrf}`,
+      'x-csrf-token': csrf,
+      ...headers,
+    });
   async function deliveredToken(email: string, purpose: 'verify' | 'reset', exclude?: string): Promise<string> {
     for (let index = 0; index < 100; index++) {
       const list = (await request(inbox, '/api/v1/messages')).data;
@@ -180,6 +190,12 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
     const loggedIn = await post('login', { email, password });
     expect(loggedIn.status).toBe(200);
     expect(Object.keys(loggedIn.data.data)).toEqual(['userId']);
+    expect(loggedIn.headers['set-cookie']).toHaveLength(2);
+    expect(
+      (loggedIn.headers['set-cookie'] as string[]).every(
+        (value) => value.includes('HttpOnly') && value.includes('SameSite=Lax'),
+      ),
+    ).toBe(true);
     expect(JSON.stringify(loggedIn.data).includes(password)).toBe(false);
   });
 
@@ -200,6 +216,13 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
   test('reset acknowledgements conceal account existence; reset is single-use and revokes sessions', async () => {
     const email = 'reset@example.test';
     const userId = await verifiedAccount(email);
+    const login = await post('login', { email, password });
+    const access = (login.headers['set-cookie'] as string[])
+      .find((value) => value.startsWith('pz_access='))!
+      .split(';')[0]
+      .slice('pz_access='.length);
+    const sessions = new Sessions(db, signingKey, 'http://localhost:2567');
+    expect((await sessions.authenticate(access)).userId).toBe(userId);
     const session = await new AccountRepository(db).createSession({
       userId,
       refreshTokenHash: tokenHash('test-session'),
@@ -222,6 +245,7 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
     expect((await post('password/reset', { token, password: nextPassword })).status).toBe(400);
     expect((await post('login', { email, password })).status).toBe(401);
     expect((await post('login', { email, password: nextPassword })).status).toBe(200);
+    await expect(sessions.authenticate(access)).rejects.toMatchObject({ status: 401 });
     expect(
       (await db.query('SELECT revoked_at FROM sessions WHERE id = $1', [session.id])).rows[0].revoked_at,
     ).not.toBeNull();
@@ -280,10 +304,11 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
   test('rate limits survive service recreation and cannot be evaded by varying a request identifier', async () => {
     const ip = source();
     const email = 'limited@example.test';
+    const session = { service: new Sessions(db, signingKey, 'http://localhost:2567'), csrf };
     for (let index = 0; index < 10; index++)
-      await expect(accounts.login({ email, password }, ip)).rejects.toMatchObject({ status: 401 });
+      await expect(accounts.login({ email, password }, ip, session)).rejects.toMatchObject({ status: 401 });
     const recreated = new EmailAccounts(db, createAccountMail(mailConfig()), signingKey);
-    await expect(recreated.login({ email, password }, source())).rejects.toMatchObject({ status: 429 });
+    await expect(recreated.login({ email, password }, source(), session)).rejects.toMatchObject({ status: 429 });
   });
 
   test('invalid bodies, authority claims and unapproved origins are rejected at the HTTP boundary', async () => {
@@ -337,6 +362,28 @@ describe('email account HTTP + real Mailpit SMTP + PostgreSQL', () => {
     }
     expect((await post('register', { email, password, nickname: '重试成功' })).status).toBe(202);
     await deliveredToken(email, 'verify');
+  });
+
+  test('session persistence failure fails login without issuing any credential cookies', async () => {
+    const email = 'session-failure@example.test';
+    await verifiedAccount(email);
+    const count = (await db.query('SELECT count(*)::int AS count FROM sessions')).rows[0].count;
+    await db.query(
+      "CREATE FUNCTION auth_test_reject_session() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'injected session failure'; END $$",
+    );
+    await db.query(
+      'CREATE TRIGGER auth_test_reject_session BEFORE INSERT ON sessions FOR EACH ROW EXECUTE FUNCTION auth_test_reject_session()',
+    );
+    try {
+      const result = await post('login', { email, password });
+      expect(result.status).toBe(500);
+      expect(result.headers['set-cookie']).toBeUndefined();
+      expect((await db.query('SELECT count(*)::int AS count FROM sessions')).rows[0].count).toBe(count);
+    } finally {
+      await db.query('DROP TRIGGER auth_test_reject_session ON sessions');
+      await db.query('DROP FUNCTION auth_test_reject_session()');
+    }
+    expect((await post('login', { email, password })).status).toBe(200);
   });
 
   test('database rate buckets admit exactly the configured count under concurrent callers', async () => {

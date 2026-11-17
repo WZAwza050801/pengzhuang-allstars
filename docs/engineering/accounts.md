@@ -12,4 +12,6 @@ ACC-01 只建立账户边界与持久化契约；注册、密码派生、邮件�
 
 ACC-02 增量：`users.registration_nickname` 保留注册昵称草稿，后续 DAT-02 初始化资料使用；`auth_identities.verified_at` 记录邮箱验证。`EmailAuthRepository.authenticate` 只在内部回调中核对密码 hash，公开返回仍仅可信 userId，不返回 hash。`auth_rate_limits` 为持久化限流；`account_mail_jobs` 为加密的短期邮件投递队列，发送/终止后清空密文。流程与保留边界见 [email-accounts.md](email-accounts.md)。
 
+ACC-03 增量：`sessions.refresh_generation`、`csrf_token_hash` 与 family 索引；`session_refresh_history(token_hash, session_id, generation, consumed_at)` 保留已消费刷新凭证的哈希以检测重放，session/generation 唯一。签发/旋转/撤销、30 天绝对有效期与 10 秒并发宽限见 [sessions.md](sessions.md)。此内部仓储的 hash 不作为公开账户 DTO 返回。
+
 外键全部引用 `users(id)` 并使用 `RESTRICT`，所以硬删除账户必须先经过账户匿名化/清理流程，不能让级联删除悄悄移除审计所需证据。迁移的 `down` 只适用于本地/测试，由迁移器的显式回滚开关保护。
