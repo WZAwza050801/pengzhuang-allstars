@@ -21,10 +21,34 @@ describe('PostgreSQL 17 persistence', () => {
       await db.close();
     }
   });
-  test('fresh and concurrent migrations apply once, repeated startup is a no-op', async () => {
-    const [a, b] = await Promise.all([migrateDatabase(db), migrateDatabase(db)]);
-    expect(a.length + b.length).toBe(1);
+  test('installed migrations are idempotent when another integration suite initialized the schema first', async () => {
+    await Promise.all([migrateDatabase(db), migrateDatabase(db)]);
     expect(await migrateDatabase(db)).toHaveLength(0);
+  });
+  test('fresh and concurrent temporary migrations apply once, then become a no-op', async () => {
+    const base = process.env.PG_TEST_TMP_DIR;
+    if (!base) throw new Error('Isolated migration fixture directory required');
+    await mkdir(base, { recursive: true });
+    const directory = await mkdtemp(path.join(base, 'concurrent-'));
+    const suffix = path
+      .basename(directory)
+      .replace(/[^a-z0-9]/gi, '')
+      .toLowerCase();
+    const table = `migration_concurrent_${suffix}`;
+    try {
+      await writeFile(
+        path.join(directory, '202611180010_create.mjs'),
+        "export function up(pgm) { pgm.sql('CREATE TABLE migration_concurrent_probe(id int)'); }\n",
+      );
+      const [a, b] = await Promise.all([
+        migrateDatabase(db, { directory, table }),
+        migrateDatabase(db, { directory, table }),
+      ]);
+      expect(a.length + b.length).toBe(1);
+      expect(await migrateDatabase(db, { directory, table })).toHaveLength(0);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
   });
   test('repositories share one transaction and roll back together', async () => {
     await expect(
@@ -76,8 +100,11 @@ describe('PostgreSQL 17 persistence', () => {
     await expect(migrateDatabase(db, { direction: 'down' })).rejects.toThrow('explicit');
     expect(await migrateDatabase(db, { direction: 'down', allowRollback: true })).toHaveLength(1);
     expect(
-      (await db.query<{ exists: string | null }>("SELECT to_regclass('service_metadata') AS exists")).rows[0].exists,
+      (await db.query<{ exists: string | null }>("SELECT to_regclass('sessions') AS exists")).rows[0].exists,
     ).toBeNull();
     expect(await migrateDatabase(db)).toHaveLength(1);
+    expect((await db.query<{ exists: string | null }>("SELECT to_regclass('sessions') AS exists")).rows[0].exists).toBe(
+      'sessions',
+    );
   });
 });

@@ -517,6 +517,20 @@
 - 回滚：独立任务提交可回退；保留旧入口以便恢复。
 - 下一项：选择依赖已满足的未完成任务；UI-03 待 ACC-04、DAT-02。
 
+### ACC-01
+
+- 状态：进行中
+- 开始：2026-11-18 00:40 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 738bf39
+- 范围：建立长期用户、身份、密码凭据、验证令牌和会话的 PostgreSQL schema、数据字典与账户仓储；不提前实现注册登录 API 或密码派生。
+- 实现：新增 users/auth_identities/password_credentials/verification_tokens/sessions migration、账户仓储和数据字典；身份全局唯一按 provider/appId/subject，账户状态有单向删除终态，所有 credential/token/session hash 均不作为仓储输出返回。
+- 验证：format/lint/typecheck 通过；真实 PostgreSQL 用例已覆盖迁移、状态迁移、并发身份唯一、一次性令牌、会话撤销和外键反例，但 `npm run test:integration` 因本机没有 Docker 而失败。获授权远程工作区也未发现 Docker 或 psql，未创建容器或安装服务。
+- 证据：本提交中的 packages/persistence/migrations/202611180001_accounts.mjs、tests/accounts.integration.test.ts、docs/engineering/accounts.md；真实运行证据待补。
+- 风险与剩余：任务仍未完成，必须在隔离 PostgreSQL 17 上运行 integration 测试并验证 migration up/down 后才可勾选。ACC-02 才引入 Argon2id、邮件和令牌流程；不得把 seatToken 当作登录会话。
+- 回滚：独立 migration 和提交可回退；migration down 只允许本地/测试显式执行。
+- 下一项：ACC-02（待 ACC-01）。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。
