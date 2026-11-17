@@ -17,9 +17,9 @@
 | Web/H5 | React 19 + Vite + React Router 7 | 大厅和业务页面增量替换 DOM 拼接；比赛 Canvas 核心通过宿主桥接 |
 | Web 状态 | TanStack Query 5 管服务端数据；Zustand 5 管轻量界面状态 | 余额/等级不能以本地 store 为权威；避免两套缓存互相覆盖 |
 | 样式 | CSS Modules + CSS variables/design tokens | 平台统一颜色/间距/状态，各端独立布局；不要求 Canvas UI 复用 CSS |
-| 管理后台 | React + Ant Design 5 + 同一业务 API 的 admin 路由 | 与游戏页面不同入口，服务端每个动作独立鉴权 |
+| 管理后台 | React + Ant Design 6.7.1 候选 + 同一业务 API 的 admin 路由 | FND-02 核实发行/peer；UI 接入时实际验证，与游戏页面不同入口 |
 | 微信小游戏 | TypeScript + 微信小游戏官方 API/适配层 + Canvas2D | 大厅/HUD 重做；保留规则/物理及数据模型。不能依赖 DOM、WebAudio、浏览器 Worker 的隐式存在 |
-| Android/iOS | Capacitor 7 作为 PoC 起点；Android WebView / iOS WKWebView | APP-01 核实系统支持/商店要求并锁定受维护版本；性能通过才全面封装，否则 ADR 选择替代并重排任务 |
+| Android/iOS | Capacitor 8.6.2 作为 PoC 候选；Android WebView / iOS WKWebView | FND-02 核实 Node 兼容；APP-01 验证原生系统/商店要求，性能通过才全面封装 |
 | 电脑安装包 | 默认暂不制作 | WEB-06 根据实际需求决策；需要时在 Tauri 2/Electron 中选一个，不双实现 |
 | 缓存/分布式 | 初期不依赖 Redis | PostgreSQL 保存权威业务；多进程队列/Colyseus presence 按容量证据引入 Redis 7 或受维护兼容版 |
 | 资源 | 版本 manifest + 内容哈希；生产对象存储/CDN | 本地资源服务器同契约；供应商通过配置选择 |

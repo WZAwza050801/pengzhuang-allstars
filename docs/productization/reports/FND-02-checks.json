@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exit": 0,
+    "seconds": 4.123
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit": 0,
+    "seconds": 3.691
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test"
+    ],
+    "exit": 0,
+    "seconds": 17.684
+  }
+]

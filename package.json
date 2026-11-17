@@ -5,9 +5,13 @@
   "description": "碰撞全明星 怀旧复刻：竖屏 5v5 弹射足球，浏览器联机约战",
   "type": "module",
   "engines": {
-    "node": ">=22.12"
+    "node": "24.22.1",
+    "npm": "11.9.0"
   },
+  "packageManager": "npm@11.9.0",
   "scripts": {
+    "preinstall": "node tools/check-toolchain.mjs",
+    "check:toolchain": "node tools/check-toolchain.mjs",
     "dev": "vite --config client/vite.config.ts",
     "dev:server": "tsx watch server/index.ts",
     "dev:client": "vite --config client/vite.config.ts",

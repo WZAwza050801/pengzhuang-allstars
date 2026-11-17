@@ -1,0 +1,162 @@
+{
+  "react": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "19.3.1",
+      "engines": {
+        "node": ">=0.10.0"
+      },
+      "license": "MIT"
+    }
+  },
+  "zod": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "4.6.7",
+      "license": "MIT"
+    }
+  },
+  "eslint": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "10.15.0",
+      "engines": {
+        "node": "^20.19.0 || ^22.13.0 || >=24"
+      },
+      "peerDependencies": {
+        "jiti": "*"
+      },
+      "license": "MIT"
+    }
+  },
+  "prettier": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "3.10.1",
+      "engines": {
+        "node": ">=14"
+      },
+      "license": "MIT"
+    }
+  },
+  "vitest": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "5.1.0",
+      "engines": {
+        "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      },
+      "peerDependencies": {
+        "vite": "^6.4.0 || ^7.0.0 || ^8.0.0",
+        "jsdom": "*",
+        "happy-dom": "*",
+        "@vitest/ui": "5.1.0",
+        "@types/node": "^22.0.0 || >=24.0.0",
+        "@edge-runtime/vm": "*",
+        "@opentelemetry/api": "^1.9.0",
+        "@vitest/coverage-v8": "5.1.0",
+        "@vitest/browser-preview": "5.1.0",
+        "@vitest/coverage-istanbul": "5.1.0",
+        "@vitest/browser-playwright": "5.1.0",
+        "@vitest/browser-webdriverio": "^5.0.0-beta.5 || >=5.0.0"
+      },
+      "license": "MIT"
+    }
+  },
+  "pg": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "8.23.1",
+      "engines": {
+        "node": ">= 16.0.0"
+      },
+      "peerDependencies": {
+        "pg-native": ">=3.0.1"
+      },
+      "license": "MIT"
+    }
+  },
+  "node-pg-migrate": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "9.0.0",
+      "engines": {
+        "node": ">=20.11.0"
+      },
+      "peerDependencies": {
+        "pg": ">=4.3.0 <9.0.0",
+        "@types/pg": ">=6.0.0 <9.0.0"
+      },
+      "license": "MIT"
+    }
+  },
+  "@capacitor/core": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "8.6.2",
+      "license": "MIT"
+    }
+  },
+  "@capacitor/cli": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "8.6.2",
+      "engines": {
+        "node": ">=22.0.0"
+      },
+      "license": "MIT"
+    }
+  },
+  "react-router-dom": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "7.18.5",
+      "engines": {
+        "node": ">=20.0.0"
+      },
+      "peerDependencies": {
+        "react": ">=18",
+        "react-dom": ">=18"
+      },
+      "license": "MIT"
+    }
+  },
+  "@tanstack/react-query": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "5.107.1",
+      "peerDependencies": {
+        "react": "^18 || ^19",
+        "@types/react": "^18 || ^19"
+      },
+      "license": "MIT"
+    }
+  },
+  "zustand": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "5.1.0",
+      "engines": {
+        "node": ">=12.20.0"
+      },
+      "peerDependencies": {
+        "immer": ">=9.0.6",
+        "react": ">=18.0.0",
+        "@types/react": ">=18.0.0",
+        "use-sync-external-store": ">=1.2.0"
+      },
+      "license": "MIT"
+    }
+  },
+  "antd": {
+    "exit_code": 0,
+    "metadata": {
+      "version": "6.7.1",
+      "peerDependencies": {
+        "react": ">=18.0.0",
+        "react-dom": ">=18.0.0"
+      },
+      "license": "MIT"
+    }
+  }
+}

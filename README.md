@@ -15,7 +15,7 @@
 
 ## 当前 Demo 本地运行
 
-当前 `package.json` 要求 Node.js >=22.12；产品化目标统一至 Node.js 24 LTS，具体补丁版本由 FND-02 核实并锁定。
+当前锁定 Node.js 24.22.1（24 LTS）和 npm 11.9.0；`.nvmrc`、`.node-version`、`engines` 与安装前检查保持一致。升级需在独立变更中更新这些约束、锁文件并完成兼容验证。
 
 ```bash
 npm ci
