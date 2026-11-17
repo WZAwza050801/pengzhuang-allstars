@@ -709,7 +709,7 @@
     {
       "path": "client/public/assets/catalog.json",
       "bytes": 259361,
-      "sha256": "118c967e0a4a740de4bb01828857585576d721e9bea536ccdd8df2168601acc1",
+      "sha256": "4781f1eaa6403ca35c5258e9b7703f1a6ec33ae240c047edd6ce393a2e371eeb",
       "usage": "runtime",
       "category": "runtime-other-unverified",
       "sourceEvidence": "No more specific source evidence; review required",

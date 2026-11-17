@@ -1,6 +1,7 @@
 import type { FieldGeometry, PhysicsConfig } from '../../shared/data';
 import type { Side } from '../../shared/physics';
 import { portraitUrl } from './portraits';
+import { fieldArtMapping } from '../../packages/game-core/src/field-art';
 import { fieldOutline } from '../../packages/game-core/src/field';
 import { worldToView, viewToWorld, clientToWorld, cameraMatrix, fieldViewport, type Camera } from '../../packages/game-core/src/camera';
 
@@ -15,6 +16,7 @@ export interface Skin {
   artFit?: string;
   /** Source pixels [left, top, right, bottom) of the playable rectangle inside the full scene. */
   artCrop?: number[];
+  artRotate?: number;
   /** The whole original screen (stands, walls, corner springs, score bar), relative to client/public. */
   scene?: string;
   sceneSize?: number[];
@@ -163,6 +165,20 @@ export class Renderer {
     return img.complete && img.naturalWidth ? img : null;
   }
 
+  /** Decode the selected field before a calibration capture or explicit scene transition. */
+  async preloadField(): Promise<void> {
+    const images: HTMLImageElement[] = [];
+    for (const src of [this.skin.art, this.skin.scene]) {
+      if (!src) continue;
+      let image = this.artImages.get(src);
+      if (!image) { image = new Image(); image.src = `/${src}`; this.artImages.set(src, image); }
+      images.push(image);
+    }
+    this.springImage();
+    if (this.springImg) images.push(this.springImg);
+    await Promise.all(images.map(image => image.decode()));
+  }
+
   /**
    * Where the full original scene sits in world metres. artCrop is the playable rectangle in the
    * scene's pixels, so one scene pixel is width/(right-left) metres and the crop lands on [-W,W]x[-L,L].
@@ -170,9 +186,7 @@ export class Renderer {
   private sceneBox() {
     const sk = this.skin;
     if ((!sk.scene && !this.drawn) || !sk.sceneSize || !sk.artCrop) return null;
-    const [left, top, right] = sk.artCrop;
-    const k = this.g.width / (right - left);
-    return { k, x0: -this.g.width / 2 - left * k, y0: -this.g.length / 2 - top * k, w: sk.sceneSize[0] * k, h: sk.sceneSize[1] * k };
+    return fieldArtMapping(this.g, sk).sceneBox;
   }
 
   private sceneImage(): HTMLImageElement | null {
@@ -200,9 +214,12 @@ export class Renderer {
   sceneBar() {
     const b = this.sceneBox();
     if (!b) return null;
-    const px = b.k * this.s;
-    const { x: left, y: top } = worldToView({ x: b.x0, y: b.y0 }, { ...this.camera, side: 0 });
-    return { x: left + SCENE_BAR.left * px, y: top, w: (SCENE_BAR.right - SCENE_BAR.left) * px, h: SCENE_BAR.bottom * px, px };
+    const mapping = fieldArtMapping(this.g, this.skin);
+    const corners = [{x:SCENE_BAR.left,y:0},{x:SCENE_BAR.right,y:0},{x:SCENE_BAR.right,y:SCENE_BAR.bottom},{x:SCENE_BAR.left,y:SCENE_BAR.bottom}]
+      .map(p => worldToView(mapping.sourceToWorld(p), { ...this.camera, side: 0 }));
+    const x = Math.min(...corners.map(p=>p.x)), y = Math.min(...corners.map(p=>p.y));
+    const w = Math.max(...corners.map(p=>p.x))-x, h = Math.max(...corners.map(p=>p.y))-y;
+    return { x, y, w, h, px: w/(SCENE_BAR.right-SCENE_BAR.left) };
   }
 
   resize() {
@@ -273,7 +290,11 @@ export class Renderer {
     if (!b || !img) return false;
     const ctx = this.ctx, k = this.s * this.dpr;
     ctx.setTransform(k, 0, 0, k, this.cx * this.dpr, this.cy * this.dpr);
-    ctx.drawImage(img, b.x0, b.y0, b.w, b.h);
+    const mapping = fieldArtMapping(this.g, this.skin);
+    ctx.save();
+    ctx.transform(...mapping.matrix);
+    ctx.drawImage(img, 0, 0, this.skin.sceneSize![0], this.skin.sceneSize![1]);
+    ctx.restore();
     // The original scene is 3:4. A phone or a desktop window is taller, so the picture ends
     // above the bottom bar. Stretching those last pixels turns the hedge into vertical streaks.
     const viewBottom = (this.canvas.height / this.dpr - this.cy) / this.s;
@@ -310,7 +331,7 @@ export class Renderer {
   }
 
   /** The "drawn" skin: static layers are painted once per layout into drawnCache, then blitted every frame. */
-  private drawDrawnScene(b: { k: number; x0: number; y0: number; w: number; h: number }): boolean {
+  private drawDrawnScene(b: { k: number; ky: number; x0: number; y0: number; w: number; h: number }): boolean {
     const cw = this.canvas.width, ch = this.canvas.height;
     const key = `${this.skin.id}|${cw}x${ch}|${this.s}|${this.cx}|${this.cy}|${this.flip}`;
     if (!this.drawnCache || key !== this.drawnKey) {
@@ -334,7 +355,7 @@ export class Renderer {
   }
 
   /** Never flipped: ground, red stands, hedge ring, bunting and rocks, and the cyan | black | red score bar. */
-  private paintBackdrop(x: CanvasRenderingContext2D, b: { k: number; x0: number; y0: number }, v: { l: number; r: number; t: number; b: number }) {
+  private paintBackdrop(x: CanvasRenderingContext2D, b: { k: number; ky: number; x0: number; y0: number }, v: { l: number; r: number; t: number; b: number }) {
     const g = this.g, W = g.width / 2, L = g.length / 2;
     const rand = rng(2016);
 
@@ -389,7 +410,7 @@ export class Renderer {
     }
 
     // bunting between the score bar and the hedge
-    const barBottom = b.y0 + 100 * b.k;
+    const barBottom = b.y0 + 100 * b.ky;
     const yb = (barBottom - hy) / 2 - 0.12;
     const colors = ['#33a9e6', '#ff6f91', '#f39a2b', '#41c9d6', '#ffd43b', '#8c6ce0'];
     let ci = 0;
@@ -451,7 +472,7 @@ export class Renderer {
     rock(W - 0.3, hy + 0.35, 0.14);
 
     // score bar: cyan | black tab | red; the DOM scoreboard sits on top
-    const bx = (p: number) => b.x0 + p * b.k, by = (p: number) => b.y0 + p * b.k, k = b.k;
+    const bx = (p: number) => b.x0 + p * b.k, by = (p: number) => b.y0 + p * b.ky, k = b.k;
     const bar = (l: number, r: number, bottom: number, radii: number[], top: string, bot: string, edge: string) => {
       x.beginPath();
       x.roundRect(bx(l), by(-40), bx(r) - bx(l), by(bottom) - by(-40), radii.map((q) => q * k));

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "assets-d305860202c35524",
+  "version": "assets-b03b44cc820e4e9e",
   "minProtocol": 1,
   "maxProtocol": 1,
   "assets": [
@@ -8398,8 +8398,8 @@
       "id": "procedural.field",
       "kind": "procedural-field",
       "path": null,
-      "bytes": 49497,
-      "sha256": "3e51b27b6335a4cf1c6c8b9f89416d8615fd4f78b8263da05cf740b13eccdd8b",
+      "bytes": 50462,
+      "sha256": "ae98d84d7abfeb8bd27d87e53ad138c65858949536805d764f43c48acf5a84fd",
       "width": null,
       "height": null,
       "anchors": {},

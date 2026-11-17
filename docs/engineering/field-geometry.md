@@ -44,3 +44,11 @@ fieldSegments（16段）生成墙、六段球网和四角弹簧，fieldPosts（�
 门后球员在本杆未进球结束后一起生成一次 relocate 事件，逐人选择合法空位；冻结/锚定不改变这条规则。freeSpot 保留原近邻环搜索，增加唯一几何内沿检查，以及有界确定网格后备搜索。无合法位置明确失败，不再静默返回重叠点。进球则先计分并复位全部状态，失球方开球，不另外发移位事件。
 
 专项测试覆盖四角法线、超速限幅、低速、足球、静态体、单步去重，以及权威 resolveShot 的多球员移位/防重叠和进球重置组合。全部保留 phys-4 数值。
+
+## 皮肤标定
+
+`fieldArtMapping` 统一处理 source crop → 顺时针0/90/180/270 → 可玩世界矩形及逆变换，并提供 Canvas affine matrix 和场景包围框。裁切生成器仍读取 fields.json；Renderer 整图、已裁切图和HUD使用同一转换。整图纵向改用 length/cropHeight，修正原来沿用 width/cropWidth 导致的下门线约0.00452m偏差；不改物理数据。未来旋转整场时源图也随矩阵旋转，不能只旋转碰撞。
+
+比赛场景使用 field.<id>.scene/art 绑定；大厅 Image_01–05 使用 lobby.stadium.<n> 绑定，仅为等距展示，无碰撞坐标，不将等距图强行套到正交比赛矩形。程序化 orig_2016 的 crop/sceneSize 是虚拟版式；其他三套程序化皮肤直接使用核心几何。
+
+`PLAYWRIGHT_BROWSERS_PATH=<cache> node tools/field-capture.mjs` 自启独立端口Vite并清理，生成 `docs/productization/reports/field-calibration/anchors.json` 和 `skins-both-sides.png`。development独立入口 field-debug.html 不在生产构建入口中。报告区分“变换误差”和“独立原图测量误差”：本次最大2.22e-16m是前者，原图的手绘门框/装饰仍有视觉厚度，不能把数学互逆宣称为重新测得原版常数。18格叠加检查墙内沿、门柱/开口、弹簧、网，以及五张大厅图的用途；FLD-07继续视口与拖拽矩阵。
