@@ -15,11 +15,19 @@ import http from 'node:http';
 import os from 'node:os';
 
 const ROOT = process.cwd();
-const SERVER_PORT = Number(process.env.E2E_SERVER_PORT || 2567);
-const WEB_PORT = Number(process.env.E2E_WEB_PORT || 4173);
+const requestedPort = (name) => {
+  const value = process.env[name];
+  if (value === undefined || value === '') return 0;
+  const port = Number(value);
+  if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error(`${name} must be a TCP port`);
+  return port;
+};
+const REQUESTED_SERVER_PORT = requestedPort('E2E_SERVER_PORT');
+const REQUESTED_WEB_PORT = requestedPort('E2E_WEB_PORT');
 const DIST_CLIENT = path.join(ROOT, 'work', 'test-client');
 const DIST_SERVER = path.join(ROOT, 'dist', 'server', 'index.js');
-const OUT = path.join(ROOT, 'docs', 'screens');
+const ARTIFACTS = path.resolve(process.env.E2E_ARTIFACT_DIR || path.join(ROOT, 'work', 'e2e-artifacts'));
+const OUT = path.join(ARTIFACTS, 'screens');
 const ROOM_STORE = fs.mkdtempSync(path.join(os.tmpdir(), 'allstars-e2e-'));
 
 const results = [];
@@ -45,8 +53,10 @@ const MIME = {
 let serverProc = null;
 let webServer = null;
 let browser = null;
+let serverPort = 0;
+let webPort = 0;
 
-function startWeb() {
+function startWeb(port) {
   return new Promise((resolve, reject) => {
     const srv = http.createServer((req, res) => {
       const rel = decodeURIComponent((req.url || '/').split('?')[0]);
@@ -69,16 +79,57 @@ function startWeb() {
       fs.createReadStream(file).pipe(res);
     });
     srv.on('error', reject);
-    srv.listen(WEB_PORT, '127.0.0.1', () => resolve(srv));
+    srv.listen(port, '127.0.0.1', () => resolve(srv));
   });
 }
 
-async function waitHealth(timeoutMs = 40000) {
+function boundPort(server) {
+  const address = server.address();
+  if (!address || typeof address === 'string') throw new Error('Test server did not bind a TCP port');
+  return address.port;
+}
+
+async function waitServerStart(child, timeoutMs = 40000) {
+  return new Promise((resolve, reject) => {
+    let output = '';
+    const finish = (callback, value) => {
+      clearTimeout(timeout);
+      child.stdout?.off('data', onOutput);
+      child.off('error', onError);
+      child.off('exit', onExit);
+      callback(value);
+    };
+    const onOutput = (chunk) => {
+      output += chunk.toString();
+      const lines = output.split(/\r?\n/);
+      output = lines.pop() ?? '';
+      for (const line of lines) {
+        try {
+          const event = JSON.parse(line);
+          if (event.event === 'server_started' && Number.isInteger(event.port) && event.port > 0) {
+            finish(resolve, event.port);
+            return;
+          }
+        } catch {
+          // Server logs are not part of the readiness protocol.
+        }
+      }
+    };
+    const onError = () => finish(reject, new Error('Test game server failed to start'));
+    const onExit = (code) => finish(reject, new Error(`Test game server exited before ready (${code ?? 'unknown'})`));
+    const timeout = setTimeout(() => finish(reject, new Error('Test game server did not report readiness')), timeoutMs);
+    child.stdout?.on('data', onOutput);
+    child.once('error', onError);
+    child.once('exit', onExit);
+  });
+}
+
+async function waitHealth(port, timeoutMs = 40000) {
   const t0 = Date.now();
   let last = '';
   while (Date.now() - t0 < timeoutMs) {
     try {
-      const r = await fetch(`http://127.0.0.1:${SERVER_PORT}/healthz`);
+      const r = await fetch(`http://127.0.0.1:${port}/healthz`);
       if (r.ok) return { ok: true, body: await r.text() };
       last = `HTTP ${r.status}`;
     } catch (e) {
@@ -87,6 +138,17 @@ async function waitHealth(timeoutMs = 40000) {
     await sleep(500);
   }
   return { ok: false, body: last };
+}
+
+async function closeServerProcess(child) {
+  if (!child || child.exitCode !== null || child.signalCode !== null) return;
+  const exited = new Promise((resolve) => child.once('exit', resolve));
+  child.kill('SIGTERM');
+  await Promise.race([exited, sleep(5000)]);
+  if (child.exitCode === null && child.signalCode === null) {
+    child.kill('SIGKILL');
+    await Promise.race([exited, sleep(5000)]);
+  }
 }
 
 async function playMouseShot(page) {
@@ -146,19 +208,25 @@ async function main() {
   let serverErr = '';
   serverProc = spawn(process.execPath, [DIST_SERVER], {
     cwd: ROOT,
-    env: { ...process.env, APP_ENV: 'test', PORT: String(SERVER_PORT), ROOM_STORE_DIR: ROOM_STORE },
+    env: { ...process.env, APP_ENV: 'test', PORT: String(REQUESTED_SERVER_PORT), ROOM_STORE_DIR: ROOM_STORE },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   serverProc.stderr.on('data', (d) => (serverErr += d.toString().slice(-2000)));
-  serverProc.stdout.on('data', () => {});
-  const health = await waitHealth();
+  try {
+    serverPort = await waitServerStart(serverProc);
+  } catch (error) {
+    record('联机服务端启动', 'FAIL', `${error.message} | stderr=${serverErr.slice(-300)}`);
+    return 1;
+  }
+  const health = await waitHealth(serverPort);
   record('联机服务端 /healthz', health.ok ? 'PASS' : 'FAIL', health.ok ? health.body.slice(0, 220) : `${health.body} | stderr=${serverErr.slice(-300)}`);
   if (!health.ok) return 1;
 
   // 2) 静态站点
   try {
-    webServer = await startWeb();
-    record('静态托管测试客户端', 'PASS', `http://127.0.0.1:${WEB_PORT}`);
+    webServer = await startWeb(REQUESTED_WEB_PORT);
+    webPort = boundPort(webServer);
+    record('静态托管测试客户端', 'PASS', `http://127.0.0.1:${webPort}`);
   } catch (e) {
     record('静态托管测试客户端', 'FAIL', e.message);
     return 1;
@@ -179,7 +247,7 @@ async function main() {
 
   // 3) 起始界面（首页是昵称/模式设置，canvas 要进入对局后才创建）
   try {
-    await page.goto(`http://127.0.0.1:${WEB_PORT}/?legacy=1`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.goto(`http://127.0.0.1:${webPort}/?legacy=1`, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForFunction(() => document.querySelector('#app')?.children.length > 0, null, { timeout: 15000 });
     await page.screenshot({ path: path.join(OUT, 'e2e-build-boot.png') });
     record('起始界面渲染', 'PASS', '#app 已挂载子节点');
@@ -393,15 +461,15 @@ async function main() {
   const production = await ctx.newPage();
   production.on('pageerror',e=>errors.push(e.message));
   production.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-  await production.goto(`http://127.0.0.1:${SERVER_PORT}/?legacy=1`);
+  await production.goto(`http://127.0.0.1:${serverPort}/?legacy=1`);
   await production.fill('.nick','production');await production.click('.btn-play');await production.uncheck('.timer');await production.click('[data-bot="easy"]');
   await production.waitForSelector('.game canvas');
   const noHandle=await production.evaluate(()=>!window.__pz&&!window.__fieldCalibration&&!window.__aiAudit&&!window.__cardAudit&&!window.__uiAudit&&!window.__componentsAudit&&!window.__workflowAudit);
-  const html=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/field-debug.html`)).text();
-  const cardHtml=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/card-debug.html`)).text();
-  const uiHtml=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/ui-debug.html`)).text();
-  const componentsHtml=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/components-debug.html`)).text();
-  const workflowHtml=await (await fetch(`http://127.0.0.1:${SERVER_PORT}/workflow-debug.html`)).text();
+  const html=await (await fetch(`http://127.0.0.1:${serverPort}/field-debug.html`)).text();
+  const cardHtml=await (await fetch(`http://127.0.0.1:${serverPort}/card-debug.html`)).text();
+  const uiHtml=await (await fetch(`http://127.0.0.1:${serverPort}/ui-debug.html`)).text();
+  const componentsHtml=await (await fetch(`http://127.0.0.1:${serverPort}/components-debug.html`)).text();
+  const workflowHtml=await (await fetch(`http://127.0.0.1:${serverPort}/workflow-debug.html`)).text();
   const noEntry=!html.includes('/src/fieldDebug.ts')&&!cardHtml.includes('/src/cardDebug.ts')&&!uiHtml.includes('/src/uiDebug.ts')&&!componentsHtml.includes('/src/componentsDebug.ts')&&!workflowHtml.includes('/src/workflowDebug.ts')&&!fs.existsSync(path.join(ROOT,'dist/client/field-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/ai-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/card-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/ui-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/components-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/workflow-debug.html'));
   record('生产包调试隔离', noHandle && noEntry ? 'PASS' : 'FAIL', '实际生产页可进入比赛，调试句柄和调试HTML均未发布');
   await production.close();
@@ -415,12 +483,12 @@ async function main() {
       const context = await browser.newContext({ viewport, deviceScaleFactor });
       await context.addInitScript((serverPort) => {
         localStorage.setItem('pz_server', `http://127.0.0.1:${serverPort}`);
-      }, SERVER_PORT);
+      }, serverPort);
       modeContexts.push(context);
       const peer = await context.newPage();
       peer.on('pageerror', e => errors.push(e.message));
       peer.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
-      await peer.goto(`http://127.0.0.1:${WEB_PORT}/?legacy=1`);
+      await peer.goto(`http://127.0.0.1:${webPort}/?legacy=1`);
       pages.push(peer);
     }
     const [a, b] = pages;
@@ -431,7 +499,7 @@ async function main() {
     await b.locator('.rule-summary').filter({ hasText: '统一 Lv5' }).waitFor();
     const summaries = await Promise.all(pages.map(p => p.locator('.rule-summary').innerText()));
     record('双端模式规则摘要', summaries[0] === summaries[1] && summaries[0].includes('均衡好友赛') && summaries[0].includes('无正式奖励') ? 'PASS' : 'FAIL', summaries[0]);
-    await a.screenshot({ path: path.join(ROOT, 'docs/productization/reports/mode-lobby.png') });
+    await a.screenshot({ path: path.join(ARTIFACTS, 'mode-lobby.png') });
     await a.click('.ready'); await b.click('.ready');
     await Promise.all(pages.map(p => p.waitForSelector('.game canvas')));
     await Promise.all(pages.map(p => p.waitForFunction(() => window.__pz?.canAim, null, { timeout: 5000 })));
@@ -466,13 +534,7 @@ try {
 } finally {
   try { if (browser) await browser.close(); } catch {}
   try { if (webServer) webServer.close(); } catch {}
-  try {
-    if (serverProc && !serverProc.killed) {
-      serverProc.kill();
-      await sleep(300);
-      if (!serverProc.killed) serverProc.kill('SIGKILL');
-    }
-  } catch {}
+  try { await closeServerProcess(serverProc); } catch {}
   if (path.dirname(path.resolve(ROOM_STORE)) === path.resolve(os.tmpdir()) && path.basename(ROOM_STORE).startsWith('allstars-e2e-')) {
     fs.rmSync(ROOM_STORE, { recursive: true, force: true });
   }

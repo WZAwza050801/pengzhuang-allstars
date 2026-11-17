@@ -34,6 +34,11 @@ test('port, flag and origin validation rejects malformed input', () => {
     ConfigurationError,
   );
 });
+test('test runtime may request an operating-system assigned port', () => {
+  assert.equal(readRuntimeConfig({ APP_ENV: 'test', PORT: '0' }).port, 0);
+  assert.throws(() => readRuntimeConfig({ APP_ENV: 'local', PORT: '0' }), ConfigurationError);
+  assert.throws(() => readRuntimeConfig({ ...production(), PORT: '0' }), ConfigurationError);
+});
 test('production accepts strong config but rejects unsafe options', () => {
   assert.equal(readRuntimeConfig(production()).mode, 'production');
   for (const override of [

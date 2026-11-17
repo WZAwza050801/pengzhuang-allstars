@@ -7,10 +7,13 @@ const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url),
 const node = readFileSync(new URL('../.node-version', import.meta.url), 'utf8').trim();
 const nvm = readFileSync(new URL('../.nvmrc', import.meta.url), 'utf8').trim();
 const npm = pkg.packageManager?.match(/^npm@(\d+\.\d+\.\d+)$/)?.[1];
-const actualNpm = spawnSync(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['--version'], {
+const npmInvocation =
+  process.platform === 'win32'
+    ? { command: process.env.ComSpec ?? 'cmd.exe', args: ['/d', '/s', '/c', 'npm.cmd', '--version'] }
+    : { command: 'npm', args: ['--version'] };
+const actualNpm = spawnSync(npmInvocation.command, npmInvocation.args, {
   cwd: root,
   encoding: 'utf8',
-  shell: process.platform === 'win32',
 });
 const errors = [];
 if (node !== nvm || pkg.engines.node !== node) errors.push('Node pins in .node-version, .nvmrc and engines must agree');

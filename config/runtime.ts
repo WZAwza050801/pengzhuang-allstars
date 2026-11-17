@@ -4,7 +4,7 @@ import { z } from 'zod';
 const flag = z.preprocess((v) => (v === 'true' ? true : v === 'false' ? false : v), z.boolean());
 const schema = z.object({
   mode: z.enum(['local', 'test', 'staging', 'production']),
-  port: z.coerce.number().int().min(1).max(65535),
+  port: z.coerce.number().int().min(0).max(65535),
   publicOrigin: z.url(),
   databaseUrl: z.string().optional(),
   sessionSigningKey: z.string().optional(),
@@ -58,6 +58,7 @@ export function readRuntimeConfig(env: NodeJS.ProcessEnv = process.env): Readonl
     throw new ConfigurationError(parsed.error.issues.map((i) => String(i.path[0] ?? 'configuration')));
   const cfg = parsed.data;
   const bad: string[] = [];
+  if (cfg.port === 0 && cfg.mode !== 'test') bad.push('port');
   if (env.NODE_ENV === 'production' && !deployed) bad.push('APP_ENV');
   const safeOrigin = (value: string, secure: boolean) => {
     const url = new URL(value);

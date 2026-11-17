@@ -28,6 +28,7 @@
     "test:physics": "tsx tools/physics-tests.ts",
     "test:net": "tsx tools/net-tests.ts",
     "test:e2e": "npm run build:test-client && node tools/e2e-browser.mjs",
+    "test:qa": "npm run build && node tools/qa-runner.mjs",
     "test:web-layout": "node tools/web-layout-browser.mjs",
     "test:web-shell": "node tools/web-shell-browser.mjs",
     "test:web-performance": "npm run build:test-client && node tools/web-performance-browser.mjs",

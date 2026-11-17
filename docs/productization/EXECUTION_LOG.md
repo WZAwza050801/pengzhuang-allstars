@@ -573,6 +573,20 @@
 - 回滚：独立任务提交可回退；保留 AST-05 资源 hash/失败回退协议和既有性能质量档。
 - 下一项：选择依赖已满足的未完成任务；WEB-03 仍待 UI-07。
 
+### QA-01
+
+- 状态：完成
+- 开始：2026-11-18 02:18 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / c3c2fc5
+- 范围：稳定本地基础测试的端口、临时存储、构建产物与进程清理；补充可重复 runner 和不依赖生产数据的基础 CI。不覆盖真实 PostgreSQL、真实设备或后续业务集成验收。
+- 实现：测试环境唯一允许 `PORT=0` 交由系统分配；E2E 从服务端 `server_started` 事件读取实际端口，静态服务也默认使用临时端口。E2E 截图和模式诊断改写入忽略的 `work/e2e-artifacts`（可由 `E2E_ARTIFACT_DIR` 覆盖），并等待子服务退出后再清除临时房间存储。新增 `test:qa`：构建后连续两轮单元/契约、每轮两个并行 E2E，另保留端口验证失败非零及清理。GitHub Actions 基础作业固定 Node 24.22.1、Chromium、静态检查和同一 runner。
+- 验证：先补 `APP_ENV=test, PORT=0` 配置用例（6/6 通过）。`npm run typecheck`、`npm run lint`、`npm run build` 通过。`npm run test:qa` 通过：两轮单元与契约、每轮两个并行 E2E 均通过；占用 Web 端口的 E2E 按预期非零退出，runner 断言未留下 `allstars-e2e-*` 临时房间目录。E2E 独立单跑为 18 PASS / 0 SKIP / 0 FAIL。
+- 证据：本提交；`tools/qa-runner.mjs`；`.github/workflows/ci.yml`；`docs/productization/reports/QA-01.md`。CI 工作流未在本地伪称已运行，等待远端 GitHub 触发。
+- 风险与剩余：真实 PostgreSQL integration 仍因本机没有 Docker 而属于 ACC-01/QA-02 的外部阻塞；真机/跨引擎矩阵留给 QA-03、AST-06、APP/WX 任务。构建仍含第三方 React Router/Zod 的既有 Rollup 注释提示，无新增构建错误。
+- 回滚：独立任务提交可回退；常规运行端口下限和生产配置约束不变，端口 0 只在 test 模式有效。
+- 下一项：QA-03（依赖满足）；APP-01、ACC-01、AST-06 分别仍受原生工具链、PostgreSQL、真机条件限制。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。
