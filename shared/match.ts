@@ -1,6 +1,7 @@
 import type { GameData, LevelAttrs, SkillDef } from './data';
 import { simulateShot, type SimResult, type SimSetup, type SimShot, type Side } from './physics';
 import { nextRandom } from './rng';
+import { insideField } from '../packages/game-core/src/field';
 
 export interface PieceState {
   id: string;
@@ -238,11 +239,12 @@ export function buildShot(st: MatchState, data: GameData, input: ShotInput, rng:
   return { shot, onHit, extra, skill: sk };
 }
 
-function freeSpot(st: MatchState, data: GameData, x: number, y: number, selfId: string) {
+export function freeSpot(st: MatchState, data: GameData, x: number, y: number, selfId: string) {
   const r = data.physics.disc.radius;
   const br = data.physics.ball.radius;
   const ok = (px: number, py: number) =>
     Math.abs(px) <= data.geometry.width / 2 - r && Math.abs(py) <= data.geometry.length / 2 - r - 0.3 &&
+    insideField(data.geometry, px, py, r, 0) &&
     Math.hypot(px - st.ball.x, py - st.ball.y) > r + br + 0.05 &&
     st.pieces.every((q) => q.id === selfId || q.out > 0 || Math.hypot(px - q.x, py - q.y) > 2 * r + 0.05);
   if (ok(x, y)) return { x, y };
@@ -254,7 +256,15 @@ function freeSpot(st: MatchState, data: GameData, x: number, y: number, selfId: 
       if (ok(px, py)) return { x: px, y: py };
     }
   }
-  return { x, y };
+  // Deterministic bounded fallback; never silently return an occupied position.
+  const candidates: { x: number; y: number; d: number }[] = [];
+  const W = data.geometry.width / 2 - r, L = data.geometry.length / 2 - r - 0.3;
+  for (let px = -W; px <= W; px += 0.15) for (let py = -L; py <= L; py += 0.15) {
+    if (ok(px, py)) candidates.push({ x: px, y: py, d: Math.hypot(px - x, py - y) });
+  }
+  candidates.sort((a,b) => a.d-b.d || a.y-b.y || a.x-b.x);
+  if (!candidates.length) throw new Error('No legal free position');
+  return { x: candidates[0].x, y: candidates[0].y };
 }
 
 /** Pieces whose centre ended behind a goal line are moved to the nearest free spot in front of it. */

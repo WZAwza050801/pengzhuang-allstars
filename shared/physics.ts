@@ -235,7 +235,7 @@ export class ShotRunner {
   private readonly shooterSide: Side;
   private turnRate: number;
   private readonly maxTurn: number;
-  private kicks: PendingKick[] = [];
+  private kicks = new Map<string, PendingKick>();
   private readonly recordEvery: number;
   private readonly maxSteps: number;
   private readonly postGoalSteps: number;
@@ -301,7 +301,7 @@ export class ShotRunner {
     if (spr.kind === 'spring' && hit.kind === 'disc' && hitBody.isDynamic() && sprBody !== hitBody) {
       const v = hitBody.getLinearVelocity();
       const approach = -(v.x * spr.n![0] + v.y * spr.n![1]);
-      if (approach > this.phys.spring.minSpeed) this.kicks.push({ body: hitBody, id: hit.id, corner: spr.corner!, n: spr.n! });
+      if (approach > this.phys.spring.minSpeed) this.kicks.set(`${hit.id}:${spr.corner}`, { body: hitBody, id: hit.id, corner: spr.corner!, n: spr.n! });
     }
     let other: Tag | null = null;
     if (ta.id === this.shot.pieceId) other = tb;
@@ -353,8 +353,8 @@ export class ShotRunner {
     sim.world.step(sim.dt, phys.velocityIterations, phys.positionIterations);
     this.step++;
 
-    sim.kicksThisStep = this.kicks.length;
-    for (const k of this.kicks) {
+    sim.kicksThisStep = this.kicks.size;
+    for (const k of this.kicks.values()) {
       const sp = phys.spring;
       const v = k.body.getLinearVelocity();
       let nx = v.x + k.n[0] * sp.boost, ny = v.y + k.n[1] * sp.boost;
@@ -364,7 +364,7 @@ export class ShotRunner {
       const p = k.body.getPosition();
       this.events.push({ t: this.t, type: 'spring-kick', a: k.id, b: `spring${k.corner}`, speed: Math.hypot(nx, ny), x: p.x, y: p.y });
     }
-    this.kicks = [];
+    this.kicks.clear();
 
     if (this.pendingBoost) {
       this.pendingBoost = false;
