@@ -1,4 +1,6 @@
 import { DEFAULT_DATA, type GameData } from '../../shared/data';
+import { rulesForMode } from '../../config/modes';
+import { resolveModeLineup } from '../../packages/game-core/src/modes';
 import { beginTurn, createMatch, endByTime, forfeit, passTurn, resolveShot, validateShot, type MatchState, type ShotInput } from '../../shared/match';
 import type { Side } from '../../shared/physics';
 import { fallbackShot, type AiLevel } from '../../shared/ai';
@@ -11,6 +13,7 @@ const clone = <T>(o: T): T => structuredClone(o);
 
 /** Runs the authoritative rules in the browser: hot-seat or practice vs. the bot. */
 export class LocalHost implements MatchHost {
+  readonly rules = rulesForMode(DEFAULT_DATA, 'practice');
   readonly mySides: Side[];
   readonly viewSide: Side = 0;
   readonly seats: [SeatInfo, SeatInfo];
@@ -38,7 +41,8 @@ export class LocalHost implements MatchHost {
     ];
     this.useTimer = opts.timer;
     this.level = opts.level ?? 'normal';
-    this.st = createMatch(this.data, opts.lineups, { seed: runtime.seed ?? ((Math.random() * 2 ** 32) >>> 0), levels: opts.levels });
+    const selections = opts.lineups.map((lineup, side) => resolveModeLineup(this.data, this.rules, lineup, { levels: opts.levels?.[side] }));
+    this.st = createMatch(this.data, [selections[0].lineup, selections[1].lineup], { seed: runtime.seed ?? ((Math.random() * 2 ** 32) >>> 0), levels: [selections[0].levels, selections[1].levels] });
 
   }
   private readonly useTimer: boolean;

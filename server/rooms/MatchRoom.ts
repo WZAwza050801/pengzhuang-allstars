@@ -3,6 +3,9 @@ import { clearTimeout, setTimeout } from 'node:timers';
 import { Room, matchMaker, type Client } from 'colyseus';
 import { DEFAULT_DATA, type GameData } from '../../shared/data';
 import { freezeSnapshot } from '../../packages/game-core/src/snapshot';
+import { rulesForMode, verifyModeRules } from '../../config/modes';
+import { resolveModeLineup, classifyModeOutcome } from '../../packages/game-core/src/modes';
+import type { ModeRules, ModeOutcome } from '../../packages/contracts/src/modes';
 import {
   beginTurn,
   createMatch,
@@ -148,6 +151,7 @@ export class MatchRoom extends Room {
   private store: RoomStore | null = null;
   private time: ServerClock = systemClock;
   private data: GameData = DEFAULT_DATA;
+  private rules: ModeRules = rulesForMode(DEFAULT_DATA, 'practice');
   private timing: MatchTiming = timingDefaults(DEFAULT_DATA);
   private code = '';
   private skin = '';
@@ -171,6 +175,13 @@ export class MatchRoom extends Room {
   override async onCreate(options: unknown): Promise<void> {
     const record = MatchRoom.restoreRecordFor(options);
     this.data = freezeSnapshot(this.resolveGameData(record?.configVersion));
+    if (record?.modeRules) this.rules = verifyModeRules(this.data, record.modeRules);
+    else {
+      const mode = !record && isRecord(options) ? options.mode : undefined;
+      // Ownership cannot be proved by a guest payload. ACC/DAT/NET add trusted tickets later.
+      if (mode !== undefined && mode !== 'practice' && mode !== 'friend') throw netError('bad-message');
+      this.rules = rulesForMode(this.data, mode ?? 'practice');
+    }
     this.store = this.resolveStore();
     this.time = this.resolveClock();
     this.timing = { ...timingDefaults(this.data), ...MatchRoom.sharedTiming };
@@ -330,8 +341,9 @@ export class MatchRoom extends Room {
     if (side === -1) return this.sendError(client, 'not-seated', C2S.setLineup);
     if (this.phase !== 'lobby') return this.sendError(client, 'match-already-started', C2S.setLineup);
     const seat = this.seats[side]!;
-    seat.lineup = parsed.value.lineup;
-    seat.levels = parsed.value.levels;
+    const selection = resolveModeLineup(this.data, this.rules, parsed.value.lineup, { levels: parsed.value.levels });
+    seat.lineup = selection.lineup;
+    seat.levels = selection.levels;
     seat.ready = false;
     this.broadcastRoom();
   }
@@ -404,6 +416,7 @@ export class MatchRoom extends Room {
     if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
 
     const packet: ShotPacketMsg = {
+      outcome: this.outcome(),
       matchId: this.matchId,
       seat: side,
       clientShotId: ref,
@@ -479,7 +492,7 @@ export class MatchRoom extends Room {
 
   /** A state change that is not a shot (timeout, surrender, forfeit, match clock). */
   private pushUpdate(events: MatchEvent[]): void {
-    const update: UpdateMsg = { matchId: this.matchId, events, state: this.wireState(), clocks: this.clocks() };
+    const update: UpdateMsg = { matchId: this.matchId, events, state: this.wireState(), clocks: this.clocks(), outcome: this.outcome() };
     this.broadcast(S2C.update, update);
     if (this.match!.over) this.finishMatch();
     else this.persist();
@@ -515,6 +528,7 @@ export class MatchRoom extends Room {
     const clocks = this.clocks();
     const recSeat = (s: Seat): RecordSeat => ({ nickname: s.nickname, token: s.token, lineup: s.lineup.slice(), levels: s.levels.slice() });
     this.store.save({
+      modeRules: this.rules,
       format: ROOM_RECORD_FORMAT,
       code: this.code,
       skin: this.skin,
@@ -541,6 +555,10 @@ export class MatchRoom extends Room {
     for (const [i, s] of rec.seats.entries()) {
       const parsed = parseSetLineup({ lineup: s.lineup, levels: s.levels }, this.data);
       if (!parsed.ok) throw fail(`seat ${i}: ${parsed.code}`);
+      const selection = resolveModeLineup(this.data, this.rules, parsed.value.lineup, { levels: parsed.value.levels });
+      if (selection.levels.some((level, slot) => level !== s.levels[slot]) ||
+        rec.match.pieces.filter(p => p.side === i).some(p => p.playerId !== s.lineup[p.slot] || p.level !== selection.levels[p.slot]))
+        throw fail(`seat ${i}: mode levels differ`);
       seats.push({
         client: null,
         sessionId: '',
@@ -635,6 +653,7 @@ export class MatchRoom extends Room {
   private matchInfo(): Omit<MatchStartMsg, 'state' | 'turnEvents' | 'clocks'> {
     const [a, b] = this.seats as [Seat, Seat];
     return {
+      rules: this.rules,
       matchId: this.matchId,
       configVersion: this.data.version,
       skin: this.skin,
@@ -648,7 +667,13 @@ export class MatchRoom extends Room {
     const c = this.clocks();
     // The turn clock includes the allowance for a shot this client never has to play back.
     const turnMs = c.turnMs === null ? null : Math.min(c.turnMs, this.timing.turnMs);
-    return { ...this.matchInfo(), seq: this.seq, state: this.wireState(), clocks: { turnMs, matchMs: c.matchMs } };
+    return { ...this.matchInfo(), outcome: this.outcome(), seq: this.seq, state: this.wireState(), clocks: { turnMs, matchMs: c.matchMs } };
+  }
+
+  private outcome(): ModeOutcome | undefined {
+    if (!this.match?.over) return undefined;
+    return classifyModeOutcome(this.rules, { authority: 'server', durable: false, accountsVerified: false,
+      reason: this.match.endReason, winner: this.match.winner });
   }
 
   /** Client-visible copy of the authoritative state: the RNG state never leaves the server. */
@@ -666,6 +691,8 @@ export class MatchRoom extends Room {
       return seat;
     };
     const snap: RoomSnapshot = {
+      rules: this.rules,
+      outcome: this.outcome(),
       protocol: PROTOCOL_VERSION,
       code: this.code,
       configVersion: this.data.version,

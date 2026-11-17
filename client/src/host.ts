@@ -1,5 +1,6 @@
 import type { MatchEvent, MatchState, ShotInput } from '../../shared/match';
 import type { SimEvent, Side } from '../../shared/physics';
+import type { ModeRules } from '../../packages/contracts/src/modes';
 
 /** What the renderer receives for one resolved shot, whether computed locally or by the server. */
 export interface ShotPacket {
@@ -29,6 +30,7 @@ export interface SeatInfo {
 }
 
 export interface MatchHost {
+  readonly rules?: ModeRules;
   /** Sides the local user may control. */
   readonly mySides: Side[];
   readonly viewSide: Side;

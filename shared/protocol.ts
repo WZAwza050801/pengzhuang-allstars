@@ -1,5 +1,6 @@
 import type { MatchEvent, MatchState, ShotInput } from './match';
 import type { Side, SimEvent } from './physics';
+import type { ModeId, ModeRules, ModeOutcome } from '../packages/contracts/src/modes';
 
 export const PROTOCOL_VERSION = 1;
 export const ROOM_NAME = 'match';
@@ -68,6 +69,7 @@ export interface CreateRoomOptions {
   protocol: number;
   nickname: string;
   skin?: string;
+  mode?: ModeId;
 }
 
 /** `seatToken` (from a previous RoomSnapshot) re-claims a seat after a dropped connection; without it the join takes a free lobby seat. */
@@ -129,6 +131,8 @@ export interface SeatSnapshot {
 }
 
 export interface RoomSnapshot {
+  rules?: ModeRules;
+  outcome?: ModeOutcome;
   protocol: number;
   code: string;
   configVersion: string;
@@ -153,6 +157,7 @@ export interface ClockInfo {
 
 /** `state.rng` is always 0 on the wire; the seed never leaves the server. */
 export interface MatchStartMsg {
+  rules?: ModeRules;
   matchId: string;
   configVersion: string;
   skin: string;
@@ -166,6 +171,7 @@ export interface MatchStartMsg {
 
 /** Same fields as client/src/host.ts ShotPacket plus routing info. */
 export interface ShotPacketMsg {
+  outcome?: ModeOutcome;
   matchId: string;
   seat: Side;
   clientShotId: string;
@@ -183,6 +189,7 @@ export interface ShotPacketMsg {
 
 /** A state change that is not a shot: turn timeout, match clock, surrender, forfeit. `events` end with `end` when the match is over. */
 export interface UpdateMsg {
+  outcome?: ModeOutcome;
   matchId: string;
   events: MatchEvent[];
   state: MatchState;
@@ -191,6 +198,8 @@ export interface UpdateMsg {
 
 /** Sent only to a client that re-claimed its seat mid-match or after the end: everything needed to rebuild the board. */
 export interface ResumeMsg {
+  rules?: ModeRules;
+  outcome?: ModeOutcome;
   matchId: string;
   configVersion: string;
   skin: string;

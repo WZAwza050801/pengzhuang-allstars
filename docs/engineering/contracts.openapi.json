@@ -858,6 +858,292 @@
       }
     }
   },
+  "components": {
+    "schemas": {
+      "ModeRules": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "levelPolicy": {
+            "type": "string",
+            "enum": [
+              "selectable",
+              "uniform",
+              "owned"
+            ]
+          },
+          "fixedLevel": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "requiresOwnership": {
+            "type": "boolean"
+          },
+          "supportedSkillsOnly": {
+            "type": "boolean"
+          },
+          "ratingScope": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ranked",
+                  "growth"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rewardScope": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ranked",
+                  "growth"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "schemaVersion": {
+            "type": "number",
+            "const": 1
+          },
+          "modesVersion": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "practice",
+              "friend",
+              "growth",
+              "ranked"
+            ]
+          },
+          "gameDataVersion": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "minLevel": {
+            "type": "number",
+            "const": 1
+          },
+          "maxLevel": {
+            "type": "number",
+            "const": 10
+          },
+          "skillVersion": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+          },
+          "skillLevelAt": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              }
+            ],
+            "items": false,
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "conditionMode": {
+            "type": "boolean",
+            "const": false
+          },
+          "goalsToWin": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "matchSeconds": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "turnSeconds": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "reconnectSeconds": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "disconnectPolicy": {
+            "type": "string",
+            "const": "finish-shot-clocks-continue"
+          },
+          "bothDisconnected": {
+            "type": "string",
+            "const": "void"
+          },
+          "serverFault": {
+            "type": "string",
+            "const": "void"
+          },
+          "shotLimit": {
+            "type": "string",
+            "const": "void"
+          }
+        },
+        "required": [
+          "label",
+          "levelPolicy",
+          "fixedLevel",
+          "requiresOwnership",
+          "supportedSkillsOnly",
+          "ratingScope",
+          "rewardScope",
+          "schemaVersion",
+          "modesVersion",
+          "mode",
+          "gameDataVersion",
+          "minLevel",
+          "maxLevel",
+          "skillVersion",
+          "skillLevelAt",
+          "conditionMode",
+          "goalsToWin",
+          "matchSeconds",
+          "turnSeconds",
+          "reconnectSeconds",
+          "disconnectPolicy",
+          "bothDisconnected",
+          "serverFault",
+          "shotLimit"
+        ],
+        "additionalProperties": false
+      },
+      "ModeOutcome": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "practice",
+              "friend",
+              "growth",
+              "ranked"
+            ]
+          },
+          "modesVersion": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+          },
+          "gameDataVersion": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "forfeit",
+              "void",
+              "untrusted"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "winner": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": -1
+              },
+              {
+                "type": "number",
+                "const": 0
+              },
+              {
+                "type": "number",
+                "const": 1
+              }
+            ]
+          },
+          "ratingScope": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ranked",
+                  "growth"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rewardScope": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ranked",
+                  "growth"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "mode",
+          "modesVersion",
+          "gameDataVersion",
+          "verdict",
+          "reason",
+          "winner",
+          "ratingScope",
+          "rewardScope"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
   "x-websocket": {
     "protocol": 1,
     "c2s": {

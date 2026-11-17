@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "rules": {
+    "bothDisconnected": "void",
+    "conditionMode": false,
+    "disconnectPolicy": "finish-shot-clocks-continue",
+    "fixedLevel": 5,
+    "gameDataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+    "goalsToWin": 3,
+    "label": "均衡好友赛",
+    "levelPolicy": "uniform",
+    "matchSeconds": 180,
+    "maxLevel": 10,
+    "minLevel": 1,
+    "mode": "friend",
+    "modesVersion": "modes-1",
+    "ratingScope": null,
+    "reconnectSeconds": 60,
+    "requiresOwnership": false,
+    "rewardScope": null,
+    "schemaVersion": 1,
+    "serverFault": "void",
+    "shotLimit": "void",
+    "skillLevelAt": [
+      1,
+      4,
+      7
+    ],
+    "skillVersion": "skills-1",
+    "supportedSkillsOnly": false,
+    "turnSeconds": 20
+  },
+  "lineup": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05"
+  ],
+  "levels": [
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "proxy": {
+    "difficulty": "easy",
+    "maxEvaluations": 2,
+    "decisionSeconds": 2,
+    "clock": "virtual-playback-plus-decision",
+    "note": "Deterministic low-budget AI proxy; not evidence of human balance or real server wall-clock timing"
+  },
+  "rows": [
+    {
+      "seed": 13,
+      "firstSide": 0,
+      "winner": 0,
+      "score": [
+        1,
+        0
+      ],
+      "reason": "time",
+      "shots": 47,
+      "elapsedSeconds": 183.83333333333331,
+      "skillEvents": 39,
+      "traceSha256": "65d3bd2264e557eff4d4be2c207d98bcf8ea8c267fd109c77af2df7254d4e291"
+    },
+    {
+      "seed": 13,
+      "firstSide": 1,
+      "winner": 1,
+      "score": [
+        0,
+        2
+      ],
+      "reason": "time",
+      "shots": 48,
+      "elapsedSeconds": 183.90000000000003,
+      "skillEvents": 39,
+      "traceSha256": "a1de529fcfd9130b35f3ec53fed9b9310ae581e301ae18b9a911ef76bb8f35a1"
+    },
+    {
+      "seed": 42,
+      "firstSide": 0,
+      "winner": 1,
+      "score": [
+        0,
+        2
+      ],
+      "reason": "time",
+      "shots": 47,
+      "elapsedSeconds": 183.73333333333335,
+      "skillEvents": 26,
+      "traceSha256": "ac59666b8dd5eee2d66cfb6660baa1511e0832eabfe9bcd33496a247d3d9d029"
+    },
+    {
+      "seed": 42,
+      "firstSide": 1,
+      "winner": 1,
+      "score": [
+        1,
+        2
+      ],
+      "reason": "time",
+      "shots": 46,
+      "elapsedSeconds": 183.7666666666666,
+      "skillEvents": 25,
+      "traceSha256": "3f290788415ce54d7263229e575a5ad6343ce5e8f428947a828fc6c0d97bee21"
+    },
+    {
+      "seed": 7919,
+      "firstSide": 0,
+      "winner": 0,
+      "score": [
+        3,
+        0
+      ],
+      "reason": "goals",
+      "shots": 45,
+      "elapsedSeconds": 174.63333333333327,
+      "skillEvents": 25,
+      "traceSha256": "11b8973dc31b763b5446b60a630e827e39d7e728285d13498864b376e2420e81"
+    },
+    {
+      "seed": 7919,
+      "firstSide": 1,
+      "winner": 0,
+      "score": [
+        2,
+        1
+      ],
+      "reason": "time",
+      "shots": 46,
+      "elapsedSeconds": 181.63333333333338,
+      "skillEvents": 28,
+      "traceSha256": "4b998e4d61c10f8e63984e55edb55204b4aa37cab52e5129b63b1de4f32f6a90"
+    },
+    {
+      "seed": 2026,
+      "firstSide": 0,
+      "winner": 0,
+      "score": [
+        2,
+        0
+      ],
+      "reason": "time",
+      "shots": 46,
+      "elapsedSeconds": 181.46666666666667,
+      "skillEvents": 28,
+      "traceSha256": "caefef9d464a865f0c25873a517d220e3b38751cf5583a0630b573e70135ff8d"
+    },
+    {
+      "seed": 2026,
+      "firstSide": 1,
+      "winner": 1,
+      "score": [
+        0,
+        2
+      ],
+      "reason": "time",
+      "shots": 46,
+      "elapsedSeconds": 180.83333333333331,
+      "skillEvents": 28,
+      "traceSha256": "6142f82fcf9c43b2b9756b34d0c4bbcfa727e4c7d25f5a4c050cc0da5e05ee5a"
+    }
+  ],
+  "summary": {
+    "matches": 8,
+    "firstWins": 6,
+    "secondWins": 2,
+    "draws": 0
+  }
+}

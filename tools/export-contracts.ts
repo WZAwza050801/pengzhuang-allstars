@@ -3,6 +3,7 @@ import path from 'node:path';
 import { z } from 'zod';
 import { HTTP_CONTRACTS, ApiErrorSchema, API_VERSION } from '../packages/contracts/src/http';
 import { C2S, S2C, PROTOCOL_VERSION, NET_ERROR_CODES, MAX_CLIENT_MESSAGE_BYTES } from '../shared/protocol';
+import { ModeRulesSchema, ModeOutcomeSchema } from '../packages/contracts/src/modes';
 
 const paths: Record<string, unknown> = {};
 for (const item of HTTP_CONTRACTS) {
@@ -23,7 +24,7 @@ for (const item of HTTP_CONTRACTS) {
     },
   };
 }
-const content = `${JSON.stringify({ openapi: '3.1.0', info: { title: 'Pengzhuang boundary contracts (controllers not yet implemented)', version: API_VERSION }, paths, 'x-websocket': { protocol: PROTOCOL_VERSION, c2s: C2S, s2c: S2C, errors: NET_ERROR_CODES, maxClientMessageBytes: MAX_CLIENT_MESSAGE_BYTES } }, null, 2)}\n`;
+const content = `${JSON.stringify({ openapi: '3.1.0', info: { title: 'Pengzhuang boundary contracts (controllers not yet implemented)', version: API_VERSION }, paths, components: { schemas: { ModeRules: z.toJSONSchema(ModeRulesSchema), ModeOutcome: z.toJSONSchema(ModeOutcomeSchema) } }, 'x-websocket': { protocol: PROTOCOL_VERSION, c2s: C2S, s2c: S2C, errors: NET_ERROR_CODES, maxClientMessageBytes: MAX_CLIENT_MESSAGE_BYTES } }, null, 2)}\n`;
 const filename = path.resolve('docs/engineering/contracts.openapi.json');
 if (process.argv.includes('--check')) {
   if (!existsSync(filename) || readFileSync(filename, 'utf8') !== content) {

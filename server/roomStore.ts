@@ -3,11 +3,13 @@ import path from 'node:path';
 import type { MatchState } from '../shared/match';
 import { ROOM_CODE_ALPHABET, ROOM_CODE_LENGTH, SEAT_TOKEN_PATTERN } from '../shared/protocol';
 import { isRecord, parseNickname } from './validation';
+import { ModeRulesSchema, type ModeRules } from '../packages/contracts/src/modes';
 
 export const ROOM_RECORD_FORMAT = 1;
 
 /** Everything needed to carry a running match across a server restart. One JSON file per room, no database. */
 export interface RoomRecord {
+  modeRules?: ModeRules;
   format: typeof ROOM_RECORD_FORMAT;
   code: string;
   skin: string;
@@ -89,6 +91,7 @@ function isRecordSeat(v: unknown): v is RecordSeat {
 /** Structural check only; the room re-validates lineups against the live game data when it restores. */
 export function isRoomRecord(v: unknown): v is RoomRecord {
   if (!isRecord(v) || v.format !== ROOM_RECORD_FORMAT) return false;
+  if (v.modeRules !== undefined && !ModeRulesSchema.safeParse(v.modeRules).success) return false;
   if (typeof v.code !== 'string' || !CODE_RE.test(v.code)) return false;
   if (!isStr(v.skin, 64) || !isStr(v.configVersion, 128) || !isStr(v.matchId, 64)) return false;
   if (!isInt(v.seed) || !isInt(v.seq)) return false;

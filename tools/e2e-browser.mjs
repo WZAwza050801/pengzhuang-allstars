@@ -12,6 +12,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
+import os from 'node:os';
 
 const ROOT = process.cwd();
 const SERVER_PORT = Number(process.env.E2E_SERVER_PORT || 2567);
@@ -19,6 +20,7 @@ const WEB_PORT = Number(process.env.E2E_WEB_PORT || 4173);
 const DIST_CLIENT = path.join(ROOT, 'work', 'test-client');
 const DIST_SERVER = path.join(ROOT, 'dist', 'server', 'index.js');
 const OUT = path.join(ROOT, 'docs', 'screens');
+const ROOM_STORE = fs.mkdtempSync(path.join(os.tmpdir(), 'allstars-e2e-'));
 
 const results = [];
 const record = (name, status, detail) => {
@@ -102,7 +104,7 @@ async function main() {
   let serverErr = '';
   serverProc = spawn(process.execPath, [DIST_SERVER], {
     cwd: ROOT,
-    env: { ...process.env, PORT: String(SERVER_PORT) },
+    env: { ...process.env, APP_ENV: 'test', PORT: String(SERVER_PORT), ROOM_STORE_DIR: ROOM_STORE },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   serverProc.stderr.on('data', (d) => (serverErr += d.toString().slice(-2000)));
@@ -277,6 +279,32 @@ async function main() {
   const noEntry=!html.includes('/src/fieldDebug.ts')&&!fs.existsSync(path.join(ROOT,'dist/client/field-debug.html'))&&!fs.existsSync(path.join(ROOT,'dist/client/ai-debug.html'));
   record('生产包调试隔离', noHandle && noEntry ? 'PASS' : 'FAIL', '实际生产页可进入比赛，调试句柄和调试HTML均未发布');
   await production.close();
+  const modeContexts = [];
+  try {
+    const pages = [];
+    for (const viewport of [{ width: 1200, height: 900 }, { width: 390, height: 844 }]) {
+      const context = await browser.newContext({ viewport });
+      modeContexts.push(context);
+      const peer = await context.newPage();
+      peer.on('pageerror', e => errors.push(e.message));
+      peer.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+      await peer.goto(`http://127.0.0.1:${SERVER_PORT}/`);
+      pages.push(peer);
+    }
+    const [a, b] = pages;
+    await a.fill('.nick', 'mode-owner'); await a.click('.btn-play'); await a.click('.online-create');
+    await a.locator('.rule-summary').filter({ hasText: '统一 Lv5' }).waitFor();
+    const roomCode = await a.locator('.roomcode b').innerText();
+    await b.fill('.nick', 'mode-guest'); await b.click('.btn-play'); await b.fill('.code', roomCode); await b.click('.online-join');
+    await b.locator('.rule-summary').filter({ hasText: '统一 Lv5' }).waitFor();
+    const summaries = await Promise.all(pages.map(p => p.locator('.rule-summary').innerText()));
+    record('双端模式规则摘要', summaries[0] === summaries[1] && summaries[0].includes('均衡好友赛') && summaries[0].includes('无正式奖励') ? 'PASS' : 'FAIL', summaries[0]);
+    await a.screenshot({ path: path.join(ROOT, 'docs/productization/reports/mode-lobby.png') });
+    await a.click('.ready'); await b.click('.ready');
+    await Promise.all(pages.map(p => p.waitForSelector('.game canvas')));
+    record('均衡好友赛双浏览器开局', 'PASS', '独立桌面/移动视口均从规则摘要进入比赛');
+  } catch (e) { record('均衡好友赛浏览器验收', 'FAIL', e.message.slice(0, 180)); }
+  finally { await Promise.all(modeContexts.map(context => context.close())); }
   record('运行时 JS 错误', errors.length === 0 ? 'PASS' : 'FAIL', errors.length ? errors.slice(0, 3).join(' | ').slice(0, 300) : 'console error / pageerror 均为 0');
 
   const failed = results.filter((r) => r.status === 'FAIL');
@@ -302,5 +330,8 @@ try {
       if (!serverProc.killed) serverProc.kill('SIGKILL');
     }
   } catch {}
+  if (path.dirname(path.resolve(ROOM_STORE)) === path.resolve(os.tmpdir()) && path.basename(ROOM_STORE).startsWith('allstars-e2e-')) {
+    fs.rmSync(ROOM_STORE, { recursive: true, force: true });
+  }
 }
 process.exit(code);

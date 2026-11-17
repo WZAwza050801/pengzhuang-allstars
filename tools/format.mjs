@@ -25,6 +25,7 @@ files.push(
   'client/src/aiDebug.ts',
   'tools/ai-browser.mjs',
   'tools/ai-latency.ts',
+  'tools/mode-pairs.ts',
   'tools/economy-simulation.ts',
   'tools/format.mjs',
   'tools/check-config.ts',

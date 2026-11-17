@@ -34,6 +34,21 @@
 - 证据：本提交（git log -- tests/server.test.ts 可定位）；未改游戏规则或提前勾选任何产品任务。
 - 下一项：BAL-06。
 
+### BAL-06
+
+- 状态：完成
+- 开始：2026-11-17 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / 6878ab0
+- 范围：四模式版本化规则、共享摘要契约、权威等级/持有权校验、隔离榜单及奖励资格、房间摘要与恢复、先后手配对实验。游客只开放练习与均衡好友赛；不代替 ACC/DAT/NET 的账号、事务结算或 MM 的排行榜。
+- 计划：contracts/modes 定义 DTO；config/modes 固定工程默认；game-core/modes 提供纯规则；房间与 Host 共用；补契约/边界/真实 SDK 测试和 ADR、报告。回滚采用独立任务提交，旧游客房间缺少 mode 时保持练习语义。
+- 实现：modes-1 与共享 DTO/纯规则接入房间、等待室和本地 Host；统一好友等级、验证正式模式持有权并隔离结果资格；冻结/恢复摘要，修正 OnlineHost 的第二座位视角；浏览器联机夹具使用独立临时存档。
+- 验证：Node 24.22.1/npm 11.9.0；完整 check（单元 70/70、契约 5/5）；build；physics 18/18、net 176/0；真实 Chromium 15/15，0 SKIP、0 FAIL、0 JS 错误；8 场固定种子配对实跑完成。
+- 证据：本提交（git log -- docs/productization/reports/BAL-06.md 可定位）；reports/BAL-06.md、reports/mode-pairs.json、reports/mode-lobby.png。
+- 风险与剩余：游客不能进入正式排位/成长模式；正式账号、可靠结果与账本留给 ACC/DAT/NET/MM。8 场不是充分平衡证据。
+- 回滚：独立任务提交；旧协议可选字段和旧练习存档继续兼容，不改物理配置。
+- 下一项：BAL-07。
+
 ### FND-01
 
 - 状态：完成

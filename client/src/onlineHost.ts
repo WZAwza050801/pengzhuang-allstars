@@ -1,5 +1,7 @@
 import { Client, type Room } from 'colyseus.js';
 import { DEFAULT_DATA } from '../../shared/data';
+import { rulesForMode, verifyModeRules } from '../../config/modes';
+import type { GuestMode, ModeRules } from '../../packages/contracts/src/modes';
 import type { MatchEvent, MatchState, ShotInput } from '../../shared/match';
 import type { Side } from '../../shared/physics';
 import {
@@ -33,6 +35,7 @@ const RECONNECT_DELAYS_MS = [400, 900, 1800, 3200, 5000, 8000];
 export type OnlineStatus = 'connecting' | 'lobby' | 'playing' | 'ended' | 'reconnecting' | 'closed';
 
 export interface OnlineHostOptions {
+  mode?: GuestMode;
   /** `ws://host:port` of the Colyseus server. Empty string means "same origin" (the built-in server hosts the page). */
   serverUrl?: string;
   nickname: string;
@@ -45,8 +48,13 @@ export interface OnlineStatusListener {
   (status: OnlineStatus, detail?: string): void;
 }
 export class OnlineHost implements MatchHost {
+  private modeRules: ModeRules | undefined;
+  get rules(): ModeRules | undefined { return this.modeRules; }
+  private readonly requestedMode: GuestMode;
+  private lastSnapshot: RoomSnapshot | null = null;
   readonly mySides: Side[];
-  readonly viewSide: Side = 0;
+  private seat: Side = 0;
+  get viewSide(): Side { return this.seat; }
   readonly seats: [SeatInfo, SeatInfo];
 
   private roomCode = '';
@@ -88,6 +96,7 @@ export class OnlineHost implements MatchHost {
   /** Registers the "the room changed" callback (opponent joined, ready flags, phase). */
   onRoomSnapshot(cb: (snap: RoomSnapshot) => void): void {
     this.roomSnapshotListener = cb;
+    if (this.lastSnapshot) cb(this.lastSnapshot);
   }
 
   /** The server pushes the whole clock with every message; the client converts it into a local deadline. */
@@ -98,6 +107,8 @@ export class OnlineHost implements MatchHost {
   }
 
   constructor(opts: OnlineHostOptions, statusListener?: OnlineStatusListener) {
+    this.requestedMode = opts.mode ?? 'friend';
+    this.pendingNickname = opts.nickname;
     this.statusListener = statusListener ?? null;
     const base = (opts.serverUrl ?? '').replace(/\/$/, '');
     this.client = new Client(base || undefined);
@@ -111,7 +122,7 @@ export class OnlineHost implements MatchHost {
 
   /** Connects to the server and returns the room code. Must be awaited before `start()`. */
   async connect(): Promise<string> {
-    const opts = { protocol: PROTOCOL_VERSION, nickname: this.pendingNickname };
+    const opts = { protocol: PROTOCOL_VERSION, nickname: this.pendingNickname, mode: this.requestedMode };
     this.setStatus('connecting');
     const room = this.code
       ? await this.client.joinById(this.code, opts)
@@ -174,6 +185,10 @@ export class OnlineHost implements MatchHost {
   }
 
   private applyRoomSnapshot(snap: RoomSnapshot): void {
+    if (!this.acceptRules(snap.rules, snap.configVersion)) return;
+    this.seat = snap.mySeat;
+    this.mySides.splice(0, this.mySides.length, snap.mySeat);
+    this.lastSnapshot = snap;
     if (snap.seatToken) this.seatToken = snap.seatToken;
     for (const side of [0, 1] as const) {
       const s = snap.seats[side];
@@ -188,6 +203,7 @@ export class OnlineHost implements MatchHost {
   }
 
   private onMatchStart(msg: MatchStartMsg): void {
+    if (!this.acceptRules(msg.rules, msg.configVersion)) return;
     this.matchId = msg.matchId;
     this.configVersion = msg.configVersion;
     this.state = msg.state;
@@ -226,6 +242,7 @@ export class OnlineHost implements MatchHost {
   }
 
   private onResume(msg: ResumeMsg): void {
+    if (!this.acceptRules(msg.rules, msg.configVersion)) return;
     this.matchId = msg.matchId;
     this.configVersion = msg.configVersion;
     this.state = msg.state;
@@ -239,6 +256,19 @@ export class OnlineHost implements MatchHost {
 
   private onError(msg: ErrorMsg): void {
     this.listener?.onInfo?.(`服务端拒绝了操作：${msg.code}`);
+  }
+
+  private acceptRules(input: ModeRules | undefined, dataVersion: string): boolean {
+    try {
+      if (dataVersion !== DEFAULT_DATA.version) throw new Error('Game data mismatch');
+      this.modeRules = input ? verifyModeRules(DEFAULT_DATA, input) : rulesForMode(DEFAULT_DATA, 'practice');
+      return true;
+    } catch {
+      this.setStatus('closed', '对局规则版本不兼容，请更新后重试');
+      this.listener?.onInfo?.('对局规则版本不兼容，请更新后重试');
+      void this.room?.leave(true);
+      return false;
+    }
   }
 
   /**
