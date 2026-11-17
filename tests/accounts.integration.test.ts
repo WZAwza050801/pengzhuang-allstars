@@ -111,4 +111,94 @@ describe('account persistence', () => {
       }),
     ).rejects.toMatchObject({ code: '23503' });
   });
+
+  test('isolates identical provider subjects by app and keeps each user binding unique within an app', async () => {
+    const [first, second] = await Promise.all([accounts.createUser(), accounts.createUser()]);
+    await accounts.linkIdentity({
+      userId: first.id,
+      provider: 'wechat',
+      providerAppId: 'app-a',
+      providerSubject: 'shared-subject',
+    });
+    await accounts.linkIdentity({
+      userId: second.id,
+      provider: 'wechat',
+      providerAppId: 'app-b',
+      providerSubject: 'shared-subject',
+    });
+    expect(
+      (
+        await accounts.findUserByIdentity({
+          provider: 'wechat',
+          providerAppId: 'app-a',
+          providerSubject: 'shared-subject',
+        })
+      )?.id,
+    ).toBe(first.id);
+    expect(
+      (
+        await accounts.findUserByIdentity({
+          provider: 'wechat',
+          providerAppId: 'app-b',
+          providerSubject: 'shared-subject',
+        })
+      )?.id,
+    ).toBe(second.id);
+    await expect(
+      accounts.linkIdentity({
+        userId: first.id,
+        provider: 'wechat',
+        providerAppId: 'app-a',
+        providerSubject: 'other-subject',
+      }),
+    ).rejects.toBeInstanceOf(DuplicateIdentityError);
+    await expect(db.query('DELETE FROM users WHERE id = $1', [first.id])).rejects.toMatchObject({ code: '23503' });
+  });
+
+  test('records bans and rejects status transitions that bypass the deletion lifecycle', async () => {
+    const user = await accounts.createUser();
+    const banned = await accounts.transitionStatus(user.id, 'banned');
+    expect(banned.bannedAt).toBeInstanceOf(Date);
+    expect((await accounts.transitionStatus(user.id, 'active')).status).toBe('active');
+    await expect(accounts.transitionStatus(user.id, 'deleted')).rejects.toBeInstanceOf(
+      InvalidAccountStatusTransitionError,
+    );
+  });
+
+  test('consumes a verification token only once under contention and rejects expired or wrong-purpose tokens', async () => {
+    const user = await accounts.createUser();
+    const tokenHash = hash('concurrent');
+    await accounts.createVerificationToken({
+      userId: user.id,
+      purpose: 'password-reset',
+      tokenHash,
+      expiresAt: new Date(Date.now() + 60_000),
+    });
+    expect(await accounts.consumeVerificationToken({ purpose: 'email-verification', tokenHash })).toBeNull();
+    const results = await Promise.all(
+      Array.from({ length: 4 }, () => accounts.consumeVerificationToken({ purpose: 'password-reset', tokenHash })),
+    );
+    expect(results.filter((result) => result === user.id)).toHaveLength(1);
+    await db.query(
+      "INSERT INTO verification_tokens(user_id, purpose, token_hash, created_at, expires_at) VALUES ($1, 'password-reset', $2, now() - interval '2 hours', now() - interval '1 hour')",
+      [user.id, hash('expired')],
+    );
+    expect(
+      await accounts.consumeVerificationToken({ purpose: 'password-reset', tokenHash: hash('expired') }),
+    ).toBeNull();
+  });
+
+  test('session ownership and refresh hash uniqueness are enforced by the database', async () => {
+    const [owner, other] = await Promise.all([accounts.createUser(), accounts.createUser()]);
+    const input = {
+      userId: owner.id,
+      refreshTokenHash: hash('unique-session'),
+      familyId: randomUUID(),
+      expiresAt: new Date(Date.now() + 60_000),
+    };
+    const session = await accounts.createSession(input);
+    await expect(accounts.createSession(input)).rejects.toMatchObject({ code: '23505' });
+    expect(await accounts.revokeSession({ userId: other.id, sessionId: session.id })).toBe(false);
+    expect(await accounts.revokeSession({ userId: owner.id, sessionId: session.id })).toBe(true);
+  });
 });

@@ -519,15 +519,16 @@
 
 ### ACC-01
 
-- 状态：进行中
+- 状态：完成
 - 开始：2026-11-18 00:40 Asia/Shanghai
 - 负责人：Codex
 - 分支与起始提交：docs/productization-roadmap / 738bf39
+- 恢复：2026-11-18，Codex / 62649f7；补齐本地隔离 PostgreSQL 17 runner 与真实 migration/账户验收，现有仓储与 schema 先复核再验证。
 - 范围：建立长期用户、身份、密码凭据、验证令牌和会话的 PostgreSQL schema、数据字典与账户仓储；不提前实现注册登录 API 或密码派生。
 - 实现：新增 users/auth_identities/password_credentials/verification_tokens/sessions migration、账户仓储和数据字典；身份全局唯一按 provider/appId/subject，账户状态有单向删除终态，所有 credential/token/session hash 均不作为仓储输出返回。
-- 验证：format/lint/typecheck 通过；真实 PostgreSQL 用例已覆盖迁移、状态迁移、并发身份唯一、一次性令牌、会话撤销和外键反例，但 `npm run test:integration` 因本机没有 Docker 而失败。获授权远程工作区也未发现 Docker 或 psql，未创建容器或安装服务。
-- 证据：本提交中的 packages/persistence/migrations/202611180001_accounts.mjs、tests/accounts.integration.test.ts、docs/engineering/accounts.md；真实运行证据待补。
-- 风险与剩余：任务仍未完成，必须在隔离 PostgreSQL 17 上运行 integration 测试并验证 migration up/down 后才可勾选。ACC-02 才引入 Argon2id、邮件和令牌流程；不得把 seatToken 当作登录会话。
+- 验证：首次因缺少 Docker 未能运行；2026-11-18 恢复后采用官方 EDB PostgreSQL 17.12 原生工具，在本地一次性集群实际运行 integration：2 文件 / 14 项通过，其中账户 8 项、持久化 6 项，包含真实 FK/唯一约束、并发身份绑定、appId 隔离、token 并发消费、事务失败及 migration down/up。补充原生 runner 失败退出/清理反例；无测试文件时退出 1，结束后 PostgreSQL 进程与临时集群目录均为 0。
+- 证据：schema/仓储提交 07186dd；本提交中的 tests/accounts.integration.test.ts、tools/run-pg-tests.mjs、docs/engineering/database.md；docs/productization/reports/ACC-01.md。
+- 风险与剩余：ACC-01 已满足验收；ACC-02 才引入 Argon2id、邮件和令牌流程。原生二进制仅在本地工具链目录，未注册服务或占用远端服务器；CI integration 已接入，远端执行结果待同步后确认。
 - 回滚：独立 migration 和提交可回退；migration down 只允许本地/测试显式执行。
 - 下一项：ACC-02（待 ACC-01）。
 

@@ -323,7 +323,7 @@
 
 现有入口与范围：server/auth.ts 当前仅游客；建立账号 service，不把 seatToken 当登录。
 
-- [ ] **ACC-01** 建立长期用户和身份表
+- [x] **ACC-01** 建立长期用户和身份表
   - 依赖：ARC-04、FND-04
   - 实施：建 users/identities/credentials/sessions/verification 表及约束；统一 userId；区分 appId/openId。
   - 产物：migration、数据字典、账户 repository。
