@@ -706,6 +706,21 @@
 - 回滚：独立提交回退，保留 ACC-06 服务与数据库迁移。
 - 下一项：DAT-02。
 
+### DAT-02
+
+- 状态：完成
+- 开始：2026-11-18 06:17 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 441eed4
+- 范围：按现有 BAL-05 starter-v1 固定五卡/300 金币/0 碎片初始化资料、钱包和默认阵容；持久一次性回执、账本、同事务失败回滚；本人 profile/cards/wallet 读取及资料乐观版本更新。初始化接入真实注册/登录，旧非空数据无回执不覆盖，交 DAT-06 迁移。
+- 计划与验收：并发/重试只授予一次，配置升级不重发；跨设备同一读模型；非法昵称/头像/等级/资产/他人目标拒绝；封禁/注销不重建；真实 PostgreSQL/SMTP 和既有账号页面回归。
+- 实现：复用冻结 BAL-05 grantStarter，用户锁与唯一回执保证五卡/钱包/阵容/profile/账本/outbox 同事务一次授予；接真实邮箱注册/登录、微信登录与 /me。新增本人 profile/cards/wallet API、分页和资料乐观版本；旧非空数据无回执 409 保留，封禁/注销不重建。内置默认头像 ID 不接受任意 URL；Web 单字符昵称对齐既有规则；revision 上限匹配 PostgreSQL int32。
+- 验证：`npm run test:integration` 9 文件/96 项，含云存档 9 项、真实 SMTP/运行时/跨设备/八并发/末尾故障回滚及完整账号页面；`npm run check` 119 单元/8 契约、198 文件格式及静态/生成检查通过；build 通过；`npm run test:e2e` 18 PASS/0 SKIP/0 FAIL，无 console/pageerror。大版本号回归先复现 500，边界修正后返回 400、全量通过。
+- 证据：本提交（`git log -- docs/productization/reports/DAT-02.md` 可定位）、[DAT-02 报告](reports/DAT-02.md)、[接口与初始化](../engineering/player-data.md)。
+- 风险与剩余：旧非空账号需 DAT-06 审计迁移；阵容保存/参赛快照、资产升级、真实大厅分别由 DAT-03/04/UI-03 接入。真实微信、真机、素材、平衡和依赖审计门槛保留，未新增外部依赖、未使用远端，临时数据库/Mailpit 正常停止。
+- 回滚：独立提交回退；新增 schema down 仅隔离测试，已发放资产不做反向删除。
+- 下一项：DAT-03。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

@@ -7,6 +7,7 @@ import type { DeviceKind } from '../../packages/contracts/src/accounts';
 import { ApiError } from '../api/http';
 import type { Sessions } from './sessions';
 import { WechatProvider } from './wechat-provider';
+import type { InitializeAccount } from './player-data';
 
 export class WechatAccounts {
   private readonly codeKey: Buffer;
@@ -14,6 +15,7 @@ export class WechatAccounts {
     private readonly db: Database,
     private readonly provider: WechatProvider,
     signingKey: string,
+    private readonly initialize?: InitializeAccount,
   ) {
     this.codeKey = createHmac('sha256', signingKey).update('wechat-code-replay-v1').digest();
   }
@@ -26,6 +28,7 @@ export class WechatAccounts {
         await accounts.linkIdentity({ userId: user.id, ...identity });
       }
       if (user.status !== 'active') throw new ApiError('UNAUTHENTICATED', 401);
+      await this.initialize?.(tx, user.id);
       const credentials = await session.service.issue(tx, user.id, session.csrf, session.deviceKind);
       return { userId: user.id, result: { userId: user.id, credentials } };
     }, true);

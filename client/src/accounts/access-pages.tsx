@@ -96,7 +96,7 @@ export function RegisterPage() {
           <PasswordInput fresh />
           <label>
             昵称
-            <input name="nickname" required minLength={2} maxLength={12} autoComplete="nickname" />
+            <input name="nickname" required minLength={1} maxLength={12} autoComplete="nickname" />
           </label>
         </Form>
       )}

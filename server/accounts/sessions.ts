@@ -4,6 +4,7 @@ import { SessionRepository } from '../../packages/persistence/src/sessions';
 import { ApiError } from '../api/http';
 import { AccessTokens, UUID } from './access-tokens';
 import type { Principal } from './access-tokens';
+import type { InitializeAccount } from './player-data';
 import { DeviceKindSchema, SessionCursorSchema, type DeviceKind } from '../../packages/contracts/src/accounts';
 import { UserDataRepository } from '../../packages/persistence/src/user-data';
 
@@ -25,6 +26,7 @@ export class Sessions {
     private readonly db: Database,
     secret: string,
     issuer: string,
+    private readonly initialize?: InitializeAccount,
   ) {
     this.access = new AccessTokens(secret, issuer);
     this.refreshKey = createHmac('sha256', secret).update('refresh-derivation-v1').digest();
@@ -79,6 +81,7 @@ export class Sessions {
   }
   current(principal: Principal) {
     return this.active(principal, async (tx) => {
+      await this.initialize?.(tx, principal.userId);
       const profile = await new UserDataRepository(tx).getProfile(principal.userId);
       return {
         ...principal,

@@ -74,6 +74,19 @@ export class UserDataRepository {
         .rows[0] ?? null
     );
   }
+  async updateProfile(
+    userId: string,
+    input: { nickname: string; avatarAssetId: string; expectedRevision: number },
+  ): Promise<UserProfile | null> {
+    return (
+      (
+        await this.sql.query<UserProfile>(
+          `UPDATE profiles SET nickname = $2, avatar_asset_id = $3, version = version + 1, updated_at = clock_timestamp() WHERE user_id = $1 AND version = $4 RETURNING ${profileColumns}`,
+          [userId, input.nickname, input.avatarAssetId, input.expectedRevision],
+        )
+      ).rows[0] ?? null
+    );
+  }
 
   async createCard(input: { userId: string; playerDefId: string; level?: number }): Promise<OwnedCard> {
     const result = await this.sql.query<OwnedCard>(

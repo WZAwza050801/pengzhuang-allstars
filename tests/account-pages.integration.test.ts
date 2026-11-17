@@ -122,7 +122,7 @@ async function register(page: Page) {
   await page.goto(`${origin}/account/register`);
   await page.getByLabel('邮箱', { exact: true }).fill(email);
   await page.getByLabel('新密码', { exact: true }).fill(password);
-  await page.getByLabel('昵称', { exact: true }).fill('浏览器玩家');
+  await page.getByLabel('昵称', { exact: true }).fill('球');
   await page.getByRole('button', { name: '注册并发送验证邮件', exact: true }).click();
   await browserExpect(page.getByText('申请已收到。', { exact: false })).toBeVisible();
   const token = await mailpit.token(email, 'verify');

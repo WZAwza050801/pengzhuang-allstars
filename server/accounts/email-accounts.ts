@@ -12,6 +12,7 @@ import { type AccountMail } from './mail';
 import { Passwords } from './passwords';
 import type { Sessions } from './sessions';
 import type { DeviceKind } from '../../packages/contracts/src/accounts';
+import type { InitializeAccount } from './player-data';
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 const normalizeEmail = (value: string) => value.trim().toLowerCase();
@@ -29,6 +30,7 @@ export class EmailAccounts {
     private readonly mail: AccountMail,
     signingKey: string,
     private readonly passwords = new Passwords(),
+    private readonly initialize?: InitializeAccount,
   ) {
     this.mailKey = createHmac('sha256', signingKey).update('account-mail-encryption-v1').digest();
   }
@@ -90,6 +92,7 @@ export class EmailAccounts {
       try {
         await this.db.transaction(async (tx) => {
           const userId = await new EmailAuthRepository(tx).createAccount(email, passwordHash, input.nickname);
+          await this.initialize?.(tx, userId);
           await this.queueToken(tx, userId, email, 'email-verification');
         });
       } catch (error) {
@@ -106,6 +109,7 @@ export class EmailAccounts {
       return this.db.transaction(async (tx) => {
         const userId = await new EmailAuthRepository(tx).authenticate(email, (hash) => this.passwords.matches(input.password, hash));
         if (!userId) throw new ApiError('UNAUTHENTICATED', 401);
+        await this.initialize?.(tx, userId);
         const credentials = await session.service.issue(tx, userId, session.csrf, session.deviceKind);
         return { userId, credentials };
       });

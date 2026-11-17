@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { PROTOCOL_VERSION } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { parseNickname } from './game-validation';
+import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
 import { EmailAddressSchema, PasswordProofSchema, NewPasswordSchema, AccountTokenSchema } from './credentials';
 import {
   CurrentUserSchema,
@@ -45,7 +46,7 @@ export const ApiErrorSchema = z.strictObject({
   requestId: z.string().min(1).max(128),
 });
 export type ApiResult<T> = { ok: true; data: T; requestId: string } | z.infer<typeof ApiErrorSchema>;
-const revision = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER);
+const revision = z.number().int().min(0).max(2147483647);
 const nickname = z
   .string()
   .max(64)
@@ -91,6 +92,15 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
+  { method: 'get', path: '/api/v1/me/profile', operationId: 'profile', response: UserProfileSchema },
+  {
+    method: 'get',
+    path: '/api/v1/me/cards',
+    operationId: 'ownedCards',
+    query: CardPageQuerySchema,
+    response: CardPageSchema,
+  },
+  { method: 'get', path: '/api/v1/me/wallet', operationId: 'wallet', response: WalletListSchema },
   { method: 'get', path: '/api/v1/auth/options', operationId: 'authOptions', response: AuthOptionsSchema },
   { method: 'get', path: '/api/v1/me/identities', operationId: 'identityStatus', response: IdentityStatusSchema },
   { method: 'get', path: '/api/v1/auth/csrf', operationId: 'csrf' },
@@ -153,7 +163,13 @@ export const HTTP_CONTRACTS = [
     successStatus: 202,
   },
   { method: 'post', path: '/api/v1/auth/password/reset', operationId: 'resetPassword', body: ResetPasswordSchema },
-  { method: 'patch', path: '/api/v1/me/profile', operationId: 'updateProfile', body: ProfileSchema },
+  {
+    method: 'patch',
+    path: '/api/v1/me/profile',
+    operationId: 'updateProfile',
+    body: ProfileSchema,
+    response: UserProfileSchema,
+  },
   { method: 'put', path: '/api/v1/me/lineups/{id}', operationId: 'saveLineup', body: LineupSchema },
   { method: 'post', path: '/api/v1/me/cards/{id}/upgrade', operationId: 'upgradeCard', body: UpgradeSchema },
   { method: 'post', path: '/api/v1/me/cards/craft', operationId: 'craftCard', body: CraftSchema },
