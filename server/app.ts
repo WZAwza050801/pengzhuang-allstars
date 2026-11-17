@@ -8,6 +8,9 @@ import { WebSocketTransport } from '@colyseus/ws-transport';
 import { DEFAULT_DATA } from '../shared/data';
 import { MAX_CLIENT_MESSAGE_BYTES, PROTOCOL_VERSION, ROOM_NAME } from '../shared/protocol';
 import { MatchRoom } from './rooms/MatchRoom';
+import { createServices, systemClock, type ServiceDependencies } from './services';
+import { catalogModule, type ApiModule } from './api/modules';
+import { ApiError, asyncRoute, errorMiddleware, requestId, sendApiError, type ErrorEvent } from './api/http';
 
 /**
  * Where the built client lives. `dist/client` is produced by `npm run build` and served from the same process as
@@ -39,24 +42,53 @@ function lanPlayUrls(port: number): { url: string; kind: 'lan' | 'vpn' }[] {
   return found;
 }
 
-export function createGameServer() {
+export interface GameServerOptions extends Partial<ServiceDependencies> {
+  modules?: readonly ApiModule[];
+  clientDirectory?: string | null;
+  ready?: () => Promise<void>;
+  onError?: (event: ErrorEvent) => void;
+  closeResources?: readonly (() => Promise<void>)[];
+}
+
+export function createGameServer(options: GameServerOptions = {}) {
+  const deps: ServiceDependencies = {
+    repository: options.repository ?? null, clock: options.clock ?? systemClock,
+    resolveData: options.resolveData ?? (() => DEFAULT_DATA), roomStore: options.roomStore ?? null,
+    outcomeSink: options.outcomeSink ?? null,
+  };
+  const services = createServices(deps);
+  let closing: Promise<void> | null = null;
   const app = express();
   app.disable('x-powered-by');
+  app.use(requestId);
   app.get('/healthz', (_req, res) => {
     res.json({
       status: 'ok',
       service: 'collision-allstars',
       protocol: PROTOCOL_VERSION,
-      dataVersion: DEFAULT_DATA.version,
+      dataVersion: deps.resolveData().version,
       uptimeSec: Math.round(process.uptime()),
     });
   });
+  app.get('/readyz', asyncRoute(async (_req, res) => {
+    if (closing) throw new ApiError('UNAVAILABLE', 503, true);
+    try {
+      if (options.ready) await options.ready();
+      else if (deps.repository) await deps.repository.query('SELECT 1');
+    } catch { throw new ApiError('UNAVAILABLE', 503, true); }
+    res.json({ status: 'ready', requestId: res.locals.requestId });
+  }));
+  app.use('/api/v1', express.json({ limit: '32kb', strict: true }));
+  for (const module of [catalogModule, ...(options.modules ?? [])]) {
+    app.use(`/api/v1/${module.area}`, module.createRouter({ ...deps, services }));
+  }
   app.get('/api/join-info', (req, res) => {
     res.json({ urls: lanPlayUrls(req.socket.localPort ?? 0) });
   });
 
   // The built client, served next to the game server: one address for both the page and the websocket.
-  const dir = clientDir();
+  app.use('/api', (_req, res) => { sendApiError(res, new ApiError('NOT_FOUND', 404)); });
+  const dir = options.clientDirectory === undefined ? clientDir() : options.clientDirectory;
   if (dir) {
     app.use(express.static(dir, {
       index: 'index.html',
@@ -66,10 +98,12 @@ export function createGameServer() {
       },
     }));
     // A single-page app: unknown paths that are not API calls fall back to the entry document.
-    app.get(/^\/(?!healthz|api\/).*/, (_req, res) => {
+    app.get(/^\/(?!healthz(?:\/|$)|readyz(?:\/|$)|api(?:\/|$)).*/, (_req, res) => {
       res.sendFile(path.join(dir, 'index.html'));
     });
   }
+
+  app.use(errorMiddleware(options.onError));
 
   // Colyseus takes over the http server's 'request' listeners, so the express app must be attached first.
   const httpServer = http.createServer(app);
@@ -78,6 +112,28 @@ export function createGameServer() {
     gracefullyShutdown: false,
     greet: false,
   });
-  gameServer.define(ROOM_NAME, MatchRoom);
-  return { app, httpServer, gameServer };
+  class RuntimeRoom extends MatchRoom {
+    protected override resolveGameData(version?: string) {
+      return options.resolveData ? deps.resolveData(version) : super.resolveGameData(version);
+    }
+    protected override resolveStore() { return options.roomStore === undefined ? super.resolveStore() : deps.roomStore; }
+    protected override resolveClock() { return deps.clock; }
+    protected override authenticate(options: unknown) { return services.accounts.authenticateGuest(options); }
+  }
+  gameServer.define(ROOM_NAME, RuntimeRoom);
+  function close(): Promise<void> {
+    return closing ??= (async () => {
+      const failures: unknown[] = [];
+      const transportClosed = httpServer.listening ? new Promise<void>((resolve) => httpServer.once('close', resolve)) : Promise.resolve();
+      try { await gameServer.gracefullyShutdown(false); } catch (error) { failures.push(error); }
+      if (httpServer.listening) httpServer.close();
+      httpServer.closeIdleConnections();
+      await transportClosed;
+      for (const cleanup of [...(options.closeResources ?? [])].reverse()) {
+        try { await cleanup(); } catch (error) { failures.push(error); }
+      }
+      if (failures.length) throw new Error('Server shutdown failed');
+    })();
+  }
+  return { app, httpServer, gameServer, services, close };
 }

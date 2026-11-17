@@ -97,7 +97,7 @@
   - 验收：篡改/缺引用/不兼容配置拒绝；热更不污染已有 GameData。
   - 验证：版本兼容与 hash 反例；新旧局分别引用正确配置。
 
-- [ ] **ARC-06** 整理 API 和房间装配
+- [x] **ARC-06** 整理 API 和房间装配
   - 依赖：ARC-04、ARC-05
   - 实施：拆账号/资产/对战 service；注入 repository、时钟、结果 sink；保留 Express/Colyseus 启动；优雅关闭。
   - 产物：server 组合入口、模块路由、错误中间件。

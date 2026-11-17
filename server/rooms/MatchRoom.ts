@@ -36,6 +36,7 @@ import {
   type UpdateMsg,
 } from '../../shared/protocol';
 import { authenticateJoin, netError, type GuestIdentity } from '../auth';
+import { systemClock, type ServerClock } from '../clock';
 import { ROOM_RECORD_FORMAT, type RecordSeat, type RoomRecord, type RoomStore } from '../roomStore';
 import { isRecord, parseReady, parseSetLineup, parseShotMessage, parseSkin, parseSurrender } from '../validation';
 
@@ -79,7 +80,6 @@ interface RateBucket {
   warned: boolean;
 }
 
-const nowMs = (): number => performance.now();
 const newSeatToken = (): string => randomBytes(16).toString('base64url');
 const errText = (err: unknown): string => (err instanceof Error ? (err.stack ?? err.message) : String(err));
 
@@ -141,7 +141,12 @@ export class MatchRoom extends Room {
     return typeof key === 'string' ? MatchRoom.pendingRestores.get(key) : undefined;
   }
 
-  private readonly store: RoomStore | null = MatchRoom.sharedStore;
+  protected resolveGameData(version?: string): GameData { return MatchRoom.dataProvider(version); }
+  protected resolveStore(): RoomStore | null { return MatchRoom.sharedStore; }
+  protected resolveClock(): ServerClock { return systemClock; }
+  protected authenticate(options: unknown): GuestIdentity { return authenticateJoin(options); }
+  private store: RoomStore | null = null;
+  private time: ServerClock = systemClock;
   private data: GameData = DEFAULT_DATA;
   private timing: MatchTiming = timingDefaults(DEFAULT_DATA);
   private code = '';
@@ -165,11 +170,13 @@ export class MatchRoom extends Room {
 
   override async onCreate(options: unknown): Promise<void> {
     const record = MatchRoom.restoreRecordFor(options);
-    this.data = freezeSnapshot(MatchRoom.dataProvider(record?.configVersion));
+    this.data = freezeSnapshot(this.resolveGameData(record?.configVersion));
+    this.store = this.resolveStore();
+    this.time = this.resolveClock();
     this.timing = { ...timingDefaults(this.data), ...MatchRoom.sharedTiming };
     if (!record) {
       // onAuth only runs after the websocket upgrade, so reject a bad creator here to avoid orphan rooms.
-      authenticateJoin(options);
+      this.authenticate(options);
       const skin = parseSkin(isRecord(options) ? options.skin : undefined);
       if (!skin.ok) throw netError(skin.code);
       this.skin = skin.value;
@@ -195,7 +202,7 @@ export class MatchRoom extends Room {
   }
 
   override onAuth(_client: Client, options: unknown): GuestIdentity {
-    return authenticateJoin(options);
+    return this.authenticate(options);
   }
 
   override onJoin(client: Client, _options: unknown, auth: GuestIdentity): void {
@@ -393,7 +400,7 @@ export class MatchRoom extends Room {
 
     // The next turn only starts once the clients have played the shot back, so the turn clock gets that time on top.
     const playbackMs = Math.ceil((out.sim.frames.length / this.data.physics.recordHz) * 1000) + this.timing.playbackMarginMs;
-    this.playbackUntil = nowMs() + playbackMs;
+    this.playbackUntil = this.time.nowMs() + playbackMs;
     if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
 
     const packet: ShotPacketMsg = {
@@ -440,7 +447,7 @@ export class MatchRoom extends Room {
     this.matchTimer = null;
     const st = this.match;
     if (this.phase !== 'playing' || !st || st.over) return;
-    const left = this.playbackUntil - nowMs();
+    const left = this.playbackUntil - this.time.nowMs();
     if (left > 0) {
       // A shot is still playing on the clients: the whistle waits for it, as in the local game.
       this.endPending = true;
@@ -519,7 +526,7 @@ export class MatchRoom extends Room {
       match: st,
       seats: [recSeat(a), recSeat(b)],
       clocks: { matchMs: clocks.matchMs, turnMs: clocks.turnMs },
-      savedAt: Date.now(),
+      savedAt: this.time.wallMs(),
     });
   }
 
@@ -578,7 +585,7 @@ export class MatchRoom extends Room {
   }
 
   private startClocks(matchMs: number, turnMs: number): void {
-    const t = nowMs();
+    const t = this.time.nowMs();
     this.matchDeadline = t + matchMs;
     this.matchTimer = this.after(matchMs, () => this.onMatchClock());
     this.playbackUntil = t;
@@ -588,7 +595,7 @@ export class MatchRoom extends Room {
 
   private armTurn(ms: number): void {
     if (this.turnTimer) clearTimeout(this.turnTimer);
-    this.turnDeadline = nowMs() + ms;
+    this.turnDeadline = this.time.nowMs() + ms;
     this.turnTimer = this.after(ms, () => this.onTurnTimeout());
   }
 
@@ -596,7 +603,7 @@ export class MatchRoom extends Room {
     const seat = this.seats[side];
     if (!seat) return;
     this.closeWindow(seat);
-    seat.windowEnd = nowMs() + this.timing.reconnectMs;
+    seat.windowEnd = this.time.nowMs() + this.timing.reconnectMs;
     seat.window = this.after(this.timing.reconnectMs, () => this.onWindowExpired(side));
   }
 
@@ -618,7 +625,7 @@ export class MatchRoom extends Room {
   /** Remaining time right now. A finished match has no clocks. */
   private clocks(): ClockInfo {
     if (this.phase !== 'playing' || !this.match || this.match.over) return { turnMs: null, matchMs: 0 };
-    const t = nowMs();
+    const t = this.time.nowMs();
     return {
       turnMs: this.turnDeadline === null ? null : Math.max(0, Math.ceil(this.turnDeadline - t)),
       matchMs: Math.max(0, Math.ceil(this.matchDeadline - t)),
@@ -655,7 +662,7 @@ export class MatchRoom extends Room {
     const view = (s: Seat | null): SeatSnapshot | null => {
       if (!s) return null;
       const seat: SeatSnapshot = { nickname: s.nickname, connected: s.connected, ready: s.ready, lineup: s.lineup.slice(), levels: s.levels.slice() };
-      if (this.phase === 'playing' && s.windowEnd !== null) seat.reconnectMs = Math.max(0, Math.ceil(s.windowEnd - nowMs()));
+      if (this.phase === 'playing' && s.windowEnd !== null) seat.reconnectMs = Math.max(0, Math.ceil(s.windowEnd - this.time.nowMs()));
       return seat;
     };
     const snap: RoomSnapshot = {
