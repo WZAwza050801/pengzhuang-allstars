@@ -161,6 +161,20 @@
 - 回滚：独立任务提交可回退；不覆盖其它任务。
 - 下一项：按任务依赖选择。
 
+### ARC-05
+
+- 状态：完成
+- 开始：2026-11-17 13:00 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / 5d4b947e67be719eeb116653041d1735733bdeed
+- 范围：实现版本化配置/资源manifest、内容hash验证和不可变快照，新旧版本共存与明确兼容策略。
+- 实现：实现领域schema注入的版本/hash注册表、资源manifest及全GameData清单，实际房间绑定不可变版本。
+- 验证：15项unit/4契约、build、physics18/net176、Chromium9通过；hash篡改和同版本替换/源码启动反例被拒绝。
+- 证据：本提交（git log -- docs/productization/reports/ARC-05.md 可定位）；docs/productization/reports/ARC-05.md
+- 风险与剩余：本任务验收完成；远端同步权限与后续产品任务按各自记录处理。
+- 回滚：独立任务提交可回退；不覆盖其它任务。
+- 下一项：按任务依赖选择。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

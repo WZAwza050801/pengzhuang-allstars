@@ -1,4 +1,5 @@
 import { readRuntimeConfig } from '../config/runtime';
+import { createBundledGameConfiguration } from '../config/game';
 import { DEFAULT_DATA } from '../shared/data';
 import { createGameServer } from './app';
 import { MatchRoom } from './rooms/MatchRoom';
@@ -36,6 +37,8 @@ async function restoreRooms(storeDir: string): Promise<void> {
 async function main(): Promise<void> {
   const config = readRuntimeConfig();
   const port = config.port;
+  const gameConfiguration = createBundledGameConfiguration();
+  MatchRoom.useDataProvider(gameConfiguration.resolveData);
   const { gameServer } = createGameServer();
   await gameServer.listen(port);
   console.log(`[server] listening on port ${port}  (GET /healthz)`);

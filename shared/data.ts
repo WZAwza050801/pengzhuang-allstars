@@ -1,4 +1,5 @@
 import fieldsJson from '../data/fields.json';
+import { freezeSnapshot } from '../packages/game-core/src/snapshot';
 import physicsJson from '../data/physics.json';
 import playersJson from '../data/players.json';
 import skillsJson from '../data/skills.json';
@@ -71,6 +72,6 @@ export function buildGameData(physics: PhysicsConfig = physicsJson): GameData {
   };
 }
 
-export const DEFAULT_DATA = buildGameData();
+export const DEFAULT_DATA = freezeSnapshot(buildGameData());
 export const FIELD_SKINS = fieldsJson.skins;
 export const PLAYER_LIST = playersJson.players;

@@ -24,6 +24,7 @@ files.push(
   'tools/audit-assets.mjs',
   'tools/check-plan.mjs',
 );
+files.push('tools/export-game-config.ts', 'tools/migrate.ts', 'tools/run-pg-tests.mjs');
 let bad = 0;
 files.push('tools/check-boundaries.mjs', 'tools/export-contracts.ts');
 for (const name of files) {

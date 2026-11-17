@@ -1,7 +1,8 @@
 import { randomBytes, randomInt, randomUUID, timingSafeEqual } from 'node:crypto';
 import { clearTimeout, setTimeout } from 'node:timers';
 import { Room, matchMaker, type Client } from 'colyseus';
-import { DEFAULT_DATA } from '../../shared/data';
+import { DEFAULT_DATA, type GameData } from '../../shared/data';
+import { freezeSnapshot } from '../../packages/game-core/src/snapshot';
 import {
   beginTurn,
   createMatch,
@@ -50,12 +51,12 @@ export interface MatchTiming {
   playbackMarginMs: number;
 }
 
-const DEFAULT_TIMING: MatchTiming = {
-  matchMs: DEFAULT_DATA.rules.matchSeconds * 1000,
-  turnMs: DEFAULT_DATA.rules.turnSeconds * 1000,
-  reconnectMs: DEFAULT_DATA.rules.reconnectSeconds * 1000,
+function timingDefaults(data: GameData): MatchTiming { return {
+  matchMs: data.rules.matchSeconds * 1000,
+  turnMs: data.rules.turnSeconds * 1000,
+  reconnectMs: data.rules.reconnectSeconds * 1000,
   playbackMarginMs: 500,
-};
+}; }
 
 interface Seat {
   client: Client | null;
@@ -106,7 +107,9 @@ export class MatchRoom extends Room {
   private static readonly usedCodes = new Set<string>();
   private static readonly pendingRestores = new Map<string, RoomRecord>();
   private static sharedStore: RoomStore | null = null;
-  private static sharedTiming: MatchTiming = { ...DEFAULT_TIMING };
+  private static sharedTiming: Partial<MatchTiming> = {};
+  private static dataProvider: (version?: string) => GameData = (version) => { if (version && version !== DEFAULT_DATA.version) throw netError('config-mismatch'); return DEFAULT_DATA; };
+  static useDataProvider(provider: (version?: string) => GameData): () => void { const previous = MatchRoom.dataProvider; MatchRoom.dataProvider = provider; return () => { MatchRoom.dataProvider = previous; }; }
 
   /** Rooms keep the store they were created with. Pass null to stop persisting rooms created from now on. */
   static useStore(store: RoomStore | null): void {
@@ -139,7 +142,8 @@ export class MatchRoom extends Room {
   }
 
   private readonly store: RoomStore | null = MatchRoom.sharedStore;
-  private readonly timing: MatchTiming = { ...MatchRoom.sharedTiming };
+  private data: GameData = DEFAULT_DATA;
+  private timing: MatchTiming = timingDefaults(DEFAULT_DATA);
   private code = '';
   private skin = '';
   private phase: Phase = 'lobby';
@@ -161,6 +165,8 @@ export class MatchRoom extends Room {
 
   override async onCreate(options: unknown): Promise<void> {
     const record = MatchRoom.restoreRecordFor(options);
+    this.data = freezeSnapshot(MatchRoom.dataProvider(record?.configVersion));
+    this.timing = { ...timingDefaults(this.data), ...MatchRoom.sharedTiming };
     if (!record) {
       // onAuth only runs after the websocket upgrade, so reject a bad creator here to avoid orphan rooms.
       authenticateJoin(options);
@@ -203,8 +209,8 @@ export class MatchRoom extends Room {
       nickname: auth.nickname,
       connected: true,
       ready: false,
-      lineup: DEFAULT_DATA.rules.defaultLineup.slice(),
-      levels: new Array<number>(DEFAULT_DATA.rules.formation.length).fill(DEFAULT_DATA.rules.levels.uniformLevel),
+      lineup: this.data.rules.defaultLineup.slice(),
+      levels: new Array<number>(this.data.rules.formation.length).fill(this.data.rules.levels.uniformLevel),
       windowEnd: null,
       window: null,
     };
@@ -311,7 +317,7 @@ export class MatchRoom extends Room {
   }
 
   private handleSetLineup(client: Client, raw: unknown): void {
-    const parsed = parseSetLineup(raw, DEFAULT_DATA);
+    const parsed = parseSetLineup(raw, this.data);
     if (!parsed.ok) return this.sendError(client, parsed.code, C2S.setLineup);
     const side = this.seatOf(client);
     if (side === -1) return this.sendError(client, 'not-seated', C2S.setLineup);
@@ -340,8 +346,8 @@ export class MatchRoom extends Room {
     this.matchId = randomUUID();
     this.seq = 0;
     this.accepted.clear();
-    const st = createMatch(DEFAULT_DATA, [a.lineup, b.lineup], { seed: this.seed, levels: [a.levels, b.levels] });
-    const turnEvents = beginTurn(st, DEFAULT_DATA);
+    const st = createMatch(this.data, [a.lineup, b.lineup], { seed: this.seed, levels: [a.levels, b.levels] });
+    const turnEvents = beginTurn(st, this.data);
     this.match = st;
     this.phase = 'playing';
     // The room has to outlive its clients: a dropped seat can come back, and the clocks keep running with nobody connected.
@@ -368,7 +374,7 @@ export class MatchRoom extends Room {
     const st = this.match;
     if (this.phase === 'lobby' || !st) return this.sendError(client, 'match-not-started', C2S.shot, ref);
     if (msg.matchId !== this.matchId) return this.sendError(client, 'stale-match', C2S.shot, ref);
-    if (msg.configVersion !== DEFAULT_DATA.version) return this.sendError(client, 'config-mismatch', C2S.shot, ref);
+    if (msg.configVersion !== this.data.version) return this.sendError(client, 'config-mismatch', C2S.shot, ref);
 
     const key = `${side}:${ref}`;
     const prior = this.accepted.get(key);
@@ -376,17 +382,17 @@ export class MatchRoom extends Room {
 
     if (st.over || this.endPending) return this.sendError(client, 'match-over', C2S.shot, ref);
     if (msg.turnId !== st.shotNo) return this.sendError(client, 'stale-turn', C2S.shot, ref);
-    const verdict = validateShot(st, DEFAULT_DATA, side, msg.input);
+    const verdict = validateShot(st, this.data, side, msg.input);
     if (verdict !== null) return this.sendError(client, isNetErrorCode(verdict) ? verdict : 'internal-error', C2S.shot, ref);
 
     const work = structuredClone(st);
-    const out = resolveShot(work, DEFAULT_DATA, msg.input);
+    const out = resolveShot(work, this.data, msg.input);
     this.match = work;
     this.seq += 1;
     this.accepted.set(key, this.seq);
 
     // The next turn only starts once the clients have played the shot back, so the turn clock gets that time on top.
-    const playbackMs = Math.ceil((out.sim.frames.length / DEFAULT_DATA.physics.recordHz) * 1000) + this.timing.playbackMarginMs;
+    const playbackMs = Math.ceil((out.sim.frames.length / this.data.physics.recordHz) * 1000) + this.timing.playbackMarginMs;
     this.playbackUntil = nowMs() + playbackMs;
     if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
 
@@ -398,7 +404,7 @@ export class MatchRoom extends Room {
       input: msg.input,
       ids: out.sim.ids,
       frames: out.sim.frames,
-      recordHz: DEFAULT_DATA.physics.recordHz,
+      recordHz: this.data.physics.recordHz,
       simEvents: out.sim.events,
       events: out.events,
       turnEvents: out.turnEvents,
@@ -425,7 +431,7 @@ export class MatchRoom extends Room {
     this.turnTimer = null;
     const st = this.match;
     if (this.phase !== 'playing' || !st || st.over) return;
-    const events = this.apply((s) => passTurn(s, DEFAULT_DATA, 'timeout'));
+    const events = this.apply((s) => passTurn(s, this.data, 'timeout'));
     if (!this.match!.over) this.armTurn(this.timing.turnMs);
     this.pushUpdate(events);
   }
@@ -505,7 +511,7 @@ export class MatchRoom extends Room {
       format: ROOM_RECORD_FORMAT,
       code: this.code,
       skin: this.skin,
-      configVersion: DEFAULT_DATA.version,
+      configVersion: this.data.version,
       matchId: this.matchId,
       seed: this.seed,
       seq: this.seq,
@@ -519,14 +525,14 @@ export class MatchRoom extends Room {
 
   private restoreFrom(rec: RoomRecord): void {
     const fail = (why: string): Error => new Error(`cannot restore room ${rec.code}: ${why}`);
-    if (rec.configVersion !== DEFAULT_DATA.version || rec.match.dataVersion !== DEFAULT_DATA.version) throw fail('data version differs');
+    if (rec.configVersion !== this.data.version || rec.match.dataVersion !== this.data.version) throw fail('data version differs');
     if (rec.match.over) throw fail('the match is already over');
     if (MatchRoom.usedCodes.has(rec.code)) throw fail('room code is in use');
     const skin = parseSkin(rec.skin);
     if (!skin.ok) throw fail(skin.code);
     const seats: Seat[] = [];
     for (const [i, s] of rec.seats.entries()) {
-      const parsed = parseSetLineup({ lineup: s.lineup, levels: s.levels }, DEFAULT_DATA);
+      const parsed = parseSetLineup({ lineup: s.lineup, levels: s.levels }, this.data);
       if (!parsed.ok) throw fail(`seat ${i}: ${parsed.code}`);
       seats.push({
         client: null,
@@ -623,7 +629,7 @@ export class MatchRoom extends Room {
     const [a, b] = this.seats as [Seat, Seat];
     return {
       matchId: this.matchId,
-      configVersion: DEFAULT_DATA.version,
+      configVersion: this.data.version,
       skin: this.skin,
       lineups: [a.lineup.slice(), b.lineup.slice()],
       levels: [a.levels.slice(), b.levels.slice()],
@@ -655,7 +661,7 @@ export class MatchRoom extends Room {
     const snap: RoomSnapshot = {
       protocol: PROTOCOL_VERSION,
       code: this.code,
-      configVersion: DEFAULT_DATA.version,
+      configVersion: this.data.version,
       skin: this.skin,
       phase: this.phase,
       seats: [view(this.seats[0]), view(this.seats[1])],
