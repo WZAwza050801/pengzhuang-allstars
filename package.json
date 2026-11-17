@@ -76,11 +76,15 @@
     "assets:package": "tsx tools/asset-packages.ts --write",
     "check:asset-package": "tsx tools/asset-packages.ts",
     "check:asset-release": "tsx tools/asset-packages.ts --release",
-    "test:assets-browser": "node tools/assets-browser.mjs"
+    "test:assets-browser": "node tools/assets-browser.mjs",
+    "test:asset-matrix": "node tools/asset-matrix.mjs",
+    "assets:readiness": "tsx tools/asset-readiness.ts --write",
+    "check:asset-readiness": "tsx tools/asset-readiness.ts"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",
     "@colyseus/ws-transport": "0.16.5",
+    "@noble/hashes": "2.4.0",
     "@pengzhuang/contracts": "1.0.0",
     "@pengzhuang/game-core": "1.0.0",
     "@pengzhuang/platform": "1.0.0",

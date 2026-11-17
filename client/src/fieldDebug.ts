@@ -7,6 +7,7 @@ const query = new URL(location.href).searchParams,
   auditOnly = query.has('audit');
 const selected = query.get('skin'),
   sideQuery = query.get('side');
+const requestedQuality = query.get('quality') === 'low' ? 'low' : 'high';
 const width = Math.max(120, Math.min(1920, Number(query.get('width')) || 260));
 const height = Math.max(160, Math.min(1920, Number(query.get('height')) || 420));
 const root = document.getElementById('app')!;
@@ -45,6 +46,7 @@ for (const skin of auditOnly ? [] : FIELD_SKINS.filter((s) => !selected || s.id 
     canvas.style.width = width + 'px';
     canvas.style.height = height + 'px';
     const renderer = new Renderer(canvas, DEFAULT_DATA.geometry, DEFAULT_DATA.physics, skin as Skin);
+    renderer.setQuality(requestedQuality);
     renderer.flip = side === 1;
     renderer.resize();
     renderers.push(renderer);
@@ -161,6 +163,7 @@ Promise.all(previews).then(async () => {
     ready: true,
     resourceAudit,
     matrixAudit,
+    resources: () => renderers.map((renderer) => renderer.resourceStats()),
   };
 });
 window.addEventListener(
@@ -187,7 +190,7 @@ async function resourceAudit() {
           renderer.resize();
           renderer.draw(blank());
         }
-        for (const id of Object.keys(DEFAULT_DATA.players).slice(0, 40)) await renderer.avatar(id).decode();
+        for (const id of Object.keys(DEFAULT_DATA.players).slice(0, 40)) await renderer.preloadAvatar(id);
         const before = renderer.resourceStats();
         renderer.dispose();
         const after = renderer.resourceStats();
@@ -199,7 +202,7 @@ async function resourceAudit() {
     }
   return stats;
 }
-async function matrixAudit() {
+async function matrixAudit(quality: 'low' | 'high' = 'high') {
   const canvas = document.createElement('canvas');
   canvas.style.cssText = 'position:absolute;left:-10000px;top:0';
   document.body.append(canvas);
@@ -209,6 +212,7 @@ async function matrixAudit() {
     to = { x: 1, y: 2.2 },
     expected = dragIntent(from, to, DEFAULT_DATA.physics.disc.radius, 2.4);
   try {
+    renderer.setQuality(quality);
     for (const skin of FIELD_SKINS)
       for (const side of [0, 1])
         for (const [w, h] of [
@@ -231,7 +235,7 @@ async function matrixAudit() {
           };
           const actual = dragIntent(inverse(from), inverse(to), DEFAULT_DATA.physics.disc.radius, 2.4);
           const error = Math.max(...(['dirX', 'dirY', 'power'] as const).map((k) => Math.abs(actual[k] - expected[k])));
-          results.push({ skin: skin.id, side, width: w, height: h, dpr: devicePixelRatio, error });
+          results.push({ skin: skin.id, side, width: w, height: h, dpr: devicePixelRatio, quality, error });
         }
   } finally {
     renderer.dispose();

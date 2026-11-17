@@ -164,10 +164,11 @@ async function main() {
         },
       });
       root.append(activeDialog.element);
-      dialogSample.append(
-        UI.Button({ label: '打开确认框', onActivate: () => activeDialog?.open() }).element,
-        confirmed,
-      );
+      const dialogOpener = UI.Button({
+        label: '打开确认框',
+        onActivate: () => activeDialog?.open(dialogOpener.element),
+      });
+      dialogSample.append(dialogOpener.element, confirmed);
       sample('Toast', 'message; polite status, no focus movement').append(UI.Toast('阵容已保存（演示）'));
       sample('EmptyState', 'message').append(UI.EmptyState('暂无可用阵容，请先选择球员'));
       const errors = sample('ErrorState', 'message / retry');

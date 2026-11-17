@@ -14,41 +14,45 @@ export default defineConfig({
       name: 'verified-asset-packages',
       apply: 'build',
       enforce: 'post',
-      generateBundle(_options, bundle) {
-        const { manifest, report } = createAssetPackage();
-        for (const asset of manifest.assets)
-          if (asset.path)
-            this.emitFile({
-              type: 'asset',
-              fileName: asset.path.slice(1),
-              source: readFileSync(path.join(root, 'public', asset.path)),
-            });
-        this.emitFile({
-          type: 'asset',
-          fileName: 'assets/catalog.json',
-          source: JSON.stringify(manifest, null, 2) + '\n',
-        });
-        for (const group of report.packages)
+      // Measure after Vite's dynamic-import rewriting: https://rollupjs.org/plugin-development/#build-hooks
+      generateBundle: {
+        order: 'post',
+        handler(_options, bundle) {
+          const { manifest, report } = createAssetPackage();
+          for (const asset of manifest.assets)
+            if (asset.path)
+              this.emitFile({
+                type: 'asset',
+                fileName: asset.path.slice(1),
+                source: readFileSync(path.join(root, 'public', asset.path)),
+              });
           this.emitFile({
             type: 'asset',
-            fileName: `packs/${group.id}.json`,
-            source: JSON.stringify({ version: manifest.version, ...group }) + '\n',
+            fileName: 'assets/catalog.json',
+            source: JSON.stringify(manifest, null, 2) + '\n',
           });
-        const applicationFiles = Object.values(bundle).filter((item) => /\.(js|css)$/.test(item.fileName));
-        const applicationBytes = applicationFiles.reduce(
-          (sum, item) => sum + Buffer.byteLength(item.type === 'chunk' ? item.code : item.source),
-          0,
-        );
-        this.emitFile({
-          type: 'asset',
-          fileName: 'asset-package-report.json',
-          source:
-            JSON.stringify(
-              { ...report, applicationBytes, applicationFiles: applicationFiles.map((item) => item.fileName) },
-              null,
-              2,
-            ) + '\n',
-        });
+          for (const group of report.packages)
+            this.emitFile({
+              type: 'asset',
+              fileName: `packs/${group.id}.json`,
+              source: JSON.stringify({ version: manifest.version, ...group }) + '\n',
+            });
+          const applicationFiles = Object.values(bundle).filter((item) => /\.(js|css)$/.test(item.fileName));
+          const applicationBytes = applicationFiles.reduce(
+            (sum, item) => sum + Buffer.byteLength(item.type === 'chunk' ? item.code : item.source),
+            0,
+          );
+          this.emitFile({
+            type: 'asset',
+            fileName: 'asset-package-report.json',
+            source:
+              JSON.stringify(
+                { ...report, applicationBytes, applicationFiles: applicationFiles.map((item) => item.fileName) },
+                null,
+                2,
+              ) + '\n',
+          });
+        },
       },
     },
   ],

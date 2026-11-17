@@ -124,6 +124,20 @@
 - 回滚：独立提交；取消过滤可恢复原全量本地包，旧兼容入口与物理数据不变。
 - 下一项：AST-06。
 
+### AST-06
+
+- 状态：Web 子集已验证；真机依用户要求暂缓，整项未完成
+- 开始：2026-11-17 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / 99b04b2
+- 范围：Web 多视口/DPR/引擎资源检查、许可清单与平台预算审查。用户随后更正：仅有 iPhone 15 Pro、没有 Android，明确暂时搁置真机验收；不启动手机验收服务，不将桌面模拟器记作真机。
+- 计划：补已发现的普通局域网 HTTP 缺少 WebCrypto 的资源 hash 兼容并按官方资料锁定依赖；测试真实非安全上下文；导出三引擎 Web 矩阵与当前资源批准/预算状态。真机部分依用户要求暂缓，复选框保持未完成；继续后续可独立开发任务。
+- 实现：三引擎资源矩阵、许可/包体清单；无 WebCrypto 的 SHA-256 动态回退；头像预载等待、解码状态和 WebKit 模态焦点修正；动态模块改写之后核对最终包体。
+- 验证：check（单元 93/93、契约 5/5）；build/最终客户端重建；三引擎 144 视图、432 几何组、每引擎 117 原头像与卡片、0 错误/警告；真实非安全上下文加载；资产故障浏览器与游戏 E2E 16/16。
+- 证据：本提交（git log -- docs/productization/reports/AST-06.md 可定位）；reports/AST-06.md、reports/asset-matrix/browser.json 与截图、reports/asset-readiness.json。
+- 剩余：iOS/Android 真机及平台实际包预算未验收；批准为 0；WebKit 冷缓存批量写入需后续性能量化。按用户更正不开展真机工作，不勾选 AST-06。
+- 下一项：UI-01（不依赖 AST-06）。
+
 ### FND-01
 
 - 状态：完成

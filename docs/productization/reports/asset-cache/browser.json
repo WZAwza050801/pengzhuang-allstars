@@ -1,6 +1,8 @@
 {
   "cache": {
     "images": 1,
+    "pending": 0,
+    "ready": 1,
     "decodedBytes": 262144,
     "decodedLimit": 67108864,
     "failures": 0,
@@ -60,6 +62,8 @@
   "cancellation": {
     "name": "AbortError",
     "images": 0,
+    "pending": 0,
+    "ready": 0,
     "decodedBytes": 0,
     "decodedLimit": 67108864,
     "failures": 0,
@@ -86,6 +90,8 @@
     "width": 576,
     "height": 768,
     "images": 1,
+    "pending": 0,
+    "ready": 1,
     "decodedBytes": 1769472,
     "decodedLimit": 67108864,
     "failures": 0,
@@ -111,8 +117,8 @@
     "consoleErrorsAndWarnings": []
   },
   "release": {
-    "version": "assets-de2336fa3f534fc8",
-    "applicationBytes": 1231450,
+    "version": "assets-332176562462fe95",
+    "applicationBytes": 1238142,
     "publicBytes": 14086896,
     "removed": 72,
     "removedBytes": 17188681,

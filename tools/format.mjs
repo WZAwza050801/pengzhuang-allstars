@@ -36,6 +36,8 @@ files.push(
   'tools/asset-variants.ts',
   'tools/asset-packages.ts',
   'tools/assets-browser.mjs',
+  'tools/asset-matrix.mjs',
+  'tools/asset-readiness.ts',
   'client/src/assets.ts',
   'client/vite.config.ts',
   'tools/components-browser.mjs',

@@ -16,7 +16,7 @@
 | RuleSummary | summary | 只展示权威摘要，不能据此修改规则 |
 | ConnectionBanner | online/offline/reconnecting | 文本/错误/忙碌语义；输入权限仍由比赛宿主裁定 |
 | Countdown | remainingSeconds | 只格式化权威剩余秒；不在组件里结算超时 |
-| Dialog | title/body/confirmLabel | open/onConfirm/dispose；取消/Esc、双向焦点循环、关闭恢复触发按钮 |
+| Dialog | title/body/confirmLabel | open(trigger?)/onConfirm/dispose；取消/Esc、双向焦点循环、关闭恢复触发按钮；点击宿主应传入 trigger，兼容 WebKit 不自动聚焦被点击按钮的行为 |
 | Toast | message | polite status，不自动抢焦点；宿主管理展示周期 |
 | EmptyState | message | 明确无内容；后续动作由页面提供 |
 | ErrorState | message | retry；失败描述，不输出内部堆栈 |

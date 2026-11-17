@@ -95,9 +95,14 @@ export async function fetchAssetBytes(url: string, signal: AbortSignal, maxBytes
   return result;
 }
 export async function assetDigest(bytes: Uint8Array) {
-  return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array(bytes).buffer)), (b) =>
-    b.toString(16).padStart(2, '0'),
-  ).join('');
+  // WebCrypto is secure-context-only; LAN HTTP still verifies the exact same content digest.
+  // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/subtle
+  // https://github.com/paulmillr/noble-hashes/blob/2.4.0/README.md#sha2-sha256-sha384-sha512-and-others
+  const subtle = globalThis.crypto?.subtle;
+  const hash = subtle
+    ? new Uint8Array(await subtle.digest('SHA-256', new Uint8Array(bytes).buffer))
+    : (await import('@noble/hashes/sha2.js')).sha256(bytes);
+  return Array.from(hash, (b) => b.toString(16).padStart(2, '0')).join('');
 }
 let shared: Promise<AssetManager> | null = null;
 export function webAssetManager() {
@@ -117,6 +122,7 @@ export function webAssetManager() {
   return shared;
 }
 interface ImageRecord {
+  state: 'loading' | 'ready' | 'error';
   source: string;
   controller: AbortController;
   promise: Promise<void>;
@@ -149,6 +155,7 @@ export class WebAssetScene {
     this.release(image);
     if (this.images.size >= 64) throw new Error('Image scene count exceeded');
     const record: ImageRecord = {
+      state: 'loading',
       source,
       controller: new AbortController(),
       promise: Promise.resolve(),
@@ -177,9 +184,11 @@ export class WebAssetScene {
       if (!record.active || this.disposed) throw assetAbort();
       if (image.naturalWidth !== entry.width || image.naturalHeight !== entry.height)
         throw new Error('Decoded dimensions differ');
+      record.state = 'ready';
     })()
       .catch((error) => {
         if (record.active) {
+          record.state = 'error';
           this.failures++;
           image.removeAttribute('src');
           this.bytes -= record.bytes;
@@ -225,6 +234,8 @@ export class WebAssetScene {
   stats() {
     return {
       images: this.images.size,
+      pending: [...this.images.values()].filter((r) => r.state === 'loading').length,
+      ready: [...this.images.values()].filter((r) => r.state === 'ready').length,
       decodedBytes: this.bytes,
       decodedLimit: this.limit,
       failures: this.failures,

@@ -143,6 +143,13 @@ export class Renderer {
     return img;
   }
 
+  /** Wait for verified bytes and decoding before an explicit portrait preload. */
+  async preloadAvatar(playerId: string): Promise<HTMLImageElement> {
+    const image = this.avatar(playerId);
+    await this.resources.wait(image);
+    return image;
+  }
+
   /** Bound face URLs, for the portrait smoke check. */
   boundAvatars() {
     return [...this.avatars.entries()].map(([playerId, img]) => ({

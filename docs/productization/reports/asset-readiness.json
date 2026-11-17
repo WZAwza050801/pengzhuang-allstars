@@ -1,0 +1,1952 @@
+{
+  "schemaVersion": 1,
+  "sourceVersion": "assets-242a893cc17ad5b6",
+  "packageVersion": "assets-332176562462fe95",
+  "commercialReady": false,
+  "license": {
+    "approved": [],
+    "excludedFromRelease": [
+      {
+        "id": "assets.cards.atlas.json",
+        "path": "/assets/cards/atlas.json",
+        "category": "rebuilt-card-atlas",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.cards.card-frames.png",
+        "path": "/assets/cards/card-frames.png",
+        "category": "rebuilt-card-atlas",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.cards.portraits-0.png",
+        "path": "/assets/cards/portraits-0.png",
+        "category": "rebuilt-card-atlas",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.cards.portraits-1.png",
+        "path": "/assets/cards/portraits-1.png",
+        "category": "rebuilt-card-atlas",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-11e641a5209c.webp",
+        "path": "/assets/fields/low/field-11e641a5209c.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-1907ae4344b1.webp",
+        "path": "/assets/fields/low/field-1907ae4344b1.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-56f42c593b41.webp",
+        "path": "/assets/fields/low/field-56f42c593b41.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-83a36bd462e6.webp",
+        "path": "/assets/fields/low/field-83a36bd462e6.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-9ef3508c7421.webp",
+        "path": "/assets/fields/low/field-9ef3508c7421.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-a2873bc992fd.webp",
+        "path": "/assets/fields/low/field-a2873bc992fd.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-a965af8b4b6e.webp",
+        "path": "/assets/fields/low/field-a965af8b4b6e.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-d2c2961561a1.webp",
+        "path": "/assets/fields/low/field-d2c2961561a1.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-d93a6d774b3e.webp",
+        "path": "/assets/fields/low/field-d93a6d774b3e.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.field-fb0a7e40b174.webp",
+        "path": "/assets/fields/low/field-fb0a7e40b174.webp",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.low.manifest.json",
+        "path": "/assets/fields/low/manifest.json",
+        "category": "rebuilt-low-resolution",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_01_full.webp",
+        "path": "/assets/fields/scene_01_full.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_01.webp",
+        "path": "/assets/fields/scene_01.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_02_full.webp",
+        "path": "/assets/fields/scene_02_full.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_02.webp",
+        "path": "/assets/fields/scene_02.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_03_full.webp",
+        "path": "/assets/fields/scene_03_full.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_03.webp",
+        "path": "/assets/fields/scene_03.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_04_full.webp",
+        "path": "/assets/fields/scene_04_full.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_04.webp",
+        "path": "/assets/fields/scene_04.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_05_full.webp",
+        "path": "/assets/fields/scene_05_full.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.scene_05.webp",
+        "path": "/assets/fields/scene_05.webp",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.fields.spring_corner.png",
+        "path": "/assets/fields/spring_corner.png",
+        "category": "field-derived-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Background.jpg",
+        "path": "/assets/orig_ui/Background.jpg",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Box_01.png",
+        "path": "/assets/orig_ui/Box_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Box_02.png",
+        "path": "/assets/orig_ui/Box_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Box_Quality_01.png",
+        "path": "/assets/orig_ui/Box_Quality_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Box_Quality_02.png",
+        "path": "/assets/orig_ui/Box_Quality_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Box_Quality_03.png",
+        "path": "/assets/orig_ui/Box_Quality_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Box_Quality_04.png",
+        "path": "/assets/orig_ui/Box_Quality_04.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Box_Select.png",
+        "path": "/assets/orig_ui/Box_Select.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_00.png",
+        "path": "/assets/orig_ui/Btn_00.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_02.png",
+        "path": "/assets/orig_ui/Btn_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_03.png",
+        "path": "/assets/orig_ui/Btn_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_04.png",
+        "path": "/assets/orig_ui/Btn_04.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_01.png",
+        "path": "/assets/orig_ui/Btn_Icon_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_02.png",
+        "path": "/assets/orig_ui/Btn_Icon_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_03.png",
+        "path": "/assets/orig_ui/Btn_Icon_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_04.png",
+        "path": "/assets/orig_ui/Btn_Icon_04.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_05.png",
+        "path": "/assets/orig_ui/Btn_Icon_05.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_06.png",
+        "path": "/assets/orig_ui/Btn_Icon_06.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_07.png",
+        "path": "/assets/orig_ui/Btn_Icon_07.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_08.png",
+        "path": "/assets/orig_ui/Btn_Icon_08.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Btn_Icon_09.png",
+        "path": "/assets/orig_ui/Btn_Icon_09.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Ico_01.png",
+        "path": "/assets/orig_ui/Ico_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Ico_02.png",
+        "path": "/assets/orig_ui/Ico_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Ico_03.png",
+        "path": "/assets/orig_ui/Ico_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Logo_zh.png",
+        "path": "/assets/orig_ui/Logo_zh.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Lv_Add.png",
+        "path": "/assets/orig_ui/Lv_Add.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Lv_Background.png",
+        "path": "/assets/orig_ui/Lv_Background.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Player_Attributes_01.png",
+        "path": "/assets/orig_ui/Player_Attributes_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Player_Attributes_02.png",
+        "path": "/assets/orig_ui/Player_Attributes_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Player_Attributes_03.png",
+        "path": "/assets/orig_ui/Player_Attributes_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Player_Attributes_04.png",
+        "path": "/assets/orig_ui/Player_Attributes_04.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Player_Attributes_05.png",
+        "path": "/assets/orig_ui/Player_Attributes_05.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.stadium.Image_01.png",
+        "path": "/assets/orig_ui/stadium/Image_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.stadium.Image_02.png",
+        "path": "/assets/orig_ui/stadium/Image_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.stadium.Image_03.png",
+        "path": "/assets/orig_ui/stadium/Image_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.stadium.Image_04.png",
+        "path": "/assets/orig_ui/stadium/Image_04.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.stadium.Image_05.png",
+        "path": "/assets/orig_ui/stadium/Image_05.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.stadium.Img_01.png",
+        "path": "/assets/orig_ui/stadium/Img_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Store_Icon_01.png",
+        "path": "/assets/orig_ui/Store_Icon_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Store_Icon_05.png",
+        "path": "/assets/orig_ui/Store_Icon_05.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_03.png",
+        "path": "/assets/orig_ui/Tab_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_05.png",
+        "path": "/assets/orig_ui/Tab_05.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_Icon_01.png",
+        "path": "/assets/orig_ui/Tab_Icon_01.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_Icon_02.png",
+        "path": "/assets/orig_ui/Tab_Icon_02.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_Icon_03.png",
+        "path": "/assets/orig_ui/Tab_Icon_03.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_Icon_04.png",
+        "path": "/assets/orig_ui/Tab_Icon_04.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_Icon_06.png",
+        "path": "/assets/orig_ui/Tab_Icon_06.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Tab_Right.png",
+        "path": "/assets/orig_ui/Tab_Right.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Windos_TipsBox_Close.png",
+        "path": "/assets/orig_ui/Windos_TipsBox_Close.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.orig_ui.Windos_TipsBox.png",
+        "path": "/assets/orig_ui/Windos_TipsBox.png",
+        "category": "original-ui",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1001_10101.png",
+        "path": "/assets/players_original/head_1001_10101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1001_10102.png",
+        "path": "/assets/players_original/head_1001_10102.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1001_10103.png",
+        "path": "/assets/players_original/head_1001_10103.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1001_10104.png",
+        "path": "/assets/players_original/head_1001_10104.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1001_10105.png",
+        "path": "/assets/players_original/head_1001_10105.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1001_10106.png",
+        "path": "/assets/players_original/head_1001_10106.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1001_10107.png",
+        "path": "/assets/players_original/head_1001_10107.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1002_10201.png",
+        "path": "/assets/players_original/head_1002_10201.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1002_10202.png",
+        "path": "/assets/players_original/head_1002_10202.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1002_10203.png",
+        "path": "/assets/players_original/head_1002_10203.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1002_10204.png",
+        "path": "/assets/players_original/head_1002_10204.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1002_10205.png",
+        "path": "/assets/players_original/head_1002_10205.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1002_10206.png",
+        "path": "/assets/players_original/head_1002_10206.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1002_10207.png",
+        "path": "/assets/players_original/head_1002_10207.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1003_10301.png",
+        "path": "/assets/players_original/head_1003_10301.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1003_10302.png",
+        "path": "/assets/players_original/head_1003_10302.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1003_10303.png",
+        "path": "/assets/players_original/head_1003_10303.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1003_10304.png",
+        "path": "/assets/players_original/head_1003_10304.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1003_10305.png",
+        "path": "/assets/players_original/head_1003_10305.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1003_10306.png",
+        "path": "/assets/players_original/head_1003_10306.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1003_10307.png",
+        "path": "/assets/players_original/head_1003_10307.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1004_10401.png",
+        "path": "/assets/players_original/head_1004_10401.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1004_10402.png",
+        "path": "/assets/players_original/head_1004_10402.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1004_10403.png",
+        "path": "/assets/players_original/head_1004_10403.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1004_10404.png",
+        "path": "/assets/players_original/head_1004_10404.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1004_10405.png",
+        "path": "/assets/players_original/head_1004_10405.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1004_10406.png",
+        "path": "/assets/players_original/head_1004_10406.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_1004_10407.png",
+        "path": "/assets/players_original/head_1004_10407.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2001_20101.png",
+        "path": "/assets/players_original/head_2001_20101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2001_20102.png",
+        "path": "/assets/players_original/head_2001_20102.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2001_20103.png",
+        "path": "/assets/players_original/head_2001_20103.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2001_20104.png",
+        "path": "/assets/players_original/head_2001_20104.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2001_20105.png",
+        "path": "/assets/players_original/head_2001_20105.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2001_20106.png",
+        "path": "/assets/players_original/head_2001_20106.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2001_20107.png",
+        "path": "/assets/players_original/head_2001_20107.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2002_20201.png",
+        "path": "/assets/players_original/head_2002_20201.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2002_20202.png",
+        "path": "/assets/players_original/head_2002_20202.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2002_20203.png",
+        "path": "/assets/players_original/head_2002_20203.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2002_20204.png",
+        "path": "/assets/players_original/head_2002_20204.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2002_20205.png",
+        "path": "/assets/players_original/head_2002_20205.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2002_20206.png",
+        "path": "/assets/players_original/head_2002_20206.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_2002_20207.png",
+        "path": "/assets/players_original/head_2002_20207.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30101.png",
+        "path": "/assets/players_original/head_3001_30101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30102.png",
+        "path": "/assets/players_original/head_3001_30102.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30103.png",
+        "path": "/assets/players_original/head_3001_30103.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30104.png",
+        "path": "/assets/players_original/head_3001_30104.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30105.png",
+        "path": "/assets/players_original/head_3001_30105.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30106.png",
+        "path": "/assets/players_original/head_3001_30106.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30107.png",
+        "path": "/assets/players_original/head_3001_30107.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_3001_30108.png",
+        "path": "/assets/players_original/head_3001_30108.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40101.png",
+        "path": "/assets/players_original/head_4001_40101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40102.png",
+        "path": "/assets/players_original/head_4001_40102.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40103.png",
+        "path": "/assets/players_original/head_4001_40103.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40104.png",
+        "path": "/assets/players_original/head_4001_40104.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40105.png",
+        "path": "/assets/players_original/head_4001_40105.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40106.png",
+        "path": "/assets/players_original/head_4001_40106.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40107.png",
+        "path": "/assets/players_original/head_4001_40107.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40108.png",
+        "path": "/assets/players_original/head_4001_40108.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4001_40110.png",
+        "path": "/assets/players_original/head_4001_40110.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40201.png",
+        "path": "/assets/players_original/head_4002_40201.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40202.png",
+        "path": "/assets/players_original/head_4002_40202.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40203.png",
+        "path": "/assets/players_original/head_4002_40203.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40204.png",
+        "path": "/assets/players_original/head_4002_40204.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40205.png",
+        "path": "/assets/players_original/head_4002_40205.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40206.png",
+        "path": "/assets/players_original/head_4002_40206.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40207.png",
+        "path": "/assets/players_original/head_4002_40207.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4002_40208.png",
+        "path": "/assets/players_original/head_4002_40208.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4003_40301.png",
+        "path": "/assets/players_original/head_4003_40301.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4003_40302.png",
+        "path": "/assets/players_original/head_4003_40302.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4003_40303.png",
+        "path": "/assets/players_original/head_4003_40303.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4003_40304.png",
+        "path": "/assets/players_original/head_4003_40304.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4003_40305.png",
+        "path": "/assets/players_original/head_4003_40305.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4003_40306.png",
+        "path": "/assets/players_original/head_4003_40306.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_4003_40307.png",
+        "path": "/assets/players_original/head_4003_40307.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_5001_50101.png",
+        "path": "/assets/players_original/head_5001_50101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_5001_50102.png",
+        "path": "/assets/players_original/head_5001_50102.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_5001_50103.png",
+        "path": "/assets/players_original/head_5001_50103.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_5001_50104.png",
+        "path": "/assets/players_original/head_5001_50104.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_5001_50105.png",
+        "path": "/assets/players_original/head_5001_50105.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_5001_50106.png",
+        "path": "/assets/players_original/head_5001_50106.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_5001_50107.png",
+        "path": "/assets/players_original/head_5001_50107.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_6001_60101.png",
+        "path": "/assets/players_original/head_6001_60101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_6001_60102.png",
+        "path": "/assets/players_original/head_6001_60102.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_6001_60103.png",
+        "path": "/assets/players_original/head_6001_60103.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_6001_60104.png",
+        "path": "/assets/players_original/head_6001_60104.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_6001_60105.png",
+        "path": "/assets/players_original/head_6001_60105.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_6001_60106.png",
+        "path": "/assets/players_original/head_6001_60106.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_6001_60107.png",
+        "path": "/assets/players_original/head_6001_60107.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_7001_70101.png",
+        "path": "/assets/players_original/head_7001_70101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8001_80101.png",
+        "path": "/assets/players_original/head_8001_80101.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8001_80102.png",
+        "path": "/assets/players_original/head_8001_80102.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8001_80103.png",
+        "path": "/assets/players_original/head_8001_80103.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8001_80104.png",
+        "path": "/assets/players_original/head_8001_80104.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8001_80105.png",
+        "path": "/assets/players_original/head_8001_80105.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8001_80106.png",
+        "path": "/assets/players_original/head_8001_80106.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8001_80107.png",
+        "path": "/assets/players_original/head_8001_80107.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8002_80201.png",
+        "path": "/assets/players_original/head_8002_80201.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8002_80202.png",
+        "path": "/assets/players_original/head_8002_80202.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8002_80203.png",
+        "path": "/assets/players_original/head_8002_80203.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8002_80204.png",
+        "path": "/assets/players_original/head_8002_80204.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8002_80205.png",
+        "path": "/assets/players_original/head_8002_80205.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8002_80206.png",
+        "path": "/assets/players_original/head_8002_80206.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_8002_80207.png",
+        "path": "/assets/players_original/head_8002_80207.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_9001_90001.png",
+        "path": "/assets/players_original/head_9001_90001.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_9001_90002.png",
+        "path": "/assets/players_original/head_9001_90002.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players_original.head_9001_90003.png",
+        "path": "/assets/players_original/head_9001_90003.png",
+        "category": "original-player-portraits",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p06_avatar.png",
+        "path": "/assets/players/p06_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p07_avatar.png",
+        "path": "/assets/players/p07_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p08_avatar.png",
+        "path": "/assets/players/p08_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p09_avatar.png",
+        "path": "/assets/players/p09_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p10_avatar.png",
+        "path": "/assets/players/p10_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p11_avatar.png",
+        "path": "/assets/players/p11_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p12_avatar.png",
+        "path": "/assets/players/p12_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p13_avatar.png",
+        "path": "/assets/players/p13_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p14_avatar.png",
+        "path": "/assets/players/p14_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p15_avatar.png",
+        "path": "/assets/players/p15_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.players.p16_avatar.png",
+        "path": "/assets/players/p16_avatar.png",
+        "category": "rebuilt-player-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_010_10101.png",
+        "path": "/assets/skills/skill_010_10101.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_020_10102.png",
+        "path": "/assets/skills/skill_020_10102.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_030_10103.png",
+        "path": "/assets/skills/skill_030_10103.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_040_10201.png",
+        "path": "/assets/skills/skill_040_10201.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_050_10203.png",
+        "path": "/assets/skills/skill_050_10203.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_060_10204.png",
+        "path": "/assets/skills/skill_060_10204.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_070_10206.png",
+        "path": "/assets/skills/skill_070_10206.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_080_10302.png",
+        "path": "/assets/skills/skill_080_10302.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_090_10303.png",
+        "path": "/assets/skills/skill_090_10303.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_100_10306.png",
+        "path": "/assets/skills/skill_100_10306.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_110_10402.png",
+        "path": "/assets/skills/skill_110_10402.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_120_10403.png",
+        "path": "/assets/skills/skill_120_10403.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_130_10404.png",
+        "path": "/assets/skills/skill_130_10404.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_140_60103.png",
+        "path": "/assets/skills/skill_140_60103.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_150_20101.png",
+        "path": "/assets/skills/skill_150_20101.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_160_20102.png",
+        "path": "/assets/skills/skill_160_20102.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_170_20104.png",
+        "path": "/assets/skills/skill_170_20104.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_180_20106.png",
+        "path": "/assets/skills/skill_180_20106.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_190_20201.png",
+        "path": "/assets/skills/skill_190_20201.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_200_20202.png",
+        "path": "/assets/skills/skill_200_20202.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_210_30101.png",
+        "path": "/assets/skills/skill_210_30101.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_220_30104.png",
+        "path": "/assets/skills/skill_220_30104.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_230_40101.png",
+        "path": "/assets/skills/skill_230_40101.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_240_40102.png",
+        "path": "/assets/skills/skill_240_40102.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_250_40103.png",
+        "path": "/assets/skills/skill_250_40103.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_260_40106.png",
+        "path": "/assets/skills/skill_260_40106.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_270_40202.png",
+        "path": "/assets/skills/skill_270_40202.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_280_40203.png",
+        "path": "/assets/skills/skill_280_40203.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_290_40206.png",
+        "path": "/assets/skills/skill_290_40206.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_300_40207.png",
+        "path": "/assets/skills/skill_300_40207.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_310_40301.png",
+        "path": "/assets/skills/skill_310_40301.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_320_40303.png",
+        "path": "/assets/skills/skill_320_40303.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_330_50102.png",
+        "path": "/assets/skills/skill_330_50102.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_340_50103.png",
+        "path": "/assets/skills/skill_340_50103.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_350_50107.png",
+        "path": "/assets/skills/skill_350_50107.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_360_40108.png",
+        "path": "/assets/skills/skill_360_40108.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_370_40208.png",
+        "path": "/assets/skills/skill_370_40208.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_380_30103.png",
+        "path": "/assets/skills/skill_380_30103.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_400_10105.png",
+        "path": "/assets/skills/skill_400_10105.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_410_10107.png",
+        "path": "/assets/skills/skill_410_10107.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_430_10205.png",
+        "path": "/assets/skills/skill_430_10205.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_440_10301.png",
+        "path": "/assets/skills/skill_440_10301.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_450_10304.png",
+        "path": "/assets/skills/skill_450_10304.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_460_10307.png",
+        "path": "/assets/skills/skill_460_10307.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_480_20103.png",
+        "path": "/assets/skills/skill_480_20103.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_500_20107.png",
+        "path": "/assets/skills/skill_500_20107.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_520_20205.png",
+        "path": "/assets/skills/skill_520_20205.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_530_20206.png",
+        "path": "/assets/skills/skill_530_20206.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_540_30102.png",
+        "path": "/assets/skills/skill_540_30102.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_550_40104.png",
+        "path": "/assets/skills/skill_550_40104.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_560_40105.png",
+        "path": "/assets/skills/skill_560_40105.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_570_40107.png",
+        "path": "/assets/skills/skill_570_40107.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_580_40201.png",
+        "path": "/assets/skills/skill_580_40201.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_600_40205.png",
+        "path": "/assets/skills/skill_600_40205.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_610_40306.png",
+        "path": "/assets/skills/skill_610_40306.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_620_50101.png",
+        "path": "/assets/skills/skill_620_50101.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_640_50106.png",
+        "path": "/assets/skills/skill_640_50106.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_650_90001.png",
+        "path": "/assets/skills/skill_650_90001.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_660_90002.png",
+        "path": "/assets/skills/skill_660_90002.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_670_90003.png",
+        "path": "/assets/skills/skill_670_90003.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_680_40110.png",
+        "path": "/assets/skills/skill_680_40110.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_690_30108.png",
+        "path": "/assets/skills/skill_690_30108.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_700_80101.png",
+        "path": "/assets/skills/skill_700_80101.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_710_80102.png",
+        "path": "/assets/skills/skill_710_80102.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_720_80104.png",
+        "path": "/assets/skills/skill_720_80104.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_790_80201.png",
+        "path": "/assets/skills/skill_790_80201.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_800_80204.png",
+        "path": "/assets/skills/skill_800_80204.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_810_80202.png",
+        "path": "/assets/skills/skill_810_80202.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.skills.skill_820_70101.png",
+        "path": "/assets/skills/skill_820_70101.png",
+        "category": "skill-icon-assets",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.ui.chrome-dark.png",
+        "path": "/assets/ui/chrome-dark.png",
+        "category": "rebuilt-ui-pack",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.ui.chrome-light.png",
+        "path": "/assets/ui/chrome-light.png",
+        "category": "rebuilt-ui-pack",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.ui.pack.json",
+        "path": "/assets/ui/pack.json",
+        "category": "rebuilt-ui-pack",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "assets.ui.stadiums.png",
+        "path": "/assets/ui/stadiums.png",
+        "category": "rebuilt-ui-pack",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "favicon.ico",
+        "path": "/favicon.ico",
+        "category": "runtime-other-unverified",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "procedural.audio",
+        "path": null,
+        "category": "procedural-audio",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      },
+      {
+        "id": "procedural.field",
+        "path": null,
+        "category": "procedural-field",
+        "rights": "unverified",
+        "reason": "No verified release approval"
+      }
+    ],
+    "source": "client/public/assets/catalog.json; config/asset-sources.json"
+  },
+  "web": {
+    "scope": "Filesystem JS/CSS/worker and public-resource totals; not measured first-screen transfer or device GPU memory",
+    "applicationBytes": 1238142,
+    "publicBytes": 14086896,
+    "catalogBytes": 247454,
+    "packages": [
+      {
+        "id": "boot",
+        "bytes": 125676,
+        "decodedRgbaBytes": 1024
+      },
+      {
+        "id": "lobby",
+        "bytes": 1581694,
+        "decodedRgbaBytes": 38239432
+      },
+      {
+        "id": "matchCommon",
+        "bytes": 10556362,
+        "decodedRgbaBytes": 37801984
+      },
+      {
+        "id": "matchLow",
+        "bytes": 332698,
+        "decodedRgbaBytes": 16081920
+      },
+      {
+        "id": "matchHigh",
+        "bytes": 1490466,
+        "decodedRgbaBytes": 85104080
+      }
+    ]
+  },
+  "wechat": {
+    "reviewedOn": "2026-11-17",
+    "source": "https://developers.weixin.qq.com/minigame/dev/guide/base-ability/subPackage/useSubPackage.html",
+    "officialLimits": {
+      "main": "4M",
+      "total": "30M",
+      "independentSubpackage": "4M",
+      "ordinarySubpackage": "No separate limit"
+    },
+    "actualBuildMeasured": false,
+    "budgetAccepted": false,
+    "note": "Web scene indexes are not WeChat subpackages; review actual game.json and upload output in WX tasks"
+  },
+  "physicalDevices": {
+    "status": "deferred-by-user",
+    "available": [
+      "iPhone 15 Pro (OS/browser version unverified)"
+    ],
+    "unavailable": [
+      "Android"
+    ],
+    "validated": [],
+    "note": "No device session or device evidence collected; desktop WebKit is not iOS Safari"
+  }
+}

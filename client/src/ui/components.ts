@@ -227,9 +227,9 @@ export function Dialog(props: { title: string; body: string; confirmLabel: strin
   });
   return {
     element,
-    open: () => {
+    open: (trigger?: HTMLElement) => {
       if (element.open) return;
-      opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      opener = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
       element.showModal();
     },
     dispose: () => {

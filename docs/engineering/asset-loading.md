@@ -24,3 +24,5 @@ AssetScene.load/preload 加载资源；preload 去重且返回 loaded/failed，�
 当前为本地工程验证包，所有商业批准仍为 0。`npm run check:asset-release` 在含未批准资源时退出失败；不把“裁掉未用图片”等同于取得素材许可。REL-01 负责权利证据和替换，平台主包预算与真机内存由 AST-06/WX/APP 审查。
 
 `test:assets-browser` 实测持久缓存损坏、离线、换 hash、加载取消、容量、低纹理和无图出手；还对真实构建产物逐张打开 106 张卡牌详情，验证所有实际图片可解码。包体报告分别统计公共资源与应用 JS/CSS/worker，按实际构建文件核对，避免重复计算图片。
+
+AST-06 增加 `test:asset-matrix` 的桌面三引擎矩阵和 `assets:readiness` 的许可/平台预算记录；真机仍待验收。局域网 HTTP 不提供 WebCrypto 时动态加载锁定的 SHA-256 实现，继续校验相同 hash；持久存储不可用时使用原有内存/网络回退。动态 import 的最终字节统计在 Rollup post 钩子完成，readiness 会与磁盘文件逐项求和复核。
