@@ -1,4 +1,4 @@
-import { createServer } from 'node:http';
+import { createServer, request as httpRequest } from 'node:http';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -11,6 +11,31 @@ import { DEFAULT_DATA } from '../shared/data';
 import { startRuntime } from '../server/runtime';
 import { readRuntimeConfig } from '../config/runtime';
 import type { SqlExecutor } from '../packages/persistence/src/database';
+
+async function request(
+  origin: string,
+  route: string,
+  init: { method?: string; headers?: Record<string, string>; body?: string } = {},
+) {
+  return new Promise<{ status: number; headers: Record<string, string | string[] | undefined>; text: string }>(
+    (resolve, reject) => {
+      const call = httpRequest(new URL(route, origin), { method: init.method, headers: init.headers }, (response) => {
+        const chunks: Buffer[] = [];
+        response.on('data', (chunk: Buffer) => chunks.push(chunk));
+        response.on('end', () =>
+          resolve({
+            status: response.statusCode ?? 0,
+            headers: response.headers,
+            text: Buffer.concat(chunks).toString(),
+          }),
+        );
+      });
+      call.on('error', reject);
+      if (init.body) call.write(init.body);
+      call.end();
+    },
+  );
+}
 
 test('real HTTP routing separates API/SPA, propagates request ids, validates JSON, redacts async failures and cleans up', async () => {
   const dir = await mkdtemp(path.join(os.tmpdir(), 'allstars-api-'));
@@ -71,16 +96,16 @@ test('real HTTP routing separates API/SPA, propagates request ids, validates JSO
     const addr = server.httpServer.address();
     if (!addr || typeof addr === 'string') throw new Error('No port');
     const origin = `http://127.0.0.1:${addr.port}`;
-    expect(await (await fetch(`${origin}/page`)).text()).toContain('test SPA');
+    expect((await request(origin, '/page')).text).toContain('test SPA');
     for (const route of ['/api', '/api/v9/unknown', '/api/v1/auth/login']) {
-      const response = await fetch(origin + route);
+      const response = await request(origin, route);
       expect(response.status).toBe(404);
-      const body = ApiErrorSchema.parse(await response.json());
+      const body = ApiErrorSchema.parse(JSON.parse(response.text));
       expect(body.error.code).toBe('NOT_FOUND');
-      expect(body.requestId).toBe(response.headers.get('x-request-id'));
+      expect(body.requestId).toBe(response.headers['x-request-id']);
     }
-    const failed = await fetch(`${origin}/api/v1/matches/failure`, { headers: { 'x-request-id': 'untrusted' } });
-    const failure = ApiErrorSchema.parse(await failed.json());
+    const failed = await request(origin, '/api/v1/matches/failure', { headers: { 'x-request-id': 'untrusted' } });
+    const failure = ApiErrorSchema.parse(JSON.parse(failed.text));
     expect(failed.status).toBe(500);
     expect(JSON.stringify(failure)).not.toContain('password');
     expect(failure.requestId).not.toBe('untrusted');
@@ -89,20 +114,20 @@ test('real HTTP routing separates API/SPA, propagates request ids, validates JSO
       ['{', 400],
       [JSON.stringify({ value: 'x'.repeat(33000) }), 413],
     ] as const) {
-      const res = await fetch(`${origin}/api/v1/matches/echo`, {
+      const res = await request(origin, '/api/v1/matches/echo', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body,
       });
       expect(res.status).toBe(status);
-      expect(ApiErrorSchema.parse(await res.json()).error.code).toBe('INVALID_REQUEST');
+      expect(ApiErrorSchema.parse(JSON.parse(res.text)).error.code).toBe('INVALID_REQUEST');
     }
-    const catalog = await (await fetch(`${origin}/api/v1/catalog`)).json();
+    const catalog = JSON.parse((await request(origin, '/api/v1/catalog')).text);
     expect(catalog.data.dataVersion).toBe(DEFAULT_DATA.version);
-    expect((await fetch(`${origin}/readyz`)).status).toBe(200);
+    expect((await request(origin, '/readyz')).status).toBe(200);
     unavailable = true;
-    expect((await fetch(`${origin}/readyz`)).status).toBe(503);
-    expect((await fetch(`${origin}/healthz`)).status).toBe(200);
+    expect((await request(origin, '/readyz')).status).toBe(503);
+    expect((await request(origin, '/healthz')).status).toBe(200);
   } finally {
     const first = server.close();
     expect(server.close()).toBe(first);

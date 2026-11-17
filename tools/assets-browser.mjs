@@ -31,7 +31,7 @@ try {
   const context = await browser.newContext(),
     page = await context.newPage();
   page.on('pageerror', (e) => report.pageErrors.push(e.message));
-  await page.goto(base);
+  await page.goto(`${base}?legacy=1`);
   await page.evaluate(async () => {
     const lib = await import('/src/assets.ts'),
       catalog = await (await fetch('/assets/catalog.json')).json();
@@ -196,7 +196,7 @@ try {
     lineup.on('console', (m) => {
       if (['error', 'warning'].includes(m.type())) failures.push(m.text());
     });
-    await lineup.goto(builtPreview.resolvedUrls.local[0]);
+    await lineup.goto(`${builtPreview.resolvedUrls.local[0]}?legacy=1`);
     await lineup.locator('[data-tab=lineup]').click();
     const cards = JSON.parse(readFileSync(path.join(root, 'data/player_catalog.json'), 'utf8')).entries;
     assert.equal(await lineup.locator('.lu-grid [data-card]').count(), cards.length);
@@ -221,7 +221,7 @@ try {
     game = await fallback.newPage();
   game.on('pageerror', (e) => report.pageErrors.push(e.message));
   await game.route(/\/assets\/(?:players(?:_original)?|fields)\//, (r) => r.abort());
-  await game.goto(base);
+  await game.goto(`${base}?legacy=1`);
   await game.fill('.nick', 'asset-fallback');
   await game.click('.btn-play');
   await game.uncheck('.timer');

@@ -559,6 +559,20 @@
 - 回滚：独立任务提交可回退；保持 FLD-02 相机与输入数学接口兼容。
 - 下一项：WEB-03（待 WEB-02、UI-07）。
 
+### WEB-04
+
+- 状态：完成
+- 开始：2026-11-18 01:45 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / bcc5f5e
+- 范围：在 AST-05 的可校验有界资源缓存和 FLD-02/WEB-02 的 Canvas 实现上，补齐首屏/比赛运行性能观测与必要的无玩法变更优化；不改变球场几何、瞄准、物理或线上权威规则。
+- 实现：练习赛 React 路由改为 Suspense 动态导入，比赛视图成为独立 chunk；大厅初始加载不请求比赛 chunk 或 `assets/fields` 场地资源。新增性能 Chromium runner，记录弱网首屏、帧时间和热身后连续 10 局的 JS 堆增量；既有质量档继续限制 Canvas DPR（1/1.5/2.5）且 Renderer 静态场地缓存不变。资源浏览器回归固定使用遗留比赛入口，使真实缓存损坏、离线、取消、低清纹理与断图出手验证不再因页面壳路由漂移而失效。
+- 验证：`npm run test:web-performance` 通过：390x844 DPR 3、150ms 延迟、200KiB/s 下载下首屏 3933ms，初始资源 592583B，比赛 chunk/场地资源均未预取，帧 p50/p95 16.7ms，10 局热身后堆增长 884920B。`npm run test:assets-browser` 与 `npm run test:web-shell` 通过；`npm run check`、`npm run build`、`npm run test:e2e` 与 `node tools/check-plan.mjs` 在本提交前通过。
+- 证据：本提交；`docs/productization/reports/WEB-04.md`；`docs/productization/reports/web-04/browser.json`；`tools/web-performance-browser.mjs`。AST-05 的资源 hash、失败回退、持久缓存/内存上限与低清资源矩阵继续生效。
+- 风险与剩余：本任务验收完成。数据为本机 Chromium 头显仿真，非物理移动设备、Safari 或微信小游戏性能结论；这些平台矩阵由 WEB-03、AST-06、WX/APP 后续任务处理。
+- 回滚：独立任务提交可回退；保留 AST-05 资源 hash/失败回退协议和既有性能质量档。
+- 下一项：选择依赖已满足的未完成任务；WEB-03 仍待 UI-07。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

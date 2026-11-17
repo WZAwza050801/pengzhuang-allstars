@@ -30,6 +30,7 @@
     "test:e2e": "npm run build:test-client && node tools/e2e-browser.mjs",
     "test:web-layout": "node tools/web-layout-browser.mjs",
     "test:web-shell": "node tools/web-shell-browser.mjs",
+    "test:web-performance": "npm run build:test-client && node tools/web-performance-browser.mjs",
     "test": "npm run test:physics && npm run test:net",
     "backup": "tsx tools/backup.ts",
     "lint": "eslint .",

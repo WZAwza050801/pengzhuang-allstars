@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   DEFAULT_FEATURES,
   MAIN_NAV,
@@ -8,9 +8,10 @@ import {
   type NavigationTarget,
 } from '@pengzhuang/client-model';
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams, useSearchParams } from 'react-router';
-import { PracticeMatchScreen } from './matchScreen';
 import { LobbyScreen, PlaceholderScreen, UnavailableScreen, type NavigateTarget } from './webScreens';
 import styles from './webShell.module.css';
+
+const PracticeMatchScreen = lazy(async () => ({ default: (await import('./matchScreen')).PracticeMatchScreen }));
 
 function useNavigationContext(): NavigationContext {
   const [network, setNetwork] = useState<NavigationContext['network']>(() => (navigator.onLine ? 'online' : 'offline'));
@@ -76,7 +77,9 @@ function MatchRoute({ context }: { context: NavigationContext }) {
   if (decision.kind === 'blocked') return <UnavailableScreen reason={unavailableReason(decision.reason)} onBack={() => navigate('/')} />;
   if (decision.target.page !== 'match') return <Navigate to="/" replace />;
   return decision.target.mode === 'practice' ? (
-    <PracticeMatchScreen />
+    <Suspense fallback={<p className={styles.matchLoading}>正在载入练习赛…</p>}>
+      <PracticeMatchScreen />
+    </Suspense>
   ) : (
     <UnavailableScreen reason="该对局需要有效的服务端比赛凭证。" onBack={() => navigate('/')} />
   );
