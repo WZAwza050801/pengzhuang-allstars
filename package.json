@@ -79,7 +79,8 @@
     "test:assets-browser": "node tools/assets-browser.mjs",
     "test:asset-matrix": "node tools/asset-matrix.mjs",
     "assets:readiness": "tsx tools/asset-readiness.ts --write",
-    "check:asset-readiness": "tsx tools/asset-readiness.ts"
+    "check:asset-readiness": "tsx tools/asset-readiness.ts",
+    "test:workflow-browser": "node tools/workflow-browser.mjs"
   },
   "dependencies": {
     "@colyseus/schema": "3.0.76",

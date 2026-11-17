@@ -42,6 +42,8 @@ files.push(
   'client/vite.config.ts',
   'tools/components-browser.mjs',
   'client/src/componentsDebug.ts',
+  'client/src/workflowDebug.ts',
+  'tools/workflow-browser.mjs',
   'client/src/ui/components.ts',
   'client/src/ui/semantics.ts',
   'tools/ui-browser.mjs',

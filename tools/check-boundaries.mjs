@@ -49,6 +49,7 @@ function walk(directory) {
     visit(source);
   }
 }
-for (const dir of ['shared', 'packages/game-core/src', 'packages/contracts/src']) walk(dir);
+for (const dir of ['shared', 'packages/game-core/src', 'packages/contracts/src', 'packages/client-model/src'])
+  walk(dir);
 console.log(`Boundary checked ${count} portable source files`);
 process.exitCode = errors ? 1 : 0;
