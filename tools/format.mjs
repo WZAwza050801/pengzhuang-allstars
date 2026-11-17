@@ -23,6 +23,7 @@ files.push(
   'tools/format.mjs',
   'tools/check-config.ts',
   'tools/validate-balance-data.ts',
+  'tools/export-balance-mapping.ts',
   'tools/check-toolchain.mjs',
   'tools/audit-assets.mjs',
   'tools/check-plan.mjs',

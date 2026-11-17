@@ -69,7 +69,8 @@ export function buildGameData(physics: PhysicsConfig = physicsJson): GameData {
   for (const p of playersJson.players) players[p.id] = p;
   const skills: Record<string, SkillDef> = {};
   for (const s of skillsJson.skills) skills[s.id] = s as SkillDef;
-  return {
+  // Definitions are validated finite JSON; use a portable independent copy for calibration callers.
+  return JSON.parse(JSON.stringify({
     version: [fieldsJson.version, physics.version, playersJson.version, skillsJson.version, rulesJson.version, levelsVersion, attrMapJson.version].join('/'),
     geometry: fieldsJson.geometry,
     physics,
@@ -78,7 +79,7 @@ export function buildGameData(physics: PhysicsConfig = physicsJson): GameData {
     skills,
     levels: levelTable,
     mapping: attrMapJson,
-  };
+  })) as GameData;
 }
 
 export const DEFAULT_DATA = freezeSnapshot(buildGameData());

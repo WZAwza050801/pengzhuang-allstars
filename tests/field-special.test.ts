@@ -93,7 +93,13 @@ test('crowded relocation searches for a legal free position; fully occupied worl
 });
 
 test('goal reset clears relocation/status state and gives the conceding side kickoff without an extra relocation event', () => {
-  const cleanData = { ...data, skills: {} };
+  const cleanData = {
+    ...data,
+    skills: {},
+    players: Object.fromEntries(
+      Object.entries(data.players).map(([id, player]) => [id, { ...player, skill: 'none', srcSkill: null }]),
+    ),
+  };
   const st = createMatch(cleanData, [data.rules.defaultLineup, data.rules.defaultLineup], { seed: 3, firstSide: 0 });
   for (const piece of st.pieces) {
     piece.out = 2;

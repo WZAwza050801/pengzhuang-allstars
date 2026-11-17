@@ -1,6 +1,8 @@
-import type { GameData, LevelAttrs, SkillDef } from './data';
+import type { GameData, SkillDef } from './data';
 import { simulateShot, type SimResult, type SimSetup, type SimShot, type Side } from './physics';
 import { nextRandom } from './rng';
+import { levelAttrs, pieceStats } from '../packages/game-core/src/balance';
+export { levelAttrs, pieceStats, type PieceStats } from '../packages/game-core/src/balance';
 import { insideField } from '../packages/game-core/src/field';
 
 export interface PieceState {
@@ -55,49 +57,6 @@ export type MatchEvent =
   | { type: 'extra'; side: Side }
   | { type: 'pass'; side: Side; reason: string }
   | { type: 'end'; winner: Side | -1; reason: string };
-
-export interface PieceStats {
-  massMul: number;
-  speedMul: number;
-  curveMul: number;
-  aimAssist: number;
-  skill: SkillDef | null;
-  skillLevel: number;
-}
-
-const lerp = (r: number[], t: number) => r[0] + (r[1] - r[0]) * t;
-
-/**
- * Attribute points of a player at a card level. Players with a srcId read the source level table (data/levels.json);
- * the rebuilt players (srcId null) have no table and keep the attrs + growth estimate, capped at attrMax.
- */
-export function levelAttrs(data: GameData, playerId: string, level: number): LevelAttrs {
-  const def = data.players[playerId];
-  if (def.srcId) return data.levels[def.srcId][String(level)];
-  const m = data.mapping;
-  const a = def.attrs.map((v, i) => Math.min(m.attrMax, v + def.growth[i] * (level - 1)));
-  return { weight: a[0], power: a[1], mind: a[4], radian: a[2], precision: a[3] };
-}
-
-export function pieceStats(data: GameData, playerId: string, level: number, cond = 1): PieceStats {
-  const def = data.players[playerId];
-  const m = data.mapping;
-  const a = levelAttrs(data, playerId, level);
-  const n = (v: number) => Math.max(0, Math.min(1, (v * cond - m.attrMin) / (m.attrMax - m.attrMin)));
-  const skill = data.skills[def.skill] ?? null;
-  const at = data.rules.levels.skillLevelAt;
-  let skillLevel = 0;
-  for (let i = 0; i < at.length; i++) if (level >= at[i]) skillLevel = i + 1;
-  const unlocked = skill && level >= skill.unlockLevel;
-  return {
-    massMul: lerp(m.massMul, n(a.weight)),
-    speedMul: lerp(m.speedMul, n(a.power)),
-    curveMul: lerp(m.curveMul, n(a.radian)),
-    aimAssist: lerp(m.aimAssist, n(a.precision)),
-    skill: unlocked ? skill : null,
-    skillLevel: unlocked ? Math.max(1, skillLevel) : 0,
-  };
-}
 
 export function formationPos(data: GameData, side: Side, slot: number) {
   const f = data.rules.formation[slot];

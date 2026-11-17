@@ -1,4 +1,6 @@
 import { World, Vec2, Circle, Edge, Settings, type Body, type Contact, type Fixture } from 'planck';
+import { launchSpeed } from '../packages/game-core/src/balance';
+export { launchSpeed } from '../packages/game-core/src/balance';
 import type { FieldGeometry, PhysicsConfig } from './data';
 import { fieldSegments, fieldPosts, goalCrossing } from '../packages/game-core/src/field';
 export { fieldSegments, insideField, type FieldSegment, type SegmentKind } from '../packages/game-core/src/field';
@@ -93,10 +95,6 @@ interface PendingKick {
   n: [number, number];
 }
 
-export function launchSpeed(phys: PhysicsConfig, power: number, speedMul = 1): number {
-  const p = Math.min(1, Math.max(phys.shot.minPower, power));
-  return phys.shot.vmax * speedMul * Math.pow(p, phys.shot.gamma);
-}
 
 export class SimWorld {
   readonly world: World;
