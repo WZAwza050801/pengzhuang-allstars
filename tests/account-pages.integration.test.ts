@@ -17,6 +17,11 @@ import { authOptionsModule } from '../server/api/auth-options';
 import { emailAuthModule } from '../server/api/email-auth';
 import { currentUserModule } from '../server/api/current-user';
 import { lifecycleModules } from '../server/api/lifecycle';
+import { LocalImports } from '../server/accounts/local-import';
+import { localImportModule } from '../server/api/local-import';
+import { PlayerData } from '../server/accounts/player-data';
+import { DEFAULT_DATA } from '../shared/data';
+import { createBundledEconomyConfiguration } from '../config/economy';
 import { freePort, startMailpit } from './helpers/mailpit';
 import { jsonRequest } from './helpers/json-http';
 
@@ -48,6 +53,7 @@ beforeAll(async () => {
     SMTP_URL: `smtp://127.0.0.1:${mailpit.smtpPort}`,
   });
   const passwords = new Passwords();
+  const players = new PlayerData(db, createBundledEconomyConfiguration().policy, DEFAULT_DATA);
   mail = new EmailAccounts(db, createAccountMail(config), key, passwords);
   const sessions = new Sessions(db, key, origin);
   const web = new WebSessions(sessions, config, key);
@@ -86,6 +92,7 @@ beforeAll(async () => {
       authOptionsModule(true, false, web),
       web.module(),
       currentUserModule(web),
+      localImportModule(new LocalImports(db, players.initialize, () => DEFAULT_DATA), web),
       ...lifecycleModules(lifecycle, web),
       emailAuthModule(mail, web),
     ],
@@ -351,6 +358,101 @@ test('the binding UI uses current proof and a real mailbox before enabling the n
   }
 }, 60000);
 
+test('real browser previews an old save, retries a lost import response, and retains only safe preferences', async () => {
+  const { page, context } = await pageIn(undefined, true);
+  try {
+    await seedUnboundBrowser(context);
+    await page.goto(`${origin}/profile`);
+    await page.evaluate(
+      (team) => {
+        localStorage.setItem('pz_nick', '旧球员');
+        localStorage.setItem('pz_skin', 'classic');
+        localStorage.setItem('pz_muted', '1');
+        localStorage.setItem('pz_lineups', JSON.stringify({ active: 0, sets: [team] }));
+        localStorage.setItem('pz_profile', JSON.stringify({ cash: 999999999, diamond: 99999, level: 10 }));
+        localStorage.setItem('pz_card_level', '10');
+      },
+      [...DEFAULT_DATA.rules.defaultLineup],
+    );
+    await page.getByRole('button', { name: '检查旧本地存档', exact: true }).click();
+    await browserExpect(page.getByText('昵称草稿：旧球员', { exact: true })).toBeVisible();
+    let lost = false;
+    await page.route('**/api/v1/me/local-import', async (route) => {
+      if (route.request().method() === 'POST' && !lost) {
+        lost = true;
+        await route.fetch();
+        await route.abort();
+      } else await route.continue();
+    });
+    await page.getByRole('button', { name: '确认导入到当前账号', exact: true }).click();
+    await browserExpect(page.getByText('可保留本次预览重试。', { exact: false })).toBeVisible();
+    await page.getByRole('button', { name: '确认导入到当前账号', exact: true }).click();
+    await browserExpect(page.getByText('当前账号已完成导入。', { exact: true })).toBeVisible();
+    await browserExpect(page.getByText('已保存 1 套持有卡阵容偏好', { exact: false })).toBeVisible();
+    const me = await context.request.get(`${origin}/api/v1/me`);
+    expect(me.ok()).toBe(true);
+    const userId = (await me.json()).data.userId;
+    expect(
+      (await db.query("SELECT balance::text FROM wallets WHERE user_id=$1 AND currency='coins'", [userId])).rows[0]
+        .balance,
+    ).toBe('300');
+    expect(
+      (await db.query('SELECT level FROM owned_cards WHERE user_id=$1', [userId])).rows.every((row) => row.level === 1),
+    ).toBe(true);
+    await page.evaluate(() => {
+      localStorage.setItem('pz_skin', 'orig_2016');
+      localStorage.setItem('pz_muted', '0');
+    });
+    await page.getByRole('button', { name: '在本机使用导入设置', exact: true }).click();
+    expect(
+      await page.evaluate(() => [
+        localStorage.getItem('pz_skin'),
+        localStorage.getItem('pz_muted'),
+        JSON.parse(localStorage.getItem('pz_profile')!).cash,
+      ]),
+    ).toEqual(['classic', '1', 999999999]);
+    await page.reload();
+    await page.getByRole('button', { name: '检查旧本地存档', exact: true }).click();
+    await browserExpect(page.getByText('当前账号已完成导入。', { exact: true })).toBeVisible();
+    await page.screenshot({ path: path.join(screenshotDirectory, 'local-import-mobile.png') });
+    await page.getByRole('button', { name: '退出登录', exact: true }).click();
+    await page.waitForURL('**/login');
+    await seedUnboundBrowser(context);
+    await page.goto(`${origin}/profile`);
+    await page.getByRole('button', { name: '检查旧本地存档', exact: true }).click();
+    await browserExpect(page.getByRole('button', { name: '确认导入到当前账号', exact: true })).toBeVisible();
+    await browserExpect(page.getByText('当前账号已完成导入。', { exact: true })).toHaveCount(0);
+  } finally {
+    await context.close();
+  }
+});
+test('browser explains corrupt and blocked local saves without submitting an import', async () => {
+  const { page, context } = await pageIn();
+  try {
+    await seedUnboundBrowser(context);
+    await page.goto(`${origin}/profile`);
+    await page.evaluate(() => {
+      localStorage.setItem('pz_lineups', '{broken');
+      localStorage.setItem('pz_muted', 'invalid');
+    });
+    await page.getByRole('button', { name: '检查旧本地存档', exact: true }).click();
+    await browserExpect(page.getByText('旧阵容存档损坏，已跳过。', { exact: true })).toBeVisible();
+    await browserExpect(page.getByText('没有可导入的合法偏好。', { exact: false })).toBeVisible();
+    await browserExpect(page.getByRole('button', { name: '确认导入到当前账号', exact: true })).toHaveCount(0);
+    await page.evaluate(() => {
+      Object.defineProperty(window, 'localStorage', {
+        configurable: true,
+        get() {
+          throw new Error('blocked');
+        },
+      });
+    });
+    await page.getByRole('button', { name: '检查旧本地存档', exact: true }).click();
+    await browserExpect(page.getByText('浏览器不允许读取本地存档。', { exact: false })).toBeVisible();
+  } finally {
+    await context.close();
+  }
+});
 test('browser pages produce no unexpected console errors or unhandled exceptions', () => {
   expect(errors).toEqual([]);
 });

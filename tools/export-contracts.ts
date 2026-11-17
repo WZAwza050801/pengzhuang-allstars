@@ -22,6 +22,8 @@ for (const item of HTTP_CONTRACTS) {
       required: true,
       schema: { type: 'string', format: 'uuid' },
     });
+  if (['importLocalPreferences', 'localImportStatus'].includes(item.operationId))
+    parameters.push({ name: 'X-Account-Id', in: 'header', required: true, schema: { type: 'string', format: 'uuid' } });
   paths[item.path] = {
     ...(paths[item.path] as Record<string, unknown> | undefined),
     [item.method]: {

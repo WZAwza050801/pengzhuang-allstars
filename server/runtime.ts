@@ -23,6 +23,8 @@ import { Lineups } from './accounts/lineups';
 import { lineupModule } from './api/lineups';
 import { Assets } from './accounts/assets';
 import { assetModule } from './api/assets';
+import { LocalImports } from './accounts/local-import';
+import { localImportModule } from './api/local-import';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -33,6 +35,7 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
   const players = database && economy ? new PlayerData(database, economy.policy, gameConfiguration.resolveData()) : null;
   const assets = database && players && economy ? new Assets(database, players.initialize, () => ({ policy: economy.registry.get(), data: gameConfiguration.resolveData() })) : null;
   const lineups = database && players ? new Lineups(database, players.initialize, gameConfiguration.resolveData) : null;
+  const localImports = database && players ? new LocalImports(database, players.initialize, gameConfiguration.resolveData) : null;
   const emailAccounts = database && config.emailProvider !== 'disabled'
     ? new EmailAccounts(database, createAccountMail(config), config.sessionSigningKey!, passwords, players?.initialize) : null;
   const web = database && config.sessionSigningKey
@@ -41,7 +44,7 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     ? new WechatAccounts(database, new WechatProvider({ appId: config.wechatAppId!, secret: config.wechatSecret! }), config.sessionSigningKey!, players?.initialize) : null;
   const lifecycle = database && web ? new AccountLifecycle(database, passwords, { enabled: config.accountDeletionEnabled, graceHours: config.accountDeletionGraceHours, version: config.accountRetentionPolicy }, emailAccounts, wechat) : null;
   const server = createGameServer({
-    modules: [authOptionsModule(!!emailAccounts, !!wechat, web), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : [])] : [])],
+    modules: [authOptionsModule(!!emailAccounts, !!wechat, web), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : [])] : [])],
     repository: database, resolveData: gameConfiguration.resolveData,
     roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : []), ...(lifecycle ? [() => lifecycle.close()] : [])] : [],
     onError: (event) => console.error(JSON.stringify({ event: 'http_error', ...event })),

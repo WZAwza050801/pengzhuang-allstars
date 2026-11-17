@@ -4,6 +4,7 @@ import type { SessionList } from '../../../packages/contracts/src/accounts';
 import { useAccount } from './context';
 import { AccountLayout, Form, EmailInput, PasswordInput, readForm, useAccountAction, accountError } from './forms';
 import styles from './pages.module.css';
+import { LocalImportPanel } from './local-import';
 
 export function AccountHub() {
   const { services, login, unavailable } = useAccount();
@@ -86,6 +87,7 @@ function ProfilePage() {
   return (
     <AccountLayout title="我的账号">
       <p>{login.user?.profile?.nickname ?? '已登录账号'}</p>
+      <LocalImportPanel key={login.user!.userId} />
       <section className={styles.section} aria-labelledby="devices-title">
         <h2 id="devices-title">登录设备</h2>
         {!devices ? (

@@ -99,10 +99,10 @@ describe('PostgreSQL 17 persistence', () => {
   test('down requires explicit permission; local rollback and reapply work', async () => {
     await expect(migrateDatabase(db, { direction: 'down' })).rejects.toThrow('explicit');
     expect(await migrateDatabase(db, { direction: 'down', allowRollback: true })).toHaveLength(1);
-    expect((await db.query("SELECT to_regclass('asset_operations') AS name")).rows).toEqual([{ name: null }]);
+    expect((await db.query("SELECT to_regclass('account_local_imports') AS name")).rows).toEqual([{ name: null }]);
     expect(await migrateDatabase(db)).toHaveLength(1);
-    expect((await db.query("SELECT to_regclass('asset_operations') AS name")).rows).toEqual([
-      { name: 'asset_operations' },
+    expect((await db.query("SELECT to_regclass('account_local_imports') AS name")).rows).toEqual([
+      { name: 'account_local_imports' },
     ]);
   });
 });

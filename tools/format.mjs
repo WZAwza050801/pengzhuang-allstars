@@ -67,6 +67,7 @@ files.push(
   'client/src/accounts/forms.tsx',
   'client/src/accounts/access-pages.tsx',
   'client/src/accounts/profile-page.tsx',
+  'client/src/accounts/local-import.tsx',
   'client/src/accounts/routes.tsx',
   'client/src/accounts/link-token.ts',
   'client/src/accounts/pages.module.css',

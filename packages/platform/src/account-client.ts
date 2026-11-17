@@ -37,6 +37,11 @@ import {
 } from '../../contracts/src/accounts';
 import type { AccountPort, AccountResponse, LogoutIntent } from '../../client-model/src/account';
 import type { HttpRequest, NetworkAdapter } from './types';
+import {
+  LocalImportCommandSchema,
+  LocalImportReceiptSchema,
+  LocalImportStatusSchema,
+} from '../../contracts/src/local-import';
 
 const networkFailure = { ok: false as const, error: { code: 'NETWORK_ERROR' as const, retryable: true } };
 const invalid = { ok: false as const, error: { code: 'INVALID_RESPONSE' as const, retryable: false } };
@@ -115,6 +120,23 @@ export class WebAccountClient implements AccountPort {
   }
   current() {
     return this.protected(() => this.call('/me', CurrentUserSchema));
+  }
+  localImportStatus(userId: string) {
+    if (!z.uuid().safeParse(userId).success) return Promise.resolve(invalid);
+    return this.protected(() =>
+      this.call('/me/local-import', LocalImportStatusSchema, { headers: { 'X-Account-Id': userId } }),
+    );
+  }
+  importLocalPreferences(body: unknown, userId: string) {
+    const input = LocalImportCommandSchema.safeParse(body);
+    if (!input.success || !z.uuid().safeParse(userId).success) return Promise.resolve(invalid);
+    return this.protected(() =>
+      this.write('/me/local-import', LocalImportReceiptSchema, {
+        method: 'POST',
+        body: input.data,
+        headers: { 'X-Account-Id': userId },
+      }),
+    );
   }
   list(cursor?: string): Promise<AccountResponse<SessionList>> {
     return this.protected(() =>

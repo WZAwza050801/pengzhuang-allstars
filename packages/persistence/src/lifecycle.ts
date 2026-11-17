@@ -236,6 +236,7 @@ export class LifecycleRepository {
     await this.sql.query('DELETE FROM password_credentials WHERE user_id = $1', [userId]);
     await this.sql.query('DELETE FROM auth_identities WHERE user_id = $1', [userId]);
     await this.sql.query('DELETE FROM profiles WHERE user_id = $1', [userId]);
+    await this.sql.query('DELETE FROM account_local_imports WHERE user_id = $1', [userId]);
     await this.sql.query("UPDATE lineups SET name = '已注销阵容', revision = revision + 1 WHERE user_id = $1", [
       userId,
     ]);

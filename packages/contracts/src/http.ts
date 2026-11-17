@@ -4,6 +4,7 @@ import { VersionIdSchema } from './configuration';
 import { parseNickname } from './game-validation';
 import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
 import { LineupPageQuerySchema, LineupPageSchema, SavedLineupSchema } from './lineups';
+import { LocalImportCommandSchema, LocalImportReceiptSchema, LocalImportStatusSchema } from './local-import';
 import {
   UpgradeQuoteSchema,
   CraftQuoteQuerySchema,
@@ -130,6 +131,19 @@ export const HTTP_CONTRACTS = [
   },
   { method: 'get', path: '/api/v1/me/lineups/{id}', operationId: 'lineup', response: SavedLineupSchema },
   { method: 'get', path: '/api/v1/me/profile', operationId: 'profile', response: UserProfileSchema },
+  {
+    method: 'get',
+    path: '/api/v1/me/local-import',
+    operationId: 'localImportStatus',
+    response: LocalImportStatusSchema,
+  },
+  {
+    method: 'post',
+    path: '/api/v1/me/local-import',
+    operationId: 'importLocalPreferences',
+    body: LocalImportCommandSchema,
+    response: LocalImportReceiptSchema,
+  },
   {
     method: 'get',
     path: '/api/v1/me/cards',

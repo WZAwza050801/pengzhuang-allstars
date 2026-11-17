@@ -172,3 +172,5 @@ async function settleOutcome(outcomeId: string): Promise<void> {
 ## 8. 本地存档迁移
 
 `localStorage` 资料/等级不构成可信资产。DAT-05 只允许迁移设置、可校验的阵容偏好和昵称草稿；卡牌/余额/等级由服务端初始策略产生。导入具备标记与幂等性，不能刷新页面重复获得新手奖励。保留本地练习模式，明确与正式账号资产隔离。
+
+DAT-05 已实现账号页检查/预览/确认与 `GET/POST /me/local-import`，账号域一次性回执；`X-Account-Id` 必须匹配实际会话。非法本地项跳过，阵容只保存本人持有卡 UUID 草稿，不自动覆盖正式阵容/昵称；到期注销移除导入草稿。允许键和具体事务边界见 [local-import.md](../engineering/local-import.md)。
