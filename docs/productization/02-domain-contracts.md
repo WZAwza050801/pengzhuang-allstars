@@ -26,6 +26,7 @@
 | lineups / lineup_slots | id、user_id、name、revision；slot 唯一、owned_card_id 外键；同一阵容不重复卡且符合位置规则 |
 | wallets | user_id、currency、balance>=0、version；user_id+currency 唯一 |
 | asset_ledger | id、user_id、currency、delta、balance_after、reason、source_id、idempotency_key；唯一键限定业务域 |
+| asset_operations | user_id+operation_key 唯一、载荷 hash、成功结果；grant/debit 的 kind+reason+source_id 在用户域内唯一；回执和账本追加式 |
 | matches / match_participants | matchId、mode、configVersion、status、result；参与者 userId、阵容快照、side |
 | match_outcomes | matchId 唯一、final_seq、winner、reason、payload_hash、payload；不可由客户端写入 |
 | match_rewards | matchId+userId+rewardType 唯一，记录结算版本和资产流水关联 |
@@ -45,7 +46,7 @@
 ```sql
 CREATE UNIQUE INDEX match_outcome_once ON match_outcomes (match_id);
 CREATE UNIQUE INDEX reward_once ON match_rewards (match_id, user_id, reward_type);
-CREATE UNIQUE INDEX ledger_intent_once ON asset_ledger (user_id, idempotency_key);
+CREATE UNIQUE INDEX ledger_intent_once ON asset_ledger (user_id, reason, idempotency_key, currency);
 ALTER TABLE wallets ADD CONSTRAINT nonnegative_balance CHECK (balance >= 0);
 CREATE UNIQUE INDEX lineup_slot_once ON lineup_slots (lineup_id, slot);
 ```
@@ -69,6 +70,8 @@ CREATE UNIQUE INDEX lineup_slot_once ON lineup_slots (lineup_id, slot);
 | PATCH /me/profile | nickname、avatarAssetId；revision 乐观锁；不允许改 level/currency/role |
 | GET /me/cards /me/wallet /me/lineups | 服务端资产与阵容 |
 | PUT /me/lineups/:id | ownedCardIds + expectedRevision；验证持有权、五槽顺序/唯一占用；当前沿用任意职业可落位，职业标签是推荐，见 [阵容规则](../engineering/lineups.md) |
+| GET /me/cards/:id/upgrade-quote /me/cards/craft-quote | 服务端当前成本及价格版本；升级 revision 为卡版本，合成为碎片钱包版本，见 [资产操作](../engineering/asset-operations.md) |
+| GET /me/ledger | 本人流水，游标分页，默认 20 / 上限 50；金额十进制字符串，不暴露载荷 hash |
 | POST /me/cards/:id/upgrade | 目标卡、expectedRevision、expectedEconomyVersion、Idempotency-Key；服务端算成本 |
 | POST /me/cards/craft | playerDefId、expectedRevision、expectedEconomyVersion、Idempotency-Key；服务端验证未持有并算碎片成本 |
 | GET /me/matches | 分页战绩；私有完整事件只对本人/获授权管理员开放 |

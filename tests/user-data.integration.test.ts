@@ -207,6 +207,8 @@ describe('user business schema on PostgreSQL', () => {
     });
     const future = await repository.enqueue({ type: 'test.future', aggregateId: 'future', payload: {} });
     const done = await repository.enqueue({ type: 'test.done', aggregateId: 'done', payload: {} });
+    // Other suites leave real events in this disposable cluster; prioritize this fixture within the bounded page.
+    await db.query("UPDATE outbox_events SET next_attempt_at = '1900-01-01T00:00:00Z' WHERE id = $1", [ready]);
     await db.query("UPDATE outbox_events SET next_attempt_at = now() + interval '1 day' WHERE id = $1", [future]);
     await db.query('UPDATE outbox_events SET processed_at = now() WHERE id = $1', [done]);
     const pending = await repository.pendingOutbox();

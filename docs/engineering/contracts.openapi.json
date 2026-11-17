@@ -5,6 +5,497 @@
     "version": "v1"
   },
   "paths": {
+    "/api/v1/me/cards/{id}/upgrade-quote": {
+      "get": {
+        "operationId": "upgradeQuote",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service-specific success envelope; implemented by the corresponding business task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok",
+                    "data",
+                    "requestId"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ok": {
+                      "const": true
+                    },
+                    "data": {
+                      "$schema": "https://json-schema.org/draft/2020-12/schema",
+                      "type": "object",
+                      "properties": {
+                        "ownedCardId": {
+                          "type": "string",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                        },
+                        "playerDefId": {
+                          "type": "string",
+                          "pattern": "^p[0-9]{2,4}$"
+                        },
+                        "currentLevel": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9
+                        },
+                        "nextLevel": {
+                          "type": "integer",
+                          "minimum": 2,
+                          "maximum": 10
+                        },
+                        "coins": {
+                          "type": "string",
+                          "maxLength": 19,
+                          "pattern": "^(0|[1-9][0-9]*)$",
+                          "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                        },
+                        "expectedRevision": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 2147483647
+                        },
+                        "economyVersion": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+                        }
+                      },
+                      "required": [
+                        "ownedCardId",
+                        "playerDefId",
+                        "currentLevel",
+                        "nextLevel",
+                        "coins",
+                        "expectedRevision",
+                        "economyVersion"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INVALID_REQUEST",
+                            "UNAUTHENTICATED",
+                            "FORBIDDEN",
+                            "NOT_FOUND",
+                            "CONFLICT",
+                            "INSUFFICIENT_FUNDS",
+                            "RATE_LIMITED",
+                            "UNAVAILABLE",
+                            "INTERNAL_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string",
+                          "maxLength": 300
+                        },
+                        "retryable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message",
+                        "retryable"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "error",
+                    "requestId"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/cards/craft-quote": {
+      "get": {
+        "operationId": "craftQuote",
+        "parameters": [
+          {
+            "name": "playerDefId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^p[0-9]{2,4}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service-specific success envelope; implemented by the corresponding business task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok",
+                    "data",
+                    "requestId"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ok": {
+                      "const": true
+                    },
+                    "data": {
+                      "$schema": "https://json-schema.org/draft/2020-12/schema",
+                      "type": "object",
+                      "properties": {
+                        "playerDefId": {
+                          "type": "string",
+                          "pattern": "^p[0-9]{2,4}$"
+                        },
+                        "fragments": {
+                          "type": "string",
+                          "maxLength": 19,
+                          "pattern": "^(0|[1-9][0-9]*)$",
+                          "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                        },
+                        "expectedRevision": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 2147483647
+                        },
+                        "economyVersion": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+                        }
+                      },
+                      "required": [
+                        "playerDefId",
+                        "fragments",
+                        "expectedRevision",
+                        "economyVersion"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INVALID_REQUEST",
+                            "UNAUTHENTICATED",
+                            "FORBIDDEN",
+                            "NOT_FOUND",
+                            "CONFLICT",
+                            "INSUFFICIENT_FUNDS",
+                            "RATE_LIMITED",
+                            "UNAVAILABLE",
+                            "INTERNAL_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string",
+                          "maxLength": 300
+                        },
+                        "retryable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message",
+                        "retryable"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "error",
+                    "requestId"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/ledger": {
+      "get": {
+        "operationId": "ledger",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[1-9]|[1-4][0-9]|50)$"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service-specific success envelope; implemented by the corresponding business task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok",
+                    "data",
+                    "requestId"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ok": {
+                      "const": true
+                    },
+                    "data": {
+                      "$schema": "https://json-schema.org/draft/2020-12/schema",
+                      "type": "object",
+                      "properties": {
+                        "entries": {
+                          "maxItems": 50,
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid",
+                                "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                              },
+                              "currency": {
+                                "type": "string",
+                                "enum": [
+                                  "coins",
+                                  "fragments"
+                                ]
+                              },
+                              "delta": {
+                                "anyOf": [
+                                  {
+                                    "type": "string",
+                                    "maxLength": 19,
+                                    "pattern": "^(0|[1-9][0-9]*)$",
+                                    "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "maxLength": 20,
+                                    "pattern": "^-[1-9][0-9]*$"
+                                  }
+                                ]
+                              },
+                              "balanceAfter": {
+                                "type": "string",
+                                "maxLength": 19,
+                                "pattern": "^(0|[1-9][0-9]*)$",
+                                "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 100
+                              },
+                              "sourceId": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "format": "date-time",
+                                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "currency",
+                              "delta",
+                              "balanceAfter",
+                              "reason",
+                              "sourceId",
+                              "createdAt"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "nextCursor": {
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "maxLength": 256
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "entries",
+                        "nextCursor"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INVALID_REQUEST",
+                            "UNAUTHENTICATED",
+                            "FORBIDDEN",
+                            "NOT_FOUND",
+                            "CONFLICT",
+                            "INSUFFICIENT_FUNDS",
+                            "RATE_LIMITED",
+                            "UNAVAILABLE",
+                            "INTERNAL_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string",
+                          "maxLength": 300
+                        },
+                        "retryable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message",
+                        "retryable"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "error",
+                    "requestId"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/me/lineups": {
       "get": {
         "operationId": "lineups",
@@ -3511,6 +4002,15 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "requestBody": {
@@ -3542,7 +4042,154 @@
         },
         "responses": {
           "200": {
-            "description": "Service-specific success envelope; implemented by the corresponding business task"
+            "description": "Service-specific success envelope; implemented by the corresponding business task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok",
+                    "data",
+                    "requestId"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ok": {
+                      "const": true
+                    },
+                    "data": {
+                      "$schema": "https://json-schema.org/draft/2020-12/schema",
+                      "type": "object",
+                      "properties": {
+                        "operationId": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200
+                        },
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "upgrade",
+                            "craft",
+                            "grant",
+                            "debit"
+                          ]
+                        },
+                        "economyVersion": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+                        },
+                        "wallets": {
+                          "maxItems": 2,
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string",
+                                "enum": [
+                                  "coins",
+                                  "fragments"
+                                ]
+                              },
+                              "balance": {
+                                "type": "string",
+                                "maxLength": 19,
+                                "pattern": "^(0|[1-9][0-9]*)$",
+                                "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                              },
+                              "version": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 9007199254740991
+                              }
+                            },
+                            "required": [
+                              "currency",
+                              "balance",
+                              "version"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "cards": {
+                          "maxItems": 50,
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid",
+                                "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                              },
+                              "playerDefId": {
+                                "type": "string",
+                                "pattern": "^p[0-9]{2,4}$"
+                              },
+                              "level": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 10
+                              },
+                              "exp": {
+                                "type": "string",
+                                "maxLength": 19,
+                                "pattern": "^(0|[1-9][0-9]*)$",
+                                "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                              },
+                              "version": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 9007199254740991
+                              },
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "active",
+                                  "disabled"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "playerDefId",
+                              "level",
+                              "exp",
+                              "version",
+                              "status"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "ledgerIds": {
+                          "maxItems": 3,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                          }
+                        }
+                      },
+                      "required": [
+                        "operationId",
+                        "kind",
+                        "economyVersion",
+                        "wallets",
+                        "cards",
+                        "ledgerIds"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request",
@@ -3610,6 +4257,17 @@
     "/api/v1/me/cards/craft": {
       "post": {
         "operationId": "craftCard",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -3644,7 +4302,154 @@
         },
         "responses": {
           "200": {
-            "description": "Service-specific success envelope; implemented by the corresponding business task"
+            "description": "Service-specific success envelope; implemented by the corresponding business task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok",
+                    "data",
+                    "requestId"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ok": {
+                      "const": true
+                    },
+                    "data": {
+                      "$schema": "https://json-schema.org/draft/2020-12/schema",
+                      "type": "object",
+                      "properties": {
+                        "operationId": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200
+                        },
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "upgrade",
+                            "craft",
+                            "grant",
+                            "debit"
+                          ]
+                        },
+                        "economyVersion": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+                        },
+                        "wallets": {
+                          "maxItems": 2,
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string",
+                                "enum": [
+                                  "coins",
+                                  "fragments"
+                                ]
+                              },
+                              "balance": {
+                                "type": "string",
+                                "maxLength": 19,
+                                "pattern": "^(0|[1-9][0-9]*)$",
+                                "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                              },
+                              "version": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 9007199254740991
+                              }
+                            },
+                            "required": [
+                              "currency",
+                              "balance",
+                              "version"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "cards": {
+                          "maxItems": 50,
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid",
+                                "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                              },
+                              "playerDefId": {
+                                "type": "string",
+                                "pattern": "^p[0-9]{2,4}$"
+                              },
+                              "level": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 10
+                              },
+                              "exp": {
+                                "type": "string",
+                                "maxLength": 19,
+                                "pattern": "^(0|[1-9][0-9]*)$",
+                                "description": "Nonnegative PostgreSQL bigint serialized as a decimal string"
+                              },
+                              "version": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 9007199254740991
+                              },
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "active",
+                                  "disabled"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "playerDefId",
+                              "level",
+                              "exp",
+                              "version",
+                              "status"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "ledgerIds": {
+                          "maxItems": 3,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                          }
+                        }
+                      },
+                      "required": [
+                        "operationId",
+                        "kind",
+                        "economyVersion",
+                        "wallets",
+                        "cards",
+                        "ledgerIds"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request",

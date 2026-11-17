@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { MoneySchema } from './money';
+import { OpaqueCursorQuerySchema, ChronologicalCursorSchema } from './pagination';
 
 export const DeviceKindSchema = z.enum(['desktop', 'mobile', 'tablet', 'unknown']);
 export const WechatLoginSchema = z.strictObject({
@@ -27,22 +28,8 @@ export const CurrentUserSchema = z.strictObject({
     .nullable(),
 });
 export type CurrentUser = z.infer<typeof CurrentUserSchema>;
-export const SessionListQuerySchema = z.strictObject({
-  limit: z
-    .string()
-    .regex(/^(?:[1-9]|[1-4][0-9]|50)$/)
-    .optional(),
-  cursor: z
-    .string()
-    .min(1)
-    .max(256)
-    .regex(/^[A-Za-z0-9_-]+$/)
-    .optional(),
-});
-export const SessionCursorSchema = z.strictObject({
-  createdAt: z.iso.datetime().refine((value) => !value.startsWith('0000-'), 'PostgreSQL has no year zero'),
-  id: z.uuid(),
-});
+export const SessionListQuerySchema = OpaqueCursorQuerySchema;
+export const SessionCursorSchema = ChronologicalCursorSchema;
 export const SessionListSchema = z.strictObject({
   sessions: z
     .array(

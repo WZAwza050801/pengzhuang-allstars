@@ -15,7 +15,7 @@ for (const item of HTTP_CONTRACTS) {
     for (const [name, schema] of Object.entries(query.properties ?? {}))
       parameters.push({ name, in: 'query', required: false, schema });
   }
-  if (item.operationId === 'logout')
+  if (['logout', 'upgradeCard', 'craftCard'].includes(item.operationId))
     parameters.push({
       name: 'Idempotency-Key',
       in: 'header',

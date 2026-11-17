@@ -21,11 +21,11 @@
 
 ## 权威与事务接入要求
 
-`packages/game-core/src/economy.ts` 提供不可变纯规则；`tools/economy-simulation.ts` 的 receipt/账本仅为单进程模拟，不代表数据库幂等或账号资产系统已完成。真实账户、鉴权、持有权、并发和持久化由 DAT/ACC/NET 后续任务接入。
+`packages/game-core/src/economy.ts` 提供不可变纯规则；`tools/economy-simulation.ts` 的 receipt/账本仅为单进程模拟。DAT-04 已完成真实账户升级、合成、受信授予/扣除、事务幂等与账本查询，见 [资产操作](asset-operations.md)；正式比赛资格、每日进度和结算由 NET/LIV 接入。
 
-DAT-04 必须在同一数据库事务内锁定用户钱包、卡与进度，校验持有权/revision，执行报价与扣款/发卡，追加流水，写幂等结果和 outbox。任一步失败全部回滚。授予唯一键使用 `(userId, account.starter, starter-v1)`，不能使用当前配置版本。奖励唯一键包括 matchId/userId/rewardType，参与卡每日领取、累计进度、成功序号和钱包变动一起提交。幂等重试需比较载荷 hash，不同载荷复用键应冲突；不能只在内存查重。
+DAT-04 在同一数据库事务内锁定用户、钱包和卡，校验持有权/revision，执行报价与扣款/发卡，追加流水，写幂等结果和 outbox，失败全部回滚。初始授予唯一键使用 `(userId, account.starter, starter-v1)`，不随配置版本重发。后续 NET/LIV 必须将 matchId/userId/rewardType 唯一奖励记录、参与卡每日领取/累计进度/成功序号与资产端口放在同一事务；当前资产端口不代替这些资格校验。数据库回执比较载荷 hash，同键异载荷冲突。
 
-升级和合成的 `expectedEconomyVersion` 对比**当前生效价格版本**，拒绝陈旧报价。奖励则由可信 outcome 绑定的历史 economyVersion 与 GameData 计算，并沿用唯一奖励记录。两类版本不能混用，不允许请求旧版低价升级。HTTP schema/OpenAPI 已定义请求，控制器尚属后续任务。
+升级和合成的 `expectedEconomyVersion` 对比**当前生效价格版本**，拒绝陈旧报价。奖励则由可信 outcome 绑定的历史 economyVersion 与 GameData 计算，并沿用唯一奖励记录。两类版本不能混用，不允许请求旧版低价升级。报价/升级/合成/账本 HTTP 控制器已挂载；内部授予没有玩家写入口。
 
 服务端加载使用 `createBundledEconomyConfiguration()`，校验 schema、引用、GameData 版本、policy hash 及 pricing hash。pricing hash 包含卡的可用状态和稀有度衍生报价，修改这些值也必须提升 economyVersion。同版本改内容时 `balance:economy` 与加载器均拒绝。单局持有冻结配置；热更新/回滚与保留策略在 BAL-07 完成。
 

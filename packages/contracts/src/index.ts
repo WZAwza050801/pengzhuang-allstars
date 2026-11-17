@@ -5,6 +5,7 @@ export * from './accounts';
 export * from './lifecycle';
 export * from './player-data';
 export * from './lineups';
+export * from './economy-operations';
 export * from './configuration';
 export * from './field';
 export * from './field-events';

@@ -58,7 +58,9 @@ export class UserDataRepository {
   constructor(private readonly sql: SqlExecutor) {}
 
   async registerPlayerDefinitions(ids: readonly string[]): Promise<void> {
-    await this.sql.query('INSERT INTO player_definitions(id) SELECT unnest($1::text[]) ON CONFLICT DO NOTHING', [ids]);
+    await this.sql.query('INSERT INTO player_definitions(id) SELECT unnest($1::text[]) ON CONFLICT DO NOTHING', [
+      [...new Set(ids)].sort(),
+    ]);
   }
 
   async createProfile(input: { userId: string; nickname: string; avatarAssetId: string }): Promise<UserProfile> {

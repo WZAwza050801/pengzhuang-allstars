@@ -738,6 +738,22 @@
 - 回滚：独立提交回退，保留已保存数据；若需迁移仅隔离测试 down。
 - 下一项：DAT-04。
 
+### DAT-04
+
+- 状态：完成
+- 开始：2026-11-18 06:51 Asia/Shanghai
+- 负责人：Codex
+- 分支与起始提交：docs/productization-roadmap / f73c167
+- 范围：真实升级/合成报价与事务、内部受信 grant/debit 端口、精确钱包/卡版本/账本/幂等回执/outbox、本人账本分页和有界数据库事务重试；不开放客户端任意加减资产，不改 economy-2 参数。
+- 计划与验收：真实 PostgreSQL/HTTP 验证并发、相同意图跨实例/响应丢失重试、同键异载荷冲突、陈旧价格/卡版本、禁用或非本人卡、余额不足/int64 精度/溢出、事务各阶段故障回滚；模拟 SQLSTATE 及实际锁竞争证明重试有界。
+- 实现：真实升级/合成报价、持有权和价格/revision 校验；用户/会话/钱包/卡锁，同事务写余额/等级/流水/成功回执/outbox；同键同载荷返回历史结果、异载荷冲突，grant/debit 另按业务来源去重。金额 BigInt/int64 字符串，账本本人游标分页、微秒不漏页、历史禁止改删；内部可信端口可组合外层事务，输入与历史配置先复制冻结。
+- 验证：`npm run test:integration` 11 文件/131 项通过（资产 24），包含实际 HTTP/数据库、并发与锁等待、五处写入故障回滚、响应 body 丢失后重试、精度/溢出、真实运行时挂载；注入 SQLSTATE 验证 40P01/40001 最多三次完整事务重试。`npm run check` 122 单元/10 契约、211 文件格式及静态/生成检查通过；build 通过；e2e 18 PASS/0 SKIP/0 FAIL，0 console/pageerror。
+- 必要关联：分页 query/cursor 第三处重复提取公共 schema；定义注册排序避免跨用户注册顺序相反；outbox 旧测试将自己 ready 事件前排以适应真实积压，未改生产 50 条上限。首轮同步抛错和分页测试失败修正后全量通过，既有视觉 assets 模块保持原样。
+- 证据：本提交（`git log -- docs/productization/reports/DAT-04.md` 可定位）、[DAT-04 报告](reports/DAT-04.md)、[资产端口/API 说明](../engineering/asset-operations.md)。
+- 风险与剩余：NET/LIV/ADM 需验证各自来源资格/日上限/RBAC 并组合内部端口；outbox 消费与受控纠正由后续任务完成。真实微信、真机、素材、平衡及依赖审计门槛保留；无新依赖，未使用远端，隔离 PostgreSQL/Mailpit 正常停止。
+- 回滚：独立提交回退；新增 schema down 仅隔离测试，不回退已入账资产。
+- 下一项：DAT-05 / UI-03。
+
 ## 记录模板
 
 复制模板时将示例 ID 改成真实任务。完成记录标题用 `### TASK-ID`，检查器据此核对已勾选任务的完成证据。

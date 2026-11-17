@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { CurrentUserSchema } from './accounts';
 import { MoneySchema } from './money';
+import { PageLimitSchema } from './pagination';
 
 /** Reserved asset for the built-in monogram avatar; arbitrary URLs/uploads are not accepted. */
 export const DEFAULT_AVATAR_ASSET_ID = 'avatar_default';
@@ -15,10 +16,7 @@ export const OwnedCardSchema = z.strictObject({
 });
 export const CardPageQuerySchema = z.strictObject({
   cursor: z.uuid().optional(),
-  limit: z
-    .string()
-    .regex(/^(?:[1-9]|[1-4][0-9]|50)$/)
-    .optional(),
+  limit: PageLimitSchema.optional(),
 });
 export const CardPageSchema = z.strictObject({
   cards: z.array(OwnedCardSchema).max(50),
