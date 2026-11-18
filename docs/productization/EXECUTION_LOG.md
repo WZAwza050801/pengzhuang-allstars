@@ -39,6 +39,22 @@
 
 ## 任务执行记录
 
+### MM-02
+
+- 状态：完成
+- 开始：2026-11-18 23:55 Asia/Shanghai
+- 完成：2026-11-19 00:50 Asia/Shanghai
+- 负责人：Qwen Code
+- 分支与起始提交：docs/productization-roadmap / 2a66bee
+- 范围：版本化简单 Elo（K/初始分/平局/作废规则）、持久积分与段位映射、榜单查询 API、结算事务内幂等积分更新、队列真实积分读取端口；复用 NET-04 可靠结算与 MM-01 队列分组，不改物理/经济/玩法。生产排位保持关闭（展示未就绪，遵守 HANDOFF 门槛），测试经选项启用 ranked/growth 验证真实积分链路。
+- 计划与验收：config/ratings.json（ratings-1，engineering-default）+ 契约 schema；game-core 纯 Elo/段位函数；迁移 ratings/rating_applications（应用记录不可变触发器）；RatingRepository 与 Ratings service（ MatchRatings.applyInTransaction + 队列 read 端口）；/me/rating 与 /ratings/leaderboard API；runtime 装配。真实 PG 验证胜/平/负/认输/作废、同局重复、乱序、同用户并发多场不丢更新、SQL 故障重试幂等、榜单权限与分页、队列按真实积分/赛季分组；完整 check 与相关回归通过后勾选提交。
+- 实现：初始 1000/K32/scale400/下限 0/平局 0.5，段位青铜 0/白银 1100/黄金 1250/铂金 1400/钻石 1600；delta 记录含下限钳制以便账本对账。只对权威+落盘+账号验证+非作废结果计分（复用 classifyModeOutcome），认输计分、作废不创建积分行。rating_applications 以 (match_id,user_id) 主键+不可变触发器；applyInTransaction 先查已应用、按 userId 序锁行、用赛前积分计算、同事务写审计与积分。队列 readForQueue 幂等 provisioning 当前赛季真实积分。榜单 keyset 分页、最小身份（无 userId/邮箱）、非法游标/scope 400、非当前赛季空榜。生产 enabledModes 仍 ['friend']（展示+发布决策门槛），测试经选项启用 ranked/growth。
+- 验证：npm run check 退出 0，207 单元/57 文件、19 契约/8 文件、330 文件格式及全部静态/资源/平衡/规划检查（work/mm02-check.log）。定向集成 tests/ratings.integration.test.ts 9/9、0 跳过（work/mm02-integration.log）。全量集成第二轮 24 文件 332/333、687.79 秒（work/mm02-full-integration-2.log）；唯一失败为 ui-accessibility 既有负载敏感焦点断言，隔离重跑与 WebKit 单测 3/3 重试均绿，客户端与 324/324 验证态逐字节一致，判定非回归（详见报告）。第一轮 331/333 中的 matchmaking 失败系本任务测试复用固定房间码跨用例冲突，改随机码后消除。服务端构建通过；dist+startRuntime 生产冒烟通过（/me/rating 双池 1000/bronze、榜单 200、匿名 401、friend-only 门槛）。
+- 证据：[MM-02 报告](reports/MM-02.md)、[工程说明](../engineering/ratings.md)、tests/ratings.test.ts、tests/ratings.integration.test.ts、迁移 202611180019。代码/测试/勾选/记录同最终提交。
+- 风险与剩余：跨季口径/软重置/历史榜归 MM-03；等待策略/异常归 MM-04；排位展示 UI 与开放决策未做，生产排位保持关闭。下限钳制破坏边界零和（有意取舍，已记录）。无新依赖、无远端资源、无生产迁移。
+- 回滚：停新局并保留 ratings/rating_applications 审计，回退同任务代码；迁移 down 仅隔离测试，不得在有真实积分数据时删表。
+- 完成与交接：MM-02 验收满足，累计 62/112。下一可领取 MM-03（依赖 MM-02）、MM-04（依赖 MM-02）、MM-06（依赖 BAL-04+MM-01）；MM-05 仍待 NET-06。第 70 项为下一 GitHub 同步点。
+
 ### MM-01
 
 - 状态：完成

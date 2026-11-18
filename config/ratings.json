@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "version": "ratings-1",
+  "status": "engineering-default",
+  "season": "season-1",
+  "initialPoints": 1000,
+  "floorPoints": 0,
+  "k": 32,
+  "scale": 400,
+  "tiers": [
+    { "id": "bronze", "label": "青铜", "min": 0 },
+    { "id": "silver", "label": "白银", "min": 1100 },
+    { "id": "gold", "label": "黄金", "min": 1250 },
+    { "id": "platinum", "label": "铂金", "min": 1400 },
+    { "id": "diamond", "label": "钻石", "min": 1600 }
+  ]
+}

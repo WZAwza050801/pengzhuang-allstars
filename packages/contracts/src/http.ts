@@ -3,6 +3,7 @@ import { ACCOUNT_PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../../../sh
 import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
 import { QueueCommandSchema, QueueStatusSchema, QueueOptionsSchema } from './matchmaking';
+import { OwnRatingsSchema, LeaderboardQuerySchema, LeaderboardSchema } from './ratings';
 import { ActiveMatchSchema, ReentryCommandSchema } from './match-recovery';
 import { MatchResultSchema, MatchHistorySchema, MatchHistoryQuerySchema, MatchLedgerSchema } from './match-results';
 import { parseNickname } from './game-validation';
@@ -299,6 +300,14 @@ export const HTTP_CONTRACTS = [
     operationId: 'queueTicket',
     body: ReentryCommandSchema,
     response: MatchTicketResultSchema,
+  },
+  { method: 'get', path: '/api/v1/me/rating', operationId: 'ownRating', response: OwnRatingsSchema },
+  {
+    method: 'get',
+    path: '/api/v1/ratings/leaderboard',
+    operationId: 'ratingLeaderboard',
+    query: LeaderboardQuerySchema,
+    response: LeaderboardSchema,
   },
 ] as const;
 
