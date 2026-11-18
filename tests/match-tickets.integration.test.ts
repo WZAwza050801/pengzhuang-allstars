@@ -1,7 +1,7 @@
 import './node-transport.setup';
 import path from 'node:path';
 import { randomBytes, randomUUID, createHash } from 'node:crypto';
-import { beforeAll, afterAll, expect, test } from 'vitest';
+import { beforeAll, afterAll, expect, test, vi } from 'vitest';
 import { Client, type Room } from 'colyseus.js';
 import { matchMaker } from 'colyseus';
 import { AccountRepository, Database, migrateDatabase } from '@pengzhuang/persistence';
@@ -30,6 +30,7 @@ import { WebSessions } from '../server/api/web-sessions';
 import { MatchTickets, type AccountRoomTarget } from '../server/matches/tickets';
 import { MatchTicketResultSchema } from '../packages/contracts/src/match-tickets';
 import { jsonRequest } from './helpers/json-http';
+import { MatchRoom } from '../server/rooms/MatchRoom';
 
 let db: Database;
 let server: ReturnType<typeof createGameServer>;
@@ -110,6 +111,7 @@ const target = (ticket: Ticket): AccountRoomTarget => ({
   mode: ticket.mode,
   selection: () => undefined,
   canEnter: () => true,
+  recovery: () => undefined,
 });
 const hash = (token: string) => createHash('sha256').update(token).digest('hex');
 async function until<T>(read: () => T | null | undefined | false): Promise<T> {
@@ -512,8 +514,244 @@ test('old account ticket protocol fails closed without consuming its nonce', asy
   ).toBeNull();
 });
 
+async function activeGame(reconnectMs = 60000) {
+  const accounts = [await owner(), await owner()];
+  const restore = MatchRoom.useTiming({ reconnectMs });
+  let first: Ticket;
+  try {
+    first = await issue(accounts[0]);
+  } finally {
+    restore();
+  }
+  const peers = [await join(first!), await join(await issue(accounts[1], first!.roomCode))];
+  peers.forEach((peer) => peer.room.send('ready', { ready: true }));
+  const start = await until(() => peers[0].latest<MatchStartMsg>(S2C.matchStart));
+  return { accounts, peers, start, code: first!.roomCode };
+}
+const activeMatch = (account: Owner, headers = account.headers, suffix = '') =>
+  jsonRequest(origin, `/api/v1/me/active-match${suffix}`, { headers });
+const reentry = (account: Owner, matchId: string, body: unknown = { protocol: 2 }, headers = account.headers) =>
+  jsonRequest(origin, `/api/v1/matches/${matchId}/reentry`, { method: 'POST', headers, body });
+
+test('active matches persist both participants atomically and expose only the authenticated owner recovery', async () => {
+  const outsider = await owner();
+  expect((await activeMatch(outsider)).data.data).toEqual({
+    userId: outsider.principal.userId,
+    state: 'none',
+    match: null,
+  });
+  const game = await activeGame(),
+    [a, b] = game.accounts;
+  const rows = (
+    await db.query(
+      'SELECT m.room_code,m.protocol_version,p.user_id,p.side,p.lineup_snapshot FROM matches m JOIN match_participants p ON p.match_id=m.id WHERE m.id=$1 ORDER BY p.side',
+      [game.start.matchId],
+    )
+  ).rows;
+  expect(rows).toHaveLength(2);
+  expect(rows.map((row) => row.user_id)).toEqual([a.principal.userId, b.principal.userId]);
+  expect(
+    rows.every((row) => row.lineup_snapshot.length === 5 && row.room_code === game.code && row.protocol_version === 2),
+  ).toBe(true);
+  const view = await activeMatch(a);
+  expect(view.headers['cache-control']).toBe('no-store');
+  for (const [path, method] of [
+    ['/api/v1/me/active-match', 'GET'],
+    [`/api/v1/matches/${game.start.matchId}/reentry`, 'POST'],
+  ]) {
+    const cors = await jsonRequest(origin, path, {
+      method: 'OPTIONS',
+      headers: {
+        origin: issuer,
+        'access-control-request-method': method,
+        'access-control-request-headers': 'content-type,x-csrf-token,x-account-id',
+      },
+    });
+    expect(cors.status).toBe(204);
+    expect(cors.headers['access-control-allow-origin']).toBe(issuer);
+  }
+  expect(view.data.data).toMatchObject({
+    userId: a.principal.userId,
+    state: 'available',
+    match: { matchId: game.start.matchId, roomCode: game.code, side: 0, reconnectMs: null },
+  });
+  expect(JSON.stringify(view.data.data)).not.toContain(b.principal.userId);
+  for (const secret of ['ticket', 'seatToken', 'ownedCardId', 'rng', 'sessionId'])
+    expect(JSON.stringify(view.data.data)).not.toContain(secret);
+  expect((await activeMatch(outsider)).data.data.state).toBe('none');
+  expect((await reentry(outsider, game.start.matchId)).status).toBe(404);
+  expect((await reentry(a, randomUUID())).status).toBe(404);
+  expect((await activeMatch(a, a.headers, `?userId=${b.principal.userId}`)).status).toBe(400);
+  expect((await activeMatch(a, { ...a.headers, 'x-account-id': b.principal.userId })).status).toBe(409);
+  expect((await activeMatch(a, { ...a.headers, cookie: '' })).status).toBe(401);
+  for (const extra of [{ userId: b.principal.userId }, { side: 1 }, { lineupId: b.lineup.id }, { protocol: 1 }])
+    expect((await reentry(a, game.start.matchId, { protocol: 2, ...extra })).status).toBe(400);
+  await db.query('UPDATE matches SET protocol_version=1 WHERE id=$1', [game.start.matchId]);
+  expect((await activeMatch(a)).data.data.state).toBe('unavailable');
+  expect((await reentry(a, game.start.matchId)).status).toBe(503);
+  await db.query('UPDATE matches SET protocol_version=2 WHERE id=$1', [game.start.matchId]);
+});
+
+test('fresh-session reentry reuses the original match and lineup after the cloud lineup has changed', async () => {
+  const game = await activeGame(),
+    a = game.accounts[0];
+  await db.query('UPDATE lineups SET revision=revision+1 WHERE id=$1', [a.lineup.id]);
+  await game.peers[0].room.leave(false);
+  await until(() => game.peers[1].latest<RoomSnapshot>(S2C.room)?.seats[0]?.connected === false);
+  expect((await activeMatch(a)).data.data.match.reconnectMs).toBeGreaterThan(0);
+  const csrf = (await jsonRequest(origin, '/api/v1/auth/csrf')).data.data.csrfToken;
+  const credentials = await db.transaction((tx) => sessions.issue(tx, a.principal.userId, csrf));
+  const headers = {
+    ...a.headers,
+    'x-csrf-token': csrf,
+    cookie: `pz_csrf=${csrf}; pz_access=${credentials.accessToken}`,
+  };
+  const response = await reentry(a, game.start.matchId, { protocol: 2 }, headers);
+  expect(response.status).toBe(200);
+  const ticket = MatchTicketResultSchema.parse(response.data.data),
+    resumed = await join(ticket);
+  const snapshot = await until(() => resumed.latest<RoomSnapshot>(S2C.room));
+  expect(snapshot.account).toMatchObject({ userId: a.principal.userId, revision: 0 });
+  expect((await until(() => resumed.latest<{ matchId: string }>(S2C.resume))).matchId).toBe(game.start.matchId);
+  expect(snapshot.seats[0]?.lineup).toEqual(game.start.lineups[0]);
+  await expect(join(ticket)).rejects.toThrow('unauthenticated');
+});
+
+test('revocation and bans are rechecked at recovery discovery, issuance and final consumption', async () => {
+  const game = await activeGame(),
+    a = game.accounts[0],
+    b = game.accounts[1];
+  const beforeBan = await reentry(a, game.start.matchId);
+  expect(beforeBan.status).toBe(200);
+  await db.query("UPDATE users SET status='banned',banned_at=clock_timestamp() WHERE id=$1", [a.principal.userId]);
+  expect((await activeMatch(a)).status).toBe(401);
+  expect((await reentry(a, game.start.matchId)).status).toBe(401);
+  await expect(join(MatchTicketResultSchema.parse(beforeBan.data.data))).rejects.toThrow('unauthenticated');
+  await db.query('UPDATE sessions SET revoked_at=clock_timestamp() WHERE id=$1', [b.principal.sessionId]);
+  expect((await activeMatch(b)).status).toBe(401);
+  expect((await reentry(b, game.start.matchId)).status).toBe(401);
+});
+
+test('recovery windows expire to an explicit terminal state and no new ticket can revive the match', async () => {
+  const game = await activeGame(150),
+    a = game.accounts[0];
+  await game.peers[0].room.leave(false);
+  await vi.waitFor(async () => expect((await activeMatch(a)).data.data.state).toBe('expired'));
+  expect((await reentry(a, game.start.matchId)).status).toBe(404);
+  const record = (await db.query('SELECT recovery_close_reason FROM matches WHERE id=$1', [game.start.matchId]))
+    .rows[0];
+  expect(record.recovery_close_reason).toBe('expired');
+});
+
+test('ended matches retain an explicit recovery marker without pretending rewards were settled', async () => {
+  const game = await activeGame(),
+    a = game.accounts[0];
+  game.peers[0].room.send('surrender', {
+    protocol: 2,
+    matchId: game.start.matchId,
+    configVersion: game.start.configVersion,
+  });
+  await vi.waitFor(async () => expect((await activeMatch(a)).data.data.state).toBe('ended'));
+  expect((await reentry(a, game.start.matchId)).status).toBe(404);
+  const record = (
+    await db.query('SELECT status,result,recovery_close_reason FROM matches WHERE id=$1', [game.start.matchId])
+  ).rows[0];
+  expect(record.status).not.toBe('settled');
+  expect(record.result).toBeNull();
+  expect(record.recovery_close_reason).toBe('ended');
+});
+
+test('a participant-write failure rolls the entire match start back and the same clients can retry', async () => {
+  const a = await owner(),
+    b = await owner(),
+    first = await issue(a);
+  const peers = [await join(first), await join(await issue(b, first.roomCode))];
+  await db.query(`CREATE FUNCTION net03_fail_participant() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN IF NEW.side=1 THEN RAISE EXCEPTION 'injected participant failure'; END IF; RETURN NEW; END $$;
+    CREATE TRIGGER net03_fail_participant BEFORE INSERT ON match_participants FOR EACH ROW EXECUTE FUNCTION net03_fail_participant()`);
+  const logged = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+  try {
+    peers.forEach((peer) => peer.room.send('ready', { ready: true }));
+    await until(() => peers.some((peer) => peer.latest<ErrorMsg>(S2C.error)?.code === 'internal-error'));
+    expect((await db.query('SELECT id FROM matches WHERE room_code=$1', [first.roomCode])).rows).toHaveLength(0);
+    expect((matchMaker.getLocalRoomById(first.roomCode) as MatchRoom).inspect().phase).toBe('lobby');
+    expect(peers[0].latest(S2C.matchStart)).toBeUndefined();
+  } finally {
+    await db.query('DROP TRIGGER net03_fail_participant ON match_participants; DROP FUNCTION net03_fail_participant()');
+    logged.mockRestore();
+  }
+  peers.forEach((peer) => peer.room.send('ready', { ready: true }));
+  const start = await until(() => peers[0].latest<MatchStartMsg>(S2C.matchStart));
+  expect((await activeMatch(a)).data.data.match.matchId).toBe(start.matchId);
+});
+
+test('recovery discovery fails explicitly during a database outage and succeeds on a later bounded user retry', async () => {
+  const game = await activeGame(),
+    a = game.accounts[0];
+  const original = db.transaction.bind(db);
+  const fault = vi.spyOn(db, 'transaction').mockRejectedValueOnce(new Error('private database detail'));
+  const failed = await activeMatch(a);
+  expect(failed.status).toBe(503);
+  expect(JSON.stringify(failed.data)).not.toContain('private database detail');
+  fault.mockImplementation(original);
+  fault.mockRestore();
+  expect((await activeMatch(a)).data.data.state).toBe('available');
+});
+
+test('leaving during the persisted start aborts that match instead of creating an orphan active seat', async () => {
+  const a = await owner(),
+    b = await owner(),
+    first = await issue(a);
+  const peers = [await join(first), await join(await issue(b, first.roomCode))];
+  let release!: () => void,
+    entered = false;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const original = tickets.recovery.started.bind(tickets.recovery);
+  const delayed = vi.spyOn(tickets.recovery, 'started').mockImplementationOnce(async (input) => {
+    entered = true;
+    await gate;
+    return original(input);
+  });
+  try {
+    peers.forEach((peer) => peer.room.send('ready', { ready: true }));
+    await until(() => entered);
+    await peers[1].room.leave(false);
+    release();
+    await vi.waitFor(async () => expect((await activeMatch(a)).data.data.state).toBe('expired'));
+    expect((matchMaker.getLocalRoomById(first.roomCode) as MatchRoom).inspect()).toMatchObject({
+      phase: 'lobby',
+      match: null,
+    });
+    expect(peers[0].latest(S2C.matchStart)).toBeUndefined();
+    const replacement = await join(await issue(b, first.roomCode));
+    peers[0].room.send('ready', { ready: true });
+    replacement.room.send('ready', { ready: true });
+    const start = await until(() => peers[0].latest<MatchStartMsg>(S2C.matchStart));
+    expect((await activeMatch(a)).data.data.match.matchId).toBe(start.matchId);
+  } finally {
+    release();
+    delayed.mockRestore();
+  }
+});
+
+test('a more recent completed match does not hide an older match that is still recoverable', async () => {
+  const game = await activeGame(),
+    a = game.accounts[0],
+    other = await owner();
+  const second = await issue(a),
+    peers = [await join(second), await join(await issue(other, second.roomCode))];
+  peers.forEach((peer) => peer.room.send('ready', { ready: true }));
+  const start = await until(() => peers[0].latest<MatchStartMsg>(S2C.matchStart));
+  peers[0].room.send('surrender', { protocol: 2, matchId: start.matchId, configVersion: start.configVersion });
+  await until(() => peers[0].latest<RoomSnapshot>(S2C.room)?.phase === 'ended');
+  expect((await activeMatch(a)).data.data.match.matchId).toBe(game.start.matchId);
+  expect((await reentry(a, game.start.matchId)).status).toBe(200);
+});
+
 test('production runtime mounts real ticket issuance and account room authentication', async () => {
   const account = await owner();
+  const previous = await activeGame();
   await server.close();
   server = await startRuntime(
     readRuntimeConfig({
@@ -530,6 +768,8 @@ test('production runtime mounts real ticket issuance and account room authentica
   if (!address || typeof address === 'string') throw new Error('No runtime port');
   origin = `http://127.0.0.1:${address.port}`;
   sdk = new Client(origin.replace('http:', 'ws:'));
+  expect((await activeMatch(previous.accounts[0])).data.data.state).toBe('unavailable');
+  expect((await reentry(previous.accounts[0], previous.start.matchId)).status).toBe(503);
   const ticket = await issue(account),
     connection = await join(ticket);
   expect((await until(() => connection.latest<RoomSnapshot>(S2C.room))).account?.userId).toBe(account.principal.userId);

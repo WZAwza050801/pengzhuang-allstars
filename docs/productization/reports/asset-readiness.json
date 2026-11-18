@@ -1894,7 +1894,7 @@
   },
   "web": {
     "scope": "Filesystem JS/CSS/worker and public-resource totals; not measured first-screen transfer or device GPU memory",
-    "applicationBytes": 1627513,
+    "applicationBytes": 1631035,
     "publicBytes": 14086896,
     "catalogBytes": 247454,
     "packages": [

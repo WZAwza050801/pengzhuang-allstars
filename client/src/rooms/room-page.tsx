@@ -15,6 +15,8 @@ import { rulesForMode, describeModeRules } from '../../../config/modes';
 import { useAccount } from '../accounts/context';
 import { OnlineHost, type OnlineStatus } from '../onlineHost';
 import { RoomMatchView } from './match-view';
+import { ActiveMatchPanel } from './recovery-panel';
+import type { RecoverableMatch } from '../../../packages/contracts/src/match-recovery';
 import styles from './rooms.module.css';
 
 export function RoomPage({
@@ -65,6 +67,7 @@ export function RoomPage({
     void readInventory(services!.api, user.userId).then((result) => {
       if (!active) return;
       setLoading(false);
+      if (host.current) return;
       if (!result.ok) {
         setError(roomFailureText(result.error.code));
         return;
@@ -99,10 +102,11 @@ export function RoomPage({
     host.current = null;
     navigate('/');
   };
-  const connect = async () => {
-    if (busy.current || !ready || !lineup || !usable) return;
-    const target = code.trim() ? normalizeRoomCode(code) : undefined;
-    if (code.trim() && !target) {
+  const connect = async (recovery?: RecoverableMatch) => {
+    if (busy.current || (recovery ? !authorized || context.service === 'outdated' : !ready || !lineup || !usable))
+      return;
+    const target = recovery?.roomCode ?? (code.trim() ? normalizeRoomCode(code) : undefined);
+    if (!recovery && code.trim() && !target) {
       setError('请输入正确的 6 位房间码。');
       return;
     }
@@ -122,13 +126,15 @@ export function RoomPage({
           userId: user.userId,
           async issueTicket(roomCode) {
             if (!sameAccount()) return { ok: false, error: { code: 'ACCOUNT_CHANGED', retryable: false } };
-            const response = await services!.api.roomTicket(user.userId, {
-              protocol: ACCOUNT_PROTOCOL_VERSION,
-              mode: 'friend',
-              lineupId: lineup.id,
-              expectedRevision: lineup.revision,
-              ...(roomCode ? { roomCode } : {}),
-            });
+            const response = recovery
+              ? await services!.api.reenterMatch(user.userId, recovery.matchId, { protocol: ACCOUNT_PROTOCOL_VERSION })
+              : await services!.api.roomTicket(user.userId, {
+                  protocol: ACCOUNT_PROTOCOL_VERSION,
+                  mode: 'friend',
+                  lineupId: lineup!.id,
+                  expectedRevision: lineup!.revision,
+                  ...(roomCode ? { roomCode } : {}),
+                });
             return sameAccount() ? response : { ok: false, error: { code: 'ACCOUNT_CHANGED', retryable: false } };
           },
         },
@@ -222,6 +228,12 @@ export function RoomPage({
       )}
       {error && <p role="alert">{error}</p>}
       {notice && <p role="status">{notice}</p>}
+      {!host.current && (
+        <ActiveMatchPanel
+          disabled={!authorized || context.service === 'outdated' || status === 'connecting'}
+          onResume={(match) => void connect(match)}
+        />
+      )}
       {!connected ? (
         <div className={styles.setup}>
           <label>

@@ -78,10 +78,7 @@ async function seed(context: BrowserContext) {
   ]);
   return { userId: user.id };
 }
-async function pageIn({ width = 390, height = 844, touch = false, anonymous = false } = {}) {
-  const context = await browser.newContext({ viewport: { width, height }, hasTouch: touch });
-  const account = anonymous ? null : await seed(context);
-  const page = await context.newPage();
+function observe(page: Page) {
   page.setDefaultTimeout(10000);
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => {
@@ -91,6 +88,12 @@ async function pageIn({ width = 390, height = 844, touch = false, anonymous = fa
     )
       errors.push(message.text());
   });
+}
+async function pageIn({ width = 390, height = 844, touch = false, anonymous = false } = {}) {
+  const context = await browser.newContext({ viewport: { width, height }, hasTouch: touch });
+  const account = anonymous ? null : await seed(context);
+  const page = await context.newPage();
+  observe(page);
   return { context, page, account };
 }
 type Actor = Awaited<ReturnType<typeof pageIn>>;
@@ -570,6 +573,94 @@ test('a public maintenance announcement does not freeze input in an already auth
     await game.close();
   }
 });
+
+test('refresh recovery uses the original match despite a newer lineup and obtains a new ticket after a network drop', async () => {
+  const game = await pair();
+  try {
+    const matchId = room(game.code).inspect().matchId,
+      before = room(game.code).inspect().seq;
+    await db.query('UPDATE lineups SET revision=revision+1 WHERE user_id=$1', [game.a.account!.userId]);
+    const requests: unknown[] = [];
+    game.a.page.on('request', (request) => {
+      if (request.url().endsWith(`/${matchId}/reentry`)) requests.push(request.postDataJSON());
+    });
+    game.a.page.once('dialog', (dialog) => void dialog.accept());
+    await game.a.page.reload();
+    await visible(game.a.page.getByRole('button', { name: '恢复对局', exact: true })).toBeEnabled();
+    await game.a.page.getByRole('button', { name: '恢复对局', exact: true }).click();
+    await visible(game.a.page.locator('.stage canvas')).toBeVisible();
+    await visible.poll(() => state(game.a.page)).toBeTruthy();
+    expect(room(game.code).inspect()).toMatchObject({ matchId, seq: before });
+    expect(requests).toEqual([{ protocol: 2 }]);
+    expect(new URL(game.a.page.url()).search).toBe('');
+    const active = room(game.code) as unknown as {
+      seats: { account?: { userId: string }; client?: { leave(code: number): void } }[];
+    };
+    active.seats.find((seat) => seat.account?.userId === game.a.account!.userId)!.client!.leave(1012);
+    await visible.poll(() => requests.length).toBeGreaterThan(1);
+    await visible.poll(() => game.a.page.getByText('账号好友赛 · 服务端计时', { exact: true }).isVisible()).toBe(true);
+    expect(room(game.code).inspect().matchId).toBe(matchId);
+    expect(requests.every((body) => JSON.stringify(body) === '{"protocol":2}')).toBe(true);
+  } finally {
+    await game.close();
+  }
+});
+
+test('a killed browser process recovers its own match from a fresh process using login cookies alone', async () => {
+  const previousServer = await chromium.launchServer({ headless: true });
+  let nextServer: Awaited<ReturnType<typeof chromium.launchServer>> | undefined;
+  let killed = false;
+  const partner = await pageIn();
+  try {
+    const previous = await chromium.connect(previousServer.wsEndpoint());
+    const context = await previous.newContext({ viewport: { width: 390, height: 844 } });
+    const account = await seed(context),
+      page = await context.newPage();
+    observe(page);
+    const actor = { context, page, account };
+    const code = await create(actor);
+    await join(partner, code);
+    await kickoff(actor, partner);
+    const matchId = room(code).inspect().matchId,
+      seq = room(code).inspect().seq;
+    const cookies = (await context.storageState()).cookies;
+    const oldPid = previousServer.process().pid;
+    await previousServer.kill();
+    killed = true;
+    nextServer = await chromium.launchServer({ headless: true });
+    expect(nextServer.process().pid).not.toBe(oldPid);
+    const next = await chromium.connect(nextServer.wsEndpoint());
+    const clean = await next.newContext({
+      storageState: { cookies, origins: [] },
+      viewport: { width: 390, height: 844 },
+    });
+    const fresh = await clean.newPage();
+    observe(fresh);
+    await fresh.goto(origin);
+    await visible(fresh.getByRole('link', { name: '继续对局', exact: true })).toBeVisible();
+    await fresh.getByRole('link', { name: '继续对局', exact: true }).click();
+    await visible(fresh.getByRole('button', { name: '恢复对局', exact: true })).toBeEnabled();
+    await fresh.setViewportSize({ width: 320, height: 700 });
+    expect(
+      await fresh.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth),
+    ).toBe(true);
+    await fresh.screenshot({ path: path.join(screenshots, 'net03-recovery-prompt.png') });
+    await fresh.getByRole('button', { name: '恢复对局', exact: true }).click();
+    await visible(fresh.locator('.stage canvas')).toBeVisible();
+    await visible.poll(() => state(fresh)).toBeTruthy();
+    expect(await fresh.evaluate(() => (window as unknown as { __pz: Automation }).__pz.mySides())).toEqual([0]);
+    expect(room(code).inspect()).toMatchObject({ matchId, seq });
+    expect(
+      await fresh.evaluate(() => Object.keys(localStorage).some((key) => /ticket|seatToken|active.?match/i.test(key))),
+    ).toBe(false);
+    await fresh.screenshot({ path: path.join(screenshots, 'net03-new-process-recovery.png') });
+    await clean.close();
+  } finally {
+    await nextServer?.close();
+    if (!killed) await previousServer.close();
+    await partner.context.close();
+  }
+}, 60000);
 
 test('room browser runtime has no unexpected console or page errors', () => {
   expect(errors).toEqual([]);

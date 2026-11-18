@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { ACCOUNT_PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
+import { ActiveMatchSchema, ReentryCommandSchema } from './match-recovery';
 import { parseNickname } from './game-validation';
 import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
 import { LineupPageQuerySchema, LineupPageSchema, SavedLineupSchema } from './lineups';
@@ -107,6 +108,14 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(ACCOUNT_PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
+  { method: 'get', path: '/api/v1/me/active-match', operationId: 'activeMatch', response: ActiveMatchSchema },
+  {
+    method: 'post',
+    path: '/api/v1/matches/{id}/reentry',
+    operationId: 'reenterMatch',
+    body: ReentryCommandSchema,
+    response: MatchTicketResultSchema,
+  },
   { method: 'get', path: '/api/v1/config/manifest', operationId: 'publicManifest', response: PublicManifestSchema },
   { method: 'get', path: '/api/v1/announcements', operationId: 'announcements', response: LobbyContentSchema },
   { method: 'get', path: '/api/v1/me/lobby', operationId: 'lobbyAccount', response: LobbyAccountSchema },

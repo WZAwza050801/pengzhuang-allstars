@@ -75,6 +75,7 @@ files.push(
   'client/src/rooms/route.tsx',
   'client/src/rooms/room-page.tsx',
   'client/src/rooms/match-view.tsx',
+  'client/src/rooms/recovery-panel.tsx',
   'client/src/rooms/rooms.module.css',
   'client/src/inventory/editor.tsx',
   'client/src/inventory/use-editor.ts',

@@ -9,7 +9,7 @@ import type { MatchTickets, AccountRooms, AccountRoomTarget, AccountMode } from 
 import type { GameData } from '../../shared/data';
 import type { ServerClock } from '../clock';
 
-/** A bounded, in-process room directory. Cross-process discovery/recovery is deliberately deferred to NET-03/05. */
+/** A bounded, in-process room directory. Server-process takeover is deferred to NET-05. */
 export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, options: { maxRooms?: number; simulateShot?: MatchSimulator } = {}) {
   type Setup = { code: string; data: GameData; mode: AccountMode };
   const grants = new Map<string, Setup>();
@@ -31,6 +31,8 @@ export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, op
       grants.delete(key as string);
       return {
         ...setup,
+        recordStart: (input: Parameters<typeof tickets.recovery.started>[0]) => tickets.recovery.started(input),
+        recordClose: (matchId: string, reason: 'ended' | 'abandoned' | 'expired') => tickets.recovery.closed(matchId, reason),
         admit: async (options: unknown) => {
           const input = AccountRoomJoinSchema.safeParse(options);
           if (!input.success) throw netError('unauthenticated');
@@ -78,7 +80,7 @@ export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, op
       const key = randomUUID();
       const setup = { code, data, mode };
       grants.set(key, setup);
-      const pending: AccountRoomTarget = { ...setup, selection: () => undefined, canEnter: () => true };
+      const pending: AccountRoomTarget = { ...setup, selection: () => undefined, canEnter: () => true, recovery: () => undefined };
       return {
         target: pending,
         async create() {

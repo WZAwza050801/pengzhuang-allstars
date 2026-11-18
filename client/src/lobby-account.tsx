@@ -7,6 +7,7 @@ import { usePublicLobby } from './lobby-context';
 import type { NavigateTarget } from './webScreens';
 import styles from './webShell.module.css';
 import { Link } from 'react-router';
+import { ActiveMatchPanel } from './rooms/recovery-panel';
 
 export function LobbyAccountPanel({ onNavigate }: { onNavigate: NavigateTarget }) {
   const { services, login, unavailable } = useAccount();
@@ -118,6 +119,7 @@ function SignedInLobby({ onExpired }: { onExpired(): void }) {
           <p>可在“阵容”查看持有卡、保存阵容并确认升级。</p>
         </>
       )}
+      <ActiveMatchPanel />
       <div className={styles.actions}>
         <button
           className="pz-button"

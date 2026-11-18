@@ -46,6 +46,7 @@ import type { UpgradeIntent } from '../../client-model/src/upgrade-intent';
 import { PublicManifestSchema, LobbyContentSchema, LobbyAccountSchema } from '../../contracts/src/lobby';
 import { MatchTicketSchema } from '../../contracts/src/http';
 import { MatchTicketResultSchema } from '../../contracts/src/match-tickets';
+import { ActiveMatchSchema, ReentryCommandSchema } from '../../contracts/src/match-recovery';
 import {
   LocalImportCommandSchema,
   LocalImportReceiptSchema,
@@ -174,6 +175,23 @@ export class WebAccountClient implements AccountPort {
       return { ok: false as const, error: { code: 'INVALID_REQUEST' as const, retryable: false } };
     return this.protected(() =>
       this.write('/matches/tickets', MatchTicketResultSchema, {
+        method: 'POST',
+        body: input.data,
+        headers: { 'X-Account-Id': userId },
+      }),
+    );
+  }
+  activeMatch(userId: string) {
+    return this.readAccount(userId, '/me/active-match', ActiveMatchSchema).then((result) =>
+      result.ok && result.data.userId !== userId ? invalid : result,
+    );
+  }
+  reenterMatch(userId: string, matchId: string, body: unknown) {
+    const input = ReentryCommandSchema.safeParse(body);
+    if (!z.uuid().safeParse(userId).success || !z.uuid().safeParse(matchId).success || !input.success)
+      return Promise.resolve(invalid);
+    return this.protected(() =>
+      this.write(`/matches/${matchId}/reentry`, MatchTicketResultSchema, {
         method: 'POST',
         body: input.data,
         headers: { 'X-Account-Id': userId },

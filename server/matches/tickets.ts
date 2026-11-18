@@ -10,6 +10,9 @@ import type { Lineups } from '../accounts/lineups';
 import { ApiError } from '../api/http';
 import type { GameData } from '../../shared/data';
 import { ACCOUNT_PROTOCOL_VERSION } from '../../shared/protocol';
+import type { Phase } from '../../shared/protocol';
+import { MatchRecovery } from './recovery';
+import { ReentryCommandSchema } from '../../packages/contracts/src/match-recovery';
 
 export type OwnedLineupSnapshot = Awaited<ReturnType<Lineups['snapshotInTransaction']>>;
 export type AccountMode = z.infer<typeof MatchTicketSchema>['mode'];
@@ -26,6 +29,7 @@ export interface AccountRoomTarget {
   /** Returns the existing frozen snapshot on authorized in-process re-entry. */
   selection(userId: string): OwnedLineupSnapshot | undefined;
   canEnter(userId: string): boolean;
+  recovery(userId: string): { matchId: string; side: 0 | 1; phase: Phase; reconnectMs: number | null } | undefined;
 }
 export interface AccountRoomLease {
   target: AccountRoomTarget;
@@ -39,11 +43,21 @@ export interface AccountRooms {
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 
 export class MatchTickets {
+  readonly recovery: MatchRecovery;
   constructor(
     private readonly db: Database,
     private readonly lineups: Lineups,
     private readonly resolveData: () => GameData,
-  ) {}
+  ) { this.recovery = new MatchRecovery(db); }
+  async reenter(principal: Principal, matchId: string, raw: unknown, rooms: AccountRooms) {
+    if (!ReentryCommandSchema.safeParse(raw).success) throw new ApiError('INVALID_REQUEST', 400);
+    const active = await this.recovery.read(principal, rooms, matchId);
+    if (active.state === 'unavailable') throw new ApiError('UNAVAILABLE', 503, true);
+    if (active.state !== 'available') throw new ApiError('NOT_FOUND', 404);
+    const snapshot = rooms.find(active.match.roomCode)?.selection(principal.userId);
+    if (!snapshot) throw new ApiError('NOT_FOUND', 404);
+    return this.issue(principal, { protocol: ACCOUNT_PROTOCOL_VERSION, mode: active.match.mode, roomCode: active.match.roomCode, lineupId: snapshot.lineupId, expectedRevision: snapshot.revision }, rooms);
+  }
   async issue(principal: Principal, raw: unknown, rooms: AccountRooms) {
     if (typeof raw === 'object' && raw !== null && 'protocol' in raw && raw.protocol !== ACCOUNT_PROTOCOL_VERSION)
       throw new ApiError('PROTOCOL_UNSUPPORTED', 426);

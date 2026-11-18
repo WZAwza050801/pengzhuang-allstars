@@ -16,7 +16,7 @@ OnlineHost 的 account port 使用 WebAccountClient 签发票据，再以 `{prot
 
 RoomPage 按 userId/sessionId 独立持有 Host；GameView 通过 `hostLifetime: owner` 借用，StrictMode 重挂载或重试画面只释放视图资源，不误关账号连接。离开页面/切号由 owner 关闭 Host，清定时器和回调。已知房间码的同账号手动重入收到首个 resume 时也会挂载比赛，并只替换本人的旧连接。
 
-这不等于 NET-03：没有 active-match 自动发现、阵容已更新后的通用刷新恢复、跨进程参与关系或重启接管。重入仍须满足 NET-01 的原阵容 revision/窗口约束。当前缺少这些能力时不承诺杀进程后自动回局。
+NET-03 已新增 [本人对局查询与恢复入口](match-recovery.md)：刷新/杀客户端后可从大厅发现原比赛，使用冻结阵容换取新票，当前云阵容 revision 不再阻断恢复。NET-01 的手动入场仍保留原约束；服务端重启快照接管留给 NET-05，不把客户端恢复当成服务端恢复。
 
 ## 输入、时钟和状态
 

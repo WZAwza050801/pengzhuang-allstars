@@ -48,6 +48,7 @@ import { isRecord, parseReady, parseSetLineup, parseShotMessage, parseSkin, pars
 import { ShotReceipts } from '../matches/shot-receipts';
 import { RoomCommandQueue } from '../matches/command-queue';
 import { boundedShotPacket, SurrenderV2Schema } from '../../packages/contracts/src/match-wire';
+import type { AccountMatchStart } from '../matches/recovery';
 
 export type MatchSimulator = (state: MatchState, data: GameData, input: ShotInput) => ReturnType<typeof resolveShot> | Promise<ReturnType<typeof resolveShot>>;
 
@@ -119,7 +120,7 @@ export function allocateRoomCode(used: Set<string>, pick: (max: number) => numbe
 /** One 1v1 match. The server owns every rule decision; clients only send intents. */
 export class MatchRoom extends Room {
   /** Only server-side room factories can supply this setup; it is never decoded from client options. */
-  protected accountCreation(_options: unknown): { code: string; data: GameData; mode: AccountMode; admit(options: unknown): Promise<AccountIdentity> } | null { return null; }
+  protected accountCreation(_options: unknown): { code: string; data: GameData; mode: AccountMode; admit(options: unknown): Promise<AccountIdentity>; recordStart(input: AccountMatchStart): Promise<void>; recordClose(matchId: string, reason: 'ended' | 'abandoned' | 'expired'): Promise<void> } | null { return null; }
   private accountSetup: ReturnType<MatchRoom['accountCreation']> = null;
   private static readonly usedCodes = new Set<string>();
   private static readonly pendingRestores = new Map<string, RoomRecord>();
@@ -326,6 +327,12 @@ export class MatchRoom extends Room {
     if (!this.accountSetup) return undefined;
     return { code: this.code, data: this.data, mode: this.accountSetup.mode,
       selection: (userId) => this.seats.find((seat) => seat?.account?.userId === userId)?.account?.snapshot,
+      recovery: (userId) => {
+        const side = this.seats.findIndex((seat) => seat?.account?.userId === userId);
+        if (side < 0 || !this.matchId || !this.match) return undefined;
+        const seat = this.seats[side]!;
+        return { matchId: this.matchId, side: side as Side, phase: this.phase, reconnectMs: seat.windowEnd === null ? null : Math.max(0, Math.ceil(seat.windowEnd - this.time.nowMs())) };
+      },
       canEnter: (userId) => {
         const seat = this.seats.find((entry) => entry?.account?.userId === userId);
         return seat ? this.phase !== 'ended' && (seat.connected || seat.windowEnd === null || seat.windowEnd > this.time.nowMs())
@@ -409,7 +416,7 @@ export class MatchRoom extends Room {
     this.broadcastRoom();
   }
 
-  private handleReady(client: Client, raw: unknown): void {
+  private async handleReady(client: Client, raw: unknown): Promise<void> {
     const parsed = parseReady(raw);
     if (!parsed.ok) return this.sendError(client, parsed.code, C2S.ready);
     const side = this.seatOf(client);
@@ -417,19 +424,28 @@ export class MatchRoom extends Room {
     if (this.phase !== 'lobby') return this.sendError(client, 'match-already-started', C2S.ready);
     this.seats[side]!.ready = parsed.value.ready;
     const [a, b] = this.seats;
-    if (a && b && a.connected && b.connected && a.ready && b.ready) this.startMatch(a, b);
+    if (a && b && a.connected && b.connected && a.ready && b.ready) await this.startMatch(a, b);
     else this.broadcastRoom();
   }
 
-  private startMatch(a: Seat, b: Seat): void {
+  private async startMatch(a: Seat, b: Seat): Promise<void> {
+    const seed = randomInt(0x100000000), matchId = randomUUID();
+    const st = createMatch(this.data, [a.lineup, b.lineup], { seed, levels: [a.levels, b.levels] });
+    const turnEvents = beginTurn(st, this.data);
+    if (this.accountSetup) {
+      try {
+        await this.accountSetup.recordStart({ matchId, roomCode: this.code, mode: this.accountSetup.mode, configVersion: this.data.version, participants: ([a, b] as const).map((seat, side) => ({ userId: seat.account!.userId, sessionId: seat.account!.authSessionId, side: side as Side, cards: seat.account!.snapshot.cards })) });
+      } catch (error) {
+        this.resetReady(); if (!this.disposed) this.broadcastRoom(); throw error;
+      }
+      if (this.disposed || this.seats[0] !== a || this.seats[1] !== b || !a.connected || !b.connected || !a.ready || !b.ready) {
+        await this.accountSetup.recordClose(matchId, 'abandoned'); return;
+      }
+    }
     this.revision = 0;
     this.receipts = new ShotReceipts();
-    this.seed = randomInt(0x100000000);
-    this.matchId = randomUUID();
-    this.seq = 0;
+    this.seed = seed; this.matchId = matchId; this.seq = 0;
     this.accepted.clear();
-    const st = createMatch(this.data, [a.lineup, b.lineup], { seed: this.seed, levels: [a.levels, b.levels] });
-    const turnEvents = beginTurn(st, this.data);
     this.match = st;
     this.phase = 'playing';
     // The room has to outlive its clients: a dropped seat can come back, and the clocks keep running with nobody connected.
@@ -475,11 +491,11 @@ export class MatchRoom extends Room {
     if (received.revision !== this.revision || (this.accountSetup && msg.revision !== this.revision)) return this.sendError(client, this.accountSetup ? 'stale-state' : 'stale-turn', C2S.shot, ref);
     if (received.at >= this.matchDeadline) {
       if (this.matchTimer) clearTimeout(this.matchTimer);
-      this.onMatchClock(); return this.sendError(client, 'match-over', C2S.shot, ref);
+      await this.onMatchClock(); return this.sendError(client, 'match-over', C2S.shot, ref);
     }
     if (this.turnDeadline !== null && received.at >= this.turnDeadline) {
       if (this.turnTimer) clearTimeout(this.turnTimer);
-      this.onTurnTimeout(); return this.sendError(client, 'stale-turn', C2S.shot, ref);
+      await this.onTurnTimeout(); return this.sendError(client, 'stale-turn', C2S.shot, ref);
     }
     const verdict = validateShot(st, this.data, side, msg.input);
     if (verdict !== null) return this.sendError(client, isNetErrorCode(verdict) ? verdict : 'internal-error', C2S.shot, ref);
@@ -519,12 +535,12 @@ export class MatchRoom extends Room {
       this.broadcast(S2C.shotPacket, packet);
       if (this.accountSetup) client.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ref, seq: this.seq, acceptedRevision: this.revision, duplicate: false });
     } finally {
-      if (work.over) this.finishMatch();
+      if (work.over) await this.finishMatch();
       else this.persist();
     }
   }
 
-  private handleSurrender(client: Client, raw: unknown): void {
+  private async handleSurrender(client: Client, raw: unknown): Promise<void> {
     const parsed = this.accountSetup ? SurrenderV2Schema.safeParse(raw) : null;
     if (this.accountSetup && !parsed?.success) return this.sendError(client, 'bad-message', C2S.surrender);
     if (!this.accountSetup) {
@@ -538,19 +554,19 @@ export class MatchRoom extends Room {
     if (parsed?.success && parsed.data.matchId !== this.matchId) return this.sendError(client, 'stale-match', C2S.surrender);
     if (parsed?.success && parsed.data.configVersion !== this.data.version) return this.sendError(client, 'config-mismatch', C2S.surrender);
     if (this.phase === 'ended' || st.over) return this.sendError(client, 'match-over', C2S.surrender);
-    this.pushUpdate(this.apply((s) => forfeit(s, side, 'surrender')));
+    await this.pushUpdate(this.apply((s) => forfeit(s, side, 'surrender')));
   }
 
-  private onTurnTimeout(): void {
+  private async onTurnTimeout(): Promise<void> {
     this.turnTimer = null;
     const st = this.match;
     if (this.phase !== 'playing' || !st || st.over) return;
     const events = this.apply((s) => passTurn(s, this.data, 'timeout'));
     if (!this.match!.over) this.armTurn(this.timing.turnMs);
-    this.pushUpdate(events);
+    await this.pushUpdate(events);
   }
 
-  private onMatchClock(): void {
+  private async onMatchClock(): Promise<void> {
     this.matchTimer = null;
     const st = this.match;
     if (this.phase !== 'playing' || !st || st.over) return;
@@ -561,10 +577,10 @@ export class MatchRoom extends Room {
       this.armMatch(left);
       return;
     }
-    this.pushUpdate(this.apply((s) => endByTime(s)));
+    await this.pushUpdate(this.apply((s) => endByTime(s)));
   }
 
-  private onWindowExpired(side: Side): void {
+  private async onWindowExpired(side: Side): Promise<void> {
     const seat = this.seats[side];
     if (!seat) return;
     seat.window = null;
@@ -572,8 +588,8 @@ export class MatchRoom extends Room {
     const st = this.match;
     if (this.phase !== 'playing' || seat.connected || !st || st.over) return;
     const other = this.seats[side === 0 ? 1 : 0];
-    if (other?.connected) this.pushUpdate(this.apply((s) => forfeit(s, side, 'disconnect')));
-    else this.abandon();
+    if (other?.connected) await this.pushUpdate(this.apply((s) => forfeit(s, side, 'disconnect')));
+    else await this.abandon();
   }
 
   /** Runs `change` on a clone and keeps the result only if it did not throw. */
@@ -586,18 +602,24 @@ export class MatchRoom extends Room {
   }
 
   /** A state change that is not a shot (timeout, surrender, forfeit, match clock). */
-  private pushUpdate(events: MatchEvent[]): void {
+  private async pushUpdate(events: MatchEvent[]): Promise<void> {
     const update: UpdateMsg = { ...this.stamp(), matchId: this.matchId, events, state: this.wireState(), clocks: this.clocks(), outcome: this.outcome() };
     try { this.broadcast(S2C.update, update); }
     finally {
-      if (this.match!.over) this.finishMatch();
+      if (this.match!.over) await this.finishMatch();
       else this.persist();
     }
   }
 
-  private finishMatch(): void {
+  private async finishMatch(): Promise<void> {
     this.phase = 'ended';
     this.clearTimers();
+    try { await this.accountSetup?.recordClose(this.matchId, this.match!.endReason === 'disconnect' ? 'expired' : 'ended'); }
+    finally { this.releaseEndedRoom(); }
+  }
+
+  private releaseEndedRoom(): void {
+    if (this.disposed) return;
     // Nobody is kicked: the players stay to read the result and the room goes away with the last one. With nobody left, now.
     this.autoDispose = true;
     this.store?.remove(this.code);
@@ -606,12 +628,15 @@ export class MatchRoom extends Room {
   }
 
   /** Neither player came back in time: no result, nothing to resume. */
-  private abandon(): void {
+  private async abandon(): Promise<void> {
     this.phase = 'ended';
     this.clearTimers();
-    this.autoDispose = true;
-    this.store?.remove(this.code);
-    this.closeRoom();
+    try { await this.accountSetup?.recordClose(this.matchId, 'abandoned'); }
+    finally {
+      this.autoDispose = true;
+      this.store?.remove(this.code);
+      if (!this.disposed) this.closeRoom();
+    }
   }
 
   private closeRoom(): void {
@@ -619,7 +644,7 @@ export class MatchRoom extends Room {
   }
 
   private persist(): void {
-    // Account recovery is implemented by NET-03/05. Never restore an account seat as a guest bearer-token seat.
+    // NET-05 owns account snapshots. Never restore an account seat as a guest bearer-token seat.
     if (this.accountSetup) return;
     const st = this.match;
     const [a, b] = this.seats;
@@ -695,10 +720,10 @@ export class MatchRoom extends Room {
     this.openWindow(1);
   }
 
-  private after(ms: number, run: () => void, control: 'turn' | 'match' | 'window-0' | 'window-1'): NodeJS.Timeout {
+  private after(ms: number, run: () => void | Promise<void>, control: 'turn' | 'match' | 'window-0' | 'window-1'): NodeJS.Timeout {
     const epoch = this.epoch;
     const timer = setTimeout(() => {
-      this.commands.submit(() => { if (!this.disposed && this.epoch === epoch) run(); }, () => console.error('[MatchRoom] timer failed'), control);
+      this.commands.submit(() => { if (!this.disposed && this.epoch === epoch) return run(); }, () => console.error('[MatchRoom] timer failed'), control);
     }, ms);
     timer.unref();
     return timer;
@@ -717,13 +742,13 @@ export class MatchRoom extends Room {
     if (this.turnTimer) clearTimeout(this.turnTimer);
     this.turnDeadline = this.time.nowMs() + ms;
     const generation = ++this.turnGeneration;
-    this.turnTimer = this.after(ms, () => { if (generation === this.turnGeneration) this.onTurnTimeout(); }, 'turn');
+    this.turnTimer = this.after(ms, () => { if (generation === this.turnGeneration) return this.onTurnTimeout(); }, 'turn');
   }
 
   private armMatch(ms: number): void {
     if (this.matchTimer) clearTimeout(this.matchTimer);
     const generation = ++this.matchGeneration;
-    this.matchTimer = this.after(ms, () => { if (generation === this.matchGeneration) this.onMatchClock(); }, 'match');
+    this.matchTimer = this.after(ms, () => { if (generation === this.matchGeneration) return this.onMatchClock(); }, 'match');
   }
 
   private openWindow(side: Side): void {
@@ -732,7 +757,7 @@ export class MatchRoom extends Room {
     this.closeWindow(seat);
     seat.windowEnd = this.time.nowMs() + this.timing.reconnectMs;
     const generation = seat.windowGeneration;
-    seat.window = this.after(this.timing.reconnectMs, () => { if (generation === seat.windowGeneration) this.onWindowExpired(side); }, side === 0 ? 'window-0' : 'window-1');
+    seat.window = this.after(this.timing.reconnectMs, () => { if (generation === seat.windowGeneration) return this.onWindowExpired(side); }, side === 0 ? 'window-0' : 'window-1');
   }
 
   private closeWindow(seat: Seat): void {
