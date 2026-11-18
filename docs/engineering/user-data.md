@@ -12,6 +12,7 @@
 | `wallets` | `(user_id,currency)` 唯一，currency 仅 coins/fragments；balance 非负 int64、version 非负。 |
 | `asset_ledger` | 独立流水 UUID；userId/currency 组合外键；delta 有符号 int64、balanceAfter 非负；reason/sourceId/idempotencyKey/payloadHash。唯一域为 `(userId,reason,idempotencyKey,currency)`，支持同业务多币种流水。按用户/时间/id 索引。 |
 | `asset_operations` | DAT-04 成功回执，`(userId,operationKey)` 唯一，保存 kind/reason/sourceId/hash/result；grant/debit 另有业务来源唯一约束。与账本一起禁止 UPDATE/DELETE。 |
+| `data_repair_receipts` | DAT-06 维护回执，id UUID；kind/caseId/targetKey 唯一，保存严格计划、SHA、实际数据库身份、前后值、关联流水/操作。追加写入，与修复资产/outbox 同事务；只供数据库维护入口，不向玩家授予补偿权限。 |
 | `matches` | 数据库 UUID、mode、configVersion、protocolVersion、status、result、创建/完成时间；按 status/时间索引。 |
 | `match_participants` | `(matchId,userId)` 唯一、`(matchId,side)` 唯一，side 0/1；五卡 JSON 快照保存 ownedCardId/playerDefId/pieceId 等独立标识。按用户/创建时间/matchId 索引。 |
 | `outbox_events` | UUID、type、aggregateId、对象 payload、attempts、nextAttemptAt、processedAt、createdAt；未处理项的时间/id 部分索引用于有界 due 查询。 |
@@ -23,3 +24,5 @@
 账本唯一约束只防重复插入。DAT-04 已实现钱包/卡锁、同一意图 payloadHash 比较、报价/变动/流水/回执/outbox 同事务，以及原结果重放；接口与可信内部端口见 [资产操作](asset-operations.md)。比赛可信快照由 DAT-03/NET 校验；结果与奖励唯一性表由 NET-04 迁移接入。
 
 验证命令为 `npm run test:integration`，隔离数据库配置见 [database.md](database.md)。本任务覆盖真实 FK/唯一/CHECK、最大 bigint 精度、跨用户阵容卡、账本冲突、三仓储事务回滚、快照与参与者约束、due 查询及 EXPLAIN 索引路径和最新迁移 down/up。
+
+DAT-06 的只读对账、零差额纠正流水、显式补偿、原结算重排以及数据保留/匿名化步骤见 [受控维护手册](data-maintenance.md)。本工具不删除历史或猜测不可信账本。

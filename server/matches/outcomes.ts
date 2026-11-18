@@ -48,6 +48,13 @@ export interface OutcomeOptions {
 }
 const configurationHash = (data: GameData, policy: EconomyPolicy, rules: ModeRules) =>
   createHash('sha256').update(canonicalJson({ data, policy, rules })).digest('hex');
+/** The consumer and maintenance checks must validate the same immutable configuration binding. */
+export function assertSettlementConfiguration(config: SettlementConfiguration | null, outcome: OutcomeIntent): asserts config is SettlementConfiguration {
+  if (!config || config.hash !== outcome.configurationHash || config.data.version !== outcome.configVersion ||
+      config.rules.mode !== outcome.mode || config.hash !== configurationHash(config.data, config.policy, config.rules)) throw new OutcomeConflict();
+  verifyModeRules(config.data, config.rules);
+  EconomyPolicySchema.parse(config.policy);
+}
 /** Persistent result delivery and SQL-only award transactions. This port is never bound to player request JSON. */
 export class MatchOutcomes {
   readonly results: MatchResults;
@@ -113,21 +120,6 @@ export class MatchOutcomes {
       throw new OutcomeConflict();
     return hash;
   }
-  private verifyConfiguration(
-    config: SettlementConfiguration | null,
-    outcome: OutcomeIntent,
-  ): asserts config is SettlementConfiguration {
-    if (
-      !config ||
-      config.hash !== outcome.configurationHash ||
-      config.data.version !== outcome.configVersion ||
-      config.rules.mode !== outcome.mode ||
-      config.hash !== configurationHash(config.data, config.policy, config.rules)
-    )
-      throw new OutcomeConflict();
-    verifyModeRules(config.data, config.rules);
-    EconomyPolicySchema.parse(config.policy);
-  }
   private async persist(outcome: OutcomeIntent): Promise<SettlementReceipt> {
     return retryTransaction(this.options.db, async (tx) => {
       const repo = new MatchOutcomeRepository(tx),
@@ -140,7 +132,7 @@ export class MatchOutcomes {
       )
         throw new OutcomeConflict();
       const config = await repo.configuration(outcome.matchId);
-      this.verifyConfiguration(config, outcome);
+      assertSettlementConfiguration(config, outcome);
       const participants = await repo.participants(outcome.matchId);
       if (
         participants.length !== 2 ||
@@ -312,7 +304,7 @@ export class MatchOutcomes {
         const outcome = OutcomeIntentSchema.parse(stored.payload),
           config = await repo.configuration(event.matchId);
         if (outcomeHash(outcome) !== stored.payloadHash) throw new OutcomeConflict();
-        this.verifyConfiguration(config, outcome);
+        assertSettlementConfiguration(config, outcome);
         const classification = classifyModeOutcome(config.rules, {
           authority: 'server',
           durable: true,

@@ -35,6 +35,7 @@
     "test:web-performance": "npm run build:test-client && node tools/web-performance-browser.mjs",
     "test": "npm run test:physics && npm run test:net",
     "backup": "tsx tools/backup.ts",
+    "data:maintenance": "tsx tools/data-maintenance.ts",
     "lint": "eslint .",
     "format:check": "node tools/format.mjs",
     "format": "node tools/format.mjs --write",

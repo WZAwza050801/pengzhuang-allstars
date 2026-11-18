@@ -24,3 +24,5 @@ runner 检查 PostgreSQL 主版本为 17，使用 OS 临时目录、SCRAM 随机
 node-pg-migrate 使用数据库advisory lock等待模式和单事务；重复执行无待处理迁移时返回空结果。迁移文件须与部署产物一起交付；当前源码CLI读取 packages/persistence/migrations，未来打包部署必须显式携带此目录或指定migration目录，不能只发布一个server.js。
 
 当前已包含 ACC/DAT 的账号、会话、生命周期、卡牌、钱包、账本、outbox 和一次性初始化回执；service_metadata 是最初的基础设施验证表。业务行为及约束见 [用户初始化和云存档](player-data.md)、[生命周期](account-lifecycle.md) 与对应任务报告，不能仅凭建表判断业务已经验收。
+
+DAT-06 迁移 `202611180016_data_repairs.mjs` 仅扩展维护回执、索引及不可变触发器，不执行任何历史余额修复或生产角色授权。维护命令单独使用 `MAINTENANCE_DATABASE_URL`，不会自动迁移/初始化/发奖；用法和保留策略见 [数据维护](data-maintenance.md)。测试运行器还为临时数据库设置每轮随机 fixture 标记，数据工厂写入前必须同时匹配库名和标记，不能用于生产造数。

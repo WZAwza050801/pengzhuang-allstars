@@ -150,6 +150,20 @@ try {
     }
   }
   if (!ready) throw new Error('Test PostgreSQL readiness failed');
+  const runId = randomUUID();
+  const marker = new Pool({ connectionString: url, connectionTimeoutMillis: 1000 });
+  try {
+    // Server-side format quotes the database identifier and the bound marker literal for this DDL.
+    const command = (
+      await marker.query(
+        "SELECT format('ALTER DATABASE %I SET pengzhuang.fixture_id = %L',current_database(),$1::text) AS command",
+        [runId],
+      )
+    ).rows[0].command;
+    await marker.query(command);
+  } finally {
+    await marker.end();
+  }
   const fixtures = path.join(temporary, 'fixtures');
   mkdirSync(fixtures, { recursive: true });
   stage = 'integration test launch';
@@ -159,7 +173,13 @@ try {
       [path.resolve('node_modules/vitest/vitest.mjs'), 'run', '--project', 'integration', ...process.argv.slice(2)],
       {
         stdio: 'inherit',
-        env: { ...process.env, APP_ENV: 'test', TEST_DATABASE_URL: url, PG_TEST_TMP_DIR: fixtures },
+        env: {
+          ...process.env,
+          APP_ENV: 'test',
+          TEST_DATABASE_URL: url,
+          PG_TEST_TMP_DIR: fixtures,
+          PG_TEST_RUN_ID: runId,
+        },
       },
     );
     child.once('error', reject);
