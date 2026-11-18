@@ -30,6 +30,13 @@ try {
     await page.goto(base, { waitUntil: 'networkidle' });
     await page.getByRole('heading', { name: '碰撞全明星', exact: true }).waitFor();
 
+    // D11：大厅展示必须是原版 Q 版体育场图且真实加载，禁止共用对局场地资产。
+    const stadium = await page.evaluate(() => {
+      const img = document.querySelector('[data-stadium-preview] img');
+      return img ? { src: img.getAttribute('src'), loaded: img.complete && img.naturalWidth > 0 } : null;
+    });
+    assert.ok(stadium && /^\/assets\/orig_ui\/stadium\/Image_0\d\.png$/.test(stadium.src) && stadium.loaded, `lobby must show a loaded original stadium model (D11), got ${JSON.stringify(stadium)}`);
+
     const initialLayout = await page.evaluate(() => ({
       overflow: document.documentElement.scrollWidth > window.innerWidth,
       navigationDirection: getComputedStyle(document.querySelector('nav')).flexDirection,

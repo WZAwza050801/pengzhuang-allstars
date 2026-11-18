@@ -10,6 +10,24 @@
 - FND-01 已完成本次独立验证；下一可领取 FND-02/FND-03/FND-06。远端同步仍受 403 阻塞。
 - 历史会话测试见 BASELINE；后续实施不得重复引用为新代码的测试证据。
 
+## 独立玩家视角复核（2026-11-18，Qwen Code，HEAD 6ab2533）
+
+用户要求先以玩家身份模拟并对抗压力测试前任 Agent 声称完成的任务，再继续剩余任务。本轮复核不勾选任何任务、不修改产品代码（验证期临时诊断改动已还原，`git diff` 为空）。
+
+- 环境：项目专用工具链 Node 24.22.1 / npm 11.9.0 / 隔离 PostgreSQL 17.12 / Mailpit 1.34.0 / Chromium（Playwright）。未改系统 PATH。
+- `npm run check`：退出 0，199 单元/56 文件、19 契约/8 文件、322 文件格式及 lint/类型/边界/配置/规划/资源/平衡检查通过（work/player-verify-check.log）。与交接声称一致。
+- **完整集成重跑**（前任修正会话竞态后未整套重跑的部分）：`npm run test:integration` 23 文件/324 项全部通过、0 跳过，825.84 秒，退出 0，隔离集群正常清理（work/player-verify-integration.log）。含 matchmaking-ui 4/4、rooms-pages 21、account-pages 24、outcomes 19、match-tickets 34、sessions 20、asset-operations 25 等。
+- **独立玩家实测 + 对抗压测**：work/player-session.ts（临时编排，证据 work/player-verify-session.log / .json，截图 work/player-shots/）。独立隔离 PG/Mailpit，源码级 full runtime（work/server-entry.ts），22/22 通过、退出 0：
+  - 三账号真实注册→SMTP 验证邮件→登录；大厅/阵容/云存档真实数据（5 卡阵容、初始 300 金币）。
+  - 双人 friend 匹配→受限房间→唯一 durable 开局（SQL 核对 participants 与 assignment.match_id）；双方视角真实鼠标出手 4 杆 + 触屏弧线出手；两端状态逐字段一致。
+  - 刷新恢复同一局（shotNo 保持）；**真实结束服务端进程并以新 PID 重启**，15 秒租期接管后双端恢复同一局。
+  - 认输结算：双方可查原结果，非参与者第三账号查询 404；好友赛余额 300→300 不变；本人战绩列表含原比赛入口。
+  - 对抗探针：8 并发同意图入队仅 1 条活动记录；同键异载荷 409；25 轮入队/双取消风暴无 500、无残留 queued；8 并发同幂等键升级只生效一次（level 1→2）；6 并发不同键升级串行化、余额非负；越权读他人阵容/撤销他人会话/伪造他人卡阵容均拒绝（404/404/400）；12 并发错误密码登录风暴返回 401/可重试 503（Argon2 并发上限 4 的有意卸载，passwords.ts），顺序重试恢复 401，存在/不存在邮箱响应一致；退出后匿名练习可用；全程 0 意外 console/pageerror。
+- 复核中确认的服务端有意设计（非缺陷）：新玩家入座重置双方准备（MatchRoom.resetReady，双方须以最终阵容确认）；接管窗口内 queueTicket 返回可重试 503，客户端重试后成功；KDF 并发卸载；登录默认落地 /profile。
+- **观察项→已拍板并修复**：新版 Web 大厅展示区 `.stadiumPreview` 原背景使用对局场地资产 `fields/scene_01.webp`，违反 D11（大厅竞技场展示用原版 Q 版立体体育场图 orig_ui/stadium/Image_01–05.png，与对局场地禁止共用）。老板确认「Q版的！」。修复：皮肤→体育场映射提取为单一来源 client/src/arena.ts（旧 Demo 与新壳共用），新壳大厅以 `<img>` 渲染原版体育场图并保留文字叠层；tools/web-shell-browser.mjs 增加 D11 回归断言（src 必须匹配 orig_ui/stadium/Image_0N.png 且 naturalWidth>0）。验证：npm run check 退出 0、test:web-shell 3 视口+断言通过、test:e2e 18/18（旧 Demo 无回退）、build:client 通过。
+- 编排脚本自身踩坑（均非产品缺陷，已修正）：vite build 会污染进程 NODE_ENV 需隔离；注册密码须 ≥12 字符；登录后须等会话恢复再断言匹配按钮；准备流程须双方就位后再准备；503<500 断言笔误。
+- 结论：MM-01 及账号/资产/结算/恢复链路在独立重跑与玩家视角对抗下成立，交接声称可信。下一项 MM-02。
+
 ## 初始规划交付验证（b60b10e，历史记录）
 
 - `node tools/check-plan.mjs`：112 项、18 工作包、0 项勾选；依赖无环、编号唯一、文档本地链接存在；首个可领取任务为 FND-01。

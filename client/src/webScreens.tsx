@@ -6,6 +6,7 @@ import { describeModeRules } from '../../config/modes';
 import { usePublicLobby } from './lobby-context';
 import { LobbyAccountPanel } from './lobby-account';
 import { practiceScreenLoaded } from './practice-entry';
+import { stadiumImage } from './arena';
 
 export interface NavigateTarget {
   (target: NavigationTarget): void;
@@ -30,6 +31,7 @@ export function LobbyScreen({ context, onNavigate }: { context: NavigationContex
           <p>5v5 回合制弹射足球。练习模式直接进入对战，不读取或写入账号资产。</p>
           {context.network === 'offline' && <p className={styles.warning}>当前离线：仍可进行本地练习。</p>}
           <div className={styles.stadiumPreview} data-stadium-preview="true" role="img" aria-label="本地练习赛球场展示">
+            <img className={styles.stadiumPhoto} src={stadiumImage(localStorage.getItem('pz_skin'))} alt="" />
             <div>
               <strong>本地练习</strong>
               <span>3 分钟 · 先进 3 球</span>

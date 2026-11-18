@@ -8,6 +8,7 @@ import { LocalHost } from './localHost';
 import { OnlineHost, type OnlineStatus } from './onlineHost';
 import { isMuted, setMuted } from './sfx';
 import { activeLineup, mountLineup, randomLineup } from './lineup';
+import { ARENAS } from './arena';
 
 const app = document.getElementById('app')!;
 
@@ -118,18 +119,6 @@ function menu(tab: Tab = 'play') {
   if (tab === 'lineup') mountLineup(body, { cardLevel, toast });
   else playTab(body);
 }
-
-/**
- * The five original league stadiums (texture/Image_01–05), each paired with the pitch scene it plays on.
- * League names are rebuilt: the screenshots only show 地区联赛 / League Two.
- */
-const ARENAS = [
-  { stadium: 'Image_01', skin: 'scene_01', name: '社区联赛' },
-  { stadium: 'Image_02', skin: 'scene_02', name: '地区联赛' },
-  { stadium: 'Image_03', skin: 'scene_03', name: '甲级联赛' },
-  { stadium: 'Image_04', skin: 'scene_04', name: '超级联赛' },
-  { stadium: 'Image_05', skin: 'scene_05', name: '全明星联赛' },
-].filter((a) => FIELD_SKINS.some((s) => s.id === a.skin));
 
 function arenaIndex(): number {
   const i = ARENAS.findIndex((a) => a.skin === localStorage.getItem('pz_skin'));
