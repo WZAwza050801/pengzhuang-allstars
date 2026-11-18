@@ -9,6 +9,8 @@ import type { GameData } from '../../shared/data';
 import type { ModeRules } from '../../packages/contracts/src/modes';
 import type { OutcomeIntent } from '../../packages/contracts/src/match-results';
 import type { SettlementReceipt } from './outcomes';
+import { MatchCheckpoints, type CheckpointEvent } from './checkpoint-store';
+import type { AccountCheckpoint, AccountCheckpointDraft } from './checkpoint';
 
 export interface AccountMatchStart {
   matchId: string;
@@ -20,14 +22,18 @@ export interface AccountMatchStart {
 }
 export interface AccountRoomSetup {
   code: string; data: GameData; mode: AccountMode;
+  rules?: ModeRules;
+  restored?: { record: AccountCheckpoint; selections: [OwnedLineupSnapshot, OwnedLineupSnapshot] };
   admit(options: unknown): Promise<AccountIdentity>;
-  recordStart(input: AccountMatchStart): Promise<string>;
+  recordStart(input: AccountMatchStart, checkpoint: AccountCheckpointDraft): Promise<string>;
+  saveCheckpoint(checkpoint: AccountCheckpointDraft, event: CheckpointEvent): Promise<void>;
   recordClose(matchId: string, reason: 'ended' | 'abandoned' | 'expired'): Promise<void>;
-  recordOutcome(input: OutcomeIntent): Promise<SettlementReceipt>;
+  recordOutcome(input: OutcomeIntent, checkpoint: AccountCheckpointDraft): Promise<SettlementReceipt>;
   subscribeOutcome(matchId: string, listener: (receipt: SettlementReceipt) => void): () => void;
 }
 export class MatchRecovery {
   constructor(private readonly db: Database) {}
+  checkpointStore(storageId: string) { return new MatchCheckpoints(this.db, { storageId }); }
   async started(input: AccountMatchStart, initialize?: (tx: SqlExecutor) => Promise<void>): Promise<void> {
     await this.db.transaction(async (tx) => {
       for (const participant of [...input.participants].sort((a, b) => a.userId.localeCompare(b.userId)))

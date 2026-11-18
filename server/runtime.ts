@@ -62,9 +62,10 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     await outcomes?.start();
     await server.gameServer.listen(port);
     const recovery = await server.services.matches.restoreRooms();
+    const accountRecovery = await server.restoreAccountRooms();
     emailAccounts?.startMailDelivery();
     lifecycle?.start();
-    return { ...server, recovery };
+    return { ...server, recovery, accountRecovery };
   } catch {
     await server.close().catch(() => undefined);
     throw new Error('Server startup failed');

@@ -13,6 +13,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import path from 'node:path';
+import * as fs from 'node:fs/promises';
 import { createHash, randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { OutcomeIntentSchema, type OutcomeIntent } from '../../packages/contracts/src/match-results';
@@ -45,6 +46,8 @@ const missing = (error: unknown) =>
 /** Small immutable intent files. File fsync plus an exclusive hard link precede any positive acceptance. */
 export class OutcomeJournal {
   readonly root: string;
+  private asynchronousWrites = 0;
+  private writeTail: Promise<void> = Promise.resolve();
   constructor(
     directory: string,
     private readonly maxEntries = 1024,
@@ -124,6 +127,78 @@ export class OutcomeJournal {
       return 'stored';
     } finally {
       unlinkSync(temporary);
+    }
+  }
+  async putAsync(input: unknown): Promise<'stored' | 'already-stored'> {
+    const outcome = OutcomeIntentSchema.parse(input);
+    if (this.asynchronousWrites >= 128) return Promise.reject(new Error('Outcome journal write capacity exceeded'));
+    this.asynchronousWrites++;
+    const job = this.writeTail.then(() => this.publishAsync(outcome));
+    this.writeTail = job.then(
+      () => undefined,
+      () => undefined,
+    );
+    return job.finally(() => {
+      this.asynchronousWrites--;
+    });
+  }
+  private async publishAsync(outcome: OutcomeIntent): Promise<'stored' | 'already-stored'> {
+    const digest = outcomeHash(outcome),
+      target = this.file(outcome.matchId);
+    const previous = async () => {
+      const handle = await fs.open(target, 'r');
+      try {
+        if ((await handle.stat()).size > 65536) throw new JournalIntegrityError();
+        let record: z.infer<typeof recordSchema>;
+        try {
+          record = recordSchema.parse(JSON.parse(await handle.readFile('utf8')));
+        } catch {
+          throw new JournalIntegrityError();
+        }
+        if (record.outcome.matchId !== outcome.matchId || outcomeHash(record.outcome) !== record.payloadHash)
+          throw new JournalIntegrityError();
+        if (record.payloadHash !== digest) throw new OutcomeConflict();
+        return 'already-stored' as const;
+      } finally {
+        await handle.close();
+      }
+    };
+    try {
+      return await previous();
+    } catch (error) {
+      if (!missing(error)) throw error;
+    }
+    const count = (await fs.readdir(this.root)).filter((name) => /^[a-f0-9-]{36}\.json$/.test(name)).length;
+    if (count >= this.maxEntries) throw new Error('Outcome journal capacity exceeded');
+    const bytes = JSON.stringify({ format: 1, payloadHash: digest, outcome });
+    if (Buffer.byteLength(bytes) > 65536) throw new Error('Outcome journal entry too large');
+    const temporary = this.file(outcome.matchId, `.${randomUUID()}.tmp`),
+      handle = await fs.open(temporary, 'wx', 0o600);
+    try {
+      try {
+        await handle.writeFile(bytes, 'utf8');
+        await handle.sync();
+      } finally {
+        await handle.close();
+      }
+      try {
+        await fs.link(temporary, target);
+      } catch (error) {
+        if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'EEXIST')
+          return previous();
+        throw error;
+      }
+      if (process.platform !== 'win32') {
+        const directory = await fs.open(this.root, 'r');
+        try {
+          await directory.sync();
+        } finally {
+          await directory.close();
+        }
+      }
+      return 'stored';
+    } finally {
+      await fs.unlink(temporary);
     }
   }
   retry(id: string) {

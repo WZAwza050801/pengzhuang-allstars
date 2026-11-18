@@ -5,11 +5,24 @@ import path from 'node:path';
 import { createAssetPackage } from '../tools/asset-packages';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
+const entryChunks = new Set<string>();
 
 export default defineConfig({
   root,
   publicDir: 'public',
   plugins: [
+    {
+      name: 'skip-redundant-entry-preloads',
+      apply: 'build',
+      generateBundle: {
+        order: 'pre',
+        handler(_options, bundle) {
+          entryChunks.clear();
+          for (const chunk of Object.values(bundle))
+            if (chunk.type === 'chunk' && chunk.isEntry) entryChunks.add(chunk.fileName);
+        },
+      },
+    },
     {
       name: 'verified-asset-packages',
       apply: 'build',
@@ -66,6 +79,11 @@ export default defineConfig({
     },
   },
   build: {
+    modulePreload: {
+      // Entry scripts load through their document/import; lazy routes preload their other dependencies.
+      resolveDependencies: (_file, dependencies, { hostType }) =>
+        hostType === 'js' ? dependencies.filter((dependency) => !entryChunks.has(dependency)) : dependencies,
+    },
     copyPublicDir: false,
     outDir: '../dist/client',
     emptyOutDir: true,

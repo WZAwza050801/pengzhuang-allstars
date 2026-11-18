@@ -27,6 +27,7 @@ import { PlayerData } from '../server/accounts/player-data';
 import { Assets } from '../server/accounts/assets';
 import { MatchOutcomes } from '../server/matches/outcomes';
 import { OutcomeJournal } from '../server/matches/outcome-journal';
+import { RecoveryJournal } from '../server/matches/recovery-journal';
 import { Lineups } from '../server/accounts/lineups';
 import { Sessions } from '../server/accounts/sessions';
 import { WebSessions } from '../server/api/web-sessions';
@@ -964,8 +965,8 @@ test('a lost terminal update is recoverable from settlement status and the durab
 test('simultaneous database and journal failure freezes the terminal candidate until the same result becomes durable', async () => {
   const game = await activeGame(),
     live = matchMaker.getLocalRoomById(game.code) as MatchRoom;
-  // Exercise the real producer/service while injecting failures only at its two storage boundaries.
-  const failedDisk = vi.spyOn(OutcomeJournal.prototype, 'put').mockImplementationOnce(() => {
+  // Both authoritative recovery sources must fail; the downstream result service must not receive an unfenced candidate.
+  const failedDisk = vi.spyOn(RecoveryJournal.prototype, 'put').mockImplementationOnce(() => {
     throw Object.assign(new Error('Injected unwritable journal'), { code: 'EACCES' });
   });
   const failedDb = vi.spyOn(db, 'transaction').mockRejectedValueOnce(new Error('Injected database outage'));
@@ -1004,7 +1005,7 @@ test('simultaneous database and journal failure freezes the terminal candidate u
 test('journal-only terminal delivery retains its room until database import and settlement', async () => {
   const game = await activeGame(),
     live = matchMaker.getLocalRoomById(game.code) as MatchRoom;
-  const failed = vi.spyOn(db, 'transaction').mockRejectedValueOnce(new Error('Injected database outage'));
+  const failed = vi.spyOn(db, 'transaction').mockRejectedValue(new Error('Injected database outage'));
   try {
     game.peers[0].room.send('surrender', {
       protocol: 2,
@@ -1052,7 +1053,7 @@ test('an injected terminal simulation receives no positive shot acknowledgement 
       state.score = [1, 0];
       return output;
     });
-  const disk = vi.spyOn(OutcomeJournal.prototype, 'put').mockImplementationOnce(() => {
+  const disk = vi.spyOn(RecoveryJournal.prototype, 'put').mockImplementationOnce(() => {
     throw new Error('Injected disk outage');
   });
   const database = vi.spyOn(db, 'transaction').mockRejectedValueOnce(new Error('Injected database outage'));

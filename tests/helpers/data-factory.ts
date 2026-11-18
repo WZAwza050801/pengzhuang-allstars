@@ -9,6 +9,7 @@ import { MatchOutcomes, type MatchRatings } from '../../server/matches/outcomes'
 import { OutcomeJournal } from '../../server/matches/outcome-journal';
 import { OutcomeIntentSchema } from '../../packages/contracts/src/match-results';
 import { rulesForMode } from '../../config/modes';
+import { buildOwnedLineupCards } from '../../packages/game-core/src/lineups';
 
 /** The database and runner must share a per-run random marker before any fixture writes. */
 export async function createDataFixture(db: Database) {
@@ -59,15 +60,24 @@ export async function createDataFixture(db: Database) {
         );
         for (const [side, userId] of owners.entries()) {
           const cards = (
-            await tx.query('SELECT id,player_def_id,level FROM owned_cards WHERE user_id=$1 ORDER BY id LIMIT 5', [
-              userId,
-            ])
+            await tx.query<{
+              id: string;
+              playerDefId: string;
+              level: number;
+              version: number;
+              status: 'active' | 'disabled';
+            }>(
+              `SELECT c.id,c.player_def_id AS "playerDefId",c.level,c.version,c.status FROM account_initializations a
+              JOIN lineup_slots s ON s.lineup_id=a.default_lineup_id AND s.user_id=a.user_id
+              JOIN owned_cards c ON c.id=s.owned_card_id AND c.user_id=s.user_id WHERE a.user_id=$1 ORDER BY s.slot`,
+              [userId],
+            )
           ).rows;
           await tx.query('INSERT INTO match_participants(match_id,user_id,side,lineup_snapshot) VALUES ($1,$2,$3,$4)', [
             matchId,
             userId,
             side,
-            JSON.stringify(cards),
+            JSON.stringify(buildOwnedLineupCards(DEFAULT_DATA, rulesForMode(DEFAULT_DATA, mode), cards)),
           ]);
         }
         return worker.openInTransaction(tx, matchId, DEFAULT_DATA, rulesForMode(DEFAULT_DATA, mode));

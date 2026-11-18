@@ -57,6 +57,7 @@ export function assertSettlementConfiguration(config: SettlementConfiguration | 
 }
 /** Persistent result delivery and SQL-only award transactions. This port is never bound to player request JSON. */
 export class MatchOutcomes {
+  get journalDirectory() { return this.options.journal.root; }
   readonly results: MatchResults;
   private timer: ReturnType<typeof setInterval> | null = null;
   private running: Promise<void> | null = null;
@@ -169,7 +170,7 @@ export class MatchOutcomes {
     if (pending && outcomeHash(pending.outcome) !== outcomeHash(outcome)) throw new OutcomeConflict();
     let journaled = false;
     try {
-      this.options.journal.put(outcome);
+      await this.options.journal.putAsync(outcome);
       journaled = true;
     } catch (error) {
       if (error instanceof OutcomeConflict || error instanceof JournalIntegrityError) {

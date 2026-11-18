@@ -59,3 +59,20 @@ test('the immutable journal returns identical retries, refuses conflicts and sur
     rmSync(directory, { recursive: true, force: true });
   }
 });
+
+test('asynchronous outcome publication keeps the existing durable format and returns one immutable result under contention', async () => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), 'pz-outcome-journal-'));
+  try {
+    const value = intent(),
+      journal = new OutcomeJournal(directory);
+    const saved = await Promise.all(Array.from({ length: 6 }, () => journal.putAsync(value)));
+    expect(saved.filter((result) => result === 'stored')).toHaveLength(1);
+    expect(journal.read(value.matchId)).toEqual(value);
+    await expect(journal.putAsync({ ...value, score: [2, 0] })).rejects.toThrow('conflict');
+    expect(new OutcomeJournal(directory).read(value.matchId)).toEqual(value);
+  } finally {
+    expect(path.dirname(path.resolve(directory))).toBe(path.resolve(os.tmpdir()));
+    expect(path.basename(directory)).toMatch(/^pz-outcome-journal-/);
+    rmSync(directory, { recursive: true, force: true });
+  }
+});

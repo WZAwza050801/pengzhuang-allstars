@@ -26,3 +26,5 @@ node-pg-migrate 使用数据库advisory lock等待模式和单事务；重复执
 当前已包含 ACC/DAT 的账号、会话、生命周期、卡牌、钱包、账本、outbox 和一次性初始化回执；service_metadata 是最初的基础设施验证表。业务行为及约束见 [用户初始化和云存档](player-data.md)、[生命周期](account-lifecycle.md) 与对应任务报告，不能仅凭建表判断业务已经验收。
 
 DAT-06 迁移 `202611180016_data_repairs.mjs` 仅扩展维护回执、索引及不可变触发器，不执行任何历史余额修复或生产角色授权。维护命令单独使用 `MAINTENANCE_DATABASE_URL`，不会自动迁移/初始化/发奖；用法和保留策略见 [数据维护](data-maintenance.md)。测试运行器还为临时数据库设置每轮随机 fixture 标记，数据工厂写入前必须同时匹配库名和标记，不能用于生产造数。
+
+NET-05迁移 `202611180017_match_checkpoints.mjs` 新增账号局追加快照与持有权head，不改既有结果或资产。部署同时保留原数据库与 `pending-outcomes/account-recovery` 日志卷；旧无快照账号记录只报告不可恢复，不伪造局面。回收仅处理符合证明的恢复缓存，业务历史保留。具体时钟、冲突、迁移/回退与日志域约束见[重启接管手册](match-checkpoints.md)。数据维护孤立引用目录随新表扩展至18类。

@@ -15,6 +15,7 @@
 | `data_repair_receipts` | DAT-06 维护回执，id UUID；kind/caseId/targetKey 唯一，保存严格计划、SHA、实际数据库身份、前后值、关联流水/操作。追加写入，与修复资产/outbox 同事务；只供数据库维护入口，不向玩家授予补偿权限。 |
 | `matches` | 数据库 UUID、mode、configVersion、protocolVersion、status、result、创建/完成时间；按 status/时间索引。 |
 | `match_participants` | `(matchId,userId)` 唯一、`(matchId,side)` 唯一，side 0/1；五卡 JSON 快照保存 ownedCardId/playerDefId/pieceId 等独立标识。按用户/创建时间/matchId 索引。 |
+| `match_checkpoints` / `match_recovery_heads` | NET-05追加式账号局快照与当前持有者/epoch/日志域；已接受出手和剩余时钟先保存后确认。仅符合条件的恢复缓存可回收，原结果/奖励/账本保留，见[重启接管](match-checkpoints.md)。 |
 | `outbox_events` | UUID、type、aggregateId、对象 payload、attempts、nextAttemptAt、processedAt、createdAt；未处理项的时间/id 部分索引用于有界 due 查询。 |
 
 外键统一 `ON DELETE RESTRICT`，不级联删除用户资产、阵容或历史比赛。账号清理需由后续注销/匿名化流程显式处理。迁移 down 按依赖逆序删除本迁移表，仅供显式本地测试；不删除 ACC-01 表。生产变更按前向兼容策略执行。

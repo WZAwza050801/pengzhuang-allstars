@@ -63,6 +63,14 @@ const checks = [
     'repair-ledger',
     "SELECT DISTINCT r.id::text AS id FROM data_repair_receipts r CROSS JOIN LATERAL jsonb_array_elements_text(CASE WHEN jsonb_typeof(r.receipt->'effect'->'ledgerIds')='array' THEN r.receipt->'effect'->'ledgerIds' ELSE '[]'::jsonb END) i(id) LEFT JOIN asset_ledger l ON l.id::text=i.id AND l.user_id=r.user_id WHERE l.id IS NULL",
   ],
+  [
+    'checkpoint-head',
+    'SELECT h.match_id::text AS id FROM match_recovery_heads h LEFT JOIN match_checkpoints c ON c.match_id=h.match_id AND c.ordinal=h.checkpoint LEFT JOIN matches m ON m.id=h.match_id WHERE c.match_id IS NULL OR m.id IS NULL',
+  ],
+  [
+    'checkpoint-match',
+    'SELECT DISTINCT c.match_id::text AS id FROM match_checkpoints c LEFT JOIN matches m ON m.id=c.match_id LEFT JOIN match_settlement_contexts s ON s.match_id=c.match_id WHERE m.id IS NULL OR s.match_id IS NULL',
+  ],
 ] as const;
 export async function readOrphans(tx: SqlExecutor, limit: number) {
   const findings: { code: string; count: string; examples: string[] }[] = [];

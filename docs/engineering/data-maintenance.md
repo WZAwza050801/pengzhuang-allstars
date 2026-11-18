@@ -18,7 +18,7 @@
 
 ## 命令与退出码
 
-先部署 expand 迁移 `202611180016_data_repairs.mjs`。检查命令不会自动迁移。通过受控会话向 `MAINTENANCE_DATABASE_URL` 注入连接配置；检查使用只读凭据，执行修复使用经过授权的维护凭据。命令参数不接受数据库 URL、管理员角色、任意 SQL 或改写胜负的字段。不要在 shell 历史粘贴凭据；下面命令假定环境已经配置。
+先部署当前前向迁移，包括 `202611180016_data_repairs.mjs` 和NET-05的 `202611180017_match_checkpoints.mjs`；当前孤立引用目录含18类检查，包括checkpoint-head/checkpoint-match。检查命令不会自动迁移。通过受控会话向 `MAINTENANCE_DATABASE_URL` 注入连接配置；检查使用只读凭据，执行修复使用经过授权的维护凭据。命令参数不接受数据库 URL、管理员角色、任意 SQL 或改写胜负的字段。不要在 shell 历史粘贴凭据；下面命令假定环境已经配置。
 
 ```powershell
 # 单个对象；UUID 换成受理工单中的内部标识

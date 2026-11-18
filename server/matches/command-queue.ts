@@ -1,5 +1,5 @@
 type Command = { run(): void | Promise<void>; failed(error: unknown): void; control?: string };
-/** One room's ordered command stream. Only four named clock signals bypass the network queue budget. */
+/** One room's ordered command stream. Named clock/persistence signals bypass the network queue budget. */
 export class RoomCommandQueue {
   private readonly pending: Command[] = [];
   private running = false;
@@ -10,7 +10,7 @@ export class RoomCommandQueue {
   submit(
     run: Command['run'],
     failed: Command['failed'],
-    control?: 'turn' | 'match' | 'window-0' | 'window-1',
+    control?: 'turn' | 'match' | 'window-0' | 'window-1' | 'persistence',
   ): boolean {
     if (this.closed) return false;
     if (control) {

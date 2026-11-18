@@ -111,6 +111,12 @@ files.push(
   'server/maintenance/match-audit.ts',
   'server/maintenance/orphans.ts',
   'tools/data-maintenance.ts',
+  'server/matches/checkpoint.ts',
+  'server/matches/checkpoint-store.ts',
+  'server/matches/recovery-journal.ts',
+  'server/matches/live-checkpoints.ts',
+  'server/matches/account-restorer.ts',
+  'server/matches/outcome-journal.ts',
 );
 let bad = 0;
 files.push('tools/check-boundaries.mjs', 'tools/export-contracts.ts');

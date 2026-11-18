@@ -68,6 +68,11 @@ async function runCase(browser, base, profile) {
     await page.getByRole('button', { name: '开始练习', exact: true }).click();
     await page.waitForURL(/\/match\?mode=practice$/);
     await page.waitForSelector('.game canvas');
+    const repeatedEntry = await page.evaluate(() => {
+      const entries = new Set([...document.querySelectorAll('script[type="module"][src]')].map((script) => script.src));
+      return [...document.querySelectorAll('link[rel="modulepreload"]')].some((link) => entries.has(link.href));
+    });
+    assert.equal(repeatedEntry, false, 'The loaded document entry must not be preloaded again by a lazy route');
     await page.locator('.menu-btn').click();
     await page.locator('.menu .exit').click();
     await page.getByRole('heading', { name: '碰撞全明星', exact: true }).waitFor();

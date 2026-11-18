@@ -149,9 +149,11 @@ export function createGameServer(options: GameServerOptions = {}) {
   if (accounts) gameServer.define(ACCOUNT_ROOM_NAME, accounts.roomClass);
   function close(): Promise<void> {
     return closing ??= (async () => {
+      accounts?.stop();
       const failures: unknown[] = [];
       const transportClosed = httpServer.listening ? new Promise<void>((resolve) => httpServer.once('close', resolve)) : Promise.resolve();
       try { await gameServer.gracefullyShutdown(false); } catch (error) { failures.push(error); }
+      try { await accounts?.close(); } catch (error) { failures.push(error); }
       if (httpServer.listening) httpServer.close();
       httpServer.closeIdleConnections();
       await transportClosed;
@@ -161,5 +163,5 @@ export function createGameServer(options: GameServerOptions = {}) {
       if (failures.length) throw new Error('Server shutdown failed');
     })();
   }
-  return { app, httpServer, gameServer, services, close };
+  return { app, httpServer, gameServer, services, restoreAccountRooms: async () => accounts ? accounts.restore() : null, close };
 }

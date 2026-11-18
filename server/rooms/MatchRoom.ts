@@ -51,6 +51,8 @@ import { boundedShotPacket, SurrenderV2Schema } from '../../packages/contracts/s
 import type { AccountRoomSetup } from '../matches/recovery';
 import type { SettlementReceipt } from '../matches/outcomes';
 import { OutcomeIntentSchema, type OutcomeIntent } from '../../packages/contracts/src/match-results';
+import type { AccountCheckpointDraft } from '../matches/checkpoint';
+import type { CheckpointEvent } from '../matches/checkpoint-store';
 
 export type MatchSimulator = (state: MatchState, data: GameData, input: ShotInput) => ReturnType<typeof resolveShot> | Promise<ReturnType<typeof resolveShot>>;
 
@@ -76,7 +78,7 @@ function timingDefaults(data: GameData): MatchTiming { return {
 interface Seat {
   actorId: string;
   windowGeneration: number;
-  account?: AccountIdentity;
+  account?: Omit<AccountIdentity, 'authSessionId'> & { authSessionId?: string };
   client: Client | null;
   sessionId: string;
   /** Secret that re-claims this seat. Only ever sent to the seat's own client, never logged. */
@@ -195,6 +197,9 @@ export class MatchRoom extends Room {
   private turnGeneration = 0;
   private matchGeneration = 0;
   private readonly commands = new RoomCommandQueue();
+  private pendingCheckpoint: { record: AccountCheckpointDraft; event: CheckpointEvent; apply(): void | Promise<void> } | null = null;
+  private persistenceTimer: NodeJS.Timeout | null = null;
+  private persistenceAttempts = 0;
   protected simulateShot(state: MatchState, data: GameData, input: ShotInput): ReturnType<MatchSimulator> { return resolveShot(state, data, input); }
   private protocol() { return this.accountSetup ? ACCOUNT_PROTOCOL_VERSION : PROTOCOL_VERSION; }
   private stamp() { return { protocol: this.protocol(), revision: this.revision }; }
@@ -211,7 +216,8 @@ export class MatchRoom extends Room {
     this.accountSetup = this.accountCreation(options);
     const record = MatchRoom.restoreRecordFor(options);
     this.data = freezeSnapshot(this.accountSetup?.data ?? this.resolveGameData(record?.configVersion, randomUUID()));
-    if (record?.modeRules) this.rules = verifyModeRules(this.data, record.modeRules);
+    if (this.accountSetup?.rules) this.rules = verifyModeRules(this.data, this.accountSetup.rules);
+    else if (record?.modeRules) this.rules = verifyModeRules(this.data, record.modeRules);
     else {
       const mode = this.accountSetup?.mode ?? (!record && isRecord(options) ? options.mode : undefined);
       if (mode !== undefined && mode !== 'practice' && mode !== 'friend' && mode !== 'growth' && mode !== 'ranked') throw netError('bad-message');
@@ -244,7 +250,8 @@ export class MatchRoom extends Room {
     this.onMessage('__no_message_handler', (client) => this.guard(client, undefined, () => this.sendError(client, 'bad-message')));
 
     // Last step and synchronous: nothing may await between the uniqueness check and the registration.
-    if (record) this.restoreFrom(record);
+    if (this.accountSetup?.restored) this.restoreAccount(this.accountSetup.restored);
+    else if (record) this.restoreFrom(record);
     else if (this.accountSetup) {
       if (MatchRoom.usedCodes.has(this.accountSetup.code)) throw netError('unavailable');
       MatchRoom.usedCodes.add(this.accountSetup.code);
@@ -266,6 +273,7 @@ export class MatchRoom extends Room {
       if (prior) {
         if (!this.accountTarget()?.canEnter(account.userId)) throw netError('forbidden');
         prior.account = account;
+        prior.nickname = account.nickname;
         return this.reclaimSeat(client, prior.token);
       }
     } else if (this.accountSetup) throw netError('unauthenticated');
@@ -306,9 +314,11 @@ export class MatchRoom extends Room {
       if (this.phase === 'playing') this.openWindow(side);
     }
     this.broadcastRoom();
+    this.queuePresence();
   }
 
   override onDispose(): void {
+    if (this.persistenceTimer) clearTimeout(this.persistenceTimer);
     this.unsubscribeSettlement?.(); this.unsubscribeSettlement = null;
     this.disposed = true;
     this.epoch++;
@@ -340,6 +350,7 @@ export class MatchRoom extends Room {
     return { code: this.code, data: this.data, mode: this.accountSetup.mode,
       selection: (userId) => this.seats.find((seat) => seat?.account?.userId === userId)?.account?.snapshot,
       recovery: (userId) => {
+        if (this.match?.over && !this.settlementReceipt.recoverable) return undefined;
         const side = this.seats.findIndex((seat) => seat?.account?.userId === userId);
         if (side < 0 || !this.matchId || !this.match) return undefined;
         const seat = this.seats[side]!;
@@ -383,15 +394,20 @@ export class MatchRoom extends Room {
     }
     this.broadcastRoom();
     if (this.phase !== 'lobby') client.send(S2C.resume, this.resumeMsg());
+    this.queuePresence();
   }
 
   /** Rate limit plus a catch-all: Colyseus does not catch exceptions thrown from message handlers. */
   private guard(client: Client, on: ClientMessageType | undefined, run: (received: { revision: number; at: number }) => void | Promise<void>): void {
     if (!this.allow(client, on)) return;
     const epoch = this.epoch, received = { revision: this.revision, at: this.time.nowMs() };
-    const queued = this.commands.submit(() => { if (!this.disposed && epoch === this.epoch) return run(received); }, () => {
+    const queued = this.commands.submit(async () => {
+      if (this.disposed || epoch !== this.epoch) return;
+      await this.flushCheckpoint();
+      if (!this.disposed && epoch === this.epoch) return run(received);
+    }, () => {
       console.error('[MatchRoom] message handler failed');
-      this.sendError(client, 'internal-error', on);
+      this.sendError(client, this.pendingCheckpoint ? 'unavailable' : 'internal-error', on);
     });
     if (!queued && !this.disposed) this.sendError(client, 'rate-limited', on);
   }
@@ -445,8 +461,12 @@ export class MatchRoom extends Room {
     const st = createMatch(this.data, [a.lineup, b.lineup], { seed, levels: [a.levels, b.levels] });
     const turnEvents = beginTurn(st, this.data);
     if (this.accountSetup) {
+      if (!a.account?.authSessionId || !b.account?.authSessionId) throw netError('unauthenticated');
       try {
-        this.configurationHash = await this.accountSetup.recordStart({ matchId, roomCode: this.code, mode: this.accountSetup.mode, configVersion: this.data.version, rules: this.rules, participants: ([a, b] as const).map((seat, side) => ({ userId: seat.account!.userId, sessionId: seat.account!.authSessionId, side: side as Side, cards: seat.account!.snapshot.cards })) });
+        this.configurationHash = await this.accountSetup.recordStart({ matchId, roomCode: this.code, mode: this.accountSetup.mode, configVersion: this.data.version, rules: this.rules, participants: ([a, b] as const).map((seat, side) => ({ userId: seat.account!.userId, sessionId: seat.account!.authSessionId!, side: side as Side, cards: seat.account!.snapshot.cards })) }, this.checkpointFor(st, {
+          matchId, seed, revision: 0, seq: 0, receipts: [],
+          clocks: { matchMs: this.timing.matchMs, turnMs: this.timing.turnMs, elapsedMs: 0, playbackMs: 0, reconnectMs: [null, null] },
+        }));
       } catch (error) {
         this.resetReady(); if (!this.disposed) this.broadcastRoom(); throw error;
       }
@@ -542,22 +562,29 @@ export class MatchRoom extends Room {
       clocks: { turnMs: work.over ? null : playbackMs + this.timing.turnMs, matchMs: work.over ? 0 : Math.max(0, Math.ceil(this.matchDeadline - this.time.nowMs())) },
     };
     if (!boundedShotPacket(packet, Math.ceil(this.data.physics.maxSimSeconds * this.data.physics.recordHz) + 2)) return this.sendError(client, 'simulation-limit', C2S.shot, ref);
-    this.receipts.accept(actor, msg, packet.seq, revision + 1);
-    this.match = work; this.revision++; this.seq = packet.seq;
-    this.accepted.set(key, this.seq);
-    this.playbackUntil = this.time.nowMs() + playbackMs;
-    if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
-    if (work.over && this.accountSetup) {
-      this.terminalMessage = { type: S2C.shotPacket, data: packet, ack: { side, ref } };
-      await this.finishMatch(); return;
-    }
-    try {
-      this.broadcast(S2C.shotPacket, packet);
-      if (this.accountSetup) client.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ref, seq: this.seq, acceptedRevision: this.revision, duplicate: false });
-    } finally {
-      if (work.over) await this.finishMatch();
-      else this.persist();
-    }
+    const receipts = new ShotReceipts(this.receipts.records());
+    receipts.accept(actor, msg, packet.seq, revision + 1);
+    const publish = async () => {
+      this.receipts = receipts;
+      this.match = work; this.revision++; this.seq = packet.seq;
+      this.accepted.set(key, this.seq);
+      this.playbackUntil = this.time.nowMs() + playbackMs;
+      if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
+      packet.clocks = this.clocks();
+      if (work.over && this.accountSetup) {
+        this.terminalMessage = { type: S2C.shotPacket, data: packet, ack: { side, ref } };
+        await this.finishMatch(); return;
+      }
+      try {
+        this.broadcast(S2C.shotPacket, packet);
+        if (this.accountSetup) this.seats[side]?.client?.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ref, seq: this.seq, acceptedRevision: this.revision, duplicate: false });
+      } finally { if (work.over) await this.finishMatch(); else this.persist(); }
+    };
+    if (this.accountSetup && !work.over) {
+      const record = this.checkpointFor(work, { revision: revision + 1, seq: packet.seq, receipts: receipts.records() });
+      record.clocks.turnMs = playbackMs + this.timing.turnMs; record.clocks.playbackMs = playbackMs;
+      await this.commitCheckpoint(record, 'shot', publish);
+    } else await publish();
   }
 
   private async handleSurrender(client: Client, raw: unknown): Promise<void> {
@@ -574,16 +601,14 @@ export class MatchRoom extends Room {
     if (parsed?.success && parsed.data.matchId !== this.matchId) return this.sendError(client, 'stale-match', C2S.surrender);
     if (parsed?.success && parsed.data.configVersion !== this.data.version) return this.sendError(client, 'config-mismatch', C2S.surrender);
     if (this.phase === 'ended' || st.over) return this.sendError(client, 'match-over', C2S.surrender);
-    await this.pushUpdate(this.apply((s) => forfeit(s, side, 'surrender')));
+    await this.applyUpdate((s) => forfeit(s, side, 'surrender'));
   }
 
   private async onTurnTimeout(): Promise<void> {
     this.turnTimer = null;
     const st = this.match;
     if (this.phase !== 'playing' || !st || st.over) return;
-    const events = this.apply((s) => passTurn(s, this.data, 'timeout'));
-    if (!this.match!.over) this.armTurn(this.timing.turnMs);
-    await this.pushUpdate(events);
+    await this.applyUpdate((s) => passTurn(s, this.data, 'timeout'), true);
   }
 
   private async onMatchClock(): Promise<void> {
@@ -597,7 +622,7 @@ export class MatchRoom extends Room {
       this.armMatch(left);
       return;
     }
-    await this.pushUpdate(this.apply((s) => endByTime(s)));
+    await this.applyUpdate((s) => endByTime(s));
   }
 
   private async onWindowExpired(side: Side): Promise<void> {
@@ -608,17 +633,24 @@ export class MatchRoom extends Room {
     const st = this.match;
     if (this.phase !== 'playing' || seat.connected || !st || st.over) return;
     const other = this.seats[side === 0 ? 1 : 0];
-    if (other?.connected) await this.pushUpdate(this.apply((s) => forfeit(s, side, 'disconnect')));
+    if (other?.connected) await this.applyUpdate((s) => forfeit(s, side, 'disconnect'));
     else await this.abandon();
   }
 
-  /** Runs `change` on a clone and keeps the result only if it did not throw. */
-  private apply(change: (st: MatchState) => MatchEvent[]): MatchEvent[] {
+  /** Running account updates are installed only after their complete checkpoint commits. */
+  private async applyUpdate(change: (st: MatchState) => MatchEvent[], resetTurn = false): Promise<void> {
     const work = structuredClone(this.match!);
     const events = change(work);
-    this.match = work;
-    this.revision++;
-    return events;
+    const publish = async () => {
+      this.match = work; this.revision++;
+      if (resetTurn && !work.over) this.armTurn(this.timing.turnMs);
+      await this.pushUpdate(events);
+    };
+    if (this.accountSetup && !work.over) {
+      const record = this.checkpointFor(work, { revision: this.revision + 1 });
+      if (resetTurn) record.clocks.turnMs = this.timing.turnMs;
+      await this.commitCheckpoint(record, 'update', publish);
+    } else await publish();
   }
 
   /** A state change that is not a shot (timeout, surrender, forfeit, match clock). */
@@ -651,8 +683,11 @@ export class MatchRoom extends Room {
           actions: receipts.filter((receipt) => receipt.actorId === seat!.actorId).length })),
       });
     }
-    try { this.onSettlement(await this.accountSetup.recordOutcome(this.terminalIntent)); }
-    catch (error) { this.onSettlement({ status: 'failed', recorded: false, recoverable: false }); throw error; }
+    try {
+      this.onSettlement(await this.accountSetup.recordOutcome(this.terminalIntent, this.checkpointFor(this.match!)));
+      if (!this.settlementReceipt.recoverable) this.schedulePersistence();
+    }
+    catch (error) { this.onSettlement({ status: 'failed', recorded: false, recoverable: false }); this.schedulePersistence(); throw error; }
   }
 
   private onSettlement(receipt: SettlementReceipt): void {
@@ -735,6 +770,84 @@ export class MatchRoom extends Room {
     });
   }
 
+  private checkpointFor(state: MatchState, overrides: Partial<Pick<AccountCheckpointDraft, 'matchId' | 'seed' | 'revision' | 'seq' | 'receipts' | 'clocks'>> = {}): AccountCheckpointDraft {
+    const now = this.time.nowMs(), [a, b] = this.seats;
+    if (!a?.account || !b?.account) throw netError('unauthenticated');
+    const seat = (value: Seat) => ({
+      userId: value.account!.userId, lineupId: value.account!.snapshot.lineupId, lineupRevision: value.account!.snapshot.revision,
+      cards: value.account!.snapshot.cards.map(card => ({ slot: card.slot, ownedCardId: card.ownedCardId, playerDefId: card.playerDefId, cardVersion: card.cardVersion, ownedLevel: card.ownedLevel, level: card.level })),
+    });
+    return { format: 1, engine: 'shared-match-v1', identity: 'account', protocol: ACCOUNT_PROTOCOL_VERSION, clockPolicy: 'freeze-v1',
+      code: this.code, matchId: this.matchId, configVersion: this.data.version, skin: this.skin, seed: this.seed, seq: this.seq, revision: this.revision,
+      match: structuredClone(state), seats: [seat(a), seat(b)], receipts: this.receipts.records(), savedAt: Math.floor(this.time.wallMs()),
+      terminal: this.terminalIntent ? structuredClone(this.terminalIntent) : null,
+      clocks: { matchMs: state.over ? 0 : Math.max(0, Math.ceil(this.matchDeadline - now)),
+        turnMs: state.over || this.turnDeadline === null ? null : Math.max(0, Math.ceil(this.turnDeadline - now)),
+        playbackMs: state.over ? 0 : Math.max(0, Math.ceil(this.playbackUntil - now)), elapsedMs: Math.max(0, Math.floor(now - this.startedAt)),
+        reconnectMs: [a.windowEnd === null ? null : Math.max(0, Math.ceil(a.windowEnd - now)), b.windowEnd === null ? null : Math.max(0, Math.ceil(b.windowEnd - now))],
+      }, ...overrides,
+    };
+  }
+  private async commitCheckpoint(record: AccountCheckpointDraft, event: CheckpointEvent, apply: () => void | Promise<void>) {
+    if (this.pendingCheckpoint) throw netError('unavailable');
+    this.pendingCheckpoint = { record, event, apply }; this.persistenceAttempts = 0;
+    await this.flushCheckpoint();
+  }
+  private async flushCheckpoint() {
+    const pending = this.pendingCheckpoint;
+    if (!pending || this.disposed) return;
+    try { await this.accountSetup!.saveCheckpoint(pending.record, pending.event); }
+    catch (error) { this.schedulePersistence(); throw error; }
+    this.pendingCheckpoint = null; this.persistenceAttempts = 0;
+    if (this.persistenceTimer) clearTimeout(this.persistenceTimer); this.persistenceTimer = null;
+    if (!this.disposed) await pending.apply();
+  }
+  private schedulePersistence() {
+    if (this.disposed || this.persistenceTimer || this.persistenceAttempts >= 12) return;
+    const delay = Math.min(5000, 1000 * 2 ** this.persistenceAttempts++);
+    this.persistenceTimer = setTimeout(() => {
+      this.persistenceTimer = null;
+      this.commands.submit(async () => {
+        await this.flushCheckpoint();
+        if (!this.disposed && this.terminalIntent && !this.settlementReceipt.recoverable) await this.finishMatch();
+      }, () => { if (!this.disposed) console.error('[MatchRoom] checkpoint retry failed'); }, 'persistence');
+    }, delay);
+    this.persistenceTimer.unref();
+  }
+  private queuePresence() {
+    if (!this.accountSetup || this.disposed || this.phase !== 'playing') return;
+    this.commands.submit(async () => {
+      await this.flushCheckpoint();
+      if (!this.disposed && this.phase === 'playing' && this.match && !this.match.over)
+        await this.commitCheckpoint(this.checkpointFor(this.match), 'presence', () => undefined);
+    }, () => { if (!this.disposed) console.error('[MatchRoom] presence checkpoint failed'); }, 'persistence');
+  }
+
+  private restoreAccount(restored: NonNullable<AccountRoomSetup['restored']>) {
+    const { record, selections } = restored;
+    if (record.match.over || record.terminal || MatchRoom.usedCodes.has(record.code) || record.configVersion !== this.data.version)
+      throw netError('unavailable');
+    const seat = (side: 0 | 1): Seat => {
+      const selection = selections[side], nickname = side === 0 ? '玩家一' : '玩家二';
+      return { actorId: selection.userId, windowGeneration: 0, account: { userId: selection.userId, nickname, snapshot: selection },
+        client: null, sessionId: '', token: newSeatToken(), nickname, connected: false, ready: true,
+        lineup: selection.cards.map(card => card.playerDefId), levels: selection.cards.map(card => card.level), windowEnd: null, window: null,
+      };
+    };
+    MatchRoom.usedCodes.add(record.code); this.code = record.code; this.skin = record.skin; this.seed = record.seed;
+    this.matchId = record.matchId; this.seq = record.seq; this.revision = record.revision;
+    this.configurationHash = record.configurationHash; this.match = structuredClone(record.match);
+    this.seats = [seat(0), seat(1)]; this.receipts = new ShotReceipts(record.receipts);
+    this.accepted = new Map(record.receipts.map(receipt => [`${record.seats.findIndex(seat => seat.userId === receipt.actorId)}:${receipt.shotId}`, receipt.seq]));
+    this.startedAt = this.time.nowMs() - record.clocks.elapsedMs;
+    this.unsubscribeSettlement = this.accountSetup!.subscribeOutcome(record.matchId, receipt => this.onSettlement(receipt));
+    this.phase = 'playing'; this.autoDispose = false;
+    this.startClocks(record.clocks.matchMs, record.clocks.turnMs ?? this.timing.turnMs);
+    this.playbackUntil = this.time.nowMs() + record.clocks.playbackMs;
+    this.openWindow(0, record.clocks.reconnectMs[0] ?? this.timing.reconnectMs);
+    this.openWindow(1, record.clocks.reconnectMs[1] ?? this.timing.reconnectMs);
+  }
+
   private restoreFrom(rec: RoomRecord): void {
     const fail = (why: string): Error => new Error(`cannot restore room ${rec.code}: ${why}`);
     if (rec.configVersion !== this.data.version || rec.match.dataVersion !== this.data.version) throw fail('data version differs');
@@ -788,7 +901,11 @@ export class MatchRoom extends Room {
   private after(ms: number, run: () => void | Promise<void>, control: 'turn' | 'match' | 'window-0' | 'window-1'): NodeJS.Timeout {
     const epoch = this.epoch;
     const timer = setTimeout(() => {
-      this.commands.submit(() => { if (!this.disposed && this.epoch === epoch) return run(); }, () => console.error('[MatchRoom] timer failed'), control);
+      this.commands.submit(async () => {
+        if (this.disposed || this.epoch !== epoch) return;
+        await this.flushCheckpoint();
+        if (!this.disposed && this.epoch === epoch) return run();
+      }, () => console.error('[MatchRoom] timer failed'), control);
     }, ms);
     timer.unref();
     return timer;
@@ -816,13 +933,13 @@ export class MatchRoom extends Room {
     this.matchTimer = this.after(ms, () => { if (generation === this.matchGeneration) return this.onMatchClock(); }, 'match');
   }
 
-  private openWindow(side: Side): void {
+  private openWindow(side: Side, remaining = this.timing.reconnectMs): void {
     const seat = this.seats[side];
     if (!seat) return;
     this.closeWindow(seat);
-    seat.windowEnd = this.time.nowMs() + this.timing.reconnectMs;
+    seat.windowEnd = this.time.nowMs() + remaining;
     const generation = seat.windowGeneration;
-    seat.window = this.after(this.timing.reconnectMs, () => { if (generation === seat.windowGeneration) return this.onWindowExpired(side); }, side === 0 ? 'window-0' : 'window-1');
+    seat.window = this.after(remaining, () => { if (generation === seat.windowGeneration) return this.onWindowExpired(side); }, side === 0 ? 'window-0' : 'window-1');
   }
 
   private closeWindow(seat: Seat): void {
