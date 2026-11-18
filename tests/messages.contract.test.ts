@@ -15,6 +15,7 @@ import {
   PROTOCOL_VERSION,
 } from '@pengzhuang/contracts';
 import { parseReady as serverReady } from '../server/validation';
+import { AccountRoomJoinSchema, MatchTicketResultSchema } from '@pengzhuang/contracts';
 
 test('HTTP body schemas reject authority claims and malformed numbers', () => {
   expect(decodeBody(UpgradeSchema, { expectedRevision: 0, expectedEconomyVersion: 'economy-1' }).ok).toBe(true);
@@ -70,4 +71,37 @@ test('legacy shot shape defers numeric legality to authoritative rules', () => {
   const body = { matchId: 'm1', turnId: 0, clientShotId: 's1', configVersion: 'v1', input };
   expect(parseShotMessage(body).ok).toBe(true);
   expect(parseShotMessage({ ...body, unexpected: true })).toEqual({ ok: false, code: 'bad-message' });
+});
+
+test('account room tickets have bounded nonce/destination/expiry schemas and cannot carry authority claims', () => {
+  const ticket = 'a'.repeat(43);
+  expect(AccountRoomJoinSchema.parse({ protocol: PROTOCOL_VERSION, ticket })).toEqual({
+    protocol: PROTOCOL_VERSION,
+    ticket,
+  });
+  for (const extra of [
+    { userId: 'fake' },
+    { seatToken: 'a'.repeat(22) },
+    { nickname: 'pretend' },
+    { snapshot: {} },
+    { protocol: 999 },
+    { ticket: 'short' },
+  ])
+    expect(AccountRoomJoinSchema.safeParse({ protocol: PROTOCOL_VERSION, ticket, ...extra }).success).toBe(false);
+  const result = {
+    ticket,
+    roomCode: 'ABCDEF',
+    expiresAt: '2026-11-18T00:00:00.000Z',
+    protocol: PROTOCOL_VERSION,
+    mode: 'friend',
+    configVersion: 'test',
+  };
+  expect(MatchTicketResultSchema.safeParse(result).success).toBe(true);
+  for (const extra of [
+    { roomCode: '../../bad' },
+    { expiresAt: 'tomorrow' },
+    { ticket: 'a'.repeat(2048) },
+    { accessToken: 'secret' },
+  ])
+    expect(MatchTicketResultSchema.safeParse({ ...result, ...extra }).success).toBe(false);
 });

@@ -3,16 +3,20 @@ import os from 'node:os';
 import path from 'node:path';
 import { existsSync } from 'node:fs';
 import express from 'express';
-import { Server } from 'colyseus';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 import { DEFAULT_DATA } from '../shared/data';
-import { MAX_CLIENT_MESSAGE_BYTES, PROTOCOL_VERSION, ROOM_NAME } from '../shared/protocol';
+import { MAX_CLIENT_MESSAGE_BYTES, PROTOCOL_VERSION, ROOM_NAME, ACCOUNT_ROOM_NAME } from '../shared/protocol';
 import { MatchRoom } from './rooms/MatchRoom';
 import { createServices, systemClock, type ServiceDependencies } from './services';
 import { catalogModule, type ApiModule } from './api/modules';
 import { publicLobbyModules } from './api/public-lobby';
 import type { LobbyContent } from '../packages/contracts/src/lobby';
 import { ApiError, asyncRoute, errorMiddleware, requestId, sendApiError, type ErrorEvent } from './api/http';
+import { AdmissionServer, RoomAdmission, type AdmissionLimits } from './matches/admission';
+import { createAccountRooms } from './matches/rooms';
+import type { MatchTickets } from './matches/tickets';
+import type { WebSessions } from './api/web-sessions';
+import { matchTicketsModule } from './api/match-tickets';
 
 /**
  * Where the built client lives. `dist/client` is produced by `npm run build` and served from the same process as
@@ -45,6 +49,8 @@ function lanPlayUrls(port: number): { url: string; kind: 'lan' | 'vpn' }[] {
 }
 
 export interface GameServerOptions extends Partial<ServiceDependencies> {
+  accountRooms?: { tickets: MatchTickets; web: WebSessions };
+  admissionLimits?: Partial<AdmissionLimits>;
   lobbyMaintenance?: boolean;
   readLobbyContent?: () => LobbyContent;
   modules?: readonly ApiModule[];
@@ -61,6 +67,8 @@ export function createGameServer(options: GameServerOptions = {}) {
     outcomeSink: options.outcomeSink ?? null,
   };
   const services = createServices(deps);
+  const admission = new RoomAdmission(() => deps.clock.nowMs(), options.admissionLimits);
+  const accounts = options.accountRooms ? createAccountRooms(options.accountRooms.tickets, deps.clock) : null;
   let closing: Promise<void> | null = null;
   const app = express();
   app.disable('x-powered-by');
@@ -83,7 +91,7 @@ export function createGameServer(options: GameServerOptions = {}) {
     res.json({ status: 'ready', requestId: res.locals.requestId });
   }));
   app.use('/api/v1', express.json({ limit: '32kb', strict: true }));
-  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent), ...(options.modules ?? [])]) {
+  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent), ...(options.modules ?? []), ...(accounts && options.accountRooms ? [matchTicketsModule(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission)] : [])]) {
     app.use(`/api/v1/${module.area}`, module.createRouter({ ...deps, services }));
   }
   app.get('/api/join-info', (req, res) => {
@@ -111,11 +119,19 @@ export function createGameServer(options: GameServerOptions = {}) {
 
   // Colyseus takes over the http server's 'request' listeners, so the express app must be attached first.
   const httpServer = http.createServer(app);
-  const gameServer = new Server({
-    transport: new WebSocketTransport({ server: httpServer, maxPayload: MAX_CLIENT_MESSAGE_BYTES }),
+  const gameServer = new AdmissionServer({
+    transport: new WebSocketTransport({ server: httpServer, maxPayload: MAX_CLIENT_MESSAGE_BYTES,
+      verifyClient(info, done) {
+        try {
+          const query = new URL(info.req.url ?? '/', 'http://localhost').searchParams;
+          if (query.has('_authToken') || query.has('access_token') || query.has('ticket')) { done(false, 403); return; }
+        } catch { done(false, 400); return; }
+        done(admission.allow(info.req.socket.remoteAddress ?? 'unknown', 'connect'), 429);
+      } }),
     gracefullyShutdown: false,
     greet: false,
   });
+  gameServer.admission = admission;
   class RuntimeRoom extends MatchRoom {
     protected override resolveGameData(version?: string, serverCohort?: string) {
       return options.resolveData ? deps.resolveData(version, serverCohort) : super.resolveGameData(version, serverCohort);
@@ -125,6 +141,7 @@ export function createGameServer(options: GameServerOptions = {}) {
     protected override authenticate(options: unknown) { return services.accounts.authenticateGuest(options); }
   }
   gameServer.define(ROOM_NAME, RuntimeRoom);
+  if (accounts) gameServer.define(ACCOUNT_ROOM_NAME, accounts.roomClass);
   function close(): Promise<void> {
     return closing ??= (async () => {
       const failures: unknown[] = [];

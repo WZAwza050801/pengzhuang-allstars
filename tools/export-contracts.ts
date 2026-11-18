@@ -38,6 +38,7 @@ for (const item of HTTP_CONTRACTS) {
       'ledger',
       'upgradeCard',
       'craftCard',
+      'matchTicket',
     ].includes(item.operationId)
   )
     parameters.push({

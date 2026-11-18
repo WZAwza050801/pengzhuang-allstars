@@ -31,3 +31,5 @@ NET-01/03 必须把 snapshotInTransaction 与签发/持久化票据放在**同�
 实际 HTTP/数据库、失败注入、等待锁后的新等级与冻结快照证据见 [DAT-03 报告](../productization/reports/DAT-03.md)。
 
 UI-04 已接持有卡筛选、五槽点选、旧偏好草稿与 revision 冲突比较；未知保存结果先 GET 核对，保留原草稿。客户端页面和可选账号目标头见 [owned-inventory.md](owned-inventory.md)，不新增职业限制或预设创建配额。
+
+NET-01 已使用同事务快照签发一次性票据并接入独立账号房，消费/重入复查即时权限；见 [account-rooms.md](account-rooms.md)。本页此前“未来票据接口”的描述是 DAT-03 当时的交付边界。

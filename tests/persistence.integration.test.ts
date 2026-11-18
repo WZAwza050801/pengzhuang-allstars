@@ -97,12 +97,12 @@ describe('PostgreSQL 17 persistence', () => {
     }
   });
   test('down requires explicit permission; local rollback and reapply work', async () => {
+    const names = async () => (await db.query<{ name: string }>('SELECT name FROM pgmigrations ORDER BY id')).rows;
+    const before = await names();
     await expect(migrateDatabase(db, { direction: 'down' })).rejects.toThrow('explicit');
     expect(await migrateDatabase(db, { direction: 'down', allowRollback: true })).toHaveLength(1);
-    expect((await db.query("SELECT to_regclass('account_local_imports') AS name")).rows).toEqual([{ name: null }]);
+    expect(await names()).toEqual(before.slice(0, -1));
     expect(await migrateDatabase(db)).toHaveLength(1);
-    expect((await db.query("SELECT to_regclass('account_local_imports') AS name")).rows).toEqual([
-      { name: 'account_local_imports' },
-    ]);
+    expect(await names()).toEqual(before);
   });
 });

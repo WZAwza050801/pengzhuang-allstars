@@ -4,6 +4,7 @@ import type { ModeId, ModeRules, ModeOutcome } from '../packages/contracts/src/m
 
 export const PROTOCOL_VERSION = 1;
 export const ROOM_NAME = 'match';
+export const ACCOUNT_ROOM_NAME = 'account_match';
 export const QUEUE_ROOM_NAME = 'queue';
 export const ROOM_CODE_LENGTH = 6;
 export const ROOM_CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -31,6 +32,9 @@ export const QUEUE_S2C = { queued: 'queued', matched: 'matched', cancelled: 'que
 export const SEAT_TOKEN_PATTERN = /^[A-Za-z0-9_-]{22}$/;
 
 export const NET_ERROR_CODES = [
+  'unauthenticated',
+  'forbidden',
+  'unavailable',
   'bad-message',
   'rate-limited',
   'internal-error',
@@ -131,6 +135,9 @@ export interface SeatSnapshot {
 }
 
 export interface RoomSnapshot {
+  identity?: 'guest' | 'account';
+  /** Only the receiving account's identity and frozen selection are exposed. */
+  account?: { userId: string; lineupId: string; revision: number };
   rules?: ModeRules;
   outcome?: ModeOutcome;
   protocol: number;

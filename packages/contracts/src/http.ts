@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { PROTOCOL_VERSION } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
+import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
 import { parseNickname } from './game-validation';
 import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
 import { LineupPageQuerySchema, LineupPageSchema, SavedLineupSchema } from './lineups';
@@ -96,6 +97,7 @@ export const MatchTicketSchema = z.strictObject({
   lineupId: z.uuid(),
   expectedRevision: revision,
   protocol: z.literal(PROTOCOL_VERSION),
+  roomCode: RoomCodeSchema.optional(),
 });
 export const QueueSchema = z.strictObject({
   mode: z.enum(['ranked', 'growth']),
@@ -247,7 +249,13 @@ export const HTTP_CONTRACTS = [
     body: CraftSchema,
     response: AssetOperationSchema,
   },
-  { method: 'post', path: '/api/v1/matches/tickets', operationId: 'matchTicket', body: MatchTicketSchema },
+  {
+    method: 'post',
+    path: '/api/v1/matches/tickets',
+    operationId: 'matchTicket',
+    body: MatchTicketSchema,
+    response: MatchTicketResultSchema,
+  },
   { method: 'post', path: '/api/v1/matchmaking/entries', operationId: 'enterQueue', body: QueueSchema },
 ] as const;
 

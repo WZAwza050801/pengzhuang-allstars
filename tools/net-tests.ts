@@ -718,7 +718,9 @@ async function pickPort(): Promise<number> {
 }
 
 async function main(): Promise<void> {
-  const { httpServer, gameServer } = createGameServer();
+  // This bulk protocol/fault suite intentionally sends hundreds of joins on loopback.
+  // Production admission thresholds are exercised separately by room-admission.test.ts.
+  const { httpServer, gameServer } = createGameServer({ admissionLimits: { perIp: 2000, global: 4000, createsPerIp: 1000, createsGlobal: 2000 } });
   await gameServer.listen(await pickPort());
   const port = (httpServer.address() as AddressInfo).port;
   url = `ws://127.0.0.1:${port}`;

@@ -426,7 +426,7 @@
 
 现有入口与范围：MatchRoom、auth、validation、roomStore、OnlineHost；保留现有防重/限流/异常防护。
 
-- [ ] **NET-01** 将房间鉴权绑定长期账号
+- [x] **NET-01** 将房间鉴权绑定长期账号
   - 依赖：ARC-06、ACC-04、DAT-03
   - 实施：生成并原子消费一次性房间票据；房间绑定 userId/合法阵容；隔离游客练习；全局建房/连接限流。
   - 产物：ticket service、onAuth、账号房间 snapshot。

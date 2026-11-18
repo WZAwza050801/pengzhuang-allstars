@@ -73,11 +73,11 @@ export class WebSessions {
         if (
           !origin ||
           !['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method ?? '') ||
-          headers.some((v) => !['content-type', 'x-csrf-token', 'authorization', 'idempotency-key'].includes(v))
+          headers.some((v) => !['content-type', 'x-csrf-token', 'authorization', 'idempotency-key', 'x-account-id'].includes(v))
         )
           throw new ApiError('FORBIDDEN', 403);
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-CSRF-Token, Authorization, Idempotency-Key');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-CSRF-Token, Authorization, Idempotency-Key, X-Account-Id');
         res.status(204).end();
         return;
       }

@@ -25,6 +25,7 @@ import { Assets } from './accounts/assets';
 import { assetModule } from './api/assets';
 import { LocalImports } from './accounts/local-import';
 import { localImportModule } from './api/local-import';
+import { MatchTickets } from './matches/tickets';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -43,7 +44,9 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
   const wechat = database && config.wechatEnabled
     ? new WechatAccounts(database, new WechatProvider({ appId: config.wechatAppId!, secret: config.wechatSecret! }), config.sessionSigningKey!, players?.initialize) : null;
   const lifecycle = database && web ? new AccountLifecycle(database, passwords, { enabled: config.accountDeletionEnabled, graceHours: config.accountDeletionGraceHours, version: config.accountRetentionPolicy }, emailAccounts, wechat) : null;
+  const tickets = database && web && lineups ? new MatchTickets(database, lineups, gameConfiguration.resolveData) : null;
   const server = createGameServer({
+    accountRooms: tickets && web ? { tickets, web } : undefined,
     lobbyMaintenance: config.lobbyMaintenance,
     modules: [authOptionsModule(!!emailAccounts, !!wechat, web, !!(web && players && lineups && assets)), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : [])] : [])],
     repository: database, resolveData: gameConfiguration.resolveData,

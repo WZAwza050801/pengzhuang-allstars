@@ -39,6 +39,7 @@ import {
   type UpdateMsg,
 } from '../../shared/protocol';
 import { authenticateJoin, netError, type GuestIdentity } from '../auth';
+import type { AccountIdentity, AccountRoomTarget, AccountMode } from '../matches/tickets';
 import { systemClock, type ServerClock } from '../clock';
 import { ROOM_RECORD_FORMAT, type RecordSeat, type RoomRecord, type RoomStore } from '../roomStore';
 import { isRecord, parseReady, parseSetLineup, parseShotMessage, parseSkin, parseSurrender } from '../validation';
@@ -63,6 +64,7 @@ function timingDefaults(data: GameData): MatchTiming { return {
 }; }
 
 interface Seat {
+  account?: AccountIdentity;
   client: Client | null;
   sessionId: string;
   /** Secret that re-claims this seat. Only ever sent to the seat's own client, never logged. */
@@ -107,6 +109,9 @@ export function allocateRoomCode(used: Set<string>, pick: (max: number) => numbe
 
 /** One 1v1 match. The server owns every rule decision; clients only send intents. */
 export class MatchRoom extends Room {
+  /** Only server-side room factories can supply this setup; it is never decoded from client options. */
+  protected accountCreation(_options: unknown): { code: string; data: GameData; mode: AccountMode; admit(options: unknown): Promise<AccountIdentity> } | null { return null; }
+  private accountSetup: ReturnType<MatchRoom['accountCreation']> = null;
   private static readonly usedCodes = new Set<string>();
   private static readonly pendingRestores = new Map<string, RoomRecord>();
   private static sharedStore: RoomStore | null = null;
@@ -173,13 +178,15 @@ export class MatchRoom extends Room {
   private turnTimer: NodeJS.Timeout | null = null;
 
   override async onCreate(options: unknown): Promise<void> {
+    this.accountSetup = this.accountCreation(options);
     const record = MatchRoom.restoreRecordFor(options);
-    this.data = freezeSnapshot(this.resolveGameData(record?.configVersion, randomUUID()));
+    this.data = freezeSnapshot(this.accountSetup?.data ?? this.resolveGameData(record?.configVersion, randomUUID()));
     if (record?.modeRules) this.rules = verifyModeRules(this.data, record.modeRules);
     else {
-      const mode = !record && isRecord(options) ? options.mode : undefined;
-      // Ownership cannot be proved by a guest payload. ACC/DAT/NET add trusted tickets later.
-      if (mode !== undefined && mode !== 'practice' && mode !== 'friend') throw netError('bad-message');
+      const mode = this.accountSetup?.mode ?? (!record && isRecord(options) ? options.mode : undefined);
+      if (mode !== undefined && mode !== 'practice' && mode !== 'friend' && mode !== 'growth' && mode !== 'ranked') throw netError('bad-message');
+      // Only the trusted account setup can select modes requiring ownership.
+      if (!this.accountSetup && mode !== undefined && mode !== 'practice' && mode !== 'friend') throw netError('bad-message');
       this.rules = rulesForMode(this.data, mode ?? 'practice');
     }
     this.store = this.resolveStore();
@@ -187,7 +194,7 @@ export class MatchRoom extends Room {
     this.timing = { ...timingDefaults(this.data), ...MatchRoom.sharedTiming };
     if (!record) {
       // onAuth only runs after the websocket upgrade, so reject a bad creator here to avoid orphan rooms.
-      this.authenticate(options);
+      if (!this.accountSetup) this.authenticate(options);
       const skin = parseSkin(isRecord(options) ? options.skin : undefined);
       if (!skin.ok) throw netError(skin.code);
       this.skin = skin.value;
@@ -208,27 +215,42 @@ export class MatchRoom extends Room {
 
     // Last step and synchronous: nothing may await between the uniqueness check and the registration.
     if (record) this.restoreFrom(record);
-    else this.code = allocateRoomCode(MatchRoom.usedCodes);
+    else if (this.accountSetup) {
+      if (MatchRoom.usedCodes.has(this.accountSetup.code)) throw netError('unavailable');
+      MatchRoom.usedCodes.add(this.accountSetup.code);
+      this.code = this.accountSetup.code;
+    } else this.code = allocateRoomCode(MatchRoom.usedCodes);
     this.roomId = this.code;
   }
 
-  override onAuth(_client: Client, options: unknown): GuestIdentity {
-    return this.authenticate(options);
+  override async onAuth(_client: Client, options: unknown): Promise<GuestIdentity | AccountIdentity> {
+    return this.accountSetup ? this.accountSetup.admit(options) : this.authenticate(options);
   }
 
-  override onJoin(client: Client, _options: unknown, auth: GuestIdentity): void {
-    if (auth.seatToken !== undefined) return this.reclaimSeat(client, auth.seatToken);
+  override onJoin(client: Client, _options: unknown, auth: GuestIdentity | AccountIdentity): void {
+    const account = 'userId' in auth ? auth : undefined;
+    if (!account && 'seatToken' in auth && auth.seatToken !== undefined) return this.reclaimSeat(client, auth.seatToken);
+    if (account) {
+      if (!this.accountSetup || account.snapshot.rules.gameDataVersion !== this.data.version || account.snapshot.rules.mode !== this.rules.mode) throw netError('forbidden');
+      const prior = this.seats.find((seat) => seat?.account?.userId === account.userId);
+      if (prior) {
+        if (!this.accountTarget()?.canEnter(account.userId)) throw netError('forbidden');
+        prior.account = account;
+        return this.reclaimSeat(client, prior.token);
+      }
+    } else if (this.accountSetup) throw netError('unauthenticated');
     const idx = this.seats.findIndex((s) => s === null);
     if (idx < 0 || this.phase !== 'lobby') throw netError('match-already-started');
     this.seats[idx] = {
+      account,
       client,
       sessionId: client.sessionId,
       token: newSeatToken(),
       nickname: auth.nickname,
       connected: true,
       ready: false,
-      lineup: this.data.rules.defaultLineup.slice(),
-      levels: new Array<number>(this.data.rules.formation.length).fill(this.data.rules.levels.uniformLevel),
+      lineup: account ? account.snapshot.cards.map((card) => card.playerDefId) : this.data.rules.defaultLineup.slice(),
+      levels: account ? account.snapshot.cards.map((card) => card.level) : new Array<number>(this.data.rules.formation.length).fill(this.data.rules.levels.uniformLevel),
       windowEnd: null,
       window: null,
     };
@@ -272,6 +294,18 @@ export class MatchRoom extends Room {
       match: this.match ? structuredClone(this.match) : null,
       acceptedShots: this.accepted.size,
     };
+  }
+
+  /** Trusted server port for ticket issuance; never exposed through matchmaker metadata or a public GET. */
+  accountTarget(): AccountRoomTarget | undefined {
+    if (!this.accountSetup) return undefined;
+    return { code: this.code, data: this.data, mode: this.accountSetup.mode,
+      selection: (userId) => this.seats.find((seat) => seat?.account?.userId === userId)?.account?.snapshot,
+      canEnter: (userId) => {
+        const seat = this.seats.find((entry) => entry?.account?.userId === userId);
+        return seat ? this.phase !== 'ended' && (seat.connected || seat.windowEnd === null || seat.windowEnd > this.time.nowMs())
+          : this.phase === 'lobby' && this.seats.some((entry) => entry === null);
+      } };
   }
 
   private seatOf(client: Client): Side | -1 {
@@ -335,6 +369,7 @@ export class MatchRoom extends Room {
   }
 
   private handleSetLineup(client: Client, raw: unknown): void {
+    if (this.accountSetup) return this.sendError(client, 'forbidden', C2S.setLineup);
     const parsed = parseSetLineup(raw, this.data);
     if (!parsed.ok) return this.sendError(client, parsed.code, C2S.setLineup);
     const side = this.seatOf(client);
@@ -522,6 +557,8 @@ export class MatchRoom extends Room {
   }
 
   private persist(): void {
+    // Account recovery is implemented by NET-03/05. Never restore an account seat as a guest bearer-token seat.
+    if (this.accountSetup) return;
     const st = this.match;
     const [a, b] = this.seats;
     if (!this.store || this.phase !== 'playing' || !st || !a || !b) return;
@@ -672,7 +709,7 @@ export class MatchRoom extends Room {
 
   private outcome(): ModeOutcome | undefined {
     if (!this.match?.over) return undefined;
-    return classifyModeOutcome(this.rules, { authority: 'server', durable: false, accountsVerified: false,
+    return classifyModeOutcome(this.rules, { authority: 'server', durable: false, accountsVerified: !!this.accountSetup,
       reason: this.match.endReason, winner: this.match.winner });
   }
 
@@ -691,6 +728,7 @@ export class MatchRoom extends Room {
       return seat;
     };
     const snap: RoomSnapshot = {
+      identity: this.accountSetup ? 'account' : 'guest',
       rules: this.rules,
       outcome: this.outcome(),
       protocol: PROTOCOL_VERSION,
@@ -702,7 +740,8 @@ export class MatchRoom extends Room {
       mySeat,
     };
     const mine = this.seats[mySeat];
-    if (mine) snap.seatToken = mine.token;
+    if (mine?.account) snap.account = { userId: mine.account.userId, lineupId: mine.account.snapshot.lineupId, revision: mine.account.snapshot.revision };
+    else if (mine) snap.seatToken = mine.token;
     return snap;
   }
 

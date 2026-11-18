@@ -5917,6 +5917,17 @@
     "/api/v1/matches/tickets": {
       "post": {
         "operationId": "matchTicket",
+        "parameters": [
+          {
+            "name": "X-Account-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -5946,6 +5957,12 @@
                   "protocol": {
                     "type": "number",
                     "const": 1
+                  },
+                  "roomCode": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 6,
+                    "pattern": "^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]+$"
                   }
                 },
                 "required": [
@@ -5961,7 +5978,76 @@
         },
         "responses": {
           "200": {
-            "description": "Service-specific success envelope; implemented by the corresponding business task"
+            "description": "Service-specific success envelope; implemented by the corresponding business task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok",
+                    "data",
+                    "requestId"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ok": {
+                      "const": true
+                    },
+                    "data": {
+                      "$schema": "https://json-schema.org/draft/2020-12/schema",
+                      "type": "object",
+                      "properties": {
+                        "ticket": {
+                          "type": "string",
+                          "pattern": "^[A-Za-z0-9_-]{43}$"
+                        },
+                        "roomCode": {
+                          "type": "string",
+                          "minLength": 6,
+                          "maxLength": 6,
+                          "pattern": "^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]+$"
+                        },
+                        "expiresAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                        },
+                        "protocol": {
+                          "type": "number",
+                          "const": 1
+                        },
+                        "configVersion": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1024
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "friend",
+                            "ranked",
+                            "growth"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "ticket",
+                        "roomCode",
+                        "expiresAt",
+                        "protocol",
+                        "configVersion",
+                        "mode"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request",
@@ -6443,6 +6529,9 @@
       "error": "error"
     },
     "errors": [
+      "unauthenticated",
+      "forbidden",
+      "unavailable",
       "bad-message",
       "rate-limited",
       "internal-error",
