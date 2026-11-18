@@ -22,9 +22,14 @@ import { localImportModule } from '../server/api/local-import';
 import { PlayerData } from '../server/accounts/player-data';
 import { playerDataModule } from '../server/api/player-data';
 import { Assets } from '../server/accounts/assets';
+import { Lineups } from '../server/accounts/lineups';
+import { lineupModule } from '../server/api/lineups';
+import { assetModule } from '../server/api/assets';
+import { UserDataRepository } from '../packages/persistence/src/user-data';
 import type { LobbyContent } from '../packages/contracts/src/lobby';
 import { DEFAULT_DATA } from '../shared/data';
 import { createBundledEconomyConfiguration } from '../config/economy';
+import { economyCardPool } from '../packages/game-core/src/economy';
 import { freePort, startMailpit } from './helpers/mailpit';
 import { jsonRequest } from './helpers/json-http';
 
@@ -99,10 +104,12 @@ beforeAll(async () => {
     repository: db,
     clientDirectory: directory,
     modules: [
-      authOptionsModule(true, false, web),
+      authOptionsModule(true, false, web, true),
       web.module(),
       currentUserModule(web),
       playerDataModule(players, web),
+      lineupModule(new Lineups(db, players.initialize, () => DEFAULT_DATA), web),
+      assetModule(assets, web),
       localImportModule(new LocalImports(db, players.initialize, () => DEFAULT_DATA), web),
       ...lifecycleModules(lifecycle, web),
       emailAuthModule(mail, web),
@@ -621,6 +628,428 @@ test('lobby displays real published text and explicit maintenance, outdated and 
   } finally {
     lobbyContent = { version: 'lobby-test-1', announcements: [] };
     await context.setOffline(false);
+    await context.close();
+  }
+});
+async function browserAccount(context: BrowserContext) {
+  const response = await context.request.get(`${origin}/api/v1/me`);
+  expect(response.ok()).toBe(true);
+  return (await response.json()).data as { userId: string; sessionId: string };
+}
+async function browserWriteHeaders(context: BrowserContext, userId: string) {
+  const csrf = (await context.cookies()).find((cookie) => cookie.name === 'pz_csrf')!.value;
+  return { Origin: origin, 'X-CSRF-Token': csrf, 'X-Account-Id': userId };
+}
+async function browserLineup(context: BrowserContext, userId: string) {
+  return (
+    await (await context.request.get(`${origin}/api/v1/me/lineups`, { headers: { 'X-Account-Id': userId } })).json()
+  ).data.lineups[0] as { id: string; revision: number; ownedCardIds: string[] };
+}
+async function enterInventory(page: Page, context: BrowserContext) {
+  await seedUnboundBrowser(context);
+  const account = await browserAccount(context);
+  await page.goto(`${origin}/lineup`);
+  await browserExpect(page.getByRole('heading', { name: '我的阵容与持有卡', exact: true })).toBeVisible();
+  await browserExpect(page.locator('[data-inventory-coins]')).toHaveText('金币：300');
+  await browserExpect(page.locator('[data-upgrade-price]')).toContainText('花费 100 金币');
+  return account;
+}
+test('real login resumes the inventory page; keyboard placement saves only owned UUIDs and invalid slots cannot save', async () => {
+  const { page, context } = await pageIn();
+  try {
+    const email = await register(page);
+    await page.goto(`${origin}/lineup`);
+    await page.waitForURL('**/login');
+    await page.getByLabel('邮箱', { exact: true }).fill(email);
+    await page.getByLabel('密码', { exact: true }).fill(password);
+    await page.getByRole('button', { name: '登录', exact: true }).click();
+    await page.waitForURL('**/lineup');
+    await browserExpect(page.locator('[data-inventory-coins]')).toHaveText('金币：300');
+    const account = await browserAccount(context),
+      before = await browserLineup(context, account.userId);
+    const sent: unknown[] = [];
+    page.on('request', (request) => {
+      if (request.method() === 'PUT' && request.url().includes('/me/lineups/')) sent.push(request.postDataJSON());
+    });
+    await page.getByRole('button', { name: '选择位置 1', exact: true }).focus();
+    await page.keyboard.press('Enter');
+    await page.locator(`[data-owned-card="${before.ownedCardIds[4]}"]`).focus();
+    await page.keyboard.press('Enter');
+    await page.getByRole('button', { name: '保存阵容', exact: true }).dblclick();
+    await browserExpect(page.getByText('阵容已保存。', { exact: true })).toBeVisible();
+    const expected = [...before.ownedCardIds];
+    [expected[0], expected[4]] = [expected[4], expected[0]];
+    expect((await browserLineup(context, account.userId)).ownedCardIds).toEqual(expected);
+    expect(sent).toEqual([{ ownedCardIds: expected, expectedRevision: before.revision }]);
+    await page.getByRole('button', { name: '清空位置 1', exact: true }).click();
+    await browserExpect(page.getByRole('button', { name: '保存阵容', exact: true })).toBeDisabled();
+    await browserExpect(page.getByText('保存需要五张不同且可用的持有卡。', { exact: true })).toBeVisible();
+    await page.getByLabel('搜索球员', { exact: true }).fill('不存在的球员');
+    await browserExpect(page.getByText('没有符合筛选条件的持有卡。', { exact: true })).toBeVisible();
+    await page.getByLabel('搜索球员', { exact: true }).fill('');
+    await page.getByLabel('职业筛选', { exact: true }).selectOption('GK');
+    expect(await page.locator('[data-owned-card]').count()).toBe(1);
+    for (const width of [320, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByLabel('职业筛选', { exact: true }).selectOption('ALL');
+    await page.getByRole('heading', { name: '我的阵容与持有卡', exact: true }).scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(screenshotDirectory, 'inventory-mobile.png') });
+    await page.locator('[data-owned-card] canvas').first().waitFor();
+    await page.locator('[data-owned-card]').first().scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(screenshotDirectory, 'inventory-cards-mobile.png') });
+    await page.locator('[data-owned-card]').first().click();
+    await page.screenshot({ path: path.join(screenshotDirectory, 'inventory-detail-mobile.png') });
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.getByRole('heading', { name: '我的阵容与持有卡', exact: true }).scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(screenshotDirectory, 'inventory-desktop.png') });
+  } finally {
+    await context.close();
+  }
+}, 60000);
+test('a double-click upgrade spends once; a dropped response survives reload and replays the original receipt', async () => {
+  const { page, context } = await pageIn(undefined, true);
+  try {
+    const account = await enterInventory(page, context);
+    const cards = await new UserDataRepository(db).listCards(account.userId);
+    const id = cards[0].id;
+    const requests: { key: string | undefined; body: unknown }[] = [];
+    let dropped = false;
+    await page.route('**/api/v1/me/cards/*/upgrade', async (route) => {
+      requests.push({ key: route.request().headers()['idempotency-key'], body: route.request().postDataJSON() });
+      if (!dropped) {
+        dropped = true;
+        await route.fetch();
+        await route.abort();
+      } else await route.continue();
+    });
+    await page.getByRole('button', { name: '确认升级', exact: true }).dblclick();
+    await browserExpect(page.getByRole('button', { name: '确认上次升级结果', exact: true })).toBeEnabled();
+    expect(requests).toHaveLength(1);
+    await page.reload();
+    await browserExpect(page.getByRole('button', { name: '确认上次升级结果', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: '确认上次升级结果', exact: true }).click();
+    await browserExpect(
+      page.getByText('升级已确认成功。当前卡级和余额以重新读取的库存为准。', { exact: true }),
+    ).toBeVisible();
+    await browserExpect(page.locator('[data-inventory-coins]')).toHaveText('金币：200');
+    expect(requests).toHaveLength(2);
+    expect(requests[1]).toEqual(requests[0]);
+    expect((await new UserDataRepository(db).listCards(account.userId)).find((card) => card.id === id)?.level).toBe(2);
+    expect(
+      (await db.query('SELECT count(*)::int AS n FROM asset_operations WHERE user_id=$1', [account.userId])).rows[0].n,
+    ).toBe(1);
+    expect(
+      await page.evaluate((userId) => sessionStorage.getItem(`pz-upgrade-intent-v1:${userId}`), account.userId),
+    ).toBeNull();
+  } finally {
+    await context.close();
+  }
+});
+test('stale lineups preserve the draft; loss of both save response and confirmation read does not cause a second PUT', async () => {
+  const { page, context } = await pageIn(undefined, true);
+  try {
+    const account = await enterInventory(page, context);
+    const original = await browserLineup(context, account.userId);
+    const headers = await browserWriteHeaders(context, account.userId);
+    await page.getByRole('button', { name: '选择位置 1', exact: true }).click();
+    await page.locator(`[data-owned-card="${original.ownedCardIds[4]}"]`).click();
+    const remote = [...original.ownedCardIds].reverse();
+    expect(
+      (
+        await context.request.put(`${origin}/api/v1/me/lineups/${original.id}`, {
+          headers,
+          data: { ownedCardIds: remote, expectedRevision: original.revision },
+        })
+      ).ok(),
+    ).toBe(true);
+    await page.getByRole('button', { name: '保存阵容', exact: true }).click();
+    await browserExpect(page.getByText('服务器阵容已变化。', { exact: false })).toBeVisible();
+    await page.getByRole('button', { name: '保留草稿并使用新版本', exact: true }).click();
+    let puts = 0,
+      loseRead = true;
+    await page.route('**/api/v1/me/lineups/*', async (route) => {
+      if (route.request().method() === 'PUT') {
+        puts++;
+        await route.fetch();
+        await route.abort();
+      } else if (loseRead) {
+        loseRead = false;
+        await route.abort();
+      } else await route.continue();
+    });
+    await page.getByRole('button', { name: '保存阵容', exact: true }).click();
+    await browserExpect(page.getByRole('button', { name: '确认保存结果', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: '确认保存结果', exact: true }).click();
+    await browserExpect(page.getByText('已确认阵容保存成功。', { exact: true })).toBeVisible();
+    expect(puts).toBe(1);
+    const expected = [...original.ownedCardIds];
+    [expected[0], expected[4]] = [expected[4], expected[0]];
+    expect(await browserLineup(context, account.userId)).toMatchObject({ revision: 2, ownedCardIds: expected });
+  } finally {
+    await context.close();
+  }
+});
+test('server-side insufficient funds and a concurrent card revision show errors without a second debit', async () => {
+  const { page, context } = await pageIn();
+  try {
+    const account = await enterInventory(page, context);
+    const id = (await new UserDataRepository(db).listCards(account.userId))[0].id;
+    let key = randomUUID();
+    await assets.debitTrusted({
+      userId: account.userId,
+      operationId: key,
+      sourceId: key,
+      reason: 'admin.correction',
+      currency: 'coins',
+      amount: '250',
+    });
+    await page.getByRole('button', { name: '确认升级', exact: true }).click();
+    await browserExpect(page.getByText('金币不足，升级未扣款。', { exact: true })).toBeVisible();
+    await browserExpect(page.locator('[data-inventory-coins]')).toHaveText('金币：50');
+    await browserExpect(page.getByRole('button', { name: '确认升级', exact: true })).toBeDisabled();
+    key = randomUUID();
+    await assets.grantTrusted({
+      userId: account.userId,
+      operationId: key,
+      sourceId: key,
+      reason: 'admin.correction',
+      coins: '500',
+    });
+    await page.getByRole('button', { name: '刷新持有卡与余额', exact: true }).click();
+    await browserExpect(page.locator('[data-upgrade-price]')).toContainText('Lv.1 → Lv.2');
+    await browserExpect(page.getByRole('button', { name: '确认升级', exact: true })).toBeEnabled();
+    const headers = { ...(await browserWriteHeaders(context, account.userId)), 'Idempotency-Key': randomUUID() };
+    expect(
+      (
+        await context.request.post(`${origin}/api/v1/me/cards/${id}/upgrade`, {
+          headers,
+          data: { expectedRevision: 0, expectedEconomyVersion: 'economy-2' },
+        })
+      ).ok(),
+    ).toBe(true);
+    await page.getByRole('button', { name: '确认升级', exact: true }).click();
+    await browserExpect(page.getByText('卡牌或价格已变化，请重新读取报价后确认。', { exact: true })).toBeVisible();
+    await browserExpect(page.locator('[data-upgrade-price]')).toContainText('Lv.2 → Lv.3');
+    expect(
+      (await new UserDataRepository(db).getWallets(account.userId)).find((wallet) => wallet.currency === 'coins')!
+        .balance,
+    ).toBe('450');
+    expect(
+      (
+        await db.query("SELECT count(*)::int AS n FROM asset_operations WHERE user_id=$1 AND kind='upgrade'", [
+          account.userId,
+        ])
+      ).rows[0].n,
+    ).toBe(1);
+  } finally {
+    await context.close();
+  }
+});
+test('foreign and newly disabled cards are rejected by real saves and cannot be selected for a valid formation', async () => {
+  const { page, context } = await pageIn();
+  const foreignContext = await browser.newContext();
+  try {
+    const account = await enterInventory(page, context);
+    const before = await browserLineup(context, account.userId);
+    await seedUnboundBrowser(foreignContext);
+    const foreign = await browserAccount(foreignContext);
+    const foreignId = (await new UserDataRepository(db).listCards(foreign.userId))[0].id;
+    await browserExpect(page.locator(`[data-owned-card="${foreignId}"]`)).toHaveCount(0);
+    await page.route('**/api/v1/me/lineups/*', async (route) => {
+      if (route.request().method() === 'PUT') {
+        const body = route.request().postDataJSON();
+        body.ownedCardIds[0] = foreignId;
+        await route.continue({ postData: JSON.stringify(body) });
+      } else await route.continue();
+    });
+    await page.getByRole('button', { name: '保存阵容', exact: true }).click();
+    await browserExpect(
+      page.getByText('阵容或卡牌状态不符合要求，请刷新持有卡后重试。', { exact: true }),
+    ).toBeVisible();
+    expect((await browserLineup(context, account.userId)).revision).toBe(0);
+    await page.unroute('**/api/v1/me/lineups/*');
+    await db.query("UPDATE owned_cards SET status='disabled',version=version+1 WHERE id=$1", [before.ownedCardIds[0]]);
+    await page.getByRole('button', { name: '保存阵容', exact: true }).click();
+    await browserExpect(page.getByRole('button', { name: '保存阵容', exact: true })).toBeDisabled();
+    await page.locator(`[data-owned-card="${before.ownedCardIds[0]}"]`).click();
+    await browserExpect(page.getByText('该卡已停用，不能保存进阵容或升级。', { exact: true })).toBeVisible();
+    await browserExpect(page.getByRole('button', { name: '确认升级', exact: true })).toHaveCount(0);
+    expect((await browserLineup(context, account.userId)).revision).toBe(0);
+  } finally {
+    await foreignContext.close();
+    await context.close();
+  }
+});
+test('switching accounts retains an unknown upgrade for its owner and the new account can upgrade independently', async () => {
+  const { page, context } = await pageIn(undefined, true);
+  try {
+    const owner = await enterInventory(page, context);
+    let dropped = false;
+    await page.route('**/api/v1/me/cards/*/upgrade', async (route) => {
+      if (!dropped) {
+        dropped = true;
+        await route.fetch();
+        await route.abort();
+      } else await route.continue();
+    });
+    await page.getByRole('button', { name: '确认升级', exact: true }).click();
+    await browserExpect(page.getByRole('button', { name: '确认上次升级结果', exact: true })).toBeEnabled();
+    await seedUnboundBrowser(context);
+    const next = await browserAccount(context);
+    await page.getByRole('button', { name: '确认上次升级结果', exact: true }).click();
+    await browserExpect(page.locator('[data-inventory-coins]')).toHaveText('金币：300');
+    expect(
+      await page.evaluate((id) => sessionStorage.getItem(`pz-upgrade-intent-v1:${id}`), owner.userId),
+    ).not.toBeNull();
+    await browserExpect(page.getByRole('button', { name: '确认上次升级结果', exact: true })).toHaveCount(0);
+    await browserExpect(page.getByRole('button', { name: '确认升级', exact: true })).toBeEnabled();
+    await page.getByRole('button', { name: '确认升级', exact: true }).click();
+    await browserExpect(page.locator('[data-inventory-coins]')).toHaveText('金币：200');
+    expect(
+      (
+        await db.query("SELECT count(*)::int AS n FROM asset_operations WHERE user_id=$1 AND kind='upgrade'", [
+          next.userId,
+        ])
+      ).rows[0].n,
+    ).toBe(1);
+  } finally {
+    await context.close();
+  }
+});
+test('owned-card API pagination and the twelve-card UI pager show only real holdings', async () => {
+  const { page, context } = await pageIn();
+  try {
+    await seedUnboundBrowser(context);
+    const account = await browserAccount(context);
+    const existing = await new UserDataRepository(db).listCards(account.userId);
+    const definitions = economyCardPool(DEFAULT_DATA)
+      .map((player) => player.id)
+      .filter((id) => !existing.some((card) => card.playerDefId === id))
+      .slice(0, 20);
+    const operationId = randomUUID();
+    await assets.grantTrusted({
+      userId: account.userId,
+      operationId,
+      sourceId: operationId,
+      reason: 'admin.correction',
+      playerDefIds: definitions,
+    });
+    let reads = 0;
+    await page.route('**/api/v1/me/cards?*', async (route) => {
+      reads++;
+      const url = new URL(route.request().url());
+      url.searchParams.set('limit', '2');
+      await route.continue({ url: url.toString() });
+    });
+    await page.goto(`${origin}/lineup`);
+    await browserExpect(page.getByText('共 25 张 · 第 1/3 页', { exact: true })).toBeVisible();
+    expect(reads).toBeGreaterThan(1);
+    await browserExpect(page.locator('[data-owned-card]')).toHaveCount(12);
+    await page.getByRole('button', { name: '下一页持有卡', exact: true }).click();
+    await page.getByRole('button', { name: '下一页持有卡', exact: true }).click();
+    await browserExpect(page.getByText('共 25 张 · 第 3/3 页', { exact: true })).toBeVisible();
+    await browserExpect(page.locator('[data-owned-card]')).toHaveCount(1);
+    const ownedIds = new Set(
+      (await new UserDataRepository(db).listCards(account.userId, { limit: 100 })).map((card) => card.id),
+    );
+    expect(ownedIds.has((await page.locator('[data-owned-card]').getAttribute('data-owned-card'))!)).toBe(true);
+  } finally {
+    await context.close();
+  }
+});
+test('an imported owned-card preference becomes a draft and only explicit save changes the cloud formation', async () => {
+  const { page, context } = await pageIn();
+  try {
+    const account = await enterInventory(page, context);
+    const original = await browserLineup(context, account.userId);
+    const cards = await new UserDataRepository(db).listCards(account.userId);
+    const ids = [...original.ownedCardIds].reverse();
+    const response = await context.request.post(`${origin}/api/v1/me/local-import`, {
+      headers: await browserWriteHeaders(context, account.userId),
+      data: {
+        version: 'pz-local-v1',
+        settings: { muted: true },
+        nicknameDraft: null,
+        lineups: [{ slot: 0, playerDefIds: ids.map((id) => cards.find((card) => card.id === id)!.playerDefId) }],
+        activeLineup: 0,
+      },
+    });
+    expect(response.ok()).toBe(true);
+    await page.reload();
+    await page.getByRole('button', { name: '采用旧偏好 1', exact: true }).click();
+    expect((await browserLineup(context, account.userId)).ownedCardIds).toEqual(original.ownedCardIds);
+    await page.getByRole('button', { name: '保存阵容', exact: true }).click();
+    await browserExpect(page.getByText('阵容已保存。', { exact: true })).toBeVisible();
+    expect((await browserLineup(context, account.userId)).ownedCardIds).toEqual(ids);
+    await browserExpect(page.locator('[data-inventory-coins]')).toHaveText('金币：300');
+  } finally {
+    await context.close();
+  }
+});
+test('blocked retry storage prevents sending an upgrade and leaves real assets unchanged', async () => {
+  const { page, context } = await pageIn();
+  try {
+    const account = await enterInventory(page, context);
+    let writes = 0;
+    page.on('request', (request) => {
+      if (request.method() === 'POST' && /\/cards\/[^/]+\/upgrade$/.test(new URL(request.url()).pathname)) writes++;
+    });
+    await page.evaluate(() => {
+      const original = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (key, value) {
+        if (key.startsWith('pz-upgrade-intent-v1:')) throw new Error('Blocked fixture storage');
+        original.call(this, key, value);
+      };
+    });
+    await page.getByRole('button', { name: '确认升级', exact: true }).click();
+    await browserExpect(
+      page.getByText('无法保存或清除升级重试记录，请检查浏览器存储权限后重试。', { exact: true }),
+    ).toBeVisible();
+    expect(writes).toBe(0);
+    expect(
+      (await new UserDataRepository(db).getWallets(account.userId)).find((wallet) => wallet.currency === 'coins')!
+        .balance,
+    ).toBe('300');
+  } finally {
+    await context.close();
+  }
+});
+test('explicit empty inventory responses have useful empty states without inventing cards or formations', async () => {
+  const { page, context } = await pageIn();
+  try {
+    await seedUnboundBrowser(context);
+    await page.route('**/api/v1/me/cards?*', (route) =>
+      route.fulfill({ json: { ok: true, data: { cards: [], nextCursor: null }, requestId: randomUUID() } }),
+    );
+    await page.route('**/api/v1/me/lineups?*', (route) =>
+      route.fulfill({ json: { ok: true, data: { lineups: [], nextCursor: null }, requestId: randomUUID() } }),
+    );
+    await page.goto(`${origin}/lineup`);
+    await browserExpect(
+      page.getByText('当前账号暂无持有卡，请重新读取或联系维护人员。', { exact: true }),
+    ).toBeVisible();
+    await browserExpect(page.getByText('暂无云端阵容。请重新读取或联系维护人员。', { exact: true })).toBeVisible();
+    await browserExpect(page.getByRole('button', { name: '保存阵容', exact: true })).toBeDisabled();
+    await browserExpect(page.locator('[data-owned-card]')).toHaveCount(0);
+    await page.unroute('**/api/v1/me/cards?*');
+    await page.unroute('**/api/v1/me/lineups?*');
+    let unknownCard = '';
+    await page.route('**/api/v1/me/cards?*', async (route) => {
+      const response = await route.fetch();
+      const body = await response.json();
+      unknownCard = body.data.cards[0].id;
+      body.data.cards[0].playerDefId = 'p9999';
+      await route.fulfill({ response, json: body });
+    });
+    await page.getByRole('button', { name: '刷新持有卡与余额', exact: true }).click();
+    await browserExpect(page.locator('[data-owned-card]')).toHaveCount(5);
+    await page.locator(`[data-owned-card="${unknownCard}"]`).click();
+    await browserExpect(page.getByText('球员资料已更新，请刷新客户端后操作此卡。', { exact: true })).toBeVisible();
+    await browserExpect(page.getByRole('button', { name: '保存阵容', exact: true })).toBeDisabled();
+  } finally {
     await context.close();
   }
 });

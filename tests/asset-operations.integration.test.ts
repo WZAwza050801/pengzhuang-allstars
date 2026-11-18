@@ -591,6 +591,23 @@ test('a trusted command and pinned policy cannot change while waiting for the us
   await assertConserved(account.userId);
 });
 
+test('a stale account header rejects an upgrade before binding its key or writing assets', async () => {
+  const first = await owner(),
+    second = await owner();
+  const operationId = randomUUID();
+  const result = await call(
+    `/cards/${second.cards[0].id}/upgrade`,
+    { ...second.headers, 'X-Account-Id': first.userId },
+    command(),
+    operationId,
+  );
+  expect(result.status).toBe(409);
+  expect(result.data.error.code).toBe('ACCOUNT_CHANGED');
+  expect(await operationCount(second.userId)).toBe(0);
+  expect((await wallet(second.userId)).balance).toBe('300');
+  expect((await upgrade(second, second.cards[0].id, operationId)).status).toBe(200);
+  expect((await wallet(second.userId)).balance).toBe('200');
+});
 test('the production runtime mounts the same quote, upgrade and ledger endpoints', async () => {
   const account = await owner();
   await server.close();

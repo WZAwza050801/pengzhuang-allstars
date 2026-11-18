@@ -6,11 +6,12 @@ import type { Lineups } from '../accounts/lineups';
 import type { Principal } from '../accounts/access-tokens';
 import type { WebSessions } from './web-sessions';
 import type { ApiModule } from './modules';
-import { ApiError, asyncRoute } from './http';
+import { ApiError, asyncRoute, requireAccountTarget } from './http';
 
 export function lineupModule(lineups: Lineups, web: WebSessions): ApiModule {
   return { area: 'me', createRouter() {
     const router = Router(); router.use(web.boundary, web.requireAccess);
+    router.use((req, res, next) => { requireAccountTarget(req, (res.locals.principal as Principal).userId); next(); });
     router.get('/lineups', asyncRoute(async (req, res) => {
       const input = LineupPageQuerySchema.safeParse(req.query);
       if (!input.success) throw new ApiError('INVALID_REQUEST', 400);

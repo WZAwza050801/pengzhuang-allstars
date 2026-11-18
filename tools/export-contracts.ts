@@ -22,8 +22,30 @@ for (const item of HTTP_CONTRACTS) {
       required: true,
       schema: { type: 'string', format: 'uuid' },
     });
-  if (['importLocalPreferences', 'localImportStatus', 'lobbyAccount'].includes(item.operationId))
-    parameters.push({ name: 'X-Account-Id', in: 'header', required: true, schema: { type: 'string', format: 'uuid' } });
+  const accountRequired = ['importLocalPreferences', 'localImportStatus', 'lobbyAccount'].includes(item.operationId);
+  if (
+    accountRequired ||
+    [
+      'profile',
+      'wallet',
+      'ownedCards',
+      'updateProfile',
+      'lineups',
+      'lineup',
+      'saveLineup',
+      'upgradeQuote',
+      'craftQuote',
+      'ledger',
+      'upgradeCard',
+      'craftCard',
+    ].includes(item.operationId)
+  )
+    parameters.push({
+      name: 'X-Account-Id',
+      in: 'header',
+      required: accountRequired,
+      schema: { type: 'string', format: 'uuid' },
+    });
   paths[item.path] = {
     ...(paths[item.path] as Record<string, unknown> | undefined),
     [item.method]: {

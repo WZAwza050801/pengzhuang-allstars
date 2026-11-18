@@ -6,10 +6,16 @@ type ErrorCode = (typeof API_ERROR_CODES)[number];
 const messages: Record<ErrorCode, string> = {
   INVALID_REQUEST: 'Invalid request', UNAUTHENTICATED: 'Authentication required', FORBIDDEN: 'Access denied',
   NOT_FOUND: 'Resource not found', CONFLICT: 'Conflicting request', INSUFFICIENT_FUNDS: 'Insufficient funds',
+  ACCOUNT_CHANGED: 'Account changed',
   RATE_LIMITED: 'Too many requests', UNAVAILABLE: 'Service unavailable', INTERNAL_ERROR: 'Internal server error',
 };
 export class ApiError extends Error {
   constructor(readonly code: ErrorCode, readonly status: number, readonly retryable = false) { super(messages[code]); }
+}
+/** A UI identity hint never chooses the authorized user; it only rejects a stale request after account switching. */
+export function requireAccountTarget(req: Request, userId: string, required = false) {
+  const expected = req.get('X-Account-Id');
+  if ((required || expected !== undefined) && expected !== userId) throw new ApiError('ACCOUNT_CHANGED', 409);
 }
 export const requestId: RequestHandler = (_req, res, next) => {
   // Generate at the trust boundary instead of accepting arbitrary client header text as a log identifier.

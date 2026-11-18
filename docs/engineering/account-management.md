@@ -27,6 +27,8 @@
 
 `WebAccountClient` 使用现有平台 NetworkAdapter，复用来源限制、10 秒默认超时和响应体上限；仅同源 Cookie，不读取 access/refresh，也不写 localStorage。平台 HTTP 端口新增显式 headers，用于 CSRF 和幂等键。请求/响应均校验公共 schema，错误只保留固定 code/retryable，不透传服务端内部信息。
 
+UI-04 接入持有卡写入时补齐跨会话 CSRF 缓存隔离：验证到新 sessionId 或当前代写请求收到 403 时失效旧缓存，迟到的旧代响应不覆盖新缓存，不自动重放写操作。可选 X-Account-Id 只用于拒绝遗留意图，不能选择授权用户；具体行为见 [持有卡页面](owned-inventory.md)。
+
 ```ts
 const api = new WebAccountClient(platform.network);
 const account = new LoginStateModel(api, () => crypto.randomUUID());

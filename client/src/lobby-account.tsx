@@ -115,7 +115,7 @@ function SignedInLobby({ onExpired }: { onExpired(): void }) {
           ) : (
             <p>尚无云端阵容。</p>
           )}
-          <p>阵容与升级页面将在开放后使用这些账号资产。</p>
+          <p>可在“阵容”查看持有卡、保存阵容并确认升级。</p>
         </>
       )}
       <div className={styles.actions}>

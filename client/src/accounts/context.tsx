@@ -9,7 +9,12 @@ interface AccountServices {
   reconcile(): Promise<void>;
   changed(authenticated: boolean): Promise<void>;
 }
-type Options = { emailEnabled: boolean; wechatMiniProgram: boolean; sessionPresent: boolean };
+type Options = {
+  emailEnabled: boolean;
+  wechatMiniProgram: boolean;
+  sessionPresent: boolean;
+  inventoryEnabled: boolean;
+};
 interface AccountContextValue {
   services: AccountServices | null;
   login: LoginSnapshot;

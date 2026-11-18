@@ -11,8 +11,8 @@ const failure = (code: 'UNAUTHENTICATED' | 'UNAVAILABLE', status = 401) => ({
     requestId: randomUUID(),
   },
 });
-const csrf = () =>
-  success({ csrfToken: `${randomBytes(32).toString('base64url')}.${randomBytes(32).toString('base64url')}` });
+const csrfValue = () => `${randomBytes(32).toString('base64url')}.${randomBytes(32).toString('base64url')}`;
+const csrf = () => success({ csrfToken: csrfValue() });
 
 test('credential failures are never refreshed or replayed; invalid registration stays at the boundary', async () => {
   const requests: string[] = [];
@@ -97,4 +97,41 @@ test('account responses reject malformed data; network errors remain retryable a
     },
   });
   expect(await offline.current()).toEqual({ ok: false, error: { code: 'NETWORK_ERROR', retryable: true } });
+});
+
+test('a new verified session discards its predecessor CSRF cache and late CSRF responses cannot overwrite it', async () => {
+  let sessionId = randomUUID();
+  const userId = randomUUID();
+  const oldToken = csrfValue(),
+    newToken = csrfValue();
+  let csrfReads = 0;
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const headers: string[] = [];
+  const api = new WebAccountClient({
+    request: async (url, options) => {
+      if (url.endsWith('/me')) return success({ userId, sessionId, profile: null });
+      if (url.endsWith('/csrf')) {
+        if (++csrfReads === 1) {
+          await gate;
+          return success({ csrfToken: oldToken });
+        }
+        return success({ csrfToken: newToken });
+      }
+      headers.push(options?.headers?.['X-CSRF-Token'] ?? 'missing');
+      return success({ loggedOut: true });
+    },
+  });
+  await api.current();
+  const oldRequest = api.logout({ operationId: randomUUID(), allSessions: false });
+  sessionId = randomUUID();
+  await api.current();
+  const newRequest = api.logout({ operationId: randomUUID(), allSessions: false });
+  release();
+  await Promise.all([oldRequest, newRequest]);
+  await api.logout({ operationId: randomUUID(), allSessions: false });
+  expect(headers.at(-1)).toBe(newToken);
+  expect(csrfReads).toBe(2);
 });

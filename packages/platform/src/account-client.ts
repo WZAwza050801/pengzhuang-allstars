@@ -6,6 +6,8 @@ import {
   VerifyEmailSchema,
   ResetRequestSchema,
   ResetPasswordSchema,
+  LineupSchema,
+  UpgradeSchema,
 } from '../../contracts/src/http';
 import {
   AuthOptionsSchema,
@@ -37,6 +39,10 @@ import {
 } from '../../contracts/src/accounts';
 import type { AccountPort, AccountResponse, LogoutIntent } from '../../client-model/src/account';
 import type { HttpRequest, NetworkAdapter } from './types';
+import { CardPageSchema, WalletListSchema } from '../../contracts/src/player-data';
+import { LineupPageSchema, SavedLineupSchema } from '../../contracts/src/lineups';
+import { UpgradeQuoteSchema, AssetOperationSchema } from '../../contracts/src/economy-operations';
+import type { UpgradeIntent } from '../../client-model/src/upgrade-intent';
 import { PublicManifestSchema, LobbyContentSchema, LobbyAccountSchema } from '../../contracts/src/lobby';
 import {
   LocalImportCommandSchema,
@@ -52,7 +58,10 @@ const csrfSchema = z.strictObject({ csrfToken: z.string().regex(/^[A-Za-z0-9_-]{
 /** Uses the platform's bounded same-origin HTTP adapter; credentials stay in browser cookies. */
 export class WebAccountClient implements AccountPort {
   private csrf: string | null = null;
-  private csrfFlight: Promise<AccountResponse<z.infer<typeof csrfSchema>>> | null = null;
+  private csrfFlight: { epoch: number; promise: Promise<AccountResponse<z.infer<typeof csrfSchema>>> } | null = null;
+  private csrfEpoch = 0;
+  private currentGeneration = 0;
+  private sessionId: string | null = null;
   private refreshFlight: Promise<AccountResponse<z.infer<typeof refreshed>>> | null = null;
   private refreshGeneration = 0;
   private lastRefresh: AccountResponse<z.infer<typeof refreshed>> | null = null;
@@ -76,24 +85,32 @@ export class WebAccountClient implements AccountPort {
   }
   private ensureCsrf(): Promise<AccountResponse<z.infer<typeof csrfSchema>>> {
     if (this.csrf) return Promise.resolve({ ok: true, data: { csrfToken: this.csrf } });
-    if (this.csrfFlight) return this.csrfFlight;
-    this.csrfFlight = this.call('/auth/csrf', csrfSchema)
+    if (this.csrfFlight?.epoch === this.csrfEpoch) return this.csrfFlight.promise;
+    const epoch = this.csrfEpoch;
+    const promise = this.call('/auth/csrf', csrfSchema)
       .then((result) => {
-        if (result.ok) this.csrf = result.data.csrfToken;
+        if (result.ok && epoch === this.csrfEpoch) this.csrf = result.data.csrfToken;
         return result;
       })
       .finally(() => {
-        this.csrfFlight = null;
+        if (this.csrfFlight?.promise === promise) this.csrfFlight = null;
       });
-    return this.csrfFlight;
+    this.csrfFlight = { epoch, promise };
+    return promise;
   }
   private async write<T>(path: string, schema: z.ZodType<T>, options: HttpRequest): Promise<AccountResponse<T>> {
+    const epoch = this.csrfEpoch;
     const csrf = await this.ensureCsrf();
     if (!csrf.ok) return csrf;
-    return this.call(path, schema, {
+    const result = await this.call(path, schema, {
       ...options,
       headers: { ...options.headers, 'X-CSRF-Token': csrf.data.csrfToken },
     });
+    if (!result.ok && result.error.code === 'FORBIDDEN' && epoch === this.csrfEpoch) {
+      this.csrf = null;
+      this.csrfEpoch++;
+    }
+    return result;
   }
   private refresh() {
     if (this.refreshFlight) return this.refreshFlight;
@@ -119,8 +136,74 @@ export class WebAccountClient implements AccountPort {
     if (this.lastRefresh && !this.lastRefresh.ok) return this.lastRefresh;
     return request();
   }
-  current() {
-    return this.protected(() => this.call('/me', CurrentUserSchema));
+  async current() {
+    const generation = ++this.currentGeneration;
+    const result = await this.protected(() => this.call('/me', CurrentUserSchema));
+    if (result.ok && generation === this.currentGeneration && this.sessionId !== result.data.sessionId) {
+      this.sessionId = result.data.sessionId;
+      this.csrf = null;
+      this.csrfEpoch++;
+    }
+    return result;
+  }
+  private readAccount<T>(userId: string, path: string, schema: z.ZodType<T>) {
+    if (!z.uuid().safeParse(userId).success) return Promise.resolve(invalid);
+    return this.protected(() => this.call(path, schema, { headers: { 'X-Account-Id': userId } }));
+  }
+  inventoryCards(userId: string, cursor?: string) {
+    if (cursor && !z.uuid().safeParse(cursor).success) return Promise.resolve(invalid);
+    return this.readAccount(
+      userId,
+      `/me/cards?limit=50${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`,
+      CardPageSchema,
+    );
+  }
+  inventoryLineups(userId: string, cursor?: string) {
+    if (cursor && !z.uuid().safeParse(cursor).success) return Promise.resolve(invalid);
+    return this.readAccount(
+      userId,
+      `/me/lineups?limit=50${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`,
+      LineupPageSchema,
+    );
+  }
+  inventoryLineup(userId: string, id: string) {
+    if (!z.uuid().safeParse(id).success) return Promise.resolve(invalid);
+    return this.readAccount(userId, `/me/lineups/${id}`, SavedLineupSchema);
+  }
+  inventoryWallets(userId: string) {
+    return this.readAccount(userId, '/me/wallet', WalletListSchema);
+  }
+  async saveOwnedLineup(userId: string, id: string, body: unknown) {
+    const input = LineupSchema.safeParse(body);
+    if (!z.uuid().safeParse(userId).success || !z.uuid().safeParse(id).success || !input.success)
+      return { ok: false as const, error: { code: 'INVALID_REQUEST' as const, retryable: false } };
+    return this.protected(() =>
+      this.write(`/me/lineups/${id}`, SavedLineupSchema, {
+        method: 'PUT',
+        body: input.data,
+        headers: { 'X-Account-Id': userId },
+      }),
+    );
+  }
+  async ownedUpgradeQuote(userId: string, id: string) {
+    if (!z.uuid().safeParse(id).success) return invalid;
+    const result = await this.readAccount(userId, `/me/cards/${id}/upgrade-quote`, UpgradeQuoteSchema);
+    return result.ok && result.data.ownedCardId !== id ? invalid : result;
+  }
+  upgradeOwnedCard(intent: UpgradeIntent) {
+    const body = UpgradeSchema.safeParse(intent.command);
+    if (
+      ![intent.userId, intent.ownedCardId, intent.operationId].every((value) => z.uuid().safeParse(value).success) ||
+      !body.success
+    )
+      return Promise.resolve(invalid);
+    return this.protected(() =>
+      this.write(`/me/cards/${intent.ownedCardId}/upgrade`, AssetOperationSchema, {
+        method: 'POST',
+        body: body.data,
+        headers: { 'X-Account-Id': intent.userId, 'Idempotency-Key': intent.operationId },
+      }),
+    );
   }
   manifest() {
     return this.call('/config/manifest', PublicManifestSchema);
@@ -136,10 +219,7 @@ export class WebAccountClient implements AccountPort {
     });
   }
   localImportStatus(userId: string) {
-    if (!z.uuid().safeParse(userId).success) return Promise.resolve(invalid);
-    return this.protected(() =>
-      this.call('/me/local-import', LocalImportStatusSchema, { headers: { 'X-Account-Id': userId } }),
-    );
+    return this.readAccount(userId, '/me/local-import', LocalImportStatusSchema);
   }
   importLocalPreferences(body: unknown, userId: string) {
     const input = LocalImportCommandSchema.safeParse(body);

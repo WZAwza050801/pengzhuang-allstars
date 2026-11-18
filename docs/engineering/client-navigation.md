@@ -39,7 +39,7 @@ flowchart TD
 |---|---|---|
 | lobby `/` | 匿名/加载/离线/维护/旧版/错误 | UI-03 已接 `/me`、`/me/lobby`、模式 manifest 和公告；未知余额不填 0，详见 [真实大厅](lobby.md) |
 | login `/login` | 成功回原意图；取消回比赛；提交/失败/离线 | ACC-07 已接真实账号路由；供应商按运行配置开放，大厅登录回大厅，不伪造会话 |
-| lineup `/lineup` | 返回比赛；加载/空卡/冲突/不足/错误 | ownedCardId、revision；GET/PUT `/me/lineups`、升级/craft schema，待 DAT/UI-04；不提交 playerDefId 代替 ownedCardId |
+| lineup `/lineup` | 返回比赛；加载/空卡/冲突/不足/错误 | UI-04 已接持有卡、五槽点选、revision 保存和幂等升级，详见 [持有卡页面](owned-inventory.md)；只提交 ownedCardId，合成服务保留供后续成长入口 |
 | growth `/growth` | 返回比赛；空/禁用/错误 | 成长内容待 LIV/DAT；初始开关关闭 |
 | club `/club` | 返回比赛；无公会/满员/权限/错误 | 待 LIV-05；关闭时明确说明 |
 | profile `/profile` | 匿名转登录；返回比赛；加载/错误 | 真实资料、设备/绑定/注销及旧偏好导入；本地设置仍与凭据隔离 |
@@ -50,7 +50,7 @@ flowchart TD
 | match `/match/:matchId?` | 返回需确认；我方/对方/pending/回放/恢复/结束 | 在线比赛必须已有 matchId；practice 可新建；由 Canvas Host 裁定输入资格，页面不能自认胜负 |
 | result `/result/:matchId` | 再来或回比赛；本地/待入账/已入账/作废/错误 | 只有服务端可靠结果和账本才显示正式金额；网络错误不等于奖励 0；待 UI-06/NET-04 |
 
-当前服务器总是挂 catalog、健康、模式 manifest 和公告；runtime 在数据库/会话配置有效时挂账号、云存档/阵容/资产路由，登录供应商分别按配置开放。上表带“待”的页面继续保留功能关闭状态。DEFAULT_FEATURES 仅开启本地练习，账号能力从真实 options 派生；ALL_FEATURES 只给测试与线框条件，不由生产启动默认采用。
+当前服务器总是挂 catalog、健康、模式 manifest 和公告；runtime 在数据库/会话配置有效时挂账号、云存档/阵容/资产路由，登录供应商分别按配置开放。上表带“待”的页面继续保留功能关闭状态。DEFAULT_FEATURES 仅开启本地练习，账号与 inventoryEnabled 能力从真实 options 派生；ALL_FEATURES 只给测试与线框条件，不由生产启动默认采用。
 
 准入顺序为：解析内部意图 → 功能开关 → 新远程操作的维护/版本/网络 → 账号读取/登录。维护或离线时不诱导进入无法完成的登录。已经在进行的比赛/结果视图可以在断网时保留，显示恢复/查询状态；关闭新好友房/匹配入口不等于强制退出已有比赛。该模型不授予出手或发奖权限。
 

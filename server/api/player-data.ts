@@ -5,15 +5,16 @@ import type { PlayerData } from '../accounts/player-data';
 import type { Principal } from '../accounts/access-tokens';
 import type { WebSessions } from './web-sessions';
 import type { ApiModule } from './modules';
-import { ApiError, asyncRoute } from './http';
+import { ApiError, asyncRoute, requireAccountTarget } from './http';
 
 export function playerDataModule(players: PlayerData, web: WebSessions): ApiModule {
   return { area: 'me', createRouter() {
     const router = Router(); router.use(web.boundary, web.requireAccess);
+    router.use((req, res, next) => { requireAccountTarget(req, (res.locals.principal as Principal).userId); next(); });
     router.get('/lobby', asyncRoute(async (req, res) => {
       const principal = res.locals.principal as Principal;
       if (Object.keys(req.query).length) throw new ApiError('INVALID_REQUEST', 400);
-      if (req.get('X-Account-Id') !== principal.userId) throw new ApiError('CONFLICT', 409);
+      requireAccountTarget(req, principal.userId, true);
       res.json({ ok: true, data: await players.lobby(principal), requestId: res.locals.requestId });
     }));
     for (const area of ['profile', 'wallet'] as const) router.get(`/${area}`, asyncRoute(async (req, res) => {

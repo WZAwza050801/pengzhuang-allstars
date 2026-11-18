@@ -8,6 +8,7 @@ const messages: Record<string, string> = {
   UNAUTHENTICATED: '登录信息不正确或已失效，请重新登录。',
   FORBIDDEN: '暂时无法完成，请重新验证当前账号后再试。',
   CONFLICT: '当前操作有冲突。身份可能已绑定其他账号，不会自动合并。',
+  ACCOUNT_CHANGED: '当前账号已切换，请重新读取。',
   RATE_LIMITED: '操作太频繁，请稍后再试。',
   UNAVAILABLE: '账号服务暂不可用，请稍后再试。',
   NETWORK_ERROR: '网络未能确认操作结果，请检查连接后重试。',

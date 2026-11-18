@@ -29,3 +29,5 @@
 NET-01/03 必须把 snapshotInTransaction 与签发/持久化票据放在**同一事务**，绑定用户/session、模式及配置，在消费/重连再检查即时状态。保存或获得一个快照不构成入局授权。本任务提供可组合构建器，没有开放客户端上传快照/等级或比赛票据接口；本局 pieceId 仍由未来房间分边后生成，不混用 ownedCardId。
 
 实际 HTTP/数据库、失败注入、等待锁后的新等级与冻结快照证据见 [DAT-03 报告](../productization/reports/DAT-03.md)。
+
+UI-04 已接持有卡筛选、五槽点选、旧偏好草稿与 revision 冲突比较；未知保存结果先 GET 核对，保留原草稿。客户端页面和可选账号目标头见 [owned-inventory.md](owned-inventory.md)，不新增职业限制或预设创建配额。

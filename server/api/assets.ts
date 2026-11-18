@@ -6,11 +6,12 @@ import type { Assets } from '../accounts/assets';
 import type { Principal } from '../accounts/access-tokens';
 import type { WebSessions } from './web-sessions';
 import type { ApiModule } from './modules';
-import { ApiError, asyncRoute } from './http';
+import { ApiError, asyncRoute, requireAccountTarget } from './http';
 
 export function assetModule(assets: Assets, web: WebSessions): ApiModule {
   return { area: 'me', createRouter() {
     const router = Router(); router.use(web.boundary, web.requireAccess);
+    router.use((req, res, next) => { requireAccountTarget(req, (res.locals.principal as Principal).userId); next(); });
     router.get('/cards/:id/upgrade-quote', asyncRoute(async (req, res) => {
       const id = z.uuid().safeParse(req.params.id);
       if (!id.success || Object.keys(req.query).length) throw new ApiError('INVALID_REQUEST', 400);
