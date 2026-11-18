@@ -16,11 +16,13 @@ import {
   validateShot,
   type MatchEvent,
   type MatchState,
+  type ShotInput,
 } from '../../shared/match';
 import type { Side } from '../../shared/physics';
 import {
   C2S,
   PROTOCOL_VERSION,
+  ACCOUNT_PROTOCOL_VERSION,
   ROOM_CODE_ALPHABET,
   ROOM_CODE_LENGTH,
   ROOM_NAME,
@@ -43,6 +45,11 @@ import type { AccountIdentity, AccountRoomTarget, AccountMode } from '../matches
 import { systemClock, type ServerClock } from '../clock';
 import { ROOM_RECORD_FORMAT, type RecordSeat, type RoomRecord, type RoomStore } from '../roomStore';
 import { isRecord, parseReady, parseSetLineup, parseShotMessage, parseSkin, parseSurrender } from '../validation';
+import { ShotReceipts } from '../matches/shot-receipts';
+import { RoomCommandQueue } from '../matches/command-queue';
+import { boundedShotPacket, SurrenderV2Schema } from '../../packages/contracts/src/match-wire';
+
+export type MatchSimulator = (state: MatchState, data: GameData, input: ShotInput) => ReturnType<typeof resolveShot> | Promise<ReturnType<typeof resolveShot>>;
 
 const RATE_WINDOW_MS = 1000;
 const RATE_MAX_MESSAGES = 30;
@@ -64,6 +71,8 @@ function timingDefaults(data: GameData): MatchTiming { return {
 }; }
 
 interface Seat {
+  actorId: string;
+  windowGeneration: number;
   account?: AccountIdentity;
   client: Client | null;
   sessionId: string;
@@ -168,6 +177,16 @@ export class MatchRoom extends Room {
   private seq = 0;
   private match: MatchState | null = null;
   private accepted = new Map<string, number>();
+  private receipts = new ShotReceipts();
+  private revision = 0;
+  private epoch = 0;
+  private disposed = false;
+  private turnGeneration = 0;
+  private matchGeneration = 0;
+  private readonly commands = new RoomCommandQueue();
+  protected simulateShot(state: MatchState, data: GameData, input: ShotInput): ReturnType<MatchSimulator> { return resolveShot(state, data, input); }
+  private protocol() { return this.accountSetup ? ACCOUNT_PROTOCOL_VERSION : PROTOCOL_VERSION; }
+  private stamp() { return { protocol: this.protocol(), revision: this.revision }; }
   private matchDeadline = 0;
   private turnDeadline: number | null = null;
   /** When the clients are expected to be done playing back the newest shot. */
@@ -205,7 +224,7 @@ export class MatchRoom extends Room {
     // No Colyseus `validate` argument: a throwing validator kicks the client with 4002. Validate inside the handler.
     this.onMessage(C2S.setLineup, (client, raw) => this.guard(client, C2S.setLineup, () => this.handleSetLineup(client, raw)));
     this.onMessage(C2S.ready, (client, raw) => this.guard(client, C2S.ready, () => this.handleReady(client, raw)));
-    this.onMessage(C2S.shot, (client, raw) => this.guard(client, C2S.shot, () => this.handleShot(client, raw)));
+    this.onMessage(C2S.shot, (client, raw) => this.guard(client, C2S.shot, (received) => this.handleShot(client, raw, received)));
     this.onMessage(C2S.surrender, (client, raw) => this.guard(client, C2S.surrender, () => this.handleSurrender(client, raw)));
     this.onMessage('*', (client) => this.guard(client, undefined, () => this.sendError(client, 'bad-message')));
     // Colyseus pre-registers this key as an internal handler. A client that sends it as a message type would reach that handler
@@ -242,6 +261,8 @@ export class MatchRoom extends Room {
     const idx = this.seats.findIndex((s) => s === null);
     if (idx < 0 || this.phase !== 'lobby') throw netError('match-already-started');
     this.seats[idx] = {
+      actorId: account?.userId ?? (auth as GuestIdentity).guestId,
+      windowGeneration: 0,
       account,
       client,
       sessionId: client.sessionId,
@@ -277,6 +298,9 @@ export class MatchRoom extends Room {
   }
 
   override onDispose(): void {
+    this.disposed = true;
+    this.epoch++;
+    this.commands.close();
     // A graceful shutdown disposes running matches: keep them restorable.
     this.persist();
     this.clearTimers();
@@ -293,6 +317,7 @@ export class MatchRoom extends Room {
       seq: this.seq,
       match: this.match ? structuredClone(this.match) : null,
       acceptedShots: this.accepted.size,
+      revision: this.revision,
     };
   }
 
@@ -323,6 +348,7 @@ export class MatchRoom extends Room {
     const side = this.seats.findIndex((s) => s !== null && sameToken(s.token, token));
     if (side < 0) throw netError('bad-seat-token');
     const seat = this.seats[side]!;
+    if (this.phase === 'playing' && seat.windowEnd !== null && seat.windowEnd <= this.time.nowMs()) throw netError('bad-seat-token');
     const previous = seat.connected ? seat.client : null;
     // Rebind first: the old connection's onLeave then no longer matches any seat.
     seat.client = client;
@@ -341,14 +367,14 @@ export class MatchRoom extends Room {
   }
 
   /** Rate limit plus a catch-all: Colyseus does not catch exceptions thrown from message handlers. */
-  private guard(client: Client, on: ClientMessageType | undefined, run: () => void): void {
-    try {
-      if (!this.allow(client, on)) return;
-      run();
-    } catch (err) {
-      console.error('[MatchRoom] message handler failed:', err instanceof Error ? (err.stack ?? err.message) : String(err));
+  private guard(client: Client, on: ClientMessageType | undefined, run: (received: { revision: number; at: number }) => void | Promise<void>): void {
+    if (!this.allow(client, on)) return;
+    const epoch = this.epoch, received = { revision: this.revision, at: this.time.nowMs() };
+    const queued = this.commands.submit(() => { if (!this.disposed && epoch === this.epoch) return run(received); }, () => {
+      console.error('[MatchRoom] message handler failed');
       this.sendError(client, 'internal-error', on);
-    }
+    });
+    if (!queued && !this.disposed) this.sendError(client, 'rate-limited', on);
   }
 
   /** Fixed window. Over the limit: one `rate-limited` reply per window, everything else is dropped silently. */
@@ -396,6 +422,8 @@ export class MatchRoom extends Room {
   }
 
   private startMatch(a: Seat, b: Seat): void {
+    this.revision = 0;
+    this.receipts = new ShotReceipts();
     this.seed = randomInt(0x100000000);
     this.matchId = randomUUID();
     this.seq = 0;
@@ -409,7 +437,7 @@ export class MatchRoom extends Room {
     this.startClocks(this.timing.matchMs, this.timing.turnMs);
 
     this.broadcastRoom();
-    const start: MatchStartMsg = { ...this.matchInfo(), state: this.wireState(), turnEvents, clocks: this.clocks() };
+    const start: MatchStartMsg = { ...this.matchInfo(), ...this.stamp(), state: this.wireState(), turnEvents, clocks: this.clocks() };
     this.broadcast(S2C.matchStart, start);
     this.persist();
   }
@@ -418,8 +446,8 @@ export class MatchRoom extends Room {
    * Validation order is part of the protocol (docs/online.md). Anything that fails leaves the authoritative state
    * untouched: the shot is resolved on a clone that replaces `this.match` only after resolveShot() returned.
    */
-  private handleShot(client: Client, raw: unknown): void {
-    const parsed = parseShotMessage(raw);
+  private async handleShot(client: Client, raw: unknown, received: { revision: number; at: number }): Promise<void> {
+    const parsed = parseShotMessage(raw, this.protocol());
     if (!parsed.ok) return this.sendError(client, parsed.code, C2S.shot);
     const msg = parsed.value;
     const ref = msg.clientShotId;
@@ -428,34 +456,49 @@ export class MatchRoom extends Room {
     const st = this.match;
     if (this.phase === 'lobby' || !st) return this.sendError(client, 'match-not-started', C2S.shot, ref);
     if (msg.matchId !== this.matchId) return this.sendError(client, 'stale-match', C2S.shot, ref);
-    if (msg.configVersion !== this.data.version) return this.sendError(client, 'config-mismatch', C2S.shot, ref);
-
     const key = `${side}:${ref}`;
+    const actor = this.seats[side]!.actorId;
+    const found = this.receipts.lookup(actor, msg);
+    if (found.kind === 'conflict') return this.sendError(client, 'shot-conflict', C2S.shot, ref);
+    if (found.kind === 'same') {
+      if (this.accountSetup) client.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ref, seq: found.receipt.seq, acceptedRevision: found.receipt.revision, duplicate: true });
+      else this.sendError(client, 'duplicate-shot', C2S.shot, ref, found.receipt.seq);
+      return;
+    }
+    if (msg.configVersion !== this.data.version) return this.sendError(client, 'config-mismatch', C2S.shot, ref);
+    // Legacy records without hashes can return their original sequence, but cannot claim a payload match.
     const prior = this.accepted.get(key);
     if (prior !== undefined) return this.sendError(client, 'duplicate-shot', C2S.shot, ref, prior);
 
     if (st.over || this.endPending) return this.sendError(client, 'match-over', C2S.shot, ref);
     if (msg.turnId !== st.shotNo) return this.sendError(client, 'stale-turn', C2S.shot, ref);
+    if (received.revision !== this.revision || (this.accountSetup && msg.revision !== this.revision)) return this.sendError(client, this.accountSetup ? 'stale-state' : 'stale-turn', C2S.shot, ref);
+    if (received.at >= this.matchDeadline) {
+      if (this.matchTimer) clearTimeout(this.matchTimer);
+      this.onMatchClock(); return this.sendError(client, 'match-over', C2S.shot, ref);
+    }
+    if (this.turnDeadline !== null && received.at >= this.turnDeadline) {
+      if (this.turnTimer) clearTimeout(this.turnTimer);
+      this.onTurnTimeout(); return this.sendError(client, 'stale-turn', C2S.shot, ref);
+    }
     const verdict = validateShot(st, this.data, side, msg.input);
     if (verdict !== null) return this.sendError(client, isNetErrorCode(verdict) ? verdict : 'internal-error', C2S.shot, ref);
 
     const work = structuredClone(st);
-    const out = resolveShot(work, this.data, msg.input);
-    this.match = work;
-    this.seq += 1;
-    this.accepted.set(key, this.seq);
+    const epoch = this.epoch, revision = this.revision;
+    const out = await this.simulateShot(work, this.data, msg.input);
+    if (this.disposed || this.epoch !== epoch || this.revision !== revision || this.match !== st || this.phase !== 'playing') return;
 
     // The next turn only starts once the clients have played the shot back, so the turn clock gets that time on top.
     const playbackMs = Math.ceil((out.sim.frames.length / this.data.physics.recordHz) * 1000) + this.timing.playbackMarginMs;
-    this.playbackUntil = this.time.nowMs() + playbackMs;
-    if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
-
+    const state = structuredClone(work); state.rng = 0;
     const packet: ShotPacketMsg = {
-      outcome: this.outcome(),
+      protocol: this.protocol(), revision: revision + 1,
+      outcome: this.outcome(work),
       matchId: this.matchId,
       seat: side,
       clientShotId: ref,
-      seq: this.seq,
+      seq: this.seq + 1,
       input: msg.input,
       ids: out.sim.ids,
       frames: out.sim.frames,
@@ -463,21 +506,37 @@ export class MatchRoom extends Room {
       simEvents: out.sim.events,
       events: out.events,
       turnEvents: out.turnEvents,
-      state: this.wireState(),
-      clocks: this.clocks(),
+      state,
+      clocks: { turnMs: work.over ? null : playbackMs + this.timing.turnMs, matchMs: work.over ? 0 : Math.max(0, Math.ceil(this.matchDeadline - this.time.nowMs())) },
     };
-    this.broadcast(S2C.shotPacket, packet);
-    if (work.over) this.finishMatch();
-    else this.persist();
+    if (!boundedShotPacket(packet, Math.ceil(this.data.physics.maxSimSeconds * this.data.physics.recordHz) + 2)) return this.sendError(client, 'simulation-limit', C2S.shot, ref);
+    this.receipts.accept(actor, msg, packet.seq, revision + 1);
+    this.match = work; this.revision++; this.seq = packet.seq;
+    this.accepted.set(key, this.seq);
+    this.playbackUntil = this.time.nowMs() + playbackMs;
+    if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
+    try {
+      this.broadcast(S2C.shotPacket, packet);
+      if (this.accountSetup) client.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ref, seq: this.seq, acceptedRevision: this.revision, duplicate: false });
+    } finally {
+      if (work.over) this.finishMatch();
+      else this.persist();
+    }
   }
 
   private handleSurrender(client: Client, raw: unknown): void {
-    const parsed = parseSurrender(raw);
-    if (!parsed.ok) return this.sendError(client, parsed.code, C2S.surrender);
+    const parsed = this.accountSetup ? SurrenderV2Schema.safeParse(raw) : null;
+    if (this.accountSetup && !parsed?.success) return this.sendError(client, 'bad-message', C2S.surrender);
+    if (!this.accountSetup) {
+      const parsed = parseSurrender(raw);
+      if (!parsed.ok) return this.sendError(client, parsed.code, C2S.surrender);
+    }
     const side = this.seatOf(client);
     if (side === -1) return this.sendError(client, 'not-seated', C2S.surrender);
     const st = this.match;
     if (this.phase === 'lobby' || !st) return this.sendError(client, 'match-not-started', C2S.surrender);
+    if (parsed?.success && parsed.data.matchId !== this.matchId) return this.sendError(client, 'stale-match', C2S.surrender);
+    if (parsed?.success && parsed.data.configVersion !== this.data.version) return this.sendError(client, 'config-mismatch', C2S.surrender);
     if (this.phase === 'ended' || st.over) return this.sendError(client, 'match-over', C2S.surrender);
     this.pushUpdate(this.apply((s) => forfeit(s, side, 'surrender')));
   }
@@ -499,7 +558,7 @@ export class MatchRoom extends Room {
     if (left > 0) {
       // A shot is still playing on the clients: the whistle waits for it, as in the local game.
       this.endPending = true;
-      this.matchTimer = this.after(left, () => this.onMatchClock());
+      this.armMatch(left);
       return;
     }
     this.pushUpdate(this.apply((s) => endByTime(s)));
@@ -522,15 +581,18 @@ export class MatchRoom extends Room {
     const work = structuredClone(this.match!);
     const events = change(work);
     this.match = work;
+    this.revision++;
     return events;
   }
 
   /** A state change that is not a shot (timeout, surrender, forfeit, match clock). */
   private pushUpdate(events: MatchEvent[]): void {
-    const update: UpdateMsg = { matchId: this.matchId, events, state: this.wireState(), clocks: this.clocks(), outcome: this.outcome() };
-    this.broadcast(S2C.update, update);
-    if (this.match!.over) this.finishMatch();
-    else this.persist();
+    const update: UpdateMsg = { ...this.stamp(), matchId: this.matchId, events, state: this.wireState(), clocks: this.clocks(), outcome: this.outcome() };
+    try { this.broadcast(S2C.update, update); }
+    finally {
+      if (this.match!.over) this.finishMatch();
+      else this.persist();
+    }
   }
 
   private finishMatch(): void {
@@ -563,7 +625,7 @@ export class MatchRoom extends Room {
     const [a, b] = this.seats;
     if (!this.store || this.phase !== 'playing' || !st || !a || !b) return;
     const clocks = this.clocks();
-    const recSeat = (s: Seat): RecordSeat => ({ nickname: s.nickname, token: s.token, lineup: s.lineup.slice(), levels: s.levels.slice() });
+    const recSeat = (s: Seat): RecordSeat => ({ actorId: s.actorId, nickname: s.nickname, token: s.token, lineup: s.lineup.slice(), levels: s.levels.slice() });
     this.store.save({
       modeRules: this.rules,
       format: ROOM_RECORD_FORMAT,
@@ -574,6 +636,8 @@ export class MatchRoom extends Room {
       seed: this.seed,
       seq: this.seq,
       accepted: [...this.accepted],
+      shotReceipts: this.receipts.records(),
+      revision: this.revision,
       match: st,
       seats: [recSeat(a), recSeat(b)],
       clocks: { matchMs: clocks.matchMs, turnMs: clocks.turnMs },
@@ -597,6 +661,8 @@ export class MatchRoom extends Room {
         rec.match.pieces.filter(p => p.side === i).some(p => p.playerId !== s.lineup[p.slot] || p.level !== selection.levels[p.slot]))
         throw fail(`seat ${i}: mode levels differ`);
       seats.push({
+        actorId: s.actorId ?? `legacy-guest-${i}`,
+        windowGeneration: 0,
         client: null,
         sessionId: '',
         token: s.token,
@@ -617,6 +683,8 @@ export class MatchRoom extends Room {
     this.matchId = rec.matchId;
     this.seq = rec.seq;
     this.accepted = new Map(rec.accepted);
+    this.receipts = new ShotReceipts(rec.shotReceipts);
+    this.revision = rec.revision ?? rec.seq;
     this.match = structuredClone(rec.match);
     this.seats = [seats[0]!, seats[1]!];
     this.phase = 'playing';
@@ -627,13 +695,10 @@ export class MatchRoom extends Room {
     this.openWindow(1);
   }
 
-  private after(ms: number, run: () => void): NodeJS.Timeout {
+  private after(ms: number, run: () => void, control: 'turn' | 'match' | 'window-0' | 'window-1'): NodeJS.Timeout {
+    const epoch = this.epoch;
     const timer = setTimeout(() => {
-      try {
-        run();
-      } catch (err) {
-        console.error('[MatchRoom] timer failed:', errText(err));
-      }
+      this.commands.submit(() => { if (!this.disposed && this.epoch === epoch) run(); }, () => console.error('[MatchRoom] timer failed'), control);
     }, ms);
     timer.unref();
     return timer;
@@ -642,7 +707,7 @@ export class MatchRoom extends Room {
   private startClocks(matchMs: number, turnMs: number): void {
     const t = this.time.nowMs();
     this.matchDeadline = t + matchMs;
-    this.matchTimer = this.after(matchMs, () => this.onMatchClock());
+    this.armMatch(matchMs);
     this.playbackUntil = t;
     this.endPending = false;
     this.armTurn(turnMs);
@@ -651,7 +716,14 @@ export class MatchRoom extends Room {
   private armTurn(ms: number): void {
     if (this.turnTimer) clearTimeout(this.turnTimer);
     this.turnDeadline = this.time.nowMs() + ms;
-    this.turnTimer = this.after(ms, () => this.onTurnTimeout());
+    const generation = ++this.turnGeneration;
+    this.turnTimer = this.after(ms, () => { if (generation === this.turnGeneration) this.onTurnTimeout(); }, 'turn');
+  }
+
+  private armMatch(ms: number): void {
+    if (this.matchTimer) clearTimeout(this.matchTimer);
+    const generation = ++this.matchGeneration;
+    this.matchTimer = this.after(ms, () => { if (generation === this.matchGeneration) this.onMatchClock(); }, 'match');
   }
 
   private openWindow(side: Side): void {
@@ -659,16 +731,19 @@ export class MatchRoom extends Room {
     if (!seat) return;
     this.closeWindow(seat);
     seat.windowEnd = this.time.nowMs() + this.timing.reconnectMs;
-    seat.window = this.after(this.timing.reconnectMs, () => this.onWindowExpired(side));
+    const generation = seat.windowGeneration;
+    seat.window = this.after(this.timing.reconnectMs, () => { if (generation === seat.windowGeneration) this.onWindowExpired(side); }, side === 0 ? 'window-0' : 'window-1');
   }
 
   private closeWindow(seat: Seat): void {
+    seat.windowGeneration++;
     if (seat.window) clearTimeout(seat.window);
     seat.window = null;
     seat.windowEnd = null;
   }
 
   private clearTimers(): void {
+    this.turnGeneration++; this.matchGeneration++;
     if (this.matchTimer) clearTimeout(this.matchTimer);
     if (this.turnTimer) clearTimeout(this.turnTimer);
     this.matchTimer = null;
@@ -690,6 +765,7 @@ export class MatchRoom extends Room {
   private matchInfo(): Omit<MatchStartMsg, 'state' | 'turnEvents' | 'clocks'> {
     const [a, b] = this.seats as [Seat, Seat];
     return {
+      ...this.stamp(),
       rules: this.rules,
       matchId: this.matchId,
       configVersion: this.data.version,
@@ -707,10 +783,10 @@ export class MatchRoom extends Room {
     return { ...this.matchInfo(), outcome: this.outcome(), seq: this.seq, state: this.wireState(), clocks: { turnMs, matchMs: c.matchMs } };
   }
 
-  private outcome(): ModeOutcome | undefined {
-    if (!this.match?.over) return undefined;
+  private outcome(state = this.match): ModeOutcome | undefined {
+    if (!state?.over) return undefined;
     return classifyModeOutcome(this.rules, { authority: 'server', durable: false, accountsVerified: !!this.accountSetup,
-      reason: this.match.endReason, winner: this.match.winner });
+      reason: state.endReason, winner: state.winner });
   }
 
   /** Client-visible copy of the authoritative state: the RNG state never leaves the server. */
@@ -728,10 +804,11 @@ export class MatchRoom extends Room {
       return seat;
     };
     const snap: RoomSnapshot = {
+      revision: this.revision,
       identity: this.accountSetup ? 'account' : 'guest',
       rules: this.rules,
       outcome: this.outcome(),
-      protocol: PROTOCOL_VERSION,
+      protocol: this.protocol(),
       code: this.code,
       configVersion: this.data.version,
       skin: this.skin,
@@ -753,7 +830,7 @@ export class MatchRoom extends Room {
   }
 
   private sendError(client: Client, code: NetErrorCode, on?: ClientMessageType, ref?: string, seq?: number): void {
-    const msg: ErrorMsg = { code };
+    const msg: ErrorMsg = { ...this.stamp(), code };
     if (on !== undefined) msg.on = on;
     if (ref !== undefined) msg.ref = ref;
     if (seq !== undefined) msg.seq = seq;

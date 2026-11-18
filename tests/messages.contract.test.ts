@@ -12,7 +12,7 @@ import {
   parseSeatToken,
   parseReady,
   parseShotMessage,
-  PROTOCOL_VERSION,
+  ACCOUNT_PROTOCOL_VERSION,
 } from '@pengzhuang/contracts';
 import { parseReady as serverReady } from '../server/validation';
 import { AccountRoomJoinSchema, MatchTicketResultSchema } from '@pengzhuang/contracts';
@@ -53,13 +53,18 @@ test('identifiers, card uniqueness and precise money are bounded', () => {
   expect(MoneySchema.safeParse(Number('9007199254740993')).success).toBe(false);
   expect(MoneySchema.safeParse('9223372036854775808').success).toBe(false);
   expect(
-    MatchTicketSchema.safeParse({ mode: 'friend', lineupId: id, expectedRevision: 0, protocol: PROTOCOL_VERSION + 1 })
-      .success,
+    MatchTicketSchema.safeParse({
+      mode: 'friend',
+      lineupId: id,
+      expectedRevision: 0,
+      protocol: ACCOUNT_PROTOCOL_VERSION + 1,
+    }).success,
   ).toBe(false);
 });
 test('v1 protocol compatibility keeps nickname, ready and seat-token error codes', () => {
   expect(supportsProtocol(1)).toBe(true);
-  for (const value of [0, 2, '1', null]) expect(supportsProtocol(value)).toBe(false);
+  expect(supportsProtocol(2)).toBe(true);
+  for (const value of [0, 3, '1', null]) expect(supportsProtocol(value)).toBe(false);
   expect(parseNickname('  e\u0301  ')).toEqual({ ok: true, value: 'é' });
   expect(parseNickname('\u200b')).toEqual({ ok: false, code: 'bad-nickname' });
   expect(parseSeatToken('x')).toEqual({ ok: false, code: 'bad-seat-token' });
@@ -73,10 +78,33 @@ test('legacy shot shape defers numeric legality to authoritative rules', () => {
   expect(parseShotMessage({ ...body, unexpected: true })).toEqual({ ok: false, code: 'bad-message' });
 });
 
+test('v2 shots require an exact protocol and state revision; legacy commands stay separate', () => {
+  const body = {
+    protocol: 2,
+    revision: 0,
+    matchId: 'm1',
+    turnId: 0,
+    clientShotId: 's1',
+    configVersion: 'v1',
+    input: { pieceId: '0-0', dirX: 1, dirY: 0, power: 0.5, curve: 0 },
+  };
+  expect(parseShotMessage(body, 2)).toEqual({ ok: true, value: body });
+  expect(parseShotMessage(body).ok).toBe(false);
+  for (const extra of [
+    { protocol: 1 },
+    { revision: undefined },
+    { revision: -1 },
+    { revision: Infinity },
+    { revision: '0' },
+    { userId: 'forged' },
+  ])
+    expect(parseShotMessage({ ...body, ...extra }, 2).ok).toBe(false);
+});
+
 test('account room tickets have bounded nonce/destination/expiry schemas and cannot carry authority claims', () => {
   const ticket = 'a'.repeat(43);
-  expect(AccountRoomJoinSchema.parse({ protocol: PROTOCOL_VERSION, ticket })).toEqual({
-    protocol: PROTOCOL_VERSION,
+  expect(AccountRoomJoinSchema.parse({ protocol: ACCOUNT_PROTOCOL_VERSION, ticket })).toEqual({
+    protocol: ACCOUNT_PROTOCOL_VERSION,
     ticket,
   });
   for (const extra of [
@@ -85,14 +113,17 @@ test('account room tickets have bounded nonce/destination/expiry schemas and can
     { nickname: 'pretend' },
     { snapshot: {} },
     { protocol: 999 },
+    { protocol: 1 },
     { ticket: 'short' },
   ])
-    expect(AccountRoomJoinSchema.safeParse({ protocol: PROTOCOL_VERSION, ticket, ...extra }).success).toBe(false);
+    expect(AccountRoomJoinSchema.safeParse({ protocol: ACCOUNT_PROTOCOL_VERSION, ticket, ...extra }).success).toBe(
+      false,
+    );
   const result = {
     ticket,
     roomCode: 'ABCDEF',
     expiresAt: '2026-11-18T00:00:00.000Z',
-    protocol: PROTOCOL_VERSION,
+    protocol: ACCOUNT_PROTOCOL_VERSION,
     mode: 'friend',
     configVersion: 'test',
   };

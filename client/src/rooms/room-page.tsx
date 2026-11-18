@@ -10,7 +10,7 @@ import {
   RoomJoinError,
 } from '../../../packages/client-model/src/room';
 import { DEFAULT_DATA } from '../../../shared/data';
-import { PROTOCOL_VERSION, type RoomSnapshot } from '../../../shared/protocol';
+import { ACCOUNT_PROTOCOL_VERSION, type RoomSnapshot } from '../../../shared/protocol';
 import { rulesForMode, describeModeRules } from '../../../config/modes';
 import { useAccount } from '../accounts/context';
 import { OnlineHost, type OnlineStatus } from '../onlineHost';
@@ -123,7 +123,7 @@ export function RoomPage({
           async issueTicket(roomCode) {
             if (!sameAccount()) return { ok: false, error: { code: 'ACCOUNT_CHANGED', retryable: false } };
             const response = await services!.api.roomTicket(user.userId, {
-              protocol: PROTOCOL_VERSION,
+              protocol: ACCOUNT_PROTOCOL_VERSION,
               mode: 'friend',
               lineupId: lineup.id,
               expectedRevision: lineup.revision,

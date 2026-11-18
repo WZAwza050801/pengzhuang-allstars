@@ -99,8 +99,12 @@ export function parseSurrender(raw: unknown): Parsed<null> {
  * Shape only. Numbers are checked for `typeof` but not for finiteness or range: NaN / Infinity / out-of-range
  * values reach shared/match.ts validateShot(), the single source of truth for shot legality.
  */
-export function parseShotMessage(raw: unknown): Parsed<ShotMsg> {
-  if (!isRecord(raw) || !hasExactKeys(raw, ['matchId', 'turnId', 'clientShotId', 'configVersion', 'input']))
+export function parseShotMessage(raw: unknown, protocol = 1): Parsed<ShotMsg> {
+  const fields = ['matchId', 'turnId', 'clientShotId', 'configVersion', 'input'];
+  if (protocol === 2) fields.push('protocol', 'revision');
+  if (!isRecord(raw) || !hasExactKeys(raw, fields)) return fail('bad-message');
+  if (protocol === 2 && raw.protocol !== 2) return fail('protocol-mismatch');
+  if (protocol === 2 && (typeof raw.revision !== 'number' || !Number.isSafeInteger(raw.revision) || raw.revision < 0))
     return fail('bad-message');
   const { matchId, turnId, clientShotId, configVersion, input } = raw;
   if (typeof matchId !== 'string' || !ID_RE.test(matchId)) return fail('bad-message');
@@ -115,5 +119,12 @@ export function parseShotMessage(raw: unknown): Parsed<ShotMsg> {
   if (typeof dirX !== 'number' || typeof dirY !== 'number' || typeof power !== 'number' || typeof curve !== 'number') {
     return fail('bad-message');
   }
-  return good({ matchId, turnId, clientShotId, configVersion, input: { pieceId, dirX, dirY, power, curve } });
+  return good({
+    matchId,
+    turnId,
+    clientShotId,
+    configVersion,
+    input: { pieceId, dirX, dirY, power, curve },
+    ...(protocol === 2 ? { protocol: 2, revision: raw.revision as number } : {}),
+  });
 }

@@ -7,6 +7,7 @@ const messages: Record<ErrorCode, string> = {
   INVALID_REQUEST: 'Invalid request', UNAUTHENTICATED: 'Authentication required', FORBIDDEN: 'Access denied',
   NOT_FOUND: 'Resource not found', CONFLICT: 'Conflicting request', INSUFFICIENT_FUNDS: 'Insufficient funds',
   ACCOUNT_CHANGED: 'Account changed',
+  PROTOCOL_UNSUPPORTED: 'Match protocol unsupported; refresh the client',
   RATE_LIMITED: 'Too many requests', UNAVAILABLE: 'Service unavailable', INTERNAL_ERROR: 'Internal server error',
 };
 export class ApiError extends Error {

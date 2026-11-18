@@ -11,10 +11,15 @@ import { DEFAULT_DATA } from '../shared/data';
 import {
   ACCOUNT_ROOM_NAME,
   ROOM_NAME,
-  PROTOCOL_VERSION,
+  ACCOUNT_PROTOCOL_VERSION as PROTOCOL_VERSION,
+  PROTOCOL_VERSION as GUEST_PROTOCOL_VERSION,
   S2C,
   type RoomSnapshot,
   type MatchStartMsg,
+  type ShotMsg,
+  type ShotAckMsg,
+  type ShotPacketMsg,
+  type ErrorMsg,
 } from '../shared/protocol';
 import { createGameServer } from '../server/app';
 import { startRuntime } from '../server/runtime';
@@ -123,6 +128,7 @@ function watch(room: Room) {
   room.onError(() => undefined);
   return {
     room,
+    messages,
     latest: <T>(type: string) => messages.filter((message) => message.type === type).at(-1)?.data as T | undefined,
   };
 }
@@ -160,9 +166,14 @@ test('HTTP tickets require real authentication, same-origin CSRF, account hint, 
     { levels: [10, 10, 10, 10, 10] },
     { snapshot: {} },
     { protocol: 999 },
+    { protocol: 1 },
     { mode: 'practice' },
   ])
-    expect((await post(account, { ...command(account), ...extra })).status).toBe(400);
+    expect((await post(account, { ...command(account), ...extra })).status).toBe('protocol' in extra ? 426 : 400);
+  expect((await post(account, { ...command(account), protocol: 1 })).data.error).toMatchObject({
+    code: 'PROTOCOL_UNSUPPORTED',
+    retryable: false,
+  });
   expect(
     (await db.query('SELECT nonce_hash FROM match_tickets WHERE user_id = $1', [account.principal.userId])).rows,
   ).toHaveLength(0);
@@ -174,7 +185,7 @@ test('foreign lineups, stale revisions, guest rooms, unknown rooms and different
   expect((await post(account, { ...command(account), lineupId: foreign.lineup.id })).status).toBe(404);
   expect((await post(account, { ...command(account), expectedRevision: 9 })).status).toBe(409);
   expect((await post(account, command(account, 'AAAAAA'))).status).toBe(404);
-  const guest = watch(await sdk.create(ROOM_NAME, { protocol: PROTOCOL_VERSION, nickname: 'guest' }));
+  const guest = watch(await sdk.create(ROOM_NAME, { protocol: GUEST_PROTOCOL_VERSION, nickname: 'guest' }));
   expect((await post(account, command(account, guest.room.roomId))).status).toBe(404);
   const first = await issue(foreign);
   expect((await post(account, { ...command(account, first.roomCode), mode: 'ranked' })).status).toBe(404);
@@ -379,6 +390,126 @@ test('concurrent real WebSocket replays admit exactly one connection', async () 
   if (success?.status !== 'fulfilled') throw new Error('No successful join');
   const snapshot = await until(() => success.value.latest<RoomSnapshot>(S2C.room));
   expect(snapshot.seats.filter(Boolean)).toHaveLength(1);
+});
+
+test('v2 account shots acknowledge original sequences, reject changed payloads and bind receipts to the account', async () => {
+  const accounts = [await owner(), await owner()];
+  const first = await issue(accounts[0]);
+  const peers = [await join(first), await join(await issue(accounts[1], first.roomCode))];
+  peers.forEach((peer) => peer.room.send('ready', { ready: true }));
+  const start = await until(() => peers[0].latest<MatchStartMsg>(S2C.matchStart));
+  expect(start).toMatchObject({ protocol: 2, revision: 0 });
+  await until(() => peers[1].latest<MatchStartMsg>(S2C.matchStart));
+  const side = start.state.turn,
+    actor = peers[side];
+  const shot: ShotMsg = {
+    protocol: 2,
+    revision: 0,
+    matchId: start.matchId,
+    turnId: start.state.shotNo,
+    clientShotId: 'same-intent',
+    configVersion: start.configVersion,
+    input: {
+      pieceId: start.state.pieces.find((piece) => piece.side === side)!.id,
+      dirX: 1,
+      dirY: 0,
+      power: 0.1,
+      curve: 0,
+    },
+  };
+  const rejected = async (peer: typeof actor, type: string, body: unknown, code: string) => {
+    const from = peer.messages.length;
+    peer.room.send(type, body);
+    const reply = await until(
+      () => peer.messages.slice(from).find((message) => message.type === S2C.error)?.data as ErrorMsg | undefined,
+    );
+    expect(reply.code).toBe(code);
+  };
+  await rejected(actor, 'shot', { ...shot, revision: 1 }, 'stale-state');
+  await rejected(actor, 'shot', { ...shot, turnId: 1 }, 'stale-turn');
+  await rejected(actor, 'shot', { ...shot, configVersion: 'other' }, 'config-mismatch');
+  await rejected(actor, 'shot', { ...shot, protocol: 1 }, 'protocol-mismatch');
+  actor.room.send('shot', shot);
+  expect(await until(() => actor.latest<ShotAckMsg>(S2C.shotAck))).toMatchObject({
+    protocol: 2,
+    seq: 1,
+    revision: 1,
+    acceptedRevision: 1,
+    duplicate: false,
+  });
+  const packet = await until(() => actor.latest<ShotPacketMsg>(S2C.shotPacket));
+  expect(packet.state.rng).toBe(0);
+  const original = structuredClone(packet);
+  actor.room.send('shot', shot);
+  await until(() => actor.latest<ShotAckMsg>(S2C.shotAck)?.duplicate);
+  expect(actor.latest<ShotAckMsg>(S2C.shotAck)).toMatchObject({ seq: 1, acceptedRevision: 1 });
+  for (const extra of [
+    { input: { ...shot.input, power: 0.2 } },
+    { turnId: 1 },
+    { revision: 1 },
+    { configVersion: 'other' },
+  ])
+    await rejected(actor, 'shot', { ...shot, ...extra }, 'shot-conflict');
+  expect(actor.latest<ShotPacketMsg>(S2C.shotPacket)).toEqual(original);
+  const nextSide = packet.state.turn,
+    next = peers[nextSide];
+  next.room.send('shot', {
+    ...shot,
+    revision: packet.revision,
+    turnId: packet.state.shotNo,
+    input: {
+      ...shot.input,
+      pieceId: packet.state.pieces.find((piece) => piece.side === nextSide && piece.out === 0 && piece.frozen === 0)!
+        .id,
+    },
+  });
+  expect(
+    await until(() => next.latest<ShotAckMsg>(S2C.shotAck)?.seq === 2 && next.latest<ShotAckMsg>(S2C.shotAck)),
+  ).toMatchObject({ seq: 2, duplicate: false });
+  const replacement = await join(await issue(accounts[side], first.roomCode));
+  await until(() => replacement.latest<RoomSnapshot>(S2C.room));
+  replacement.room.send('shot', shot);
+  expect(await until(() => replacement.latest<ShotAckMsg>(S2C.shotAck))).toMatchObject({
+    seq: 1,
+    acceptedRevision: 1,
+    duplicate: true,
+    revision: 2,
+  });
+  await rejected(replacement, 'surrender', {}, 'bad-message');
+  await rejected(
+    replacement,
+    'surrender',
+    { protocol: 2, matchId: 'wrong', configVersion: start.configVersion },
+    'stale-match',
+  );
+  await rejected(
+    replacement,
+    'surrender',
+    { protocol: 2, matchId: start.matchId, configVersion: 'wrong' },
+    'config-mismatch',
+  );
+  replacement.room.send('surrender', { protocol: 2, matchId: start.matchId, configVersion: start.configVersion });
+  await until(() => replacement.latest<{ state: { over: boolean } }>(S2C.update)?.state.over);
+  const count = replacement.messages.length;
+  replacement.room.send('shot', shot);
+  expect(
+    await until(
+      () =>
+        replacement.messages.slice(count).find((message) => message.type === S2C.shotAck)?.data as
+          ShotAckMsg | undefined,
+    ),
+  ).toMatchObject({ seq: 1, acceptedRevision: 1, duplicate: true, revision: 3 });
+});
+
+test('old account ticket protocol fails closed without consuming its nonce', async () => {
+  const account = await owner(),
+    ticket = await issue(account);
+  await db.query('UPDATE match_tickets SET protocol_version = 1 WHERE nonce_hash = $1', [hash(ticket.ticket)]);
+  await expect(join(ticket)).rejects.toThrow('unauthenticated');
+  expect(
+    (await db.query('SELECT consumed_at FROM match_tickets WHERE nonce_hash = $1', [hash(ticket.ticket)])).rows[0]
+      .consumed_at,
+  ).toBeNull();
 });
 
 test('production runtime mounts real ticket issuance and account room authentication', async () => {

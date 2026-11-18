@@ -1,7 +1,7 @@
 import type { PublicManifest } from '../../contracts/src/lobby';
-import { PROTOCOL_VERSION } from '../../../shared/protocol';
+import { ACCOUNT_PROTOCOL_VERSION } from '../../../shared/protocol';
 export function lobbyService(manifest: PublicManifest): 'ready' | 'maintenance' | 'outdated' {
-  return !manifest.protocolVersions.includes(PROTOCOL_VERSION)
+  return !manifest.protocolVersions.includes(ACCOUNT_PROTOCOL_VERSION)
     ? 'outdated'
     : manifest.maintenance
       ? 'maintenance'

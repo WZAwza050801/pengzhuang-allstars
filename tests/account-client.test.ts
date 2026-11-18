@@ -1,6 +1,7 @@
 import { randomBytes, randomUUID } from 'node:crypto';
 import { expect, test } from 'vitest';
 import { WebAccountClient } from '../packages/platform/src/account-client';
+import { roomFailureText } from '../packages/client-model/src/room';
 
 const success = (data: unknown) => ({ status: 200, body: { ok: true, data, requestId: randomUUID() } });
 const failure = (code: 'UNAUTHENTICATED' | 'UNAVAILABLE', status = 401) => ({
@@ -22,7 +23,7 @@ test('room ticket requests validate identity hints and carry only a versioned ow
     ticket: 'a'.repeat(43),
     roomCode: 'ABCD23',
     expiresAt: '2026-11-18T00:00:00.000Z',
-    protocol: 1,
+    protocol: 2,
     mode: 'friend',
     configVersion: 'test',
   };
@@ -32,7 +33,8 @@ test('room ticket requests validate identity hints and carry only a versioned ow
       return url.endsWith('/csrf') ? csrf() : success(ticket);
     },
   });
-  const command = { protocol: 1, mode: 'friend', lineupId, expectedRevision: 0, roomCode: 'ABCD23' };
+  const command = { protocol: 2, mode: 'friend', lineupId, expectedRevision: 0, roomCode: 'ABCD23' };
+  expect(await api.roomTicket(userId, { ...command, protocol: 1 })).toMatchObject({ ok: false });
   expect(await api.roomTicket(userId, { ...command, userId })).toMatchObject({ ok: false });
   expect(await api.roomTicket('invalid', command)).toMatchObject({ ok: false });
   expect(requests).toHaveLength(0);
@@ -45,6 +47,29 @@ test('room ticket requests validate identity hints and carry only a versioned ow
   expect(requests.at(-1)?.headers?.['X-CSRF-Token']).toBeTruthy();
 });
 
+test('unsupported account protocol gives an upgrade instruction and never refreshes or replays the request', async () => {
+  let posts = 0;
+  const api = new WebAccountClient({
+    request: async (url) => {
+      if (url.endsWith('/csrf')) return csrf();
+      posts++;
+      return {
+        status: 426,
+        body: {
+          ok: false,
+          error: { code: 'PROTOCOL_UNSUPPORTED', message: 'Refresh the client', retryable: false },
+          requestId: randomUUID(),
+        },
+      };
+    },
+  });
+  expect(
+    await api.roomTicket(randomUUID(), { protocol: 2, mode: 'friend', lineupId: randomUUID(), expectedRevision: 0 }),
+  ).toMatchObject({ ok: false, error: { code: 'PROTOCOL_UNSUPPORTED', retryable: false } });
+  expect(roomFailureText('PROTOCOL_UNSUPPORTED')).toContain('刷新客户端');
+  expect(posts).toBe(1);
+});
+
 test('unknown room issuance failures do not automatically create a second room', async () => {
   let posts = 0;
   const api = new WebAccountClient({
@@ -55,7 +80,7 @@ test('unknown room issuance failures do not automatically create a second room',
     },
   });
   expect(
-    await api.roomTicket(randomUUID(), { protocol: 1, mode: 'friend', lineupId: randomUUID(), expectedRevision: 0 }),
+    await api.roomTicket(randomUUID(), { protocol: 2, mode: 'friend', lineupId: randomUUID(), expectedRevision: 0 }),
   ).toMatchObject({ ok: false, error: { code: 'UNAVAILABLE' } });
   expect(posts).toBe(1);
 });

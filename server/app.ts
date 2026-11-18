@@ -6,7 +6,7 @@ import express from 'express';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 import { DEFAULT_DATA } from '../shared/data';
 import { MAX_CLIENT_MESSAGE_BYTES, PROTOCOL_VERSION, ROOM_NAME, ACCOUNT_ROOM_NAME } from '../shared/protocol';
-import { MatchRoom } from './rooms/MatchRoom';
+import { MatchRoom, type MatchSimulator } from './rooms/MatchRoom';
 import { createServices, systemClock, type ServiceDependencies } from './services';
 import { catalogModule, type ApiModule } from './api/modules';
 import { publicLobbyModules } from './api/public-lobby';
@@ -49,6 +49,7 @@ function lanPlayUrls(port: number): { url: string; kind: 'lan' | 'vpn' }[] {
 }
 
 export interface GameServerOptions extends Partial<ServiceDependencies> {
+  simulateShot?: MatchSimulator;
   accountRooms?: { tickets: MatchTickets; web: WebSessions };
   admissionLimits?: Partial<AdmissionLimits>;
   lobbyMaintenance?: boolean;
@@ -68,7 +69,7 @@ export function createGameServer(options: GameServerOptions = {}) {
   };
   const services = createServices(deps);
   const admission = new RoomAdmission(() => deps.clock.nowMs(), options.admissionLimits);
-  const accounts = options.accountRooms ? createAccountRooms(options.accountRooms.tickets, deps.clock) : null;
+  const accounts = options.accountRooms ? createAccountRooms(options.accountRooms.tickets, deps.clock, { simulateShot: options.simulateShot }) : null;
   let closing: Promise<void> | null = null;
   const app = express();
   app.disable('x-powered-by');
@@ -133,6 +134,7 @@ export function createGameServer(options: GameServerOptions = {}) {
   });
   gameServer.admission = admission;
   class RuntimeRoom extends MatchRoom {
+    protected override simulateShot(...args: Parameters<MatchSimulator>) { return options.simulateShot ? options.simulateShot(...args) : super.simulateShot(...args); }
     protected override resolveGameData(version?: string, serverCohort?: string) {
       return options.resolveData ? deps.resolveData(version, serverCohort) : super.resolveGameData(version, serverCohort);
     }

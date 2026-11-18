@@ -16,6 +16,8 @@ MatchTickets 在同一 PostgreSQL 事务中按 user→session→lineup→排序�
 
 ## 房间身份与重入
 
+NET-02 将账号票据和比赛升级到协议 2，并在数据库绑定票据协议；旧游客仍为 1。兼容窗口、明确升级错误、出手回执与串行时钟见 [match-protocol.md](match-protocol.md)。
+
 座位内部保存 userId、鉴权 session 与不可变持有快照；昵称从服务端 profile 读取，只用于展示。同名账号是不同席位。客户端 set_lineup 在账号房统一拒绝；比赛直接使用冻结的 playerDefId 和有效等级，不能上传等级。
 
 房间消息标注 `identity: account`，只向本人提供 `account.userId/lineupId/revision`，不向对手公开该账号或持有卡 UUID。账号房不返回旧 seatToken，带旧 seatToken 或伪造 userId 的入场正文被拒绝。历史游客房继续只通过随机 seatToken 认座，不获得账号权限。

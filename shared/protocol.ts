@@ -3,6 +3,8 @@ import type { Side, SimEvent } from './physics';
 import type { ModeId, ModeRules, ModeOutcome } from '../packages/contracts/src/modes';
 
 export const PROTOCOL_VERSION = 1;
+export const ACCOUNT_PROTOCOL_VERSION = 2;
+export const SUPPORTED_MATCH_PROTOCOLS = [PROTOCOL_VERSION, ACCOUNT_PROTOCOL_VERSION] as const;
 export const ROOM_NAME = 'match';
 export const ACCOUNT_ROOM_NAME = 'account_match';
 export const QUEUE_ROOM_NAME = 'queue';
@@ -19,6 +21,7 @@ export const S2C = {
   room: 'room',
   matchStart: 'match_start',
   shotPacket: 'shot_packet',
+  shotAck: 'shot_ack',
   update: 'update',
   resume: 'resume',
   error: 'error',
@@ -49,6 +52,9 @@ export const NET_ERROR_CODES = [
   'stale-match',
   'config-mismatch',
   'duplicate-shot',
+  'shot-conflict',
+  'stale-state',
+  'simulation-limit',
   'stale-turn',
   // pass-through of shared/match.ts validateShot()
   'match-over',
@@ -115,6 +121,8 @@ export interface ReadyMsg {
 
 /** `turnId` must equal `state.shotNo` of the newest state the client has seen. */
 export interface ShotMsg {
+  protocol?: number;
+  revision?: number;
   matchId: string;
   turnId: number;
   clientShotId: string;
@@ -135,6 +143,7 @@ export interface SeatSnapshot {
 }
 
 export interface RoomSnapshot {
+  revision?: number;
   identity?: 'guest' | 'account';
   /** Only the receiving account's identity and frozen selection are exposed. */
   account?: { userId: string; lineupId: string; revision: number };
@@ -163,7 +172,9 @@ export interface ClockInfo {
 }
 
 /** `state.rng` is always 0 on the wire; the seed never leaves the server. */
-export interface MatchStartMsg {
+export interface MatchStamp { protocol?: number; revision?: number }
+export interface ShotAckMsg extends MatchStamp { matchId: string; clientShotId: string; seq: number; acceptedRevision: number; duplicate: boolean }
+export interface MatchStartMsg extends MatchStamp {
   rules?: ModeRules;
   matchId: string;
   configVersion: string;
@@ -177,7 +188,7 @@ export interface MatchStartMsg {
 }
 
 /** Same fields as client/src/host.ts ShotPacket plus routing info. */
-export interface ShotPacketMsg {
+export interface ShotPacketMsg extends MatchStamp {
   outcome?: ModeOutcome;
   matchId: string;
   seat: Side;
@@ -195,7 +206,7 @@ export interface ShotPacketMsg {
 }
 
 /** A state change that is not a shot: turn timeout, match clock, surrender, forfeit. `events` end with `end` when the match is over. */
-export interface UpdateMsg {
+export interface UpdateMsg extends MatchStamp {
   outcome?: ModeOutcome;
   matchId: string;
   events: MatchEvent[];
@@ -204,7 +215,7 @@ export interface UpdateMsg {
 }
 
 /** Sent only to a client that re-claimed its seat mid-match or after the end: everything needed to rebuild the board. */
-export interface ResumeMsg {
+export interface ResumeMsg extends MatchStamp {
   rules?: ModeRules;
   outcome?: ModeOutcome;
   matchId: string;
@@ -218,7 +229,7 @@ export interface ResumeMsg {
   clocks: ClockInfo;
 }
 
-export interface ErrorMsg {
+export interface ErrorMsg extends MatchStamp {
   code: NetErrorCode;
   on?: ClientMessageType;
   ref?: string;

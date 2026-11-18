@@ -296,6 +296,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -452,6 +453,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -698,6 +700,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -861,6 +864,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -1006,6 +1010,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -1219,6 +1224,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -1405,6 +1411,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -1555,6 +1562,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -1736,6 +1744,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -1880,6 +1889,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -2054,6 +2064,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -2273,6 +2284,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -2563,6 +2575,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -2759,6 +2772,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -2906,6 +2920,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3030,6 +3045,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3140,6 +3156,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3211,6 +3228,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3295,6 +3313,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3416,6 +3435,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3547,6 +3567,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3639,6 +3660,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3731,6 +3753,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3890,6 +3913,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -3961,6 +3985,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4089,6 +4114,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4217,6 +4243,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4310,6 +4337,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4448,6 +4476,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4629,6 +4658,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4747,6 +4777,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4852,6 +4883,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -4952,6 +4984,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -5044,6 +5077,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -5138,6 +5172,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -5232,6 +5267,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -5330,6 +5366,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -5604,6 +5641,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -5874,6 +5912,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -5961,7 +6000,7 @@
                   },
                   "protocol": {
                     "type": "number",
-                    "const": 1
+                    "const": 2
                   },
                   "roomCode": {
                     "type": "string",
@@ -6019,7 +6058,7 @@
                         },
                         "protocol": {
                           "type": "number",
-                          "const": 1
+                          "const": 2
                         },
                         "configVersion": {
                           "type": "string",
@@ -6073,6 +6112,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -6148,7 +6188,7 @@
                   },
                   "protocol": {
                     "type": "number",
-                    "const": 1
+                    "const": 2
                   }
                 },
                 "required": [
@@ -6185,6 +6225,7 @@
                           "type": "string",
                           "enum": [
                             "INVALID_REQUEST",
+                            "PROTOCOL_UNSUPPORTED",
                             "UNAUTHENTICATED",
                             "FORBIDDEN",
                             "NOT_FOUND",
@@ -6529,6 +6570,7 @@
       "room": "room",
       "matchStart": "match_start",
       "shotPacket": "shot_packet",
+      "shotAck": "shot_ack",
       "update": "update",
       "resume": "resume",
       "error": "error"
@@ -6551,6 +6593,9 @@
       "stale-match",
       "config-mismatch",
       "duplicate-shot",
+      "shot-conflict",
+      "stale-state",
+      "simulation-limit",
       "stale-turn",
       "match-over",
       "not-your-turn",

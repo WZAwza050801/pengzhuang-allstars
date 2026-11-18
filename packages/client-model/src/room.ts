@@ -18,6 +18,7 @@ export function roomFailureText(code: string): string {
     NOT_FOUND: '房间不存在、已满或已结束，请核对邀请或返回大厅。',
     RATE_LIMITED: '进入房间过于频繁，请稍后再试。',
     INVALID_RESPONSE: '服务端规则或返回信息不兼容，请刷新客户端。',
+    PROTOCOL_UNSUPPORTED: '对战协议已更新，请刷新客户端后重新进入。',
   };
   return messages[code] ?? '暂时无法连接房间，请检查网络后重试。';
 }

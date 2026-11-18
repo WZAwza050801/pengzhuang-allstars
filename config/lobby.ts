@@ -1,7 +1,7 @@
 import bundled from './lobby.json';
 import { LobbyContentSchema, PublicManifestSchema, type LobbyContent } from '../packages/contracts/src/lobby';
 import { ModeIdSchema } from '../packages/contracts/src/modes';
-import { PROTOCOL_VERSION } from '../shared/protocol';
+import { SUPPORTED_MATCH_PROTOCOLS } from '../shared/protocol';
 import { rulesForMode } from './modes';
 import type { GameData } from '../shared/data';
 import { freezeSnapshot } from '../packages/game-core/src/snapshot';
@@ -23,7 +23,7 @@ export function activeAnnouncements(content: LobbyContent, now: Date) {
 export function publicManifest(data: GameData, maintenance: boolean, friendRoomsEnabled = false) {
   return PublicManifestSchema.parse({
     schemaVersion: 1,
-    protocolVersions: [PROTOCOL_VERSION],
+    protocolVersions: [...SUPPORTED_MATCH_PROTOCOLS],
     gameDataVersion: data.version,
     maintenance,
     modes: ModeIdSchema.options.map((mode) => rulesForMode(data, mode)),

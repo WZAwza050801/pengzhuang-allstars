@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { activeAnnouncements, publicManifest } from '../config/lobby';
 import { lobbyService, formatLobbyMoney } from '../packages/client-model/src/lobby';
 import { DEFAULT_DATA } from '../shared/data';
-import { PROTOCOL_VERSION } from '../shared/protocol';
+import { PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../shared/protocol';
 import { LobbyContentSchema, LobbyAccountSchema } from '../packages/contracts/src/lobby';
 
 test('announcement visibility follows server publication and expiry boundaries', () => {
@@ -44,7 +44,7 @@ test('announcement ordering compares instants across different ISO fractional pr
 });
 test('public manifest uses authoritative mode rules and only implemented modes are available', () => {
   const manifest = publicManifest(DEFAULT_DATA, false);
-  expect(manifest.protocolVersions).toEqual([PROTOCOL_VERSION]);
+  expect(manifest.protocolVersions).toEqual([...SUPPORTED_MATCH_PROTOCOLS]);
   expect(manifest.availableModes).toEqual(['practice']);
   expect(manifest.modes.find((mode) => mode.mode === 'friend')).toMatchObject({
     fixedLevel: 5,
@@ -56,7 +56,7 @@ test('public manifest uses authoritative mode rules and only implemented modes a
 test('protocol mismatch takes priority and maintenance is an explicit server state', () => {
   const manifest = publicManifest(DEFAULT_DATA, true);
   expect(lobbyService(manifest)).toBe('maintenance');
-  expect(lobbyService({ ...manifest, protocolVersions: [PROTOCOL_VERSION + 1] })).toBe('outdated');
+  expect(lobbyService({ ...manifest, protocolVersions: [PROTOCOL_VERSION] })).toBe('outdated');
 });
 test('display formatting preserves all bigint digits without coercion to Number', () => {
   expect(formatLobbyMoney('9007199254740993')).toBe('9,007,199,254,740,993');

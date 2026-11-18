@@ -9,7 +9,7 @@ import { requireActivePrincipal } from '../accounts/authorization';
 import type { Lineups } from '../accounts/lineups';
 import { ApiError } from '../api/http';
 import type { GameData } from '../../shared/data';
-import { PROTOCOL_VERSION } from '../../shared/protocol';
+import { ACCOUNT_PROTOCOL_VERSION } from '../../shared/protocol';
 
 export type OwnedLineupSnapshot = Awaited<ReturnType<Lineups['snapshotInTransaction']>>;
 export type AccountMode = z.infer<typeof MatchTicketSchema>['mode'];
@@ -45,6 +45,8 @@ export class MatchTickets {
     private readonly resolveData: () => GameData,
   ) {}
   async issue(principal: Principal, raw: unknown, rooms: AccountRooms) {
+    if (typeof raw === 'object' && raw !== null && 'protocol' in raw && raw.protocol !== ACCOUNT_PROTOCOL_VERSION)
+      throw new ApiError('PROTOCOL_UNSUPPORTED', 426);
     const parsed = MatchTicketSchema.safeParse(raw);
     if (!parsed.success) throw new ApiError('INVALID_REQUEST', 400);
     const input = parsed.data;
@@ -81,8 +83,8 @@ export class MatchTickets {
         // Snapshot and nonce hash become durable together; the client supplies no cards, levels, identity or price.
         const result = await tx.query<{ expires_at: Date }>(
           `INSERT INTO match_tickets
-          (nonce_hash, user_id, session_id, room_code, mode, config_version, lineup_snapshot, expires_at)
-          VALUES ($1,$2,$3,$4,$5,$6,$7,clock_timestamp() + interval '60 seconds') RETURNING expires_at`,
+          (nonce_hash, user_id, session_id, room_code, mode, config_version, lineup_snapshot, expires_at, protocol_version)
+          VALUES ($1,$2,$3,$4,$5,$6,$7,clock_timestamp() + interval '60 seconds',$8) RETURNING expires_at`,
           [
             hash,
             principal.userId,
@@ -91,6 +93,7 @@ export class MatchTickets {
             input.mode,
             target.data.version,
             JSON.stringify(snapshot),
+            ACCOUNT_PROTOCOL_VERSION,
           ],
         );
         return result.rows[0].expires_at.toISOString();
@@ -103,7 +106,7 @@ export class MatchTickets {
         ticket: token,
         roomCode: target.code,
         expiresAt,
-        protocol: PROTOCOL_VERSION,
+        protocol: ACCOUNT_PROTOCOL_VERSION,
         configVersion: target.data.version,
         mode: input.mode,
       };
@@ -133,8 +136,8 @@ export class MatchTickets {
         const claimed = await tx.query<{ lineup_snapshot: OwnedLineupSnapshot }>(
           `UPDATE match_tickets SET consumed_at = clock_timestamp()
           WHERE nonce_hash = $1 AND user_id = $2 AND session_id = $3 AND room_code = $4 AND mode = $5
-          AND config_version = $6 AND consumed_at IS NULL AND expires_at > clock_timestamp() RETURNING lineup_snapshot`,
-          [hash, hint.user_id, hint.session_id, target.code, target.mode, target.data.version],
+          AND config_version = $6 AND protocol_version = $7 AND consumed_at IS NULL AND expires_at > clock_timestamp() RETURNING lineup_snapshot`,
+          [hash, hint.user_id, hint.session_id, target.code, target.mode, target.data.version, ACCOUNT_PROTOCOL_VERSION],
         );
         const snapshot = claimed.rows[0]?.lineup_snapshot;
         if (!snapshot || snapshot.userId !== hint.user_id || !target.canEnter(hint.user_id))

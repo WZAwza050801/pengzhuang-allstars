@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PROTOCOL_VERSION } from '../../../shared/protocol';
+import { ACCOUNT_PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
 import { parseNickname } from './game-validation';
@@ -37,12 +37,13 @@ import {
 } from './lifecycle';
 
 export const API_VERSION = 'v1';
-export const SUPPORTED_PROTOCOL_VERSIONS: readonly number[] = Object.freeze([PROTOCOL_VERSION]);
+export const SUPPORTED_PROTOCOL_VERSIONS: readonly number[] = Object.freeze([...SUPPORTED_MATCH_PROTOCOLS]);
 export function supportsProtocol(version: unknown): version is number {
   return typeof version === 'number' && SUPPORTED_PROTOCOL_VERSIONS.includes(version);
 }
 export const API_ERROR_CODES = [
   'INVALID_REQUEST',
+  'PROTOCOL_UNSUPPORTED',
   'UNAUTHENTICATED',
   'FORBIDDEN',
   'NOT_FOUND',
@@ -96,14 +97,14 @@ export const MatchTicketSchema = z.strictObject({
   mode: z.enum(['friend', 'ranked', 'growth']),
   lineupId: z.uuid(),
   expectedRevision: revision,
-  protocol: z.literal(PROTOCOL_VERSION),
+  protocol: z.literal(ACCOUNT_PROTOCOL_VERSION),
   roomCode: RoomCodeSchema.optional(),
 });
 export const QueueSchema = z.strictObject({
   mode: z.enum(['ranked', 'growth']),
   lineupId: z.uuid(),
   expectedRevision: revision,
-  protocol: z.literal(PROTOCOL_VERSION),
+  protocol: z.literal(ACCOUNT_PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
   { method: 'get', path: '/api/v1/config/manifest', operationId: 'publicManifest', response: PublicManifestSchema },

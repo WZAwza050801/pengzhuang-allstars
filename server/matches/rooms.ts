@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { matchMaker } from 'colyseus';
 import { ACCOUNT_ROOM_NAME } from '../../shared/protocol';
 import { AccountRoomJoinSchema } from '../../packages/contracts/src/match-tickets';
-import { MatchRoom, allocateRoomCode } from '../rooms/MatchRoom';
+import { MatchRoom, allocateRoomCode, type MatchSimulator } from '../rooms/MatchRoom';
 import { netError } from '../auth';
 import { ApiError } from '../api/http';
 import type { MatchTickets, AccountRooms, AccountRoomTarget, AccountMode } from './tickets';
@@ -10,12 +10,13 @@ import type { GameData } from '../../shared/data';
 import type { ServerClock } from '../clock';
 
 /** A bounded, in-process room directory. Cross-process discovery/recovery is deliberately deferred to NET-03/05. */
-export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, maxRooms = 128) {
+export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, options: { maxRooms?: number; simulateShot?: MatchSimulator } = {}) {
   type Setup = { code: string; data: GameData; mode: AccountMode };
   const grants = new Map<string, Setup>();
   const rooms = new Map<string, AccountMatchRoom>();
   const reserved = new Set<string>();
   class AccountMatchRoom extends MatchRoom {
+    protected override simulateShot(...args: Parameters<MatchSimulator>) { return options.simulateShot ? options.simulateShot(...args) : super.simulateShot(...args); }
     private lifetime: NodeJS.Timeout | undefined;
     protected override resolveClock() {
       return clock;
@@ -72,7 +73,7 @@ export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, ma
   }
   const directory: AccountRooms = {
     reserve(data, mode) {
-      if (reserved.size >= maxRooms) throw new ApiError('RATE_LIMITED', 429, true);
+      if (reserved.size >= (options.maxRooms ?? 128)) throw new ApiError('RATE_LIMITED', 429, true);
       const code = allocateRoomCode(reserved);
       const key = randomUUID();
       const setup = { code, data, mode };
