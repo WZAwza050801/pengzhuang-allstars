@@ -100,6 +100,11 @@ export function ActiveMatchPanel({
           重新检查对局
         </button>
       )}
+      {(value?.state === 'ended' || value?.state === 'expired') && (
+        <Link className="pz-button" to="/results">
+          查看比赛记录
+        </Link>
+      )}
     </section>
   );
 }

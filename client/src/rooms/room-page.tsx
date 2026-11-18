@@ -195,6 +195,14 @@ export function RoomPage({
         status={status}
         detail={error}
         service={context.service}
+        onResult={() => {
+          const matchId = host.current?.endedMatchId;
+          if (!matchId) return;
+          sequence.current++;
+          host.current?.dispose();
+          host.current = null;
+          navigate(`/result/${matchId}?mode=friend`);
+        }}
         onExit={() => {
           host.current?.dispose();
           host.current = null;

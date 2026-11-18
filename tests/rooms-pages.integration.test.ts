@@ -1,9 +1,9 @@
 import path from 'node:path';
 import { mkdirSync } from 'node:fs';
-import { randomBytes } from 'node:crypto';
+import { randomBytes, randomUUID } from 'node:crypto';
 import { build } from 'vite';
 import { chromium, expect as visible, type Browser, type Page, type BrowserContext } from 'playwright/test';
-import { beforeAll, afterAll, test, expect } from 'vitest';
+import { beforeAll, afterAll, test, expect, vi } from 'vitest';
 import { matchMaker } from 'colyseus';
 import { AccountRepository, Database, migrateDatabase } from '@pengzhuang/persistence';
 import { readRuntimeConfig } from '../config/runtime';
@@ -26,10 +26,16 @@ import { playerDataModule } from '../server/api/player-data';
 import { lineupModule } from '../server/api/lineups';
 import { jsonRequest } from './helpers/json-http';
 import { freePort } from './helpers/mailpit';
+import { rulesForMode } from '../config/modes';
+import { OutcomeIntentSchema } from '../packages/contracts/src/match-results';
+import { ApiError } from '../server/api/http';
+import { S2C } from '../shared/protocol';
 
 let db: Database, server: ReturnType<typeof createGameServer>, browser: Browser, sessions: Sessions;
 let origin: string;
 let outcomes: MatchOutcomes;
+let assets: Assets;
+let players: PlayerData;
 const errors: string[] = [];
 const screenshots = path.resolve('work/ui05-browser');
 beforeAll(async () => {
@@ -38,13 +44,15 @@ beforeAll(async () => {
   await migrateDatabase(db);
   origin = `http://127.0.0.1:${await freePort()}`;
   const key = randomBytes(32).toString('base64url');
-  const players = new PlayerData(db, createBundledEconomyConfiguration().policy, DEFAULT_DATA);
+  players = new PlayerData(db, createBundledEconomyConfiguration().policy, DEFAULT_DATA);
+  assets = new Assets(db, players.initialize, () => ({
+    data: DEFAULT_DATA,
+    policy: createBundledEconomyConfiguration().policy,
+  }));
+  await db.query('CREATE TABLE ui06_rating_transaction_marker(match_id uuid PRIMARY KEY)');
   outcomes = new MatchOutcomes({
     db,
-    assets: new Assets(db, players.initialize, () => ({
-      data: DEFAULT_DATA,
-      policy: createBundledEconomyConfiguration().policy,
-    })),
+    assets,
     policy: () => createBundledEconomyConfiguration().policy,
     journal: new OutcomeJournal(path.join(process.env.PG_TEST_TMP_DIR, 'net04-page-outcomes')),
   });
@@ -112,6 +120,83 @@ async function pageIn({ width = 390, height = 844, touch = false, anonymous = fa
   return { context, page, account };
 }
 type Actor = Awaited<ReturnType<typeof pageIn>>;
+
+// Trusted component fixture for positive ledger/history rendering. It is not a network physics or Elo test.
+async function recordedMatches(a: Actor, b: Actor, mode: 'friend' | 'growth' = 'growth', count = 1) {
+  await outcomes.close();
+  for (const userId of [a.account!.userId, b.account!.userId])
+    await db.transaction((tx) => players.initialize(tx, userId));
+  const port = new MatchOutcomes({
+    db,
+    assets,
+    policy: () => createBundledEconomyConfiguration().policy,
+    journal: new OutcomeJournal(path.join(process.env.PG_TEST_TMP_DIR!, `ui06-result-${randomUUID()}`)),
+    ratings: {
+      async applyInTransaction(tx, outcome) {
+        await tx.query('INSERT INTO ui06_rating_transaction_marker(match_id) VALUES ($1)', [outcome.matchId]);
+      },
+    },
+    onEvent: () => undefined,
+  });
+  const ids: string[] = [];
+  try {
+    for (let i = 0; i < count; i++) {
+      const matchId = randomUUID(),
+        owners = [a.account!.userId, b.account!.userId];
+      const configurationHash = await db.transaction(async (tx) => {
+        await tx.query(
+          "INSERT INTO matches(id,mode,config_version,protocol_version,status) VALUES ($1,$2,$3,2,'playing')",
+          [matchId, mode, DEFAULT_DATA.version],
+        );
+        for (const [side, userId] of owners.entries())
+          await tx.query('INSERT INTO match_participants(match_id,user_id,side,lineup_snapshot) VALUES ($1,$2,$3,$4)', [
+            matchId,
+            userId,
+            side,
+            JSON.stringify(
+              (
+                await tx.query('SELECT id,player_def_id,level FROM owned_cards WHERE user_id=$1 ORDER BY id LIMIT 5', [
+                  userId,
+                ])
+              ).rows,
+            ),
+          ]);
+        return port.openInTransaction(tx, matchId, DEFAULT_DATA, rulesForMode(DEFAULT_DATA, mode));
+      });
+      await port.record(
+        OutcomeIntentSchema.parse({
+          schemaVersion: 1,
+          protocol: 2,
+          matchId,
+          mode,
+          configurationHash,
+          configVersion: DEFAULT_DATA.version,
+          finalSeq: 4,
+          score: [1, 0],
+          winner: 0,
+          reason: 'time',
+          elapsedSeconds: 180,
+          endedAt: new Date(Date.now() - 30000 + i * 1000).toISOString(),
+          participants: owners.map((userId, side) => ({ userId, side, actions: 2 })),
+        }),
+      );
+      ids.push(matchId);
+    }
+    await port.drain(64);
+    expect(
+      (
+        await db.query(
+          'SELECT match_id FROM match_outcomes WHERE match_id=ANY($1::uuid[]) AND settled_at IS NOT NULL',
+          [ids],
+        )
+      ).rows,
+    ).toHaveLength(count);
+    return ids;
+  } finally {
+    await port.close();
+    await outcomes.start();
+  }
+}
 type Automation = {
   state(): MatchState;
   mySides(): number[];
@@ -698,6 +783,261 @@ test('a killed browser process recovers its own match from a fresh process using
     await partner.context.close();
   }
 }, 60000);
+
+test('UI-06 delayed settlement survives reload, offline navigation, and repeated queries before a fresh rematch', async () => {
+  const game = await pair();
+  const matchId = room(game.code).inspect().matchId;
+  await outcomes.close();
+  try {
+    await game.a.page.locator('.menu-btn').click();
+    game.a.page.once('dialog', (dialog) => dialog.accept());
+    await game.a.page.locator('.menu .surrender').click();
+    await game.a.page.getByRole('button', { name: '查看本场结算', exact: true }).click();
+    await visible(game.a.page).toHaveURL(`${origin}/result/${matchId}?mode=friend`);
+    await visible(game.a.page.getByRole('heading', { name: '结果已保存，等待奖励入账', exact: true })).toBeVisible();
+    await visible(game.a.page.locator('[aria-label="本场实际奖励"]')).toHaveCount(0);
+    await game.a.page.reload();
+    await visible(game.a.page.getByRole('heading', { name: '结果已保存，等待奖励入账', exact: true })).toBeVisible();
+    await game.a.page.getByRole('button', { name: '重新查询结果', exact: true }).evaluate((button) => {
+      (button as HTMLButtonElement).click();
+      (button as HTMLButtonElement).click();
+    });
+    expect((await db.query('SELECT * FROM match_rewards WHERE match_id=$1', [matchId])).rows).toHaveLength(0);
+    await outcomes.start();
+    await visible(game.a.page.getByRole('heading', { name: '结算已完成', exact: true })).toBeVisible();
+    expect((await db.query('SELECT * FROM match_rewards WHERE match_id=$1', [matchId])).rows).toHaveLength(2);
+    await game.a.context.setOffline(true);
+    await visible(
+      game.a.page.getByText('当前离线，以下为本会话此前确认的结果；恢复网络后会重新查询。', { exact: true }),
+    ).toBeVisible();
+    await game.a.page.getByRole('link', { name: '查看比赛记录', exact: true }).click();
+    await visible(game.a.page.getByRole('link', { name: '查看本场结果', exact: true })).toHaveCount(1);
+    await game.a.page.getByRole('link', { name: '查看本场结果', exact: true }).click();
+    await visible(game.a.page.getByRole('heading', { name: '结算已完成', exact: true })).toBeVisible();
+    await game.a.context.setOffline(false);
+    await visible(game.a.page.getByRole('button', { name: '重新查询结果', exact: true })).toBeEnabled();
+    await game.a.page.reload();
+    await visible(game.a.page.getByRole('heading', { name: '结算已完成', exact: true })).toBeVisible();
+    const before = (
+      await db.query(
+        'SELECT COUNT(*)::int AS count FROM matches m JOIN match_participants p ON p.match_id=m.id WHERE p.user_id=$1',
+        [game.a.account!.userId],
+      )
+    ).rows[0].count;
+    await game.a.page.getByRole('link', { name: '再来一局', exact: true }).evaluate((link) => {
+      (link as HTMLAnchorElement).click();
+      (link as HTMLAnchorElement).click();
+    });
+    await visible(game.a.page.getByRole('button', { name: '创建房间', exact: true })).toBeEnabled();
+    let tickets = 0;
+    game.a.page.on('request', (request) => {
+      if (request.method() === 'POST' && request.url().endsWith('/matches/tickets')) tickets++;
+    });
+    await game.a.page.getByRole('button', { name: '创建房间', exact: true }).evaluate((button) => {
+      (button as HTMLButtonElement).click();
+      (button as HTMLButtonElement).click();
+    });
+    await visible(game.a.page.getByRole('textbox', { name: '邀请链接', exact: true })).toBeVisible();
+    expect(tickets).toBe(1);
+    expect(
+      (await game.a.page.getByRole('textbox', { name: '邀请链接', exact: true }).inputValue()).split('/').at(-1),
+    ).not.toBe(game.code);
+    expect(
+      (
+        await db.query(
+          'SELECT COUNT(*)::int AS count FROM matches m JOIN match_participants p ON p.match_id=m.id WHERE p.user_id=$1',
+          [game.a.account!.userId],
+        )
+      ).rows[0].count,
+    ).toBe(before);
+    expect((await db.query('SELECT * FROM match_rewards WHERE match_id=$1', [matchId])).rows).toHaveLength(2);
+  } finally {
+    await game.a.context.setOffline(false);
+    await outcomes.start();
+    await game.close();
+  }
+});
+
+test('UI-06 a dropped terminal broadcast leads to the original durable result and ended-room recovery links to history', async () => {
+  const game = await pair(),
+    live = room(game.code),
+    matchId = live.inspect().matchId;
+  const original = live.broadcast.bind(live);
+  const drop = vi.spyOn(live, 'broadcast').mockImplementation((...args) => {
+    if (args[0] !== S2C.update && args[0] !== S2C.settlement) return original(...args);
+  });
+  try {
+    await game.a.page.locator('.menu-btn').click();
+    game.a.page.once('dialog', (dialog) => dialog.accept());
+    await game.a.page.locator('.menu .surrender').click();
+    await visible(game.a.page.getByRole('button', { name: '查看结算', exact: true })).toBeVisible();
+    live.clients[0].leave(1000);
+    await game.a.page.getByRole('button', { name: '查看结算', exact: true }).click();
+    await visible(game.a.page).toHaveURL(`${origin}/result/${matchId}?mode=friend`);
+    await visible(game.a.page.getByRole('heading', { name: '惜败', exact: true })).toBeVisible();
+    await game.b.page.getByRole('button', { name: '查看结算', exact: true }).click();
+    await visible(game.b.page.getByRole('heading', { name: '胜利', exact: true })).toBeVisible();
+    await visible(game.b.page.getByRole('heading', { name: '结算已完成', exact: true })).toBeVisible();
+    await game.b.page.screenshot({ path: path.join(screenshots, 'ui06-result-mobile.png'), fullPage: true });
+    await game.a.page.goto(`${origin}/room/${game.code}`);
+    await visible(game.a.page.getByText('上一场比赛已结束，不能重新入场。', { exact: true })).toBeVisible();
+    await game.a.page.getByRole('link', { name: '查看比赛记录', exact: true }).click();
+    await visible(game.a.page.getByRole('link', { name: '查看本场结果', exact: true })).toHaveCount(1);
+    expect(
+      (await db.query("SELECT id FROM outbox_events WHERE type='match.settle' AND aggregate_id=$1", [matchId])).rows,
+    ).toHaveLength(1);
+  } finally {
+    drop.mockRestore();
+    await game.close();
+  }
+});
+
+test('UI-06 committed positive rewards and exact own ledger survive query failures without becoming zero or being awarded again', async () => {
+  const a = await pageIn({ width: 1280, height: 900 }),
+    b = await pageIn(),
+    foreign = await pageIn();
+  try {
+    const [matchId] = await recordedMatches(a, b);
+    await a.page.goto(`${origin}/result/${matchId}?mode=growth`);
+    await visible(a.page.locator('[aria-label="本场实际奖励"]')).toContainText('+50');
+    await visible(a.page.getByText('积分变更尚未确认，待积分服务提供实际记录后查询。', { exact: true })).toBeVisible();
+    await a.page.getByRole('button', { name: '查看本场流水', exact: true }).click();
+    await visible(a.page.getByText('入账后余额 350', { exact: true })).toBeVisible();
+    const own = await a.context.request.get(`${origin}/api/v1/matches/${matchId}/ledger`, {
+      headers: { 'X-Account-Id': a.account!.userId },
+    });
+    expect(own.status()).toBe(200);
+    expect(own.headers()['cache-control']).toBe('no-store');
+    expect((await own.json()).data.entries).toMatchObject([{ delta: '50', reason: 'match.reward', sourceId: matchId }]);
+    expect(
+      (
+        await foreign.context.request.get(`${origin}/api/v1/matches/${matchId}/ledger`, {
+          headers: { 'X-Account-Id': foreign.account!.userId },
+        })
+      ).status(),
+    ).toBe(404);
+    expect(
+      (
+        await a.context.request.get(`${origin}/api/v1/matches/${matchId}/ledger`, {
+          headers: { 'X-Account-Id': b.account!.userId },
+        })
+      ).status(),
+    ).toBe(409);
+    expect(
+      (
+        await a.context.request.get(`${origin}/api/v1/matches/${matchId}/ledger?coins=999`, {
+          headers: { 'X-Account-Id': a.account!.userId },
+        })
+      ).status(),
+    ).toBe(400);
+    const fail = vi.spyOn(outcomes.results, 'detail').mockRejectedValueOnce(new ApiError('UNAVAILABLE', 503, true));
+    try {
+      await a.page.getByRole('button', { name: '重新查询结果', exact: true }).click();
+      await visible(a.page.getByRole('alert')).toContainText('暂时未能更新结果');
+      await visible(a.page.locator('[aria-label="本场实际奖励"]')).toContainText('+50');
+    } finally {
+      fail.mockRestore();
+    }
+    await a.page.getByRole('button', { name: '重新查询结果', exact: true }).click();
+    await visible(a.page.getByRole('alert')).toHaveCount(0);
+    await a.page.screenshot({ path: path.join(screenshots, 'ui06-reward-ledger-desktop.png'), fullPage: true });
+    expect(
+      (await db.query("SELECT id FROM asset_ledger WHERE reason='match.reward' AND source_id=$1", [matchId])).rows,
+    ).toHaveLength(2);
+    expect((await db.query('SELECT * FROM match_rewards WHERE match_id=$1', [matchId])).rows).toHaveLength(2);
+    await db.query('UPDATE sessions SET revoked_at=clock_timestamp() WHERE user_id=$1', [a.account!.userId]);
+    expect(
+      (
+        await a.context.request.get(`${origin}/api/v1/matches/${matchId}/ledger`, {
+          headers: { 'X-Account-Id': a.account!.userId },
+        })
+      ).status(),
+    ).toBe(401);
+  } finally {
+    await a.context.close();
+    await b.context.close();
+    await foreign.context.close();
+  }
+});
+
+test('UI-06 history paginates real owned records and result layouts support small screens and keyboard actions', async () => {
+  const a = await pageIn(),
+    b = await pageIn();
+  try {
+    await recordedMatches(a, b, 'friend', 23);
+    await a.page.goto(`${origin}/results`);
+    await visible(a.page.getByRole('link', { name: '查看本场结果', exact: true })).toHaveCount(20);
+    await a.page.getByRole('button', { name: '加载更早的比赛', exact: true }).click();
+    await visible(a.page.getByRole('link', { name: '查看本场结果', exact: true })).toHaveCount(23);
+    await a.page.getByRole('link', { name: '查看本场结果', exact: true }).first().click();
+    await visible(a.page.getByRole('heading', { name: '结算已完成', exact: true })).toBeVisible();
+    for (const width of [320, 768, 1440]) {
+      await a.page.setViewportSize({ width, height: 900 });
+      expect(
+        await a.page.evaluate(
+          () =>
+            document.documentElement.scrollWidth <= innerWidth &&
+            [...document.querySelectorAll<HTMLElement>('main,main section')].every(
+              (element) => element.scrollWidth <= element.clientWidth + 1,
+            ),
+        ),
+      ).toBe(true);
+    }
+    await a.page.setViewportSize({ width: 320, height: 844 });
+    await a.page.evaluate(() => document.documentElement.style.setProperty('--web-font-scale', '1.5'));
+    const rematch = a.page.getByRole('link', { name: '再来一局', exact: true });
+    await rematch.focus();
+    await visible(rematch).toBeFocused();
+    await a.page.screenshot({ path: path.join(screenshots, 'ui06-result-large-text.png'), fullPage: true });
+    await a.page.keyboard.press('Enter');
+    await visible(a.page).toHaveURL(`${origin}/room`);
+    await visible(a.page.getByRole('button', { name: '创建房间', exact: true })).toBeEnabled();
+  } finally {
+    await a.context.close();
+    await b.context.close();
+  }
+});
+
+test('UI-06 a delayed old-account result cannot repopulate the result page after switching cookies and session', async () => {
+  const a = await pageIn(),
+    b = await pageIn();
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let entered!: () => void;
+  const arrived = new Promise<void>((resolve) => {
+    entered = resolve;
+  });
+  try {
+    const [matchId] = await recordedMatches(a, b);
+    await a.page.goto(`${origin}/result/${matchId}?mode=growth`);
+    await visible(a.page.locator('[aria-label="本场实际奖励"]')).toContainText('+50');
+    let intercepted = false;
+    await a.page.route(`**/api/v1/matches/${matchId}/result`, async (route) => {
+      if (intercepted) return route.continue();
+      intercepted = true;
+      const response = await route.fetch();
+      entered();
+      await held;
+      await route.fulfill({ response });
+    });
+    await a.page.getByRole('button', { name: '重新查询结果', exact: true }).click();
+    await arrived;
+    await seed(a.context);
+    await a.page.evaluate(() => window.dispatchEvent(new Event('focus')));
+    await visible(a.page.getByRole('alert')).toContainText('尚未查到本人的已结束结果');
+    release();
+    await visible(a.page.locator('[aria-label="本场实际奖励"]')).toHaveCount(0);
+    await a.page.getByRole('button', { name: '重新查询结果', exact: true }).click();
+    await visible(a.page.getByRole('alert')).toContainText('尚未查到本人的已结束结果');
+    await visible(a.page.locator('[aria-label="本场实际奖励"]')).toHaveCount(0);
+  } finally {
+    release();
+    await a.context.close();
+    await b.context.close();
+  }
+});
 
 test('room browser runtime has no unexpected console or page errors', () => {
   expect(errors).toEqual([]);

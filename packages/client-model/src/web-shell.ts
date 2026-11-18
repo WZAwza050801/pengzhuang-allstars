@@ -29,6 +29,8 @@ export function toWebPath(target: NavigationTarget): string {
   switch (target.page) {
     case 'lobby':
       return '/';
+    case 'history':
+      return '/results';
     case 'login':
     case 'lineup':
     case 'growth':

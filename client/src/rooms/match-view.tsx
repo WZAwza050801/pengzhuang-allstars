@@ -13,16 +13,20 @@ export function RoomMatchView({
   detail,
   service,
   onExit,
+  onResult,
 }: {
   host: OnlineHost;
   status: OnlineStatus | 'idle';
   detail: string;
   service: NavigationContext['service'];
   onExit(): void;
+  onResult(): void;
 }) {
   const root = useRef<HTMLDivElement>(null);
   const exit = useRef(onExit);
   exit.current = onExit;
+  const result = useRef(onResult);
+  result.current = onResult;
   const [error, setError] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [settlement, setSettlement] = useState<SettlementInfo | null>(null);
@@ -37,7 +41,12 @@ export function RoomMatchView({
     void bridge
       .mount(root.current, {
         host,
-        options: { hostLifetime: 'owner', skinId: FIELD_SKINS[0].id, onExit: () => exit.current() },
+        options: {
+          hostLifetime: 'owner',
+          skinId: FIELD_SKINS[0].id,
+          onExit: () => exit.current(),
+          onResult: () => result.current(),
+        },
       })
       .catch(() => {
         if (active) setError(true);
@@ -74,13 +83,20 @@ export function RoomMatchView({
                             ? '规则已更新 · 本场沿用开局版本'
                             : '账号好友赛 · 服务端计时'}
         </span>
-        <button
-          className="pz-button"
-          disabled={status === 'reconnecting' || status === 'closed' || status === 'ended'}
-          onClick={() => host.synchronize()}
-        >
-          重新同步
-        </button>
+        {host.endedMatchId && (
+          <button className="pz-button" onClick={onResult}>
+            查看结算
+          </button>
+        )}
+        {status !== 'ended' && (
+          <button
+            className="pz-button"
+            disabled={status === 'reconnecting' || status === 'closed'}
+            onClick={() => host.synchronize()}
+          >
+            重新同步
+          </button>
+        )}
       </aside>
       {status === 'closed' && (
         <div className={styles.fallback}>

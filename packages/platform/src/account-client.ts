@@ -47,7 +47,12 @@ import { PublicManifestSchema, LobbyContentSchema, LobbyAccountSchema } from '..
 import { MatchTicketSchema } from '../../contracts/src/http';
 import { MatchTicketResultSchema } from '../../contracts/src/match-tickets';
 import { ActiveMatchSchema, ReentryCommandSchema } from '../../contracts/src/match-recovery';
-import { MatchResultSchema, MatchHistorySchema, MatchHistoryQuerySchema } from '../../contracts/src/match-results';
+import {
+  MatchResultSchema,
+  MatchHistorySchema,
+  MatchHistoryQuerySchema,
+  MatchLedgerSchema,
+} from '../../contracts/src/match-results';
 import {
   LocalImportCommandSchema,
   LocalImportReceiptSchema,
@@ -202,6 +207,18 @@ export class WebAccountClient implements AccountPort {
     const id = matchId.toLowerCase();
     return this.readAccount(userId, `/matches/${id}/result`, MatchResultSchema).then((result) =>
       result.ok && (result.data.userId !== userId || result.data.matchId !== id) ? invalid : result,
+    );
+  }
+  matchLedger(userId: string, matchId: string) {
+    if (!z.uuid().safeParse(matchId).success) return Promise.resolve(invalid);
+    const id = matchId.toLowerCase();
+    return this.readAccount(userId, `/matches/${id}/ledger`, MatchLedgerSchema).then((result) =>
+      result.ok &&
+      (result.data.userId !== userId ||
+        result.data.matchId !== id ||
+        result.data.entries.some((entry) => entry.sourceId !== id || entry.reason !== 'match.reward'))
+        ? invalid
+        : result,
     );
   }
   reenterMatch(userId: string, matchId: string, body: unknown) {

@@ -34,6 +34,7 @@ export interface GameOptions {
   skinId: string;
   onExit: () => void;
   onRematch?: () => void;
+  onResult?: () => void;
 }
 
 interface Playback {
@@ -627,13 +628,14 @@ export class GameView {
       <h2 class="rtitle"></h2>
       <div class="rscore"><span style="color:${TEAM_COLORS[0]}"></span><b>${st.score[0]} : ${st.score[1]}</b><span style="color:${TEAM_COLORS[1]}"></span></div>
       <p class="rreason"></p>
-      <div class="rbtns">${this.opts.onRematch ? '<button class="again primary">再来一局</button>' : ''}<button class="back">返回大厅</button></div>`;
+      <div class="rbtns">${this.opts.onResult ? '<button class="view-result primary">查看本场结算</button>' : ''}${this.opts.onRematch ? '<button class="again primary">再来一局</button>' : ''}<button class="back">返回大厅</button></div>`;
     panel.querySelector('.rtitle')!.textContent = title;
     const spans = panel.querySelectorAll('.rscore span');
     spans[0].textContent = this.host.seats[0].name;
     spans[1].textContent = this.host.seats[1].name;
     panel.querySelector('.rreason')!.textContent = `${reason} · 共 ${st.shotNo} 手`;
     panel.querySelector('.again')?.addEventListener('click', () => this.opts.onRematch?.());
+    panel.querySelector('.view-result')?.addEventListener('click', () => { this.dispose(); this.opts.onResult?.(); });
     panel.querySelector('.back')!.addEventListener('click', () => this.exit());
     this.el.result.classList.remove('hidden');
   }

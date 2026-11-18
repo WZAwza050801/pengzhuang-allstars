@@ -18,6 +18,7 @@ async function fixture() {
   const handlers = new Map<string, (message: unknown) => void>();
   const room = {
     roomId: 'ABCDEF',
+    connection: { isOpen: true },
     send: vi.fn(),
     leave: vi.fn(async () => undefined),
     onMessage: (type: string, callback: (message: unknown) => void) => handlers.set(type, callback),
@@ -28,11 +29,12 @@ async function fixture() {
   const statuses: string[] = [],
     states: MatchState[] = [],
     packets: ShotPacket[] = [];
+  const userId = crypto.randomUUID();
   const host = new OnlineHost(
     {
       nickname: 'account',
       account: {
-        userId: crypto.randomUUID(),
+        userId,
         issueTicket: async () => ({
           ok: true,
           data: {
@@ -95,7 +97,7 @@ async function fixture() {
     state: work,
     clocks: start.clocks,
   };
-  return { host, room, emit, states, statuses, packets, start, input, packet };
+  return { host, room, emit, states, statuses, packets, start, input, packet, userId };
 }
 
 test('v2 clients ignore reordered or duplicate state packets after a newer terminal update', async () => {
@@ -118,6 +120,37 @@ test('v2 clients ignore reordered or duplicate state packets after a newer termi
     expect(game.packets).toHaveLength(1);
     expect(game.states.at(-1)).toEqual(ended.state);
     expect(game.statuses.at(-1)).toBe('ended');
+  } finally {
+    game.host.dispose();
+  }
+});
+
+test('a known ended-room snapshot keeps result access after socket closure and never starts reentry', async () => {
+  const game = await fixture();
+  try {
+    game.emit(S2C.room, {
+      protocol: 2,
+      revision: 1,
+      identity: 'account',
+      account: { userId: game.userId, lineupId: crypto.randomUUID(), revision: 0 },
+      rules: game.start.rules,
+      code: 'ABCDEF',
+      configVersion: game.start.configVersion,
+      skin: 'classic',
+      phase: 'ended',
+      seats: [null, null],
+      mySeat: 0,
+      settlement: { status: 'recorded', recorded: true },
+    });
+    expect(game.host.endedMatchId).toBe(game.start.matchId);
+    game.room.connection.isOpen = false;
+    game.room.onLeave.mock.calls[0][0](1000);
+    expect(game.statuses.at(-1)).toBe('ended');
+    game.host.synchronize();
+    expect(game.statuses.at(-1)).toBe('ended');
+    expect(game.host.inputStatus()).toBe('pending');
+    game.host.dispose();
+    expect(game.room.leave).not.toHaveBeenCalled();
   } finally {
     game.host.dispose();
   }

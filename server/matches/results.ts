@@ -4,6 +4,8 @@ import {
   MatchHistoryQuerySchema,
   MatchResultSchema,
   OutcomeIntentSchema,
+  MatchLedgerSchema,
+  type MatchLedger,
   type MatchResult,
 } from '../../packages/contracts/src/match-results';
 import { ChronologicalCursorSchema } from '../../packages/contracts/src/pagination';
@@ -146,6 +148,45 @@ export class MatchResults {
       });
       if (!row) throw new ApiError('NOT_FOUND', 404);
       return this.view(principal, row);
+    } catch (error) {
+      if (error instanceof ApiError) throw error;
+      throw new ApiError('UNAVAILABLE', 503, true);
+    }
+  }
+  async ledger(principal: Principal, id: string): Promise<MatchLedger> {
+    if (!z.uuid().safeParse(id).success) throw new ApiError('INVALID_REQUEST', 400);
+    try {
+      return await this.db.transaction(async (tx) => {
+        await requireActivePrincipal(tx, principal);
+        const row = (await tx.query<ResultRow>(`${projection} WHERE p.user_id=$1 AND m.id=$2`, [principal.userId, id]))
+          .rows[0];
+        if (!row) throw new ApiError('NOT_FOUND', 404);
+        if (!row.settled_at) throw new ApiError('CONFLICT', 409, true);
+        const result = this.view(principal, row),
+          reward = result.reward;
+        if (!reward) throw new ApiError('UNAVAILABLE', 503, true);
+        const entries = (
+          await tx.query<MatchLedger['entries'][number]>(
+            `SELECT id,currency,delta::text,balance_after::text AS "balanceAfter",reason,source_id AS "sourceId",
+           to_char(created_at AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS "createdAt"
+           FROM asset_ledger WHERE user_id=$1 AND id=ANY($2::uuid[]) AND source_id=$3 AND reason='match.reward' ORDER BY created_at,id`,
+            [principal.userId, reward.ledgerIds, row.id],
+          )
+        ).rows;
+        const parsed = MatchLedgerSchema.safeParse({ userId: principal.userId, matchId: row.id, entries });
+        if (
+          !parsed.success ||
+          entries.length !== reward.ledgerIds.length ||
+          entries
+            .filter((entry) => entry.currency === 'coins')
+            .reduce((sum, entry) => sum + BigInt(entry.delta), 0n) !== BigInt(reward.coins) ||
+          entries
+            .filter((entry) => entry.currency === 'fragments')
+            .reduce((sum, entry) => sum + BigInt(entry.delta), 0n) !== BigInt(reward.fragments)
+        )
+          throw new ApiError('UNAVAILABLE', 503, true);
+        return parsed.data;
+      });
     } catch (error) {
       if (error instanceof ApiError) throw error;
       throw new ApiError('UNAVAILABLE', 503, true);

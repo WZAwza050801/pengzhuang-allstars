@@ -118,6 +118,11 @@
 .host :global(.menu button) {
   min-height: var(--ui-touch-target);
 }
+.host :global(.result .rbtns) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-8);
+}
 .connection {
   position: absolute;
   left: 0;

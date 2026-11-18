@@ -39,6 +39,7 @@ const titles = {
   room: '好友房',
   match: '比赛',
   result: '结算',
+  history: '比赛记录',
 };
 const reasons: Record<BlockReason, string> = {
   'feature-off': '暂未开放',

@@ -26,6 +26,7 @@
 |---|---|
 | `GET /matches/:id/result` | 活跃会话、必需 `X-Account-Id`、本人参赛；外人 404。结果尚未结束返回 404；持有私有日志/RAM 候选时可返回 pending，reward 为 null。 |
 | `GET /me/matches` | 同样的身份限制；默认 20、最多 50，按结束时间和 UUID 倒序游标分页；只列数据库已记录的结果。 |
+| `GET /matches/:id/ledger`（UI-06） | 本人参赛且结算已提交；只读实际奖励关联的本人账本记录，条数/金额核验后返回。详情见 [结果页与回局交互](match-results-ui.md)。 |
 
 响应 `Cache-Control: no-store`；不包含对手 userId、会话/重连凭据、种子、完整配置或服务器文件路径。状态为 pending 时 recorded=false，recorded 表示 outcome/outbox 已提交，settled 才有本人的奖励凭证（明确的零奖励也有凭证）。failed 保留待处理结果；错误或查不到不等于奖励为零。WebAccountClient 校验用户和 matchId，历史中每一项也必须属于当前用户。
 

@@ -43,7 +43,7 @@ export function LobbyAccountPanel({ onNavigate }: { onNavigate: NavigateTarget }
   );
 }
 function SignedInLobby({ onExpired }: { onExpired(): void }) {
-  const { services, login } = useAccount();
+  const { services, login, options } = useAccount();
   const publicLobby = usePublicLobby();
   const [resource, setResource] = useState<ResourceView<LobbyAccount>>({ tag: 'loading' });
   const [attempt, setAttempt] = useState(0);
@@ -120,6 +120,11 @@ function SignedInLobby({ onExpired }: { onExpired(): void }) {
         </>
       )}
       <ActiveMatchPanel />
+      {options?.friendRoomsEnabled && (
+        <Link className="pz-button" to="/results">
+          查看比赛记录
+        </Link>
+      )}
       <div className={styles.actions}>
         <button
           className="pz-button"

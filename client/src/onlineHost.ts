@@ -103,6 +103,7 @@ export class OnlineHost implements MatchHost {
 
   private state: MatchState | null = null;
   private matchId = '';
+  get endedMatchId(): string | null { return (this.state?.over || this.lastSnapshot?.phase === 'ended') ? this.matchId || null : null; }
   private configVersion = DEFAULT_DATA.version;
   private turnDeadlineAt: number | null = null;
   private matchDeadlineAt: number | null = null;
@@ -227,6 +228,7 @@ export class OnlineHost implements MatchHost {
     room.onLeave((code: number) => {
       // A consented leave is our own doing; anything else means the socket dropped.
       if (this.disposed || this.room !== room) return;
+      if (this.account && this.endedMatchId) { this.stopReconnectAfterEnd(); return; }
       if (code === 1000 || code === 4000) {
         this.setStatus('closed');
         return;
@@ -243,6 +245,11 @@ export class OnlineHost implements MatchHost {
     this.status = status;
     this.statusListener?.(status, detail);
   }
+  private stopReconnectAfterEnd(): void {
+    if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
+    this.reconnectTimer = null; this.reconnecting = false;
+    this.setStatus('ended');
+  }
 
   private applyRoomSnapshot(snap: RoomSnapshot): void {
     if (this.account && (!this.validStamp(snap) || snap.revision! < this.revision)) return;
@@ -255,6 +262,7 @@ export class OnlineHost implements MatchHost {
     this.mySides.splice(0, this.mySides.length, snap.mySeat);
     this.lastSnapshot = snap;
     this.applySettlement(snap.settlement);
+    if (this.account && snap.phase === 'ended') this.stopReconnectAfterEnd();
     if (snap.seatToken) this.seatToken = snap.seatToken;
     for (const side of [0, 1] as const) {
       const s = snap.seats[side];
@@ -305,7 +313,7 @@ export class OnlineHost implements MatchHost {
     };
     this.listener?.onShot(packet);
     this.applySettlement(msg.settlement);
-    if (msg.state.over) this.setStatus('ended');
+    if (msg.state.over) this.stopReconnectAfterEnd();
   }
 
   private onUpdate(msg: UpdateMsg): void {
@@ -318,9 +326,7 @@ export class OnlineHost implements MatchHost {
     this.listener?.onState(msg.state);
     this.applySettlement(msg.settlement);
     if (msg.state.over) {
-      if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
-      this.reconnectTimer = null; this.reconnecting = false;
-      this.setStatus('ended');
+      this.stopReconnectAfterEnd();
     }
   }
 
@@ -393,7 +399,9 @@ export class OnlineHost implements MatchHost {
    * kept the seat reserved), then fall back to a fresh join carrying the seat token.
    */
   private scheduleReconnect(): void {
-    if (this.disposed || this.reconnecting || this.state?.over) return;
+    if (this.disposed) return;
+    if (this.account && this.endedMatchId) { this.stopReconnectAfterEnd(); return; }
+    if (this.reconnecting || this.state?.over) return;
     this.reconnecting = true;
     if (this.reconnectAttempt === 0) this.reconnectUntil = Date.now() + (this.modeRules?.reconnectSeconds ?? 60) * 1000;
     this.setStatus('reconnecting');
@@ -511,7 +519,7 @@ export class OnlineHost implements MatchHost {
     if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
     this.reconnectTimer = null;
     try {
-      this.room?.leave(true);
+      if (this.room && this.room.connection?.isOpen !== false) this.room.leave(true);
     } catch {
       /* the socket may already be gone */
     }

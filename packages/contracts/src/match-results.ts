@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { ACCOUNT_PROTOCOL_VERSION } from '../../../shared/protocol';
 import { MoneySchema } from './money';
 import { OpaqueCursorQuerySchema } from './pagination';
+import { LedgerPageSchema } from './economy-operations';
 
 export const SettlementStatusSchema = z.enum(['pending', 'recorded', 'settled', 'failed']);
 export type SettlementStatus = z.infer<typeof SettlementStatusSchema>;
@@ -90,3 +91,9 @@ export const MatchHistorySchema = z.strictObject({
   nextCursor: z.string().max(256).nullable(),
 });
 export type MatchResult = z.infer<typeof MatchResultSchema>;
+export const MatchLedgerSchema = z.strictObject({
+  userId: z.uuid(),
+  matchId: z.uuid(),
+  entries: LedgerPageSchema.shape.entries.max(8),
+});
+export type MatchLedger = z.infer<typeof MatchLedgerSchema>;

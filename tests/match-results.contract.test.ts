@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { expect, test } from 'vitest';
-import { MatchResultSchema, MatchHistoryQuerySchema } from '../packages/contracts/src/match-results';
+import { MatchResultSchema, MatchHistoryQuerySchema, MatchLedgerSchema } from '../packages/contracts/src/match-results';
 
 test('result contracts distinguish pending delivery from committed reward receipts and reject private fields', () => {
   const pending = {
@@ -51,4 +51,31 @@ test('result contracts distinguish pending delivery from committed reward receip
     { userId: randomUUID() },
   ])
     expect(MatchHistoryQuerySchema.safeParse(query).success).toBe(false);
+});
+
+test('match ledger contracts require owner and match identity, preserve integer precision, and exclude credential fields', () => {
+  const body = {
+    userId: randomUUID(),
+    matchId: randomUUID(),
+    entries: [
+      {
+        id: randomUUID(),
+        currency: 'coins',
+        delta: '50',
+        balanceAfter: '9007199254741041',
+        reason: 'match.reward',
+        sourceId: randomUUID(),
+        createdAt: '2026-11-18T05:00:00.000Z',
+      },
+    ],
+  };
+  expect(MatchLedgerSchema.safeParse(body).success).toBe(true);
+  for (const value of [
+    { ...body, userId: undefined },
+    { ...body, entries: Array(9).fill(body.entries[0]) },
+    { ...body, sessionToken: 'private' },
+    { ...body, entries: [{ ...body.entries[0], delta: 50 }] },
+    { ...body, entries: [{ ...body.entries[0], internalUserId: randomUUID() }] },
+  ])
+    expect(MatchLedgerSchema.safeParse(value).success).toBe(false);
 });

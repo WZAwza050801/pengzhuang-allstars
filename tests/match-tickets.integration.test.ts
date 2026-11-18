@@ -776,8 +776,30 @@ test('real terminal results expose owner-only read APIs before and after settlem
     [a, b] = game.accounts,
     outsider = await owner();
   const route = `/api/v1/matches/${game.start.matchId}/result`;
+  const ledgerRoute = `/api/v1/matches/${game.start.matchId}/ledger`;
+  const ledger = (account: Owner) => jsonRequest(origin, ledgerRoute, { headers: account.headers });
   const read = (account: Owner, suffix = '') => jsonRequest(origin, route + suffix, { headers: account.headers });
   expect((await read(a)).status).toBe(404);
+  expect((await ledger(a)).status).toBe(409);
+  expect((await ledger(outsider)).status).toBe(404);
+  expect((await jsonRequest(origin, ledgerRoute)).status).toBe(401);
+  expect((await jsonRequest(origin, '/api/v1/matches/invalid/ledger', { headers: a.headers })).status).toBe(400);
+  expect(
+    (await jsonRequest(origin, ledgerRoute, { method: 'POST', headers: a.headers, body: { coins: '999' } })).status,
+  ).toBe(404);
+  expect(
+    (await jsonRequest(origin, ledgerRoute, { headers: { ...a.headers, origin: 'https://untrusted.example' } })).status,
+  ).toBe(403);
+  const ledgerCors = await jsonRequest(origin, ledgerRoute, {
+    method: 'OPTIONS',
+    headers: {
+      origin: issuer,
+      'access-control-request-method': 'GET',
+      'access-control-request-headers': 'x-account-id',
+    },
+  });
+  expect(ledgerCors.status).toBe(204);
+  expect(ledgerCors.headers['access-control-allow-origin']).toBe(issuer);
   game.peers[0].room.send('surrender', {
     protocol: 2,
     matchId: game.start.matchId,
@@ -827,10 +849,16 @@ test('real terminal results expose owner-only read APIs before and after settlem
     pendingReason: null,
     reward: { coins: '0', fragments: '0', eligible: false, operationId: null, ledgerIds: [] },
   });
+  const receipt = await ledger(a);
+  expect(receipt.status).toBe(200);
+  expect(receipt.headers['cache-control']).toBe('no-store');
+  expect(receipt.data.data).toEqual({ userId: a.principal.userId, matchId: game.start.matchId, entries: [] });
   await db.query("UPDATE users SET status='banned',banned_at=clock_timestamp() WHERE id=$1", [a.principal.userId]);
   expect((await read(a)).status).toBe(401);
+  expect((await ledger(a)).status).toBe(401);
   await db.query('UPDATE sessions SET revoked_at=clock_timestamp() WHERE id=$1', [b.principal.sessionId]);
   expect((await read(b)).status).toBe(401);
+  expect((await ledger(b)).status).toBe(401);
 });
 
 test('owner history paginates tied timestamps without duplicate results and rejects forged query shapes', async () => {

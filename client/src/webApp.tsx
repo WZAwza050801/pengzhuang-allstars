@@ -13,6 +13,7 @@ import styles from './webShell.module.css';
 import { AccountProvider, useAccount } from './accounts/context';
 import { PublicLobbyProvider, usePublicLobby } from './lobby-context';
 import { loadPracticeScreen, practiceScreenLoaded } from './practice-entry';
+import ResultsRoute from './results/route';
 
 const PracticeMatchScreen = lazy(loadPracticeScreen);
 const AccountScreen = lazy(() => import('./accounts/routes'));
@@ -165,6 +166,8 @@ function Shell({ context }: { context: NavigationContext }) {
           <Route path="/login" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
           <Route path="/account/*" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
           <Route path="/lineup" element={<Suspense fallback={<p role="status">正在载入阵容页面…</p>}><InventoryScreen context={context} /></Suspense>} />
+          <Route path="/result/:matchId" element={<ResultsRoute context={context} />} />
+          <Route path="/results" element={<ResultsRoute context={context} />} />
           <Route path="/growth" element={<FutureRoute context={context} target={{ page: 'growth' }} title="成长" detail="成长内容将在资产与运营任务完成后开放。" />} />
           <Route path="/club" element={<FutureRoute context={context} target={{ page: 'club' }} title="俱乐部" detail="俱乐部功能尚未接入服务端。" />} />
           <Route path="/profile" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />

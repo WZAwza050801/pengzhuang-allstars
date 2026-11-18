@@ -17,6 +17,22 @@ test('anonymous cloud intent survives login without external return URLs', () =>
   ])
     expect(resolveNavigation(input, context).kind).toBe('invalid');
 });
+
+test('account results require login but remain readable during offline recovery without opening new remote games', () => {
+  const target = { page: 'result', mode: 'friend', matchId: 'original-match' };
+  expect(resolveNavigation(target, context)).toEqual({ kind: 'login', resume: target });
+  for (const change of [{ network: 'offline' }, { service: 'maintenance' }, { service: 'outdated' }] as const) {
+    const current = {
+      ...context,
+      ...change,
+      session: 'authenticated' as const,
+      features: { ...ALL_FEATURES, onlineMatches: false },
+    };
+    expect(resolveNavigation(target, current)).toEqual({ kind: 'show', target });
+    expect(resolveNavigation({ page: 'history' }, current)).toEqual({ kind: 'show', target: { page: 'history' } });
+    expect(resolveNavigation({ page: 'room' }, current).kind).toBe('blocked');
+  }
+});
 test('closed features do not offer impossible login; account rooms and legacy guest entry remain separate', () => {
   expect(
     resolveNavigation({ page: 'lineup' }, { ...context, features: { ...ALL_FEATURES, inventory: false } }),

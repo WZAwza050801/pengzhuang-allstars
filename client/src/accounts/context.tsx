@@ -2,10 +2,12 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { createWebPlatform } from '@pengzhuang/platform';
 import { WebAccountClient } from '../../../packages/platform/src/account-client';
 import { LoginStateModel, type LoginSnapshot } from '../../../packages/client-model/src/account';
+import { ResultCache } from '../../../packages/client-model/src/match-result';
 
 interface AccountServices {
   api: WebAccountClient;
   model: LoginStateModel;
+  results: ResultCache;
   reconcile(): Promise<void>;
   changed(authenticated: boolean): Promise<void>;
 }
@@ -45,12 +47,14 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     });
     const api = new WebAccountClient(platform.network);
     const model = new LoginStateModel(api, () => crypto.randomUUID());
+    const results = new ResultCache();
     const channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel('pz-account-events-v1') : null;
     let flight: Promise<void> | null = null;
     let identityEpoch = 0;
     const services: AccountServices = {
       api,
       model,
+      results,
       reconcile() {
         return (flight ??= (async () => {
           const epoch = identityEpoch;
@@ -81,6 +85,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       },
     };
     const unsubscribe = model.subscribe(() => {
+      results.setIdentity(model.snapshot.user);
       if (!stopped) setValue((previous) => ({ ...previous, login: model.snapshot }));
     });
     setValue({ services, login: model.snapshot, options: null, unavailable: false });
@@ -99,6 +104,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     return () => {
       stopped = true;
       unsubscribe();
+      results.setIdentity(null);
       channel?.close();
       window.removeEventListener('focus', refresh);
       window.removeEventListener('pageshow', refresh);

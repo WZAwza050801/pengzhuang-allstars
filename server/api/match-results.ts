@@ -38,6 +38,7 @@ export function matchResultModules(results: MatchResults, web: WebSessions): Api
       createRouter() {
         const router = Router();
         router.options('/:id/result', web.boundary);
+        router.options('/:id/ledger', web.boundary);
         router.get(
           '/:id/result',
           web.boundary,
@@ -49,6 +50,21 @@ export function matchResultModules(results: MatchResults, web: WebSessions): Api
             res.json({
               ok: true,
               data: await results.detail(res.locals.principal as Principal, req.params.id),
+              requestId: res.locals.requestId,
+            });
+          }),
+        );
+        router.get(
+          '/:id/ledger',
+          web.boundary,
+          web.requireAccess,
+          boundary,
+          asyncRoute(async (req, res) => {
+            if (Object.keys(req.query).length || typeof req.params.id !== 'string')
+              throw new ApiError('INVALID_REQUEST', 400);
+            res.json({
+              ok: true,
+              data: await results.ledger(res.locals.principal as Principal, req.params.id),
               requestId: res.locals.requestId,
             });
           }),

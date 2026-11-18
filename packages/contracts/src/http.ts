@@ -3,7 +3,7 @@ import { ACCOUNT_PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../../../sh
 import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
 import { ActiveMatchSchema, ReentryCommandSchema } from './match-recovery';
-import { MatchResultSchema, MatchHistorySchema, MatchHistoryQuerySchema } from './match-results';
+import { MatchResultSchema, MatchHistorySchema, MatchHistoryQuerySchema, MatchLedgerSchema } from './match-results';
 import { parseNickname } from './game-validation';
 import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
 import { LineupPageQuerySchema, LineupPageSchema, SavedLineupSchema } from './lineups';
@@ -117,6 +117,7 @@ export const HTTP_CONTRACTS = [
     response: MatchHistorySchema,
   },
   { method: 'get', path: '/api/v1/matches/{id}/result', operationId: 'matchResult', response: MatchResultSchema },
+  { method: 'get', path: '/api/v1/matches/{id}/ledger', operationId: 'matchLedger', response: MatchLedgerSchema },
   { method: 'get', path: '/api/v1/me/active-match', operationId: 'activeMatch', response: ActiveMatchSchema },
   {
     method: 'post',

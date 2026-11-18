@@ -6,7 +6,7 @@ import { startWebPageFixture } from './web-page-fixture.mjs';
 
 const ROOT = process.cwd();
 const CLIENT = path.join(ROOT, 'work', 'test-client');
-const REPORT_DIR = path.join(ROOT, 'docs', 'productization', 'reports', 'web-04');
+const REPORT_DIR = path.resolve(process.env.WEB_ACCEPTANCE_REPORT_DIR || path.join(ROOT, 'docs', 'productization', 'reports', 'web-04'));
 const REPORT = path.join(REPORT_DIR, 'browser.json');
 const MiB = 1024 * 1024;
 

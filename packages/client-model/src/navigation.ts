@@ -3,7 +3,7 @@ import { ModeIdSchema, type ModeId } from '../../contracts/src/modes';
 import { QueueSchema } from '../../contracts/src/http';
 const matchId = z.string().regex(/^[A-Za-z0-9_-]{1,128}$/);
 export const NavigationTargetSchema = z.discriminatedUnion('page', [
-  z.strictObject({ page: z.enum(['login', 'lobby', 'lineup', 'growth', 'club', 'profile', 'settings']) }),
+  z.strictObject({ page: z.enum(['login', 'lobby', 'lineup', 'growth', 'club', 'profile', 'settings', 'history']) }),
   z.strictObject({ page: z.literal('inbox'), section: z.enum(['mail', 'tasks', 'achievements']) }),
   z.strictObject({ page: z.literal('queue'), mode: QueueSchema.shape.mode }),
   z.strictObject({
@@ -71,6 +71,7 @@ const simplePolicy: Partial<Record<PageId, { features: FeatureKey[]; account: bo
   lineup: { features: ['inventory'], account: true, remote: true },
   growth: { features: ['growth', 'inventory'], account: true, remote: true },
   club: { features: ['club'], account: true, remote: true },
+  history: { features: ['friendRooms'], account: true, remote: false },
   inbox: { features: ['inbox'], account: true, remote: true },
 };
 /** Presentation admission only. Services must still authorize every business action. */
@@ -86,6 +87,8 @@ export function resolveNavigation(input: unknown, context: NavigationContext): N
       target.mode === 'practice'
         ? { features: ['practice'], account: false, remote: false }
         : { features: ['onlineMatches'], account: target.mode === 'ranked' || target.mode === 'growth', remote: false };
+  if (target.page === 'result' && target.mode !== 'practice')
+    policy = { features: ['friendRooms'], account: true, remote: false };
   if (policy.features.some((key) => !context.features[key]))
     return { kind: 'blocked', reason: 'feature-off', retry: target };
   if (policy.remote) {
@@ -136,6 +139,7 @@ export interface ResultView {
   reward: RewardView;
 }
 export const PAGE_FLOW: Readonly<Record<PageId, { path: string; back: PageId; states: readonly string[] }>> = {
+  history: { path: '/results', back: 'lobby', states: ['loading', 'ready', 'empty', 'offline', 'error'] },
   login: { path: '/login', back: 'lobby', states: ['ready', 'submitting', 'error', 'offline', 'cancelled'] },
   lobby: {
     path: '/',

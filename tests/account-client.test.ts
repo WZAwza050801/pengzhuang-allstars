@@ -15,6 +15,44 @@ const failure = (code: 'UNAUTHENTICATED' | 'UNAVAILABLE', status = 401) => ({
 const csrfValue = () => `${randomBytes(32).toString('base64url')}.${randomBytes(32).toString('base64url')}`;
 const csrf = () => success({ csrfToken: csrfValue() });
 
+test('match ledger reads bind owner and match, reject mixed receipts, and issue only bounded authenticated reads', async () => {
+  const userId = randomUUID(),
+    matchId = randomUUID(),
+    entry = {
+      id: randomUUID(),
+      currency: 'coins',
+      delta: '50',
+      balanceAfter: '350',
+      reason: 'match.reward',
+      sourceId: matchId,
+      createdAt: '2026-11-18T05:00:00.000Z',
+    };
+  let payload: unknown = { userId, matchId, entries: [entry] };
+  const requests: { url: string; method?: string; owner?: string }[] = [];
+  const api = new WebAccountClient({
+    request: async (url, input) => {
+      requests.push({ url, method: input?.method, owner: input?.headers?.['X-Account-Id'] });
+      return success(payload);
+    },
+  });
+  expect(await api.matchLedger(userId, matchId)).toMatchObject({ ok: true, data: { entries: [entry] } });
+  expect(requests.at(-1)).toMatchObject({ url: `/api/v1/matches/${matchId}/ledger`, owner: userId });
+  expect(requests.at(-1)?.method ?? 'GET').toBe('GET');
+  for (const data of [
+    { userId: randomUUID(), matchId, entries: [entry] },
+    { userId, matchId: randomUUID(), entries: [entry] },
+    { userId, matchId, entries: [{ ...entry, sourceId: randomUUID() }] },
+    { userId, matchId, entries: [{ ...entry, reason: 'starter' }] },
+  ]) {
+    payload = data;
+    expect(await api.matchLedger(userId, matchId)).toMatchObject({ ok: false });
+  }
+  const count = requests.length;
+  expect(await api.matchLedger(userId, '../file')).toMatchObject({ ok: false });
+  expect(await api.matchLedger('invalid', matchId)).toMatchObject({ ok: false });
+  expect(requests).toHaveLength(count);
+});
+
 test('result readers reject stale account or match identities and never submit settlement mutations', async () => {
   const userId = randomUUID(),
     matchId = randomUUID(),
