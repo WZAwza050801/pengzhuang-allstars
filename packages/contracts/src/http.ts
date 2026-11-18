@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { ACCOUNT_PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
+import { QueueCommandSchema, QueueStatusSchema, QueueOptionsSchema } from './matchmaking';
 import { ActiveMatchSchema, ReentryCommandSchema } from './match-recovery';
 import { MatchResultSchema, MatchHistorySchema, MatchHistoryQuerySchema, MatchLedgerSchema } from './match-results';
 import { parseNickname } from './game-validation';
@@ -102,12 +103,7 @@ export const MatchTicketSchema = z.strictObject({
   protocol: z.literal(ACCOUNT_PROTOCOL_VERSION),
   roomCode: RoomCodeSchema.optional(),
 });
-export const QueueSchema = z.strictObject({
-  mode: z.enum(['ranked', 'growth']),
-  lineupId: z.uuid(),
-  expectedRevision: revision,
-  protocol: z.literal(ACCOUNT_PROTOCOL_VERSION),
-});
+export const QueueSchema = QueueCommandSchema;
 export const HTTP_CONTRACTS = [
   {
     method: 'get',
@@ -276,7 +272,34 @@ export const HTTP_CONTRACTS = [
     body: MatchTicketSchema,
     response: MatchTicketResultSchema,
   },
-  { method: 'post', path: '/api/v1/matchmaking/entries', operationId: 'enterQueue', body: QueueSchema },
+  { method: 'get', path: '/api/v1/matchmaking/options', operationId: 'queueOptions', response: QueueOptionsSchema },
+  {
+    method: 'get',
+    path: '/api/v1/matchmaking/entries/current',
+    operationId: 'currentQueue',
+    response: QueueStatusSchema,
+  },
+  { method: 'get', path: '/api/v1/matchmaking/entries/{id}', operationId: 'queueEntry', response: QueueStatusSchema },
+  {
+    method: 'post',
+    path: '/api/v1/matchmaking/entries',
+    operationId: 'enterQueue',
+    body: QueueSchema,
+    response: QueueStatusSchema,
+  },
+  {
+    method: 'delete',
+    path: '/api/v1/matchmaking/entries/{id}',
+    operationId: 'cancelQueue',
+    response: QueueStatusSchema,
+  },
+  {
+    method: 'post',
+    path: '/api/v1/matchmaking/entries/{id}/ticket',
+    operationId: 'queueTicket',
+    body: ReentryCommandSchema,
+    response: MatchTicketResultSchema,
+  },
 ] as const;
 
 /** Boundary validation only; authentication/ownership/idempotency belong to the service. */

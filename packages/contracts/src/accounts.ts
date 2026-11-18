@@ -49,12 +49,14 @@ export const LogoutSchema = z.strictObject({ allSessions: z.boolean() });
 export const LogoutResultSchema = z.strictObject({ loggedOut: z.literal(true) });
 export const RevokeSessionResultSchema = z.strictObject({ revoked: z.literal(true) });
 export const AuthOptionsSchema = z.strictObject({
+  matchmakingEnabled: z.boolean().default(false),
   friendRoomsEnabled: z.boolean().default(false),
   inventoryEnabled: z.boolean().default(false),
   emailEnabled: z.boolean(),
   wechatMiniProgram: z.boolean(),
   sessionPresent: z.boolean(),
 });
+export type AuthOptions = z.infer<typeof AuthOptionsSchema>;
 export const AccountAcceptedSchema = z.strictObject({ accepted: z.literal(true) });
 export const SignedInSchema = z.strictObject({ userId: z.uuid() });
 export const EmailVerifiedSchema = z.strictObject({ verified: z.literal(true) });

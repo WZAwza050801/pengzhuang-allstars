@@ -21,10 +21,12 @@ import styles from './rooms.module.css';
 
 export function RoomPage({
   initialCode,
+  queueEntryId,
   context,
   blocked,
 }: {
   initialCode: string;
+  queueEntryId?: string;
   context: NavigationContext;
   blocked: boolean;
 }) {
@@ -62,6 +64,10 @@ export function RoomPage({
     host.current?.setAuthorizationReady(authorized);
   }, [authorized]);
   useEffect(() => {
+    if (queueEntryId) {
+      setLoading(false);
+      return;
+    }
     let active = true;
     setLoading(true);
     void readInventory(services!.api, user.userId).then((result) => {
@@ -81,7 +87,7 @@ export function RoomPage({
     return () => {
       active = false;
     };
-  }, [services, user.userId, attempt]);
+  }, [services, user.userId, attempt, queueEntryId]);
   useEffect(() => {
     const warn = (event: BeforeUnloadEvent) => {
       if (host.current && status !== 'ended') {
@@ -96,14 +102,22 @@ export function RoomPage({
   const lineup = data?.lineups.find((item) => item.id === selection);
   const usable = !!lineup && !!data && canSaveOwnedLineup(lineup.ownedCardIds, data.cards);
   const leave = () => {
-    if (host.current && !playing && !confirm('离开房间会取消准备。确定返回大厅吗？')) return;
+    if (
+      host.current &&
+      !playing &&
+      !confirm(queueEntryId ? '离开房间不会撤回本场配对。确定返回大厅吗？' : '离开房间会取消准备。确定返回大厅吗？')
+    )
+      return;
     sequence.current++;
     host.current?.dispose();
     host.current = null;
     navigate('/');
   };
   const connect = async (recovery?: RecoverableMatch) => {
-    if (busy.current || (recovery ? !authorized || context.service === 'outdated' : !ready || !lineup || !usable))
+    if (
+      busy.current ||
+      (recovery ? !authorized || context.service === 'outdated' : !ready || (!queueEntryId && (!lineup || !usable)))
+    )
       return;
     const target = recovery?.roomCode ?? (code.trim() ? normalizeRoomCode(code) : undefined);
     if (!recovery && code.trim() && !target) {
@@ -128,13 +142,15 @@ export function RoomPage({
             if (!sameAccount()) return { ok: false, error: { code: 'ACCOUNT_CHANGED', retryable: false } };
             const response = recovery
               ? await services!.api.reenterMatch(user.userId, recovery.matchId, { protocol: ACCOUNT_PROTOCOL_VERSION })
-              : await services!.api.roomTicket(user.userId, {
-                  protocol: ACCOUNT_PROTOCOL_VERSION,
-                  mode: 'friend',
-                  lineupId: lineup!.id,
-                  expectedRevision: lineup!.revision,
-                  ...(roomCode ? { roomCode } : {}),
-                });
+              : queueEntryId
+                ? await services!.api.queueTicket(user.userId, queueEntryId)
+                : await services!.api.roomTicket(user.userId, {
+                    protocol: ACCOUNT_PROTOCOL_VERSION,
+                    mode: 'friend',
+                    lineupId: lineup!.id,
+                    expectedRevision: lineup!.revision,
+                    ...(roomCode ? { roomCode } : {}),
+                  });
             return sameAccount() ? response : { ok: false, error: { code: 'ACCOUNT_CHANGED', retryable: false } };
           },
         },
@@ -163,7 +179,7 @@ export function RoomPage({
         return;
       }
       setCode(roomCode);
-      navigate(`/room/${roomCode}`, { replace: true });
+      navigate(`/room/${roomCode}${queueEntryId ? `?queueEntry=${queueEntryId}` : ''}`, { replace: true });
     } catch (cause) {
       created.dispose();
       if (!mounted.current || sequence.current !== request) return;
@@ -222,8 +238,16 @@ export function RoomPage({
     <section className={styles.page}>
       <header className={styles.header}>
         <div>
-          <p>好友约战</p>
-          <h1>{connected ? `房间 ${snapshot.code}` : initialCode ? '加入好友房' : '选择阵容，邀请好友'}</h1>
+          <p>{queueEntryId ? '均衡匹配' : '好友约战'}</p>
+          <h1>
+            {connected
+              ? `房间 ${snapshot.code}`
+              : queueEntryId
+                ? '进入已匹配房间'
+                : initialCode
+                  ? '加入好友房'
+                  : '选择阵容，邀请好友'}
+          </h1>
         </div>
         <button className="pz-button" onClick={leave}>
           {status === 'connecting' ? '取消连接' : '返回大厅'}
@@ -248,7 +272,21 @@ export function RoomPage({
           onResume={(match) => void connect(match)}
         />
       )}
-      {!connected ? (
+      {!connected && queueEntryId ? (
+        <div className={styles.setup}>
+          <p>使用入队时的原阵容，当前云阵容不会覆盖本场比赛。</p>
+          <button
+            className="pz-button pz-primary"
+            disabled={!ready || status === 'connecting'}
+            onClick={() => void connect()}
+          >
+            {status === 'connecting' ? '正在连接…' : '进入匹配房间'}
+          </button>
+          <Link className="pz-button" to="/queue/friend">
+            查看匹配状态
+          </Link>
+        </div>
+      ) : !connected ? (
         <div className={styles.setup}>
           <label>
             持有阵容
@@ -318,20 +356,23 @@ export function RoomPage({
         </div>
       ) : (
         <>
-          <div className={styles.invite}>
-            <button className="pz-button" onClick={() => void copy()}>
-              复制邀请链接
-            </button>
-            <label>
-              邀请链接
-              <input
-                aria-label="邀请链接"
-                readOnly
-                value={invitationUrl(window.location.origin, snapshot.code)}
-                onFocus={(e) => e.target.select()}
-              />
-            </label>
-          </div>
+          {!queueEntryId && (
+            <div className={styles.invite}>
+              <button className="pz-button" onClick={() => void copy()}>
+                复制邀请链接
+              </button>
+              <label>
+                邀请链接
+                <input
+                  aria-label="邀请链接"
+                  readOnly
+                  value={invitationUrl(window.location.origin, snapshot.code)}
+                  onFocus={(e) => e.target.select()}
+                />
+              </label>
+            </div>
+          )}
+          {queueEntryId && <p>本场仅原两名匹配玩家可以进入。</p>}
           <p role="status">
             {status === 'reconnecting'
               ? '正在重新连接房间…'

@@ -39,7 +39,20 @@ test('closed features do not offer impossible login; account rooms and legacy gu
   ).toMatchObject({ kind: 'blocked', reason: 'feature-off' });
   expect(resolveNavigation({ page: 'room' }, context)).toEqual({ kind: 'login', resume: { page: 'room' } });
   expect(resolveNavigation({ page: 'queue', mode: 'ranked' }, context).kind).toBe('login');
-  expect(resolveNavigation({ page: 'queue', mode: 'friend' }, context).kind).toBe('invalid');
+  expect(resolveNavigation({ page: 'queue', mode: 'friend' }, context)).toEqual({
+    kind: 'login',
+    resume: { page: 'queue', mode: 'friend' },
+  });
+  for (const features of [{ matchmaking: false }, { inventory: false }, { accounts: false }])
+    expect(
+      resolveNavigation(
+        { page: 'queue', mode: 'friend' },
+        {
+          ...context,
+          features: { ...ALL_FEATURES, ...features },
+        },
+      ),
+    ).toMatchObject({ kind: 'blocked', reason: 'feature-off' });
 });
 test('offline/maintenance/update block new remote flows but keep local practice and recovery views available', () => {
   for (const changed of [{ network: 'offline' }, { service: 'maintenance' }, { service: 'outdated' }] as const) {

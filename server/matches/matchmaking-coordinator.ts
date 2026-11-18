@@ -21,6 +21,7 @@ export class MatchmakingCoordinator {
   constructor(
     private readonly queue: MatchmakingQueue,
     private readonly rooms: QueueRoomFactory,
+    private readonly accepting: () => boolean = () => true,
   ) {}
   private report() {
     if (Date.now() - this.lastError < 10000) return;
@@ -87,6 +88,7 @@ export class MatchmakingCoordinator {
     for (const [code, value] of this.reservations) {
       if (this.closing) return;
       if (!value.assignment) {
+        if (!this.accepting()) continue;
         const pair = await this.pair(code);
         if (pair) await this.materialize(pair);
         else await this.release(code);
@@ -105,6 +107,7 @@ export class MatchmakingCoordinator {
         await this.release(code);
       }
     }
+    if (!this.accepting()) return;
     for (const pair of await this.queue.assignments()) {
       if (this.closing) return;
       await this.materialize(pair);

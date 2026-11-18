@@ -2,6 +2,8 @@ import { expect, test } from 'vitest';
 import { randomUUID } from 'node:crypto';
 import { QueueCommandSchema, QueueEntrySchema, MatchmakingPolicySchema } from '../packages/contracts/src/matchmaking';
 import { MATCHMAKING_POLICY } from '../config/matchmaking';
+import { DEFAULT_DATA } from '../shared/data';
+import { rulesForMode } from '../config/modes';
 
 test('queue commands reject client identities, rating/levels and non-account protocols', () => {
   const command = {
@@ -28,8 +30,9 @@ test('queue replies cannot claim a match without an assignment or label fake rat
     id: randomUUID(),
     intentId: randomUUID(),
     mode: 'friend',
-    configVersion: 'v1',
+    configVersion: DEFAULT_DATA.version,
     policyVersion: 'queue-1',
+    rules: rulesForMode(DEFAULT_DATA, 'friend'),
     region: 'local',
     lineupId: randomUUID(),
     lineupRevision: 0,

@@ -1,6 +1,6 @@
-# 匹配队列（MM-01，实施中）
+# 匹配队列（MM-01）
 
-任务尚未完成，本页先记录实现边界和分阶段验证；不是API/UI已开放的证明。
+服务端、HTTP与Web已装配并完成任务验收；任务状态以TASKS为准。下文阶段记录保留各检查点当时的范围，当前验证汇总见[验收报告](../productization/reports/MM-01.md)。完整集成初轮323通过/1失败，大厅恢复会话竞态修正后相关四项网页用例全部通过；未再整套重跑，报告保留验证先后。
 
 队列复用账号、五卡持有快照、协议2和现有账号房。首个实际开放入口是friend规则的均衡匹配，不计积分/奖励；ranked/growth仍需既有能力门槛和MM-02真实积分来源。未实现Elo前不会填假积分：friend在无积分池匹配，其它模式必须取得服务端积分/赛季快照。客户端不能提交userId、卡牌、等级或积分。
 
@@ -36,4 +36,28 @@ QueueConfiguration现在显式format1，包含GameData、模式完整规则、�
 
 `node tools/run-pg-tests.mjs tests/matchmaking-rooms.integration.test.ts tests/matchmaking.integration.test.ts tests/match-tickets.integration.test.ts tests/lineups.integration.test.ts tests/account-checkpoints.integration.test.ts tests/outcomes.integration.test.ts`：6文件/92项通过、0跳过，88.14秒，work/mm01-runtime-regression.log，退出0。含8项新的真实服务/SDK房间用例、原34账号房/19结果/5真实服务进程重启。验证成功发布前match_id/head已提交、第三方拒绝、过期和重放票据、新票保留原持有等级、真实SQL ready故障保留原房、取消竞态、过期缓存、已有好友大厅无法绕过配对。分配器失败用例在明确的房间端口注入异常，再验证同用户由真实工厂重新配对成功；不将该注入称作实际Colyseus故障。
 
-work/mm01-runtime-check.log通过192单元/19契约、314格式和其余check；work/mm01-runtime-build.log服务端构建通过。首轮ESM spy与错误接收端的测试夹具问题已修正；首次增加的普遍单局限制影响旧恢复回归，已收敛到匹配路径，原断言保留。HTTP匹配路由、客户端请求适配、网页排队/取消/失败/刷新/切号和完整项目验收尚未实现，当前仍不可勾选MM-01。
+work/mm01-runtime-check.log通过192单元/19契约、314格式和其余check；work/mm01-runtime-build.log服务端构建通过。首轮ESM spy与错误接收端的测试夹具问题已修正；首次增加的普遍单局限制影响旧恢复回归，已收敛到匹配路径，原断言保留。20:37时HTTP匹配路由、客户端请求适配、网页排队/取消/失败/刷新/切号和完整项目验收尚未实现，当时不可勾选MM-01；后续接入与当前验收见下节和报告。
+
+## HTTP与Web接入
+
+`startRuntime`仅在真实账号/阵容/比赛服务与队列装配后声明`matchmakingEnabled`；无数据库时不显示入口。公开GET `/api/v1/matchmaking/options`返回真实协议、当前配置和队列策略，默认仅friend可入队。旧客户端未收到新增能力时默认关闭。
+
+其余接口均校验真实会话和必需`X-Account-Id`，拒绝额外query。POST/DELETE沿Web边界校验Origin、CSRF与严格body，所有回复禁止缓存：
+
+| 方法与路径（前缀`/api/v1/matchmaking`） | 用途 |
+|---|---|
+| GET `/entries/current` | 本人最近一次队列，包括服务器确认的终态；没有记录时entry为null。 |
+| GET `/entries/:id` | 本人原队列回执；外人及不存在均404。 |
+| POST `/entries` | 严格intent/protocol/mode/lineup/revision/configVersion/region；返回原意图状态，后台协调器继续实际配对。 |
+| DELETE `/entries/:id` | 空body，原子取消；已配对时返回原配对，不能伪报取消成功。 |
+| POST `/entries/:id/ticket` | 协议2，ready后使用原被冻结阵容签新一次性票；配对未准备好为可重试503。 |
+
+QueueStatus含userId、数据库serverNow、原规则、状态/原因与配对信息。没有向客户端授予修改积分、等级或结果的权限。HTTP契约与OpenAPI已同步；`QUEUE_*`仍为旧协议占位，没有双套队列状态机。
+
+维护时拒绝新入队与新配对，保留读/取消和已开局恢复边界。POST入队与签票沿用现有create/connect准入；实际等待256与房间128上限另由服务端保证。历史回执保留不等于总数据库容量已被限制，不能擅自清理比赛关联记录。
+
+Web `/queue/:mode`从大厅按真实能力进入，登录回跳保留安全模式目标；当前只开放均衡匹配。使用持有阵容、服务端规则和区域，状态每两秒在页面可见且在线时读取；焦点/联网刷新，卸载清理监听。倒计时仅作提示，超时由服务器回复确认。未知写结果保留原意图并显式重试，不以本地计时/取消点击推断成功。
+
+配对完成链接只携带本人entry UUID，票据不进入URL。`/room/:code?queueEntry=...`重新签票并使用原阵容，保留原query以支持刷新/重连；原两名成员独占房间，隐藏好友邀请表单。切换真实会话后旧组件失效，迟到状态/库存不写入新账号页面。关闭页面不会自动取消，界面明确说明并提醒。
+
+定向真实HTTP5项与网页4项已通过，覆盖SQL插入故障/原意图重试、刷新唯一队列、服务器过期、真实双人开局、取消败给配对，以及真实cookie切换时的迟到响应。网页测试的延迟/故障注入均明确标注；未用Mock开局代替生产功能。最终全量结果见[MM-01报告](../productization/reports/MM-01.md)。

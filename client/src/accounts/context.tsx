@@ -3,6 +3,7 @@ import { createWebPlatform } from '@pengzhuang/platform';
 import { WebAccountClient } from '../../../packages/platform/src/account-client';
 import { LoginStateModel, type LoginSnapshot } from '../../../packages/client-model/src/account';
 import { ResultCache } from '../../../packages/client-model/src/match-result';
+import type { AuthOptions } from '../../../packages/contracts/src/accounts';
 
 interface AccountServices {
   api: WebAccountClient;
@@ -11,17 +12,10 @@ interface AccountServices {
   reconcile(): Promise<void>;
   changed(authenticated: boolean): Promise<void>;
 }
-type Options = {
-  friendRoomsEnabled: boolean;
-  emailEnabled: boolean;
-  wechatMiniProgram: boolean;
-  sessionPresent: boolean;
-  inventoryEnabled: boolean;
-};
 interface AccountContextValue {
   services: AccountServices | null;
   login: LoginSnapshot;
-  options: Options | null;
+  options: AuthOptions | null;
   unavailable: boolean;
 }
 const initial: LoginSnapshot = { status: 'unknown', user: null, error: null };

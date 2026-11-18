@@ -1,4 +1,5 @@
-import { Link, Navigate, useParams } from 'react-router';
+import { Link, Navigate, useParams, useSearchParams } from 'react-router';
+import { z } from 'zod';
 import type { NavigationContext } from '@pengzhuang/client-model';
 import { useAccount } from '../accounts/context';
 import { normalizeRoomCode } from '../../../packages/client-model/src/room';
@@ -7,9 +8,12 @@ import styles from './rooms.module.css';
 
 export default function RoomRoute({ context }: { context: NavigationContext }) {
   const { code } = useParams();
+  const [search] = useSearchParams();
+  const rawEntry = search.get('queueEntry'),
+    queueEntry = rawEntry ? z.uuid().safeParse(rawEntry) : null;
   const { services, login, options, unavailable } = useAccount();
   const normalized = code ? normalizeRoomCode(code) : undefined;
-  if (code && !normalized)
+  if ((code && !normalized) || (queueEntry && !queueEntry.success))
     return (
       <section className={styles.page}>
         <h1>房间码无效</h1>
@@ -40,6 +44,7 @@ export default function RoomRoute({ context }: { context: NavigationContext }) {
     <RoomPage
       key={`${login.user.userId}:${login.user.sessionId}`}
       initialCode={normalized ?? ''}
+      queueEntryId={queueEntry?.success ? queueEntry.data.toLowerCase() : undefined}
       context={context}
       blocked={unavailable || login.status !== 'authenticated'}
     />

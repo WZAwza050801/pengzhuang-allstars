@@ -42,6 +42,11 @@ export function LobbyScreen({ context, onNavigate }: { context: NavigationContex
             <button className="pz-button" type="button" onClick={() => onNavigate({ page: 'room' })}>
               好友约战
             </button>
+            {context.features.matchmaking && (
+              <button className="pz-button" type="button" disabled={context.session === 'loading'} onClick={() => onNavigate({ page: 'queue', mode: 'friend' })}>
+                匹配对手
+              </button>
+            )}
           </div>
           {context.network === 'offline' && !practiceScreenLoaded() && <p>练习资源尚未载入，请联网后先进入一次练习。</p>}
           {lobby.manifest.tag === 'loading' && <p role="status">正在读取服务端模式规则…</p>}

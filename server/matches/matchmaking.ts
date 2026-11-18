@@ -152,6 +152,7 @@ export class MatchmakingQueue {
       mode: row.mode,
       configVersion: row.config_version,
       policyVersion: row.policy_version,
+      rules: row.lineup_snapshot.rules,
       region: row.region,
       lineupId: row.lineup_snapshot.lineupId,
       lineupRevision: row.lineup_snapshot.revision,

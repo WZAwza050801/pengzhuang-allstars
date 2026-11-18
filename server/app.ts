@@ -22,6 +22,7 @@ import { matchResultModules } from './api/match-results';
 import type { MatchOutcomes } from './matches/outcomes';
 import type { MatchmakingQueue } from './matches/matchmaking';
 import { MatchmakingCoordinator } from './matches/matchmaking-coordinator';
+import { matchmakingModule } from './api/matchmaking';
 
 /**
  * Where the built client lives. `dist/client` is produced by `npm run build` and served from the same process as
@@ -76,7 +77,7 @@ export function createGameServer(options: GameServerOptions = {}) {
   const services = createServices(deps);
   const admission = new RoomAdmission(() => deps.clock.nowMs(), options.admissionLimits);
   const accounts = options.accountRooms ? createAccountRooms(options.accountRooms.tickets, options.accountRooms.outcomes, deps.clock, { simulateShot: options.simulateShot }) : null;
-  const matchmaking=accounts && options.matchmakingQueue ? new MatchmakingCoordinator(options.matchmakingQueue,accounts.queueRooms):null;
+  const matchmaking=accounts && options.matchmakingQueue ? new MatchmakingCoordinator(options.matchmakingQueue,accounts.queueRooms,()=>!options.lobbyMaintenance):null;
   let closing: Promise<void> | null = null;
   const app = express();
   app.disable('x-powered-by');
@@ -99,7 +100,7 @@ export function createGameServer(options: GameServerOptions = {}) {
     res.json({ status: 'ready', requestId: res.locals.requestId });
   }));
   app.use('/api/v1', express.json({ limit: '32kb', strict: true }));
-  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent, !!accounts), ...(options.modules ?? []), ...(accounts && options.accountRooms ? [matchTicketsModule(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission, options.lobbyMaintenance), ...matchRecoveryModules(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission), ...matchResultModules(options.accountRooms.outcomes.results, options.accountRooms.web)] : [])]) {
+  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent, !!accounts), ...(options.modules ?? []), ...(accounts && options.accountRooms ? [matchTicketsModule(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission, options.lobbyMaintenance), ...matchRecoveryModules(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission), ...matchResultModules(options.accountRooms.outcomes.results, options.accountRooms.web), ...(matchmaking && options.matchmakingQueue ? [matchmakingModule(options.matchmakingQueue,matchmaking,options.accountRooms.tickets,options.accountRooms.web,accounts.directory,admission,options.lobbyMaintenance)]:[])] : [])]) {
     app.use(`/api/v1/${module.area}`, module.createRouter({ ...deps, services }));
   }
   app.get('/api/join-info', (req, res) => {

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { ACCOUNT_PROTOCOL_VERSION } from '../../../shared/protocol';
 import { RoomCodeSchema } from './match-tickets';
+import { ModeRulesSchema } from './modes';
 
 export const QueueModeSchema = z.enum(['friend', 'ranked', 'growth']);
 const region = z.string().regex(/^[a-z0-9][a-z0-9-]{0,31}$/);
@@ -27,6 +28,7 @@ export const QueueCommandSchema = z.strictObject({
   configVersion: version,
   region,
 });
+export type QueueCommand = z.infer<typeof QueueCommandSchema>;
 export const QueueRatingSchema = z.strictObject({
   scope: z.enum(['ranked', 'growth']),
   season: z.string().regex(/^[A-Za-z0-9._-]{1,80}$/),
@@ -40,6 +42,7 @@ export const QueueEntrySchema = z
     mode: QueueModeSchema,
     configVersion: version,
     policyVersion: z.string().min(1).max(40),
+    rules: ModeRulesSchema,
     region,
     lineupId: z.uuid(),
     lineupRevision: z.number().int().min(0).max(2147483647),
@@ -70,6 +73,8 @@ export const QueueEntrySchema = z
     if (
       (value.state === 'matched' && !value.assignment) ||
       (value.state === 'queued' && value.assignment) ||
+      value.rules.mode !== value.mode ||
+      value.rules.gameDataVersion !== value.configVersion ||
       (value.mode === 'friend' ? value.rating !== null : value.rating?.scope !== value.mode)
     )
       ctx.addIssue({ code: 'custom', message: 'Queue state bindings are inconsistent' });
@@ -87,3 +92,4 @@ export const QueueOptionsSchema = z.strictObject({
   policy: MatchmakingPolicySchema,
   enabledModes: z.array(QueueModeSchema).max(3),
 });
+export type QueueOptions = z.infer<typeof QueueOptionsSchema>;

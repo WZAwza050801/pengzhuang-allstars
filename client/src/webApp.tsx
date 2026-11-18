@@ -23,6 +23,7 @@ const PracticeMatchScreen = lazy(loadPracticeScreen);
 const AccountScreen = lazy(() => import('./accounts/routes'));
 const InventoryScreen = lazy(() => import('./inventory/route'));
 const RoomScreen = lazy(() => import('./rooms/route'));
+const QueueScreen = lazy(() => import('./queue/route'));
 
 function useNavigationContext(): NavigationContext {
   const { login, options } = useAccount();
@@ -41,7 +42,7 @@ function useNavigationContext(): NavigationContext {
   }, []);
 
   return useMemo(
-    () => ({ session: login.user ? 'authenticated' : login.status === 'unknown' || login.status === 'loading' ? 'loading' : 'anonymous', network, service, features: { ...DEFAULT_FEATURES, friendRooms: !!options?.friendRoomsEnabled, inventory: !!options?.inventoryEnabled, accounts: !!(options?.emailEnabled || options?.wechatMiniProgram) } }),
+    () => ({ session: login.user ? 'authenticated' : login.status === 'unknown' || login.status === 'loading' ? 'loading' : 'anonymous', network, service, features: { ...DEFAULT_FEATURES, friendRooms: !!options?.friendRoomsEnabled, matchmaking:!!options?.matchmakingEnabled, inventory: !!options?.inventoryEnabled, accounts: !!(options?.emailEnabled || options?.wechatMiniProgram) } }),
     [network, login.user, login.status, options, service],
   );
 }
@@ -140,8 +141,8 @@ function Shell({ context }: { context: NavigationContext }) {
             ? 'profile'
             : 'lobby';
 
-  if (location.pathname === '/room' || location.pathname.startsWith('/room/') || location.pathname.startsWith('/match')) return (
-    <main className={`${styles.immersive} pz-ui`}><PageFocus /><Suspense fallback={<p role="status">正在载入比赛…</p>}><Routes><Route path="/room/:code?" element={<RoomScreen context={context} />} /><Route path="/match/:matchId?" element={<MatchRoute context={context} />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></Suspense></main>
+  if (location.pathname === '/room' || location.pathname.startsWith('/room/') || location.pathname.startsWith('/match') || location.pathname.startsWith('/queue/')) return (
+    <main className={`${styles.immersive} pz-ui`}><PageFocus /><Suspense fallback={<p role="status">正在载入比赛…</p>}><Routes><Route path="/room/:code?" element={<RoomScreen context={context} />} /><Route path="/queue/:mode" element={<QueueScreen context={context} />} /><Route path="/match/:matchId?" element={<MatchRoute context={context} />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></Suspense></main>
   );
 
   return (

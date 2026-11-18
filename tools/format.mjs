@@ -19,6 +19,8 @@ files.push(
   'eslint.config.mjs',
   'vitest.config.ts',
   'client/src/fieldDebug.ts',
+  'client/src/queue/route.tsx',
+  'client/src/queue/queue-page.tsx',
   'client/src/quality.ts',
   'client/src/aiService.ts',
   'client/src/aiWorker.ts',
@@ -120,6 +122,7 @@ files.push(
   'server/matches/matchmaking.ts',
   'server/matches/matchmaking-authorization.ts',
   'server/matches/matchmaking-coordinator.ts',
+  'server/api/matchmaking.ts',
 );
 let bad = 0;
 files.push('tools/check-boundaries.mjs', 'tools/export-contracts.ts');

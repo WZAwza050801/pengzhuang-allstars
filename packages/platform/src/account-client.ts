@@ -46,6 +46,13 @@ import type { UpgradeIntent } from '../../client-model/src/upgrade-intent';
 import { PublicManifestSchema, LobbyContentSchema, LobbyAccountSchema } from '../../contracts/src/lobby';
 import { MatchTicketSchema } from '../../contracts/src/http';
 import { MatchTicketResultSchema } from '../../contracts/src/match-tickets';
+import {
+  QueueCommandSchema,
+  QueueOptionsSchema,
+  QueueStatusSchema,
+  type QueueStatus,
+} from '../../contracts/src/matchmaking';
+import { ACCOUNT_PROTOCOL_VERSION } from '../../../shared/protocol';
 import { ActiveMatchSchema, ReentryCommandSchema } from '../../contracts/src/match-recovery';
 import {
   MatchResultSchema,
@@ -61,6 +68,10 @@ import {
 
 const networkFailure = { ok: false as const, error: { code: 'NETWORK_ERROR' as const, retryable: true } };
 const invalid = { ok: false as const, error: { code: 'INVALID_RESPONSE' as const, retryable: false } };
+const queueReply = (userId: string, result: AccountResponse<QueueStatus>, entryId?: string) =>
+  result.ok && (result.data.userId !== userId || (entryId !== undefined && result.data.entry?.id !== entryId))
+    ? invalid
+    : result;
 const refreshed = z.strictObject({ refreshed: z.literal(true) });
 const csrfSchema = z.strictObject({ csrfToken: z.string().regex(/^[A-Za-z0-9_-]{43}\.[A-Za-z0-9_-]{43}$/) });
 
@@ -190,6 +201,51 @@ export class WebAccountClient implements AccountPort {
   activeMatch(userId: string) {
     return this.readAccount(userId, '/me/active-match', ActiveMatchSchema).then((result) =>
       result.ok && result.data.userId !== userId ? invalid : result,
+    );
+  }
+  queueOptions() {
+    return this.call('/matchmaking/options', QueueOptionsSchema);
+  }
+  queueStatus(userId: string, entryId?: string) {
+    if (entryId !== undefined && !z.uuid().safeParse(entryId).success) return Promise.resolve(invalid);
+    const id = entryId?.toLowerCase();
+    return this.readAccount(userId, `/matchmaking/entries/${id ?? 'current'}`, QueueStatusSchema).then((result) =>
+      queueReply(userId, result, id),
+    );
+  }
+  enterQueue(userId: string, raw: unknown) {
+    const input = QueueCommandSchema.safeParse(raw);
+    if (!z.uuid().safeParse(userId).success || !input.success) return Promise.resolve(invalid);
+    return this.protected(() =>
+      this.write('/matchmaking/entries', QueueStatusSchema, {
+        method: 'POST',
+        body: input.data,
+        headers: { 'X-Account-Id': userId },
+      }),
+    ).then((result) => {
+      const bound = queueReply(userId, result);
+      return bound.ok && bound.data.entry?.intentId !== input.data.intentId.toLowerCase() ? invalid : bound;
+    });
+  }
+  cancelQueue(userId: string, entryId: string) {
+    if (!z.uuid().safeParse(userId).success || !z.uuid().safeParse(entryId).success) return Promise.resolve(invalid);
+    const id = entryId.toLowerCase();
+    return this.protected(() =>
+      this.write(`/matchmaking/entries/${id}`, QueueStatusSchema, {
+        method: 'DELETE',
+        body: {},
+        headers: { 'X-Account-Id': userId },
+      }),
+    ).then((result) => queueReply(userId, result, id));
+  }
+  queueTicket(userId: string, entryId: string) {
+    if (!z.uuid().safeParse(userId).success || !z.uuid().safeParse(entryId).success) return Promise.resolve(invalid);
+    return this.protected(() =>
+      this.write(`/matchmaking/entries/${entryId.toLowerCase()}/ticket`, MatchTicketResultSchema, {
+        method: 'POST',
+        body: { protocol: ACCOUNT_PROTOCOL_VERSION },
+        headers: { 'X-Account-Id': userId },
+      }),
     );
   }
   matchHistory(userId: string, query: unknown = {}) {
