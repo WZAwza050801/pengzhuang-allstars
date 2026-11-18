@@ -13,6 +13,7 @@ import { ACCOUNT_PROTOCOL_VERSION } from '../../shared/protocol';
 import type { Phase } from '../../shared/protocol';
 import { MatchRecovery } from './recovery';
 import { ReentryCommandSchema } from '../../packages/contracts/src/match-recovery';
+import { requireQueueTicket } from './matchmaking-authorization';
 
 export type OwnedLineupSnapshot = Awaited<ReturnType<Lineups['snapshotInTransaction']>>;
 export type AccountMode = z.infer<typeof MatchTicketSchema>['mode'];
@@ -26,6 +27,7 @@ export interface AccountRoomTarget {
   code: string;
   data: GameData;
   mode: AccountMode;
+  assignmentId?: string;
   /** Returns the existing frozen snapshot on authorized in-process re-entry. */
   selection(userId: string): OwnedLineupSnapshot | undefined;
   canEnter(userId: string): boolean;
@@ -79,6 +81,7 @@ export class MatchTickets {
     try {
       const expiresAt = await this.db.transaction(async (tx) => {
         await requireActivePrincipal(tx, principal);
+        await requireQueueTicket(tx, principal.userId, target);
         // User lock serializes issuance across runtimes; reconnects also count. Failed requests never allocate rooms.
         const count = await tx.query<{ total: number }>(
           "SELECT count(*)::integer AS total FROM match_tickets WHERE user_id = $1 AND created_at > clock_timestamp() - interval '1 minute'",
@@ -151,6 +154,7 @@ export class MatchTickets {
       if (!hint) throw new ApiError('UNAUTHENTICATED', 401);
       return await this.db.transaction(async (tx) => {
         await requireActivePrincipal(tx, { userId: hint.user_id, sessionId: hint.session_id });
+        await requireQueueTicket(tx, hint.user_id, target);
         const claimed = await tx.query<{ lineup_snapshot: OwnedLineupSnapshot }>(
           `UPDATE match_tickets SET consumed_at = clock_timestamp()
           WHERE nonce_hash = $1 AND user_id = $2 AND session_id = $3 AND room_code = $4 AND mode = $5

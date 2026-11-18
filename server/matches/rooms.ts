@@ -19,13 +19,26 @@ import { AccountRestorer, type RestoredAccountRoom } from './account-restorer';
 import { buildOwnedLineupCards } from '../../packages/game-core/src/lineups';
 import { freezeSnapshot } from '../../packages/game-core/src/snapshot';
 import type { OwnedLineupSnapshot } from './tickets';
+import type { QueueAssignment } from './matchmaking';
+import type { QueueRoomFactory } from './matchmaking-coordinator';
 
 /** A bounded runtime directory backed by epoch-fenced account checkpoints and the original journal volume. */
 export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcomes, clock: ServerClock, options: { maxRooms?: number; simulateShot?: MatchSimulator } = {}) {
-  type Setup = { code: string; data: GameData; mode: AccountMode; restore?: RestoredAccountRoom & { store: MatchCheckpoints } };
+  type Setup = { code: string; data: GameData; mode: AccountMode; matched?:QueueAssignment; restore?: RestoredAccountRoom & { store: MatchCheckpoints } };
   const grants = new Map<string, Setup>();
   const rooms = new Map<string, AccountMatchRoom>();
   const reserved = new Set<string>();
+  const reservationKeys=new Map<string,string>();
+  function reserveCode(code?:string) {
+    if(reserved.size>=(options.maxRooms??128) || (code && reserved.has(code))) throw new ApiError(code?'UNAVAILABLE':'RATE_LIMITED',code?503:429,true);
+    if(!code) code=allocateRoomCode(reserved); else reserved.add(code);
+    const key=randomUUID();reservationKeys.set(code,key);return {code,key};
+  }
+  async function releaseReservation(code:string,key:string) {
+    if(reservationKeys.get(code)!==key) return;
+    await rooms.get(code)?.disconnect();
+    if(reservationKeys.get(code)===key) {reservationKeys.delete(code);reserved.delete(code);}
+  }
   const journal = new RecoveryJournal(path.join(outcomes.journalDirectory, 'account-recovery'));
   let storePromise: Promise<MatchCheckpoints> | undefined;
   const checkpointStore = () => storePromise ??= journal.open().then(id => tickets.recovery.checkpointStore(id)).catch(error => { storePromise = undefined; throw error; });
@@ -38,6 +51,15 @@ export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcome
     private lifetime: NodeJS.Timeout | undefined;
     private checkpoints: LiveCheckpoints | undefined;
     private ending = false;
+    private matched:QueueAssignment|undefined;
+    private reservationKey='';
+    override accountTarget():AccountRoomTarget|undefined {
+      const target=super.accountTarget(), matched=this.matched;
+      if(!target || !matched) return target;
+      return {...target,assignmentId:matched.id,
+        canEnter:userId=>matched.selections.some(seat=>seat.userId===userId) && target.canEnter(userId),
+        selection:userId=>target.selection(userId)??matched.selections.find(seat=>seat.userId===userId)};
+    }
     hasAuthority() { return !this.checkpoints || this.checkpoints.active(); }
     private bindCheckpoints(store: MatchCheckpoints, lease: CheckpointLease, record: AccountCheckpoint, requestedAt: number) {
       this.checkpoints = new LiveCheckpoints(store, journal, outcomes, clock, () => { void this.disconnect().catch(() => console.error('[AccountRoom] ownership shutdown failed')); });
@@ -54,6 +76,8 @@ export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcome
       const setup = typeof key === 'string' ? grants.get(key) : undefined;
       if (!setup) throw netError('forbidden');
       grants.delete(key as string);
+      this.reservationKey=key as string;
+      this.matched=setup.matched;
       let configurationHash = setup.restore?.record.configurationHash ?? '';
       let restored: { record: AccountCheckpoint; selections: [OwnedLineupSnapshot, OwnedLineupSnapshot] } | undefined;
       if (setup.restore) {
@@ -69,12 +93,12 @@ export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcome
       }
       return {
         ...setup,
-        rules: setup.restore?.configuration.rules,
+        rules: setup.restore?.configuration.rules ?? setup.matched?.rules,
         restored,
         recordStart: (input: Parameters<typeof tickets.recovery.started>[0], draft: AccountCheckpointDraft) => track((async () => {
           const store = await checkpointStore(), requestedAt = clock.nowMs();
           let lease: CheckpointLease | undefined, record: AccountCheckpoint | undefined;
-          await tickets.recovery.started(input, async tx => {
+          await tickets.recovery.started({...input,...(setup.matched?{assignmentId:setup.matched.id}:{})}, async tx => {
             configurationHash = await outcomes.openInTransaction(tx, input.matchId, setup.data, input.rules);
             record = { ...draft, configurationHash }; lease = await store.initialize(tx, record);
           });
@@ -130,17 +154,15 @@ export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcome
     override onDispose() {
       this.ending = true;
       clearTimeout(this.lifetime);
-      rooms.delete(this.roomId);
-      reserved.delete(this.roomId);
+      if(rooms.get(this.roomId)===this) rooms.delete(this.roomId);
+      if(reservationKeys.get(this.roomId)===this.reservationKey) {reservationKeys.delete(this.roomId);reserved.delete(this.roomId);}
       super.onDispose();
       if (this.checkpoints) void track(this.checkpoints.close()).catch(() => console.error('[AccountRoom] ownership release failed'));
     }
   }
   const directory: AccountRooms = {
     reserve(data, mode) {
-      if (reserved.size >= (options.maxRooms ?? 128)) throw new ApiError('RATE_LIMITED', 429, true);
-      const code = allocateRoomCode(reserved);
-      const key = randomUUID();
+      const {code,key} = reserveCode();
       const setup = { code, data, mode };
       grants.set(key, setup);
       const pending: AccountRoomTarget = { ...setup, selection: () => undefined, canEnter: () => true, recovery: () => undefined };
@@ -155,8 +177,7 @@ export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcome
         },
         async release() {
           grants.delete(key);
-          reserved.delete(code);
-          await rooms.get(code)?.disconnect();
+          await releaseReservation(code,key);
         },
       };
     },
@@ -164,18 +185,26 @@ export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcome
       const room = rooms.get(code); return room?.hasAuthority() ? room.accountTarget() : undefined;
     },
   };
+  const queueRooms:QueueRoomFactory={find:code=>directory.find(code),reserve(requestedCode) {
+    const {code,key}=reserveCode(requestedCode);
+    return {code,async create(assignment) {
+      if(assignment.roomCode!==code || rooms.has(code)) throw new ApiError('CONFLICT',409);
+      grants.set(key,{code,data:assignment.data,mode:assignment.mode,matched:assignment});
+      try {await matchMaker.createRoom(ACCOUNT_ROOM_NAME,{creationKey:key});}
+      finally {grants.delete(key);}
+    },async release() {grants.delete(key);await releaseReservation(code,key);}};
+  }};
   const restorer = new AccountRestorer(checkpointStore, journal, outcomes, clock, {
     has: code => rooms.has(code),
     async install(input) {
-      if (reserved.has(input.record.code) || reserved.size >= (options.maxRooms ?? 128)) throw new ApiError('UNAVAILABLE', 503, true);
       const mode = input.configuration.rules.mode;
       if (mode === 'practice') throw new ApiError('CONFLICT', 409);
-      const key = randomUUID(); reserved.add(input.record.code);
+      const {key}=reserveCode(input.record.code);
       grants.set(key, { code: input.record.code, data: input.configuration.data, mode, restore: { ...input, store: await checkpointStore() } });
       try { await matchMaker.createRoom(ACCOUNT_ROOM_NAME, { creationKey: key }); }
-      catch (error) { reserved.delete(input.record.code); throw error; }
+      catch (error) { await releaseReservation(input.record.code,key); throw error; }
       finally { grants.delete(key); }
     },
   });
-  return { directory, roomClass: AccountMatchRoom, restore: () => restorer.start(), stop: () => restorer.stop(), async close() { await restorer.close(); while (pending.size) await Promise.allSettled([...pending]); } };
+  return { directory, queueRooms, roomClass: AccountMatchRoom, restore: () => restorer.start(), stop: () => restorer.stop(), async close() { await restorer.close(); while (pending.size) await Promise.allSettled([...pending]); } };
 }

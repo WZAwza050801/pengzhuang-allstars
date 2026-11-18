@@ -20,8 +20,20 @@
 
 两个边界先失败再修正：普通SQL改写冻结阵容/重新打开终态被触发器阻止；旧比赛复用同房间码曾误把新分配报为完成，现改以assignment.match_id外键读取权威比赛。SQL触发器故障验证分配及双方状态整体回滚，解除后同码成功。`npm run check`通过192单元/19契约、311文件格式及lint/类型/边界/工具链/规划/生成数据；日志work/mm01-foundation-check-final.log。
 
-## 下一阶段必须完成
+## 存储阶段交接（20:09，历史）
 
-目前没有运行时装配、HTTP路由或网页队列，不能勾选MM-01。实际房间协调器须先在128房上限内预留房间码，再调用pair；取得配对的原data/mode/两份selection后创建受限房间，不能先按当前配置创建房间再套旧局。SQL响应不明时保留原code重试；物化成功后ready失败不能随意销毁已经开放的原房间。SQL成功但物化失败须明确标记failed并释放资源。
+20:09时尚无运行时装配、HTTP路由或网页队列。后续协调器须先在128房上限内预留房间码，再调用pair；取得配对的原data/mode/两份selection后创建受限房间，不能先按当前配置创建房间再套旧局。SQL响应不明时保留原code重试；物化成功后ready失败不能随意销毁已经开放的原房间。SQL成功但物化失败须明确标记failed并释放资源。
 
 开局还需在队列协调锁先于用户锁的顺序下，检查活动队列归属、排除其它已开局比赛，并在现有MatchRecovery.started事务内绑定assignment.match_id；否则不能开放队列。不得按roomCode推断该关联。队列房只允许原两名用户入场、使用原冻结selection；新票据和实际SDK/进程/HTTP/Web验证仍待完成。若实现自动就绪/指定席位，必须验证实际席位、对手准备和超时清理，不能用内存模拟开局代替。
+
+## 已验证的运行时阶段（2026-11-18 20:37）
+
+已增加受限房间工厂、协调器与startRuntime装配。协调器每秒扫描、每轮至多新建4个配对房；本地预留/房间仍共用128上限，SQL确认不明时保留原code重试，历史code冲突释放原预留。SQL已配对后创建房间，SQL ready暂失败保留已经存在的原房间；物化失败明确失败双方并释放。房间预留以内部generation key约束释放，迟到清理不能删除另一个新预留。正常关闭停止协调、明确失败未开局队列/分配，已经开局的匹配保持原match_id供NET-05恢复。
+
+QueueConfiguration现在显式format1，包含GameData、模式完整规则、队列策略和mode；hash覆盖全部这些内容。两份冻结规则必须与配置归档一致，实际房间也使用原归档规则。没有改玩法/经济参数；开发期旧队列缓存不会静默转换或混配，排队过期仍由数据库时钟处理。
+
+票据签发/消费复查配对成员、ready、入场期限和原配置；游客/外人不能凭公开code加入。开局在协调锁后取得用户/会话锁，再核对队列归属、原卡和匹配用户的其它活动比赛，参与者/初始快照/assignment.match_id同事务提交。新增限制针对匹配，原好友房的历史恢复查询保持原行为；旧的“较新已完成局不遮蔽较旧可恢复局”回归未经放宽继续通过。
+
+`node tools/run-pg-tests.mjs tests/matchmaking-rooms.integration.test.ts tests/matchmaking.integration.test.ts tests/match-tickets.integration.test.ts tests/lineups.integration.test.ts tests/account-checkpoints.integration.test.ts tests/outcomes.integration.test.ts`：6文件/92项通过、0跳过，88.14秒，work/mm01-runtime-regression.log，退出0。含8项新的真实服务/SDK房间用例、原34账号房/19结果/5真实服务进程重启。验证成功发布前match_id/head已提交、第三方拒绝、过期和重放票据、新票保留原持有等级、真实SQL ready故障保留原房、取消竞态、过期缓存、已有好友大厅无法绕过配对。分配器失败用例在明确的房间端口注入异常，再验证同用户由真实工厂重新配对成功；不将该注入称作实际Colyseus故障。
+
+work/mm01-runtime-check.log通过192单元/19契约、314格式和其余check；work/mm01-runtime-build.log服务端构建通过。首轮ESM spy与错误接收端的测试夹具问题已修正；首次增加的普遍单局限制影响旧恢复回归，已收敛到匹配路径，原断言保留。HTTP匹配路由、客户端请求适配、网页排队/取消/失败/刷新/切号和完整项目验收尚未实现，当前仍不可勾选MM-01。

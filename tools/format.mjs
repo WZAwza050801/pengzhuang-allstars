@@ -118,6 +118,8 @@ files.push(
   'server/matches/account-restorer.ts',
   'server/matches/outcome-journal.ts',
   'server/matches/matchmaking.ts',
+  'server/matches/matchmaking-authorization.ts',
+  'server/matches/matchmaking-coordinator.ts',
 );
 let bad = 0;
 files.push('tools/check-boundaries.mjs', 'tools/export-contracts.ts');

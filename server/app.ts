@@ -20,6 +20,8 @@ import { matchTicketsModule } from './api/match-tickets';
 import { matchRecoveryModules } from './api/match-recovery';
 import { matchResultModules } from './api/match-results';
 import type { MatchOutcomes } from './matches/outcomes';
+import type { MatchmakingQueue } from './matches/matchmaking';
+import { MatchmakingCoordinator } from './matches/matchmaking-coordinator';
 
 /**
  * Where the built client lives. `dist/client` is produced by `npm run build` and served from the same process as
@@ -54,6 +56,7 @@ function lanPlayUrls(port: number): { url: string; kind: 'lan' | 'vpn' }[] {
 export interface GameServerOptions extends Partial<ServiceDependencies> {
   simulateShot?: MatchSimulator;
   accountRooms?: { tickets: MatchTickets; web: WebSessions; outcomes: MatchOutcomes };
+  matchmakingQueue?: MatchmakingQueue;
   admissionLimits?: Partial<AdmissionLimits>;
   lobbyMaintenance?: boolean;
   readLobbyContent?: () => LobbyContent;
@@ -73,6 +76,7 @@ export function createGameServer(options: GameServerOptions = {}) {
   const services = createServices(deps);
   const admission = new RoomAdmission(() => deps.clock.nowMs(), options.admissionLimits);
   const accounts = options.accountRooms ? createAccountRooms(options.accountRooms.tickets, options.accountRooms.outcomes, deps.clock, { simulateShot: options.simulateShot }) : null;
+  const matchmaking=accounts && options.matchmakingQueue ? new MatchmakingCoordinator(options.matchmakingQueue,accounts.queueRooms):null;
   let closing: Promise<void> | null = null;
   const app = express();
   app.disable('x-powered-by');
@@ -149,8 +153,10 @@ export function createGameServer(options: GameServerOptions = {}) {
   if (accounts) gameServer.define(ACCOUNT_ROOM_NAME, accounts.roomClass);
   function close(): Promise<void> {
     return closing ??= (async () => {
+      matchmaking?.stop();
       accounts?.stop();
       const failures: unknown[] = [];
+      try {await matchmaking?.close();} catch(error) {failures.push(error);}
       const transportClosed = httpServer.listening ? new Promise<void>((resolve) => httpServer.once('close', resolve)) : Promise.resolve();
       try { await gameServer.gracefullyShutdown(false); } catch (error) { failures.push(error); }
       try { await accounts?.close(); } catch (error) { failures.push(error); }
@@ -163,5 +169,5 @@ export function createGameServer(options: GameServerOptions = {}) {
       if (failures.length) throw new Error('Server shutdown failed');
     })();
   }
-  return { app, httpServer, gameServer, services, restoreAccountRooms: async () => accounts ? accounts.restore() : null, close };
+  return { app, httpServer, gameServer, services, matchmaking, startMatchmaking:async()=>matchmaking?.start(), restoreAccountRooms: async () => accounts ? accounts.restore() : null, close };
 }

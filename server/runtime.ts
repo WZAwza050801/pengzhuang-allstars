@@ -29,6 +29,7 @@ import { MatchTickets } from './matches/tickets';
 import path from 'node:path';
 import { MatchOutcomes } from './matches/outcomes';
 import { OutcomeJournal } from './matches/outcome-journal';
+import { MatchmakingQueue } from './matches/matchmaking';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -48,9 +49,11 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     ? new WechatAccounts(database, new WechatProvider({ appId: config.wechatAppId!, secret: config.wechatSecret! }), config.sessionSigningKey!, players?.initialize) : null;
   const lifecycle = database && web ? new AccountLifecycle(database, passwords, { enabled: config.accountDeletionEnabled, graceHours: config.accountDeletionGraceHours, version: config.accountRetentionPolicy }, emailAccounts, wechat) : null;
   const tickets = database && web && lineups ? new MatchTickets(database, lineups, gameConfiguration.resolveData) : null;
+  const matchmakingQueue=database && tickets && lineups ? new MatchmakingQueue({db:database,lineups,resolveData:gameConfiguration.resolveData}):undefined;
   const outcomes = database && assets && economy ? new MatchOutcomes({ db: database, assets, policy: () => economy.registry.get(), journal: new OutcomeJournal(path.join(config.roomStoreDir, 'pending-outcomes')) }) : null;
   const server = createGameServer({
     accountRooms: tickets && web && outcomes ? { tickets, web, outcomes } : undefined,
+    matchmakingQueue,
     lobbyMaintenance: config.lobbyMaintenance,
     modules: [authOptionsModule(!!emailAccounts, !!wechat, web, !!(web && players && lineups && assets), !!tickets), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : [])] : [])],
     repository: database, resolveData: gameConfiguration.resolveData,
@@ -63,6 +66,7 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     await server.gameServer.listen(port);
     const recovery = await server.services.matches.restoreRooms();
     const accountRecovery = await server.restoreAccountRooms();
+    await server.startMatchmaking();
     emailAccounts?.startMailDelivery();
     lifecycle?.start();
     return { ...server, recovery, accountRecovery };

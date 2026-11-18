@@ -17,13 +17,15 @@ import { ACCOUNT_PROTOCOL_VERSION } from '../../shared/protocol';
 import type { GameData } from '../../shared/data';
 import { MATCHMAKING_POLICY } from '../../config/matchmaking';
 import { verifyModeRules } from '../../config/modes';
+import type { ModeRules } from '../../packages/contracts/src/modes';
 import type { Principal } from '../accounts/access-tokens';
 import { requireActivePrincipal } from '../accounts/authorization';
 import type { Lineups } from '../accounts/lineups';
 import { ApiError } from '../api/http';
 import type { AccountMode, OwnedLineupSnapshot } from './tickets';
+import { lockMatchmaking } from './matchmaking-authorization';
 
-type Configuration = { data: GameData; policy: MatchmakingPolicy; mode: AccountMode };
+type Configuration = { format: 1; data: GameData; policy: MatchmakingPolicy; mode: AccountMode; rules: ModeRules };
 type EntryRow = {
   id: string;
   user_id: string;
@@ -63,6 +65,7 @@ export interface QueueAssignment {
   expiresAt: string;
   state: AssignmentRow['state'];
   mode: AccountMode;
+  rules: ModeRules;
   data: GameData;
   selections: [OwnedLineupSnapshot, OwnedLineupSnapshot];
 }
@@ -98,9 +101,8 @@ export class MatchmakingQueue {
   }
   private run<T>(work: (tx: SqlExecutor) => Promise<T>): Promise<T> {
     return retryTransaction(this.options.db, async (tx) => {
-      await tx.query("SET LOCAL lock_timeout='2s'");
       // Queue coordination locks first; pairing then checks user/session locks in user-id order.
-      await tx.query('SELECT pg_advisory_xact_lock(70726,1)');
+      await lockMatchmaking(tx);
       return work(tx);
     }).catch((error) => {
       if (error instanceof ApiError) throw error;
@@ -237,7 +239,13 @@ export class MatchmakingQueue {
           ? null
           : QueueRatingSchema.parse(await this.options.ratings!.read(tx, principal.userId, input.mode));
       if (rating && rating.scope !== input.mode) throw conflict();
-      const configuration: Configuration = { data, policy: this.policy, mode: input.mode },
+      const configuration: Configuration = {
+          format: 1,
+          data,
+          policy: this.policy,
+          mode: input.mode,
+          rules: snapshot.rules,
+        },
         configurationHash = hash(configuration);
       await tx.query('INSERT INTO matchmaking_configurations(hash,payload) VALUES($1,$2) ON CONFLICT DO NOTHING', [
         configurationHash,
@@ -320,6 +328,7 @@ export class MatchmakingQueue {
     ).rows;
     if (
       !configuration ||
+      configuration.format !== 1 ||
       hash(configuration) !== row.configuration_hash ||
       members.length !== 2 ||
       members[0].user_id === members[1].user_id
@@ -335,6 +344,7 @@ export class MatchmakingQueue {
       )
         throw conflict();
       verifyModeRules(configuration.data, member.lineup_snapshot.rules);
+      if (canonicalJson(member.lineup_snapshot.rules) !== canonicalJson(configuration.rules)) throw conflict();
       if (member.policy_version !== policy.version) throw conflict();
     }
     return freezeSnapshot<QueueAssignment>({
@@ -344,6 +354,7 @@ export class MatchmakingQueue {
       expiresAt: row.expires_at.toISOString(),
       state: row.state,
       mode: configuration.mode,
+      rules: configuration.rules,
       data: configuration.data,
       selections: [members[0].lineup_snapshot, members[1].lineup_snapshot],
     });
@@ -478,11 +489,43 @@ export class MatchmakingQueue {
       await this.sweep(tx);
       const rows = (
         await tx.query<AssignmentRow>(
-          "SELECT * FROM matchmaking_assignments WHERE host_id=$1 AND state IN ('preparing','ready') ORDER BY created_at,id LIMIT 20",
+          "SELECT * FROM matchmaking_assignments WHERE host_id=$1 AND state='preparing' ORDER BY created_at,id LIMIT 20",
           [this.hostId],
         )
       ).rows;
       return Promise.all(rows.map((row) => this.assignment(tx, row)));
+    });
+  }
+  assignmentStates(ids: readonly string[]) {
+    const parsed = z.array(z.uuid()).max(128).safeParse(ids);
+    if (!parsed.success) return Promise.reject(new ApiError('INVALID_REQUEST', 400));
+    return this.run(async (tx) => {
+      await this.sweep(tx);
+      return (
+        await tx.query<{ id: string; state: AssignmentRow['state']; matchId: string | null }>(
+          'SELECT id,state,match_id AS "matchId" FROM matchmaking_assignments WHERE host_id=$1 AND id=ANY($2::uuid[])',
+          [this.hostId, parsed.data],
+        )
+      ).rows;
+    });
+  }
+  stopHost() {
+    return this.run(async (tx) => {
+      await tx.query(
+        "UPDATE matchmaking_entries SET state='failed',reason='room-unavailable',updated_at=clock_timestamp() WHERE host_id=$1 AND state='queued'",
+        [this.hostId],
+      );
+      const rows = (
+        await tx.query<{ id: string }>(
+          "UPDATE matchmaking_assignments SET state='failed',updated_at=clock_timestamp() WHERE host_id=$1 AND state IN ('preparing','ready') AND match_id IS NULL RETURNING id",
+          [this.hostId],
+        )
+      ).rows;
+      for (const row of rows)
+        await tx.query(
+          "UPDATE matchmaking_entries SET state='failed',reason='room-unavailable',updated_at=clock_timestamp() WHERE assignment_id=$1 AND state='matched'",
+          [row.id],
+        );
     });
   }
 }

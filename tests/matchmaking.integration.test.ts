@@ -58,6 +58,13 @@ test('one user has one active queue across instances and repeated intent returns
   );
   expect(new Set(entries.map((value) => value.entry!.id)).size).toBe(1);
   expect(QueueStatusSchema.safeParse(entries[0]).success).toBe(true);
+  const pinned = (
+    await db.query(
+      `SELECT c.payload,e.lineup_snapshot FROM matchmaking_entries e JOIN matchmaking_configurations c ON c.hash=e.configuration_hash WHERE e.id=$1`,
+      [entries[0].entry!.id],
+    )
+  ).rows[0];
+  expect(pinned.payload).toMatchObject({ format: 1, mode: 'friend', rules: pinned.lineup_snapshot.rules });
   await expect(second.enqueue(a.principal, command(a))).rejects.toMatchObject({ code: 'CONFLICT' });
   await expect(first.enqueue(a.principal, { ...input, region: 'west' })).rejects.toMatchObject({ code: 'CONFLICT' });
   const count = await db.query('SELECT count(*)::text AS n FROM matchmaking_entries WHERE user_id=$1', [

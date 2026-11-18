@@ -11,9 +11,11 @@ import type { OutcomeIntent } from '../../packages/contracts/src/match-results';
 import type { SettlementReceipt } from './outcomes';
 import { MatchCheckpoints, type CheckpointEvent } from './checkpoint-store';
 import type { AccountCheckpoint, AccountCheckpointDraft } from './checkpoint';
+import { lockMatchmaking, authorizeQueuedStart } from './matchmaking-authorization';
 
 export interface AccountMatchStart {
   matchId: string;
+  assignmentId?: string;
   roomCode: string;
   mode: AccountMode;
   configVersion: string;
@@ -36,8 +38,10 @@ export class MatchRecovery {
   checkpointStore(storageId: string) { return new MatchCheckpoints(this.db, { storageId }); }
   async started(input: AccountMatchStart, initialize?: (tx: SqlExecutor) => Promise<void>): Promise<void> {
     await this.db.transaction(async (tx) => {
+      await lockMatchmaking(tx);
       for (const participant of [...input.participants].sort((a, b) => a.userId.localeCompare(b.userId)))
         await requireActivePrincipal(tx, participant);
+      await authorizeQueuedStart(tx,input);
       await tx.query(
         `INSERT INTO matches(id, mode, config_version, protocol_version, status, room_code)
         VALUES ($1,$2,$3,$4,'playing',$5)`,
@@ -50,6 +54,7 @@ export class MatchRecovery {
           [input.matchId, participant.userId, participant.side, JSON.stringify(participant.cards)],
         );
       if (initialize) await initialize(tx);
+      if(input.assignmentId) await tx.query('UPDATE matchmaking_assignments SET match_id=$2,updated_at=clock_timestamp() WHERE id=$1',[input.assignmentId,input.matchId]);
     });
   }
   async closed(matchId: string, reason: 'ended' | 'abandoned' | 'expired'): Promise<void> {
