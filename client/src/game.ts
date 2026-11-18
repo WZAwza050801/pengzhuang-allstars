@@ -4,7 +4,7 @@ import { simulateShot, type Side } from '../../shared/physics';
 import { foldAimPath } from '../../shared/aim';
 import type { MatchHost, ShotPacket } from './host';
 import { Renderer, TEAM_COLORS, type Aim, type Effect, type ScenePiece, type Skin } from './render';
-import { sfx } from './sfx';
+import { sfx, getVolume, setVolume, isMuted, setMuted } from './sfx';
 import type { PlatformServices, Viewport } from '@pengzhuang/platform';
 import { createGamePlatform } from './webPlatform';
 import { samplePlayback } from '../../packages/game-core/src/playback';
@@ -28,6 +28,7 @@ function isEditableTarget(target: EventTarget | null) {
 }
 
 export interface GameOptions {
+  hostLifetime?: 'view' | 'owner';
   platform?: PlatformServices;
   quality?: Quality | 'auto';
   skinId: string;
@@ -96,11 +97,13 @@ export class GameView {
           </div>
           <button class="menu-btn">菜单</button>
         </div>
-        <div class="overlay menu hidden">
+        <div class="overlay menu hidden" role="dialog" aria-modal="true" aria-label="比赛菜单">
           <div class="panel">
             <h3>菜单</h3>
             <label>场地外观 <select class="skin"></select></label>
             <label>画质 <select class="quality"><option value="auto">自动</option><option value="low">流畅</option><option value="medium">标准</option><option value="high">精细</option></select></label>
+            <label>音量 <input class="volume" type="range" min="0" max="100" step="5" aria-label="比赛音量"></label>
+            <label><input class="mute" type="checkbox">静音</label>
             <button class="surrender">认输</button>
             <button class="exit">返回大厅</button>
             <button class="close">继续比赛</button>
@@ -116,8 +119,8 @@ export class GameView {
     })) this.el[k] = q(s);
     (q('.t0') as HTMLElement).style.setProperty('--team', TEAM_COLORS[0]);
     (q('.t1') as HTMLElement).style.setProperty('--team', TEAM_COLORS[1]);
-    this.el.name0.textContent = host.seats[0].name;
-    this.el.name1.textContent = host.seats[1].name;
+    this.el.name0.textContent = opts.hostLifetime === 'owner' ? `${host.viewSide === 0 ? '我方' : '对方'} · ${host.seats[0].name}` : host.seats[0].name;
+    this.el.name1.textContent = opts.hostLifetime === 'owner' ? `${host.viewSide === 1 ? '我方' : '对方'} · ${host.seats[1].name}` : host.seats[1].name;
 
     const skin = (FIELD_SKINS.find((s) => s.id === opts.skinId) ?? FIELD_SKINS[0]) as Skin;
     const canvas = q('.stage canvas') as HTMLCanvasElement;
@@ -140,8 +143,14 @@ export class GameView {
       this.r.setQuality(qualitySel.value === 'auto' ? chooseQuality(capabilities) : qualitySel.value as Quality);
       this.onResize();
     });
-    q('.menu-btn').addEventListener('click', () => this.el.menu.classList.remove('hidden'));
-    q('.menu .close').addEventListener('click', () => this.el.menu.classList.add('hidden'));
+    const volume = q('.volume') as HTMLInputElement;
+    volume.value = String(Math.round(getVolume() * 100));
+    volume.addEventListener('input', () => { setVolume(Number(volume.value) / 100); sfx.unlock(); });
+    const mute = q('.mute') as HTMLInputElement;
+    mute.checked = isMuted();
+    mute.addEventListener('change', () => { setMuted(mute.checked); sfx.unlock(); });
+    q('.menu-btn').addEventListener('click', () => { this.cancelAim(); this.el.menu.classList.remove('hidden'); q('.menu .close').focus(); });
+    q('.menu .close').addEventListener('click', () => this.closeMenu());
     q('.menu .exit').addEventListener('click', () => this.exit());
     q('.menu .surrender').addEventListener('click', () => {
       this.el.menu.classList.add('hidden');
@@ -160,10 +169,11 @@ export class GameView {
     this.onResize();
 
     host.start({
-      onState: (st) => this.onState(st),
-      onShot: (p) => this.onShot(p),
-      onEvents: (ev) => this.showEvents(ev),
-      onInfo: (t) => this.toast(t, 'info'),
+      onReset: () => { if (!this.disposed) { this.play = null; this.relocating = null; this.cancelAim(); this.effects = []; this.trail = []; } },
+      onState: (st) => { if (!this.disposed) this.onState(st); },
+      onShot: (p) => { if (!this.disposed) this.onShot(p); },
+      onEvents: (ev) => { if (!this.disposed) this.showEvents(ev); },
+      onInfo: (t) => { if (!this.disposed) this.toast(t, 'info'); },
     });
     this.raf = requestAnimationFrame(this.frame);
     // automation handle for tools/e2e-*.mjs
@@ -208,6 +218,14 @@ export class GameView {
   };
 
   private onKey = (e: KeyboardEvent) => {
+    if (!this.el.menu.classList.contains('hidden')) {
+      if (e.key === 'Escape') { e.preventDefault(); this.closeMenu(); return; }
+      if (e.key === 'Tab') {
+        const controls = [...this.el.menu.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled)')];
+        const edge = e.shiftKey ? controls[0] : controls.at(-1);
+        if (document.activeElement === edge) { e.preventDefault(); (e.shiftKey ? controls.at(-1) : controls[0])?.focus(); }
+      }
+    }
     if (e.defaultPrevented || isEditableTarget(e.target) || isEditableTarget(document.activeElement)) return;
     if (e.key === 'Escape' && this.aim) {
       e.preventDefault();
@@ -219,6 +237,8 @@ export class GameView {
       if (this.aim) this.updateAim(this.aim.pointer);
     }
   };
+
+  private closeMenu() { this.el.menu.classList.add('hidden'); this.root.querySelector<HTMLElement>('.menu-btn')?.focus(); }
 
   private setCurve(v: number) {
     this.curve = Math.max(-1, Math.min(1, Math.round(v * 20) / 20));
@@ -289,6 +309,10 @@ export class GameView {
   // ------------------------------------------------------------ input
   private canAim() {
     if (this.disposed || this.suspended) return false;
+    if (this.host.inputStatus?.() && this.host.inputStatus() !== 'ready') return false;
+    if (!this.el.menu.classList.contains('hidden')) return false;
+    const deadline = this.host.turnDeadline();
+    if (deadline !== null && deadline <= Date.now()) return false;
     return !!this.state && !this.play && !this.relocating && !this.state.over && this.host.mySides.includes(this.state.turn);
   }
 
@@ -449,6 +473,7 @@ export class GameView {
       trail: this.trail,
     });
     this.updateTimer();
+    this.updateTurnLabel();
   };
 
   private spawnSimEvents(t: number) {
@@ -491,12 +516,24 @@ export class GameView {
     const st = this.state!;
     this.el.score0.textContent = String(st.score[0]);
     this.el.score1.textContent = String(st.score[1]);
-    const mine = this.host.mySides.includes(st.turn);
-    const who = this.host.seats[st.turn].name;
-    this.el.turn.textContent = st.over ? '比赛结束' : this.host.mySides.length > 1 ? `${who} 出手` : mine ? '你的回合' : `${who} 思考中…`;
+    this.updateTurnLabel();
     this.el.turn.style.color = TEAM_COLORS[st.turn];
     this.root.querySelector('.t0')!.classList.toggle('active', st.turn === 0 && !st.over);
     this.root.querySelector('.t1')!.classList.toggle('active', st.turn === 1 && !st.over);
+  }
+
+  private updateTurnLabel() {
+    const st = this.state;
+    if (!st) return;
+    const status = this.host.inputStatus?.() ?? 'ready';
+    const deadline = this.host.turnDeadline();
+    const text = st.over ? '比赛结束' : status === 'closed' ? '连接已断开，无法出手' : status === 'reconnecting' ? '正在恢复连接，暂停出手' : status === 'pending' ? '出手待确认，请勿重复提交' : this.play ? '正在播放，暂停出手' : deadline !== null && deadline <= Date.now() ? '等待服务端换手' : this.host.mySides.length > 1 ? `${this.host.seats[st.turn].name} 出手` : this.host.mySides.includes(st.turn) ? '你的回合' : '对方回合';
+    const peer = this.host.seats[this.host.viewSide === 0 ? 1 : 0];
+    const peerAway = this.host.mySides.length === 1 && !peer.isBot && !peer.connected && status === 'ready' && !st.over;
+    const remaining = peer.reconnectDeadline === undefined ? '' : ` · ${Math.max(0, Math.ceil((peer.reconnectDeadline - Date.now()) / 1000))}秒`;
+    const label = peerAway ? `对手断线${remaining} · ${text}` : text;
+    if (this.el.turn.textContent !== label) this.el.turn.textContent = label;
+    if (status !== 'ready' && this.aim) this.cancelAim();
   }
 
   private updateTimer() {
@@ -602,6 +639,7 @@ export class GameView {
   }
 
   private exit() {
+    if (this.opts.hostLifetime === 'owner' && this.state && !this.state.over && !confirm(`离开后比赛继续计时，断线超过 ${this.host.rules?.reconnectSeconds ?? 60} 秒将按规则判定。确定返回大厅吗？`)) return;
     this.dispose();
     this.opts.onExit();
   }
@@ -642,7 +680,7 @@ export class GameView {
     const debug = window as unknown as { __pz?: unknown };
     if (debug.__pz === this.debugHandle) delete debug.__pz;
     this.debugHandle = null;
-    this.host.dispose();
+    if (this.opts.hostLifetime !== 'owner') this.host.dispose();
   }
 }
 

@@ -753,7 +753,7 @@
     {
       "path": "client/public/assets/catalog.json",
       "bytes": 298590,
-      "sha256": "ecf02c83c3728b1e6001127a3bd8b778ed8292b5acdd66be792313ef9b4a9442",
+      "sha256": "4147641b117fb90098e2ee48d94362d065942cf7a6ea4625c86e5ae91fccbbd3",
       "usage": "runtime",
       "category": "runtime-other-unverified",
       "sourceEvidence": "No more specific source evidence; review required",
@@ -4075,7 +4075,7 @@
     {
       "path": "client/public/assets/ui/pack.json",
       "bytes": 8853,
-      "sha256": "b7cdeb02dcb7b5a622185fb17acfbe1c04fcd057b8bd38b49bfbd948fe70b10c",
+      "sha256": "297967327ebccd3ad981e88df2882df23cd9d511422d6b1129cf1576bd94b48b",
       "usage": "runtime",
       "category": "rebuilt-ui-pack",
       "sourceEvidence": "tools/ui-textures.mjs original geometric drawing; config/ui-tokens.json; docs/engineering/ui-assets.md; commercial approval remains unverified",

@@ -79,7 +79,7 @@ export function resolveNavigation(input: unknown, context: NavigationContext): N
   if (!parsed.success) return { kind: 'invalid', fallback: { page: 'lobby' } };
   const target = parsed.data;
   let policy = simplePolicy[target.page] ?? { features: [], account: false, remote: false };
-  if (target.page === 'room') policy = { features: ['friendRooms'], account: false, remote: true };
+  if (target.page === 'room') policy = { features: ['friendRooms', 'inventory'], account: true, remote: true };
   if (target.page === 'queue') policy = { features: ['matchmaking', 'inventory'], account: true, remote: true };
   if (target.page === 'match' || target.page === 'result')
     policy =

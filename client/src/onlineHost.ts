@@ -17,6 +17,9 @@ import {
   type UpdateMsg,
 } from '../../shared/protocol';
 import type { HostListener, MatchHost, SeatInfo, ShotPacket } from './host';
+import type { MatchTicketResult } from '../../packages/contracts/src/match-tickets';
+import type { AccountResponse } from '../../packages/client-model/src/account';
+import { RoomJoinError } from '../../packages/client-model/src/room';
 
 /**
  * The server owns every rule decision. This client only sends intents and renders what comes back.
@@ -35,6 +38,7 @@ const RECONNECT_DELAYS_MS = [400, 900, 1800, 3200, 5000, 8000];
 export type OnlineStatus = 'connecting' | 'lobby' | 'playing' | 'ended' | 'reconnecting' | 'closed';
 
 export interface OnlineHostOptions {
+  account?: { userId: string; issueTicket(code?: string): Promise<AccountResponse<MatchTicketResult>> };
   mode?: GuestMode;
   /** `ws://host:port` of the Colyseus server. Empty string means "same origin" (the built-in server hosts the page). */
   serverUrl?: string;
@@ -48,6 +52,10 @@ export interface OnlineStatusListener {
   (status: OnlineStatus, detail?: string): void;
 }
 export class OnlineHost implements MatchHost {
+  private readonly account: OnlineHostOptions['account'];
+  private pendingShot: string | null = null;
+  private authorizationReady = true;
+  private reconnectUntil = 0;
   private modeRules: ModeRules | undefined;
   get rules(): ModeRules | undefined { return this.modeRules; }
   private readonly requestedMode: GuestMode;
@@ -107,6 +115,7 @@ export class OnlineHost implements MatchHost {
   }
 
   constructor(opts: OnlineHostOptions, statusListener?: OnlineStatusListener) {
+    this.account = opts.account;
     this.requestedMode = opts.mode ?? 'friend';
     this.pendingNickname = opts.nickname;
     this.statusListener = statusListener ?? null;
@@ -122,11 +131,13 @@ export class OnlineHost implements MatchHost {
 
   /** Connects to the server and returns the room code. Must be awaited before `start()`. */
   async connect(): Promise<string> {
+    if (this.disposed) throw new RoomJoinError('ACCOUNT_CHANGED');
     const opts = { protocol: PROTOCOL_VERSION, nickname: this.pendingNickname, mode: this.requestedMode };
     this.setStatus('connecting');
-    const room = this.code
+    const room = this.account ? await this.joinAccount() : this.code
       ? await this.client.joinById(this.code, opts)
       : await this.client.joinOrCreate(ROOM_NAME, opts);
+    if (this.disposed) { void room.leave(true); throw new RoomJoinError('ACCOUNT_CHANGED'); }
     this.room = room;
     this.reconnectionToken = room.reconnectionToken ?? null;
     this.bindRoom(room);
@@ -136,16 +147,41 @@ export class OnlineHost implements MatchHost {
     return this.roomCode;
   }
 
+  private async joinAccount(): Promise<Room> {
+    if (!this.account || this.disposed) throw new RoomJoinError('ACCOUNT_CHANGED');
+    if (!this.authorizationReady) throw new RoomJoinError('UNAVAILABLE', true);
+    const result = await this.account.issueTicket(this.code || undefined);
+    if (!result.ok) throw new RoomJoinError(result.error.code, result.error.retryable);
+    if (this.disposed) throw new RoomJoinError('ACCOUNT_CHANGED');
+    if (!this.authorizationReady) throw new RoomJoinError('UNAVAILABLE', true);
+    const ticket = result.data;
+    if (ticket.mode !== 'friend' || ticket.configVersion !== DEFAULT_DATA.version || (this.code && this.code !== ticket.roomCode)) throw new RoomJoinError('INVALID_RESPONSE');
+    this.roomCode = ticket.roomCode;
+    const room = await this.client.joinById(ticket.roomCode, { protocol: PROTOCOL_VERSION, ticket: ticket.ticket });
+    if (this.disposed) { void room.leave(true); throw new RoomJoinError('ACCOUNT_CHANGED'); }
+    return room;
+  }
+
+  setAuthorizationReady(ready: boolean): void { this.authorizationReady = ready; }
+  inputStatus(): 'ready' | 'pending' | 'reconnecting' | 'closed' {
+    if (!this.authorizationReady || this.status === 'reconnecting' || this.status === 'connecting') return 'reconnecting';
+    if (this.disposed || this.status === 'closed') return 'closed';
+    return this.pendingShot ? 'pending' : 'ready';
+  }
+  synchronize(): void { if (!this.disposed && this.account && this.status !== 'reconnecting') this.scheduleReconnect(); }
+
   /**
    * Submits the lineup and marks the seat ready. The server only starts the match when both seats are ready,
    * so this is what actually kicks the game off.
    */
   submitLineup(lineup: string[], levels?: number[]): void {
+    if (this.account) return;
     this.room?.send(C2S.setLineup, levels ? { lineup, levels } : { lineup });
   }
 
   /** Marks this seat ready. The match starts once the other player is ready too. */
   setReady(ready: boolean): void {
+    if (!this.authorizationReady || this.status !== 'lobby') return;
     this.room?.send(C2S.ready, { ready });
   }
 
@@ -159,15 +195,16 @@ export class OnlineHost implements MatchHost {
   }
 
   private bindRoom(room: Room): void {
-    room.onMessage(S2C.room, (msg: RoomSnapshot) => this.applyRoomSnapshot(msg));
-    room.onMessage(S2C.matchStart, (msg: MatchStartMsg) => this.onMatchStart(msg));
-    room.onMessage(S2C.shotPacket, (msg: ShotPacketMsg) => this.onShotPacket(msg));
-    room.onMessage(S2C.update, (msg: UpdateMsg) => this.onUpdate(msg));
-    room.onMessage(S2C.resume, (msg: ResumeMsg) => this.onResume(msg));
-    room.onMessage(S2C.error, (msg: ErrorMsg) => this.onError(msg));
+    const receive = <T>(handle: (message: T) => void) => (message: T) => { if (!this.disposed && this.room === room) handle(message); };
+    room.onMessage(S2C.room, receive((msg: RoomSnapshot) => this.applyRoomSnapshot(msg)));
+    room.onMessage(S2C.matchStart, receive((msg: MatchStartMsg) => this.onMatchStart(msg)));
+    room.onMessage(S2C.shotPacket, receive((msg: ShotPacketMsg) => this.onShotPacket(msg)));
+    room.onMessage(S2C.update, receive((msg: UpdateMsg) => this.onUpdate(msg)));
+    room.onMessage(S2C.resume, receive((msg: ResumeMsg) => this.onResume(msg)));
+    room.onMessage(S2C.error, receive((msg: ErrorMsg) => this.onError(msg)));
     room.onLeave((code: number) => {
       // A consented leave is our own doing; anything else means the socket dropped.
-      if (this.disposed) return;
+      if (this.disposed || this.room !== room) return;
       if (code === 1000 || code === 4000) {
         this.setStatus('closed');
         return;
@@ -175,6 +212,7 @@ export class OnlineHost implements MatchHost {
       this.scheduleReconnect();
     });
     room.onError((code: number, message?: string) => {
+      if (this.disposed || this.room !== room) return;
       this.listener?.onInfo?.(`联机错误 ${code}：${message ?? ''}`);
     });
   }
@@ -185,6 +223,10 @@ export class OnlineHost implements MatchHost {
   }
 
   private applyRoomSnapshot(snap: RoomSnapshot): void {
+    if (this.account && (snap.identity !== 'account' || snap.account?.userId !== this.account.userId)) {
+      this.setStatus('closed', '账号信息不匹配，请返回大厅重新登录');
+      void this.room?.leave(true); return;
+    }
     if (!this.acceptRules(snap.rules, snap.configVersion)) return;
     this.seat = snap.mySeat;
     this.mySides.splice(0, this.mySides.length, snap.mySeat);
@@ -193,12 +235,15 @@ export class OnlineHost implements MatchHost {
     for (const side of [0, 1] as const) {
       const s = snap.seats[side];
       this.seats[side] = {
+        reconnectDeadline: s?.reconnectMs === undefined ? undefined : Date.now() + s.reconnectMs,
         name: s?.nickname ?? (side === 0 ? this.pendingNickname : '等待中…'),
         isBot: false,
         connected: s?.connected ?? false,
       };
     }
-    if (snap.phase === 'lobby' && this.status === 'connecting') this.setStatus('lobby');
+    if (snap.phase === 'lobby' && (this.status === 'connecting' || this.status === 'reconnecting')) {
+      this.reconnecting = false; this.reconnectAttempt = 0; this.setStatus('lobby');
+    }
     this.roomSnapshotListener?.(snap);
   }
 
@@ -215,6 +260,7 @@ export class OnlineHost implements MatchHost {
   }
 
   private onShotPacket(msg: ShotPacketMsg): void {
+    this.pendingShot = null;
     this.matchId = msg.matchId;
     this.state = msg.state;
     this.applyClocks(msg.clocks.turnMs, msg.clocks.matchMs);
@@ -233,6 +279,7 @@ export class OnlineHost implements MatchHost {
   }
 
   private onUpdate(msg: UpdateMsg): void {
+    this.pendingShot = null;
     this.matchId = msg.matchId;
     this.state = msg.state;
     this.applyClocks(msg.clocks.turnMs, msg.clocks.matchMs);
@@ -242,6 +289,8 @@ export class OnlineHost implements MatchHost {
   }
 
   private onResume(msg: ResumeMsg): void {
+    const firstState = this.state === null;
+    this.pendingShot = null;
     if (!this.acceptRules(msg.rules, msg.configVersion)) return;
     this.matchId = msg.matchId;
     this.configVersion = msg.configVersion;
@@ -250,11 +299,14 @@ export class OnlineHost implements MatchHost {
     this.reconnecting = false;
     this.reconnectAttempt = 0;
     this.setStatus(msg.state.over ? 'ended' : 'playing');
+    this.listener?.onReset?.();
     this.listener?.onState(msg.state);
     this.listener?.onInfo?.('已重新连接，局面已恢复');
+    if (firstState) this.matchReadyListener?.();
   }
 
   private onError(msg: ErrorMsg): void {
+    if (msg.on === C2S.shot && (!msg.ref || msg.ref === this.pendingShot)) this.pendingShot = null;
     this.listener?.onInfo?.(`服务端拒绝了操作：${msg.code}`);
   }
 
@@ -278,6 +330,7 @@ export class OnlineHost implements MatchHost {
   private scheduleReconnect(): void {
     if (this.disposed || this.reconnecting) return;
     this.reconnecting = true;
+    if (this.reconnectAttempt === 0) this.reconnectUntil = Date.now() + (this.modeRules?.reconnectSeconds ?? 60) * 1000;
     this.setStatus('reconnecting');
     const delay = RECONNECT_DELAYS_MS[Math.min(this.reconnectAttempt, RECONNECT_DELAYS_MS.length - 1)];
     this.reconnectAttempt += 1;
@@ -286,10 +339,24 @@ export class OnlineHost implements MatchHost {
 
   private async tryReconnect(): Promise<void> {
     if (this.disposed) return;
+    if (this.account) {
+      try {
+        const room = await this.joinAccount();
+        this.room = room;
+        this.bindRoom(room);
+        return;
+      } catch (error) {
+        this.reconnecting = false;
+        if (Date.now() < this.reconnectUntil && (!(error instanceof RoomJoinError) || error.retryable)) { this.scheduleReconnect(); return; }
+        this.setStatus('closed', error instanceof RoomJoinError ? error.message : '连接中断，请返回大厅');
+        return;
+      }
+    }
     const token = this.reconnectionToken;
     if (token) {
       try {
         const room = await this.client.reconnect(token);
+        if (this.disposed) { void room.leave(true); return; }
         this.room = room;
         this.reconnectionToken = room.reconnectionToken ?? token;
         this.bindRoom(room);
@@ -309,6 +376,7 @@ export class OnlineHost implements MatchHost {
           nickname: this.pendingNickname,
           seatToken: this.seatToken,
         });
+        if (this.disposed) { void room.leave(true); return; }
         this.room = room;
         this.reconnectionToken = room.reconnectionToken ?? null;
         this.bindRoom(room);
@@ -333,6 +401,7 @@ export class OnlineHost implements MatchHost {
   }
 
   shoot(input: ShotInput): void {
+    if (this.inputStatus() !== 'ready') return;
     const room = this.room;
     if (!room || !this.state) return;
     if (this.state.turn !== this.viewSide) {
@@ -341,10 +410,12 @@ export class OnlineHost implements MatchHost {
     }
     if (this.state.over) return;
     // The turn id is the shot number the client has seen: the server rejects anything else.
+    const shotId = randomClientShotId();
+    this.pendingShot = shotId;
     room.send(C2S.shot, {
       matchId: this.matchId,
       turnId: this.state.shotNo,
-      clientShotId: randomClientShotId(),
+      clientShotId: shotId,
       configVersion: this.configVersion,
       input,
     });
@@ -364,6 +435,7 @@ export class OnlineHost implements MatchHost {
   }
 
   surrender(): void {
+    if (this.inputStatus() !== 'ready' || this.status !== 'playing') return;
     this.room?.send(C2S.surrender, {});
   }
 
@@ -378,6 +450,8 @@ export class OnlineHost implements MatchHost {
     }
     this.room = null;
     this.listener = null;
+    this.roomSnapshotListener = null;
+    this.matchReadyListener = null;
   }
 }
 

@@ -17,6 +17,7 @@ export interface ShotPacket {
 }
 
 export interface HostListener {
+  onReset?(): void;
   onState(st: MatchState): void;
   onShot(p: ShotPacket): void;
   onEvents(ev: MatchEvent[]): void;
@@ -24,12 +25,14 @@ export interface HostListener {
 }
 
 export interface SeatInfo {
+  reconnectDeadline?: number;
   name: string;
   isBot: boolean;
   connected: boolean;
 }
 
 export interface MatchHost {
+  inputStatus?(): 'ready' | 'pending' | 'reconnecting' | 'closed';
   readonly rules?: ModeRules;
   /** Sides the local user may control. */
   readonly mySides: Side[];

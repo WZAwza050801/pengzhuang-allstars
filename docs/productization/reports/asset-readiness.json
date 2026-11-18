@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceVersion": "assets-242a893cc17ad5b6",
-  "packageVersion": "assets-332176562462fe95",
+  "sourceVersion": "assets-94dd7bb39550562c",
+  "packageVersion": "assets-0ceec830f62557bd",
   "commercialReady": false,
   "license": {
     "approved": [],
@@ -1894,7 +1894,7 @@
   },
   "web": {
     "scope": "Filesystem JS/CSS/worker and public-resource totals; not measured first-screen transfer or device GPU memory",
-    "applicationBytes": 1238142,
+    "applicationBytes": 1624729,
     "publicBytes": 14086896,
     "catalogBytes": 247454,
     "packages": [

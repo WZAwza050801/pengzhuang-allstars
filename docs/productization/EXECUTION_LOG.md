@@ -21,6 +21,21 @@
 
 ## 任务执行记录
 
+### UI-05
+
+- 状态：完成
+- 开始：2026-11-18 10:31 Asia/Shanghai
+- 负责人：Codex desktop
+- 分支与起始提交：docs/productization-roadmap / c55760b
+- 范围：登录好友房、持有阵容选择、邀请与准备；一次性票据接既有 Host/Canvas；区分待确认、双方回合、播放与断线；音量、认输和退出确认。保留既有输入/物理，恢复和奖励的后续任务不提前勾选。
+- 验收计划：真实账号双浏览器建房/邀请/准备、双方视角鼠标/触屏弧线、服务端超时/认输；请求重复/迟到、掉线禁用与新票据重连、切号/快速退出/重复挂载、窄屏热区与声音设置；必要单元/契约/数据库/旧浏览器回归。独立提交回滚，复用既有设计规范。
+- 实现：friendRoomsEnabled 与真实服务/manifest 对齐，维护在服务端阻止新票据；匿名邀请登录/恢复回跳，持有阵容选择和双方准备。OnlineHost 接账号票据、即时 pending 锁与换票恢复；借用 Host 的 GameView 支持 StrictMode、首个 resume、旧回调隔离；全屏双方视角/HUD、对手断线、音量/菜单焦点及确认退出/认输。公共维护不冻结原局；资源声音源 hash 同步导出。
+- 验证：Node 24.22.1/npm 11.9.0；check 157 单元/11 契约、251 文件格式及其余门槛通过；最终完整 PostgreSQL/Chromium 集成 14 文件/187 项，0 跳过；原 net 176/0；生产构建与资源 readiness 一致；最终 e2e 18/0/0，0 console/pageerror。13 项房间浏览器涵盖完整交互与权限，320/768/1440 双方全部球员命中 Canvas。
+- 证据：本提交（git log -- docs/productization/reports/UI-05.md 可定位）；reports/UI-05.md、docs/engineering/friend-rooms.md、rooms-pages.integration.test.ts。work/ui05-browser 截图已实际查看，完整命令/行为摘要入报告，不把局部跳过或截图当真机证据。
+- 风险与剩余：本任务验收无已知阻塞；NET-03/04/05 与 UI-06 继续负责通用 active-match/跨进程恢复、可靠结果和奖励；真机听感/iOS 中断、微信真实资格与现有素材/依赖/平衡发布门槛保留。未使用远端服务器。
+- 回滚：独立提交；无数据库迁移或新依赖，回退能力/页面/音频及生成资源为同一版本；保留 NET-01 服务与旧游客语义。
+- 下一项：NET-02；累计 53/112，第 60 项同步 GitHub。
+
 ### NET-01
 
 - 状态：完成

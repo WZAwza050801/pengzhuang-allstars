@@ -420,7 +420,7 @@
       "inset": 0
     }
   ],
-  "version": "ui-assets-3701433072f38103",
+  "version": "ui-assets-aa314d05fd41a12c",
   "tokensVersion": "ui-1",
   "generatorSha256": "2acea7dcf237d8ae92938847b9fea4aa7bb870d400a94d4dfb6dba4422de2354",
   "generatorEngine": "chromium-159.0.8154.6",
@@ -437,7 +437,7 @@
       "turn"
     ],
     "sourcePath": "client/src/sfx.ts",
-    "sha256": "419e0a2673254f0e2506d32e6afeb76fccb19c80f68bb4c11f4eef933f7a113b",
+    "sha256": "9b48b184651bf645e46272e4785335f73731d5e33aab67b6c2b0e5eb4861bdb3",
     "strategy": "user-gesture-procedural"
   }
 }

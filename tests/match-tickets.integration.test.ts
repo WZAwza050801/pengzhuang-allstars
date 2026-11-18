@@ -402,6 +402,11 @@ test('production runtime mounts real ticket issuance and account room authentica
   const ticket = await issue(account),
     connection = await join(ticket);
   expect((await until(() => connection.latest<RoomSnapshot>(S2C.room))).account?.userId).toBe(account.principal.userId);
+  expect((await jsonRequest(origin, '/api/v1/auth/options')).data.data.friendRoomsEnabled).toBe(true);
+  expect((await jsonRequest(origin, '/api/v1/config/manifest')).data.data.availableModes).toEqual([
+    'practice',
+    'friend',
+  ]);
 });
 
 test('a late third-account ticket cannot occupy either seat, while a fresh own ticket replaces a live connection', async () => {
@@ -422,4 +427,29 @@ test('a late third-account ticket cannot occupy either seat, while a fresh own t
   expect(snapshot.account?.userId).toBe(a.principal.userId);
   await until(() => !wa.room.connection.isOpen);
   expect(wb.room.connection.isOpen).toBe(true);
+});
+
+test('maintenance disables account room creation on the server and keeps the manifest truthful', async () => {
+  const account = await owner();
+  await server.close();
+  const web = new WebSessions(sessions, { cookieSecure: false, allowedOrigins: [issuer] }, signingKey);
+  server = createGameServer({
+    repository: db,
+    clientDirectory: null,
+    lobbyMaintenance: true,
+    accountRooms: { tickets, web },
+    modules: [web.module()],
+  });
+  await server.gameServer.listen(0);
+  const address = server.httpServer.address();
+  if (!address || typeof address === 'string') throw new Error('No maintenance port');
+  origin = `http://127.0.0.1:${address.port}`;
+  expect((await post(account)).status).toBe(503);
+  expect((await jsonRequest(origin, '/api/v1/config/manifest')).data.data).toMatchObject({
+    maintenance: true,
+    availableModes: ['practice'],
+  });
+  expect(
+    (await db.query('SELECT nonce_hash FROM match_tickets WHERE user_id = $1', [account.principal.userId])).rows,
+  ).toHaveLength(0);
 });

@@ -46,11 +46,13 @@ flowchart TD
 | settings `/settings` | 返回我的；离线本地设置/保存失败 | 音量/画质本地；安全会话交给平台服务，不能用普通偏好存储代替凭据仓 |
 | inbox `/inbox/:section` | 返回比赛；空/过期/领取中/错误 | mail/tasks/achievements；领取需服务端幂等，待 LIV |
 | queue `/queue/:mode` | 取消/超时回比赛；匹配成功去比赛 | 只 ranked/growth；票据/队列 schema 已有，实际匹配待 NET/MM |
-| room `/room/:code?` | 对手离开/准备冲突/不兼容/返回 | 6 位邀请码；旧游客 SDK 好友房已实现；新壳接入待 UI-05/NET |
+| room `/room/:code?` | 对手离开/准备冲突/不兼容/返回 | UI-05 账号好友房接 NET-01 票据、持有阵容、邀请和全屏比赛；旧游客 SDK 独立，见 [friend-rooms.md](friend-rooms.md) |
 | match `/match/:matchId?` | 返回需确认；我方/对方/pending/回放/恢复/结束 | 在线比赛必须已有 matchId；practice 可新建；由 Canvas Host 裁定输入资格，页面不能自认胜负 |
 | result `/result/:matchId` | 再来或回比赛；本地/待入账/已入账/作废/错误 | 只有服务端可靠结果和账本才显示正式金额；网络错误不等于奖励 0；待 UI-06/NET-04 |
 
 当前服务器总是挂 catalog、健康、模式 manifest 和公告；runtime 在数据库/会话配置有效时挂账号、云存档/阵容/资产路由，登录供应商分别按配置开放。上表带“待”的页面继续保留功能关闭状态。DEFAULT_FEATURES 仅开启本地练习，账号与 inventoryEnabled 能力从真实 options 派生；ALL_FEATURES 只给测试与线框条件，不由生产启动默认采用。
+
+UI-05 新增 friendRoomsEnabled，只有实际账号票据服务接通时才用于导航。新好友房要求账号与 inventory 能力，邀请登录/恢复可回跳；已开局在原 room 路径保留 Host 和画面，不依赖占位 match 路由创建新局。NET-03/04 完成前不提供通用 active-match 发现或正式奖励页面。
 
 准入顺序为：解析内部意图 → 功能开关 → 新远程操作的维护/版本/网络 → 账号读取/登录。维护或离线时不诱导进入无法完成的登录。已经在进行的比赛/结果视图可以在断网时保留，显示恢复/查询状态；关闭新好友房/匹配入口不等于强制退出已有比赛。该模型不授予出手或发奖权限。
 

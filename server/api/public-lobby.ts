@@ -4,12 +4,12 @@ import type { LobbyContent } from '../../packages/contracts/src/lobby';
 import type { ApiModule } from './modules';
 import { ApiError, asyncRoute } from './http';
 
-export function publicLobbyModules(maintenance = false, readContent: () => LobbyContent = () => LOBBY_CONTENT): ApiModule[] {
+export function publicLobbyModules(maintenance = false, readContent: () => LobbyContent = () => LOBBY_CONTENT, friendRoomsEnabled = false): ApiModule[] {
   return [
     { area: 'config', createRouter({ resolveData }) { const router = Router(); router.get('/manifest', asyncRoute(async (req, res) => {
       if (Object.keys(req.query).length) throw new ApiError('INVALID_REQUEST', 400);
       res.setHeader('Cache-Control', 'no-store');
-      res.json({ ok: true, data: publicManifest(resolveData(), maintenance), requestId: res.locals.requestId });
+      res.json({ ok: true, data: publicManifest(resolveData(), maintenance, friendRoomsEnabled), requestId: res.locals.requestId });
     })); return router; } },
     { area: 'announcements', createRouter({ clock }) { const router = Router(); router.get('/', asyncRoute(async (req, res) => {
       if (Object.keys(req.query).length) throw new ApiError('INVALID_REQUEST', 400);

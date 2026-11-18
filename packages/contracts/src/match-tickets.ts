@@ -18,3 +18,4 @@ export const MatchTicketResultSchema = z.strictObject({
   configVersion: z.string().min(1).max(1024),
   mode: z.enum(['friend', 'ranked', 'growth']),
 });
+export type MatchTicketResult = z.infer<typeof MatchTicketResultSchema>;

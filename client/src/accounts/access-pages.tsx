@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { NavigationTargetSchema, resolveNavigation, toWebPath, type NavigationContext } from '@pengzhuang/client-model';
 import { useAccount } from './context';
@@ -11,6 +11,17 @@ export function LoginPage({ context }: { context: NavigationContext }) {
   const action = useAccountAction();
   const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => {
+    if (login.status !== 'authenticated') return;
+    const resume = NavigationTargetSchema.safeParse(location.state?.resume);
+    if (!resume.success) return;
+    if (readAccountLink()?.kind === 'link' && readAccountLink()?.token) {
+      navigate('/account/link', { replace: true });
+      return;
+    }
+    const decision = resolveNavigation(resume.data, { ...context, session: 'authenticated' });
+    if (decision.kind === 'show') navigate(toWebPath(decision.target), { replace: true });
+  }, [login.status, context, location.state, navigate]);
   return (
     <AccountLayout title="登录账号">
       <p>登录后管理账号与设备。本地练习无需登录。</p>

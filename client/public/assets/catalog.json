@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "assets-242a893cc17ad5b6",
+  "version": "assets-94dd7bb39550562c",
   "minProtocol": 1,
   "maxProtocol": 1,
   "assets": [
@@ -8783,7 +8783,7 @@
       "kind": "data",
       "path": "/assets/ui/pack.json",
       "bytes": 8853,
-      "sha256": "b7cdeb02dcb7b5a622185fb17acfbe1c04fcd057b8bd38b49bfbd948fe70b10c",
+      "sha256": "297967327ebccd3ad981e88df2882df23cd9d511422d6b1129cf1576bd94b48b",
       "width": null,
       "height": null,
       "anchors": {},
@@ -8854,8 +8854,8 @@
       "id": "procedural.audio",
       "kind": "procedural-audio",
       "path": null,
-      "bytes": 2730,
-      "sha256": "cf75adb673a683e10ead09cf7f77582f5f68764f3a8a6141a44a7987cf5c3a98",
+      "bytes": 3624,
+      "sha256": "ea0da84ef2e003a31dde00237fe19f0a9fc5ff48b639b6058f15d8ed267f46a7",
       "width": null,
       "height": null,
       "anchors": {},

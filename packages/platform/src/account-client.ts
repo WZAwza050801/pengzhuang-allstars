@@ -44,6 +44,8 @@ import { LineupPageSchema, SavedLineupSchema } from '../../contracts/src/lineups
 import { UpgradeQuoteSchema, AssetOperationSchema } from '../../contracts/src/economy-operations';
 import type { UpgradeIntent } from '../../client-model/src/upgrade-intent';
 import { PublicManifestSchema, LobbyContentSchema, LobbyAccountSchema } from '../../contracts/src/lobby';
+import { MatchTicketSchema } from '../../contracts/src/http';
+import { MatchTicketResultSchema } from '../../contracts/src/match-tickets';
 import {
   LocalImportCommandSchema,
   LocalImportReceiptSchema,
@@ -164,6 +166,18 @@ export class WebAccountClient implements AccountPort {
       userId,
       `/me/lineups?limit=50${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`,
       LineupPageSchema,
+    );
+  }
+  async roomTicket(userId: string, body: unknown) {
+    const input = MatchTicketSchema.safeParse(body);
+    if (!z.uuid().safeParse(userId).success || !input.success)
+      return { ok: false as const, error: { code: 'INVALID_REQUEST' as const, retryable: false } };
+    return this.protected(() =>
+      this.write('/matches/tickets', MatchTicketResultSchema, {
+        method: 'POST',
+        body: input.data,
+        headers: { 'X-Account-Id': userId },
+      }),
     );
   }
   inventoryLineup(userId: string, id: string) {

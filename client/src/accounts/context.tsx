@@ -10,6 +10,7 @@ interface AccountServices {
   changed(authenticated: boolean): Promise<void>;
 }
 type Options = {
+  friendRoomsEnabled: boolean;
   emailEnabled: boolean;
   wechatMiniProgram: boolean;
   sessionPresent: boolean;

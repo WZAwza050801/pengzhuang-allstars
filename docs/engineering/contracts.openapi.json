@@ -2975,6 +2975,10 @@
                       "$schema": "https://json-schema.org/draft/2020-12/schema",
                       "type": "object",
                       "properties": {
+                        "friendRoomsEnabled": {
+                          "default": false,
+                          "type": "boolean"
+                        },
                         "inventoryEnabled": {
                           "default": false,
                           "type": "boolean"
@@ -2990,6 +2994,7 @@
                         }
                       },
                       "required": [
+                        "friendRoomsEnabled",
                         "inventoryEnabled",
                         "emailEnabled",
                         "wechatMiniProgram",

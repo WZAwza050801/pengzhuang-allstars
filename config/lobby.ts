@@ -20,13 +20,13 @@ export function activeAnnouncements(content: LobbyContent, now: Date) {
       .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt) || a.id.localeCompare(b.id)),
   };
 }
-export function publicManifest(data: GameData, maintenance: boolean) {
+export function publicManifest(data: GameData, maintenance: boolean, friendRoomsEnabled = false) {
   return PublicManifestSchema.parse({
     schemaVersion: 1,
     protocolVersions: [PROTOCOL_VERSION],
     gameDataVersion: data.version,
     maintenance,
     modes: ModeIdSchema.options.map((mode) => rulesForMode(data, mode)),
-    availableModes: ['practice'],
+    availableModes: friendRoomsEnabled && !maintenance ? ['practice', 'friend'] : ['practice'],
   });
 }

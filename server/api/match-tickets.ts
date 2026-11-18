@@ -11,6 +11,7 @@ export function matchTicketsModule(
   web: WebSessions,
   rooms: AccountRooms,
   admission: RoomAdmission,
+  maintenance = false,
 ): ApiModule {
   return {
     area: 'matches',
@@ -21,6 +22,7 @@ export function matchTicketsModule(
         '/tickets',
         asyncRoute(async (req, res) => {
           const principal = res.locals.principal as Principal;
+          if (maintenance) throw new ApiError('UNAVAILABLE', 503, true);
           requireAccountTarget(req, principal.userId);
           if (Object.keys(req.query).length) throw new ApiError('INVALID_REQUEST', 400);
           if (

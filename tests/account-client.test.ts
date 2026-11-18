@@ -14,6 +14,52 @@ const failure = (code: 'UNAUTHENTICATED' | 'UNAVAILABLE', status = 401) => ({
 const csrfValue = () => `${randomBytes(32).toString('base64url')}.${randomBytes(32).toString('base64url')}`;
 const csrf = () => success({ csrfToken: csrfValue() });
 
+test('room ticket requests validate identity hints and carry only a versioned owned-lineup command', async () => {
+  const userId = randomUUID(),
+    lineupId = randomUUID();
+  const requests: { url: string; body?: unknown; headers?: Record<string, string> }[] = [];
+  const ticket = {
+    ticket: 'a'.repeat(43),
+    roomCode: 'ABCD23',
+    expiresAt: '2026-11-18T00:00:00.000Z',
+    protocol: 1,
+    mode: 'friend',
+    configVersion: 'test',
+  };
+  const api = new WebAccountClient({
+    request: async (url, input) => {
+      requests.push({ url, body: input?.body, headers: input?.headers });
+      return url.endsWith('/csrf') ? csrf() : success(ticket);
+    },
+  });
+  const command = { protocol: 1, mode: 'friend', lineupId, expectedRevision: 0, roomCode: 'ABCD23' };
+  expect(await api.roomTicket(userId, { ...command, userId })).toMatchObject({ ok: false });
+  expect(await api.roomTicket('invalid', command)).toMatchObject({ ok: false });
+  expect(requests).toHaveLength(0);
+  expect(await api.roomTicket(userId, command)).toEqual({ ok: true, data: ticket });
+  expect(requests.at(-1)).toMatchObject({
+    url: '/api/v1/matches/tickets',
+    body: command,
+    headers: { 'X-Account-Id': userId },
+  });
+  expect(requests.at(-1)?.headers?.['X-CSRF-Token']).toBeTruthy();
+});
+
+test('unknown room issuance failures do not automatically create a second room', async () => {
+  let posts = 0;
+  const api = new WebAccountClient({
+    request: async (url) => {
+      if (url.endsWith('/csrf')) return csrf();
+      posts++;
+      return failure('UNAVAILABLE', 503);
+    },
+  });
+  expect(
+    await api.roomTicket(randomUUID(), { protocol: 1, mode: 'friend', lineupId: randomUUID(), expectedRevision: 0 }),
+  ).toMatchObject({ ok: false, error: { code: 'UNAVAILABLE' } });
+  expect(posts).toBe(1);
+});
+
 test('credential failures are never refreshed or replayed; invalid registration stays at the boundary', async () => {
   const requests: string[] = [];
   const api = new WebAccountClient({

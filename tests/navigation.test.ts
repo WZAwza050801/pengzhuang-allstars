@@ -17,11 +17,11 @@ test('anonymous cloud intent survives login without external return URLs', () =>
   ])
     expect(resolveNavigation(input, context).kind).toBe('invalid');
 });
-test('closed features do not send visitors into an impossible login; guest friend and practice remain distinct', () => {
+test('closed features do not offer impossible login; account rooms and legacy guest entry remain separate', () => {
   expect(
     resolveNavigation({ page: 'lineup' }, { ...context, features: { ...ALL_FEATURES, inventory: false } }),
   ).toMatchObject({ kind: 'blocked', reason: 'feature-off' });
-  expect(resolveNavigation({ page: 'room' }, context)).toEqual({ kind: 'show', target: { page: 'room' } });
+  expect(resolveNavigation({ page: 'room' }, context)).toEqual({ kind: 'login', resume: { page: 'room' } });
   expect(resolveNavigation({ page: 'queue', mode: 'ranked' }, context).kind).toBe('login');
   expect(resolveNavigation({ page: 'queue', mode: 'friend' }, context).kind).toBe('invalid');
 });

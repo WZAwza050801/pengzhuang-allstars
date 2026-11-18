@@ -91,7 +91,7 @@ export function createGameServer(options: GameServerOptions = {}) {
     res.json({ status: 'ready', requestId: res.locals.requestId });
   }));
   app.use('/api/v1', express.json({ limit: '32kb', strict: true }));
-  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent), ...(options.modules ?? []), ...(accounts && options.accountRooms ? [matchTicketsModule(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission)] : [])]) {
+  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent, !!accounts), ...(options.modules ?? []), ...(accounts && options.accountRooms ? [matchTicketsModule(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission, options.lobbyMaintenance)] : [])]) {
     app.use(`/api/v1/${module.area}`, module.createRouter({ ...deps, services }));
   }
   app.get('/api/join-info', (req, res) => {
