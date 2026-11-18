@@ -14,6 +14,8 @@ test('local defaults preserve existing port and store', () => {
   assert.equal(cfg.port, 2567);
   assert.equal(cfg.devAuthBypass, false);
   assert.equal(cfg.cookieSecure, false);
+  assert.equal(cfg.lobbyMaintenance, false);
+  assert.equal(readRuntimeConfig({ LOBBY_MAINTENANCE: 'true' }).lobbyMaintenance, true);
   assert.ok(Object.isFrozen(cfg.allowedOrigins));
 });
 test('port, flag and origin validation rejects malformed input', () => {
@@ -22,6 +24,7 @@ test('port, flag and origin validation rejects malformed input', () => {
     { PORT: '65536' },
     { PORT: 'wat' },
     { DEV_AUTH_BYPASS: 'yes' },
+    { LOBBY_MAINTENANCE: 'yes' },
     { PUBLIC_ORIGIN: 'https://example.org/path' },
     { ALLOWED_ORIGINS: '*' },
     { ALLOWED_ORIGINS: 'https://*.example.org' },

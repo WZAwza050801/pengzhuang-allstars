@@ -178,6 +178,17 @@
   font-weight: 700;
 }
 
+.wallet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-24);
+  margin-block: var(--ui-space-16);
+}
+.wallet div { min-width: 0; }
+.wallet dt { color: var(--ui-muted); }
+.wallet dd { margin: var(--ui-space-4) 0 0; font-weight: 700; font-size: 1.25em; overflow-wrap: anywhere; }
+.announcementBody { white-space: pre-wrap; overflow-wrap: anywhere; }
+
 .actions {
   flex-wrap: wrap;
   gap: var(--ui-space-8);

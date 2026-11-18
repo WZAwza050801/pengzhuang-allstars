@@ -10,6 +10,8 @@ import { MAX_CLIENT_MESSAGE_BYTES, PROTOCOL_VERSION, ROOM_NAME } from '../shared
 import { MatchRoom } from './rooms/MatchRoom';
 import { createServices, systemClock, type ServiceDependencies } from './services';
 import { catalogModule, type ApiModule } from './api/modules';
+import { publicLobbyModules } from './api/public-lobby';
+import type { LobbyContent } from '../packages/contracts/src/lobby';
 import { ApiError, asyncRoute, errorMiddleware, requestId, sendApiError, type ErrorEvent } from './api/http';
 
 /**
@@ -43,6 +45,8 @@ function lanPlayUrls(port: number): { url: string; kind: 'lan' | 'vpn' }[] {
 }
 
 export interface GameServerOptions extends Partial<ServiceDependencies> {
+  lobbyMaintenance?: boolean;
+  readLobbyContent?: () => LobbyContent;
   modules?: readonly ApiModule[];
   clientDirectory?: string | null;
   ready?: () => Promise<void>;
@@ -79,7 +83,7 @@ export function createGameServer(options: GameServerOptions = {}) {
     res.json({ status: 'ready', requestId: res.locals.requestId });
   }));
   app.use('/api/v1', express.json({ limit: '32kb', strict: true }));
-  for (const module of [catalogModule, ...(options.modules ?? [])]) {
+  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent), ...(options.modules ?? [])]) {
     app.use(`/api/v1/${module.area}`, module.createRouter({ ...deps, services }));
   }
   app.get('/api/join-info', (req, res) => {

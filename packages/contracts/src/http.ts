@@ -5,6 +5,7 @@ import { parseNickname } from './game-validation';
 import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
 import { LineupPageQuerySchema, LineupPageSchema, SavedLineupSchema } from './lineups';
 import { LocalImportCommandSchema, LocalImportReceiptSchema, LocalImportStatusSchema } from './local-import';
+import { PublicManifestSchema, LobbyContentSchema, LobbyAccountSchema } from './lobby';
 import {
   UpgradeQuoteSchema,
   CraftQuoteQuerySchema,
@@ -102,6 +103,9 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
+  { method: 'get', path: '/api/v1/config/manifest', operationId: 'publicManifest', response: PublicManifestSchema },
+  { method: 'get', path: '/api/v1/announcements', operationId: 'announcements', response: LobbyContentSchema },
+  { method: 'get', path: '/api/v1/me/lobby', operationId: 'lobbyAccount', response: LobbyAccountSchema },
   {
     method: 'get',
     path: '/api/v1/me/cards/{id}/upgrade-quote',

@@ -20,6 +20,9 @@ import { lifecycleModules } from '../server/api/lifecycle';
 import { LocalImports } from '../server/accounts/local-import';
 import { localImportModule } from '../server/api/local-import';
 import { PlayerData } from '../server/accounts/player-data';
+import { playerDataModule } from '../server/api/player-data';
+import { Assets } from '../server/accounts/assets';
+import type { LobbyContent } from '../packages/contracts/src/lobby';
 import { DEFAULT_DATA } from '../shared/data';
 import { createBundledEconomyConfiguration } from '../config/economy';
 import { freePort, startMailpit } from './helpers/mailpit';
@@ -31,6 +34,8 @@ let server: ReturnType<typeof createGameServer>;
 let mail: EmailAccounts;
 let browser: Browser;
 let origin: string;
+let assets: Assets;
+let lobbyContent: LobbyContent = { version: 'lobby-test-1', announcements: [] };
 let seedUnboundBrowser: (context: BrowserContext) => Promise<void>;
 const password = '真实浏览器-123456789';
 const errors: string[] = [];
@@ -54,8 +59,12 @@ beforeAll(async () => {
   });
   const passwords = new Passwords();
   const players = new PlayerData(db, createBundledEconomyConfiguration().policy, DEFAULT_DATA);
-  mail = new EmailAccounts(db, createAccountMail(config), key, passwords);
-  const sessions = new Sessions(db, key, origin);
+  assets = new Assets(db, players.initialize, () => ({
+    policy: createBundledEconomyConfiguration().policy,
+    data: DEFAULT_DATA,
+  }));
+  mail = new EmailAccounts(db, createAccountMail(config), key, passwords, players.initialize);
+  const sessions = new Sessions(db, key, origin, players.initialize);
   const web = new WebSessions(sessions, config, key);
   // Trusted fixture only; this does not claim a real WeChat platform exchange.
   seedUnboundBrowser = async (context) => {
@@ -86,12 +95,14 @@ beforeAll(async () => {
   const directory = path.join(process.env.PG_TEST_TMP_DIR, 'account-pages-client');
   await build({ configFile: path.resolve('client/vite.config.ts'), logLevel: 'silent', build: { outDir: directory } });
   server = createGameServer({
+    readLobbyContent: () => lobbyContent,
     repository: db,
     clientDirectory: directory,
     modules: [
       authOptionsModule(true, false, web),
       web.module(),
       currentUserModule(web),
+      playerDataModule(players, web),
       localImportModule(new LocalImports(db, players.initialize, () => DEFAULT_DATA), web),
       ...lifecycleModules(lifecycle, web),
       emailAuthModule(mail, web),
@@ -118,7 +129,10 @@ async function pageIn(context?: BrowserContext, expectedTransportFailure = false
     if (
       message.type() === 'error' &&
       !/Failed to load resource:.*(?:400|401|403|409|429)/.test(message.text()) &&
-      !(expectedTransportFailure && /net::ERR_FAILED/.test(message.text()))
+      !(
+        expectedTransportFailure &&
+        /net::ERR_(?:FAILED|INTERNET_DISCONNECTED)|Failed to load resource:.*(?:500|503)/.test(message.text())
+      )
     )
       errors.push(message.text());
   });
@@ -450,6 +464,163 @@ test('browser explains corrupt and blocked local saves without submitting an imp
     await page.getByRole('button', { name: '检查旧本地存档', exact: true }).click();
     await browserExpect(page.getByText('浏览器不允许读取本地存档。', { exact: false })).toBeVisible();
   } finally {
+    await context.close();
+  }
+});
+test('real email login returns to the lobby and refreshes exact server assets without losing the selected mode', async () => {
+  const { page, context } = await pageIn();
+  try {
+    const email = await register(page);
+    await page.evaluate(() => {
+      localStorage.setItem('pz_profile', JSON.stringify({ cash: 999999999, level: 10 }));
+    });
+    await page.goto(`${origin}/`);
+    await page.getByRole('button', { name: '登录账号', exact: true }).click();
+    await page.getByLabel('邮箱', { exact: true }).fill(email);
+    await page.getByLabel('密码', { exact: true }).fill(password);
+    await page.getByRole('button', { name: '登录', exact: true }).click();
+    await page.waitForURL(`${origin}/`);
+    await browserExpect(page.locator('[data-wallet="coins"]')).toHaveText('300');
+    await browserExpect(page.getByText('持有卡：5 张', { exact: true })).toBeVisible();
+    await page.getByRole('button', { name: '均衡好友赛', exact: true }).click();
+    await browserExpect(page.locator('[data-mode-summary]')).toContainText('统一 Lv5');
+    const me = (await (await context.request.get(`${origin}/api/v1/me`)).json()).data;
+    const operationId = randomUUID();
+    await assets.grantTrusted({
+      userId: me.userId,
+      operationId,
+      sourceId: operationId,
+      reason: 'admin.correction',
+      coins: '100',
+    });
+    await page.getByRole('button', { name: '刷新大厅数据', exact: true }).click();
+    await browserExpect(page.locator('[data-wallet="coins"]')).toHaveText('400');
+    await browserExpect(page.getByRole('button', { name: '均衡好友赛', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    const exactId = randomUUID();
+    await assets.grantTrusted({
+      userId: me.userId,
+      operationId: exactId,
+      sourceId: exactId,
+      reason: 'admin.correction',
+      coins: '9007199254740593',
+    });
+    await page.getByRole('button', { name: '刷新大厅数据', exact: true }).click();
+    await browserExpect(page.locator('[data-wallet="coins"]')).toHaveText('9,007,199,254,740,993');
+    await page.locator('[data-wallet="coins"]').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(screenshotDirectory, 'lobby-account-mobile.png') });
+    await page.getByRole('link', { name: '账号资料与设备', exact: true }).click();
+    await browserExpect(page.getByRole('heading', { name: '我的账号', exact: true })).toBeVisible();
+  } finally {
+    await context.close();
+  }
+}, 60000);
+test('slow, failed and empty lobby data never invent a zero balance and an expired session clears private data', async () => {
+  const { page, context } = await pageIn(undefined, true);
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let phase: 'slow' | 'failure' | 'empty' | 'ready' = 'slow';
+  try {
+    await seedUnboundBrowser(context);
+    await page.route('**/api/v1/me/lobby', async (route) => {
+      if (phase === 'slow') {
+        await gate;
+        await route.continue();
+      } else if (phase === 'failure')
+        await route.fulfill({
+          status: 503,
+          json: {
+            ok: false,
+            error: { code: 'UNAVAILABLE', message: 'Generic failure', retryable: true },
+            requestId: randomUUID(),
+          },
+        });
+      else if (phase === 'empty') {
+        const response = await route.fetch();
+        const body = await response.json();
+        body.data = { ...body.data, profile: null, wallets: [], cardCount: 0, defaultLineup: null };
+        await route.fulfill({ response, json: body });
+      } else await route.continue();
+    });
+    await page.goto(`${origin}/`);
+    await browserExpect(page.getByText('正在读取云端资产，余额尚未确认…', { exact: true })).toBeVisible();
+    await browserExpect(page.locator('[data-wallet]')).toHaveCount(0);
+    release();
+    await browserExpect(page.locator('[data-wallet="coins"]')).toHaveText('300');
+    phase = 'failure';
+    await page.getByRole('button', { name: '刷新大厅数据', exact: true }).click();
+    await browserExpect(page.getByText('未能读取资产，余额尚未确认。', { exact: true })).toBeVisible();
+    await browserExpect(page.locator('[data-wallet]')).toHaveCount(0);
+    phase = 'empty';
+    await page.getByRole('button', { name: '刷新大厅数据', exact: true }).click();
+    await browserExpect(page.locator('[data-wallet="coins"]')).toHaveText('尚未建立');
+    await browserExpect(page.getByText('尚无云端阵容。', { exact: true })).toBeVisible();
+    phase = 'ready';
+    await page.getByRole('button', { name: '刷新大厅数据', exact: true }).click();
+    await browserExpect(page.locator('[data-wallet="coins"]')).toHaveText('300');
+    const me = (await (await context.request.get(`${origin}/api/v1/me`)).json()).data;
+    await db.query("UPDATE users SET status='banned',banned_at=clock_timestamp() WHERE id=$1", [me.userId]);
+    await page.getByRole('button', { name: '刷新大厅数据', exact: true }).click();
+    await browserExpect(page.getByRole('button', { name: '登录账号', exact: true })).toBeVisible();
+    await browserExpect(page.locator('[data-wallet]')).toHaveCount(0);
+  } finally {
+    release();
+    await context.close();
+  }
+});
+test('lobby displays real published text and explicit maintenance, outdated and offline states', async () => {
+  const { page, context } = await pageIn(undefined, true);
+  let state: 'maintenance' | 'outdated' | 'ready' = 'maintenance';
+  lobbyContent = {
+    version: 'lobby-test-2',
+    announcements: [
+      {
+        id: 'test-notice',
+        title: '维护说明',
+        body: '<img src=x onerror=alert(1)>\n测试公告正文',
+        publishedAt: new Date(Date.now() - 60000).toISOString(),
+        expiresAt: null,
+      },
+    ],
+  };
+  try {
+    await page.route('**/api/v1/config/manifest', async (route) => {
+      const response = await route.fetch();
+      const body = await response.json();
+      body.data.maintenance = state === 'maintenance';
+      if (state === 'outdated') body.data.protocolVersions = [999];
+      await route.fulfill({ response, json: body });
+    });
+    await page.goto(`${origin}/`);
+    await browserExpect(page.getByRole('heading', { name: '服务维护中', exact: true })).toBeVisible();
+    await browserExpect(page.getByRole('heading', { name: '维护说明', exact: true })).toBeVisible();
+    await browserExpect(page.locator('article')).toContainText('<img src=x onerror=alert(1)>');
+    await browserExpect(page.locator('article img')).toHaveCount(0);
+    state = 'outdated';
+    await page.getByRole('button', { name: '重新检查服务', exact: true }).click();
+    await browserExpect(page.getByRole('heading', { name: '客户端版本过旧', exact: true })).toBeVisible();
+    await browserExpect(page.getByRole('button', { name: '刷新客户端', exact: true })).toBeVisible();
+    state = 'ready';
+    await page.reload();
+    await browserExpect(page.getByRole('button', { name: '自由练习', exact: true })).toBeVisible();
+    await context.setOffline(true);
+    await browserExpect(page.getByRole('heading', { name: '当前离线', exact: true })).toBeVisible();
+    await browserExpect(page.getByRole('button', { name: '开始练习', exact: true })).toBeDisabled();
+    await context.setOffline(false);
+    await page.getByRole('button', { name: '开始练习', exact: true }).click();
+    await page.waitForSelector('.game canvas');
+    await page.locator('.menu-btn').click();
+    await page.locator('.menu .exit').click();
+    await context.setOffline(true);
+    await page.getByRole('button', { name: '开始练习', exact: true }).click();
+    await page.waitForSelector('.game canvas');
+  } finally {
+    lobbyContent = { version: 'lobby-test-1', announcements: [] };
+    await context.setOffline(false);
     await context.close();
   }
 });

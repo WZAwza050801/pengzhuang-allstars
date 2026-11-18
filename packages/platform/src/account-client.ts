@@ -37,6 +37,7 @@ import {
 } from '../../contracts/src/accounts';
 import type { AccountPort, AccountResponse, LogoutIntent } from '../../client-model/src/account';
 import type { HttpRequest, NetworkAdapter } from './types';
+import { PublicManifestSchema, LobbyContentSchema, LobbyAccountSchema } from '../../contracts/src/lobby';
 import {
   LocalImportCommandSchema,
   LocalImportReceiptSchema,
@@ -120,6 +121,19 @@ export class WebAccountClient implements AccountPort {
   }
   current() {
     return this.protected(() => this.call('/me', CurrentUserSchema));
+  }
+  manifest() {
+    return this.call('/config/manifest', PublicManifestSchema);
+  }
+  announcements() {
+    return this.call('/announcements', LobbyContentSchema);
+  }
+  lobby(userId: string) {
+    if (!z.uuid().safeParse(userId).success) return Promise.resolve(invalid);
+    return this.protected(async () => {
+      const result = await this.call('/me/lobby', LobbyAccountSchema, { headers: { 'X-Account-Id': userId } });
+      return result.ok && result.data.userId !== userId ? invalid : result;
+    });
   }
   localImportStatus(userId: string) {
     if (!z.uuid().safeParse(userId).success) return Promise.resolve(invalid);

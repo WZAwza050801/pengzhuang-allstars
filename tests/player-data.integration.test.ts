@@ -314,3 +314,53 @@ test('verified WeChat login work reuses the same initializer without regranting 
   expect(await count('owned_cards', one.userId)).toBe(5);
   expect((await new UserDataRepository(db).getWallets(one.userId))[0].balance).toBe('300');
 });
+
+test('runtime lobby summary returns owned data and rejects another account or unsolicited query', async () => {
+  const account = await owner();
+  const hdr = { ...account.headers, 'x-account-id': account.userId };
+  const result = await call('/me/lobby', hdr);
+  expect(result.status).toBe(200);
+  expect(result.data.data).toMatchObject({
+    userId: account.userId,
+    profile: { nickname: '存档玩家', level: 1, exp: '0' },
+    cardCount: 5,
+    defaultLineup: { readyCards: 5, revision: 0 },
+  });
+  expect(result.data.data.wallets.find((row: { currency: string }) => row.currency === 'coins').balance).toBe('300');
+  const other = await owner();
+  expect((await call('/me/lobby', { ...hdr, 'x-account-id': other.userId })).status).toBe(409);
+  expect((await call('/me/lobby?userId=other', hdr)).status).toBe(400);
+  const card = (await new UserDataRepository(db).listCards(account.userId))[0];
+  await db.query("UPDATE owned_cards SET status='disabled' WHERE id=$1", [card.id]);
+  expect((await call('/me/lobby', hdr)).data.data.defaultLineup.readyCards).toBe(4);
+});
+
+test('runtime exposes public maintenance, compatible mode rules and an empty versioned announcement feed', async () => {
+  await runtime.close();
+  runtime = await startRuntime(
+    readRuntimeConfig({
+      ...process.env,
+      APP_ENV: 'test',
+      PUBLIC_ORIGIN: issuer,
+      ALLOWED_ORIGINS: issuer,
+      SESSION_SIGNING_KEY: key,
+      EMAIL_PROVIDER: 'disabled',
+      LOBBY_MAINTENANCE: 'true',
+      ROOM_STORE_DIR: path.join(process.env.PG_TEST_TMP_DIR!, 'lobby-maintenance-rooms'),
+    }),
+    0,
+  );
+  const address = runtime.httpServer.address();
+  if (!address || typeof address === 'string') throw new Error('No port');
+  origin = `http://127.0.0.1:${address.port}`;
+  const manifest = await jsonRequest(origin, '/api/v1/config/manifest');
+  expect(manifest.status).toBe(200);
+  expect(manifest.data.data).toMatchObject({ maintenance: true, availableModes: ['practice'] });
+  expect(manifest.data.data.modes).toHaveLength(4);
+  expect(JSON.stringify(manifest.data)).not.toMatch(/sessionSigningKey|databaseUrl|smtpUrl|password|secret/);
+  expect((await jsonRequest(origin, '/api/v1/announcements')).data.data).toEqual({
+    version: 'lobby-1',
+    announcements: [],
+  });
+  expect((await jsonRequest(origin, '/api/v1/config/manifest?key=secret')).status).toBe(400);
+});

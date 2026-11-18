@@ -7,6 +7,7 @@ export * from './player-data';
 export * from './lineups';
 export * from './economy-operations';
 export * from './local-import';
+export * from './lobby';
 export * from './configuration';
 export * from './field';
 export * from './field-events';

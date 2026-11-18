@@ -53,6 +53,14 @@ export class PlayerData {
     });
   }
   profile(principal: Principal) { return this.active(principal, async (_tx, repo) => profileView((await repo.getProfile(principal.userId))!)); }
+  lobby(principal: Principal) {
+    return this.active(principal, async (tx, repo) => {
+      const profile = await repo.getProfile(principal.userId);
+      const count = (await tx.query<{ n: number }>('SELECT count(*)::int AS n FROM owned_cards WHERE user_id=$1', [principal.userId])).rows[0].n;
+      const lineup = (await tx.query<{ id: string; name: string; revision: number; readyCards: number }>(`SELECT l.id,l.name,l.revision,count(c.id) FILTER (WHERE c.status='active')::int AS "readyCards" FROM account_initializations a JOIN lineups l ON l.id=a.default_lineup_id AND l.user_id=a.user_id LEFT JOIN lineup_slots s ON s.lineup_id=l.id AND s.user_id=l.user_id LEFT JOIN owned_cards c ON c.id=s.owned_card_id AND c.user_id=l.user_id WHERE a.user_id=$1 GROUP BY l.id`, [principal.userId])).rows[0] ?? null;
+      return { userId: principal.userId, profile: profile ? profileView(profile) : null, wallets: (await repo.getWallets(principal.userId)).map(({ userId: _userId, ...wallet }) => wallet), cardCount: count, defaultLineup: lineup };
+    });
+  }
   updateProfile(principal: Principal, input: { nickname: string; avatarAssetId: string; expectedRevision: number }) {
     const nickname = parseNickname(input.nickname);
     if (input.avatarAssetId !== DEFAULT_AVATAR_ASSET_ID || !nickname.ok) throw new ApiError('INVALID_REQUEST', 400);

@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { chromium } from 'playwright';
 import { startWebPageFixture } from './web-page-fixture.mjs';
 
-const reportDirectory = fileURLToPath(new URL('../docs/productization/reports/web-01/', import.meta.url));
+const reportDirectory = process.env.WEB_ACCEPTANCE_REPORT_DIR ? `${path.resolve(process.env.WEB_ACCEPTANCE_REPORT_DIR)}${path.sep}` : fileURLToPath(new URL('../docs/productization/reports/web-01/', import.meta.url));
 const server = await startWebPageFixture();
 const base = server.base;
 

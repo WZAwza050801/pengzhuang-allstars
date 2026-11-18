@@ -11,12 +11,15 @@ import { Navigate, Route, Routes, useLocation, useNavigate, useParams, useSearch
 import { LobbyScreen, PlaceholderScreen, UnavailableScreen, type NavigateTarget } from './webScreens';
 import styles from './webShell.module.css';
 import { AccountProvider, useAccount } from './accounts/context';
+import { PublicLobbyProvider, usePublicLobby } from './lobby-context';
+import { loadPracticeScreen, practiceScreenLoaded } from './practice-entry';
 
-const PracticeMatchScreen = lazy(async () => ({ default: (await import('./matchScreen')).PracticeMatchScreen }));
+const PracticeMatchScreen = lazy(loadPracticeScreen);
 const AccountScreen = lazy(() => import('./accounts/routes'));
 
 function useNavigationContext(): NavigationContext {
   const { login, options } = useAccount();
+  const { service } = usePublicLobby();
   const [network, setNetwork] = useState<NavigationContext['network']>(() => (navigator.onLine ? 'online' : 'offline'));
 
   useEffect(() => {
@@ -31,8 +34,8 @@ function useNavigationContext(): NavigationContext {
   }, []);
 
   return useMemo(
-    () => ({ session: login.user ? 'authenticated' : login.status === 'unknown' || login.status === 'loading' ? 'loading' : 'anonymous', network, service: 'ready', features: { ...DEFAULT_FEATURES, accounts: !!(options?.emailEnabled || options?.wechatMiniProgram) } }),
-    [network, login.user, login.status, options],
+    () => ({ session: login.user ? 'authenticated' : login.status === 'unknown' || login.status === 'loading' ? 'loading' : 'anonymous', network, service, features: { ...DEFAULT_FEATURES, accounts: !!(options?.emailEnabled || options?.wechatMiniProgram) } }),
+    [network, login.user, login.status, options, service],
   );
 }
 
@@ -79,6 +82,7 @@ function MatchRoute({ context }: { context: NavigationContext }) {
   if (decision.kind === 'login') return <Navigate to="/login" replace state={{ resume: decision.resume }} />;
   if (decision.kind === 'blocked') return <UnavailableScreen reason={unavailableReason(decision.reason)} onBack={() => navigate('/')} />;
   if (decision.target.page !== 'match') return <Navigate to="/" replace />;
+  if (decision.target.mode === 'practice' && context.network === 'offline' && !practiceScreenLoaded()) return <UnavailableScreen reason="练习资源尚未载入，请联网后先进入一次练习。" onBack={() => navigate('/')} />;
   return decision.target.mode === 'practice' ? (
     <Suspense fallback={<p className={styles.matchLoading}>正在载入练习赛…</p>}>
       <PracticeMatchScreen />
@@ -108,7 +112,7 @@ function Shell({ context }: { context: NavigationContext }) {
       const decision = resolveNavigation(target, context);
       if (decision.kind === 'show') {
         setNotice(null);
-        navigate(toWebPath(decision.target));
+        navigate(toWebPath(decision.target), decision.target.page === 'login' ? { state: { resume: { page: 'lobby' } } } : undefined);
       } else if (decision.kind === 'login') {
         setNotice(null);
         navigate('/login', { state: { resume: decision.resume } });
@@ -183,4 +187,4 @@ function ConnectedApp() {
   useVisualViewportHeight();
   return <Shell context={useNavigationContext()} />;
 }
-export function WebApp() { return <AccountProvider><ConnectedApp /></AccountProvider>; }
+export function WebApp() { return <AccountProvider><PublicLobbyProvider><ConnectedApp /></PublicLobbyProvider></AccountProvider>; }
