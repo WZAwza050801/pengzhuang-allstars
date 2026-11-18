@@ -7,13 +7,17 @@ import {
   type NavigationContext,
   type NavigationTarget,
 } from '@pengzhuang/client-model';
-import { Navigate, Route, Routes, useLocation, useNavigate, useParams, useSearchParams } from 'react-router';
+import { Link, Navigate, Route, Routes, useLocation, useNavigate, useParams, useSearchParams } from 'react-router';
 import { LobbyScreen, PlaceholderScreen, UnavailableScreen, type NavigateTarget } from './webScreens';
 import styles from './webShell.module.css';
 import { AccountProvider, useAccount } from './accounts/context';
 import { PublicLobbyProvider, usePublicLobby } from './lobby-context';
 import { loadPracticeScreen, practiceScreenLoaded } from './practice-entry';
 import ResultsRoute from './results/route';
+import { ViewBoundary, PageFocus } from './ui/view-boundary';
+import { SupportPage } from './support';
+import { SettingsPage } from './settings';
+import { useVisualPreferences } from './ui/visual-preferences';
 
 const PracticeMatchScreen = lazy(loadPracticeScreen);
 const AccountScreen = lazy(() => import('./accounts/routes'));
@@ -136,18 +140,21 @@ function Shell({ context }: { context: NavigationContext }) {
             ? 'profile'
             : 'lobby';
 
-  if (location.pathname === '/room' || location.pathname.startsWith('/room/')) return (
-    <main className="pz-ui"><Suspense fallback={<p role="status">正在载入好友房…</p>}><Routes><Route path="/room/:code?" element={<RoomScreen context={context} />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></Suspense></main>
+  if (location.pathname === '/room' || location.pathname.startsWith('/room/') || location.pathname.startsWith('/match')) return (
+    <main className={`${styles.immersive} pz-ui`}><PageFocus /><Suspense fallback={<p role="status">正在载入比赛…</p>}><Routes><Route path="/room/:code?" element={<RoomScreen context={context} />} /><Route path="/match/:matchId?" element={<MatchRoute context={context} />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></Suspense></main>
   );
 
   return (
     <main className={`${styles.application} pz-ui`}>
+      <PageFocus />
+      <a className="pz-skip" href="#page-content">跳到主要内容</a>
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>碰撞全明星</p>
           <strong>{login.user?.profile?.nickname ?? (login.user ? '已登录账号' : '访客')}</strong>
         </div>
         <p role="status">{context.network === 'online' ? '本地练习可用' : '离线模式'}</p>
+        <Link className="pz-button" to="/help" state={{ from: location.pathname }}>问题与反馈</Link>
       </header>
       <div className={styles.noticeSlot}>
         {notice && (
@@ -159,19 +166,19 @@ function Shell({ context }: { context: NavigationContext }) {
           </div>
         )}
       </div>
-      <div className={styles.content}>
+      <div className={styles.content} id="page-content" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<LobbyScreen context={context} onNavigate={onNavigate} />} />
-          <Route path="/match/:matchId?" element={<MatchRoute context={context} />} />
           <Route path="/login" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
           <Route path="/account/*" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
           <Route path="/lineup" element={<Suspense fallback={<p role="status">正在载入阵容页面…</p>}><InventoryScreen context={context} /></Suspense>} />
           <Route path="/result/:matchId" element={<ResultsRoute context={context} />} />
           <Route path="/results" element={<ResultsRoute context={context} />} />
+          <Route path="/help" element={<SupportPage />} />
           <Route path="/growth" element={<FutureRoute context={context} target={{ page: 'growth' }} title="成长" detail="成长内容将在资产与运营任务完成后开放。" />} />
           <Route path="/club" element={<FutureRoute context={context} target={{ page: 'club' }} title="俱乐部" detail="俱乐部功能尚未接入服务端。" />} />
           <Route path="/profile" element={<Suspense fallback={<p role="status">正在载入账号页面…</p>}><AccountScreen context={context} /></Suspense>} />
-          <Route path="/settings" element={<PlaceholderScreen title="设置" detail="画质和音频在比赛菜单中调整；安全凭据不会写入普通本地偏好。" />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
@@ -194,6 +201,7 @@ function Shell({ context }: { context: NavigationContext }) {
 
 function ConnectedApp() {
   useVisualViewportHeight();
+  useVisualPreferences();
   return <Shell context={useNavigationContext()} />;
 }
-export function WebApp() { return <AccountProvider><PublicLobbyProvider><ConnectedApp /></PublicLobbyProvider></AccountProvider>; }
+export function WebApp() { const location = useLocation(); return <ViewBoundary resetKey={location.pathname}><AccountProvider><PublicLobbyProvider><ConnectedApp /></PublicLobbyProvider></AccountProvider></ViewBoundary>; }

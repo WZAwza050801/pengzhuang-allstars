@@ -35,6 +35,11 @@
   background: var(--ui-background);
   font-size: calc(var(--ui-body) * var(--web-font-scale));
 }
+.immersive {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+}
 
 .header,
 .mainNav,
@@ -45,12 +50,14 @@
 }
 
 .header {
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: var(--ui-space-12);
   padding: calc(var(--ui-space-12) + env(safe-area-inset-top)) var(--ui-space-16) var(--ui-space-12);
   border-bottom: 1px solid var(--ui-border);
   background: var(--ui-panel);
 }
+.header > div { min-width:0; overflow-wrap:anywhere; }
 
 .header p,
 .header strong,
@@ -239,6 +246,7 @@
 }
 
 .mainNav {
+  flex-wrap: wrap;
   justify-content: space-around;
   gap: 2px;
   border-top: 1px solid var(--ui-border);
@@ -247,7 +255,8 @@
 }
 
 .mainNav button {
-  flex: 1;
+  flex: 1 0 auto;
+  min-width: var(--ui-touch-target);
   padding: var(--ui-space-8) 2px;
 }
 

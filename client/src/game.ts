@@ -10,6 +10,8 @@ import { createGamePlatform } from './webPlatform';
 import { samplePlayback } from '../../packages/game-core/src/playback';
 import { chooseQuality, type Quality } from './quality';
 import { dragIntent, gestureCurve } from '../../packages/game-core/src/drag';
+import { assistedShot } from './assisted-shot';
+import { VISUAL_PREFERENCES_EVENT, readVisualPreferences } from './ui/visual-preferences';
 
 const data = DEFAULT_DATA;
 const MAX_DRAG = 2.4; // metres of pull for full power
@@ -35,6 +37,7 @@ export interface GameOptions {
   onExit: () => void;
   onRematch?: () => void;
   onResult?: () => void;
+  onHelp?: () => void;
 }
 
 interface Playback {
@@ -72,6 +75,10 @@ export class GameView {
   /** Touch aims take the curve from the drag gesture; mouse aims use the arrow keys. */
   private gesture = false;
   private relocating: { start: number; from: Map<string, { x: number; y: number }> } | null = null;
+  private reducedMotion = false;
+  private assistKey = '';
+  private bannerEpoch = 0;
+  private dialogPeers = new Map<HTMLElement, boolean>();
   private trail: { x: number; y: number; t: number }[] = [];
   private timers = new Set<ReturnType<typeof setTimeout>>();
 
@@ -84,11 +91,12 @@ export class GameView {
     root.innerHTML = `
       <div class="game">
         <div class="hud-top">
-          <div class="team t0"><div class="tname"></div><div class="tscore">0</div></div>
+          <div class="team t0" role="status"><div class="tname"></div><div class="tscore">0</div></div>
           <div class="mid"><div class="turn"></div><div class="timer"></div><div class="shots"></div></div>
-          <div class="team t1"><div class="tscore">0</div><div class="tname"></div></div>
+          <div class="team t1" role="status"><div class="tscore">0</div><div class="tname"></div></div>
+          <output class="pz-sr-only turn-count" aria-live="polite"></output>
         </div>
-        <div class="stage"><canvas></canvas><div class="toasts"></div><div class="banner"></div></div>
+        <div class="stage"><canvas role="img" aria-label="比赛球场；比分和回合有文字显示，可在菜单使用键盘与辅助出手"></canvas><div class="toasts" aria-live="polite"></div><div class="banner" role="status"></div></div>
         <div class="hud-bottom">
           <div class="curve">
             <span class="clabel">弧线</span>
@@ -101,22 +109,33 @@ export class GameView {
         <div class="overlay menu hidden" role="dialog" aria-modal="true" aria-label="比赛菜单">
           <div class="panel">
             <h3>菜单</h3>
-            <label>场地外观 <select class="skin"></select></label>
+            <label>场地外观 <select class="skin" aria-label="场地外观"></select></label>
             <label>画质 <select class="quality"><option value="auto">自动</option><option value="low">流畅</option><option value="medium">标准</option><option value="high">精细</option></select></label>
             <label>音量 <input class="volume" type="range" min="0" max="100" step="5" aria-label="比赛音量"></label>
             <label><input class="mute" type="checkbox">静音</label>
             <button class="surrender">认输</button>
+              <button class="open-assist">键盘与辅助出手</button>
+              <button class="reopen-result hidden">查看本场结果</button>
+              ${opts.onHelp ? '<button class="help">问题与反馈</button>' : ''}
             <button class="exit">返回大厅</button>
             <button class="close">继续比赛</button>
           </div>
         </div>
-        <div class="overlay result hidden"><div class="panel"></div></div>
-        <canvas class="aim-layer"></canvas>
+        <div class="overlay assist hidden" role="dialog" aria-modal="true" aria-label="键盘与辅助出手"><form class="panel">
+          <h2>键盘与辅助出手</h2><p>方向按当前视角：0°向上、90°向右、180°向下、270°向左。比赛继续按原规则计时。</p>
+          <label>出手球员<select class="assist-piece" name="piece"></select></label>
+          <label>方向角度（度）<input class="assist-angle" name="angle" type="number" min="0" max="359.9" step="0.1" value="0" required></label>
+          <label>力度（%）<input class="assist-power" name="power" type="number" min="${Math.ceil(data.physics.shot.minPower * 100)}" max="100" step="1" value="60" required></label>
+          <label>弧线（-1 到 1）<input class="assist-curve" name="curve" type="number" min="-1" max="1" step="0.05" value="0" required></label>
+          <p class="assist-status" role="status"></p><button class="assist-submit" type="submit">确认出手</button><button class="assist-close" type="button">取消辅助出手</button>
+        </form></div>
+        <div class="overlay result hidden" role="dialog" aria-modal="true" aria-label="本场比赛结果"><div class="panel"></div></div>
+        <canvas class="aim-layer" aria-hidden="true"></canvas>
       </div>`;
     const q = (s: string) => root.querySelector(s) as HTMLElement;
     for (const [k, s] of Object.entries({
       name0: '.t0 .tname', name1: '.t1 .tname', score0: '.t0 .tscore', score1: '.t1 .tscore', turn: '.turn', timer: '.timer', shots: '.shots',
-      toasts: '.toasts', banner: '.banner', cval: '.cval', menu: '.menu', result: '.result', stage: '.stage',
+      toasts: '.toasts', banner: '.banner', cval: '.cval', menu: '.menu', result: '.result', assist: '.assist', stage: '.stage',
     })) this.el[k] = q(s);
     (q('.t0') as HTMLElement).style.setProperty('--team', TEAM_COLORS[0]);
     (q('.t1') as HTMLElement).style.setProperty('--team', TEAM_COLORS[1]);
@@ -127,6 +146,13 @@ export class GameView {
     const canvas = q('.stage canvas') as HTMLCanvasElement;
     this.r = new Renderer(canvas, data.geometry, data.physics, skin);
     const capabilities = { cores: navigator.hardwareConcurrency, memoryGiB: (navigator as Navigator & { deviceMemory?: number }).deviceMemory, reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches };
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    this.reducedMotion = motion.matches || readVisualPreferences().reducedMotion;
+    const updateMotion = () => { this.reducedMotion = motion.matches || document.documentElement.dataset.reducedMotion === 'true'; if (this.reducedMotion) { if (this.play) this.finishPlayback(false); this.effects = []; this.trail = []; this.relocating = null; } };
+    motion.addEventListener('change', updateMotion);
+    window.addEventListener(VISUAL_PREFERENCES_EVENT, updateMotion);
+    this.unsubscribers.push(() => motion.removeEventListener('change', updateMotion));
+    this.unsubscribers.push(() => window.removeEventListener(VISUAL_PREFERENCES_EVENT, updateMotion));
     this.r.setQuality(opts.quality && opts.quality !== 'auto' ? opts.quality : chooseQuality(capabilities));
     this.r.attachOverlay(q('.aim-layer') as HTMLCanvasElement);
     this.r.flip = host.viewSide === 1;
@@ -150,12 +176,25 @@ export class GameView {
     const mute = q('.mute') as HTMLInputElement;
     mute.checked = isMuted();
     mute.addEventListener('change', () => { setMuted(mute.checked); sfx.unlock(); });
-    q('.menu-btn').addEventListener('click', () => { this.cancelAim(); this.el.menu.classList.remove('hidden'); q('.menu .close').focus(); });
+    q('.menu-btn').addEventListener('click', () => this.openDialog(this.el.menu, '.close'));
     q('.menu .close').addEventListener('click', () => this.closeMenu());
     q('.menu .exit').addEventListener('click', () => this.exit());
     q('.menu .surrender').addEventListener('click', () => {
-      this.el.menu.classList.add('hidden');
+      this.closeMenu();
       if (confirm('确定认输吗？')) host.surrender();
+    });
+    q('.open-assist').addEventListener('click', () => { if (this.canAim(true)) { this.populateAssist(); (q('.assist-curve') as HTMLInputElement).value = String(this.curve); q('.assist-status').textContent = ''; this.openDialog(this.el.assist, '.assist-piece'); } });
+    q('.assist-close').addEventListener('click', () => this.closeMenu());
+    q('.reopen-result').addEventListener('click', () => this.showResult());
+    q('.help')?.addEventListener('click', () => this.exit(this.opts.onHelp));
+    q('.assist form').addEventListener('submit', (event) => {
+      event.preventDefault(); const form = event.currentTarget as HTMLFormElement;
+      if (!form.reportValidity() || !this.canAim(true)) { q('.assist-status').textContent = '当前不能出手，请等待可操作的己方回合。'; return; }
+      const pieceId = (q('.assist-piece') as HTMLSelectElement).value;
+      const piece = this.state!.pieces.find((p) => p.id === pieceId && p.side === this.state!.turn && !p.out && !p.frozen);
+      const input = assistedShot({ pieceId, angle: Number((q('.assist-angle') as HTMLInputElement).value), power: Number((q('.assist-power') as HTMLInputElement).value) / 100, curve: Number((q('.assist-curve') as HTMLInputElement).value), viewSide: host.viewSide ?? 0, minPower: data.physics.shot.minPower });
+      if (!piece || !input) { q('.assist-status').textContent = '球员或出手数值已变化，请重新选择。'; this.populateAssist(); return; }
+      this.closeMenu(); this.host.shoot(input);
     });
 
     canvas.addEventListener('pointerdown', (e) => this.onDown(e));
@@ -219,10 +258,11 @@ export class GameView {
   };
 
   private onKey = (e: KeyboardEvent) => {
-    if (!this.el.menu.classList.contains('hidden')) {
+    const dialog = [this.el.menu, this.el.assist, this.el.result].find((element) => !element.classList.contains('hidden'));
+    if (dialog) {
       if (e.key === 'Escape') { e.preventDefault(); this.closeMenu(); return; }
       if (e.key === 'Tab') {
-        const controls = [...this.el.menu.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled)')];
+        const controls = [...dialog.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled)')].filter((element) => !element.closest('.hidden'));
         const edge = e.shiftKey ? controls[0] : controls.at(-1);
         if (document.activeElement === edge) { e.preventDefault(); (e.shiftKey ? controls.at(-1) : controls[0])?.focus(); }
       }
@@ -239,7 +279,40 @@ export class GameView {
     }
   };
 
-  private closeMenu() { this.el.menu.classList.add('hidden'); this.root.querySelector<HTMLElement>('.menu-btn')?.focus(); }
+  private openDialog(dialog: HTMLElement, initial: string) {
+    this.cancelAim();
+    const scope = this.root.closest('main') ?? this.root;
+    let branch = this.root.querySelector<HTMLElement>('.game')!;
+    while (branch !== scope && branch.parentElement) {
+      for (const sibling of branch.parentElement.children) if (sibling !== branch && sibling instanceof HTMLElement) {
+        if (!this.dialogPeers.has(sibling)) this.dialogPeers.set(sibling, sibling.inert);
+        sibling.inert = true;
+      }
+      branch = branch.parentElement;
+    }
+    for (const element of this.root.querySelector('.game')!.children) {
+      const child = element as HTMLElement; child.inert = child !== dialog;
+      if (child.classList.contains('overlay')) child.classList.toggle('hidden', child !== dialog);
+    }
+    dialog.querySelector<HTMLElement>(initial)?.focus();
+  }
+  private closeMenu() {
+    for (const element of this.root.querySelector('.game')!.children) { const child = element as HTMLElement; child.inert = false; if (child.classList.contains('overlay')) child.classList.add('hidden'); }
+    this.releaseDialogPeers();
+    this.root.querySelector<HTMLElement>('.menu-btn')?.focus();
+  }
+  private releaseDialogPeers() {
+    for (const [element, previous] of this.dialogPeers) element.inert = previous;
+    this.dialogPeers.clear();
+  }
+  private populateAssist() {
+    if (!this.state) return;
+    const pieces = this.state.pieces.filter((p) => p.side === this.state!.turn && this.host.mySides.includes(p.side) && !p.out && !p.frozen);
+    const key = pieces.map((p) => p.id).join('|'); if (key === this.assistKey) return; this.assistKey = key;
+    const select = this.root.querySelector<HTMLSelectElement>('.assist-piece')!, previous = select.value;
+    select.replaceChildren(...pieces.map((p, index) => new Option(`${index + 1} · ${this.pieceName(p.id)}`, p.id)));
+    if (pieces.some((p) => p.id === previous)) select.value = previous;
+  }
 
   private setCurve(v: number) {
     this.curve = Math.max(-1, Math.min(1, Math.round(v * 20) / 20));
@@ -277,6 +350,7 @@ export class GameView {
     sfx.shoot(p.input.power);
     this.play = { packet: p, start: performance.now(), before: this.state, nextEvent: 0, goalShown: false };
     this.setCurve(0);
+    if (this.reducedMotion) { this.showEvents(p.events); this.showEvents(p.turnEvents); this.finishPlayback(false); }
   }
 
   private schedule(callback: () => void, ms: number) {
@@ -308,10 +382,10 @@ export class GameView {
   }
 
   // ------------------------------------------------------------ input
-  private canAim() {
+  private canAim(throughDialog = false) {
     if (this.disposed || this.suspended) return false;
     if (this.host.inputStatus?.() && this.host.inputStatus() !== 'ready') return false;
-    if (!this.el.menu.classList.contains('hidden')) return false;
+    if (!throughDialog && [this.el.menu, this.el.assist, this.el.result].some((element) => !element.classList.contains('hidden'))) return false;
     const deadline = this.host.turnDeadline();
     if (deadline !== null && deadline <= Date.now()) return false;
     return !!this.state && !this.play && !this.relocating && !this.state.over && this.host.mySides.includes(this.state.turn);
@@ -517,7 +591,9 @@ export class GameView {
     const st = this.state!;
     this.el.score0.textContent = String(st.score[0]);
     this.el.score1.textContent = String(st.score[1]);
+    this.root.querySelector('.turn-count')!.textContent = `本场回合计数 ${st.shotNo}`;
     this.updateTurnLabel();
+    this.populateAssist();
     this.el.turn.style.color = TEAM_COLORS[st.turn];
     this.root.querySelector('.t0')!.classList.toggle('active', st.turn === 0 && !st.over);
     this.root.querySelector('.t1')!.classList.toggle('active', st.turn === 1 && !st.over);
@@ -535,6 +611,9 @@ export class GameView {
     const label = peerAway ? `对手断线${remaining} · ${text}` : text;
     if (this.el.turn.textContent !== label) this.el.turn.textContent = label;
     if (status !== 'ready' && this.aim) this.cancelAim();
+    for (const selector of ['.open-assist', '.assist-submit']) (this.root.querySelector(selector) as HTMLButtonElement).disabled = !this.canAim(true);
+    this.root.querySelector('.reopen-result')!.classList.toggle('hidden', !st.over);
+    this.el.turn.setAttribute('role', 'status');
   }
 
   private updateTimer() {
@@ -615,6 +694,8 @@ export class GameView {
     b.classList.remove('show');
     void b.offsetWidth;
     b.classList.add('show');
+    const epoch = ++this.bannerEpoch;
+    if (this.reducedMotion) { this.schedule(() => { if (epoch === this.bannerEpoch) b.classList.remove('show'); }, 1600); }
   }
 
   private showResult() {
@@ -626,7 +707,7 @@ export class GameView {
     const reason = ({ goals: `先进 ${data.rules.goalsToWin} 球`, time: `${data.rules.matchSeconds / 60} 分钟到`, 'shot-limit': `${data.rules.maxShots} 手用完`, surrender: '认输', disconnect: '对手断线超时' } as Record<string, string>)[st.endReason] ?? st.endReason;
     panel.innerHTML = `
       <h2 class="rtitle"></h2>
-      <div class="rscore"><span style="color:${TEAM_COLORS[0]}"></span><b>${st.score[0]} : ${st.score[1]}</b><span style="color:${TEAM_COLORS[1]}"></span></div>
+      <div class="rscore"><span></span><b>${st.score[0]} : ${st.score[1]}</b><span></span></div>
       <p class="rreason"></p>
       <div class="rbtns">${this.opts.onResult ? '<button class="view-result primary">查看本场结算</button>' : ''}${this.opts.onRematch ? '<button class="again primary">再来一局</button>' : ''}<button class="back">返回大厅</button></div>`;
     panel.querySelector('.rtitle')!.textContent = title;
@@ -637,13 +718,13 @@ export class GameView {
     panel.querySelector('.again')?.addEventListener('click', () => this.opts.onRematch?.());
     panel.querySelector('.view-result')?.addEventListener('click', () => { this.dispose(); this.opts.onResult?.(); });
     panel.querySelector('.back')!.addEventListener('click', () => this.exit());
-    this.el.result.classList.remove('hidden');
+    this.openDialog(this.el.result, 'button');
   }
 
-  private exit() {
+  private exit(after = this.opts.onExit) {
     if (this.opts.hostLifetime === 'owner' && this.state && !this.state.over && !confirm(`离开后比赛继续计时，断线超过 ${this.host.rules?.reconnectSeconds ?? 60} 秒将按规则判定。确定返回大厅吗？`)) return;
     this.dispose();
-    this.opts.onExit();
+    after();
   }
 
   resize(_viewport: Viewport) { this.onResize(); }
@@ -670,6 +751,7 @@ export class GameView {
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    this.releaseDialogPeers();
     for (const timer of this.timers) clearTimeout(timer);
     this.timers.clear();
     cancelAnimationFrame(this.raf);

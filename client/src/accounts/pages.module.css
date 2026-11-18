@@ -41,7 +41,8 @@
   gap: var(--ui-space-8);
   font-weight: 700;
 }
-.page input {
+.page input,
+.page textarea {
   width: 100%;
   min-width: 0;
   min-height: var(--ui-touch-target);
@@ -52,7 +53,15 @@
   background: var(--ui-background);
   font: inherit;
 }
+.page select {
+  font: inherit;
+  min-height: var(--ui-touch-target);
+  width: 100%;
+  color: var(--ui-ink);
+  background: var(--ui-background);
+}
 .page input:focus-visible,
+.page textarea:focus-visible,
 .page a:focus-visible {
   outline: 3px solid var(--ui-focus);
   outline-offset: 3px;
@@ -60,6 +69,15 @@
 .page input[type='checkbox'] {
   width: var(--ui-space-24);
   min-height: var(--ui-space-24);
+}
+.page > label {
+  display: grid;
+  gap: var(--ui-space-8);
+  margin-block: var(--ui-space-16);
+}
+.page label:has(input[type='checkbox']) {
+  min-height: var(--ui-touch-target);
+  align-items: center;
 }
 .notice {
   margin-block: var(--ui-space-8) 0;

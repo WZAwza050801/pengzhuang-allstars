@@ -195,6 +195,12 @@ export function RoomPage({
         status={status}
         detail={error}
         service={context.service}
+        onHelp={() => {
+          sequence.current++;
+          host.current?.dispose();
+          host.current = null;
+          navigate('/help', { state: { from: '/room' } });
+        }}
         onResult={() => {
           const matchId = host.current?.endedMatchId;
           if (!matchId) return;
@@ -305,7 +311,9 @@ export function RoomPage({
             >
               重新读取阵容
             </button>
-            <Link to="/lineup">调整阵容</Link>
+            <Link className="pz-button" to="/lineup">
+              调整阵容
+            </Link>
           </div>
         </div>
       ) : (

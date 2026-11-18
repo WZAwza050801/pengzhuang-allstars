@@ -15,7 +15,9 @@ export default function ResultsRoute({ context }: { context: NavigationContext }
     return (
       <section className={styles.page}>
         <h1>比赛链接无效</h1>
-        <Link to="/results">查看本人的比赛记录</Link>
+        <Link className="pz-button" to="/results">
+          查看本人的比赛记录
+        </Link>
       </section>
     );
   if (search.get('mode') === 'practice')
@@ -23,7 +25,9 @@ export default function ResultsRoute({ context }: { context: NavigationContext }
       <section className={styles.page}>
         <h1>本地练习结果</h1>
         <p>练习结果在本次比赛画面中查看，不计入账号战绩。</p>
-        <Link to="/">返回大厅</Link>
+        <Link className="pz-button" to="/">
+          返回大厅
+        </Link>
       </section>
     );
   if (!services || !options || login.status === 'unknown' || (login.status === 'loading' && !login.user))
@@ -40,21 +44,27 @@ export default function ResultsRoute({ context }: { context: NavigationContext }
         >
           重新确认账号
         </button>
-        <Link to="/">返回大厅</Link>
+        <Link className="pz-button" to="/">
+          返回大厅
+        </Link>
       </section>
     );
   if (login.status === 'signing-out' || login.status === 'logout-pending')
     return (
       <section className={styles.page}>
         <h1>退出状态尚待确认</h1>
-        <Link to="/profile">继续处理退出</Link>
+        <Link className="pz-button" to="/profile">
+          继续处理退出
+        </Link>
       </section>
     );
   if (!options.friendRoomsEnabled)
     return (
       <section className={styles.page}>
         <h1>账号比赛记录暂未开放</h1>
-        <Link to="/">返回大厅</Link>
+        <Link className="pz-button" to="/">
+          返回大厅
+        </Link>
       </section>
     );
   if (!login.user) return <Navigate to="/login" replace state={{ resume: target }} />;

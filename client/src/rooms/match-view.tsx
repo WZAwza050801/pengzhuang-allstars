@@ -14,6 +14,7 @@ export function RoomMatchView({
   service,
   onExit,
   onResult,
+  onHelp,
 }: {
   host: OnlineHost;
   status: OnlineStatus | 'idle';
@@ -21,12 +22,15 @@ export function RoomMatchView({
   service: NavigationContext['service'];
   onExit(): void;
   onResult(): void;
+  onHelp(): void;
 }) {
   const root = useRef<HTMLDivElement>(null);
   const exit = useRef(onExit);
   exit.current = onExit;
   const result = useRef(onResult);
   result.current = onResult;
+  const help = useRef(onHelp);
+  help.current = onHelp;
   const [error, setError] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [settlement, setSettlement] = useState<SettlementInfo | null>(null);
@@ -46,6 +50,7 @@ export function RoomMatchView({
           skinId: FIELD_SKINS[0].id,
           onExit: () => exit.current(),
           onResult: () => result.current(),
+          onHelp: () => help.current(),
         },
       })
       .catch(() => {
@@ -58,6 +63,9 @@ export function RoomMatchView({
   }, [host, attempt]);
   return (
     <section className={styles.match} aria-label="账号好友赛">
+      <h1 className="pz-sr-only" tabIndex={-1}>
+        账号好友赛
+      </h1>
       <div ref={root} className={styles.host} />
       <aside className={styles.connection} aria-live="polite">
         <span>

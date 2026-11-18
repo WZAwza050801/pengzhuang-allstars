@@ -55,19 +55,19 @@ export function PracticeMatchScreen() {
     void bridge
       .mount(hostRoot, {
         host,
-        options: { skinId: skinId(), onExit: () => navigate('/') },
+        options: { skinId: skinId(), onExit: () => navigate('/'), onHelp: () => navigate('/help', { state: { from: '/match' } }) },
       })
       .then(() => {
         if (!active) return;
         lifecycle.current = completeViewRequest(lifecycle.current, started.id, { kind: 'ready' });
         setRequest(lifecycle.current);
       })
-      .catch((error: unknown) => {
+      .catch(() => {
         if (!active) return;
         hostRoot.replaceChildren();
         lifecycle.current = completeViewRequest(lifecycle.current, started.id, {
           kind: 'error',
-          message: error instanceof Error ? error.message : '比赛视图无法启动',
+          message: '比赛资源暂时未能载入。请联网后重试，或返回大厅。',
         });
         setRequest(lifecycle.current);
       });
@@ -81,6 +81,7 @@ export function PracticeMatchScreen() {
 
   return (
     <section className={styles.matchPage} aria-busy={request.status === 'pending'}>
+      {request.status !== 'error' && <h1 className="pz-sr-only" tabIndex={-1}>本地练习赛</h1>}
       {request.status === 'error' ? (
       <section className={styles.matchFallback} aria-live="assertive">
         <h1>无法进入练习赛</h1>

@@ -277,6 +277,23 @@ button:disabled { filter: grayscale(0.6); opacity: 0.75; cursor: default; }
 .rreason { margin: 0; opacity: 0.7; }
 .rbtns { display: flex; gap: 8px; }
 .rbtns button { flex: 1; }
+.game .panel { color:var(--ui-ink); background:var(--ui-panel); border:1px solid var(--ui-border); border-image:none; border-radius:var(--ui-radius); max-height:calc(100% - 24px); overflow:auto; overscroll-behavior:contain; font-size:calc(var(--ui-body) * var(--web-font-scale, 1)); }
+.game .panel :is(button,select,input:not([type='checkbox'])) { min-height:44px; max-width:100%; font:inherit; }
+.game .panel label { display:flex; flex-wrap:wrap; align-items:center; gap:8px; min-height:44px; }
+.game .panel input:not([type='checkbox']), .game .panel select { min-width:0; flex:1 1 8rem; width:100%; color:var(--ui-ink); background:var(--ui-background); }
+.game .panel p { margin:0; line-height:1.5; }
+.game .panel > * { flex-shrink:0; }
+.game .overlay .panel button { white-space:normal; overflow-wrap:anywhere; }
+.game .overlay .panel .surrender { background:var(--ui-danger); color:var(--ui-panel); border-image:none; border-radius:var(--ui-radius); text-shadow:none; }
+.game button { min-height:44px; }
+html[data-reduced-motion='true'] .game *, html[data-reduced-motion='true'] .arena-img, html[data-reduced-motion='true'] .shell-toast { animation:none !important; transition:none !important; }
+html[data-reduced-motion='true'] .game .banner.show { opacity:1; transform:none; }
+html[data-reduced-motion='true'] { --ui-fastMs:0ms; --ui-normalMs:0ms; }
+.game :focus-visible { outline:3px solid var(--ui-focus); outline-offset:3px; }
+@media (prefers-reduced-motion: reduce) {
+  .game *, .arena-img, .shell-toast { animation:none !important; transition:none !important; }
+  .game .banner.show { opacity:1; transform:none; }
+}
 
 .room-banner { position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 12; display: flex; align-items: baseline; gap: 8px; padding: 8px 16px; background: rgba(0,0,0,0.55); border-radius: 0 0 14px 14px; font-size: 13px; }
 .room-banner b { font-size: 22px; letter-spacing: 3px; color: #ffd479; }

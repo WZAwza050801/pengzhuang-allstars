@@ -84,19 +84,24 @@ export function Form({
   onSubmit: (form: HTMLFormElement) => void;
   disabled?: boolean;
 }) {
+  const notice = useRef<HTMLParagraphElement>(null),
+    noticeId = useId();
+  useEffect(() => {
+    if (action.notice && !action.busy) notice.current?.focus();
+  }, [action.notice, action.busy]);
   const handle = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(event.currentTarget);
   };
   return (
-    <form className={styles.form} onSubmit={handle} aria-busy={action.busy}>
+    <form className={styles.form} onSubmit={handle} aria-busy={action.busy} aria-describedby={noticeId}>
       <fieldset disabled={action.busy || disabled}>
         {children}
         <button className="pz-button pz-primary" type="submit">
           {action.busy ? '正在处理…' : submit}
         </button>
       </fieldset>
-      <p role="status" className={styles.notice}>
+      <p ref={notice} id={noticeId} tabIndex={-1} role="status" className={styles.notice}>
         {action.notice}
       </p>
     </form>

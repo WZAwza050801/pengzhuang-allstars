@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { NavigationTargetSchema, resolveNavigation, toWebPath, type NavigationContext } from '@pengzhuang/client-model';
 import { useAccount } from './context';
@@ -83,10 +83,16 @@ export function RegisterPage() {
   const { services, options } = useAccount();
   const action = useAccountAction();
   const [submitted, setSubmitted] = useState(false);
+  const accepted = useRef<HTMLParagraphElement>(null);
+  useEffect(() => {
+    if (submitted) accepted.current?.focus();
+  }, [submitted]);
   return (
     <AccountLayout title="注册账号">
       {submitted ? (
-        <p role="status">申请已收到。如果该邮箱可以注册，你将收到验证邮件。请查收后打开链接，验证完成再登录。</p>
+        <p ref={accepted} tabIndex={-1} role="status">
+          申请已收到。如果该邮箱可以注册，你将收到验证邮件。请查收后打开链接，验证完成再登录。
+        </p>
       ) : (
         <Form
           action={action}
