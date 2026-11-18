@@ -24,6 +24,9 @@ import {
 import { createGameServer } from '../server/app';
 import { startRuntime } from '../server/runtime';
 import { PlayerData } from '../server/accounts/player-data';
+import { Assets } from '../server/accounts/assets';
+import { MatchOutcomes } from '../server/matches/outcomes';
+import { OutcomeJournal } from '../server/matches/outcome-journal';
 import { Lineups } from '../server/accounts/lineups';
 import { Sessions } from '../server/accounts/sessions';
 import { WebSessions } from '../server/api/web-sessions';
@@ -31,6 +34,9 @@ import { MatchTickets, type AccountRoomTarget } from '../server/matches/tickets'
 import { MatchTicketResultSchema } from '../packages/contracts/src/match-tickets';
 import { jsonRequest } from './helpers/json-http';
 import { MatchRoom } from '../server/rooms/MatchRoom';
+import { rulesForMode } from '../config/modes';
+import { OutcomeIntentSchema } from '../packages/contracts/src/match-results';
+import { resolveShot } from '../shared/match';
 
 let db: Database;
 let server: ReturnType<typeof createGameServer>;
@@ -38,6 +44,7 @@ let sessions: Sessions;
 let players: PlayerData;
 let lineups: Lineups;
 let tickets: MatchTickets;
+let outcomes: MatchOutcomes;
 let origin: string;
 let sdk: Client;
 const opened: Room[] = [];
@@ -53,12 +60,21 @@ beforeAll(async () => {
   const key = signingKey;
   sessions = new Sessions(db, key, issuer, players.initialize);
   const web = new WebSessions(sessions, { cookieSecure: false, allowedOrigins: [issuer] }, key);
-  tickets = new MatchTickets(db, lineups, () => DEFAULT_DATA);
+  tickets = new MatchTickets(db, lineups, () => DEFAULT_DATA, ['friend', 'growth']);
+  outcomes = new MatchOutcomes({
+    db,
+    assets: new Assets(db, players.initialize, () => ({
+      data: DEFAULT_DATA,
+      policy: createBundledEconomyConfiguration().policy,
+    })),
+    policy: () => createBundledEconomyConfiguration().policy,
+    journal: new OutcomeJournal(path.join(process.env.PG_TEST_TMP_DIR, 'net04-ticket-outcomes')),
+  });
   server = createGameServer({
     repository: db,
     clientDirectory: null,
     modules: [web.module()],
-    accountRooms: { tickets, web },
+    accountRooms: { tickets, web, outcomes },
   });
   await server.gameServer.listen(0);
   const address = server.httpServer.address();
@@ -69,6 +85,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await Promise.all(opened.filter((room) => room.connection?.isOpen).map((room) => room.leave()));
   await server?.close();
+  await outcomes?.close();
   await db?.close();
 });
 async function owner() {
@@ -638,6 +655,7 @@ test('recovery windows expire to an explicit terminal state and no new ticket ca
   await game.peers[0].room.leave(false);
   await vi.waitFor(async () => expect((await activeMatch(a)).data.data.state).toBe('expired'));
   expect((await reentry(a, game.start.matchId)).status).toBe(404);
+  await outcomes.drain();
   const record = (await db.query('SELECT recovery_close_reason FROM matches WHERE id=$1', [game.start.matchId]))
     .rows[0];
   expect(record.recovery_close_reason).toBe('expired');
@@ -656,9 +674,13 @@ test('ended matches retain an explicit recovery marker without pretending reward
   const record = (
     await db.query('SELECT status,result,recovery_close_reason FROM matches WHERE id=$1', [game.start.matchId])
   ).rows[0];
-  expect(record.status).not.toBe('settled');
-  expect(record.result).toBeNull();
-  expect(record.recovery_close_reason).toBe('ended');
+  expect(record.status).toBe('settlement-pending');
+  expect(record.result).toMatchObject({ reason: 'surrender' });
+  expect(record.recovery_close_reason).toBeNull();
+  await outcomes.drain();
+  expect(
+    (await db.query('SELECT status,recovery_close_reason FROM matches WHERE id=$1', [game.start.matchId])).rows[0],
+  ).toMatchObject({ status: 'settled', recovery_close_reason: 'ended' });
 });
 
 test('a participant-write failure rolls the entire match start back and the same clients can retry', async () => {
@@ -708,10 +730,10 @@ test('leaving during the persisted start aborts that match instead of creating a
     release = resolve;
   });
   const original = tickets.recovery.started.bind(tickets.recovery);
-  const delayed = vi.spyOn(tickets.recovery, 'started').mockImplementationOnce(async (input) => {
+  const delayed = vi.spyOn(tickets.recovery, 'started').mockImplementationOnce(async (input, initialize) => {
     entered = true;
     await gate;
-    return original(input);
+    return original(input, initialize);
   });
   try {
     peers.forEach((peer) => peer.room.send('ready', { ready: true }));
@@ -749,6 +771,310 @@ test('a more recent completed match does not hide an older match that is still r
   expect((await reentry(a, game.start.matchId)).status).toBe(200);
 });
 
+test('real terminal results expose owner-only read APIs before and after settlement, with no client award endpoint', async () => {
+  const game = await activeGame(),
+    [a, b] = game.accounts,
+    outsider = await owner();
+  const route = `/api/v1/matches/${game.start.matchId}/result`;
+  const read = (account: Owner, suffix = '') => jsonRequest(origin, route + suffix, { headers: account.headers });
+  expect((await read(a)).status).toBe(404);
+  game.peers[0].room.send('surrender', {
+    protocol: 2,
+    matchId: game.start.matchId,
+    configVersion: game.start.configVersion,
+  });
+  await until(() => game.peers[0].latest<{ state: { over: boolean } }>(S2C.update)?.state.over);
+  const recorded = await read(a);
+  expect(recorded.status).toBe(200);
+  expect(recorded.headers['cache-control']).toBe('no-store');
+  expect(recorded.data.data).toMatchObject({
+    userId: a.principal.userId,
+    side: 0,
+    status: 'recorded',
+    recorded: true,
+    reward: null,
+    reason: 'surrender',
+    finalSeq: 0,
+  });
+  expect(JSON.stringify(recorded.data)).not.toContain(b.principal.userId);
+  expect((await read(outsider)).status).toBe(404);
+  expect((await jsonRequest(origin, route)).status).toBe(401);
+  expect(
+    (await jsonRequest(origin, route, { headers: { ...a.headers, 'x-account-id': b.principal.userId } })).data.error
+      .code,
+  ).toBe('ACCOUNT_CHANGED');
+  expect((await jsonRequest(origin, route, { headers: { ...a.headers, 'x-account-id': '' } })).status).toBe(409);
+  expect((await read(a, '?reward=999')).status).toBe(400);
+  for (const target of [route, `/api/v1/matches/${game.start.matchId}/claim`, '/api/v1/matches/outcomes'])
+    expect(
+      (await jsonRequest(origin, target, { method: 'POST', headers: a.headers, body: { coins: '999', winner: 0 } }))
+        .status,
+    ).toBe(404);
+  const cors = await jsonRequest(origin, route, {
+    method: 'OPTIONS',
+    headers: {
+      origin: issuer,
+      'access-control-request-method': 'GET',
+      'access-control-request-headers': 'x-account-id',
+    },
+  });
+  expect(cors.status).toBe(204);
+  expect(cors.headers['access-control-allow-origin']).toBe(issuer);
+  await outcomes.drain();
+  expect((await read(a)).data.data).toMatchObject({
+    status: 'settled',
+    recorded: true,
+    pendingReason: null,
+    reward: { coins: '0', fragments: '0', eligible: false, operationId: null, ledgerIds: [] },
+  });
+  await db.query("UPDATE users SET status='banned',banned_at=clock_timestamp() WHERE id=$1", [a.principal.userId]);
+  expect((await read(a)).status).toBe(401);
+  await db.query('UPDATE sessions SET revoked_at=clock_timestamp() WHERE id=$1', [b.principal.sessionId]);
+  expect((await read(b)).status).toBe(401);
+});
+
+test('owner history paginates tied timestamps without duplicate results and rejects forged query shapes', async () => {
+  const a = await owner(),
+    b = await owner(),
+    endedAt = '2026-11-18T05:00:00.000Z';
+  for (let i = 0; i < 23; i++) {
+    const matchId = randomUUID(),
+      configurationHash = await db.transaction(async (tx) => {
+        await tx.query(
+          "INSERT INTO matches(id,mode,config_version,protocol_version,status) VALUES ($1,'friend',$2,2,'playing')",
+          [matchId, DEFAULT_DATA.version],
+        );
+        for (const [side, account] of [a, b].entries())
+          await tx.query('INSERT INTO match_participants(match_id,user_id,side,lineup_snapshot) VALUES ($1,$2,$3,$4)', [
+            matchId,
+            account.principal.userId,
+            side,
+            JSON.stringify(
+              (
+                await tx.query('SELECT id,player_def_id,level FROM owned_cards WHERE user_id=$1 ORDER BY id LIMIT 5', [
+                  account.principal.userId,
+                ])
+              ).rows,
+            ),
+          ]);
+        return outcomes.openInTransaction(tx, matchId, DEFAULT_DATA, rulesForMode(DEFAULT_DATA, 'friend'));
+      });
+    await outcomes.record(
+      OutcomeIntentSchema.parse({
+        schemaVersion: 1,
+        protocol: 2,
+        matchId,
+        mode: 'friend',
+        configurationHash,
+        configVersion: DEFAULT_DATA.version,
+        finalSeq: 0,
+        score: [0, 0],
+        winner: 1,
+        reason: 'surrender',
+        elapsedSeconds: 1,
+        endedAt,
+        participants: [a, b].map((account, side) => ({ userId: account.principal.userId, side, actions: 0 })),
+      }),
+    );
+  }
+  const route = '/api/v1/me/matches',
+    first = await jsonRequest(origin, route, { headers: a.headers });
+  expect(first.status).toBe(200);
+  expect(first.data.data.matches).toHaveLength(20);
+  const second = await jsonRequest(origin, `${route}?cursor=${first.data.data.nextCursor}`, { headers: a.headers });
+  expect(second.data.data.matches).toHaveLength(3);
+  expect(second.data.data.nextCursor).toBeNull();
+  expect(new Set([...first.data.data.matches, ...second.data.data.matches].map((entry) => entry.matchId)).size).toBe(
+    23,
+  );
+  expect((await jsonRequest(origin, route + '?limit=50', { headers: a.headers })).data.data.matches).toHaveLength(23);
+  for (const suffix of [
+    '?limit=51',
+    '?limit=2&limit=3',
+    '?cursor=invalid',
+    '?userId=' + b.principal.userId,
+    '?cursor=' +
+      Buffer.from(JSON.stringify({ id: randomUUID(), createdAt: '0000-01-01T00:00:00.000Z' })).toString('base64url'),
+  ])
+    expect((await jsonRequest(origin, route + suffix, { headers: a.headers })).status).toBe(400);
+  const foreign = await owner();
+  expect(
+    (await jsonRequest(origin, `${route}?cursor=${first.data.data.nextCursor}`, { headers: foreign.headers })).data.data
+      .matches,
+  ).toEqual([]);
+  await outcomes.drain(64);
+});
+
+test('a lost terminal update is recoverable from settlement status and the durable owner query', async () => {
+  const game = await activeGame(),
+    live = matchMaker.getLocalRoomById(game.code) as MatchRoom;
+  const original = live.broadcast.bind(live);
+  const drop = vi.spyOn(live, 'broadcast').mockImplementation((...args) => {
+    if (args[0] !== S2C.update) return original(...args);
+  });
+  try {
+    game.peers[0].room.send('surrender', {
+      protocol: 2,
+      matchId: game.start.matchId,
+      configVersion: game.start.configVersion,
+    });
+    const status = await until(() =>
+      game.peers[0].latest<{ recorded: boolean; state: { over: boolean; rng: number } }>(S2C.settlement),
+    );
+    expect(status).toMatchObject({ recorded: true, state: { over: true, rng: 0 } });
+    expect(game.peers[0].latest(S2C.update)).toBeUndefined();
+    expect(
+      (await jsonRequest(origin, `/api/v1/matches/${game.start.matchId}/result`, { headers: game.accounts[0].headers }))
+        .data.data.status,
+    ).toBe('recorded');
+  } finally {
+    drop.mockRestore();
+  }
+  await outcomes.drain();
+});
+
+test('simultaneous database and journal failure freezes the terminal candidate until the same result becomes durable', async () => {
+  const game = await activeGame(),
+    live = matchMaker.getLocalRoomById(game.code) as MatchRoom;
+  // Exercise the real producer/service while injecting failures only at its two storage boundaries.
+  const failedDisk = vi.spyOn(OutcomeJournal.prototype, 'put').mockImplementationOnce(() => {
+    throw Object.assign(new Error('Injected unwritable journal'), { code: 'EACCES' });
+  });
+  const failedDb = vi.spyOn(db, 'transaction').mockRejectedValueOnce(new Error('Injected database outage'));
+  try {
+    game.peers[0].room.send('surrender', {
+      protocol: 2,
+      matchId: game.start.matchId,
+      configVersion: game.start.configVersion,
+    });
+    const status = await until(() =>
+      game.peers[0].latest<{ status: string; recorded: boolean; state?: unknown }>(S2C.settlement),
+    );
+    expect(status).toMatchObject({ status: 'pending', recorded: false });
+    expect(status.state).toBeUndefined();
+    expect(game.peers[0].latest(S2C.update)).toBeUndefined();
+    expect(live.inspect()).toMatchObject({ phase: 'ended', settlement: { recoverable: false } });
+    expect(failedDisk).toHaveBeenCalledTimes(1);
+    expect(failedDb).toHaveBeenCalledTimes(1);
+  } finally {
+    failedDisk.mockRestore();
+    failedDb.mockRestore();
+  }
+  await vi.waitFor(
+    async () => {
+      await outcomes.drain();
+      expect(
+        (await db.query('SELECT * FROM match_outcomes WHERE match_id=$1', [game.start.matchId])).rows,
+      ).toHaveLength(1);
+    },
+    { timeout: 5000, interval: 100 },
+  );
+  expect(await until(() => game.peers[0].latest<{ state: { over: boolean } }>(S2C.update)?.state.over)).toBe(true);
+  expect((await db.query('SELECT * FROM match_rewards WHERE match_id=$1', [game.start.matchId])).rows).toHaveLength(2);
+});
+
+test('journal-only terminal delivery retains its room until database import and settlement', async () => {
+  const game = await activeGame(),
+    live = matchMaker.getLocalRoomById(game.code) as MatchRoom;
+  const failed = vi.spyOn(db, 'transaction').mockRejectedValueOnce(new Error('Injected database outage'));
+  try {
+    game.peers[0].room.send('surrender', {
+      protocol: 2,
+      matchId: game.start.matchId,
+      configVersion: game.start.configVersion,
+    });
+    const terminal = await until(() =>
+      game.peers[0].latest<{ state: { over: boolean }; settlement: unknown }>(S2C.update),
+    );
+    expect(terminal).toMatchObject({ state: { over: true }, settlement: { status: 'pending', recorded: false } });
+    expect(live.autoDispose).toBe(false);
+    expect(live.inspect()).toMatchObject({ settlement: { recoverable: true, recorded: false } });
+  } finally {
+    failed.mockRestore();
+  }
+  expect(
+    (await jsonRequest(origin, `/api/v1/matches/${game.start.matchId}/result`, { headers: game.accounts[0].headers }))
+      .data.data,
+  ).toMatchObject({ status: 'pending', recorded: false, reward: null });
+  expect(
+    (await db.query('SELECT recovery_closed_at FROM matches WHERE id=$1', [game.start.matchId])).rows[0]
+      .recovery_closed_at,
+  ).toBeNull();
+  await outcomes.drain();
+  expect(live.autoDispose).toBe(true);
+  expect(
+    (await db.query('SELECT recovery_closed_at FROM matches WHERE id=$1', [game.start.matchId])).rows[0]
+      .recovery_closed_at,
+  ).toBeTruthy();
+});
+
+test('an injected terminal simulation receives no positive shot acknowledgement while both stores fail', async () => {
+  const game = await activeGame(),
+    live = matchMaker.getLocalRoomById(game.code) as MatchRoom,
+    side = game.start.state.turn,
+    actor = game.peers[side];
+  // Only the terminal boundary is injected; real physics still builds the bounded playback packet.
+  const simulate = vi
+    .spyOn(live as unknown as { simulateShot: typeof resolveShot }, 'simulateShot')
+    .mockImplementationOnce((state, data, input) => {
+      const output = resolveShot(state, data, input);
+      state.over = true;
+      state.endReason = 'shot-limit';
+      state.winner = 0;
+      state.score = [1, 0];
+      return output;
+    });
+  const disk = vi.spyOn(OutcomeJournal.prototype, 'put').mockImplementationOnce(() => {
+    throw new Error('Injected disk outage');
+  });
+  const database = vi.spyOn(db, 'transaction').mockRejectedValueOnce(new Error('Injected database outage'));
+  const shot: ShotMsg = {
+    protocol: 2,
+    revision: game.start.revision,
+    matchId: game.start.matchId,
+    turnId: game.start.state.shotNo,
+    configVersion: game.start.configVersion,
+    clientShotId: 'net04-terminal',
+    input: {
+      pieceId: game.start.state.pieces.find((p) => p.side === side)!.id,
+      dirX: 1,
+      dirY: 0,
+      power: 0.1,
+      curve: 0,
+    },
+  };
+  try {
+    actor.room.send('shot', shot);
+    await until(() => actor.latest(S2C.settlement));
+    expect(actor.latest(S2C.shotPacket)).toBeUndefined();
+    expect(actor.latest(S2C.shotAck)).toBeUndefined();
+    const count = actor.messages.length;
+    actor.room.send('shot', shot);
+    await until(() => actor.messages.slice(count).some((m) => m.type === S2C.settlement));
+    expect(actor.latest(S2C.shotAck)).toBeUndefined();
+    expect(live.inspect()).toMatchObject({ seq: 1, settlement: { recoverable: false } });
+  } finally {
+    disk.mockRestore();
+    database.mockRestore();
+    simulate.mockRestore();
+  }
+  await vi.waitFor(
+    async () => {
+      await outcomes.drain();
+      expect(
+        (await db.query('SELECT * FROM match_outcomes WHERE match_id=$1', [game.start.matchId])).rows,
+      ).toHaveLength(1);
+    },
+    { timeout: 5000, interval: 100 },
+  );
+  expect(await until(() => actor.latest<ShotAckMsg>(S2C.shotAck))).toMatchObject({ seq: 1, duplicate: false });
+  const result = (await db.query('SELECT payload FROM match_outcomes WHERE match_id=$1', [game.start.matchId])).rows[0]
+    .payload;
+  expect(result).toMatchObject({ reason: 'shot-limit', winner: -1, finalSeq: 1 });
+  expect(result.participants[side].actions).toBe(1);
+  expect((await db.query('SELECT status FROM matches WHERE id=$1', [game.start.matchId])).rows[0].status).toBe('void');
+});
+
 test('production runtime mounts real ticket issuance and account room authentication', async () => {
   const account = await owner();
   const previous = await activeGame();
@@ -772,6 +1098,8 @@ test('production runtime mounts real ticket issuance and account room authentica
   expect((await reentry(previous.accounts[0], previous.start.matchId)).status).toBe(503);
   const ticket = await issue(account),
     connection = await join(ticket);
+  for (const mode of ['growth', 'ranked'])
+    expect((await post(account, { ...command(account), mode })).status).toBe(403);
   expect((await until(() => connection.latest<RoomSnapshot>(S2C.room))).account?.userId).toBe(account.principal.userId);
   expect((await jsonRequest(origin, '/api/v1/auth/options')).data.data.friendRoomsEnabled).toBe(true);
   expect((await jsonRequest(origin, '/api/v1/config/manifest')).data.data.availableModes).toEqual([
@@ -808,7 +1136,7 @@ test('maintenance disables account room creation on the server and keeps the man
     repository: db,
     clientDirectory: null,
     lobbyMaintenance: true,
-    accountRooms: { tickets, web },
+    accountRooms: { tickets, web, outcomes },
     modules: [web.module()],
   });
   await server.gameServer.listen(0);

@@ -41,14 +41,16 @@ import {
   type UpdateMsg,
 } from '../../shared/protocol';
 import { authenticateJoin, netError, type GuestIdentity } from '../auth';
-import type { AccountIdentity, AccountRoomTarget, AccountMode } from '../matches/tickets';
+import type { AccountIdentity, AccountRoomTarget } from '../matches/tickets';
 import { systemClock, type ServerClock } from '../clock';
 import { ROOM_RECORD_FORMAT, type RecordSeat, type RoomRecord, type RoomStore } from '../roomStore';
 import { isRecord, parseReady, parseSetLineup, parseShotMessage, parseSkin, parseSurrender } from '../validation';
 import { ShotReceipts } from '../matches/shot-receipts';
 import { RoomCommandQueue } from '../matches/command-queue';
 import { boundedShotPacket, SurrenderV2Schema } from '../../packages/contracts/src/match-wire';
-import type { AccountMatchStart } from '../matches/recovery';
+import type { AccountRoomSetup } from '../matches/recovery';
+import type { SettlementReceipt } from '../matches/outcomes';
+import { OutcomeIntentSchema, type OutcomeIntent } from '../../packages/contracts/src/match-results';
 
 export type MatchSimulator = (state: MatchState, data: GameData, input: ShotInput) => ReturnType<typeof resolveShot> | Promise<ReturnType<typeof resolveShot>>;
 
@@ -120,7 +122,7 @@ export function allocateRoomCode(used: Set<string>, pick: (max: number) => numbe
 /** One 1v1 match. The server owns every rule decision; clients only send intents. */
 export class MatchRoom extends Room {
   /** Only server-side room factories can supply this setup; it is never decoded from client options. */
-  protected accountCreation(_options: unknown): { code: string; data: GameData; mode: AccountMode; admit(options: unknown): Promise<AccountIdentity>; recordStart(input: AccountMatchStart): Promise<void>; recordClose(matchId: string, reason: 'ended' | 'abandoned' | 'expired'): Promise<void> } | null { return null; }
+  protected accountCreation(_options: unknown): AccountRoomSetup | null { return null; }
   private accountSetup: ReturnType<MatchRoom['accountCreation']> = null;
   private static readonly usedCodes = new Set<string>();
   private static readonly pendingRestores = new Map<string, RoomRecord>();
@@ -179,6 +181,14 @@ export class MatchRoom extends Room {
   private match: MatchState | null = null;
   private accepted = new Map<string, number>();
   private receipts = new ShotReceipts();
+  private configurationHash = '';
+  private startedAt = 0;
+  private settlementReceipt: SettlementReceipt = { status: 'pending', recorded: false, recoverable: false };
+  private unsubscribeSettlement: (() => void) | null = null;
+  private terminalIntent: OutcomeIntent | null = null;
+  private terminalMessage: { type: typeof S2C.shotPacket | typeof S2C.update; data: ShotPacketMsg | UpdateMsg; ack?: { side: Side; ref: string } } | null = null;
+  private terminalMessageSent = false;
+  private endedReleased = false;
   private revision = 0;
   private epoch = 0;
   private disposed = false;
@@ -299,6 +309,7 @@ export class MatchRoom extends Room {
   }
 
   override onDispose(): void {
+    this.unsubscribeSettlement?.(); this.unsubscribeSettlement = null;
     this.disposed = true;
     this.epoch++;
     this.commands.close();
@@ -319,6 +330,7 @@ export class MatchRoom extends Room {
       match: this.match ? structuredClone(this.match) : null,
       acceptedShots: this.accepted.size,
       revision: this.revision,
+      settlement: this.accountSetup && this.match?.over ? { ...this.settlementReceipt } : undefined,
     };
   }
 
@@ -434,7 +446,7 @@ export class MatchRoom extends Room {
     const turnEvents = beginTurn(st, this.data);
     if (this.accountSetup) {
       try {
-        await this.accountSetup.recordStart({ matchId, roomCode: this.code, mode: this.accountSetup.mode, configVersion: this.data.version, participants: ([a, b] as const).map((seat, side) => ({ userId: seat.account!.userId, sessionId: seat.account!.authSessionId, side: side as Side, cards: seat.account!.snapshot.cards })) });
+        this.configurationHash = await this.accountSetup.recordStart({ matchId, roomCode: this.code, mode: this.accountSetup.mode, configVersion: this.data.version, rules: this.rules, participants: ([a, b] as const).map((seat, side) => ({ userId: seat.account!.userId, sessionId: seat.account!.authSessionId, side: side as Side, cards: seat.account!.snapshot.cards })) });
       } catch (error) {
         this.resetReady(); if (!this.disposed) this.broadcastRoom(); throw error;
       }
@@ -445,6 +457,8 @@ export class MatchRoom extends Room {
     this.revision = 0;
     this.receipts = new ShotReceipts();
     this.seed = seed; this.matchId = matchId; this.seq = 0;
+    this.startedAt = this.time.nowMs();
+    if (this.accountSetup) this.unsubscribeSettlement = this.accountSetup.subscribeOutcome(matchId, (receipt) => this.onSettlement(receipt));
     this.accepted.clear();
     this.match = st;
     this.phase = 'playing';
@@ -477,6 +491,7 @@ export class MatchRoom extends Room {
     const found = this.receipts.lookup(actor, msg);
     if (found.kind === 'conflict') return this.sendError(client, 'shot-conflict', C2S.shot, ref);
     if (found.kind === 'same') {
+      if (this.accountSetup && this.match?.over && !this.settlementReceipt.recoverable) { this.broadcastSettlement(); return; }
       if (this.accountSetup) client.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ref, seq: found.receipt.seq, acceptedRevision: found.receipt.revision, duplicate: true });
       else this.sendError(client, 'duplicate-shot', C2S.shot, ref, found.receipt.seq);
       return;
@@ -510,7 +525,8 @@ export class MatchRoom extends Room {
     const state = structuredClone(work); state.rng = 0;
     const packet: ShotPacketMsg = {
       protocol: this.protocol(), revision: revision + 1,
-      outcome: this.outcome(work),
+      outcome: this.outcome(work, !!this.accountSetup),
+      ...(work.over && this.accountSetup ? { settlement: { status: 'recorded' as const, recorded: false } } : {}),
       matchId: this.matchId,
       seat: side,
       clientShotId: ref,
@@ -531,6 +547,10 @@ export class MatchRoom extends Room {
     this.accepted.set(key, this.seq);
     this.playbackUntil = this.time.nowMs() + playbackMs;
     if (!work.over) this.armTurn(playbackMs + this.timing.turnMs);
+    if (work.over && this.accountSetup) {
+      this.terminalMessage = { type: S2C.shotPacket, data: packet, ack: { side, ref } };
+      await this.finishMatch(); return;
+    }
     try {
       this.broadcast(S2C.shotPacket, packet);
       if (this.accountSetup) client.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ref, seq: this.seq, acceptedRevision: this.revision, duplicate: false });
@@ -604,6 +624,10 @@ export class MatchRoom extends Room {
   /** A state change that is not a shot (timeout, surrender, forfeit, match clock). */
   private async pushUpdate(events: MatchEvent[]): Promise<void> {
     const update: UpdateMsg = { ...this.stamp(), matchId: this.matchId, events, state: this.wireState(), clocks: this.clocks(), outcome: this.outcome() };
+    if (this.match!.over && this.accountSetup) {
+      this.terminalMessage = { type: S2C.update, data: update };
+      await this.finishMatch(); return;
+    }
     try { this.broadcast(S2C.update, update); }
     finally {
       if (this.match!.over) await this.finishMatch();
@@ -614,12 +638,48 @@ export class MatchRoom extends Room {
   private async finishMatch(): Promise<void> {
     this.phase = 'ended';
     this.clearTimers();
-    try { await this.accountSetup?.recordClose(this.matchId, this.match!.endReason === 'disconnect' ? 'expired' : 'ended'); }
-    finally { this.releaseEndedRoom(); }
+    if (!this.accountSetup) { this.releaseEndedRoom(); return; }
+    if (!this.terminalIntent) {
+      const receipts = this.receipts.records(), st = this.match!;
+      this.terminalIntent = OutcomeIntentSchema.parse({
+        schemaVersion: 1, protocol: ACCOUNT_PROTOCOL_VERSION, matchId: this.matchId,
+        mode: this.accountSetup.mode, configurationHash: this.configurationHash, configVersion: this.data.version,
+        finalSeq: this.seq, score: st.score, winner: this.outcome(st, true)!.winner, reason: st.endReason,
+        elapsedSeconds: Math.max(0, Math.floor((this.time.nowMs() - this.startedAt) / 1000)),
+        endedAt: new Date(this.time.wallMs()).toISOString(),
+        participants: this.seats.map((seat, side) => ({ userId: seat!.account!.userId, side,
+          actions: receipts.filter((receipt) => receipt.actorId === seat!.actorId).length })),
+      });
+    }
+    try { this.onSettlement(await this.accountSetup.recordOutcome(this.terminalIntent)); }
+    catch (error) { this.onSettlement({ status: 'failed', recorded: false, recoverable: false }); throw error; }
+  }
+
+  private onSettlement(receipt: SettlementReceipt): void {
+    if (this.disposed) return;
+    this.settlementReceipt = receipt;
+    if (!this.match?.over) return;
+    try {
+      if (receipt.recoverable && this.terminalMessage && !this.terminalMessageSent) {
+        this.terminalMessageSent = true;
+        this.terminalMessage.data.outcome = this.outcome();
+        this.terminalMessage.data.settlement = { status: receipt.status, recorded: receipt.recorded };
+        this.broadcast(this.terminalMessage.type, this.terminalMessage.data);
+        const ack = this.terminalMessage.ack;
+        if (ack) this.seats[ack.side]?.client?.send(S2C.shotAck, { ...this.stamp(), matchId: this.matchId, clientShotId: ack.ref, seq: this.seq, acceptedRevision: this.revision, duplicate: false });
+      }
+      this.broadcastSettlement();
+    } finally { if (receipt.recorded) this.releaseEndedRoom(); }
+  }
+  private broadcastSettlement(): void {
+    if (!this.accountSetup || this.disposed) return;
+    const { status, recorded, recoverable } = this.settlementReceipt;
+    this.broadcast(S2C.settlement, { ...this.stamp(), matchId: this.matchId, seq: this.seq, status, recorded, outcome: this.outcome(), ...(recoverable && this.match?.over ? { state: this.wireState(), clocks: { turnMs: null, matchMs: 0 } } : {}) });
   }
 
   private releaseEndedRoom(): void {
-    if (this.disposed) return;
+    if (this.disposed || this.endedReleased) return;
+    this.endedReleased = true;
     // Nobody is kicked: the players stay to read the result and the room goes away with the last one. With nobody left, now.
     this.autoDispose = true;
     this.store?.remove(this.code);
@@ -629,6 +689,11 @@ export class MatchRoom extends Room {
 
   /** Neither player came back in time: no result, nothing to resume. */
   private async abandon(): Promise<void> {
+    if (this.accountSetup && this.match) {
+      const work = structuredClone(this.match); work.over = true; work.winner = -1; work.endReason = 'abandoned';
+      this.match = work; this.revision++;
+      await this.finishMatch(); return;
+    }
     this.phase = 'ended';
     this.clearTimers();
     try { await this.accountSetup?.recordClose(this.matchId, 'abandoned'); }
@@ -805,14 +870,15 @@ export class MatchRoom extends Room {
     const c = this.clocks();
     // The turn clock includes the allowance for a shot this client never has to play back.
     const turnMs = c.turnMs === null ? null : Math.min(c.turnMs, this.timing.turnMs);
-    return { ...this.matchInfo(), outcome: this.outcome(), seq: this.seq, state: this.wireState(), clocks: { turnMs, matchMs: c.matchMs } };
+    return { ...this.matchInfo(), outcome: this.outcome(), seq: this.seq, state: this.wireState(), clocks: { turnMs, matchMs: c.matchMs }, ...(this.accountSetup && this.match?.over ? { settlement: this.publicSettlement() } : {}) };
   }
 
-  private outcome(state = this.match): ModeOutcome | undefined {
+  private outcome(state = this.match, durable = this.settlementReceipt.recorded): ModeOutcome | undefined {
     if (!state?.over) return undefined;
-    return classifyModeOutcome(this.rules, { authority: 'server', durable: false, accountsVerified: !!this.accountSetup,
+    return classifyModeOutcome(this.rules, { authority: 'server', durable, accountsVerified: !!this.accountSetup,
       reason: state.endReason, winner: state.winner });
   }
+  private publicSettlement() { return { status: this.settlementReceipt.status, recorded: this.settlementReceipt.recorded }; }
 
   /** Client-visible copy of the authoritative state: the RNG state never leaves the server. */
   private wireState(): MatchState {
@@ -833,6 +899,7 @@ export class MatchRoom extends Room {
       identity: this.accountSetup ? 'account' : 'guest',
       rules: this.rules,
       outcome: this.outcome(),
+      ...(this.accountSetup && this.match?.over ? { settlement: this.publicSettlement() } : {}),
       protocol: this.protocol(),
       code: this.code,
       configVersion: this.data.version,

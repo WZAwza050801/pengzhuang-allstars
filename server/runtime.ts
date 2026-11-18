@@ -26,6 +26,9 @@ import { assetModule } from './api/assets';
 import { LocalImports } from './accounts/local-import';
 import { localImportModule } from './api/local-import';
 import { MatchTickets } from './matches/tickets';
+import path from 'node:path';
+import { MatchOutcomes } from './matches/outcomes';
+import { OutcomeJournal } from './matches/outcome-journal';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -45,16 +48,18 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     ? new WechatAccounts(database, new WechatProvider({ appId: config.wechatAppId!, secret: config.wechatSecret! }), config.sessionSigningKey!, players?.initialize) : null;
   const lifecycle = database && web ? new AccountLifecycle(database, passwords, { enabled: config.accountDeletionEnabled, graceHours: config.accountDeletionGraceHours, version: config.accountRetentionPolicy }, emailAccounts, wechat) : null;
   const tickets = database && web && lineups ? new MatchTickets(database, lineups, gameConfiguration.resolveData) : null;
+  const outcomes = database && assets && economy ? new MatchOutcomes({ db: database, assets, policy: () => economy.registry.get(), journal: new OutcomeJournal(path.join(config.roomStoreDir, 'pending-outcomes')) }) : null;
   const server = createGameServer({
-    accountRooms: tickets && web ? { tickets, web } : undefined,
+    accountRooms: tickets && web && outcomes ? { tickets, web, outcomes } : undefined,
     lobbyMaintenance: config.lobbyMaintenance,
     modules: [authOptionsModule(!!emailAccounts, !!wechat, web, !!(web && players && lineups && assets), !!tickets), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : [])] : [])],
     repository: database, resolveData: gameConfiguration.resolveData,
-    roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : []), ...(lifecycle ? [() => lifecycle.close()] : [])] : [],
+    roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : []), ...(lifecycle ? [() => lifecycle.close()] : []), ...(outcomes ? [() => outcomes.close()] : [])] : [],
     onError: (event) => console.error(JSON.stringify({ event: 'http_error', ...event })),
   });
   try {
     if (database) await database.query('SELECT 1');
+    await outcomes?.start();
     await server.gameServer.listen(port);
     const recovery = await server.services.matches.restoreRooms();
     emailAccounts?.startMailDelivery();

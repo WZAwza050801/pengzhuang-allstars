@@ -5,6 +5,7 @@ import { FIELD_SKINS } from '../../../shared/data';
 import type { OnlineHost, OnlineStatus } from '../onlineHost';
 import { GameView, type GameOptions } from '../game';
 import styles from './rooms.module.css';
+import type { SettlementInfo } from '../../../shared/protocol';
 
 export function RoomMatchView({
   host,
@@ -24,6 +25,8 @@ export function RoomMatchView({
   exit.current = onExit;
   const [error, setError] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [settlement, setSettlement] = useState<SettlementInfo | null>(null);
+  useEffect(() => host.onSettlement(setSettlement), [host]);
   useEffect(() => {
     if (!root.current) return;
     let active = true;
@@ -49,17 +52,27 @@ export function RoomMatchView({
       <div ref={root} className={styles.host} />
       <aside className={styles.connection} aria-live="polite">
         <span>
-          {status === 'reconnecting'
-            ? '连接恢复中 · 暂停出手'
-            : status === 'closed'
-              ? detail || '连接已断开'
-              : status === 'ended'
-                ? '本场已结束 · 不计排位和奖励'
-                : service === 'maintenance'
-                  ? '服务维护中 · 本场继续计时'
-                  : service === 'outdated'
-                    ? '规则已更新 · 本场沿用开局版本'
-                    : '账号好友赛 · 服务端计时'}
+          {settlement?.status === 'failed'
+            ? settlement.recorded
+              ? '结果已保存 · 结算暂未完成'
+              : '结果尚未保存 · 请保持连接，等待处理'
+            : settlement?.status === 'pending'
+              ? '等待保存比赛结果 · 暂停出手'
+              : settlement?.status === 'recorded'
+                ? '比赛结果已保存 · 等待结算'
+                : settlement?.status === 'settled'
+                  ? '本场已结算 · 好友赛不计排位和奖励'
+                  : status === 'reconnecting'
+                    ? '连接恢复中 · 暂停出手'
+                    : status === 'closed'
+                      ? detail || '连接已断开'
+                      : status === 'ended'
+                        ? '本场已结束 · 不计排位和奖励'
+                        : service === 'maintenance'
+                          ? '服务维护中 · 本场继续计时'
+                          : service === 'outdated'
+                            ? '规则已更新 · 本场沿用开局版本'
+                            : '账号好友赛 · 服务端计时'}
         </span>
         <button
           className="pz-button"

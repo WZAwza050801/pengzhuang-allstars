@@ -3,11 +3,12 @@ import { MatchRoom } from './rooms/MatchRoom';
 import type { GameData } from '../shared/data';
 import type { SqlExecutor } from '../packages/persistence/src/database';
 import type { RoomStore } from './roomStore';
+import type { SettlementReceipt } from './matches/outcomes';
 
 import type { ServerClock } from './clock';
 export { systemClock } from './clock';
-/** Trusted server-side command port. No HTTP route exposes this port. NET-04 supplies its durable implementation. */
-export interface OutcomeSink<T = unknown> { record(outcome: T): Promise<'stored' | 'already-stored'> }
+/** Trusted server-side command port. No HTTP route exposes this port. */
+export interface OutcomeSink<T = unknown> { record(outcome: T): Promise<SettlementReceipt> }
 export interface ServiceDependencies {
   repository: SqlExecutor | null;
   clock: ServerClock;

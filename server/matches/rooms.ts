@@ -8,9 +8,11 @@ import { ApiError } from '../api/http';
 import type { MatchTickets, AccountRooms, AccountRoomTarget, AccountMode } from './tickets';
 import type { GameData } from '../../shared/data';
 import type { ServerClock } from '../clock';
+import type { MatchOutcomes, SettlementReceipt } from './outcomes';
+import type { OutcomeIntent } from '../../packages/contracts/src/match-results';
 
 /** A bounded, in-process room directory. Server-process takeover is deferred to NET-05. */
-export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, options: { maxRooms?: number; simulateShot?: MatchSimulator } = {}) {
+export function createAccountRooms(tickets: MatchTickets, outcomes: MatchOutcomes, clock: ServerClock, options: { maxRooms?: number; simulateShot?: MatchSimulator } = {}) {
   type Setup = { code: string; data: GameData; mode: AccountMode };
   const grants = new Map<string, Setup>();
   const rooms = new Map<string, AccountMatchRoom>();
@@ -31,8 +33,14 @@ export function createAccountRooms(tickets: MatchTickets, clock: ServerClock, op
       grants.delete(key as string);
       return {
         ...setup,
-        recordStart: (input: Parameters<typeof tickets.recovery.started>[0]) => tickets.recovery.started(input),
+        recordStart: async (input: Parameters<typeof tickets.recovery.started>[0]) => {
+          let hash = '';
+          await tickets.recovery.started(input, async (tx) => { hash = await outcomes.openInTransaction(tx, input.matchId, setup.data, input.rules); });
+          return hash;
+        },
         recordClose: (matchId: string, reason: 'ended' | 'abandoned' | 'expired') => tickets.recovery.closed(matchId, reason),
+        recordOutcome: (input: OutcomeIntent) => outcomes.record(input),
+        subscribeOutcome: (matchId: string, listener: (receipt: SettlementReceipt) => void) => outcomes.subscribe(matchId, listener),
         admit: async (options: unknown) => {
           const input = AccountRoomJoinSchema.safeParse(options);
           if (!input.success) throw netError('unauthenticated');

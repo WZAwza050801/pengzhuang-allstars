@@ -7,6 +7,7 @@ export * from './player-data';
 export * from './lineups';
 export * from './match-tickets';
 export * from './match-recovery';
+export * from './match-results';
 export * from './economy-operations';
 export * from './local-import';
 export * from './lobby';

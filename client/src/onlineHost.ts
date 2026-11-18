@@ -17,6 +17,8 @@ import {
   type ShotPacketMsg,
   type ShotAckMsg,
   type UpdateMsg,
+  type MatchSettlementMsg,
+  type SettlementInfo,
 } from '../../shared/protocol';
 import type { HostListener, MatchHost, SeatInfo, ShotPacket } from './host';
 import type { MatchTicketResult } from '../../packages/contracts/src/match-tickets';
@@ -57,6 +59,18 @@ export interface OnlineStatusListener {
 export class OnlineHost implements MatchHost {
   private readonly account: OnlineHostOptions['account'];
   private pendingShot: string | null = null;
+  private settlement: SettlementInfo | null = null;
+  private settlementListener: ((info: SettlementInfo) => void) | null = null;
+  onSettlement(cb: (info: SettlementInfo) => void): () => void {
+    this.settlementListener = cb;
+    if (this.settlement) cb(this.settlement);
+    return () => { if (this.settlementListener === cb) this.settlementListener = null; };
+  }
+  private applySettlement(info: SettlementInfo | undefined): void {
+    if (!this.account || !info || this.settlement?.status === 'settled' || (this.settlement?.recorded && !info.recorded)) return;
+    this.settlement = info;
+    this.settlementListener?.(info);
+  }
   private authorizationReady = true;
   private reconnectUntil = 0;
   private revision = -1;
@@ -172,7 +186,7 @@ export class OnlineHost implements MatchHost {
   inputStatus(): 'ready' | 'pending' | 'reconnecting' | 'closed' {
     if (!this.authorizationReady || this.status === 'reconnecting' || this.status === 'connecting') return 'reconnecting';
     if (this.disposed || this.status === 'closed') return 'closed';
-    return this.pendingShot ? 'pending' : 'ready';
+    return this.pendingShot || this.settlement ? 'pending' : 'ready';
   }
   synchronize(): void { if (!this.disposed && this.account && this.status !== 'reconnecting') this.scheduleReconnect(); }
 
@@ -209,6 +223,7 @@ export class OnlineHost implements MatchHost {
     room.onMessage(S2C.resume, receive((msg: ResumeMsg) => this.onResume(msg)));
     room.onMessage(S2C.error, receive((msg: ErrorMsg) => this.onError(msg)));
     room.onMessage(S2C.shotAck, receive((msg: ShotAckMsg) => this.onShotAck(msg)));
+    room.onMessage(S2C.settlement, receive((msg: MatchSettlementMsg) => this.onMatchSettlement(msg)));
     room.onLeave((code: number) => {
       // A consented leave is our own doing; anything else means the socket dropped.
       if (this.disposed || this.room !== room) return;
@@ -239,6 +254,7 @@ export class OnlineHost implements MatchHost {
     this.seat = snap.mySeat;
     this.mySides.splice(0, this.mySides.length, snap.mySeat);
     this.lastSnapshot = snap;
+    this.applySettlement(snap.settlement);
     if (snap.seatToken) this.seatToken = snap.seatToken;
     for (const side of [0, 1] as const) {
       const s = snap.seats[side];
@@ -288,6 +304,8 @@ export class OnlineHost implements MatchHost {
       state: msg.state,
     };
     this.listener?.onShot(packet);
+    this.applySettlement(msg.settlement);
+    if (msg.state.over) this.setStatus('ended');
   }
 
   private onUpdate(msg: UpdateMsg): void {
@@ -298,6 +316,7 @@ export class OnlineHost implements MatchHost {
     this.applyClocks(msg.clocks.turnMs, msg.clocks.matchMs);
     if (msg.events.length) this.listener?.onEvents(msg.events);
     this.listener?.onState(msg.state);
+    this.applySettlement(msg.settlement);
     if (msg.state.over) {
       if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
       this.reconnectTimer = null; this.reconnecting = false;
@@ -322,6 +341,14 @@ export class OnlineHost implements MatchHost {
     this.listener?.onState(msg.state);
     this.listener?.onInfo?.('已重新连接，局面已恢复');
     if (firstState) this.matchReadyListener?.();
+    this.applySettlement(msg.settlement);
+  }
+
+  private onMatchSettlement(msg: MatchSettlementMsg): void {
+    if (!this.account || !this.validStamp(msg) || msg.matchId !== this.matchId || msg.revision! < this.revision || !['pending', 'recorded', 'settled', 'failed'].includes(msg.status) || typeof msg.recorded !== 'boolean') return;
+    // A status alone must not consume the revision of a terminal packet still in flight.
+    if (msg.state?.over && msg.clocks && msg.revision! > this.revision) this.onUpdate({ ...msg, state: msg.state, clocks: msg.clocks, events: [] });
+    this.applySettlement({ status: msg.status, recorded: msg.recorded });
   }
 
   private onError(msg: ErrorMsg): void {
@@ -492,6 +519,7 @@ export class OnlineHost implements MatchHost {
     this.listener = null;
     this.roomSnapshotListener = null;
     this.matchReadyListener = null;
+    this.settlementListener = null;
   }
 }
 

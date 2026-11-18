@@ -15,6 +15,53 @@ const failure = (code: 'UNAUTHENTICATED' | 'UNAVAILABLE', status = 401) => ({
 const csrfValue = () => `${randomBytes(32).toString('base64url')}.${randomBytes(32).toString('base64url')}`;
 const csrf = () => success({ csrfToken: csrfValue() });
 
+test('result readers reject stale account or match identities and never submit settlement mutations', async () => {
+  const userId = randomUUID(),
+    matchId = randomUUID(),
+    requests: string[] = [];
+  let payload: unknown;
+  const result = {
+    userId,
+    matchId,
+    side: 0,
+    mode: 'friend',
+    configVersion: 'game-1',
+    economyVersion: 'economy-2',
+    modesVersion: 'modes-1',
+    finalSeq: 0,
+    score: [0, 0],
+    winner: 1,
+    reason: 'surrender',
+    endedAt: '2026-11-18T05:00:00.000Z',
+    status: 'recorded',
+    recorded: true,
+    pendingReason: null,
+    reward: null,
+  };
+  const api = new WebAccountClient({
+    request: async (url, input) => {
+      requests.push(url);
+      expect(input?.method ?? 'GET').toBe('GET');
+      return success(payload);
+    },
+  });
+  payload = result;
+  expect(await api.matchResult(userId, matchId)).toMatchObject({ ok: true, data: result });
+  payload = { ...result, userId: randomUUID() };
+  expect(await api.matchResult(userId, matchId)).toMatchObject({ ok: false, error: { code: 'INVALID_RESPONSE' } });
+  payload = { ...result, matchId: randomUUID() };
+  expect(await api.matchResult(userId, matchId)).toMatchObject({ ok: false });
+  payload = { userId, matches: [{ ...result, userId: randomUUID() }], nextCursor: null };
+  expect(await api.matchHistory(userId)).toMatchObject({ ok: false });
+  payload = { userId, matches: [result], nextCursor: null };
+  expect(await api.matchHistory(userId, { limit: '50' })).toMatchObject({ ok: true });
+  expect(requests.at(-1)).toBe('/api/v1/me/matches?limit=50');
+  const count = requests.length;
+  expect(await api.matchResult(userId, '../file')).toMatchObject({ ok: false });
+  expect(await api.matchHistory(userId, { limit: '51' })).toMatchObject({ ok: false });
+  expect(requests).toHaveLength(count);
+});
+
 test('room ticket requests validate identity hints and carry only a versioned owned-lineup command', async () => {
   const userId = randomUUID(),
     lineupId = randomUUID();

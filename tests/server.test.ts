@@ -51,8 +51,8 @@ test('real HTTP routing separates API/SPA, propagates request ids, validates JSO
   };
   const clock = { nowMs: () => 100, wallMs: () => 200 };
   const sink = {
-    async record(): Promise<'stored'> {
-      return 'stored';
+    async record() {
+      return { status: 'recorded' as const, recorded: true, recoverable: true };
     },
   };
   const server = createGameServer({

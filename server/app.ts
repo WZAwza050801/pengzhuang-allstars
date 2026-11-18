@@ -18,6 +18,8 @@ import type { MatchTickets } from './matches/tickets';
 import type { WebSessions } from './api/web-sessions';
 import { matchTicketsModule } from './api/match-tickets';
 import { matchRecoveryModules } from './api/match-recovery';
+import { matchResultModules } from './api/match-results';
+import type { MatchOutcomes } from './matches/outcomes';
 
 /**
  * Where the built client lives. `dist/client` is produced by `npm run build` and served from the same process as
@@ -51,7 +53,7 @@ function lanPlayUrls(port: number): { url: string; kind: 'lan' | 'vpn' }[] {
 
 export interface GameServerOptions extends Partial<ServiceDependencies> {
   simulateShot?: MatchSimulator;
-  accountRooms?: { tickets: MatchTickets; web: WebSessions };
+  accountRooms?: { tickets: MatchTickets; web: WebSessions; outcomes: MatchOutcomes };
   admissionLimits?: Partial<AdmissionLimits>;
   lobbyMaintenance?: boolean;
   readLobbyContent?: () => LobbyContent;
@@ -66,11 +68,11 @@ export function createGameServer(options: GameServerOptions = {}) {
   const deps: ServiceDependencies = {
     repository: options.repository ?? null, clock: options.clock ?? systemClock,
     resolveData: options.resolveData ?? (() => DEFAULT_DATA), roomStore: options.roomStore ?? null,
-    outcomeSink: options.outcomeSink ?? null,
+    outcomeSink: options.accountRooms?.outcomes ?? options.outcomeSink ?? null,
   };
   const services = createServices(deps);
   const admission = new RoomAdmission(() => deps.clock.nowMs(), options.admissionLimits);
-  const accounts = options.accountRooms ? createAccountRooms(options.accountRooms.tickets, deps.clock, { simulateShot: options.simulateShot }) : null;
+  const accounts = options.accountRooms ? createAccountRooms(options.accountRooms.tickets, options.accountRooms.outcomes, deps.clock, { simulateShot: options.simulateShot }) : null;
   let closing: Promise<void> | null = null;
   const app = express();
   app.disable('x-powered-by');
@@ -93,7 +95,7 @@ export function createGameServer(options: GameServerOptions = {}) {
     res.json({ status: 'ready', requestId: res.locals.requestId });
   }));
   app.use('/api/v1', express.json({ limit: '32kb', strict: true }));
-  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent, !!accounts), ...(options.modules ?? []), ...(accounts && options.accountRooms ? [matchTicketsModule(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission, options.lobbyMaintenance), ...matchRecoveryModules(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission)] : [])]) {
+  for (const module of [catalogModule, ...publicLobbyModules(options.lobbyMaintenance, options.readLobbyContent, !!accounts), ...(options.modules ?? []), ...(accounts && options.accountRooms ? [matchTicketsModule(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission, options.lobbyMaintenance), ...matchRecoveryModules(options.accountRooms.tickets, options.accountRooms.web, accounts.directory, admission), ...matchResultModules(options.accountRooms.outcomes.results, options.accountRooms.web)] : [])]) {
     app.use(`/api/v1/${module.area}`, module.createRouter({ ...deps, services }));
   }
   app.get('/api/join-info', (req, res) => {

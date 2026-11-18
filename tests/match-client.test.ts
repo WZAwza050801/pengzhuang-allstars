@@ -173,3 +173,35 @@ test('account clients fail closed on incompatible state stamps and oversized pla
     }
   }
 });
+
+test('settlement status freezes input without consuming a terminal revision, and a later status restores a lost terminal packet', async () => {
+  const game = await fixture(),
+    receipts: string[] = [];
+  const unsubscribe = game.host.onSettlement((info) => receipts.push(info.status));
+  const stamp = { protocol: 2, revision: 1, matchId: game.start.matchId, seq: 1 };
+  try {
+    game.emit(S2C.settlement, { ...stamp, status: 'pending', recorded: false });
+    expect(game.host.inputStatus()).toBe('pending');
+    game.emit(S2C.shotPacket, game.packet);
+    expect(game.packets).toHaveLength(1);
+    const ended = { ...game.packet.state, over: true, endReason: 'surrender', winner: 1 };
+    game.emit(S2C.settlement, {
+      ...stamp,
+      revision: 2,
+      status: 'recorded',
+      recorded: true,
+      state: ended,
+      clocks: { turnMs: null, matchMs: 0 },
+    });
+    expect(game.states.at(-1)).toEqual(ended);
+    expect(game.statuses.at(-1)).toBe('ended');
+    game.emit(S2C.settlement, { ...stamp, revision: 2, status: 'settled', recorded: true });
+    game.emit(S2C.settlement, { ...stamp, revision: 2, status: 'pending', recorded: false });
+    expect(receipts.at(-1)).toBe('settled');
+    const before = receipts.length;
+    unsubscribe();
+    expect(receipts).toHaveLength(before);
+  } finally {
+    game.host.dispose();
+  }
+});

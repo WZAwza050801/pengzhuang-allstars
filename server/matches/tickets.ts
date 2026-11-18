@@ -48,6 +48,7 @@ export class MatchTickets {
     private readonly db: Database,
     private readonly lineups: Lineups,
     private readonly resolveData: () => GameData,
+    private readonly enabledModes: readonly AccountMode[] = ['friend'],
   ) { this.recovery = new MatchRecovery(db); }
   async reenter(principal: Principal, matchId: string, raw: unknown, rooms: AccountRooms) {
     if (!ReentryCommandSchema.safeParse(raw).success) throw new ApiError('INVALID_REQUEST', 400);
@@ -64,12 +65,15 @@ export class MatchTickets {
     const parsed = MatchTicketSchema.safeParse(raw);
     if (!parsed.success) throw new ApiError('INVALID_REQUEST', 400);
     const input = parsed.data;
+    const enabled = this.enabledModes.includes(input.mode);
+    if (!enabled && !input.roomCode) throw new ApiError('FORBIDDEN', 403);
     let lease: AccountRoomLease | undefined;
     const target = input.roomCode
       ? rooms.find(input.roomCode)
       : (lease = rooms.reserve(this.resolveData(), input.mode)).target;
     if (!target || target.mode !== input.mode || !target.canEnter(principal.userId))
       throw new ApiError('NOT_FOUND', 404);
+    if (!enabled) throw new ApiError('FORBIDDEN', 403);
     const token = randomBytes(32).toString('base64url');
     const hash = digest(token);
     try {

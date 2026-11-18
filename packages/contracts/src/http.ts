@@ -3,6 +3,7 @@ import { ACCOUNT_PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../../../sh
 import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
 import { ActiveMatchSchema, ReentryCommandSchema } from './match-recovery';
+import { MatchResultSchema, MatchHistorySchema, MatchHistoryQuerySchema } from './match-results';
 import { parseNickname } from './game-validation';
 import { UserProfileSchema, CardPageQuerySchema, CardPageSchema, WalletListSchema } from './player-data';
 import { LineupPageQuerySchema, LineupPageSchema, SavedLineupSchema } from './lineups';
@@ -108,6 +109,14 @@ export const QueueSchema = z.strictObject({
   protocol: z.literal(ACCOUNT_PROTOCOL_VERSION),
 });
 export const HTTP_CONTRACTS = [
+  {
+    method: 'get',
+    path: '/api/v1/me/matches',
+    operationId: 'matchHistory',
+    query: MatchHistoryQuerySchema,
+    response: MatchHistorySchema,
+  },
+  { method: 'get', path: '/api/v1/matches/{id}/result', operationId: 'matchResult', response: MatchResultSchema },
   { method: 'get', path: '/api/v1/me/active-match', operationId: 'activeMatch', response: ActiveMatchSchema },
   {
     method: 'post',

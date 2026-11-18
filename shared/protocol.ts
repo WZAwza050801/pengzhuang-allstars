@@ -1,6 +1,7 @@
 import type { MatchEvent, MatchState, ShotInput } from './match';
 import type { Side, SimEvent } from './physics';
 import type { ModeId, ModeRules, ModeOutcome } from '../packages/contracts/src/modes';
+import type { SettlementStatus } from '../packages/contracts/src/match-results';
 
 export const PROTOCOL_VERSION = 1;
 export const ACCOUNT_PROTOCOL_VERSION = 2;
@@ -22,6 +23,7 @@ export const S2C = {
   matchStart: 'match_start',
   shotPacket: 'shot_packet',
   shotAck: 'shot_ack',
+  settlement: 'settlement',
   update: 'update',
   resume: 'resume',
   error: 'error',
@@ -143,6 +145,7 @@ export interface SeatSnapshot {
 }
 
 export interface RoomSnapshot {
+  settlement?: SettlementInfo;
   revision?: number;
   identity?: 'guest' | 'account';
   /** Only the receiving account's identity and frozen selection are exposed. */
@@ -173,6 +176,8 @@ export interface ClockInfo {
 
 /** `state.rng` is always 0 on the wire; the seed never leaves the server. */
 export interface MatchStamp { protocol?: number; revision?: number }
+export interface SettlementInfo { status: SettlementStatus; recorded: boolean }
+export interface MatchSettlementMsg extends MatchStamp, SettlementInfo { matchId: string; seq: number; outcome?: ModeOutcome; state?: MatchState; clocks?: ClockInfo }
 export interface ShotAckMsg extends MatchStamp { matchId: string; clientShotId: string; seq: number; acceptedRevision: number; duplicate: boolean }
 export interface MatchStartMsg extends MatchStamp {
   rules?: ModeRules;
@@ -189,6 +194,7 @@ export interface MatchStartMsg extends MatchStamp {
 
 /** Same fields as client/src/host.ts ShotPacket plus routing info. */
 export interface ShotPacketMsg extends MatchStamp {
+  settlement?: SettlementInfo;
   outcome?: ModeOutcome;
   matchId: string;
   seat: Side;
@@ -207,6 +213,7 @@ export interface ShotPacketMsg extends MatchStamp {
 
 /** A state change that is not a shot: turn timeout, match clock, surrender, forfeit. `events` end with `end` when the match is over. */
 export interface UpdateMsg extends MatchStamp {
+  settlement?: SettlementInfo;
   outcome?: ModeOutcome;
   matchId: string;
   events: MatchEvent[];
@@ -216,6 +223,7 @@ export interface UpdateMsg extends MatchStamp {
 
 /** Sent only to a client that re-claimed its seat mid-match or after the end: everything needed to rebuild the board. */
 export interface ResumeMsg extends MatchStamp {
+  settlement?: SettlementInfo;
   rules?: ModeRules;
   outcome?: ModeOutcome;
   matchId: string;

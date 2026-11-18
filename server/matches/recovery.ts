@@ -1,21 +1,34 @@
-import type { Database } from '../../packages/persistence/src/database';
+import type { Database, SqlExecutor } from '../../packages/persistence/src/database';
 import type { Principal } from '../accounts/access-tokens';
 import { requireActivePrincipal } from '../accounts/authorization';
 import { ApiError } from '../api/http';
 import { ACCOUNT_PROTOCOL_VERSION } from '../../shared/protocol';
 import type { ActiveMatch } from '../../packages/contracts/src/match-recovery';
-import type { AccountMode, AccountRooms, OwnedLineupSnapshot } from './tickets';
+import type { AccountIdentity, AccountMode, AccountRooms, OwnedLineupSnapshot } from './tickets';
+import type { GameData } from '../../shared/data';
+import type { ModeRules } from '../../packages/contracts/src/modes';
+import type { OutcomeIntent } from '../../packages/contracts/src/match-results';
+import type { SettlementReceipt } from './outcomes';
 
 export interface AccountMatchStart {
   matchId: string;
   roomCode: string;
   mode: AccountMode;
   configVersion: string;
+  rules: ModeRules;
   participants: readonly { userId: string; sessionId: string; side: 0 | 1; cards: OwnedLineupSnapshot['cards'] }[];
+}
+export interface AccountRoomSetup {
+  code: string; data: GameData; mode: AccountMode;
+  admit(options: unknown): Promise<AccountIdentity>;
+  recordStart(input: AccountMatchStart): Promise<string>;
+  recordClose(matchId: string, reason: 'ended' | 'abandoned' | 'expired'): Promise<void>;
+  recordOutcome(input: OutcomeIntent): Promise<SettlementReceipt>;
+  subscribeOutcome(matchId: string, listener: (receipt: SettlementReceipt) => void): () => void;
 }
 export class MatchRecovery {
   constructor(private readonly db: Database) {}
-  async started(input: AccountMatchStart): Promise<void> {
+  async started(input: AccountMatchStart, initialize?: (tx: SqlExecutor) => Promise<void>): Promise<void> {
     await this.db.transaction(async (tx) => {
       for (const participant of [...input.participants].sort((a, b) => a.userId.localeCompare(b.userId)))
         await requireActivePrincipal(tx, participant);
@@ -30,6 +43,7 @@ export class MatchRecovery {
         VALUES ($1,$2,$3,$4)`,
           [input.matchId, participant.userId, participant.side, JSON.stringify(participant.cards)],
         );
+      if (initialize) await initialize(tx);
     });
   }
   async closed(matchId: string, reason: 'ended' | 'abandoned' | 'expired'): Promise<void> {
@@ -53,11 +67,13 @@ export class MatchRecovery {
             side: 0 | 1;
             recovery_closed_at: Date | null;
             recovery_close_reason: string | null;
+            status: string;
+            reason: string | null;
           }>(
-            `SELECT m.id,m.room_code,m.mode,m.config_version,m.protocol_version,p.side,m.recovery_closed_at,m.recovery_close_reason
+            `SELECT m.id,m.room_code,m.mode,m.config_version,m.protocol_version,p.side,m.recovery_closed_at,m.recovery_close_reason,m.status,m.result->>'reason' AS reason
            FROM matches m JOIN match_participants p ON p.match_id=m.id
            WHERE p.user_id=$1 AND m.room_code IS NOT NULL AND ($2::uuid IS NULL OR m.id=$2)
-           ORDER BY (m.recovery_closed_at IS NULL) DESC,m.created_at DESC,m.id DESC LIMIT 1`,
+           ORDER BY (m.status='playing' AND m.recovery_closed_at IS NULL) DESC,m.created_at DESC,m.id DESC LIMIT 1`,
             [principal.userId, matchId ?? null],
           )
         ).rows[0];
@@ -69,6 +85,7 @@ export class MatchRecovery {
       });
       if (!row) return unavailable('none');
       if (row.protocol_version !== ACCOUNT_PROTOCOL_VERSION) return unavailable('unavailable');
+      if (['settlement-pending', 'settled', 'void'].includes(row.status)) return unavailable(row.reason === 'abandoned' || row.reason === 'disconnect' ? 'expired' : 'ended');
       if (row.recovery_closed_at) return unavailable(row.recovery_close_reason === 'ended' ? 'ended' : 'expired');
       const target = rooms.find(row.room_code),
         live = target?.recovery(principal.userId);

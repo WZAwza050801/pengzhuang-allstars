@@ -447,7 +447,7 @@
   - 验收：不依赖旧 JS 内存；只能恢复自己的座位；超时结果明确。
   - 验证：刷新/杀客户端/网络切换/被封/过窗/已结束恢复测试。
 
-- [ ] **NET-04** 实现 durable outcome 和奖励结算
+- [x] **NET-04** 实现 durable outcome 和奖励结算
   - 依赖：NET-02、DAT-04
   - 实施：结束先存 outcome+outbox；消费者事务发奖/积分；pending与重试；成功后清恢复数据。
   - 产物：结果 sink、outbox worker、战绩/奖励查询。

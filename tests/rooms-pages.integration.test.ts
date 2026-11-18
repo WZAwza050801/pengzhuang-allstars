@@ -13,6 +13,9 @@ import type { MatchState } from '../shared/match';
 import { createGameServer } from '../server/app';
 import { MatchRoom, type MatchTiming } from '../server/rooms/MatchRoom';
 import { PlayerData } from '../server/accounts/player-data';
+import { Assets } from '../server/accounts/assets';
+import { MatchOutcomes } from '../server/matches/outcomes';
+import { OutcomeJournal } from '../server/matches/outcome-journal';
 import { Lineups } from '../server/accounts/lineups';
 import { MatchTickets } from '../server/matches/tickets';
 import { Sessions } from '../server/accounts/sessions';
@@ -26,6 +29,7 @@ import { freePort } from './helpers/mailpit';
 
 let db: Database, server: ReturnType<typeof createGameServer>, browser: Browser, sessions: Sessions;
 let origin: string;
+let outcomes: MatchOutcomes;
 const errors: string[] = [];
 const screenshots = path.resolve('work/ui05-browser');
 beforeAll(async () => {
@@ -35,6 +39,15 @@ beforeAll(async () => {
   origin = `http://127.0.0.1:${await freePort()}`;
   const key = randomBytes(32).toString('base64url');
   const players = new PlayerData(db, createBundledEconomyConfiguration().policy, DEFAULT_DATA);
+  outcomes = new MatchOutcomes({
+    db,
+    assets: new Assets(db, players.initialize, () => ({
+      data: DEFAULT_DATA,
+      policy: createBundledEconomyConfiguration().policy,
+    })),
+    policy: () => createBundledEconomyConfiguration().policy,
+    journal: new OutcomeJournal(path.join(process.env.PG_TEST_TMP_DIR, 'net04-page-outcomes')),
+  });
   const lineups = new Lineups(db, players.initialize, () => DEFAULT_DATA);
   sessions = new Sessions(db, key, origin, players.initialize);
   const web = new WebSessions(sessions, { cookieSecure: false, allowedOrigins: [origin] }, key);
@@ -48,7 +61,7 @@ beforeAll(async () => {
   server = createGameServer({
     repository: db,
     clientDirectory: directory,
-    accountRooms: { tickets: new MatchTickets(db, lineups, () => DEFAULT_DATA), web },
+    accountRooms: { tickets: new MatchTickets(db, lineups, () => DEFAULT_DATA), web, outcomes },
     modules: [
       authOptionsModule(true, false, web, true, true),
       web.module(),
@@ -58,12 +71,14 @@ beforeAll(async () => {
     ],
   });
   await server.gameServer.listen(Number(new URL(origin).port));
+  await outcomes.start();
   browser = await chromium.launch({ headless: true });
   mkdirSync(screenshots, { recursive: true });
 }, 90000);
 afterAll(async () => {
   await browser?.close();
   await server?.close();
+  await outcomes?.close();
   await db?.close();
 });
 
@@ -345,6 +360,28 @@ test('server timeout advances both clients even when one display clock is frozen
     expect(room(game.code).inspect().acceptedShots).toBe(0);
     expect(room(game.code).inspect().match?.shotNo).toBeGreaterThanOrEqual(1);
   } finally {
+    await game.close();
+  }
+});
+
+test('real browsers distinguish a saved result awaiting the worker from a committed settlement', async () => {
+  const game = await pair();
+  await outcomes.close();
+  try {
+    await game.a.page.locator('.menu-btn').click();
+    game.a.page.once('dialog', (dialog) => dialog.accept());
+    await game.a.page.locator('.menu .surrender').click();
+    for (const actor of [game.a, game.b])
+      await visible(actor.page.getByText('比赛结果已保存 · 等待结算', { exact: true })).toBeVisible();
+    const matchId = room(game.code).inspect().matchId;
+    expect((await db.query('SELECT * FROM match_rewards WHERE match_id=$1', [matchId])).rows).toHaveLength(0);
+    await outcomes.start();
+    for (const actor of [game.a, game.b])
+      await visible(actor.page.getByText('本场已结算 · 好友赛不计排位和奖励', { exact: true })).toBeVisible();
+    expect((await db.query('SELECT * FROM match_rewards WHERE match_id=$1', [matchId])).rows).toHaveLength(2);
+    await game.b.page.screenshot({ path: path.join(screenshots, 'net04-settled-mobile.png'), fullPage: true });
+  } finally {
+    await outcomes.start();
     await game.close();
   }
 });
