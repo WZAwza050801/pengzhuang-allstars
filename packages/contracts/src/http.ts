@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { ACCOUNT_PROTOCOL_VERSION, SUPPORTED_MATCH_PROTOCOLS } from '../../../shared/protocol';
 import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
-import { QueueCommandSchema, QueueStatusSchema, QueueOptionsSchema } from './matchmaking';
+import { QueueCommandSchema, QueueStatusSchema, QueueOptionsSchema, MatchmakingInsightsSchema } from './matchmaking';
 import { OwnRatingsSchema, LeaderboardQuerySchema, LeaderboardSchema } from './ratings';
 import { SeasonListSchema, SeasonHistoryQuerySchema, SeasonHistorySchema } from './seasons';
 import { ActiveMatchSchema, ReentryCommandSchema } from './match-recovery';
@@ -303,6 +303,12 @@ export const HTTP_CONTRACTS = [
     response: MatchTicketResultSchema,
   },
   { method: 'get', path: '/api/v1/me/rating', operationId: 'ownRating', response: OwnRatingsSchema },
+  {
+    method: 'get',
+    path: '/api/v1/me/matchmaking-insights',
+    operationId: 'matchmakingInsights',
+    response: MatchmakingInsightsSchema,
+  },
   {
     method: 'get',
     path: '/api/v1/ratings/leaderboard',

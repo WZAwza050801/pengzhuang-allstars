@@ -39,6 +39,25 @@
 
 ## 任务执行记录
 
+### MM-04
+
+- 状态：完成
+- 开始：2026-11-19 11:20 Asia/Shanghai
+- 完成：2026-11-19 13:05 Asia/Shanghai
+- 负责人：Qwen Code
+- 分支与起始提交：docs/productization-roadmap / 50fdfbe（已同步 GitHub）
+- 范围：等待逐步扩积分区间（有上限）；等待估计/取消反馈；只读异常对局统计（挂机/频繁认输/重复对手刷分、服务器故障与掉线区分），误判不直接不可逆封禁；不无提示替机器人。复用 MM-01 队列与 NET-04 结算数据，不改物理/经济。
+- 默认决策（engineering-default）：queue-2 扩窗 base 200、每 30s +100、上限 800；异常统计阈值（样本≥5、认输率≥0.5、重复对手≥5）为建议值，只产出 advisory flags 与计数，无封禁动作。
+- 计划与验收：MatchmakingPolicySchema 扩窗字段（默认关闭兼容 queue-1）+ pair SQL 按 created_at 时钟驱动扩窗（不可变触发器禁止改行，故在配对时计算）；QueueStatus 增 wait 估计；MatchmakingInsights 只读统计 + /me/matchmaking-insights API。真实 PG 验证固定队列扩窗/上限、长等待、异常对局 flags 不封禁、取消风暴回归。
+- 产品方向备注：用户提出「杯赛结算参考皇室战争」——现有 Elo/段位/赛季范式已对齐 CR；专门杯赛模式属新产品系统，按纪律先设计讨论再工程，本轮不实现，记为待讨论方向。
+- 实现：MatchmakingPolicySchema 增 windowStepMs/windowStepDifference/windowMaxDifference（默认 0/0/缺省=关闭，queue-1 兼容）+ 纯函数 effectiveWindow；config queue-2（base200/30s+100/cap800）。pair SQL 按 clock_timestamp()-created_at 时钟驱动扩窗（行不可变故配对时计算），双方 effective 取 LEAST。QueueStatus.wait 暴露 elapsedMs/currentWindow/maxWindow/nextExpansionMs。MatchmakingInsights 只读统计（match_participants⋈match_outcomes⋈profiles）产 advisory flags（frequent-surrender/repeat-opponent），结构无封禁端口；server-fault（作废）与 disconnect（判负）分别计数。新增 /me/matchmaking-insights（鉴权+目标校验）。
+- 验证：npm run check 退出 0，216 单元/59 文件、19 契约/8 文件、339 文件格式及全部静态/资源/平衡/规划检查（work/mm04-check.log）。MM-04 单元 5/5；隔离集成 7/7（work/mm04-integration-2.log：基础窗口阻塞/扩窗配对/上限/wait 估计/认输 flag 不封禁/重复对手+故障区分/API 鉴权）；匹配回归 matchmaking/matchmaking-rooms/matchmaking-http 28/28（work/mm04-matchmaking-regression.log，含取消风暴）。服务端构建通过；dist+startRuntime 冒烟通过（queue-2/cap800/insights/匿名401）。
+- **环境阻塞**：全量集成 6 次尝试均因本机被用户其他工具/会话重度占用而受阻——vitest 多 worker 导入阶段卡死（默认并行/单 worker/2 worker 均停在 RUN），早期并行跑浏览器套件 5s/90s 启动超时型偶发失败。MM-04 相关与匹配回归隔离均绿，轻量 tsx 冒烟可跑通。**需低负载时段补跑 npm run test:integration 确认全量**（MM-03 曾低负载 25 文件/339 全过）。未以环境失败归因新代码、未删改断言。
+- 证据：[MM-04 报告](reports/MM-04.md)、[工程说明](../engineering/matchmaking-strategy.md)、tests/waiting-strategy.test.ts、tests/waiting-strategy.integration.test.ts。代码/测试/勾选/记录同最终提交。
+- 风险与剩余：扩窗参数与异常阈值为 engineering-default 建议值；正式处罚策略（若需要）属产品决策另行设计。生产排位仍 friend-only。全量回归待补跑。无新依赖/迁移/远端资源。
+- 回滚：回退同任务代码与 queue-2 配置（queue-1 默认关闭扩窗兼容）；无新迁移。
+- 完成与交接：MM-04 验收满足（隔离测试全绿），累计 64/112。下一可领取 MM-06（依赖 BAL-04+MM-01）；MM-05 仍待 NET-06。**接手者请先在低负载时段补跑全量集成确认 MM-02/03/04 无回归**。第 70 项为下一 GitHub 同步点。
+
 ### MM-03
 
 - 状态：完成

@@ -1,27 +1,32 @@
-# Agent 交接 · MM-03 → MM-04/MM-06
+# Agent 交接 · MM-04 → MM-06
 
-2026-11-19。MM-02、MM-03 已完成并勾选；本轮先按用户要求做独立玩家视角复核与对抗压测，再实施 MM-02、MM-03，并按用户要求对齐 GitHub。请以 TASKS、执行记录和各项报告核对当前状态。
+2026-11-19。MM-02、MM-03、MM-04 已完成并勾选；本轮按用户要求做独立玩家视角复核与对抗压测，实施 MM-02/03/04，并定期对齐 GitHub。请以 TASKS、执行记录和各项报告核对当前状态。
+
+## ⚠️ 接手第一件事：补跑全量集成
+
+MM-04 验收的隔离测试全绿，但**全量集成因本机被用户其他工具/会话重度占用（多 MCP server、多 Qwen/Codex 会话、Chrome、serena LSP）而未能干净跑完**——vitest 多 worker 在导入阶段卡死（6 次尝试：默认并行/单 worker/2 worker 均停在 RUN）。请在**低负载时段**补跑 `npm run test:integration` 确认 MM-02/03/04 无回归（MM-03 曾在低负载下 25 文件/339 全过）。若浏览器套件（ui-accessibility/rooms-pages/account-pages）出现 5s/90s 启动超时型偶发失败，先隔离/重试判定是否负载抖动，不要直接归因新代码、不要删改断言。轻量 tsx 冒烟（work/mm0X-smoke.ts）在重负载下仍可跑通，可作快速 sanity。
 
 ## 接手先读
 
-依次阅读仓库 `AGENTS.md`、[规划入口](README.md)、[TASKS](TASKS.md)、[执行记录](EXECUTION_LOG.md)、[MM-03 报告](reports/MM-03.md)、[MM-02 报告](reports/MM-02.md)、[赛季工程说明](../engineering/seasons.md) 和 [积分工程说明](../engineering/ratings.md)。任务清单是完成状态的唯一来源，历史 `runs/` 和旧开发提示不是当前指令。
+依次阅读仓库 `AGENTS.md`、[规划入口](README.md)、[TASKS](TASKS.md)、[执行记录](EXECUTION_LOG.md)、[MM-04 报告](reports/MM-04.md)、[MM-03 报告](reports/MM-03.md)、[MM-02 报告](reports/MM-02.md)、[匹配策略工程说明](../engineering/matchmaking-strategy.md)、[赛季工程说明](../engineering/seasons.md) 和 [积分工程说明](../engineering/ratings.md)。任务清单是完成状态的唯一来源，历史 `runs/` 和旧开发提示不是当前指令。
 
 工作目录 `D:\ai_for_games\碰撞全明星复刻`，分支 `docs/productization-roadmap`，继续复用这个工作区。先检查 HEAD、分支和本地修改，保留他人工作。未跟踪 `.serena/` 是本地既存目录，不提交、不删除。
 
 ## 本项状态与提交
 
-当前 **63/112 已完成，剩余 49 项**。
+当前 **64/112 已完成，剩余 48 项**。
 
 | 提交 | 内容 |
 |---|---|
 | `6ab2533` | MM-01 完成（前任 Agent）。 |
 | `2a66bee` | 独立复核记录 + D11 对齐：新壳大厅改用原版 Q 版体育场图（client/src/arena.ts 单一来源映射 + web-shell 回归断言）。 |
-| `1f0e356` | MM-02 积分/段位/榜单、迁移 202611180019。**已同步 GitHub**（主域被断，经 api.github.com Git Data API 精确复刻，SHA 逐字一致）。 |
-| 本项最终提交 | MM-03 赛季/历史榜/软重置/赛季奖励、迁移 202611180020、契约/OpenAPI、测试、勾选与记录；用 `git log -- docs/productization/reports/MM-03.md` 定位。 |
+| `1f0e356` | MM-02 积分/段位/榜单、迁移 202611180019。**已同步 GitHub**。 |
+| `50fdfbe` | MM-03 赛季/历史榜/软重置/赛季奖励、迁移 202611180020。**已同步 GitHub**（主域被断，经 api.github.com Git Data API 精确复刻，SHA 逐字一致）。 |
+| 本项最终提交 | MM-04 扩窗/等待估计/异常统计、queue-2 配置、契约/OpenAPI、测试、勾选与记录；用 `git log -- docs/productization/reports/MM-04.md` 定位。 |
 
-独立复核结论（详见执行记录「独立玩家视角复核」）：完整集成 324/324 重跑通过（前任未整套重跑的部分）；22/22 玩家实测+对抗探针通过（真实注册邮件、双人匹配开局、双方出手、刷新与真实服务端重启接管、认输结算越权拒绝、队列/升级并发幂等、登录风暴 KDF 卸载）。MM-01 及账号/资产/结算/恢复链路声称可信。
+独立复核结论（详见执行记录「独立玩家视角复核」）：完整集成 324/324 重跑通过；22/22 玩家实测+对抗探针通过（真实注册邮件、双人匹配开局、双方出手、刷新与真实服务端重启接管、认输结算越权拒绝、队列/升级并发幂等、登录风暴 KDF 卸载）。MM-01 及账号/资产/结算/恢复链路声称可信。
 
-MM-02 验证：check 207 单元/19 契约；定向集成 9/9；全量第二轮 332/333（唯一失败为既有 UI-07 负载抖动，隔离/重试均绿、客户端无改动）。MM-03 验证：check 211 单元/19 契约；定向集成 seasons 6/6 + ratings 回归 9/9；**全量 25 文件/339 项全过**（531.50s，本轮 UI-07 抖动项亦通过）；dist+startRuntime 冒烟通过。**已知抖动**：ui-accessibility 的「delayed reads」焦点断言与「webkit keyboard practice」canvas 5s 断言在全量并行高负载下交替偶发失败；后续若再遇，先隔离/重试判定，不要直接归因新代码，也不要删改断言。
+MM-02 验证：check 207/19；定向 9/9；全量第二轮 332/333（唯一失败为既有 UI-07 负载抖动，隔离/重试均绿）。MM-03 验证：check 211/19；seasons 6/6 + ratings 回归 9/9；**全量 25 文件/339 全过**（531.50s）；冒烟通过。MM-04 验证：check 216/19；单元 5/5；隔离集成 7/7；匹配回归 28/28（含取消风暴）；冒烟通过（queue-2/cap800/insights/匿名401）；**全量环境阻塞待补跑**。
 
 ## 已实现的积分与赛季闭环
 
@@ -45,10 +50,13 @@ MM-02 验证：check 207 单元/19 契约；定向集成 9/9；全量第二轮 3
 - 榜单最小身份：nickname/points/tier/wins/draws/losses，无 userId/邮箱；keyset 游标 base64url；历史榜只读冻结快照，活赛季历史榜为空。
 - **生产排位/成长不开放**：展示 UI 与发布决策就绪前 enabledModes 保持 ['friend']。软重置 factor/段位奖励额度/赛季日历为 engineering-default 建议值，放量前需老板确认。
 - 测试房间码必须随机（room_code 全局唯一），不得复用其他套件固定码。
+- MM-04 扩窗在 pair SQL 按 `clock_timestamp()-created_at` 计算（行不可变，禁止 UPDATE rating_window/created_at）；`effectiveWindow` 纯函数同公式。queue-2 默认 base200/30s+100/cap800；schema 扩窗字段默认 0/0/缺省=关闭（queue-1 兼容）。
+- MM-04 异常统计 `MatchmakingInsights` 只读、无封禁端口（误判不可逆处罚不可能）；阈值 engineering-default。server-fault 作废不计负、disconnect 判负，分别计数。不引入无提示机器人。
+- MM-04 扩窗/等待测试已稳健化：基础窗口用大步长确定性验证、扩窗只断言睡眠后状态、wait 用边界范围——别改回壁钟精确边界断言（重负载下会抖）。
 
 ## 下一项
 
-按依赖可领取：**MM-04**（等待策略/异常比赛，依赖 MM-02）、**MM-06**（练习 AI 难度/离线隔离，依赖 BAL-04+MM-01）。MM-05 仍待 NET-06（NET-06 待 OPS-03）。推荐 MM-04 以闭合匹配体验。先在执行记录写负责人、起始提交、范围与验收，再实现。
+按依赖可领取：**MM-06**（练习 AI 难度/离线隔离，依赖 BAL-04+MM-01）。MM-05 仍待 NET-06（NET-06 待 OPS-03）。**先补跑全量集成确认 MM-02/03/04 无回归**，再领取 MM-06。先在执行记录写负责人、起始提交、范围与验收，再实现。
 
 随后按依赖推进其它工作包，不因本轮停止而缩小 112 项计划。没有新增多 Agent 授权；不要据任务清单自行委派。
 

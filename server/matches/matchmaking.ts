@@ -8,6 +8,7 @@ import {
   QueueEntrySchema,
   QueueRatingSchema,
   MatchmakingPolicySchema,
+  effectiveWindow,
   type QueueEntry,
   type QueueRating,
   type MatchmakingPolicy,
@@ -42,6 +43,7 @@ type EntryRow = {
   rating_scope: 'ranked' | 'growth' | null;
   rating_season: string | null;
   rating_points: number | null;
+  rating_window: number;
   state: QueueEntry['state'];
   reason: QueueEntry['reason'];
   assignment_id: string | null;
@@ -172,7 +174,23 @@ export class MatchmakingQueue {
           }
         : null,
     });
-    return { userId, serverNow, entry };
+    const wait =
+      row.state === 'queued' && row.rating_scope
+        ? (() => {
+            const elapsedMs = Math.max(0, Date.parse(serverNow) - row.created_at.getTime());
+            const currentWindow = effectiveWindow(this.policy, row.rating_window, elapsedMs);
+            const maxWindow = this.policy.windowMaxDifference ?? this.policy.ratingDifference;
+            const expanding =
+              this.policy.windowStepMs > 0 && this.policy.windowStepDifference > 0 && currentWindow < maxWindow;
+            return {
+              elapsedMs,
+              currentWindow,
+              maxWindow,
+              nextExpansionMs: expanding ? this.policy.windowStepMs - (elapsedMs % this.policy.windowStepMs) : null,
+            };
+          })()
+        : null;
+    return { userId, serverNow, entry, wait };
   }
   async enqueue(principal: Principal, raw: unknown) {
     if (typeof raw === 'object' && raw !== null && 'protocol' in raw && raw.protocol !== ACCOUNT_PROTOCOL_VERSION)
@@ -381,11 +399,18 @@ export class MatchmakingQueue {
           AND a.configuration_hash=b.configuration_hash AND a.region=b.region
           AND ((a.rating_points IS NULL AND b.rating_points IS NULL) OR
             (a.rating_scope=b.rating_scope AND a.rating_season=b.rating_season
-              AND ABS(a.rating_points::bigint-b.rating_points::bigint)<=LEAST(a.rating_window,b.rating_window)))
+              AND ABS(a.rating_points::bigint-b.rating_points::bigint)<=LEAST(
+                LEAST($4::int, a.rating_window + CASE WHEN $2::int>0 AND $3::int>0 THEN FLOOR(EXTRACT(EPOCH FROM (clock_timestamp()-a.created_at))*1000.0/$2::int)*$3::int ELSE 0 END),
+                LEAST($4::int, b.rating_window + CASE WHEN $2::int>0 AND $3::int>0 THEN FLOOR(EXTRACT(EPOCH FROM (clock_timestamp()-b.created_at))*1000.0/$2::int)*$3::int ELSE 0 END))))
           WHERE a.host_id=$1 AND a.state='queued' AND b.state='queued'
             AND a.expires_at>clock_timestamp() AND b.expires_at>clock_timestamp()
           ORDER BY a.created_at,a.id,b.created_at,b.id LIMIT 1`,
-            [this.hostId],
+            [
+              this.hostId,
+              this.policy.windowStepMs,
+              this.policy.windowStepDifference,
+              this.policy.windowMaxDifference ?? this.policy.ratingDifference,
+            ],
           )
         ).rows[0];
         if (!candidate) return null;

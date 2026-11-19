@@ -1,8 +1,11 @@
 {
-  "version": "queue-1",
+  "version": "queue-2",
   "regions": [{ "id": "local", "label": "当前服务器" }],
   "maxQueued": 256,
   "waitMs": 120000,
   "joinMs": 120000,
-  "ratingDifference": 200
+  "ratingDifference": 200,
+  "windowStepMs": 30000,
+  "windowStepDifference": 100,
+  "windowMaxDifference": 800
 }

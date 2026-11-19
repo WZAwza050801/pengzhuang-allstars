@@ -36,6 +36,8 @@ import { ratingsModule } from './api/ratings';
 import { SeasonService } from './matches/seasons';
 import { SEASONS_CONFIG } from '../config/seasons';
 import { seasonsModule } from './api/seasons';
+import { MatchmakingInsights } from './matches/insights';
+import { insightsModule } from './api/insights';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -56,6 +58,7 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
   const lifecycle = database && web ? new AccountLifecycle(database, passwords, { enabled: config.accountDeletionEnabled, graceHours: config.accountDeletionGraceHours, version: config.accountRetentionPolicy }, emailAccounts, wechat) : null;
   const tickets = database && web && lineups ? new MatchTickets(database, lineups, gameConfiguration.resolveData) : null;
   const seasonService = database && assets && economy ? new SeasonService(database, SEASONS_CONFIG, RATINGS_CONFIG, assets, () => economy.registry.get(), gameConfiguration.resolveData) : null;
+  const insights = database ? new MatchmakingInsights(database) : null;
   const ratings = database ? new Ratings(database, RATINGS_CONFIG, seasonService ? () => seasonService.currentSeason(Date.now())?.id ?? null : undefined) : null;
   // Production ranked/growth stay closed until rating display and the launch decision are ready (MM-02 handoff gate);
   // the real rating port is wired so settlement and tests exercise the durable path.
@@ -65,7 +68,7 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     accountRooms: tickets && web && outcomes ? { tickets, web, outcomes } : undefined,
     matchmakingQueue,
     lobbyMaintenance: config.lobbyMaintenance,
-    modules: [authOptionsModule(!!emailAccounts, !!wechat, web, !!(web && players && lineups && assets), !!tickets, !!matchmakingQueue), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : []), ...(ratings && web ? ratingsModule(ratings, web) : []), ...(seasonService ? seasonsModule(seasonService) : [])] : [])],
+    modules: [authOptionsModule(!!emailAccounts, !!wechat, web, !!(web && players && lineups && assets), !!tickets, !!matchmakingQueue), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : []), ...(ratings && web ? ratingsModule(ratings, web) : []), ...(seasonService ? seasonsModule(seasonService) : []), ...(insights && web ? [insightsModule(insights, web)] : [])] : [])],
     repository: database, resolveData: gameConfiguration.resolveData,
     roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : []), ...(lifecycle ? [() => lifecycle.close()] : []), ...(outcomes ? [() => outcomes.close()] : []), ...(seasonService ? [() => seasonService.close()] : [])] : [],
     onError: (event) => console.error(JSON.stringify({ event: 'http_error', ...event })),
