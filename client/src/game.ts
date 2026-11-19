@@ -1,4 +1,5 @@
 import { DEFAULT_DATA, FIELD_SKINS } from '../../shared/data';
+import type { AiLevel } from '../../shared/ai';
 import { buildSetup, buildShot, pieceStats, type MatchEvent, type MatchState, type ShotInput } from '../../shared/match';
 import { simulateShot, type Side } from '../../shared/physics';
 import { foldAimPath } from '../../shared/aim';
@@ -111,6 +112,7 @@ export class GameView {
             <h3>菜单</h3>
             <label>场地外观 <select class="skin" aria-label="场地外观"></select></label>
             <label>画质 <select class="quality"><option value="auto">自动</option><option value="low">流畅</option><option value="medium">标准</option><option value="high">精细</option></select></label>
+            ${host.setAiLevel ? '<label>电脑难度 <select class="ai-level" aria-label="电脑难度"><option value="easy">简单</option><option value="normal">普通</option><option value="hard">困难</option></select></label>' : ''}
             <label>音量 <input class="volume" type="range" min="0" max="100" step="5" aria-label="比赛音量"></label>
             <label><input class="mute" type="checkbox">静音</label>
             <button class="surrender">认输</button>
@@ -170,6 +172,16 @@ export class GameView {
       this.r.setQuality(qualitySel.value === 'auto' ? chooseQuality(capabilities) : qualitySel.value as Quality);
       this.onResize();
     });
+    const aiLevelSel = q('.ai-level') as HTMLSelectElement | null;
+    if (aiLevelSel && host.setAiLevel) {
+      aiLevelSel.value = host.aiLevel?.() ?? 'normal';
+      aiLevelSel.addEventListener('change', () => {
+        const level = aiLevelSel.value as AiLevel;
+        host.setAiLevel?.(level);
+        localStorage.setItem('pz_ai_level', level);
+        this.el.name1.textContent = opts.hostLifetime === 'owner' ? `${host.viewSide === 1 ? '我方' : '对方'} · ${host.seats[1].name}` : host.seats[1].name;
+      });
+    }
     const volume = q('.volume') as HTMLInputElement;
     volume.value = String(Math.round(getVolume() * 100));
     volume.addEventListener('input', () => { setVolume(Number(volume.value) / 100); sfx.unlock(); });
@@ -735,6 +747,7 @@ export class GameView {
     this.cancelAim();
     cancelAnimationFrame(this.raf);
     this.platform.audio.pause();
+    this.host.setBackground?.(true);
     this.effects = []; this.trail = []; this.relocating = null;
   }
 
@@ -744,6 +757,7 @@ export class GameView {
     this.effects = []; this.trail = []; this.relocating = null;
     this.suspended = false;
     this.platform.audio.resume();
+    this.host.setBackground?.(false);
     this.onResize();
     this.raf = requestAnimationFrame(this.frame);
   }

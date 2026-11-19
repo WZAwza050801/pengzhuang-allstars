@@ -39,6 +39,22 @@
 
 ## 任务执行记录
 
+### MM-06
+
+- 状态：完成
+- 开始：2026-11-19 13:20 Asia/Shanghai
+- 完成：2026-11-19 13:45 Asia/Shanghai
+- 负责人：Qwen Code
+- 分支与起始提交：docs/productization-roadmap / 64e6523（已同步 GitHub）
+- 范围：练习三难度可选（菜单选择+持久化初始难度）；后台暂停 bot AI 计算（不继续无限计算）；离线练习胜负不进正式榜（practice 模式 ratingScope/rewardScope null，LocalHost 本地无 API）；联网机器人明确标识（已有 isBot+电脑难度名，队列不替机器人）；固定 seed 强度/耗时报告。复用 BAL-04 AI 预算/取消基础设施，不改物理/经济。
+- 计划与验收：MatchHost 增可选 setAiLevel/aiLevel/setBackground；LocalHost 实现（难度可变、后台 cancelAi+暂停 bot 调度、resume 恢复）；GameView.suspend/resume 接线 setBackground、菜单增难度选择；matchScreen 读 pz_ai_level 初始难度；tools/ai-strength.ts 固定 seed 自对弈强度报告。单元验证难度可观测差异/后台取消/离线隔离；浏览器验证难度选择（负载允许时）。
+- 实现：MatchHost 可选 aiLevel/setAiLevel/setBackground；LocalHost level 可变+backgrounded 标志（隐藏 cancelAi+暂停 bot 调度，turnStarted 后台不调度，恢复重排）；GameView.suspend/resume 调 host.setBackground、菜单增「电脑难度」选择（持久化 pz_ai_level+刷新 HUD 对手名）；matchScreen 读 pz_ai_level 初始难度；tools/ai-strength.ts 固定 seed 自对弈强度报告。
+- 验证：npm run check 退出 0，224 单元/60 文件、19 契约/8 文件、340 文件格式及全部静态/资源/平衡/规划检查（work/mm06-check.log）。单元 tests/ai-practice.test.ts 8/8。浏览器 tools/ai-practice-browser.mjs 隔离通过（难度默认 normal/改 hard 持久化+HUD 标签/前后台无错误）。强度报告 reports/ai-strength.json 难度梯度单调（easy vs hard 0、normal vs easy 0.833、hard vs normal 0.833、hard vs easy 1.0、hard vs hard 0.5，镜像对称）。耗时报告 BAL-04 ai-latency.json。
+- 证据：[MM-06 报告](reports/MM-06.md)、[工程说明](../engineering/ai-practice.md)、tests/ai-practice.test.ts、tools/ai-practice-browser.mjs、tools/ai-strength.ts。代码/测试/勾选/记录同最终提交。
+- 风险与剩余：强度/耗时为 CPU 代理度量，真机验收归 AST-06（暂缓）。联机机器人未引入（匹配只配真实玩家）。全量集成仍因本机重负载环境性受阻，MM-06 客户端 AI 已由单元+浏览器+强度覆盖，需低负载补跑全量。无新依赖/迁移/远端资源。
+- 回滚：回退同任务代码（MatchHost 可选方法、LocalHost、菜单难度选择）；无新迁移。
+- 完成与交接：MM-06 验收满足，累计 65/112。MM 工作包除 MM-05（待 NET-06/OPS-03）外已完成。下一可领取 ADM-01/WEB-03/OPS-01/QA-02/LIV-01/REL-01 等（见 check-plan 可领取列表）。第 70 项为下一 GitHub 同步点。
+
 ### MM-04
 
 - 状态：完成

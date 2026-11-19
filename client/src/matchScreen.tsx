@@ -6,7 +6,13 @@ import { DEFAULT_DATA, FIELD_SKINS } from '../../shared/data';
 import { GameView, type GameOptions } from './game';
 import { activeLineup, randomLineup } from './lineup';
 import { LocalHost } from './localHost';
+import type { AiLevel } from '../../shared/ai';
 import styles from './webShell.module.css';
+
+function aiLevel(): AiLevel {
+  const saved = localStorage.getItem('pz_ai_level');
+  return saved === 'easy' || saved === 'normal' || saved === 'hard' ? saved : 'normal';
+}
 
 function playerName() {
   return localStorage.getItem('pz_nick')?.trim() || '我';
@@ -42,7 +48,7 @@ export function PracticeMatchScreen() {
     const lineup = activeLineup();
     const host = new LocalHost({
       mode: 'bot',
-      level: 'normal',
+      level: aiLevel(),
       names: [playerName(), '电脑'],
       lineups: [lineup, randomLineup(lineup)],
       levels: [cardLevels(), null],

@@ -1,6 +1,7 @@
 import type { MatchEvent, MatchState, ShotInput } from '../../shared/match';
 import type { SimEvent, Side } from '../../shared/physics';
 import type { ModeRules } from '../../packages/contracts/src/modes';
+import type { AiLevel } from '../../shared/ai';
 
 /** What the renderer receives for one resolved shot, whether computed locally or by the server. */
 export interface ShotPacket {
@@ -48,4 +49,9 @@ export interface MatchHost {
   matchDeadline(): number | null;
   surrender(): void;
   dispose(): void;
+  /** MM-06: practice bot difficulty (optional; online hosts ignore). */
+  aiLevel?(): AiLevel;
+  setAiLevel?(level: AiLevel): void;
+  /** MM-06: pause/resume background bot computation so a hidden page never keeps computing. */
+  setBackground?(hidden: boolean): void;
 }

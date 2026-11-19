@@ -46,7 +46,8 @@ export class LocalHost implements MatchHost {
 
   }
   private readonly useTimer: boolean;
-  private readonly level: AiLevel;
+  private level: AiLevel;
+  private backgrounded = false;
   private matchEnd: number | null = null;
   private clock: ReturnType<typeof setTimeout> | null = null;
   private clockExpired = false;
@@ -87,8 +88,8 @@ export class LocalHost implements MatchHost {
     if (this.disposed || this.st.over) return;
     if (this.st.turn === this.botSide) {
       this.deadline = null;
-      const generation = this.generation;
-      this.botDelay = setTimeout(() => { this.botDelay = null; void this.requestBot(generation); }, AI_POLICY.presentationDelayMs);
+      if (this.backgrounded) return;
+      this.scheduleBot();
       return;
     }
     if (this.useTimer) {
@@ -107,6 +108,34 @@ export class LocalHost implements MatchHost {
     if (this.botDelay !== null) clearTimeout(this.botDelay);
     this.botDelay = null;
     this.ai.cancel();
+  }
+
+  private scheduleBot() {
+    const generation = this.generation;
+    this.botDelay = setTimeout(() => { this.botDelay = null; void this.requestBot(generation); }, AI_POLICY.presentationDelayMs);
+  }
+
+  aiLevel(): AiLevel {
+    return this.level;
+  }
+
+  setAiLevel(level: AiLevel) {
+    this.level = level;
+    if (this.botSide !== null) {
+      const label = ({ easy: '简单', normal: '普通', hard: '困难' } as const)[level];
+      this.seats[this.botSide].name = `电脑（${label}）`;
+    }
+  }
+
+  /** MM-06: a hidden page cancels pending bot computation and stops scheduling until visible again. */
+  setBackground(hidden: boolean) {
+    if (this.disposed || this.backgrounded === hidden) return;
+    this.backgrounded = hidden;
+    if (hidden) {
+      this.cancelAi();
+      return;
+    }
+    if (this.started && !this.st.over && !this.busy && this.st.turn === this.botSide && this.botDelay === null) this.scheduleBot();
   }
 
   private clearClock() { if (this.clock !== null) clearTimeout(this.clock); this.clock = null; }
