@@ -1,5 +1,5 @@
 {
-  "version": "rules-2",
+  "version": "rules-4",
   "goalsToWin": 3,
   "goalsToWinSource": "rebuilt：宣传语“三球定胜负”(S01) 按先进 3 球实现",
   "matchSeconds": 180,
@@ -32,8 +32,13 @@
     { "id": "10009", "name": "1_3_1(S)", "reqLevel": 9, "positions": ["ST;50", "CM;10", "CM;50", "CM;90", "DC;50"] }
   ],
   "originalFormationsSource": "recovered：02_players_and_data/formations.json（1.5.5 比赛阵型，x 为场宽百分比，纵深值均为 50）",
-  "defaultLineup": ["p07", "p06", "p08", "p01", "p02"],
+  "defaultLineup": ["p99", "p54", "p97", "p94", "p38"],
   "levels": { "max": 10, "uniformLevel": 5, "skillLevelAt": [1, 4, 7] },
   "levelSource": "rebuilt",
-  "condition": { "enabledByDefault": false, "badChanceBase": 0.2, "badPenalty": 0.30, "penaltySource": "recovered:S03 V1.2.1 状态差全属性 -30%" }
+  "condition": {
+    "enabledByDefault": false,
+    "badChanceBase": 0.2,
+    "badPenalty": 0.3,
+    "penaltySource": "recovered:S03 V1.2.1 状态差全属性 -30%"
+  }
 }

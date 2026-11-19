@@ -78,55 +78,55 @@
 
 ```json
 {
-  "version": "phys-4",
-  "hz": 120,
-  "velocityIterations": 8,
-  "positionIterations": 3,
-  "velocityThreshold": 0.25,
-  "disc": {
-    "radius": 0.32,
-    "mass": 1,
-    "linDamp": 0.248,
-    "coulomb": 2.193
-  },
   "ball": {
-    "radius": 0.12,
-    "mass": 0.4,
+    "coulomb": 0.852,
     "linDamp": 0.63,
-    "coulomb": 0.852
+    "mass": 0.4,
+    "radius": 0.12
   },
+  "curve": {
+    "maxTurnDeg": 103.354,
+    "turnRate": 1.98
+  },
+  "disc": {
+    "coulomb": 2.193,
+    "linDamp": 0.248,
+    "mass": 1,
+    "radius": 0.32
+  },
+  "friction": {
+    "discBall": 0.05,
+    "discDisc": 0.05,
+    "wall": 0.1
+  },
+  "hz": 120,
+  "maxBallSpeed": 16,
+  "maxSimSeconds": 14,
+  "positionIterations": 3,
+  "postGoalSeconds": 1,
+  "recordHz": 30,
   "restitution": {
-    "discDisc": 0.75,
-    "discBall": 0.8,
-    "discWall": 0.55,
     "ballWall": 0.7,
+    "discBall": 0.8,
+    "discDisc": 0.75,
+    "discWall": 0.55,
     "net": 0.12,
     "post": 0.6
   },
-  "friction": {
-    "discDisc": 0.05,
-    "discBall": 0.05,
-    "wall": 0.1
-  },
   "shot": {
-    "vmax": 9.1956,
     "gamma": 0.623,
-    "minPower": 0.06
-  },
-  "curve": {
-    "turnRate": 1.98,
-    "maxTurnDeg": 103.354
+    "minPower": 0.06,
+    "vmax": 9.1956
   },
   "spring": {
-    "restitution": 0.9,
     "boost": 2.2,
+    "maxSpeed": 9.12,
     "minSpeed": 0.25,
-    "maxSpeed": 9.12
+    "restitution": 0.9
   },
   "stopSpeed": 0.03,
-  "maxSimSeconds": 14,
-  "postGoalSeconds": 1,
-  "maxBallSpeed": 16,
-  "recordHz": 30
+  "velocityIterations": 8,
+  "velocityThreshold": 0.25,
+  "version": "phys-4"
 }
 ```

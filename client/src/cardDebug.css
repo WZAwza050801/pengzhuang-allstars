@@ -1,0 +1,18 @@
+:root { color-scheme: dark; --bg: #142c3d; --surface: #213e52; --ink: #f4f7fa; --muted: #c3d1d9; --focus: #ffd36b; --space: 16px; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, sans-serif; }
+main { max-width: 1440px; margin: auto; padding: var(--space); }
+h1 { margin: 0; font-size: 28px; } h2 { margin: 24px 0 12px; font-size: 20px; }
+p { color: var(--muted); }
+.frame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 12px; }
+figure { margin: 0; min-width: 0; text-align: center; } figure canvas { width: 80px; max-width: 100%; aspect-ratio: 5/7; }
+figcaption { font-size: 13px; }
+.card-controls { display: flex; flex-wrap: wrap; gap: var(--space); margin-top: 24px; padding: 12px; background: var(--surface); }
+label { display: flex; align-items: center; gap: 8px; }
+select, button { font: inherit; } select { min-height: 44px; padding: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 12px; }
+.player-sample { max-width: 160px; min-height: 44px; width: 100%; padding: 0; background: transparent; border: 0; cursor: pointer; }
+.player-sample canvas { display: block; width: 100%; aspect-ratio: 5/7; }
+.player-sample:disabled { cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+@media (max-width: 360px) { main { padding: 12px; } h1 { font-size: 24px; } .card-grid { gap: 8px; } }

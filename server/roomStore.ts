@@ -3,11 +3,16 @@ import path from 'node:path';
 import type { MatchState } from '../shared/match';
 import { ROOM_CODE_ALPHABET, ROOM_CODE_LENGTH, SEAT_TOKEN_PATTERN } from '../shared/protocol';
 import { isRecord, parseNickname } from './validation';
+import { ModeRulesSchema, type ModeRules } from '../packages/contracts/src/modes';
+import type { ShotReceipt } from './matches/shot-receipts';
 
 export const ROOM_RECORD_FORMAT = 1;
 
 /** Everything needed to carry a running match across a server restart. One JSON file per room, no database. */
 export interface RoomRecord {
+  revision?: number;
+  shotReceipts?: ShotReceipt[];
+  modeRules?: ModeRules;
   format: typeof ROOM_RECORD_FORMAT;
   code: string;
   skin: string;
@@ -26,6 +31,7 @@ export interface RoomRecord {
 }
 
 export interface RecordSeat {
+  actorId?: string;
   nickname: string;
   token: string;
   lineup: string[];
@@ -76,6 +82,7 @@ function isMatchState(v: unknown): v is MatchState {
 function isRecordSeat(v: unknown): v is RecordSeat {
   return (
     isRecord(v) &&
+    (v.actorId === undefined || isStr(v.actorId, 128)) &&
     parseNickname(v.nickname).ok &&
     typeof v.token === 'string' &&
     SEAT_TOKEN_PATTERN.test(v.token) &&
@@ -89,6 +96,7 @@ function isRecordSeat(v: unknown): v is RecordSeat {
 /** Structural check only; the room re-validates lineups against the live game data when it restores. */
 export function isRoomRecord(v: unknown): v is RoomRecord {
   if (!isRecord(v) || v.format !== ROOM_RECORD_FORMAT) return false;
+  if (v.modeRules !== undefined && !ModeRulesSchema.safeParse(v.modeRules).success) return false;
   if (typeof v.code !== 'string' || !CODE_RE.test(v.code)) return false;
   if (!isStr(v.skin, 64) || !isStr(v.configVersion, 128) || !isStr(v.matchId, 64)) return false;
   if (!isInt(v.seed) || !isInt(v.seq)) return false;
@@ -96,6 +104,14 @@ export function isRoomRecord(v: unknown): v is RoomRecord {
   if (!v.accepted.every((e) => Array.isArray(e) && e.length === 2 && isStr(e[0], 128) && isInt(e[1]))) return false;
   if (!isMatchState(v.match)) return false;
   if (!Array.isArray(v.seats) || v.seats.length !== 2 || !v.seats.every(isRecordSeat)) return false;
+  if (v.revision !== undefined && (!isInt(v.revision) || v.revision < v.seq)) return false;
+  if (v.shotReceipts !== undefined) {
+    if (!Array.isArray(v.shotReceipts) || v.shotReceipts.length > 1024) return false;
+    if (!isInt(v.revision)) return false;
+    const seq = v.seq, revision = v.revision;
+    const actors = v.seats.map((seat, side) => seat.actorId ?? `legacy-guest-${side}`);
+    if (!v.shotReceipts.every((receipt) => isRecord(receipt) && receipt.matchId === v.matchId && actors.includes(receipt.actorId as string) && isStr(receipt.shotId, 64) && typeof receipt.payloadHash === 'string' && /^[0-9a-f]{64}$/.test(receipt.payloadHash) && isInt(receipt.seq, 1) && receipt.seq <= seq && isInt(receipt.revision, 1) && receipt.revision <= revision)) return false;
+  }
   if (!isRecord(v.clocks) || !isNum(v.clocks.matchMs) || v.clocks.matchMs < 0) return false;
   if (v.clocks.turnMs !== null && (!isNum(v.clocks.turnMs) || v.clocks.turnMs < 0)) return false;
   return isNum(v.savedAt);

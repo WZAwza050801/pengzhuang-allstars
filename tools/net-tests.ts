@@ -468,8 +468,8 @@ async function testShotChain(): Promise<void> {
   const dup = await actor.nextError(from);
   check('replayed clientShotId -> duplicate-shot with ref and the original seq (dedupe beats stale turnId)', dup?.code === 'duplicate-shot' && dup.ref === good.clientShotId && dup.seq === 1 && dup.on === C2S.shot, dup ?? 'no reply');
   const changed = { ...good, input: { ...(good.input as Loose), power: 1 } };
-  await expectErr(actor, 'replay of the same id with a different input', C2S.shot, changed, 'duplicate-shot', { ref: good.clientShotId });
-  await expectErr(actor, 'replay of the same id with a changed turnId', C2S.shot, { ...good, turnId: a.state!.shotNo }, 'duplicate-shot', { ref: good.clientShotId });
+  await expectErr(actor, 'replay of the same id with a different input', C2S.shot, changed, 'shot-conflict', { ref: good.clientShotId });
+  await expectErr(actor, 'replay of the same id with a changed turnId', C2S.shot, { ...good, turnId: a.state!.shotNo }, 'shot-conflict', { ref: good.clientShotId });
   check('replays changed neither the state nor the packet count', inspected(code) === settled && a.packets.length === 1 && b.packets.length === 1);
 
   const bump = await playUntil(a, b, rng, () => a.state!.turn !== side, 12);
@@ -688,7 +688,7 @@ async function testFaultPaths(): Promise<void> {
   } finally {
     delete injected.handleReady;
   }
-  check('the throwing handler was logged on the server, with its message', logged.length === 1 && /message handler failed: Error: injected fault/.test(logged[0]), logged);
+  check('the throwing handler was logged without exposing arbitrary error text', logged.length === 1 && logged[0] === '[MatchRoom] message handler failed', logged);
   check('the fault did not kick the sender', a.closed === null);
   const from = a.mark();
   await a.send(C2S.ready, { ready: true });
@@ -718,7 +718,9 @@ async function pickPort(): Promise<number> {
 }
 
 async function main(): Promise<void> {
-  const { httpServer, gameServer } = createGameServer();
+  // This bulk protocol/fault suite intentionally sends hundreds of joins on loopback.
+  // Production admission thresholds are exercised separately by room-admission.test.ts.
+  const { httpServer, gameServer } = createGameServer({ admissionLimits: { perIp: 2000, global: 4000, createsPerIp: 1000, createsGlobal: 2000 } });
   await gameServer.listen(await pickPort());
   const port = (httpServer.address() as AddressInfo).port;
   url = `ws://127.0.0.1:${port}`;

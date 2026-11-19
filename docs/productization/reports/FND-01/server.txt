@@ -1,0 +1,3 @@
+[server] listening on port 44605  (GET /healthz)
+[server] no stored rooms to restore in /workspace/work/fnd-01-evidence/online-rooms
+[server] SIGTERM received, shutting down

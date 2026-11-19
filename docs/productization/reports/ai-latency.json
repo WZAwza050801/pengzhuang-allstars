@@ -1,0 +1,1108 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+  "baselineCommit": "5179e6b",
+  "baselineChoicesEqual": 27,
+  "fixtureSha256": "b3f75b0c28b0b8067901cdb8209aa9e2972b84f6ab5d85f1242ea8fcc4180d82",
+  "node": "v24.22.1",
+  "engine": "planck1.4.2",
+  "hardware": {
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "logicalCpus": 3,
+    "totalMemoryBytes": 10452459520
+  },
+  "policy": {
+    "version": "ai-policy-1",
+    "presentationDelayMs": 600,
+    "computeBudgetMs": 750,
+    "workerDeadlineMs": 1500,
+    "maxEvaluations": 95,
+    "fallback": "nearest-legal-direct-shot",
+    "note": "Initial measured local policy; real device budgets remain subject to platform verification. Original full easy/normal search <=83, hard <=95 candidates for five movable pieces."
+  },
+  "summary": [
+    {
+      "bounded": false,
+      "level": "easy",
+      "samples": 9,
+      "p50": 178.62935800000014,
+      "p95": 213.09886000000006,
+      "max": 213.09886000000006,
+      "exhausted": 0
+    },
+    {
+      "bounded": false,
+      "level": "normal",
+      "samples": 9,
+      "p50": 153.92157999999972,
+      "p95": 218.86088500000005,
+      "max": 218.86088500000005,
+      "exhausted": 0
+    },
+    {
+      "bounded": false,
+      "level": "hard",
+      "samples": 9,
+      "p50": 175.61953600000015,
+      "p95": 218.71797500000048,
+      "max": 218.71797500000048,
+      "exhausted": 0
+    },
+    {
+      "bounded": true,
+      "level": "easy",
+      "samples": 9,
+      "p50": 149.2827010000001,
+      "p95": 158.47009699999944,
+      "max": 158.47009699999944,
+      "exhausted": 0
+    },
+    {
+      "bounded": true,
+      "level": "normal",
+      "samples": 9,
+      "p50": 150.1374910000004,
+      "p95": 189.287464,
+      "max": 189.287464,
+      "exhausted": 0
+    },
+    {
+      "bounded": true,
+      "level": "hard",
+      "samples": 9,
+      "p50": 167.60246599999846,
+      "p95": 185.20989500000178,
+      "max": 185.20989500000178,
+      "exhausted": 0
+    }
+  ],
+  "results": [
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 184.962406,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 184.86516299999994,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 164.8880690000001,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 164.87574300000006,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-2",
+        "dirX": -0.24793591036424453,
+        "dirY": 0.9687764367241047,
+        "power": 0.85,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 178.62935800000014,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 178.6172120000001,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7874121691856963,
+        "dirY": -0.6164268616942941,
+        "power": 0.8,
+        "curve": 0.35
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 213.09886000000006,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 213.08574399999998,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 174.30809499999987,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 174.2890789999999,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 210.41347399999995,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 210.38632100000018,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.5331471915217363,
+        "dirY": 0.8460225009847463,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 175.55260299999986,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 175.5386729999998,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 182.77115000000003,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 182.72786000000042,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.225595361613172,
+        "dirY": 0.9742210903170913,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 152.46072099999992,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 152.442587,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.6373643487357037,
+        "dirY": 0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 159.358702,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 159.3439589999998,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.623709189194978,
+        "dirY": -0.781656476537963,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 127.15864399999964,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 127.14160099999981,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.6034972156357643,
+        "dirY": 0.7973651050302363,
+        "power": 0.6,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 161.81471600000032,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 161.79881300000034,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7466596337557779,
+        "dirY": -0.665206277270207,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 139.15296099999978,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 139.1369450000002,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.623709189194978,
+        "dirY": -0.781656476537963,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 153.92157999999972,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 153.90657099999999,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6841952757690688,
+        "dirY": -0.7292988582297987,
+        "power": 1,
+        "curve": 0.7
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 153.61425700000018,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 153.5995670000002,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-2",
+        "dirX": 0.022018160000576114,
+        "dirY": 0.9997575709291673,
+        "power": 0.8,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 142.94786499999964,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 142.92953399999988,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.5887404322281831,
+        "dirY": -0.8083221532654986,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 199.67590599999994,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 199.64922100000013,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-1",
+        "dirX": -0.275968510542119,
+        "dirY": 0.9611666771112929,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 218.86088500000005,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 218.83134000000018,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.588740432228183,
+        "dirY": 0.8083221532654986,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 218.71797500000048,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 218.69340199999988,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.6221527097914704,
+        "dirY": -0.7828959098750807,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 170.92630399999962,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 170.9017759999997,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.6019095211249091,
+        "dirY": 0.7985642919509878,
+        "power": 0.6,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 187.4742839999999,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 187.45530099999996,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7479817022162338,
+        "dirY": -0.6637193481809197,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 180.27149000000009,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 180.2524029999995,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.6221527097914704,
+        "dirY": -0.7828959098750807,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 172.39262600000075,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 172.37276099999963,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6856449914812702,
+        "dirY": -0.7279360862442863,
+        "power": 1,
+        "curve": 0.7
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 189.0404550000003,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 189.02209200000016,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-2",
+        "dirX": 0.14274799640407176,
+        "dirY": 0.9897590664008201,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 172.11117600000034,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 172.09404199999972,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.59034756780971,
+        "dirY": -0.8071491492785952,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 175.61953600000015,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 175.60121700000036,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-1",
+        "dirX": -0.2740555519334995,
+        "dirY": 0.961713863087366,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "bounded": false,
+      "elapsedMs": 159.01934100000017,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 159.00133000000005,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.59034756780971,
+        "dirY": 0.8071491492785952,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 156.26210300000002,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 156.22514200000023,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 145.16070000000036,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 145.1058239999993,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-2",
+        "dirX": -0.24793591036424453,
+        "dirY": 0.9687764367241047,
+        "power": 0.85,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 152.96909700000015,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 152.94338900000002,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7874121691856963,
+        "dirY": -0.6164268616942941,
+        "power": 0.8,
+        "curve": 0.35
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 147.91356300000007,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 147.8901880000003,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 146.06847899999957,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 146.0468060000003,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 149.2827010000001,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 149.26786100000027,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.5331471915217363,
+        "dirY": 0.8460225009847463,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 151.50248199999987,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 151.48973999999998,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6373643487357037,
+        "dirY": -0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 158.47009699999944,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 158.45985800000017,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.225595361613172,
+        "dirY": 0.9742210903170913,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "easy",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 146.66070200000013,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 146.6482189999997,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.6373643487357037,
+        "dirY": 0.7705625782249695,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 154.10494599999947,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 154.09331400000065,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.623709189194978,
+        "dirY": -0.781656476537963,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 130.1448559999999,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 130.13434899999993,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.6034972156357643,
+        "dirY": 0.7973651050302363,
+        "power": 0.6,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 146.41721899999993,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 146.40235800000028,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7466596337557779,
+        "dirY": -0.665206277270207,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 145.800835,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 145.7892410000004,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.623709189194978,
+        "dirY": -0.781656476537963,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 150.67241600000034,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 150.66225100000065,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6841952757690688,
+        "dirY": -0.7292988582297987,
+        "power": 1,
+        "curve": 0.7
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 189.287464,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 189.27563100000043,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-2",
+        "dirX": 0.022018160000576114,
+        "dirY": 0.9997575709291673,
+        "power": 0.8,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 145.47895000000062,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 145.4703440000003,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.5887404322281831,
+        "dirY": -0.8083221532654986,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 164.57723200000055,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 164.56842599999982,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-1",
+        "dirX": -0.275968510542119,
+        "dirY": 0.9611666771112929,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "normal",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 150.1374910000004,
+      "stats": {
+        "evaluated": 83,
+        "elapsedMs": 150.12872199999947,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.588740432228183,
+        "dirY": 0.8083221532654986,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 166.39064999999937,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 166.38138900000013,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.6221527097914704,
+        "dirY": -0.7828959098750807,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 167.60246599999846,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 167.59075699999994,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": -0.6019095211249091,
+        "dirY": 0.7985642919509878,
+        "power": 0.6,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-101-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 169.20142900000064,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 169.1908000000003,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.7479817022162338,
+        "dirY": -0.6637193481809197,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 164.773545,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 164.7589110000008,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-3",
+        "dirX": 0.6221527097914704,
+        "dirY": -0.7828959098750807,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-202-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 185.20989500000178,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 185.19784900000013,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.6856449914812702,
+        "dirY": -0.7279360862442863,
+        "power": 1,
+        "curve": 0.7
+      }
+    },
+    {
+      "scenario": "seed-202-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 184.31668399999944,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 184.30412199999955,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-2",
+        "dirX": 0.14274799640407176,
+        "dirY": 0.9897590664008201,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-0",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 160.54835099999946,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 160.53739099999984,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "0-4",
+        "dirX": -0.59034756780971,
+        "dirY": -0.8071491492785952,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-1",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 181.40536500000053,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 181.39313000000038,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-1",
+        "dirX": -0.2740555519334995,
+        "dirY": 0.961713863087366,
+        "power": 1,
+        "curve": 0
+      }
+    },
+    {
+      "scenario": "seed-303-stage-2",
+      "level": "hard",
+      "seed": 13,
+      "bounded": true,
+      "elapsedMs": 166.7232129999993,
+      "stats": {
+        "evaluated": 95,
+        "elapsedMs": 166.71173699999963,
+        "reason": "complete"
+      },
+      "input": {
+        "pieceId": "1-4",
+        "dirX": 0.59034756780971,
+        "dirY": 0.8071491492785952,
+        "power": 1,
+        "curve": 0
+      }
+    }
+  ],
+  "note": "Nine fixed states per difficulty; local CPU measurements and proxy decisions, not mobile certification or human balance conclusions."
+}

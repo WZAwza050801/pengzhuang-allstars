@@ -1,6 +1,9 @@
-import type { GameData, LevelAttrs, SkillDef } from './data';
+import type { GameData, SkillDef } from './data';
 import { simulateShot, type SimResult, type SimSetup, type SimShot, type Side } from './physics';
 import { nextRandom } from './rng';
+import { levelAttrs, pieceStats } from '../packages/game-core/src/balance';
+export { levelAttrs, pieceStats, type PieceStats } from '../packages/game-core/src/balance';
+import { insideField } from '../packages/game-core/src/field';
 
 export interface PieceState {
   id: string;
@@ -55,49 +58,6 @@ export type MatchEvent =
   | { type: 'pass'; side: Side; reason: string }
   | { type: 'end'; winner: Side | -1; reason: string };
 
-export interface PieceStats {
-  massMul: number;
-  speedMul: number;
-  curveMul: number;
-  aimAssist: number;
-  skill: SkillDef | null;
-  skillLevel: number;
-}
-
-const lerp = (r: number[], t: number) => r[0] + (r[1] - r[0]) * t;
-
-/**
- * Attribute points of a player at a card level. Players with a srcId read the source level table (data/levels.json);
- * the rebuilt players (srcId null) have no table and keep the attrs + growth estimate, capped at attrMax.
- */
-export function levelAttrs(data: GameData, playerId: string, level: number): LevelAttrs {
-  const def = data.players[playerId];
-  if (def.srcId) return data.levels[def.srcId][String(level)];
-  const m = data.mapping;
-  const a = def.attrs.map((v, i) => Math.min(m.attrMax, v + def.growth[i] * (level - 1)));
-  return { weight: a[0], power: a[1], mind: a[4], radian: a[2], precision: a[3] };
-}
-
-export function pieceStats(data: GameData, playerId: string, level: number, cond = 1): PieceStats {
-  const def = data.players[playerId];
-  const m = data.mapping;
-  const a = levelAttrs(data, playerId, level);
-  const n = (v: number) => Math.max(0, Math.min(1, (v * cond - m.attrMin) / (m.attrMax - m.attrMin)));
-  const skill = data.skills[def.skill] ?? null;
-  const at = data.rules.levels.skillLevelAt;
-  let skillLevel = 0;
-  for (let i = 0; i < at.length; i++) if (level >= at[i]) skillLevel = i + 1;
-  const unlocked = skill && level >= skill.unlockLevel;
-  return {
-    massMul: lerp(m.massMul, n(a.weight)),
-    speedMul: lerp(m.speedMul, n(a.power)),
-    curveMul: lerp(m.curveMul, n(a.radian)),
-    aimAssist: lerp(m.aimAssist, n(a.precision)),
-    skill: unlocked ? skill : null,
-    skillLevel: unlocked ? Math.max(1, skillLevel) : 0,
-  };
-}
-
 export function formationPos(data: GameData, side: Side, slot: number) {
   const f = data.rules.formation[slot];
   return side === 0 ? { x: f.x, y: f.y } : { x: -f.x, y: -f.y };
@@ -149,6 +109,7 @@ function prob(skill: SkillDef, level: number) {
 
 /** Roll pre-turn skills for the side to move and defence skills for the other side. */
 export function beginTurn(st: MatchState, data: GameData): MatchEvent[] {
+  if (st.over) return [];
   const ev: MatchEvent[] = [];
   const rng = { s: st.rng };
   for (const p of st.pieces) {
@@ -238,11 +199,12 @@ export function buildShot(st: MatchState, data: GameData, input: ShotInput, rng:
   return { shot, onHit, extra, skill: sk };
 }
 
-function freeSpot(st: MatchState, data: GameData, x: number, y: number, selfId: string) {
+export function freeSpot(st: MatchState, data: GameData, x: number, y: number, selfId: string) {
   const r = data.physics.disc.radius;
   const br = data.physics.ball.radius;
   const ok = (px: number, py: number) =>
     Math.abs(px) <= data.geometry.width / 2 - r && Math.abs(py) <= data.geometry.length / 2 - r - 0.3 &&
+    insideField(data.geometry, px, py, r, 0) &&
     Math.hypot(px - st.ball.x, py - st.ball.y) > r + br + 0.05 &&
     st.pieces.every((q) => q.id === selfId || q.out > 0 || Math.hypot(px - q.x, py - q.y) > 2 * r + 0.05);
   if (ok(x, y)) return { x, y };
@@ -254,7 +216,15 @@ function freeSpot(st: MatchState, data: GameData, x: number, y: number, selfId: 
       if (ok(px, py)) return { x: px, y: py };
     }
   }
-  return { x, y };
+  // Deterministic bounded fallback; never silently return an occupied position.
+  const candidates: { x: number; y: number; d: number }[] = [];
+  const W = data.geometry.width / 2 - r, L = data.geometry.length / 2 - r - 0.3;
+  for (let px = -W; px <= W; px += 0.15) for (let py = -L; py <= L; py += 0.15) {
+    if (ok(px, py)) candidates.push({ x: px, y: py, d: Math.hypot(px - x, py - y) });
+  }
+  candidates.sort((a,b) => a.d-b.d || a.y-b.y || a.x-b.x);
+  if (!candidates.length) throw new Error('No legal free position');
+  return { x: candidates[0].x, y: candidates[0].y };
 }
 
 /** Pieces whose centre ended behind a goal line are moved to the nearest free spot in front of it. */
@@ -326,6 +296,8 @@ export interface ShotOutcome {
 
 /** Authoritative resolution of one validated shot. Mutates `st` and begins the next turn. */
 export function resolveShot(st: MatchState, data: GameData, input: ShotInput): ShotOutcome {
+  const invalid = validateShot(st, data, st.turn, input);
+  if (invalid) throw new Error(`Invalid authoritative shot: ${invalid}`);
   const rng = { s: st.rng };
   const ev: MatchEvent[] = [];
   const side = st.turn;
@@ -385,6 +357,7 @@ export function resolveShot(st: MatchState, data: GameData, input: ShotInput): S
 
 /** Turn timeout or voluntary skip. Counts toward the shot limit. */
 export function passTurn(st: MatchState, data: GameData, reason: string): MatchEvent[] {
+  if (st.over) return [];
   const ev: MatchEvent[] = [{ type: 'pass', side: st.turn, reason }];
   st.shotNo++;
   st.extraUsed = false;
@@ -405,6 +378,7 @@ export function endByTime(st: MatchState): MatchEvent[] {
 }
 
 export function forfeit(st: MatchState, loser: Side, reason: string): MatchEvent[] {
+  if (st.over) return [];
   st.over = true;
   st.winner = (1 - loser) as Side;
   st.endReason = reason;

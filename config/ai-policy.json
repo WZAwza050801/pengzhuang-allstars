@@ -1,0 +1,9 @@
+{
+  "version": "ai-policy-1",
+  "presentationDelayMs": 600,
+  "computeBudgetMs": 750,
+  "workerDeadlineMs": 1500,
+  "maxEvaluations": 95,
+  "fallback": "nearest-legal-direct-shot",
+  "note": "Initial measured local policy; real device budgets remain subject to platform verification. Original full easy/normal search <=83, hard <=95 candidates for five movable pieces."
+}

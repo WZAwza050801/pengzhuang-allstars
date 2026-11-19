@@ -1,5 +1,7 @@
 # dependencies & build
 node_modules/
+work/
+data/rooms/
 dist/
 *.log
 vite.log

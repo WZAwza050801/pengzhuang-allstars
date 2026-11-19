@@ -1,0 +1,115 @@
+{
+  "rows": [
+    {
+      "skin": "classic",
+      "side": 0,
+      "maxErrorM": 0,
+      "maxErrorPx": 0
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "maxErrorM": 0,
+      "maxErrorPx": 0
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "maxErrorM": 0,
+      "maxErrorPx": 0
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "maxErrorM": 0,
+      "maxErrorPx": 0
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.520760609957133e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.520760609957133e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.867014108688432e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.867014108688432e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.862853150828711e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.862853150828711e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.862853150828711e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.862853150828711e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.858696592202943e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.858696592202943e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.854544425838085e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "maxErrorM": 2.220446049250313e-16,
+      "maxErrorPx": 7.854544425838085e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "maxErrorM": 0,
+      "maxErrorPx": 0
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "maxErrorM": 0,
+      "maxErrorPx": 0
+    }
+  ],
+  "ready": true,
+  "errors": [],
+  "note": "Transform error, not a new independent measurement of the original artwork"
+}

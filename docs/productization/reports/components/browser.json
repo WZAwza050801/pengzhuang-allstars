@@ -1,0 +1,66 @@
+{
+  "views": [
+    {
+      "theme": "light",
+      "font": "1",
+      "width": 1280,
+      "height": 900,
+      "dpr": 1,
+      "overflow": false,
+      "clippedButtons": false,
+      "components": 19,
+      "states": [
+        "ready",
+        "selected",
+        "disabled",
+        "loading",
+        "empty",
+        "error"
+      ],
+      "cardVersion": "cards-fbe0928203eb1200"
+    },
+    {
+      "theme": "dark",
+      "font": "2",
+      "width": 390,
+      "height": 844,
+      "dpr": 2,
+      "overflow": false,
+      "clippedButtons": false,
+      "components": 19,
+      "states": [
+        "ready",
+        "selected",
+        "disabled",
+        "loading",
+        "empty",
+        "error"
+      ],
+      "cardVersion": "cards-fbe0928203eb1200"
+    },
+    {
+      "theme": "light",
+      "font": "2",
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "overflow": false,
+      "clippedButtons": false,
+      "components": 19,
+      "states": [
+        "ready",
+        "selected",
+        "disabled",
+        "loading",
+        "empty",
+        "error"
+      ],
+      "cardVersion": "cards-fbe0928203eb1200"
+    }
+  ],
+  "dialogFocus": true,
+  "retry": true,
+  "pagination": true,
+  "cardSelection": true,
+  "consoleErrorsAndWarnings": []
+}

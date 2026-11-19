@@ -1,0 +1,72 @@
+{
+  "version": "ui-1",
+  "touchTarget": 44,
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24
+  ],
+  "radius": 12,
+  "typography": {
+    "body": 16,
+    "title": 28,
+    "number": 24,
+    "lineHeight": 1.5
+  },
+  "motion": {
+    "fastMs": 120,
+    "normalMs": 200,
+    "reducedMs": 0
+  },
+  "themes": {
+    "light": {
+      "background": "#eaf1f3",
+      "panel": "#ffffff",
+      "ink": "#172c3b",
+      "muted": "#455e6e",
+      "border": "#69828e",
+      "accent": "#b24b00",
+      "accentInk": "#ffffff",
+      "success": "#147341",
+      "danger": "#b52936",
+      "disabled": "#d4dfe4",
+      "disabledInk": "#45565f",
+      "focus": "#005fcc",
+      "scrim": "#102b3d"
+    },
+    "dark": {
+      "background": "#142c3b",
+      "panel": "#203e52",
+      "ink": "#f3f7f8",
+      "muted": "#b4cbd7",
+      "border": "#87a5b6",
+      "accent": "#ffb35c",
+      "accentInk": "#142c3b",
+      "success": "#73df9d",
+      "danger": "#ff9ba5",
+      "disabled": "#344b58",
+      "disabledInk": "#c0cbd1",
+      "focus": "#82c4ff",
+      "scrim": "#07141e"
+    }
+  },
+  "quality": {
+    "green": "#2f9a1e",
+    "blue": "#1f74c8",
+    "purple": "#9b2fc0",
+    "orange": "#c55a00",
+    "red": "#c0202a",
+    "silver": "#c8d0d8"
+  },
+  "stadium": {
+    "grass": "#337b54",
+    "stripe": "#408c60",
+    "line": "#f0f8ed",
+    "wall": "#c8dce1",
+    "stand": "#22566e",
+    "standSide": "#14394c",
+    "ball": "#ffffff"
+  }
+}

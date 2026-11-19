@@ -1,0 +1,110 @@
+.page {
+  width: min(100%, 56rem);
+  margin: 0 auto;
+  padding: var(--ui-space-24) var(--ui-space-16) calc(var(--ui-space-24) + env(safe-area-inset-bottom));
+  display: grid;
+  gap: var(--ui-space-16);
+  color: var(--ui-ink);
+  overflow-wrap: anywhere;
+}
+.page h1,
+.page h2,
+.page p {
+  margin: 0;
+}
+.page h1 {
+  font-size: clamp(1.5em, 5vw, 2em);
+}
+.page h2 {
+  font-size: 1.2em;
+}
+.page p {
+  line-height: 1.65;
+}
+.header,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-12);
+}
+.actions {
+  justify-content: flex-start;
+}
+.actions > span {
+  color: var(--ui-muted);
+}
+.eyebrow,
+.page time {
+  color: var(--ui-muted);
+  font-size: 0.875em;
+}
+.card {
+  display: grid;
+  gap: var(--ui-space-12);
+  padding: var(--ui-space-24);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-panel);
+  min-width: 0;
+}
+.score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--ui-space-16), 5vw, 4rem);
+}
+.score span {
+  display: grid;
+  gap: var(--ui-space-8);
+  text-align: center;
+}
+.score strong {
+  font-size: clamp(2.5em, 8vw, 4em);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.score > b {
+  font-size: 2em;
+}
+.notice {
+  padding: var(--ui-space-16);
+  border: 1px solid var(--ui-border);
+  border-inline-start: 4px solid var(--ui-accent);
+  background: var(--ui-panel);
+  border-radius: var(--ui-radius);
+}
+.rewards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-24);
+  margin: 0;
+}
+.rewards dt {
+  color: var(--ui-muted);
+}
+.rewards dd {
+  font-size: 1.6em;
+  font-weight: 700;
+  margin: var(--ui-space-8) 0 0;
+}
+.ledger,
+.history {
+  display: grid;
+  gap: var(--ui-space-12);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ledger li {
+  display: grid;
+  gap: var(--ui-space-8);
+  padding-top: var(--ui-space-12);
+  border-top: 1px solid var(--ui-border);
+}
+@media (max-width: 400px) {
+  .card {
+    padding: var(--ui-space-16);
+  }
+}

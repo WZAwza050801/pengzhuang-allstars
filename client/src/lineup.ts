@@ -23,9 +23,9 @@ const SLOTS = DEFAULT_DATA.rules.formation;
 /** Formation slot role -> roster position that fills it by default. */
 const ROLE_POS: Record<string, string> = { DC: 'DF', CM: 'MF', ST: 'FW' };
 export const POS_LABEL: Record<string, string> = { FW: '前锋', MF: '中场', DF: '后卫', GK: '门将' };
-const QUALITY_LABEL: Record<string, string> = { white: '白色', green: '绿色', blue: '蓝色', purple: '紫色', orange: '橙色' };
-/** Original card frames: Box_Quality_01 green … 05 red. White cards reuse the green frame, desaturated in CSS. */
-const QUALITY_FRAME: Record<string, string> = { white: '01', green: '01', blue: '02', purple: '03', orange: '04' };
+const QUALITY_LABEL: Record<string, string> = { green: '绿色', blue: '蓝色', purple: '紫色', orange: '橙色', red: '红色', silver: '银色' };
+/** Original card frames: Box_Quality_01 green … 05 red. Silver legend reuses the red frame, silvered in CSS. */
+const QUALITY_FRAME: Record<string, string> = { green: '01', blue: '02', purple: '03', orange: '04', red: '05', silver: '05' };
 const SETS = 3;
 const KEY = 'pz_lineups';
 

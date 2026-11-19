@@ -1,5 +1,9 @@
 import { World, Vec2, Circle, Edge, Settings, type Body, type Contact, type Fixture } from 'planck';
+import { launchSpeed } from '../packages/game-core/src/balance';
+export { launchSpeed } from '../packages/game-core/src/balance';
 import type { FieldGeometry, PhysicsConfig } from './data';
+import { fieldSegments, fieldPosts, goalCrossing } from '../packages/game-core/src/field';
+export { fieldSegments, insideField, type FieldSegment, type SegmentKind } from '../packages/game-core/src/field';
 
 /**
  * Coordinates: metres, origin at centre spot, +y points down the screen for side 0.
@@ -48,18 +52,6 @@ export interface SimOptions {
 }
 
 export type ContactKind = 'disc' | 'ball' | 'wall' | 'net' | 'post' | 'spring';
-export type SegmentKind = 'wall' | 'net' | 'spring';
-
-export interface FieldSegment {
-  a: [number, number];
-  b: [number, number];
-  kind: SegmentKind;
-  /** Corner index for springs: 0 top-left, 1 top-right, 2 bottom-right, 3 bottom-left. */
-  corner?: number;
-  /** Unit normal pointing into the field (springs only). */
-  n?: [number, number];
-}
-
 export interface SimEvent {
   t: number;
   type: string;
@@ -103,53 +95,6 @@ interface PendingKick {
   n: [number, number];
 }
 
-export function launchSpeed(phys: PhysicsConfig, power: number, speedMul = 1): number {
-  const p = Math.min(1, Math.max(phys.shot.minPower, power));
-  return phys.shot.vmax * speedMul * Math.pow(p, phys.shot.gamma);
-}
-
-/** Outline of the playable area as wall/net segments, shared by physics, rendering and tests. */
-export function fieldSegments(g: FieldGeometry): FieldSegment[] {
-  const W = g.width / 2, L = g.length / 2, gw = g.goalWidth / 2, gd = g.goalDepth, c = g.cornerCut;
-  const segs: FieldSegment[] = [];
-  const w = (a: [number, number], b: [number, number], kind: SegmentKind = 'wall') => segs.push({ a, b, kind });
-  const spring = (a: [number, number], b: [number, number], corner: number, sx: number, sy: number) =>
-    segs.push({ a, b, kind: 'spring', corner, n: [-sx * Math.SQRT1_2, -sy * Math.SQRT1_2] });
-  for (const s of [-1, 1]) {
-    const y = s * L;
-    w([-W + c, y], [-gw, y]);
-    w([gw, y], [W - c, y]);
-    w([-gw, y], [-gw, y + s * gd], 'net');
-    w([-gw, y + s * gd], [gw, y + s * gd], 'net');
-    w([gw, y + s * gd], [gw, y], 'net');
-    spring([W - c, y], [W, y - s * c], s < 0 ? 1 : 2, 1, s);
-    spring([-W, y - s * c], [-W + c, y], s < 0 ? 0 : 3, -1, s);
-  }
-  w([W, -L + c], [W, L - c]);
-  w([-W, -L + c], [-W, L - c]);
-  return segs;
-}
-
-/** True if a circle of radius r centred at (x,y) lies inside the playable outline (incl. goal pockets). */
-export function insideField(g: FieldGeometry, x: number, y: number, r: number, slop = 0.02): boolean {
-  const W = g.width / 2, L = g.length / 2, gw = g.goalWidth / 2, c = g.cornerCut;
-  const ax = Math.abs(x), ay = Math.abs(y);
-  const inMain = ax <= W && ay <= L && ax + ay <= W + L - c;
-  const inPocket = ax <= gw && ay <= L + g.goalDepth;
-  if (!inMain && !inPocket) return false;
-  const need = r - slop;
-  for (const s of fieldSegments(g)) {
-    if (segDist(x, y, s.a[0], s.a[1], s.b[0], s.b[1]) < need) return false;
-  }
-  const pd = Math.hypot(ax - gw, ay - L);
-  return pd >= r + g.postRadius - slop;
-}
-
-function segDist(px: number, py: number, ax: number, ay: number, bx: number, by: number) {
-  const dx = bx - ax, dy = by - ay;
-  const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)));
-  return Math.hypot(px - ax - t * dx, py - ay - t * dy);
-}
 
 export class SimWorld {
   readonly world: World;
@@ -173,10 +118,9 @@ export class SimWorld {
         userData: { kind: s.kind, id: s.kind === 'spring' ? `spring${s.corner}` : s.kind, corner: s.corner, n: s.n } as Tag,
       });
     }
-    const L = geom.length / 2, gw = geom.goalWidth / 2;
-    for (const sy of [-1, 1]) for (const sx of [-1, 1]) {
-      const post = this.world.createBody({ position: Vec2(sx * gw, sy * L) });
-      post.createFixture(new Circle(geom.postRadius), { userData: { kind: 'post', id: 'post' } as Tag });
+    for (const point of fieldPosts(geom)) {
+      const post = this.world.createBody({ position: Vec2(point.x, point.y) });
+      post.createFixture(new Circle(point.radius), { userData: { kind: 'post', id: 'post' } as Tag });
     }
 
     const dr = phys.disc.radius;
@@ -289,7 +233,7 @@ export class ShotRunner {
   private readonly shooterSide: Side;
   private turnRate: number;
   private readonly maxTurn: number;
-  private kicks: PendingKick[] = [];
+  private kicks = new Map<string, PendingKick>();
   private readonly recordEvery: number;
   private readonly maxSteps: number;
   private readonly postGoalSteps: number;
@@ -355,7 +299,7 @@ export class ShotRunner {
     if (spr.kind === 'spring' && hit.kind === 'disc' && hitBody.isDynamic() && sprBody !== hitBody) {
       const v = hitBody.getLinearVelocity();
       const approach = -(v.x * spr.n![0] + v.y * spr.n![1]);
-      if (approach > this.phys.spring.minSpeed) this.kicks.push({ body: hitBody, id: hit.id, corner: spr.corner!, n: spr.n! });
+      if (approach > this.phys.spring.minSpeed) this.kicks.set(`${hit.id}:${spr.corner}`, { body: hitBody, id: hit.id, corner: spr.corner!, n: spr.n! });
     }
     let other: Tag | null = null;
     if (ta.id === this.shot.pieceId) other = tb;
@@ -403,11 +347,12 @@ export class ShotRunner {
       }
     }
 
+    const beforeBall = this.pos(sim.ball);
     sim.world.step(sim.dt, phys.velocityIterations, phys.positionIterations);
     this.step++;
 
-    sim.kicksThisStep = this.kicks.length;
-    for (const k of this.kicks) {
+    sim.kicksThisStep = this.kicks.size;
+    for (const k of this.kicks.values()) {
       const sp = phys.spring;
       const v = k.body.getLinearVelocity();
       let nx = v.x + k.n[0] * sp.boost, ny = v.y + k.n[1] * sp.boost;
@@ -417,7 +362,7 @@ export class ShotRunner {
       const p = k.body.getPosition();
       this.events.push({ t: this.t, type: 'spring-kick', a: k.id, b: `spring${k.corner}`, speed: Math.hypot(nx, ny), x: p.x, y: p.y });
     }
-    this.kicks = [];
+    this.kicks.clear();
 
     if (this.pendingBoost) {
       this.pendingBoost = false;
@@ -439,10 +384,9 @@ export class ShotRunner {
     }
 
     if (!this.goal) {
-      const L = this.geom.length / 2, br = phys.ball.radius;
       const bp = sim.ball.getPosition();
-      if (bp.y < -L - br) this.goal = { scoredBy: 0, t: this.t, x: bp.x };
-      else if (bp.y > L + br) this.goal = { scoredBy: 1, t: this.t, x: bp.x };
+      const crossing = goalCrossing(this.geom, phys.ball.radius, beforeBall, bp);
+      if (crossing) this.goal = { ...crossing, t: this.t };
       if (this.goal) {
         this.goalStep = this.step;
         this.events.push({ t: this.t, type: 'goal', a: String(this.goal.scoredBy), b: '', speed: 0, x: bp.x, y: bp.y });

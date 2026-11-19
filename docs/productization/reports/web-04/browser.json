@@ -1,0 +1,37 @@
+{
+  "environment": {
+    "browser": "Chromium headless",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 3
+    },
+    "weakNetwork": {
+      "latencyMs": 150,
+      "downloadBytesPerSecond": 204800,
+      "uploadBytesPerSecond": 102400
+    }
+  },
+  "bundle": {
+    "matchChunk": "matchScreen-1o2xkwjT.js",
+    "matchChunkBytes": 1997,
+    "initialResourceBytes": 609428,
+    "matchChunkLoadedBeforeNavigation": false,
+    "fieldResourceLoadedBeforeNavigation": false
+  },
+  "firstScreen": {
+    "interactiveMs": 3961
+  },
+  "frames": {
+    "samples": 180,
+    "p50Ms": 16.7,
+    "p95Ms": 16.7,
+    "maxMs": 166.6
+  },
+  "tenMatches": {
+    "baselineHeapBytes": 7187892,
+    "afterHeapBytes": 8084340,
+    "growthBytes": 896448
+  },
+  "consoleErrors": []
+}

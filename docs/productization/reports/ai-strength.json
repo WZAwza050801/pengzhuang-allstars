@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+  "node": "v24.22.1",
+  "engine": "planck1.4.2",
+  "hardware": {
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13700H",
+    "logicalCpus": 20,
+    "totalMemoryBytes": 34070585344
+  },
+  "policy": {
+    "version": "ai-policy-1",
+    "presentationDelayMs": 600,
+    "computeBudgetMs": 750,
+    "workerDeadlineMs": 1500,
+    "maxEvaluations": 95,
+    "fallback": "nearest-legal-direct-shot",
+    "note": "Initial measured local policy; real device budgets remain subject to platform verification. Original full easy/normal search <=83, hard <=95 candidates for five movable pieces."
+  },
+  "seeds": [
+    1000,
+    1101,
+    1202,
+    1303,
+    1404,
+    1505
+  ],
+  "matchups": [
+    {
+      "side0": "easy",
+      "side1": "easy",
+      "games": 6,
+      "wins0": 1,
+      "wins1": 5,
+      "draws": 0,
+      "avgShots": 23.67,
+      "side0WinRate": 0.167
+    },
+    {
+      "side0": "easy",
+      "side1": "normal",
+      "games": 6,
+      "wins0": 1,
+      "wins1": 5,
+      "draws": 0,
+      "avgShots": 18.33,
+      "side0WinRate": 0.167
+    },
+    {
+      "side0": "easy",
+      "side1": "hard",
+      "games": 6,
+      "wins0": 0,
+      "wins1": 6,
+      "draws": 0,
+      "avgShots": 11.67,
+      "side0WinRate": 0
+    },
+    {
+      "side0": "normal",
+      "side1": "easy",
+      "games": 6,
+      "wins0": 5,
+      "wins1": 1,
+      "draws": 0,
+      "avgShots": 13.33,
+      "side0WinRate": 0.833
+    },
+    {
+      "side0": "normal",
+      "side1": "normal",
+      "games": 6,
+      "wins0": 4,
+      "wins1": 2,
+      "draws": 0,
+      "avgShots": 16.33,
+      "side0WinRate": 0.667
+    },
+    {
+      "side0": "normal",
+      "side1": "hard",
+      "games": 6,
+      "wins0": 1,
+      "wins1": 5,
+      "draws": 0,
+      "avgShots": 8.33,
+      "side0WinRate": 0.167
+    },
+    {
+      "side0": "hard",
+      "side1": "easy",
+      "games": 6,
+      "wins0": 6,
+      "wins1": 0,
+      "draws": 0,
+      "avgShots": 10,
+      "side0WinRate": 1
+    },
+    {
+      "side0": "hard",
+      "side1": "normal",
+      "games": 6,
+      "wins0": 5,
+      "wins1": 1,
+      "draws": 0,
+      "avgShots": 9,
+      "side0WinRate": 0.833
+    },
+    {
+      "side0": "hard",
+      "side1": "hard",
+      "games": 6,
+      "wins0": 3,
+      "wins1": 3,
+      "draws": 0,
+      "avgShots": 5,
+      "side0WinRate": 0.5
+    }
+  ],
+  "note": "Fixed-seed self-play under the bounded practice policy. Proxy strength for observable difficulty difference, not human balance or mobile certification."
+}

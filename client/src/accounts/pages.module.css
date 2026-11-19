@@ -1,0 +1,123 @@
+.page {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--ui-space-24) var(--ui-space-16);
+  color: var(--ui-ink);
+}
+.page h1 {
+  font-size: 1.75em;
+  margin: var(--ui-space-8) 0 var(--ui-space-16);
+}
+.page h2 {
+  font-size: 1.125em;
+  margin: 0 0 var(--ui-space-12);
+}
+.page p {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.eyebrow {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: 0.875em;
+}
+.form,
+.section {
+  padding: var(--ui-space-16);
+  border: 1px solid var(--ui-border);
+  background: var(--ui-panel);
+  border-radius: var(--ui-radius);
+  margin-block: var(--ui-space-16);
+}
+.form fieldset {
+  display: grid;
+  gap: var(--ui-space-16);
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.form label {
+  display: grid;
+  gap: var(--ui-space-8);
+  font-weight: 700;
+}
+.page input,
+.page textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--ui-touch-target);
+  padding: var(--ui-space-8) var(--ui-space-12);
+  color: var(--ui-ink);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-background);
+  font: inherit;
+}
+.page select {
+  font: inherit;
+  min-height: var(--ui-touch-target);
+  width: 100%;
+  color: var(--ui-ink);
+  background: var(--ui-background);
+}
+.page input:focus-visible,
+.page textarea:focus-visible,
+.page a:focus-visible {
+  outline: 3px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+.page input[type='checkbox'] {
+  width: var(--ui-space-24);
+  min-height: var(--ui-space-24);
+}
+.page > label {
+  display: grid;
+  gap: var(--ui-space-8);
+  margin-block: var(--ui-space-16);
+}
+.page label:has(input[type='checkbox']) {
+  min-height: var(--ui-touch-target);
+  align-items: center;
+}
+.notice {
+  margin-block: var(--ui-space-8) 0;
+  min-height: 1.6em;
+}
+.links,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-8) var(--ui-space-16);
+  align-items: center;
+}
+.links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--ui-touch-target);
+  color: var(--ui-accent);
+  text-decoration: underline;
+}
+.devices {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--ui-space-12);
+}
+.devices li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-space-8);
+  padding-block: var(--ui-space-12);
+  border-bottom: 1px solid var(--ui-border);
+}
+.devices p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: 0.875em;
+}
+.hint {
+  color: var(--ui-muted);
+  font-size: 0.875em;
+}

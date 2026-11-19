@@ -1,15 +1,18 @@
 import './style.css';
 import { DEFAULT_DATA, FIELD_SKINS } from '../../shared/data';
+import { describeModeRules } from '../../config/modes';
 import type { AiLevel } from '../../shared/ai';
-import { GameView } from './game';
+import { GameView, type GameOptions } from './game';
+import { createHostBridge } from '@pengzhuang/platform';
 import { LocalHost } from './localHost';
 import { OnlineHost, type OnlineStatus } from './onlineHost';
 import { isMuted, setMuted } from './sfx';
 import { activeLineup, mountLineup, randomLineup } from './lineup';
+import { ARENAS } from './arena';
 
 const app = document.getElementById('app')!;
 
-let current: GameView | null = null;
+let current: { dispose(): Promise<void> } | null = null;
 
 type Tab = 'shop' | 'lineup' | 'play' | 'achieve' | 'club';
 const TABS: { id: Tab; label: string; icon: string; open: boolean }[] = [
@@ -116,18 +119,6 @@ function menu(tab: Tab = 'play') {
   if (tab === 'lineup') mountLineup(body, { cardLevel, toast });
   else playTab(body);
 }
-
-/**
- * The five original league stadiums (texture/Image_01–05), each paired with the pitch scene it plays on.
- * League names are rebuilt: the screenshots only show 地区联赛 / League Two.
- */
-const ARENAS = [
-  { stadium: 'Image_01', skin: 'scene_01', name: '社区联赛' },
-  { stadium: 'Image_02', skin: 'scene_02', name: '地区联赛' },
-  { stadium: 'Image_03', skin: 'scene_03', name: '甲级联赛' },
-  { stadium: 'Image_04', skin: 'scene_04', name: '超级联赛' },
-  { stadium: 'Image_05', skin: 'scene_05', name: '全明星联赛' },
-].filter((a) => FIELD_SKINS.some((s) => s.id === a.skin));
 
 function arenaIndex(): number {
   const i = ARENAS.findIndex((a) => a.skin === localStorage.getItem('pz_skin'));
@@ -330,6 +321,7 @@ function onlineLobby(host: OnlineHost, roomCode: string) {
       <p class="tag">在线约战</p>
       <div class="roomcode"><span>房间码</span><b>${roomCode}</b><small>把它发给对手</small></div>
       <p class="wait-status">等待对手加入…</p>
+      <p class="rule-summary" aria-live="polite">等待服务端规则…</p>
       <div class="row"><button class="ready primary">提交阵容并准备</button></div>
       <div class="row"><button class="cancel">返回大厅</button></div>
     </div>`;
@@ -348,6 +340,8 @@ function onlineLobby(host: OnlineHost, roomCode: string) {
   // The match starts server-side; the host tells us when it is time to switch to the game view.
   host.onMatchReady(() => start(() => host, { roomCode }));
   host.onRoomSnapshot((snap) => {
+    const summary = app.querySelector('.rule-summary');
+    if (summary && host.rules) summary.textContent = describeModeRules(host.rules);
     const status = app.querySelector('.wait-status');
     if (!status) return;
     const other = snap.seats.find((s) => s && s.nickname !== host.seats[0].name);
@@ -363,7 +357,12 @@ function onlineLobby(host: OnlineHost, roomCode: string) {
 function start(makeHost: () => LocalHost | OnlineHost, opts?: { roomCode?: string }) {
   const skinId = currentSkin();
   const host = makeHost();
-  current = new GameView(app, host, { skinId, onExit: () => menu(), onRematch: () => { current?.dispose(); start(makeHost, opts); } });
+  const bridge = createHostBridge<HTMLElement, { host: LocalHost | OnlineHost; options: GameOptions }>((root, context) => new GameView(root, context.host, context.options));
+  current = bridge;
+  void bridge.mount(app, { host, options: { skinId, onExit: () => menu(), onRematch: () => { void current?.dispose(); start(makeHost, opts); } } }).catch(() => {
+    host.dispose();
+    if (current === bridge) { menu(); toast('无法进入比赛，请重试'); }
+  });
   if (opts?.roomCode) {
     // The code is what the other player types: show it once, prominently.
     app.querySelector('.lobby')?.remove();

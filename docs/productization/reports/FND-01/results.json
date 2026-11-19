@@ -1,0 +1,122 @@
+{
+  "source_commit": "b60b10eed31715daf54dde8150526f5c81e2df8f",
+  "game_baseline_commit": "70a8df4e134eb3051b35e9343b875a80c39efb9c",
+  "node": "v24.22.1",
+  "npm": "11.9.0",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "architecture": "x86_64",
+  "fresh_archive": true,
+  "fresh_install": true,
+  "package_lock_sha256": "fca91f2174244ad9eb7f0dd3739b7b58fef1f1bbcf38f80c4b7dd8f6f0fcc7e2",
+  "commands": [
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 4.451,
+      "log": "typecheck.txt",
+      "overrides": {}
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.961,
+      "log": "build.txt",
+      "overrides": {}
+    },
+    {
+      "name": "physics",
+      "command": [
+        "npm",
+        "run",
+        "test:physics"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 8.935,
+      "log": "physics.txt",
+      "overrides": {}
+    },
+    {
+      "name": "net",
+      "command": [
+        "npm",
+        "run",
+        "test:net"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 10.115,
+      "log": "net.txt",
+      "overrides": {
+        "NET_TEST_PORT": "0"
+      }
+    },
+    {
+      "name": "browser",
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 9.137,
+      "log": "browser.txt",
+      "overrides": {
+        "E2E_SERVER_PORT": "52817",
+        "E2E_WEB_PORT": "43617",
+        "ROOM_STORE_DIR": "/workspace/work/fnd-01-evidence/browser-rooms"
+      }
+    },
+    {
+      "name": "online",
+      "command": [
+        "npx",
+        "--no-install",
+        "tsx",
+        "tools/online-e2e.ts"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.42,
+      "log": "online.txt",
+      "overrides": {
+        "TEST_URL": "ws://127.0.0.1:44605"
+      }
+    }
+  ],
+  "generated_tracked_changes": [
+    {
+      "path": "client/public/art/manifest.json",
+      "change": "generated-modification"
+    },
+    {
+      "path": "docs/physics-tests.md",
+      "change": "generated-modification"
+    },
+    {
+      "path": "docs/screens/e2e-build-boot.png",
+      "change": "generated-modification"
+    },
+    {
+      "path": "docs/screens/e2e-build-shot.png",
+      "change": "generated-modification"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "docs/screens/e2e-build-boot.png",
+      "sha256": "b7b01a3ee3c71c788355b49509f05a6acd3709620d54a250d332ee158020a0f2"
+    },
+    {
+      "name": "docs/screens/e2e-build-shot.png",
+      "sha256": "331fda141950076041b8e80aba58be1c184e29fd31734f1868c3fbf749e15377"
+    }
+  ]
+}

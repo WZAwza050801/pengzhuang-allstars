@@ -1,0 +1,1158 @@
+{
+  "cases": 144,
+  "maxIntentError": 1.8762769116165146e-14,
+  "matrix": [
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.3322676295501878e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.049116928532385e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.2045919817182948e-14
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.3877787807814457e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.049116928532385e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.1823875212257917e-14
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.8762769116165146e-14
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.326672684688674e-15
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.8540724511240114e-14
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.493206138382448e-15
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.8762769116165146e-14
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.326672684688674e-15
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.8540724511240114e-14
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.493206138382448e-15
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.8762769116165146e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.326672684688674e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 1.8540724511240114e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.493206138382448e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 2.7200464103316335e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 6.661338147750939e-16
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 2.7200464103316335e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.6653345369377348e-16
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 1.887379141862766e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.1324274851176597e-14
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 1.9984014443252818e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.1601830607332886e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 1.887379141862766e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.1324274851176597e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 1.9984014443252818e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 1.1601830607332886e-14
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 6.106226635438361e-16
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 8.881784197001252e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 7.771561172376096e-16
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 9.159339953157541e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 8.326672684688674e-16
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 7.827072323607354e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "error": 7.216449660063518e-16
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "error": 7.827072323607354e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.3322676295501878e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.049116928532385e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.2045919817182948e-14
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.3877787807814457e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.049116928532385e-15
+    },
+    {
+      "skin": "orig_2016",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.1823875212257917e-14
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.8762769116165146e-14
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.326672684688674e-15
+    },
+    {
+      "skin": "classic",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.8540724511240114e-14
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.493206138382448e-15
+    },
+    {
+      "skin": "classic",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.8762769116165146e-14
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.326672684688674e-15
+    },
+    {
+      "skin": "cup",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.8540724511240114e-14
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.493206138382448e-15
+    },
+    {
+      "skin": "cup",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.8762769116165146e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.326672684688674e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 1.8540724511240114e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.4654943925052066e-14
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.493206138382448e-15
+    },
+    {
+      "skin": "sunset",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.0547118733938987e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 2.7200464103316335e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 6.661338147750939e-16
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 2.7200464103316335e-15
+    },
+    {
+      "skin": "scene_01",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.6653345369377348e-16
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 1.887379141862766e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.1324274851176597e-14
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 1.9984014443252818e-15
+    },
+    {
+      "skin": "scene_02",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.1601830607332886e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 1.887379141862766e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.1324274851176597e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 1.9984014443252818e-15
+    },
+    {
+      "skin": "scene_03",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 1.1601830607332886e-14
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 6.106226635438361e-16
+    },
+    {
+      "skin": "scene_04",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 8.881784197001252e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 7.771561172376096e-16
+    },
+    {
+      "skin": "scene_04",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 9.159339953157541e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 8.326672684688674e-16
+    },
+    {
+      "skin": "scene_05",
+      "side": 0,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 7.827072323607354e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 320,
+      "height": 568,
+      "dpr": 3,
+      "error": 5.828670879282072e-15
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "error": 1.2156942119645464e-14
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 768,
+      "height": 1024,
+      "dpr": 3,
+      "error": 7.216449660063518e-16
+    },
+    {
+      "skin": "scene_05",
+      "side": 1,
+      "width": 1440,
+      "height": 900,
+      "dpr": 3,
+      "error": 7.827072323607354e-15
+    }
+  ]
+}

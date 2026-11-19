@@ -1,0 +1,36 @@
+{
+  "views": [
+    {
+      "width": 1280,
+      "loginResume": true,
+      "cancelAndRetry": true,
+      "queueResult": true,
+      "guestFriend": true,
+      "localOfflinePractice": true,
+      "maintenanceAndFlags": true,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "loginResume": true,
+      "cancelAndRetry": true,
+      "queueResult": true,
+      "guestFriend": true,
+      "localOfflinePractice": true,
+      "maintenanceAndFlags": true,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "loginResume": true,
+      "cancelAndRetry": true,
+      "queueResult": true,
+      "guestFriend": true,
+      "localOfflinePractice": true,
+      "maintenanceAndFlags": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": [],
+  "businessWrites": []
+}

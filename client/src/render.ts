@@ -1,6 +1,11 @@
 import type { FieldGeometry, PhysicsConfig } from '../../shared/data';
 import type { Side } from '../../shared/physics';
+import { QUALITY_PROFILES, type Quality } from './quality';
 import { portraitUrl } from './portraits';
+import { WebAssetScene } from './assets';
+import { fieldArtMapping } from '../../packages/game-core/src/field-art';
+import { fieldOutline } from '../../packages/game-core/src/field';
+import { worldToView, viewToWorld, clientToWorld, cameraMatrix, fieldViewport, type Camera } from '../../packages/game-core/src/camera';
 
 export interface Skin {
   id: string;
@@ -13,6 +18,7 @@ export interface Skin {
   artFit?: string;
   /** Source pixels [left, top, right, bottom) of the playable rectangle inside the full scene. */
   artCrop?: number[];
+  artRotate?: number;
   /** The whole original screen (stands, walls, corner springs, score bar), relative to client/public. */
   scene?: string;
   sceneSize?: number[];
@@ -79,10 +85,12 @@ export class Renderer {
   readonly canvas: HTMLCanvasElement;
   private readonly ctx: CanvasRenderingContext2D;
   private dpr = 1;
-  private s = 1;
-  private cx = 0;
-  private cy = 0;
-  flip = false;
+  private camera: Camera = { cx: 0, cy: 0, scale: 1, side: 0 };
+  private get s() { return this.camera.scale; }
+  private get cx() { return this.camera.cx; }
+  private get cy() { return this.camera.cy; }
+  get flip() { return this.camera.side === 1; }
+  set flip(value: boolean) { this.camera.side = value ? 1 : 0; }
   skin: Skin;
   private readonly avatars = new Map<string, HTMLImageElement>();
   /** Original corner assembly (stone + coil + dirt), grass keyed out. */
@@ -97,8 +105,11 @@ export class Renderer {
   private readonly g: FieldGeometry;
   private readonly p: PhysicsConfig;
   private outline: [number, number][] = [];
-  private grassCache: HTMLCanvasElement | null = null;
-  private grassKey = '';
+  private staticCache: HTMLCanvasElement | null = null;
+  private staticKey = '';
+  private disposed = false;
+  private quality: Quality = 'high';
+  private readonly resources = new WebAssetScene();
   /** Static layers of the "drawn" skin (backdrop, hedge, grass, walls) at canvas resolution. */
   private drawnCache: HTMLCanvasElement | null = null;
   private drawnKey = '';
@@ -114,8 +125,7 @@ export class Renderer {
     this.g = g;
     this.p = p;
     this.skin = skin;
-    const W = g.width / 2, L = g.length / 2, c = g.cornerCut;
-    this.outline = [[-W + c, -L], [W - c, -L], [W, -L + c], [W, L - c], [W - c, L], [-W + c, L], [-W, L - c], [-W, -L + c]];
+    this.outline = fieldOutline(g);
   }
 
   attachOverlay(c: HTMLCanvasElement) {
@@ -125,18 +135,26 @@ export class Renderer {
 
   avatar(playerId: string) {
     const cached = this.avatars.get(playerId);
-    if (cached) return cached;
+    if (cached) { this.avatars.delete(playerId); this.avatars.set(playerId, cached); return cached; }
     const img = new Image();
-    img.src = portraitUrl(playerId);
+    this.resources.bind(portraitUrl(playerId), img);
     this.avatars.set(playerId, img);
+    this.trimImages(this.avatars, 32);
     return img;
+  }
+
+  /** Wait for verified bytes and decoding before an explicit portrait preload. */
+  async preloadAvatar(playerId: string): Promise<HTMLImageElement> {
+    const image = this.avatar(playerId);
+    await this.resources.wait(image);
+    return image;
   }
 
   /** Bound face URLs, for the portrait smoke check. */
   boundAvatars() {
     return [...this.avatars.entries()].map(([playerId, img]) => ({
       playerId,
-      src: img.currentSrc || img.src,
+      src: this.resources.source(img),
       complete: img.complete && img.naturalWidth > 0,
     }));
   }
@@ -154,15 +172,25 @@ export class Renderer {
     let img = this.artImages.get(src);
     if (!img) {
       img = new Image();
-      img.src = `/${src}`;
+      this.resources.bind(`/${src}`, img, this.quality === 'low' ? 'low' : 'high');
       this.artImages.set(src, img);
+      this.trimImages(this.artImages, 4);
     }
     return img.complete && img.naturalWidth ? img : null;
   }
 
-  /** World extents shown on screen (metres), including walls and goal pockets. */
-  private extents() {
-    return { w: this.g.width + 0.9, h: this.g.length + 2 * this.g.goalDepth + 0.7 };
+  /** Decode the selected field before a calibration capture or explicit scene transition. */
+  async preloadField(): Promise<void> {
+    const images: HTMLImageElement[] = [];
+    for (const src of [this.skin.art, this.skin.scene]) {
+      if (!src) continue;
+      let image = this.artImages.get(src);
+      if (!image) { image = new Image(); this.resources.bind(`/${src}`, image, this.quality === 'low' ? 'low' : 'high'); this.artImages.set(src, image); this.trimImages(this.artImages, 4); }
+      images.push(image);
+    }
+    this.springImage();
+    if (this.springImg) images.push(this.springImg);
+    await Promise.all(images.map(image => this.resources.wait(image)));
   }
 
   /**
@@ -172,9 +200,7 @@ export class Renderer {
   private sceneBox() {
     const sk = this.skin;
     if ((!sk.scene && !this.drawn) || !sk.sceneSize || !sk.artCrop) return null;
-    const [left, top, right] = sk.artCrop;
-    const k = this.g.width / (right - left);
-    return { k, x0: -this.g.width / 2 - left * k, y0: -this.g.length / 2 - top * k, w: sk.sceneSize[0] * k, h: sk.sceneSize[1] * k };
+    return fieldArtMapping(this.g, sk).sceneBox;
   }
 
   private sceneImage(): HTMLImageElement | null {
@@ -183,8 +209,9 @@ export class Renderer {
     let img = this.artImages.get(src);
     if (!img) {
       img = new Image();
-      img.src = `/${src}`;
+      this.resources.bind(`/${src}`, img, this.quality === 'low' ? 'low' : 'high');
       this.artImages.set(src, img);
+      this.trimImages(this.artImages, 4);
     }
     return img.complete && img.naturalWidth ? img : null;
   }
@@ -202,32 +229,25 @@ export class Renderer {
   sceneBar() {
     const b = this.sceneBox();
     if (!b) return null;
-    const px = b.k * this.s;
-    const left = this.cx + b.x0 * this.s;
-    const top = this.cy + b.y0 * this.s;
-    return { x: left + SCENE_BAR.left * px, y: top, w: (SCENE_BAR.right - SCENE_BAR.left) * px, h: SCENE_BAR.bottom * px, px };
+    const mapping = fieldArtMapping(this.g, this.skin);
+    const corners = [{x:SCENE_BAR.left,y:0},{x:SCENE_BAR.right,y:0},{x:SCENE_BAR.right,y:SCENE_BAR.bottom},{x:SCENE_BAR.left,y:SCENE_BAR.bottom}]
+      .map(p => worldToView(mapping.sourceToWorld(p), { ...this.camera, side: 0 }));
+    const x = Math.min(...corners.map(p=>p.x)), y = Math.min(...corners.map(p=>p.y));
+    const w = Math.max(...corners.map(p=>p.x))-x, h = Math.max(...corners.map(p=>p.y))-y;
+    return { x, y, w, h, px: w/(SCENE_BAR.right-SCENE_BAR.left) };
   }
 
   resize() {
     const r = this.canvas.getBoundingClientRect();
-    this.dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-    this.canvas.width = Math.round(r.width * this.dpr);
-    this.canvas.height = Math.round(r.height * this.dpr);
-    const b = this.sceneBox();
-    if (b) {
-      // Keep the walls and the inner edge of the stands in view; the scene's top (score bar) is pinned to the top edge,
-      // and the bottom goal pocket stays clear of the bottom bar. The rest of the scene may run under that bar.
-      const lowest = this.g.length / 2 + this.g.goalDepth + 0.15 - b.y0;
-      this.s = Math.min(r.width / (this.g.width + 0.8), (r.height - this.reserveBottom) / lowest);
-      this.cx = r.width / 2 - (b.x0 + b.w / 2) * this.s;
-      this.cy = -b.y0 * this.s;
-    } else {
-      const e = this.extents();
-      this.s = Math.min(r.width / e.w, r.height / e.h);
-      this.cx = r.width / 2;
-      this.cy = r.height / 2;
-    }
-    this.grassCache = null;
+    this.dpr = Math.min(window.devicePixelRatio || 1, QUALITY_PROFILES[this.quality].maxDpr);
+    // Hidden/zero-sized stages may occur during platform transitions; keep the previous camera until visible.
+    if (r.width <= 0 || r.height <= 0) return;
+    const layout = fieldViewport(this.g, { width: r.width, height: r.height, dpr: this.dpr, side: this.camera.side, scene: this.sceneBox(), reserveBottom: this.reserveBottom });
+    this.camera = layout.camera;
+    this.canvas.width = layout.backing.width;
+    this.canvas.height = layout.backing.height;
+    this.staticKey = '';
+    this.drawnKey = '';
     if (this.overlay) {
       this.overlay.width = Math.round(window.innerWidth * this.dpr);
       this.overlay.height = Math.round(window.innerHeight * this.dpr);
@@ -240,37 +260,88 @@ export class Renderer {
   }
 
   toScreen(x: number, y: number) {
-    const k = this.flip ? -1 : 1;
-    return { x: this.cx + x * this.s * k, y: this.cy + y * this.s * k };
+    return worldToView({ x, y }, this.camera);
   }
 
   toWorld(sx: number, sy: number) {
-    const k = this.flip ? -1 : 1;
-    return { x: ((sx - this.cx) / this.s) * k, y: ((sy - this.cy) / this.s) * k };
+    return viewToWorld({ x: sx, y: sy }, this.camera);
+  }
+
+  clientToWorld(x: number, y: number) {
+    const rect = this.canvas.getBoundingClientRect();
+    return clientToWorld({ x, y }, { x: rect.left, y: rect.top }, this.camera);
   }
 
   private worldTransform() {
-    const k = (this.flip ? -1 : 1) * this.s * this.dpr;
-    this.ctx.setTransform(k, 0, 0, k, this.cx * this.dpr, this.cy * this.dpr);
+    this.ctx.setTransform(...cameraMatrix(this.camera, this.dpr));
+  }
+
+  setQuality(quality: Quality) { if (this.quality !== quality) { this.quality = quality; for (const image of this.artImages.values()) this.resources.release(image); this.artImages.clear(); this.floorColors.clear(); this.resize(); } }
+
+  private trimImages(cache: Map<string, HTMLImageElement>, max: number) {
+    while (cache.size > max) {
+      const key = cache.keys().next().value!;
+      this.resources.release(cache.get(key)!); cache.delete(key);
+    }
+  }
+
+  /** Bounded resource counters for lifecycle acceptance, not a claim about device-wide GPU memory. */
+  resourceStats() {
+    return { quality: this.quality, avatars: this.avatars.size, art: this.artImages.size,
+      floorColors: this.floorColors.size, canvases: Number(!!this.staticCache) + Number(!!this.drawnCache),
+      backingPixels: this.canvas.width * this.canvas.height, disposed: this.disposed, assets: this.resources.stats() };
+  }
+
+  dispose() {
+    if (this.disposed) return;
+    this.disposed = true;
+    this.resources.dispose();
+    for (const image of [...this.avatars.values(), ...this.artImages.values(), ...(this.springImg ? [this.springImg] : [])]) image.removeAttribute('src');
+    this.avatars.clear(); this.artImages.clear(); this.floorColors.clear(); this.springImg = null;
+    for (const canvas of [this.staticCache, this.drawnCache, this.overlay, this.canvas]) if (canvas) { canvas.width = 0; canvas.height = 0; }
+    this.staticCache = null; this.drawnCache = null; this.overlay = null; this.octx = null;
   }
 
   draw(sc: Scene) {
-    const ctx = this.ctx;
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = this.skin.outside;
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.sceneDrawn = this.drawScene();
+    if (this.disposed) return;
+    this.drawStaticLayer();
     this.worldTransform();
-    this.drawField();
     this.drawSprings(sc.springHits, sc.now);
+    this.drawShadowLayer(sc);
+    this.drawTrajectoryLayer(sc);
+    this.drawActorLayer(sc);
+    this.drawGoalFronts();
+    this.drawEffects(sc.effects.slice(-QUALITY_PROFILES[this.quality].maxEffects), sc.now);
+    this.drawOverlay(sc.aim);
+  }
+
+  private drawStaticLayer() {
+    // Readiness participates in the key so the procedural fallback is replaced after an image decodes.
+    const art = this.artImage(), scene = this.sceneImage();
+    const key = `${this.skin.id}|${this.canvas.width}|${this.canvas.height}|${this.cx}|${this.cy}|${this.s}|${this.flip}|${this.quality}|${art?.naturalWidth ?? 0}|${scene?.naturalWidth ?? 0}`;
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (this.staticCache && this.staticKey === key) { this.ctx.drawImage(this.staticCache, 0, 0); return; }
+    this.ctx.fillStyle = this.skin.outside;
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.sceneDrawn = this.drawScene();
+    this.worldTransform(); this.drawField();
+    const cache = this.staticCache ?? document.createElement('canvas');
+    cache.width = this.canvas.width; cache.height = this.canvas.height;
+    cache.getContext('2d')!.drawImage(this.canvas, 0, 0);
+    this.staticCache = cache; this.staticKey = key;
+  }
+
+  private drawShadowLayer(sc: Scene) {
+    if (!QUALITY_PROFILES[this.quality].shadows) return;
     for (const p of sc.pieces) if (p.out === 0) this.drawShadow(p.x, p.y, this.p.disc.radius);
-    this.drawTrail(sc.trail, sc.now);
     this.drawShadow(sc.ball.x, sc.ball.y, this.p.ball.radius);
+  }
+  private drawTrajectoryLayer(sc: Scene) {
+    if (QUALITY_PROFILES[this.quality].trail) this.drawTrail(sc.trail, sc.now);
+  }
+  private drawActorLayer(sc: Scene) {
     this.drawBall(sc.ball.x, sc.ball.y, sc.ball.spin);
     for (const p of sc.pieces) if (p.out === 0) this.drawPiece(p, sc);
-    this.drawGoalFronts();
-    this.drawEffects(sc.effects, sc.now);
-    this.drawOverlay(sc.aim);
   }
 
   /**
@@ -284,7 +355,11 @@ export class Renderer {
     if (!b || !img) return false;
     const ctx = this.ctx, k = this.s * this.dpr;
     ctx.setTransform(k, 0, 0, k, this.cx * this.dpr, this.cy * this.dpr);
-    ctx.drawImage(img, b.x0, b.y0, b.w, b.h);
+    const mapping = fieldArtMapping(this.g, this.skin);
+    ctx.save();
+    ctx.transform(...mapping.matrix);
+    ctx.drawImage(img, 0, 0, this.skin.sceneSize![0], this.skin.sceneSize![1]);
+    ctx.restore();
     // The original scene is 3:4. A phone or a desktop window is taller, so the picture ends
     // above the bottom bar. Stretching those last pixels turns the hedge into vertical streaks.
     const viewBottom = (this.canvas.height / this.dpr - this.cy) / this.s;
@@ -317,11 +392,12 @@ export class Renderer {
     }
     const color = n ? `rgb(${Math.round(r / n)},${Math.round(g / n)},${Math.round(b / n)})` : this.skin.outside;
     this.floorColors.set(img.src, color);
+    if (this.floorColors.size > 4) this.floorColors.delete(this.floorColors.keys().next().value!);
     return color;
   }
 
   /** The "drawn" skin: static layers are painted once per layout into drawnCache, then blitted every frame. */
-  private drawDrawnScene(b: { k: number; x0: number; y0: number; w: number; h: number }): boolean {
+  private drawDrawnScene(b: { k: number; ky: number; x0: number; y0: number; w: number; h: number }): boolean {
     const cw = this.canvas.width, ch = this.canvas.height;
     const key = `${this.skin.id}|${cw}x${ch}|${this.s}|${this.cx}|${this.cy}|${this.flip}`;
     if (!this.drawnCache || key !== this.drawnKey) {
@@ -345,7 +421,7 @@ export class Renderer {
   }
 
   /** Never flipped: ground, red stands, hedge ring, bunting and rocks, and the cyan | black | red score bar. */
-  private paintBackdrop(x: CanvasRenderingContext2D, b: { k: number; x0: number; y0: number }, v: { l: number; r: number; t: number; b: number }) {
+  private paintBackdrop(x: CanvasRenderingContext2D, b: { k: number; ky: number; x0: number; y0: number }, v: { l: number; r: number; t: number; b: number }) {
     const g = this.g, W = g.width / 2, L = g.length / 2;
     const rand = rng(2016);
 
@@ -400,7 +476,7 @@ export class Renderer {
     }
 
     // bunting between the score bar and the hedge
-    const barBottom = b.y0 + 100 * b.k;
+    const barBottom = b.y0 + 100 * b.ky;
     const yb = (barBottom - hy) / 2 - 0.12;
     const colors = ['#33a9e6', '#ff6f91', '#f39a2b', '#41c9d6', '#ffd43b', '#8c6ce0'];
     let ci = 0;
@@ -462,7 +538,7 @@ export class Renderer {
     rock(W - 0.3, hy + 0.35, 0.14);
 
     // score bar: cyan | black tab | red; the DOM scoreboard sits on top
-    const bx = (p: number) => b.x0 + p * b.k, by = (p: number) => b.y0 + p * b.k, k = b.k;
+    const bx = (p: number) => b.x0 + p * b.k, by = (p: number) => b.y0 + p * b.ky, k = b.k;
     const bar = (l: number, r: number, bottom: number, radii: number[], top: string, bot: string, edge: string) => {
       x.beginPath();
       x.roundRect(bx(l), by(-40), bx(r) - bx(l), by(bottom) - by(-40), radii.map((q) => q * k));
@@ -746,8 +822,7 @@ export class Renderer {
     octx.clearRect(0, 0, o.width, o.height);
     if (!aim) return;
     const r = this.canvas.getBoundingClientRect();
-    const k = (this.flip ? -1 : 1) * this.s * this.dpr;
-    octx.setTransform(k, 0, 0, k, (r.left + this.cx) * this.dpr, (r.top + this.cy) * this.dpr);
+    octx.setTransform(...cameraMatrix(this.camera, this.dpr, { x: r.left, y: r.top }));
     this.drawPowerRing(aim, octx);
     this.drawAimOver(aim, octx);
   }
@@ -759,7 +834,7 @@ export class Renderer {
   private springImage(): HTMLImageElement | null {
     if (!this.springImg) {
       const img = new Image();
-      img.src = '/assets/fields/spring_corner.png';
+      this.resources.bind('/assets/fields/spring_corner.png', img);
       this.springImg = img;
     }
     return this.springImg.complete && this.springImg.naturalWidth > 0 ? this.springImg : null;

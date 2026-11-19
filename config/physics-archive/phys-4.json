@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "version": "phys-4",
+  "minProtocol": 1,
+  "maxProtocol": 1,
+  "payload": {
+    "ball": {
+      "coulomb": 0.852,
+      "linDamp": 0.63,
+      "mass": 0.4,
+      "radius": 0.12
+    },
+    "curve": {
+      "maxTurnDeg": 103.354,
+      "turnRate": 1.98
+    },
+    "disc": {
+      "coulomb": 2.193,
+      "linDamp": 0.248,
+      "mass": 1,
+      "radius": 0.32
+    },
+    "friction": {
+      "discBall": 0.05,
+      "discDisc": 0.05,
+      "wall": 0.1
+    },
+    "hz": 120,
+    "maxBallSpeed": 16,
+    "maxSimSeconds": 14,
+    "positionIterations": 3,
+    "postGoalSeconds": 1,
+    "recordHz": 30,
+    "restitution": {
+      "ballWall": 0.7,
+      "discBall": 0.8,
+      "discDisc": 0.75,
+      "discWall": 0.55,
+      "net": 0.12,
+      "post": 0.6
+    },
+    "shot": {
+      "gamma": 0.623,
+      "minPower": 0.06,
+      "vmax": 9.1956
+    },
+    "spring": {
+      "boost": 2.2,
+      "maxSpeed": 9.12,
+      "minSpeed": 0.25,
+      "restitution": 0.9
+    },
+    "stopSpeed": 0.03,
+    "velocityIterations": 8,
+    "velocityThreshold": 0.25,
+    "version": "phys-4"
+  },
+  "sha256": "2127807468c142c45bc301f489def437d7cca8c7c9d4ff3ada233bc986fd84bf"
+}

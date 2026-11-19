@@ -1,0 +1,154 @@
+{
+  "cache": {
+    "images": 1,
+    "pending": 0,
+    "ready": 1,
+    "decodedBytes": 262144,
+    "decodedLimit": 67108864,
+    "failures": 0,
+    "disposed": false,
+    "lowVariants": 0,
+    "cache": {
+      "memoryBytes": 81176,
+      "memoryLimit": 8388608,
+      "inFlight": 0,
+      "waiters": 0,
+      "corruptCache": 0,
+      "persistentFailures": 0,
+      "cacheHits": 0,
+      "networkRequests": 1,
+      "activeTransfers": 0,
+      "queuedTransfers": 0
+    },
+    "width": 256
+  },
+  "corruption": {
+    "memoryBytes": 81176,
+    "memoryLimit": 8388608,
+    "inFlight": 0,
+    "waiters": 0,
+    "corruptCache": 1,
+    "persistentFailures": 0,
+    "cacheHits": 0,
+    "networkRequests": 1,
+    "activeTransfers": 0,
+    "queuedTransfers": 0
+  },
+  "offline": {
+    "width": 256,
+    "memoryBytes": 81176,
+    "memoryLimit": 8388608,
+    "inFlight": 0,
+    "waiters": 0,
+    "corruptCache": 0,
+    "persistentFailures": 0,
+    "cacheHits": 1,
+    "networkRequests": 0,
+    "activeTransfers": 0,
+    "queuedTransfers": 0
+  },
+  "versionUpdate": {
+    "memoryBytes": 72756,
+    "memoryLimit": 8388608,
+    "inFlight": 0,
+    "waiters": 0,
+    "corruptCache": 0,
+    "persistentFailures": 0,
+    "cacheHits": 0,
+    "networkRequests": 1,
+    "activeTransfers": 0,
+    "queuedTransfers": 0
+  },
+  "cancellation": {
+    "name": "AbortError",
+    "images": 0,
+    "pending": 0,
+    "ready": 0,
+    "decodedBytes": 0,
+    "decodedLimit": 67108864,
+    "failures": 0,
+    "disposed": true,
+    "lowVariants": 0,
+    "cache": {
+      "memoryBytes": 0,
+      "memoryLimit": 8388608,
+      "inFlight": 0,
+      "waiters": 0,
+      "corruptCache": 0,
+      "persistentFailures": 0,
+      "cacheHits": 0,
+      "networkRequests": 1,
+      "activeTransfers": 0,
+      "queuedTransfers": 0
+    }
+  },
+  "diskBound": {
+    "bytes": 4,
+    "limit": 6
+  },
+  "lowResolution": {
+    "width": 576,
+    "height": 768,
+    "images": 1,
+    "pending": 0,
+    "ready": 1,
+    "decodedBytes": 1769472,
+    "decodedLimit": 67108864,
+    "failures": 0,
+    "disposed": false,
+    "lowVariants": 1,
+    "cache": {
+      "memoryBytes": 41482,
+      "memoryLimit": 8388608,
+      "inFlight": 0,
+      "waiters": 0,
+      "corruptCache": 0,
+      "persistentFailures": 0,
+      "cacheHits": 0,
+      "networkRequests": 1,
+      "activeTransfers": 0,
+      "queuedTransfers": 0
+    }
+  },
+  "fallbackPlayable": true,
+  "legacyLineup": {
+    "cards": 106,
+    "imagesVerified": 864,
+    "consoleErrorsAndWarnings": []
+  },
+  "release": {
+    "version": "assets-332176562462fe95",
+    "applicationBytes": 1238142,
+    "publicBytes": 14086896,
+    "removed": 72,
+    "removedBytes": 17188681,
+    "groups": [
+      {
+        "id": "boot",
+        "bytes": 125676,
+        "decodedRgbaBytes": 1024
+      },
+      {
+        "id": "lobby",
+        "bytes": 1581694,
+        "decodedRgbaBytes": 38239432
+      },
+      {
+        "id": "matchCommon",
+        "bytes": 10556362,
+        "decodedRgbaBytes": 37801984
+      },
+      {
+        "id": "matchLow",
+        "bytes": 332698,
+        "decodedRgbaBytes": 16081920
+      },
+      {
+        "id": "matchHigh",
+        "bytes": 1490466,
+        "decodedRgbaBytes": 85104080
+      }
+    ]
+  },
+  "pageErrors": []
+}

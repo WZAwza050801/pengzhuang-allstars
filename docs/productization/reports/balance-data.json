@@ -1,0 +1,770 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "field-2/phys-4/players-4/skills-1/rules-4/levels-1/attrmap-1",
+  "sourceSha256": "33073e6f868724871ac56c7aa43c8366debe010009f4ad136d2eefd41dad2d0d",
+  "sourceRows": 2250,
+  "runtimeRows": 1060,
+  "referenceOnlyRows": 1190,
+  "runtimePlayers": 106,
+  "sourcePlayers": 106,
+  "rebuiltPlayers": 0,
+  "implementedSkills": 13,
+  "explicitUnimplementedPlayers": 71,
+  "explicitNoSkillPlayers": 30,
+  "attributeDomain": {
+    "min": 21,
+    "max": 119
+  },
+  "legacyMetadata": {
+    "playersMapping": {
+      "min": 40,
+      "max": 99
+    },
+    "active": false,
+    "note": "Legacy attrs/growth and players.mapping remain preserved; source-linked players use exact levels and active attr-mapping.json."
+  },
+  "playerSources": [
+    {
+      "id": "p01",
+      "source": "R",
+      "srcId": "40108",
+      "evidence": "data/levels.json.players.40108;docs/roster-provenance.json.players.p01",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p02",
+      "source": "R",
+      "srcId": "40208",
+      "evidence": "data/levels.json.players.40208;docs/roster-provenance.json.players.p02",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p03",
+      "source": "R",
+      "srcId": "90002",
+      "evidence": "data/levels.json.players.90002;docs/roster-provenance.json.players.p03",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p04",
+      "source": "R",
+      "srcId": "20102",
+      "evidence": "data/levels.json.players.20102;docs/roster-provenance.json.players.p04",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p05",
+      "source": "R",
+      "srcId": "30103",
+      "evidence": "data/levels.json.players.30103;docs/roster-provenance.json.players.p05",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p17",
+      "source": "R",
+      "srcId": "10101",
+      "evidence": "data/levels.json.players.10101;docs/roster-provenance.json.players.p17",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p18",
+      "source": "R",
+      "srcId": "10102",
+      "evidence": "data/levels.json.players.10102;docs/roster-provenance.json.players.p18",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p19",
+      "source": "R",
+      "srcId": "10103",
+      "evidence": "data/levels.json.players.10103;docs/roster-provenance.json.players.p19",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p20",
+      "source": "R",
+      "srcId": "10104",
+      "evidence": "data/levels.json.players.10104;docs/roster-provenance.json.players.p20",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p21",
+      "source": "R",
+      "srcId": "10105",
+      "evidence": "data/levels.json.players.10105;docs/roster-provenance.json.players.p21",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p22",
+      "source": "R",
+      "srcId": "10106",
+      "evidence": "data/levels.json.players.10106;docs/roster-provenance.json.players.p22",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p23",
+      "source": "R",
+      "srcId": "10107",
+      "evidence": "data/levels.json.players.10107;docs/roster-provenance.json.players.p23",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p24",
+      "source": "R",
+      "srcId": "10201",
+      "evidence": "data/levels.json.players.10201;docs/roster-provenance.json.players.p24",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p25",
+      "source": "R",
+      "srcId": "10202",
+      "evidence": "data/levels.json.players.10202;docs/roster-provenance.json.players.p25",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p26",
+      "source": "R",
+      "srcId": "10203",
+      "evidence": "data/levels.json.players.10203;docs/roster-provenance.json.players.p26",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p27",
+      "source": "R",
+      "srcId": "10204",
+      "evidence": "data/levels.json.players.10204;docs/roster-provenance.json.players.p27",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p28",
+      "source": "R",
+      "srcId": "10205",
+      "evidence": "data/levels.json.players.10205;docs/roster-provenance.json.players.p28",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p29",
+      "source": "R",
+      "srcId": "10206",
+      "evidence": "data/levels.json.players.10206;docs/roster-provenance.json.players.p29",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p30",
+      "source": "R",
+      "srcId": "10207",
+      "evidence": "data/levels.json.players.10207;docs/roster-provenance.json.players.p30",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p31",
+      "source": "R",
+      "srcId": "10301",
+      "evidence": "data/levels.json.players.10301;docs/roster-provenance.json.players.p31",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p32",
+      "source": "R",
+      "srcId": "10302",
+      "evidence": "data/levels.json.players.10302;docs/roster-provenance.json.players.p32",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p33",
+      "source": "R",
+      "srcId": "10303",
+      "evidence": "data/levels.json.players.10303;docs/roster-provenance.json.players.p33",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p34",
+      "source": "R",
+      "srcId": "10304",
+      "evidence": "data/levels.json.players.10304;docs/roster-provenance.json.players.p34",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p35",
+      "source": "R",
+      "srcId": "10305",
+      "evidence": "data/levels.json.players.10305;docs/roster-provenance.json.players.p35",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p36",
+      "source": "R",
+      "srcId": "10306",
+      "evidence": "data/levels.json.players.10306;docs/roster-provenance.json.players.p36",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p37",
+      "source": "R",
+      "srcId": "10307",
+      "evidence": "data/levels.json.players.10307;docs/roster-provenance.json.players.p37",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p38",
+      "source": "R",
+      "srcId": "10401",
+      "evidence": "data/levels.json.players.10401;docs/roster-provenance.json.players.p38",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p39",
+      "source": "R",
+      "srcId": "10402",
+      "evidence": "data/levels.json.players.10402;docs/roster-provenance.json.players.p39",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p40",
+      "source": "R",
+      "srcId": "10403",
+      "evidence": "data/levels.json.players.10403;docs/roster-provenance.json.players.p40",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p41",
+      "source": "R",
+      "srcId": "10404",
+      "evidence": "data/levels.json.players.10404;docs/roster-provenance.json.players.p41",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p42",
+      "source": "R",
+      "srcId": "10405",
+      "evidence": "data/levels.json.players.10405;docs/roster-provenance.json.players.p42",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p43",
+      "source": "R",
+      "srcId": "10406",
+      "evidence": "data/levels.json.players.10406;docs/roster-provenance.json.players.p43",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p44",
+      "source": "R",
+      "srcId": "10407",
+      "evidence": "data/levels.json.players.10407;docs/roster-provenance.json.players.p44",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p45",
+      "source": "R",
+      "srcId": "20101",
+      "evidence": "data/levels.json.players.20101;docs/roster-provenance.json.players.p45",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p46",
+      "source": "R",
+      "srcId": "20103",
+      "evidence": "data/levels.json.players.20103;docs/roster-provenance.json.players.p46",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p47",
+      "source": "R",
+      "srcId": "20104",
+      "evidence": "data/levels.json.players.20104;docs/roster-provenance.json.players.p47",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p48",
+      "source": "R",
+      "srcId": "20105",
+      "evidence": "data/levels.json.players.20105;docs/roster-provenance.json.players.p48",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p49",
+      "source": "R",
+      "srcId": "20106",
+      "evidence": "data/levels.json.players.20106;docs/roster-provenance.json.players.p49",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p50",
+      "source": "R",
+      "srcId": "20107",
+      "evidence": "data/levels.json.players.20107;docs/roster-provenance.json.players.p50",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p51",
+      "source": "R",
+      "srcId": "20201",
+      "evidence": "data/levels.json.players.20201;docs/roster-provenance.json.players.p51",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p52",
+      "source": "R",
+      "srcId": "20202",
+      "evidence": "data/levels.json.players.20202;docs/roster-provenance.json.players.p52",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p53",
+      "source": "R",
+      "srcId": "20203",
+      "evidence": "data/levels.json.players.20203;docs/roster-provenance.json.players.p53",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p54",
+      "source": "R",
+      "srcId": "20204",
+      "evidence": "data/levels.json.players.20204;docs/roster-provenance.json.players.p54",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p55",
+      "source": "R",
+      "srcId": "20205",
+      "evidence": "data/levels.json.players.20205;docs/roster-provenance.json.players.p55",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p56",
+      "source": "R",
+      "srcId": "20206",
+      "evidence": "data/levels.json.players.20206;docs/roster-provenance.json.players.p56",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p57",
+      "source": "R",
+      "srcId": "20207",
+      "evidence": "data/levels.json.players.20207;docs/roster-provenance.json.players.p57",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p58",
+      "source": "R",
+      "srcId": "30101",
+      "evidence": "data/levels.json.players.30101;docs/roster-provenance.json.players.p58",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p59",
+      "source": "R",
+      "srcId": "30102",
+      "evidence": "data/levels.json.players.30102;docs/roster-provenance.json.players.p59",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p60",
+      "source": "R",
+      "srcId": "30104",
+      "evidence": "data/levels.json.players.30104;docs/roster-provenance.json.players.p60",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p61",
+      "source": "R",
+      "srcId": "30105",
+      "evidence": "data/levels.json.players.30105;docs/roster-provenance.json.players.p61",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p62",
+      "source": "R",
+      "srcId": "30106",
+      "evidence": "data/levels.json.players.30106;docs/roster-provenance.json.players.p62",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p63",
+      "source": "R",
+      "srcId": "30107",
+      "evidence": "data/levels.json.players.30107;docs/roster-provenance.json.players.p63",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p64",
+      "source": "R",
+      "srcId": "30108",
+      "evidence": "data/levels.json.players.30108;docs/roster-provenance.json.players.p64",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p65",
+      "source": "R",
+      "srcId": "40101",
+      "evidence": "data/levels.json.players.40101;docs/roster-provenance.json.players.p65",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p66",
+      "source": "R",
+      "srcId": "40102",
+      "evidence": "data/levels.json.players.40102;docs/roster-provenance.json.players.p66",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p67",
+      "source": "R",
+      "srcId": "40103",
+      "evidence": "data/levels.json.players.40103;docs/roster-provenance.json.players.p67",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p68",
+      "source": "R",
+      "srcId": "40104",
+      "evidence": "data/levels.json.players.40104;docs/roster-provenance.json.players.p68",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p69",
+      "source": "R",
+      "srcId": "40105",
+      "evidence": "data/levels.json.players.40105;docs/roster-provenance.json.players.p69",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p70",
+      "source": "R",
+      "srcId": "40106",
+      "evidence": "data/levels.json.players.40106;docs/roster-provenance.json.players.p70",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p71",
+      "source": "R",
+      "srcId": "40107",
+      "evidence": "data/levels.json.players.40107;docs/roster-provenance.json.players.p71",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p72",
+      "source": "R",
+      "srcId": "40110",
+      "evidence": "data/levels.json.players.40110;docs/roster-provenance.json.players.p72",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p73",
+      "source": "R",
+      "srcId": "40201",
+      "evidence": "data/levels.json.players.40201;docs/roster-provenance.json.players.p73",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p74",
+      "source": "R",
+      "srcId": "40202",
+      "evidence": "data/levels.json.players.40202;docs/roster-provenance.json.players.p74",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p75",
+      "source": "R",
+      "srcId": "40203",
+      "evidence": "data/levels.json.players.40203;docs/roster-provenance.json.players.p75",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p76",
+      "source": "R",
+      "srcId": "40204",
+      "evidence": "data/levels.json.players.40204;docs/roster-provenance.json.players.p76",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p77",
+      "source": "R",
+      "srcId": "40205",
+      "evidence": "data/levels.json.players.40205;docs/roster-provenance.json.players.p77",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p78",
+      "source": "R",
+      "srcId": "40206",
+      "evidence": "data/levels.json.players.40206;docs/roster-provenance.json.players.p78",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p79",
+      "source": "R",
+      "srcId": "40207",
+      "evidence": "data/levels.json.players.40207;docs/roster-provenance.json.players.p79",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p80",
+      "source": "R",
+      "srcId": "40301",
+      "evidence": "data/levels.json.players.40301;docs/roster-provenance.json.players.p80",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p81",
+      "source": "R",
+      "srcId": "40302",
+      "evidence": "data/levels.json.players.40302;docs/roster-provenance.json.players.p81",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p82",
+      "source": "R",
+      "srcId": "40303",
+      "evidence": "data/levels.json.players.40303;docs/roster-provenance.json.players.p82",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p83",
+      "source": "R",
+      "srcId": "40304",
+      "evidence": "data/levels.json.players.40304;docs/roster-provenance.json.players.p83",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p84",
+      "source": "R",
+      "srcId": "40305",
+      "evidence": "data/levels.json.players.40305;docs/roster-provenance.json.players.p84",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p85",
+      "source": "R",
+      "srcId": "40306",
+      "evidence": "data/levels.json.players.40306;docs/roster-provenance.json.players.p85",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p86",
+      "source": "R",
+      "srcId": "40307",
+      "evidence": "data/levels.json.players.40307;docs/roster-provenance.json.players.p86",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p87",
+      "source": "R",
+      "srcId": "50101",
+      "evidence": "data/levels.json.players.50101;docs/roster-provenance.json.players.p87",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p88",
+      "source": "R",
+      "srcId": "50102",
+      "evidence": "data/levels.json.players.50102;docs/roster-provenance.json.players.p88",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p89",
+      "source": "R",
+      "srcId": "50103",
+      "evidence": "data/levels.json.players.50103;docs/roster-provenance.json.players.p89",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p90",
+      "source": "R",
+      "srcId": "50104",
+      "evidence": "data/levels.json.players.50104;docs/roster-provenance.json.players.p90",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p91",
+      "source": "R",
+      "srcId": "50105",
+      "evidence": "data/levels.json.players.50105;docs/roster-provenance.json.players.p91",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p92",
+      "source": "R",
+      "srcId": "50106",
+      "evidence": "data/levels.json.players.50106;docs/roster-provenance.json.players.p92",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p93",
+      "source": "R",
+      "srcId": "50107",
+      "evidence": "data/levels.json.players.50107;docs/roster-provenance.json.players.p93",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p94",
+      "source": "R",
+      "srcId": "60101",
+      "evidence": "data/levels.json.players.60101;docs/roster-provenance.json.players.p94",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p95",
+      "source": "R",
+      "srcId": "60102",
+      "evidence": "data/levels.json.players.60102;docs/roster-provenance.json.players.p95",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p96",
+      "source": "R",
+      "srcId": "60103",
+      "evidence": "data/levels.json.players.60103;docs/roster-provenance.json.players.p96",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p97",
+      "source": "R",
+      "srcId": "60104",
+      "evidence": "data/levels.json.players.60104;docs/roster-provenance.json.players.p97",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p98",
+      "source": "R",
+      "srcId": "60105",
+      "evidence": "data/levels.json.players.60105;docs/roster-provenance.json.players.p98",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p99",
+      "source": "R",
+      "srcId": "60106",
+      "evidence": "data/levels.json.players.60106;docs/roster-provenance.json.players.p99",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p100",
+      "source": "R",
+      "srcId": "60107",
+      "evidence": "data/levels.json.players.60107;docs/roster-provenance.json.players.p100",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p101",
+      "source": "R",
+      "srcId": "70101",
+      "evidence": "data/levels.json.players.70101;docs/roster-provenance.json.players.p101",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p102",
+      "source": "R",
+      "srcId": "80101",
+      "evidence": "data/levels.json.players.80101;docs/roster-provenance.json.players.p102",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p103",
+      "source": "R",
+      "srcId": "80102",
+      "evidence": "data/levels.json.players.80102;docs/roster-provenance.json.players.p103",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p104",
+      "source": "R",
+      "srcId": "80103",
+      "evidence": "data/levels.json.players.80103;docs/roster-provenance.json.players.p104",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p105",
+      "source": "R",
+      "srcId": "80104",
+      "evidence": "data/levels.json.players.80104;docs/roster-provenance.json.players.p105",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p106",
+      "source": "R",
+      "srcId": "80105",
+      "evidence": "data/levels.json.players.80105;docs/roster-provenance.json.players.p106",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p107",
+      "source": "R",
+      "srcId": "80106",
+      "evidence": "data/levels.json.players.80106;docs/roster-provenance.json.players.p107",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p108",
+      "source": "R",
+      "srcId": "80107",
+      "evidence": "data/levels.json.players.80107;docs/roster-provenance.json.players.p108",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p109",
+      "source": "R",
+      "srcId": "80201",
+      "evidence": "data/levels.json.players.80201;docs/roster-provenance.json.players.p109",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p110",
+      "source": "R",
+      "srcId": "80202",
+      "evidence": "data/levels.json.players.80202;docs/roster-provenance.json.players.p110",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p111",
+      "source": "R",
+      "srcId": "80203",
+      "evidence": "data/levels.json.players.80203;docs/roster-provenance.json.players.p111",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p112",
+      "source": "R",
+      "srcId": "80204",
+      "evidence": "data/levels.json.players.80204;docs/roster-provenance.json.players.p112",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p113",
+      "source": "R",
+      "srcId": "80205",
+      "evidence": "data/levels.json.players.80205;docs/roster-provenance.json.players.p113",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p114",
+      "source": "R",
+      "srcId": "80206",
+      "evidence": "data/levels.json.players.80206;docs/roster-provenance.json.players.p114",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p115",
+      "source": "R",
+      "srcId": "80207",
+      "evidence": "data/levels.json.players.80207;docs/roster-provenance.json.players.p115",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p116",
+      "source": "R",
+      "srcId": "90001",
+      "evidence": "data/levels.json.players.90001;docs/roster-provenance.json.players.p116",
+      "runtime": "exact-level-table"
+    },
+    {
+      "id": "p117",
+      "source": "R",
+      "srcId": "90003",
+      "evidence": "data/levels.json.players.90003;docs/roster-provenance.json.players.p117",
+      "runtime": "exact-level-table"
+    }
+  ]
+}

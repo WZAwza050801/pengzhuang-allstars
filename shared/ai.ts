@@ -1,9 +1,30 @@
 import type { GameData } from './data';
-import { buildSetup, buildShot, type MatchState, type ShotInput } from './match';
+import { buildSetup, buildShot, validateShot, type MatchState, type ShotInput } from './match';
 import { simulateShot, type SimResult, type Side } from './physics';
 import { makeRng } from './rng';
 
 export type AiLevel = 'easy' | 'normal' | 'hard';
+
+export interface AiSearchStats {
+  evaluated: number; elapsedMs: number; reason: 'complete' | 'budget' | 'evaluations' | 'cancelled' | 'no-move' | 'ended';
+}
+export interface AiSearchOptions {
+  maxEvaluations?: number;
+  budgetMs?: number;
+  now?: () => number;
+  isCancelled?: () => boolean;
+  onStats?: (stats: AiSearchStats) => void;
+}
+
+/** Constant-work fallback. It never simulates or consumes the authoritative skill RNG. */
+export function fallbackShot(st: MatchState, data: GameData): ShotInput | null {
+  if (st.over) return null;
+  const mine = st.pieces.filter(p => p.side === st.turn && p.out === 0 && p.frozen === 0)
+    .sort((a,b) => Math.hypot(a.x-st.ball.x,a.y-st.ball.y)-Math.hypot(b.x-st.ball.x,b.y-st.ball.y));
+  if (!mine.length) return null;
+  const p=mine[0], dx=st.ball.x-p.x, dy=st.ball.y-p.y, distance=Math.hypot(dx,dy);
+  return {pieceId:p.id,dirX:distance>1e-6?dx/distance:0,dirY:distance>1e-6?dy/distance:st.turn===0?-1:1,power:Math.max(.6,data.physics.shot.minPower),curve:0};
+}
 
 interface Candidate { input: ShotInput; score: number }
 
@@ -39,7 +60,19 @@ function aimAt(fromX: number, fromY: number, toX: number, toY: number) {
   return { dirX: dx / l, dirY: dy / l };
 }
 
-export function chooseShot(st: MatchState, data: GameData, level: AiLevel = 'normal', seed = 1): ShotInput | null {
+export function chooseShot(st: MatchState, data: GameData, level: AiLevel = 'normal', seed = 1, options: AiSearchOptions = {}): ShotInput | null {
+  if (options.maxEvaluations !== undefined && (!Number.isInteger(options.maxEvaluations) || options.maxEvaluations < 0)) throw new RangeError('Invalid AI evaluation limit');
+  if (options.budgetMs !== undefined && (!Number.isFinite(options.budgetMs) || options.budgetMs < 0)) throw new RangeError('Invalid AI time budget');
+  const now=options.now ?? Date.now, started=now();
+  let evaluated=0, reason: AiSearchStats['reason']='complete';
+  const finish=(input: ShotInput | null) => { options.onStats?.({evaluated,elapsedMs:Math.max(0,now()-started),reason}); return reason === 'cancelled' ? null : input; };
+  const stop=() => {
+    if (options.isCancelled?.()) {reason='cancelled';return true;}
+    if (evaluated >= (options.maxEvaluations ?? Infinity)) {reason='evaluations';return true;}
+    if (options.budgetMs !== undefined && now()-started >= options.budgetMs) {reason='budget';return true;}
+    return false;
+  };
+  if (st.over) {reason='ended';return finish(null);}
   const side = st.turn;
   const rng = makeRng(seed);
   const L = data.geometry.length / 2;
@@ -47,7 +80,7 @@ export function chooseShot(st: MatchState, data: GameData, level: AiLevel = 'nor
   const oppGoalY = side === 0 ? -L : L;
   const gw = data.geometry.goalWidth / 2;
   const mine = st.pieces.filter((p) => p.side === side && p.out === 0 && p.frozen === 0);
-  if (!mine.length) return null;
+  if (!mine.length) {reason='no-move';return finish(null);}
 
   const cands: ShotInput[] = [];
   const b = st.ball;
@@ -67,21 +100,29 @@ export function chooseShot(st: MatchState, data: GameData, level: AiLevel = 'nor
     const setup = buildSetup(st, data, input.pieceId);
     return evaluate(simulateShot(data.geometry, data.physics, setup, shot, { record: false, maxSeconds: 8 }), data, side, st);
   };
-  const scored: Candidate[] = cands.map((input) => ({ input, score: run(input) }));
+  const scored: Candidate[] = [];
+  for (const input of cands) {
+    if (stop()) break;
+    if (validateShot(st,data,side,input)) continue;
+    scored.push({input,score:run(input)}); evaluated++;
+  }
+  if (!scored.length) return finish(fallbackShot(st,data));
   scored.sort((a, b) => b.score - a.score);
 
   // refine: curve and small angle tweaks around the best few
   const refineN = level === 'hard' ? 5 : 3;
-  for (const c of scored.slice(0, refineN)) {
+  refine: for (const c of scored.slice(0, refineN)) {
     for (const curve of [-0.7, -0.35, 0.35, 0.7]) {
       const a = Math.atan2(c.input.dirY, c.input.dirX) - curve * 0.12;
       const input = { ...c.input, dirX: Math.cos(a), dirY: Math.sin(a), curve };
-      scored.push({ input, score: run(input) });
+      if (stop()) break refine;
+      scored.push({ input, score: run(input) }); evaluated++;
     }
     for (const da of [-0.04, 0.04]) {
       const a = Math.atan2(c.input.dirY, c.input.dirX) + da;
       const input = { ...c.input, dirX: Math.cos(a), dirY: Math.sin(a) };
-      scored.push({ input, score: run(input) });
+      if (stop()) break refine;
+      scored.push({ input, score: run(input) }); evaluated++;
     }
   }
   scored.sort((a, b) => b.score - a.score);
@@ -95,5 +136,5 @@ export function chooseShot(st: MatchState, data: GameData, level: AiLevel = 'nor
     const a = Math.atan2(pick.dirY, pick.dirX) + (rng.next() - 0.5) * 0.03;
     pick = { ...pick, dirX: Math.cos(a), dirY: Math.sin(a) };
   }
-  return pick;
+  return finish(pick);
 }

@@ -1,0 +1,32 @@
+$ npx --no-install tsx tools/online-e2e.ts
+[online-e2e] server ws://127.0.0.1:44605
+
+[room]
+  PASS  the server assigns a 6-character room code
+  PASS  both clients see the room snapshot
+  PASS  the snapshot carries the room code
+  PASS  each seat gets its own secret seat token
+  PASS  the two seat tokens differ
+  PASS  both seats are taken
+
+[match]
+  PASS  both clients get the match_start
+  PASS  the match start carries the clock
+  PASS  the seed never leaves the server
+
+[shot]
+  PASS  the shot reaches both seats
+  PASS  the two seats see byte-identical packets
+  PASS  the packet carries frames
+  PASS  the packet advances the shot number
+  PASS  the packet carries the clock
+
+[reconnect]
+  PASS  the disconnected seat had a token
+colyseus.js: onMessage() not registered for type 'room'.
+  PASS  the seat can be re-claimed with the token
+
+[summary]
+  PASS  no failure in this run
+
+online-e2e: PASS (0 failure(s))

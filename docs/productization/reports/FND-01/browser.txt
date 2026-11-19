@@ -1,0 +1,15 @@
+$ npm run test:e2e
+
+> pengzhuang-allstars@1.0.0 test:e2e
+> node tools/e2e-browser.mjs
+
+PASS  构建产物 — dist/client/index.html 与 dist/server/index.js 均存在
+PASS  联机服务端 /healthz — {"status":"ok","service":"collision-allstars","protocol":1,"dataVersion":"field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1","uptimeSec":1}
+PASS  静态托管 dist/client — http://127.0.0.1:43617
+PASS  起始界面渲染 — #app 已挂载子节点
+PASS  进入对局 / canvas 渲染 — canvas 已挂载
+PASS  UI 一杆球 — shotNo 1 -> 2
+PASS  运行时 JS 错误 — console error / pageerror 均为 0
+
+[e2e-browser] PASS=7 SKIP=0 FAIL=0
+[e2e-browser] 注：联机双客户端完整对局由 test:net / OnlineHost 场景验收，本脚本不冒充。

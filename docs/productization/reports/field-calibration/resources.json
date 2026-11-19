@@ -1,0 +1,309 @@
+{
+  "cycles": 15,
+  "deviceScaleFactor": 3,
+  "beforeHeapBytes": 3348380,
+  "afterHeapBytes": 3769092,
+  "heapDeltaBytes": 420712,
+  "resources": [
+    {
+      "before": {
+        "quality": "low",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 273000,
+        "disposed": false
+      },
+      "after": {
+        "quality": "low",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "low",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 273000,
+        "disposed": false
+      },
+      "after": {
+        "quality": "low",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "low",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 273000,
+        "disposed": false
+      },
+      "after": {
+        "quality": "low",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "low",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 273000,
+        "disposed": false
+      },
+      "after": {
+        "quality": "low",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "low",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 273000,
+        "disposed": false
+      },
+      "after": {
+        "quality": "low",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "medium",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 614250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "medium",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "medium",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 614250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "medium",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "medium",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 614250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "medium",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "medium",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 614250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "medium",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "medium",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 614250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "medium",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "high",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 1706250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "high",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "high",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 1706250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "high",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "high",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 1706250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "high",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "high",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 1706250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "high",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    },
+    {
+      "before": {
+        "quality": "high",
+        "avatars": 32,
+        "art": 4,
+        "floorColors": 4,
+        "canvases": 2,
+        "backingPixels": 1706250,
+        "disposed": false
+      },
+      "after": {
+        "quality": "high",
+        "avatars": 0,
+        "art": 0,
+        "floorColors": 0,
+        "canvases": 0,
+        "backingPixels": 0,
+        "disposed": true
+      }
+    }
+  ]
+}

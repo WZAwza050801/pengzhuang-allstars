@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "version": "modes-1",
+  "status": "engineering-default",
+  "modes": {
+    "practice": {
+      "label": "自由练习",
+      "levelPolicy": "selectable",
+      "fixedLevel": null,
+      "requiresOwnership": false,
+      "supportedSkillsOnly": false,
+      "ratingScope": null,
+      "rewardScope": null
+    },
+    "friend": {
+      "label": "均衡好友赛",
+      "levelPolicy": "uniform",
+      "fixedLevel": 5,
+      "requiresOwnership": false,
+      "supportedSkillsOnly": false,
+      "ratingScope": null,
+      "rewardScope": null
+    },
+    "growth": {
+      "label": "持有卡赛事",
+      "levelPolicy": "owned",
+      "fixedLevel": null,
+      "requiresOwnership": true,
+      "supportedSkillsOnly": true,
+      "ratingScope": "growth",
+      "rewardScope": "growth"
+    },
+    "ranked": {
+      "label": "均衡排位",
+      "levelPolicy": "uniform",
+      "fixedLevel": 5,
+      "requiresOwnership": true,
+      "supportedSkillsOnly": true,
+      "ratingScope": "ranked",
+      "rewardScope": "ranked"
+    }
+  }
+}

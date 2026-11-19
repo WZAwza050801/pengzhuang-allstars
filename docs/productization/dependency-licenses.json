@@ -1,0 +1,93 @@
+[
+  {
+    "name": "@colyseus/schema",
+    "pin": "3.0.76",
+    "installed": "3.0.76",
+    "license": "MIT",
+    "scope": "dependencies"
+  },
+  {
+    "name": "@colyseus/ws-transport",
+    "pin": "0.16.5",
+    "installed": "0.16.5",
+    "license": "MIT",
+    "scope": "dependencies"
+  },
+  {
+    "name": "colyseus",
+    "pin": "0.16.5",
+    "installed": "0.16.5",
+    "license": "MIT",
+    "scope": "dependencies"
+  },
+  {
+    "name": "colyseus.js",
+    "pin": "0.16.22",
+    "installed": "0.16.22",
+    "license": "MIT",
+    "scope": "dependencies"
+  },
+  {
+    "name": "express",
+    "pin": "4.21.2",
+    "installed": "4.21.2",
+    "license": "MIT",
+    "scope": "dependencies"
+  },
+  {
+    "name": "planck",
+    "pin": "1.4.2",
+    "installed": "1.4.2",
+    "license": "MIT",
+    "scope": "dependencies"
+  },
+  {
+    "name": "@types/express",
+    "pin": "4.17.21",
+    "installed": "4.17.21",
+    "license": "MIT",
+    "scope": "devDependencies"
+  },
+  {
+    "name": "@types/node",
+    "pin": "22.20.5",
+    "installed": "22.20.5",
+    "license": "MIT",
+    "scope": "devDependencies"
+  },
+  {
+    "name": "esbuild",
+    "pin": "0.25.12",
+    "installed": "0.25.12",
+    "license": "MIT",
+    "scope": "devDependencies"
+  },
+  {
+    "name": "playwright",
+    "pin": "1.65.1",
+    "installed": "1.65.1",
+    "license": "Apache-2.0",
+    "scope": "devDependencies"
+  },
+  {
+    "name": "tsx",
+    "pin": "4.23.15",
+    "installed": "4.23.15",
+    "license": "MIT",
+    "scope": "devDependencies"
+  },
+  {
+    "name": "typescript",
+    "pin": "5.9.3",
+    "installed": "5.9.3",
+    "license": "Apache-2.0",
+    "scope": "devDependencies"
+  },
+  {
+    "name": "vite",
+    "pin": "7.3.8",
+    "installed": "7.3.8",
+    "license": "MIT",
+    "scope": "devDependencies"
+  }
+]

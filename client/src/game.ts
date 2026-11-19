@@ -1,10 +1,18 @@
 import { DEFAULT_DATA, FIELD_SKINS } from '../../shared/data';
+import type { AiLevel } from '../../shared/ai';
 import { buildSetup, buildShot, pieceStats, type MatchEvent, type MatchState, type ShotInput } from '../../shared/match';
 import { simulateShot, type Side } from '../../shared/physics';
 import { foldAimPath } from '../../shared/aim';
 import type { MatchHost, ShotPacket } from './host';
 import { Renderer, TEAM_COLORS, type Aim, type Effect, type ScenePiece, type Skin } from './render';
-import { sfx } from './sfx';
+import { sfx, getVolume, setVolume, isMuted, setMuted } from './sfx';
+import type { PlatformServices, Viewport } from '@pengzhuang/platform';
+import { createGamePlatform } from './webPlatform';
+import { samplePlayback } from '../../packages/game-core/src/playback';
+import { chooseQuality, type Quality } from './quality';
+import { dragIntent, gestureCurve } from '../../packages/game-core/src/drag';
+import { assistedShot } from './assisted-shot';
+import { VISUAL_PREFERENCES_EVENT, readVisualPreferences } from './ui/visual-preferences';
 
 const data = DEFAULT_DATA;
 const MAX_DRAG = 2.4; // metres of pull for full power
@@ -13,10 +21,24 @@ const CURVE_STEP = 0.1;
 const RELOCATE_MS = 450;
 const OPEN_FIELD = { ...data.geometry, width: 2000, length: 2000 };
 
+function isEditableTarget(target: EventTarget | null) {
+  return (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLSelectElement ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLElement && target.isContentEditable)
+  );
+}
+
 export interface GameOptions {
+  hostLifetime?: 'view' | 'owner';
+  platform?: PlatformServices;
+  quality?: Quality | 'auto';
   skinId: string;
   onExit: () => void;
   onRematch?: () => void;
+  onResult?: () => void;
+  onHelp?: () => void;
 }
 
 interface Playback {
@@ -41,6 +63,10 @@ export class GameView {
   private effects: Effect[] = [];
   private raf = 0;
   private disposed = false;
+  private suspended = false;
+  private readonly platform: PlatformServices;
+  private readonly unsubscribers: (() => void)[] = [];
+  private debugHandle: unknown = null;
   private lastPreviewKey = '';
   private readonly el: Record<string, HTMLElement> = {};
   private ballSpin = 0;
@@ -50,20 +76,28 @@ export class GameView {
   /** Touch aims take the curve from the drag gesture; mouse aims use the arrow keys. */
   private gesture = false;
   private relocating: { start: number; from: Map<string, { x: number; y: number }> } | null = null;
+  private reducedMotion = false;
+  private assistKey = '';
+  private bannerEpoch = 0;
+  private dialogPeers = new Map<HTMLElement, boolean>();
   private trail: { x: number; y: number; t: number }[] = [];
+  private timers = new Set<ReturnType<typeof setTimeout>>();
 
   constructor(root: HTMLElement, host: MatchHost, opts: GameOptions) {
     this.root = root;
     this.host = host;
     this.opts = opts;
+    this.platform = opts.platform ?? createGamePlatform();
+    try {
     root.innerHTML = `
       <div class="game">
         <div class="hud-top">
-          <div class="team t0"><div class="tname"></div><div class="tscore">0</div></div>
+          <div class="team t0" role="status"><div class="tname"></div><div class="tscore">0</div></div>
           <div class="mid"><div class="turn"></div><div class="timer"></div><div class="shots"></div></div>
-          <div class="team t1"><div class="tscore">0</div><div class="tname"></div></div>
+          <div class="team t1" role="status"><div class="tscore">0</div><div class="tname"></div></div>
+          <output class="pz-sr-only turn-count" aria-live="polite"></output>
         </div>
-        <div class="stage"><canvas></canvas><div class="toasts"></div><div class="banner"></div></div>
+        <div class="stage"><canvas role="img" aria-label="比赛球场；比分和回合有文字显示，可在菜单使用键盘与辅助出手"></canvas><div class="toasts" aria-live="polite"></div><div class="banner" role="status"></div></div>
         <div class="hud-bottom">
           <div class="curve">
             <span class="clabel">弧线</span>
@@ -73,31 +107,55 @@ export class GameView {
           </div>
           <button class="menu-btn">菜单</button>
         </div>
-        <div class="overlay menu hidden">
+        <div class="overlay menu hidden" role="dialog" aria-modal="true" aria-label="比赛菜单">
           <div class="panel">
             <h3>菜单</h3>
-            <label>场地外观 <select class="skin"></select></label>
+            <label>场地外观 <select class="skin" aria-label="场地外观"></select></label>
+            <label>画质 <select class="quality"><option value="auto">自动</option><option value="low">流畅</option><option value="medium">标准</option><option value="high">精细</option></select></label>
+            ${host.setAiLevel ? '<label>电脑难度 <select class="ai-level" aria-label="电脑难度"><option value="easy">简单</option><option value="normal">普通</option><option value="hard">困难</option></select></label>' : ''}
+            <label>音量 <input class="volume" type="range" min="0" max="100" step="5" aria-label="比赛音量"></label>
+            <label><input class="mute" type="checkbox">静音</label>
             <button class="surrender">认输</button>
+              <button class="open-assist">键盘与辅助出手</button>
+              <button class="reopen-result hidden">查看本场结果</button>
+              ${opts.onHelp ? '<button class="help">问题与反馈</button>' : ''}
             <button class="exit">返回大厅</button>
             <button class="close">继续比赛</button>
           </div>
         </div>
-        <div class="overlay result hidden"><div class="panel"></div></div>
-        <canvas class="aim-layer"></canvas>
+        <div class="overlay assist hidden" role="dialog" aria-modal="true" aria-label="键盘与辅助出手"><form class="panel">
+          <h2>键盘与辅助出手</h2><p>方向按当前视角：0°向上、90°向右、180°向下、270°向左。比赛继续按原规则计时。</p>
+          <label>出手球员<select class="assist-piece" name="piece"></select></label>
+          <label>方向角度（度）<input class="assist-angle" name="angle" type="number" min="0" max="359.9" step="0.1" value="0" required></label>
+          <label>力度（%）<input class="assist-power" name="power" type="number" min="${Math.ceil(data.physics.shot.minPower * 100)}" max="100" step="1" value="60" required></label>
+          <label>弧线（-1 到 1）<input class="assist-curve" name="curve" type="number" min="-1" max="1" step="0.05" value="0" required></label>
+          <p class="assist-status" role="status"></p><button class="assist-submit" type="submit">确认出手</button><button class="assist-close" type="button">取消辅助出手</button>
+        </form></div>
+        <div class="overlay result hidden" role="dialog" aria-modal="true" aria-label="本场比赛结果"><div class="panel"></div></div>
+        <canvas class="aim-layer" aria-hidden="true"></canvas>
       </div>`;
     const q = (s: string) => root.querySelector(s) as HTMLElement;
     for (const [k, s] of Object.entries({
       name0: '.t0 .tname', name1: '.t1 .tname', score0: '.t0 .tscore', score1: '.t1 .tscore', turn: '.turn', timer: '.timer', shots: '.shots',
-      toasts: '.toasts', banner: '.banner', cval: '.cval', menu: '.menu', result: '.result', stage: '.stage',
+      toasts: '.toasts', banner: '.banner', cval: '.cval', menu: '.menu', result: '.result', assist: '.assist', stage: '.stage',
     })) this.el[k] = q(s);
     (q('.t0') as HTMLElement).style.setProperty('--team', TEAM_COLORS[0]);
     (q('.t1') as HTMLElement).style.setProperty('--team', TEAM_COLORS[1]);
-    this.el.name0.textContent = host.seats[0].name;
-    this.el.name1.textContent = host.seats[1].name;
+    this.el.name0.textContent = opts.hostLifetime === 'owner' ? `${host.viewSide === 0 ? '我方' : '对方'} · ${host.seats[0].name}` : host.seats[0].name;
+    this.el.name1.textContent = opts.hostLifetime === 'owner' ? `${host.viewSide === 1 ? '我方' : '对方'} · ${host.seats[1].name}` : host.seats[1].name;
 
     const skin = (FIELD_SKINS.find((s) => s.id === opts.skinId) ?? FIELD_SKINS[0]) as Skin;
     const canvas = q('.stage canvas') as HTMLCanvasElement;
     this.r = new Renderer(canvas, data.geometry, data.physics, skin);
+    const capabilities = { cores: navigator.hardwareConcurrency, memoryGiB: (navigator as Navigator & { deviceMemory?: number }).deviceMemory, reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches };
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    this.reducedMotion = motion.matches || readVisualPreferences().reducedMotion;
+    const updateMotion = () => { this.reducedMotion = motion.matches || document.documentElement.dataset.reducedMotion === 'true'; if (this.reducedMotion) { if (this.play) this.finishPlayback(false); this.effects = []; this.trail = []; this.relocating = null; } };
+    motion.addEventListener('change', updateMotion);
+    window.addEventListener(VISUAL_PREFERENCES_EVENT, updateMotion);
+    this.unsubscribers.push(() => motion.removeEventListener('change', updateMotion));
+    this.unsubscribers.push(() => window.removeEventListener(VISUAL_PREFERENCES_EVENT, updateMotion));
+    this.r.setQuality(opts.quality && opts.quality !== 'auto' ? opts.quality : chooseQuality(capabilities));
     this.r.attachOverlay(q('.aim-layer') as HTMLCanvasElement);
     this.r.flip = host.viewSide === 1;
 
@@ -108,31 +166,71 @@ export class GameView {
       localStorage.setItem('pz_skin', skinSel.value);
       this.onResize();
     });
-    q('.menu-btn').addEventListener('click', () => this.el.menu.classList.remove('hidden'));
-    q('.menu .close').addEventListener('click', () => this.el.menu.classList.add('hidden'));
+    const qualitySel = q('.quality') as HTMLSelectElement;
+    qualitySel.value = opts.quality ?? 'auto';
+    qualitySel.addEventListener('change', () => {
+      this.r.setQuality(qualitySel.value === 'auto' ? chooseQuality(capabilities) : qualitySel.value as Quality);
+      this.onResize();
+    });
+    const aiLevelSel = q('.ai-level') as HTMLSelectElement | null;
+    if (aiLevelSel && host.setAiLevel) {
+      aiLevelSel.value = host.aiLevel?.() ?? 'normal';
+      aiLevelSel.addEventListener('change', () => {
+        const level = aiLevelSel.value as AiLevel;
+        host.setAiLevel?.(level);
+        localStorage.setItem('pz_ai_level', level);
+        this.el.name1.textContent = opts.hostLifetime === 'owner' ? `${host.viewSide === 1 ? '我方' : '对方'} · ${host.seats[1].name}` : host.seats[1].name;
+      });
+    }
+    const volume = q('.volume') as HTMLInputElement;
+    volume.value = String(Math.round(getVolume() * 100));
+    volume.addEventListener('input', () => { setVolume(Number(volume.value) / 100); sfx.unlock(); });
+    const mute = q('.mute') as HTMLInputElement;
+    mute.checked = isMuted();
+    mute.addEventListener('change', () => { setMuted(mute.checked); sfx.unlock(); });
+    q('.menu-btn').addEventListener('click', () => this.openDialog(this.el.menu, '.close'));
+    q('.menu .close').addEventListener('click', () => this.closeMenu());
     q('.menu .exit').addEventListener('click', () => this.exit());
     q('.menu .surrender').addEventListener('click', () => {
-      this.el.menu.classList.add('hidden');
+      this.closeMenu();
       if (confirm('确定认输吗？')) host.surrender();
+    });
+    q('.open-assist').addEventListener('click', () => { if (this.canAim(true)) { this.populateAssist(); (q('.assist-curve') as HTMLInputElement).value = String(this.curve); q('.assist-status').textContent = ''; this.openDialog(this.el.assist, '.assist-piece'); } });
+    q('.assist-close').addEventListener('click', () => this.closeMenu());
+    q('.reopen-result').addEventListener('click', () => this.showResult());
+    q('.help')?.addEventListener('click', () => this.exit(this.opts.onHelp));
+    q('.assist form').addEventListener('submit', (event) => {
+      event.preventDefault(); const form = event.currentTarget as HTMLFormElement;
+      if (!form.reportValidity() || !this.canAim(true)) { q('.assist-status').textContent = '当前不能出手，请等待可操作的己方回合。'; return; }
+      const pieceId = (q('.assist-piece') as HTMLSelectElement).value;
+      const piece = this.state!.pieces.find((p) => p.id === pieceId && p.side === this.state!.turn && !p.out && !p.frozen);
+      const input = assistedShot({ pieceId, angle: Number((q('.assist-angle') as HTMLInputElement).value), power: Number((q('.assist-power') as HTMLInputElement).value) / 100, curve: Number((q('.assist-curve') as HTMLInputElement).value), viewSide: host.viewSide ?? 0, minPower: data.physics.shot.minPower });
+      if (!piece || !input) { q('.assist-status').textContent = '球员或出手数值已变化，请重新选择。'; this.populateAssist(); return; }
+      this.closeMenu(); this.host.shoot(input);
     });
 
     canvas.addEventListener('pointerdown', (e) => this.onDown(e));
     canvas.addEventListener('pointermove', (e) => this.onMove(e));
     canvas.addEventListener('pointerup', (e) => this.onUp(e));
-    canvas.addEventListener('pointercancel', () => this.cancelAim());
+    canvas.addEventListener('pointercancel', this.onPointerAbort);
+    canvas.addEventListener('pointerleave', this.onPointerAbort);
+    canvas.addEventListener('lostpointercapture', this.onPointerAbort);
     window.addEventListener('keydown', this.onKey);
-    window.addEventListener('resize', this.onResize);
+    window.addEventListener('blur', this.onWindowBlur);
+    this.unsubscribers.push(this.platform.viewport.subscribe(() => this.onResize()));
     this.onResize();
 
     host.start({
-      onState: (st) => this.onState(st),
-      onShot: (p) => this.onShot(p),
-      onEvents: (ev) => this.showEvents(ev),
-      onInfo: (t) => this.toast(t, 'info'),
+      onReset: () => { if (!this.disposed) { this.play = null; this.relocating = null; this.cancelAim(); this.effects = []; this.trail = []; } },
+      onState: (st) => { if (!this.disposed) this.onState(st); },
+      onShot: (p) => { if (!this.disposed) this.onShot(p); },
+      onEvents: (ev) => { if (!this.disposed) this.showEvents(ev); },
+      onInfo: (t) => { if (!this.disposed) this.toast(t, 'info'); },
     });
     this.raf = requestAnimationFrame(this.frame);
     // automation handle for tools/e2e-*.mjs
-    (window as unknown as { __pz: unknown }).__pz = {
+    if (import.meta.env.DEV || import.meta.env.MODE === 'test') {
+    this.debugHandle = {
       state: () => this.state,
       playing: () => !!this.play,
       canAim: () => this.canAim(),
@@ -145,10 +243,16 @@ export class GameView {
         return { x: rect.left + s.x, y: rect.top + s.y, scale: this.r.scale };
       },
       portraits: () => this.r.boundAvatars(),
+      resources: () => this.r.resourceStats(),
     };
+    (window as unknown as { __pz: unknown }).__pz = this.debugHandle;
+    }
+    this.unsubscribers.push(this.platform.lifecycle.onChange((state) => state === 'background' ? this.suspend() : this.resume()));
+    } catch (error) { this.dispose(); throw error; }
   }
 
   private onResize = () => {
+    this.cancelAim();
     const game = this.root.querySelector('.game') as HTMLElement;
     game.classList.toggle('scene', this.r.sceneMode);
     this.r.reserveBottom = this.r.sceneMode ? (this.root.querySelector('.hud-bottom') as HTMLElement).offsetHeight : 0;
@@ -166,13 +270,61 @@ export class GameView {
   };
 
   private onKey = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') this.cancelAim();
+    const dialog = [this.el.menu, this.el.assist, this.el.result].find((element) => !element.classList.contains('hidden'));
+    if (dialog) {
+      if (e.key === 'Escape') { e.preventDefault(); this.closeMenu(); return; }
+      if (e.key === 'Tab') {
+        const controls = [...dialog.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled)')].filter((element) => !element.closest('.hidden'));
+        const edge = e.shiftKey ? controls[0] : controls.at(-1);
+        if (document.activeElement === edge) { e.preventDefault(); (e.shiftKey ? controls.at(-1) : controls[0])?.focus(); }
+      }
+    }
+    if (e.defaultPrevented || isEditableTarget(e.target) || isEditableTarget(document.activeElement)) return;
+    if (e.key === 'Escape' && this.aim) {
+      e.preventDefault();
+      this.cancelAim();
+    }
     if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && this.canAim() && !this.gesture) {
       e.preventDefault();
       this.setCurve(this.curve + (e.key === 'ArrowLeft' ? -CURVE_STEP : CURVE_STEP));
       if (this.aim) this.updateAim(this.aim.pointer);
     }
   };
+
+  private openDialog(dialog: HTMLElement, initial: string) {
+    this.cancelAim();
+    const scope = this.root.closest('main') ?? this.root;
+    let branch = this.root.querySelector<HTMLElement>('.game')!;
+    while (branch !== scope && branch.parentElement) {
+      for (const sibling of branch.parentElement.children) if (sibling !== branch && sibling instanceof HTMLElement) {
+        if (!this.dialogPeers.has(sibling)) this.dialogPeers.set(sibling, sibling.inert);
+        sibling.inert = true;
+      }
+      branch = branch.parentElement;
+    }
+    for (const element of this.root.querySelector('.game')!.children) {
+      const child = element as HTMLElement; child.inert = child !== dialog;
+      if (child.classList.contains('overlay')) child.classList.toggle('hidden', child !== dialog);
+    }
+    dialog.querySelector<HTMLElement>(initial)?.focus();
+  }
+  private closeMenu() {
+    for (const element of this.root.querySelector('.game')!.children) { const child = element as HTMLElement; child.inert = false; if (child.classList.contains('overlay')) child.classList.add('hidden'); }
+    this.releaseDialogPeers();
+    this.root.querySelector<HTMLElement>('.menu-btn')?.focus();
+  }
+  private releaseDialogPeers() {
+    for (const [element, previous] of this.dialogPeers) element.inert = previous;
+    this.dialogPeers.clear();
+  }
+  private populateAssist() {
+    if (!this.state) return;
+    const pieces = this.state.pieces.filter((p) => p.side === this.state!.turn && this.host.mySides.includes(p.side) && !p.out && !p.frozen);
+    const key = pieces.map((p) => p.id).join('|'); if (key === this.assistKey) return; this.assistKey = key;
+    const select = this.root.querySelector<HTMLSelectElement>('.assist-piece')!, previous = select.value;
+    select.replaceChildren(...pieces.map((p, index) => new Option(`${index + 1} · ${this.pieceName(p.id)}`, p.id)));
+    if (pieces.some((p) => p.id === previous)) select.value = previous;
+  }
 
   private setCurve(v: number) {
     this.curve = Math.max(-1, Math.min(1, Math.round(v * 20) / 20));
@@ -188,25 +340,7 @@ export class GameView {
    * A circular arc whose sagitta is a quarter of the chord gives full curve.
    */
   private gestureCurve(): number {
-    const path = this.dragPath, a = this.aim!;
-    if (path.length < 3) return 0;
-    const p0 = path[0], pe = a.pointer;
-    const cx = pe.x - p0.x, cy = pe.y - p0.y;
-    const c = Math.hypot(cx, cy);
-    if (c < 0.5) return 0;
-    // shot direction is opposite to the pull; shooter's right of d=(dx,dy) is (-dy, dx) in y-down coordinates
-    const dx = -cx / c, dy = -cy / c;
-    const rx = -dy, ry = dx;
-    let len = 0, acc = 0;
-    const pts = [...path, pe];
-    for (let i = 1; i < pts.length; i++) {
-      const s = Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
-      const mx = (pts[i].x + pts[i - 1].x) / 2 - p0.x, my = (pts[i].y + pts[i - 1].y) / 2 - p0.y;
-      acc += (mx * rx + my * ry) * s;
-      len += s;
-    }
-    if (len <= 0) return 0;
-    return Math.max(-1, Math.min(1, ((acc / len) / c) * 6));
+    return gestureCurve(this.dragPath, this.aim!.pointer);
   }
 
   // ------------------------------------------------------------ host events
@@ -228,31 +362,44 @@ export class GameView {
     sfx.shoot(p.input.power);
     this.play = { packet: p, start: performance.now(), before: this.state, nextEvent: 0, goalShown: false };
     this.setCurve(0);
+    if (this.reducedMotion) { this.showEvents(p.events); this.showEvents(p.turnEvents); this.finishPlayback(false); }
   }
 
-  private finishPlayback() {
+  private schedule(callback: () => void, ms: number) {
+    const timer = setTimeout(() => { this.timers.delete(timer); if (!this.disposed) callback(); }, ms);
+    this.timers.add(timer);
+  }
+
+  private finishPlayback(animate = true) {
     const p = this.play!;
     this.play = null;
     this.state = p.packet.state;
     const moved = p.packet.events.find((e) => e.type === 'relocate');
-    if (moved?.type === 'relocate') {
+    if (animate && moved?.type === 'relocate') {
       const frame = p.packet.frames[p.packet.frames.length - 1];
       const from = new Map<string, { x: number; y: number }>();
       p.packet.ids.forEach((id, j) => j > 0 && moved.ids.includes(id) && from.set(id, { x: frame[j * 2] / 1000, y: frame[j * 2 + 1] / 1000 }));
       this.relocating = { start: performance.now(), from };
     }
     const goal = p.packet.events.find((e) => e.type === 'goal');
-    this.showEvents(p.packet.events.filter((e) => e.type !== 'goal'));
-    if (goal && !p.goalShown) this.showEvents([goal]);
-    this.showEvents(p.packet.turnEvents);
+    if (animate) {
+      this.showEvents(p.packet.events.filter((e) => e.type !== 'goal'));
+      if (goal && !p.goalShown) this.showEvents([goal]);
+      this.showEvents(p.packet.turnEvents);
+    }
     this.syncHud();
-    if (this.state.over) setTimeout(() => this.showResult(), goal ? 1200 : 300);
-    else if (this.host.mySides.includes(this.state.turn)) sfx.turn();
+    if (this.state.over) { if (animate) this.schedule(() => this.showResult(), goal ? 1200 : 300); else this.showResult(); }
+    else if (animate && this.host.mySides.includes(this.state.turn)) sfx.turn();
     this.host.playbackDone();
   }
 
   // ------------------------------------------------------------ input
-  private canAim() {
+  private canAim(throughDialog = false) {
+    if (this.disposed || this.suspended) return false;
+    if (this.host.inputStatus?.() && this.host.inputStatus() !== 'ready') return false;
+    if (!throughDialog && [this.el.menu, this.el.assist, this.el.result].some((element) => !element.classList.contains('hidden'))) return false;
+    const deadline = this.host.turnDeadline();
+    if (deadline !== null && deadline <= Date.now()) return false;
     return !!this.state && !this.play && !this.relocating && !this.state.over && this.host.mySides.includes(this.state.turn);
   }
 
@@ -264,8 +411,7 @@ export class GameView {
   }
 
   private local(e: PointerEvent) {
-    const rect = this.r.canvas.getBoundingClientRect();
-    return this.r.toWorld(e.clientX - rect.left, e.clientY - rect.top);
+    return this.r.clientToWorld(e.clientX, e.clientY);
   }
 
   private pieceAt(w: { x: number; y: number }) {
@@ -282,7 +428,7 @@ export class GameView {
 
   private onDown(e: PointerEvent) {
     sfx.unlock();
-    if (!this.canAim()) return;
+    if (!e.isPrimary || this.aimPointer !== null || !this.canAim()) return;
     const w = this.local(e);
     const id = this.pieceAt(w);
     if (!id) return;
@@ -315,31 +461,31 @@ export class GameView {
     this.updateAim(this.local(e));
     this.cancelAim();
     if (!a.valid || !this.canAim()) return;
-    const dx = a.from.x - a.pointer.x, dy = a.from.y - a.pointer.y;
-    const input: ShotInput = { pieceId: a.pieceId, dirX: dx, dirY: dy, power: round3(a.power), curve: this.curve };
-    const l = Math.hypot(dx, dy);
-    input.dirX = round6(dx / l);
-    input.dirY = round6(dy / l);
+    const drag = dragIntent(a.from, a.pointer, data.physics.disc.radius, MAX_DRAG);
+    const input: ShotInput = { pieceId: a.pieceId, dirX: round6(drag.dirX), dirY: round6(drag.dirY), power: round3(drag.power), curve: this.curve };
     this.host.shoot(input);
   }
 
-  private cancelAim() {
-    if (this.aimPointer !== null) {
-      try { this.r.canvas.releasePointerCapture(this.aimPointer); } catch { /* already released */ }
-    }
+  private onPointerAbort = (e: PointerEvent) => this.cancelAim(e.pointerId);
+
+  private onWindowBlur = () => this.cancelAim();
+
+  private cancelAim = (pointerId?: number) => {
+    const captured = this.aimPointer;
+    if (captured === null || (pointerId !== undefined && pointerId !== captured)) return;
     this.aim = null;
     this.aimPointer = null;
     this.gesture = false;
-  }
+    this.lastPreviewKey = '';
+    try { this.r.canvas.releasePointerCapture(captured); } catch { /* already released */ }
+  };
 
   private updateAim(w: { x: number; y: number }) {
     const a = this.aim!;
     a.pointer = w;
     if (this.gesture) this.setCurve(this.gestureCurve());
-    const dx = a.from.x - w.x, dy = a.from.y - w.y;
-    const dist = Math.hypot(dx, dy);
-    const pull = Math.max(0, dist - data.physics.disc.radius * 0.6);
-    a.power = Math.min(1, pull / MAX_DRAG);
+    const { dx, dy, distance: dist, power } = dragIntent(a.from, w, data.physics.disc.radius, MAX_DRAG);
+    a.power = power;
     a.valid = a.power >= data.physics.shot.minPower;
     if (!a.valid) {
       a.path = [];
@@ -365,7 +511,7 @@ export class GameView {
 
   // ------------------------------------------------------------ rendering
   private frame = (now: number) => {
-    if (this.disposed) return;
+    if (this.disposed || this.suspended) return;
     this.raf = requestAnimationFrame(this.frame);
     if (!this.state) return;
     let pieces: ScenePiece[];
@@ -373,17 +519,14 @@ export class GameView {
     if (this.play) {
       const { packet, start, before } = this.play;
       const t = Math.max(0, (now - start) / 1000);
-      const fi = t * packet.recordHz;
-      const last = packet.frames.length - 1;
-      const i0 = Math.min(last, Math.floor(fi)), i1 = Math.min(last, i0 + 1), k = Math.min(1, fi - i0);
-      const f0 = packet.frames[i0], f1 = packet.frames[i1];
-      const at = (j: number) => ({ x: (f0[j * 2] + (f1[j * 2] - f0[j * 2]) * k) / 1000, y: (f0[j * 2 + 1] + (f1[j * 2 + 1] - f0[j * 2 + 1]) * k) / 1000 });
+      const sample = samplePlayback(packet.frames, packet.recordHz, t);
+      const at = (j: number) => sample.positions[j];
       ball = at(0);
       const pos = new Map<string, { x: number; y: number }>();
       packet.ids.forEach((id, j) => j > 0 && pos.set(id, at(j)));
       pieces = before.pieces.map((p) => ({ ...p, ...(pos.get(p.id) ?? {}) }));
       this.spawnSimEvents(t);
-      if (fi >= last) this.finishPlayback();
+      if (sample.complete) this.finishPlayback();
     } else {
       pieces = this.state.pieces;
       ball = this.state.ball;
@@ -404,7 +547,7 @@ export class GameView {
     this.lastBall = { ...ball };
     this.trail.push({ x: ball.x, y: ball.y, t: now });
     this.trail = this.trail.filter((p) => now - p.t < 260);
-    this.effects = this.effects.filter((e) => now - e.t0 < e.dur);
+    this.effects = this.effects.filter((e) => now - e.t0 < e.dur).slice(-128);
     this.r.draw({
       pieces,
       ball: { ...ball, spin: this.ballSpin },
@@ -417,6 +560,7 @@ export class GameView {
       trail: this.trail,
     });
     this.updateTimer();
+    this.updateTurnLabel();
   };
 
   private spawnSimEvents(t: number) {
@@ -459,12 +603,29 @@ export class GameView {
     const st = this.state!;
     this.el.score0.textContent = String(st.score[0]);
     this.el.score1.textContent = String(st.score[1]);
-    const mine = this.host.mySides.includes(st.turn);
-    const who = this.host.seats[st.turn].name;
-    this.el.turn.textContent = st.over ? '比赛结束' : this.host.mySides.length > 1 ? `${who} 出手` : mine ? '你的回合' : `${who} 思考中…`;
+    this.root.querySelector('.turn-count')!.textContent = `本场回合计数 ${st.shotNo}`;
+    this.updateTurnLabel();
+    this.populateAssist();
     this.el.turn.style.color = TEAM_COLORS[st.turn];
     this.root.querySelector('.t0')!.classList.toggle('active', st.turn === 0 && !st.over);
     this.root.querySelector('.t1')!.classList.toggle('active', st.turn === 1 && !st.over);
+  }
+
+  private updateTurnLabel() {
+    const st = this.state;
+    if (!st) return;
+    const status = this.host.inputStatus?.() ?? 'ready';
+    const deadline = this.host.turnDeadline();
+    const text = st.over ? '比赛结束' : status === 'closed' ? '连接已断开，无法出手' : status === 'reconnecting' ? '正在恢复连接，暂停出手' : status === 'pending' ? '出手待确认，请勿重复提交' : this.play ? '正在播放，暂停出手' : deadline !== null && deadline <= Date.now() ? '等待服务端换手' : this.host.mySides.length > 1 ? `${this.host.seats[st.turn].name} 出手` : this.host.mySides.includes(st.turn) ? '你的回合' : '对方回合';
+    const peer = this.host.seats[this.host.viewSide === 0 ? 1 : 0];
+    const peerAway = this.host.mySides.length === 1 && !peer.isBot && !peer.connected && status === 'ready' && !st.over;
+    const remaining = peer.reconnectDeadline === undefined ? '' : ` · ${Math.max(0, Math.ceil((peer.reconnectDeadline - Date.now()) / 1000))}秒`;
+    const label = peerAway ? `对手断线${remaining} · ${text}` : text;
+    if (this.el.turn.textContent !== label) this.el.turn.textContent = label;
+    if (status !== 'ready' && this.aim) this.cancelAim();
+    for (const selector of ['.open-assist', '.assist-submit']) (this.root.querySelector(selector) as HTMLButtonElement).disabled = !this.canAim(true);
+    this.root.querySelector('.reopen-result')!.classList.toggle('hidden', !st.over);
+    this.el.turn.setAttribute('role', 'status');
   }
 
   private updateTimer() {
@@ -532,8 +693,8 @@ export class GameView {
     d.querySelector('b')!.textContent = text;
     if (sub) d.querySelector('small')!.textContent = sub;
     this.el.toasts.appendChild(d);
-    setTimeout(() => d.classList.add('out'), 2600);
-    setTimeout(() => d.remove(), 3100);
+    this.schedule(() => d.classList.add('out'), 2600);
+    this.schedule(() => d.remove(), 3100);
   }
 
   private bannerShow(title: string, sub: string, color: string) {
@@ -545,6 +706,8 @@ export class GameView {
     b.classList.remove('show');
     void b.offsetWidth;
     b.classList.add('show');
+    const epoch = ++this.bannerEpoch;
+    if (this.reducedMotion) { this.schedule(() => { if (epoch === this.bannerEpoch) b.classList.remove('show'); }, 1600); }
   }
 
   private showResult() {
@@ -556,31 +719,66 @@ export class GameView {
     const reason = ({ goals: `先进 ${data.rules.goalsToWin} 球`, time: `${data.rules.matchSeconds / 60} 分钟到`, 'shot-limit': `${data.rules.maxShots} 手用完`, surrender: '认输', disconnect: '对手断线超时' } as Record<string, string>)[st.endReason] ?? st.endReason;
     panel.innerHTML = `
       <h2 class="rtitle"></h2>
-      <div class="rscore"><span style="color:${TEAM_COLORS[0]}"></span><b>${st.score[0]} : ${st.score[1]}</b><span style="color:${TEAM_COLORS[1]}"></span></div>
+      <div class="rscore"><span></span><b>${st.score[0]} : ${st.score[1]}</b><span></span></div>
       <p class="rreason"></p>
-      <div class="rbtns">${this.opts.onRematch ? '<button class="again primary">再来一局</button>' : ''}<button class="back">返回大厅</button></div>`;
+      <div class="rbtns">${this.opts.onResult ? '<button class="view-result primary">查看本场结算</button>' : ''}${this.opts.onRematch ? '<button class="again primary">再来一局</button>' : ''}<button class="back">返回大厅</button></div>`;
     panel.querySelector('.rtitle')!.textContent = title;
     const spans = panel.querySelectorAll('.rscore span');
     spans[0].textContent = this.host.seats[0].name;
     spans[1].textContent = this.host.seats[1].name;
     panel.querySelector('.rreason')!.textContent = `${reason} · 共 ${st.shotNo} 手`;
     panel.querySelector('.again')?.addEventListener('click', () => this.opts.onRematch?.());
+    panel.querySelector('.view-result')?.addEventListener('click', () => { this.dispose(); this.opts.onResult?.(); });
     panel.querySelector('.back')!.addEventListener('click', () => this.exit());
-    this.el.result.classList.remove('hidden');
+    this.openDialog(this.el.result, 'button');
   }
 
-  private exit() {
+  private exit(after = this.opts.onExit) {
+    if (this.opts.hostLifetime === 'owner' && this.state && !this.state.over && !confirm(`离开后比赛继续计时，断线超过 ${this.host.rules?.reconnectSeconds ?? 60} 秒将按规则判定。确定返回大厅吗？`)) return;
     this.dispose();
-    this.opts.onExit();
+    after();
+  }
+
+  resize(_viewport: Viewport) { this.onResize(); }
+
+  suspend() {
+    if (this.disposed || this.suspended) return;
+    this.suspended = true;
+    this.cancelAim();
+    cancelAnimationFrame(this.raf);
+    this.platform.audio.pause();
+    this.host.setBackground?.(true);
+    this.effects = []; this.trail = []; this.relocating = null;
+  }
+
+  resume() {
+    if (this.disposed || !this.suspended) return;
+    if (this.play) this.finishPlayback(false);
+    this.effects = []; this.trail = []; this.relocating = null;
+    this.suspended = false;
+    this.platform.audio.resume();
+    this.host.setBackground?.(false);
+    this.onResize();
+    this.raf = requestAnimationFrame(this.frame);
   }
 
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    this.releaseDialogPeers();
+    for (const timer of this.timers) clearTimeout(timer);
+    this.timers.clear();
     cancelAnimationFrame(this.raf);
     window.removeEventListener('keydown', this.onKey);
-    window.removeEventListener('resize', this.onResize);
-    this.host.dispose();
+    window.removeEventListener('blur', this.onWindowBlur);
+    for (const unsubscribe of this.unsubscribers) unsubscribe();
+    this.unsubscribers.length = 0;
+    this.r?.dispose();
+    this.platform.dispose();
+    const debug = window as unknown as { __pz?: unknown };
+    if (debug.__pz === this.debugHandle) delete debug.__pz;
+    this.debugHandle = null;
+    if (this.opts.hostLifetime !== 'owner') this.host.dispose();
   }
 }
 
