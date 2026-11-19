@@ -33,6 +33,9 @@ import { MatchmakingQueue } from './matches/matchmaking';
 import { Ratings } from './matches/ratings';
 import { RATINGS_CONFIG } from '../config/ratings';
 import { ratingsModule } from './api/ratings';
+import { SeasonService } from './matches/seasons';
+import { SEASONS_CONFIG } from '../config/seasons';
+import { seasonsModule } from './api/seasons';
 
 /** One Colyseus runtime per process (the framework uses a process-global matchMaker). */
 export async function startRuntime(config: RuntimeConfig, port = config.port) {
@@ -52,7 +55,8 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     ? new WechatAccounts(database, new WechatProvider({ appId: config.wechatAppId!, secret: config.wechatSecret! }), config.sessionSigningKey!, players?.initialize) : null;
   const lifecycle = database && web ? new AccountLifecycle(database, passwords, { enabled: config.accountDeletionEnabled, graceHours: config.accountDeletionGraceHours, version: config.accountRetentionPolicy }, emailAccounts, wechat) : null;
   const tickets = database && web && lineups ? new MatchTickets(database, lineups, gameConfiguration.resolveData) : null;
-  const ratings = database ? new Ratings(database, RATINGS_CONFIG) : null;
+  const seasonService = database && assets && economy ? new SeasonService(database, SEASONS_CONFIG, RATINGS_CONFIG, assets, () => economy.registry.get(), gameConfiguration.resolveData) : null;
+  const ratings = database ? new Ratings(database, RATINGS_CONFIG, seasonService ? () => seasonService.currentSeason(Date.now())?.id ?? null : undefined) : null;
   // Production ranked/growth stay closed until rating display and the launch decision are ready (MM-02 handoff gate);
   // the real rating port is wired so settlement and tests exercise the durable path.
   const matchmakingQueue=database && tickets && lineups ? new MatchmakingQueue({db:database,lineups,resolveData:gameConfiguration.resolveData,ratings:ratings?{read:(tx,userId,mode)=>ratings.readForQueue(tx,userId,mode)}:undefined}):undefined;
@@ -61,14 +65,15 @@ export async function startRuntime(config: RuntimeConfig, port = config.port) {
     accountRooms: tickets && web && outcomes ? { tickets, web, outcomes } : undefined,
     matchmakingQueue,
     lobbyMaintenance: config.lobbyMaintenance,
-    modules: [authOptionsModule(!!emailAccounts, !!wechat, web, !!(web && players && lineups && assets), !!tickets, !!matchmakingQueue), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : []), ...(ratings && web ? ratingsModule(ratings, web) : [])] : [])],
+    modules: [authOptionsModule(!!emailAccounts, !!wechat, web, !!(web && players && lineups && assets), !!tickets, !!matchmakingQueue), ...(web ? [web.module(), currentUserModule(web), ...(players ? [playerDataModule(players, web)] : []), ...(lineups ? [lineupModule(lineups, web)] : []), ...(assets ? [assetModule(assets, web)] : []), ...(localImports ? [localImportModule(localImports, web)] : []), ...(lifecycle ? lifecycleModules(lifecycle, web) : []), ...(emailAccounts ? [emailAuthModule(emailAccounts, web)] : []), ...(wechat ? [wechatAuthModule(wechat, web)] : []), ...(ratings && web ? ratingsModule(ratings, web) : []), ...(seasonService ? seasonsModule(seasonService) : [])] : [])],
     repository: database, resolveData: gameConfiguration.resolveData,
-    roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : []), ...(lifecycle ? [() => lifecycle.close()] : []), ...(outcomes ? [() => outcomes.close()] : [])] : [],
+    roomStore: createRoomStore(config.roomStoreDir), closeResources: database ? [() => database.close(), ...(emailAccounts ? [() => emailAccounts.close()] : []), ...(lifecycle ? [() => lifecycle.close()] : []), ...(outcomes ? [() => outcomes.close()] : []), ...(seasonService ? [() => seasonService.close()] : [])] : [],
     onError: (event) => console.error(JSON.stringify({ event: 'http_error', ...event })),
   });
   try {
     if (database) await database.query('SELECT 1');
     await outcomes?.start();
+    await seasonService?.start();
     await server.gameServer.listen(port);
     const recovery = await server.services.matches.restoreRooms();
     const accountRecovery = await server.restoreAccountRooms();

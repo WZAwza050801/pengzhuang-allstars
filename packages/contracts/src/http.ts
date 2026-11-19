@@ -4,6 +4,7 @@ import { VersionIdSchema } from './configuration';
 import { RoomCodeSchema, MatchTicketResultSchema } from './match-tickets';
 import { QueueCommandSchema, QueueStatusSchema, QueueOptionsSchema } from './matchmaking';
 import { OwnRatingsSchema, LeaderboardQuerySchema, LeaderboardSchema } from './ratings';
+import { SeasonListSchema, SeasonHistoryQuerySchema, SeasonHistorySchema } from './seasons';
 import { ActiveMatchSchema, ReentryCommandSchema } from './match-recovery';
 import { MatchResultSchema, MatchHistorySchema, MatchHistoryQuerySchema, MatchLedgerSchema } from './match-results';
 import { parseNickname } from './game-validation';
@@ -308,6 +309,14 @@ export const HTTP_CONTRACTS = [
     operationId: 'ratingLeaderboard',
     query: LeaderboardQuerySchema,
     response: LeaderboardSchema,
+  },
+  { method: 'get', path: '/api/v1/seasons', operationId: 'seasonList', response: SeasonListSchema },
+  {
+    method: 'get',
+    path: '/api/v1/ratings/history',
+    operationId: 'ratingHistory',
+    query: SeasonHistoryQuerySchema,
+    response: SeasonHistorySchema,
   },
 ] as const;
 

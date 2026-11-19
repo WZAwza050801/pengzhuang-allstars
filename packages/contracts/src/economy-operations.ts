@@ -62,6 +62,7 @@ export const TrustedGrantSchema = z
       'mission.reward',
       'mail.reward',
       'achievement.reward',
+      'season.reward',
       'admin.correction',
     ]),
     coins: MoneySchema.default('0'),

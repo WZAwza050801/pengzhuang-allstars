@@ -32,3 +32,8 @@ export function tierFor(points: number, config: Pick<RatingsConfig, 'tiers'>): {
 export function resultFor(winner: -1 | 0 | 1, side: 0 | 1): EloResult {
   return winner === -1 ? 'draw' : winner === side ? 'win' : 'loss';
 }
+
+/** MM-03 soft reset: compress standings toward the floor by a configured factor. */
+export function softResetPoints(points: number, floor: number, factor: number): number {
+  return Math.max(floor, floor + Math.round((points - floor) * factor));
+}

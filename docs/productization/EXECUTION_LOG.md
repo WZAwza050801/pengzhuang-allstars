@@ -39,6 +39,23 @@
 
 ## 任务执行记录
 
+### MM-03
+
+- 状态：完成
+- 开始：2026-11-19 01:05 Asia/Shanghai
+- 完成：2026-11-19 11:05 Asia/Shanghai
+- 负责人：Qwen Code
+- 分支与起始提交：docs/productization-roadmap / 1f0e356（已同步 GitHub，主域被断经 Git Data API 精确复刻，SHA 逐字一致）
+- 范围：赛季起止按服务端时钟；冻结历史榜；配置软重置与赛季奖励；幂等切季 job；跨季结算口径明确。复用 MM-02 ratings 与 DAT-04 账本，不改物理/玩法。
+- 默认决策（engineering-default，记录待老板确认）：软重置 newPoints=floor+round((old-floor)*0.5)；赛季奖励按最终段位定额金币（青铜0/白银200/黄金500/铂金1000/钻石2000，建议值）；跨季口径=积分按结算消费时的当前赛季计入（队列配对仍按入队冻结赛季），文档明确。赛季奖励 reason 新增 season.reward。
+- 计划与验收：config/seasons.json + 契约；迁移 seasons/season_history/season_rewards（不可变触发器）；SeasonService（时钟定赛季、幂等切季、冻结历史榜、软重置、奖励幂等发放）；历史榜查询；真实 PG 验证边界时间/跨季结算/重复 job/故障重跑不重复发奖/回滚演练。
+- 实现：SeasonService.currentSeason 按服务端时钟半开区间取赛季；Ratings 增可选 currentSeason provider（回退 config.season，MM-02 测试无回退）。runJob 单事务 upsert 赛程+关闭到期赛季+标记当前 active；closeSeason 以条件 UPDATE 锁赛季行作并发闸门，冻结 season_history（不可变）→按段位经账本发 season.reward（operationId/sourceId 含 scope 双幂等）→软重置 ON CONFLICT DO NOTHING 写入下赛季。失败整体回滚重跑安全。新增 GET /api/v1/seasons 与 /api/v1/ratings/history（公开、keyset 分页、最小身份、未知赛季 404）。
+- 验证：npm run check 退出 0，211 单元/58 文件、19 契约/8 文件、337 文件格式及全部静态/资源/平衡/规划检查（work/mm03-check.log）。定向集成 seasons 6/6、ratings 回归 9/9（work/mm03-integration.log、mm03-ratings-regression.log）。**全量集成 25 文件/339 项全过、0 跳过，531.50 秒，退出 0**（work/mm03-full-integration.log，本轮 UI-07 负载敏感项亦通过）。服务端构建通过；dist+startRuntime 冒烟通过（season-1 active、活赛季历史榜空、missing 404）。
+- 证据：[MM-03 报告](reports/MM-03.md)、[工程说明](../engineering/seasons.md)、tests/seasons.test.ts、tests/seasons.integration.test.ts、迁移 202611180020。代码/测试/勾选/记录同最终提交。
+- 风险与剩余：软重置 factor 与段位奖励额度为 engineering-default 建议值，真实赛季日历/奖励属产品经济决策待老板确认；跨季结算按消费时当前赛季（有意默认，文档明确）。生产排位仍 friend-only。无新依赖、无远端资源、无生产迁移。
+- 回滚：停新局保留 seasons/season_history/season_rewards 审计与已发奖账本，回退同任务代码；迁移 down 仅隔离测试。
+- 完成与交接：MM-03 验收满足，累计 63/112。下一可领取 MM-04（依赖 MM-02）、MM-06（依赖 BAL-04+MM-01）；MM-05 仍待 NET-06。第 70 项为下一 GitHub 同步点。
+
 ### MM-02
 
 - 状态：完成
