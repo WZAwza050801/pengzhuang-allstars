@@ -39,7 +39,7 @@ export const UiTokensSchema = z.strictObject({
     reducedMs: z.literal(0),
   }),
   themes: z.strictObject({ light: theme, dark: theme }),
-  quality: z.strictObject({ white: color, green: color, blue: color, purple: color, orange: color }),
+  quality: z.strictObject({ green: color, blue: color, purple: color, orange: color, red: color, silver: color }),
   stadium: z.strictObject({
     grass: color,
     stripe: color,

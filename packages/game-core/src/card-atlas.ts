@@ -62,7 +62,7 @@ export function layoutCardAtlas(roster: readonly CardIdentityInput[]): CardAtlas
       }),
     );
   }
-  atlas.pages.push({ id: 'card-frames', path: '/assets/cards/card-frames.png', width: 4 * 164, height: 4 * 228 });
+  atlas.pages.push({ id: 'card-frames', path: '/assets/cards/card-frames.png', width: 4 * 164, height: 5 * 228 });
   for (const quality of CARD_QUALITIES)
     for (const state of CARD_STATES) {
       const index = atlas.frames.length;

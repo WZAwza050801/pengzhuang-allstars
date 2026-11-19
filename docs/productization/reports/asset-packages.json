@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceVersion": "assets-94dd7bb39550562c",
-  "version": "assets-0ceec830f62557bd",
+  "sourceVersion": "assets-d5d8704896b9eb13",
+  "version": "assets-279fcab16d06234b",
   "scope": "public resources; application JS/CSS measured by build report",
   "packages": [
     {
@@ -26,6 +26,7 @@
         "assets.orig_ui.Box_Quality_02.png",
         "assets.orig_ui.Box_Quality_03.png",
         "assets.orig_ui.Box_Quality_04.png",
+        "assets.orig_ui.Box_Quality_05.png",
         "assets.orig_ui.Box_Select.png",
         "assets.orig_ui.Btn_00.png",
         "assets.orig_ui.Btn_02.png",
@@ -74,8 +75,8 @@
         "assets.ui.pack.json",
         "assets.ui.stadiums.png"
       ],
-      "bytes": 1581694,
-      "decodedRgbaBytes": 38239432
+      "bytes": 1559483,
+      "decodedRgbaBytes": 38340136
     },
     {
       "id": "matchCommon",
@@ -187,17 +188,6 @@
         "assets.players_original.head_9001_90001.png",
         "assets.players_original.head_9001_90002.png",
         "assets.players_original.head_9001_90003.png",
-        "assets.players.p06_avatar.png",
-        "assets.players.p07_avatar.png",
-        "assets.players.p08_avatar.png",
-        "assets.players.p09_avatar.png",
-        "assets.players.p10_avatar.png",
-        "assets.players.p11_avatar.png",
-        "assets.players.p12_avatar.png",
-        "assets.players.p13_avatar.png",
-        "assets.players.p14_avatar.png",
-        "assets.players.p15_avatar.png",
-        "assets.players.p16_avatar.png",
         "assets.skills.skill_010_10101.png",
         "assets.skills.skill_020_10102.png",
         "assets.skills.skill_030_10103.png",
@@ -268,8 +258,8 @@
         "assets.skills.skill_810_80202.png",
         "assets.skills.skill_820_70101.png"
       ],
-      "bytes": 10556362,
-      "decodedRgbaBytes": 37801984
+      "bytes": 9462259,
+      "decodedRgbaBytes": 34918400
     },
     {
       "id": "matchLow",
@@ -307,8 +297,8 @@
       "decodedRgbaBytes": 85104080
     }
   ],
-  "totalBytes": 14086896,
-  "removedBytes": 17188681,
+  "totalBytes": 12970582,
+  "removedBytes": 18275126,
   "removed": [
     {
       "id": "art.cutout.p01.png",
@@ -551,12 +541,6 @@
       "reason": "not-referenced"
     },
     {
-      "id": "assets.orig_ui.Box_Quality_05.png",
-      "path": "/assets/orig_ui/Box_Quality_05.png",
-      "bytes": 7658,
-      "reason": "not-referenced"
-    },
-    {
       "id": "assets.orig_ui.Btn_01.png",
       "path": "/assets/orig_ui/Btn_01.png",
       "bytes": 2318,
@@ -677,9 +661,21 @@
       "reason": "not-referenced"
     },
     {
+      "id": "assets.players.p06_avatar.png",
+      "path": "/assets/players/p06_avatar.png",
+      "bytes": 92552,
+      "reason": "not-referenced"
+    },
+    {
       "id": "assets.players.p06_full.png",
       "path": "/assets/players/p06_full.png",
       "bytes": 299104,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p07_avatar.png",
+      "path": "/assets/players/p07_avatar.png",
+      "bytes": 98586,
       "reason": "not-referenced"
     },
     {
@@ -689,9 +685,21 @@
       "reason": "not-referenced"
     },
     {
+      "id": "assets.players.p08_avatar.png",
+      "path": "/assets/players/p08_avatar.png",
+      "bytes": 112340,
+      "reason": "not-referenced"
+    },
+    {
       "id": "assets.players.p08_full.png",
       "path": "/assets/players/p08_full.png",
       "bytes": 291280,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p09_avatar.png",
+      "path": "/assets/players/p09_avatar.png",
+      "bytes": 88036,
       "reason": "not-referenced"
     },
     {
@@ -701,9 +709,21 @@
       "reason": "not-referenced"
     },
     {
+      "id": "assets.players.p10_avatar.png",
+      "path": "/assets/players/p10_avatar.png",
+      "bytes": 83538,
+      "reason": "not-referenced"
+    },
+    {
       "id": "assets.players.p10_full.png",
       "path": "/assets/players/p10_full.png",
       "bytes": 232091,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p11_avatar.png",
+      "path": "/assets/players/p11_avatar.png",
+      "bytes": 94314,
       "reason": "not-referenced"
     },
     {
@@ -713,9 +733,21 @@
       "reason": "not-referenced"
     },
     {
+      "id": "assets.players.p12_avatar.png",
+      "path": "/assets/players/p12_avatar.png",
+      "bytes": 101935,
+      "reason": "not-referenced"
+    },
+    {
       "id": "assets.players.p12_full.png",
       "path": "/assets/players/p12_full.png",
       "bytes": 295488,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p13_avatar.png",
+      "path": "/assets/players/p13_avatar.png",
+      "bytes": 111647,
       "reason": "not-referenced"
     },
     {
@@ -725,15 +757,33 @@
       "reason": "not-referenced"
     },
     {
+      "id": "assets.players.p14_avatar.png",
+      "path": "/assets/players/p14_avatar.png",
+      "bytes": 113339,
+      "reason": "not-referenced"
+    },
+    {
       "id": "assets.players.p14_full.png",
       "path": "/assets/players/p14_full.png",
       "bytes": 306165,
       "reason": "not-referenced"
     },
     {
+      "id": "assets.players.p15_avatar.png",
+      "path": "/assets/players/p15_avatar.png",
+      "bytes": 95410,
+      "reason": "not-referenced"
+    },
+    {
       "id": "assets.players.p15_full.png",
       "path": "/assets/players/p15_full.png",
       "bytes": 310165,
+      "reason": "not-referenced"
+    },
+    {
+      "id": "assets.players.p16_avatar.png",
+      "path": "/assets/players/p16_avatar.png",
+      "bytes": 102406,
       "reason": "not-referenced"
     },
     {

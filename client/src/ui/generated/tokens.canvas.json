@@ -53,11 +53,12 @@
     }
   },
   "quality": {
-    "white": "#a8b3bd",
     "green": "#2f9a1e",
     "blue": "#1f74c8",
     "purple": "#9b2fc0",
-    "orange": "#c55a00"
+    "orange": "#c55a00",
+    "red": "#c0202a",
+    "silver": "#c8d0d8"
   },
   "stadium": {
     "grass": "#337b54",

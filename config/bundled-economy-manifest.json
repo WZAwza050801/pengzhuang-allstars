@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "economyVersion": "economy-2",
-  "gameDataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
-  "sha256": "629da516fc370e320248e91dfaf4db2186a115cda438851b53542189fff3818b",
-  "pricingSha256": "b81cbf821e8a122362edaa2f2c64abba6eadd14ca3b6081f0ed11051080774fe"
+  "economyVersion": "economy-4",
+  "gameDataVersion": "field-2/phys-4/players-4/skills-1/rules-4/levels-1/attrmap-1",
+  "sha256": "dbc419834286975788ab5096f184a10e1643e4ffcb0b2ed105cfb0469c91e97f",
+  "pricingSha256": "251f08048ea9a5eb335d16cdaafd659918e7b63e822df172e3d48219d524c252"
 }

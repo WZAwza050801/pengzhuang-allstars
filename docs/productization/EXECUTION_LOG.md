@@ -10,6 +10,20 @@
 - FND-01 已完成本次独立验证；下一可领取 FND-02/FND-03/FND-06。远端同步仍受 403 阻塞。
 - 历史会话测试见 BASELINE；后续实施不得重复引用为新代码的测试证据。
 
+## 原版球员还原：删 11 自建 + 六档品质重映射 + 新手卡重设计（2026-11-19，Qwen Code，HEAD c4a4f67）
+
+用户拍板「只要 106 个原版头像 + 对应数值和技能引入」，并纠正品质档位须忠于原版。本轮为用户主导的保真重设计，修改 BAL-01/AST-02 既有产出，不新勾选任务。
+
+- 考据：原版 `card_records.json`（1.5.5）`rare` 字段确为六档，与用户描述完全吻合——银传奇 rare9（大罗/小贝，2）、深红超巨 rare5（梅西/小小罗/马尔蒂尼/齐达内，4）、橙巨星 rare4（内马尔/贝尔/博格巴/格子/奥巴梅扬等，31）、梅红次级巨星 rare3（师奶/卡瓦尼/魔笛等，39）、淡蓝球星 rare2（斯图里奇/吉鲁/托雷斯/郑智等，27）、球员卡·国足 rare1（郜林/黄博文/张琳芃，3）。马拉多纳/姆巴佩/郭全博原版表里无。完整盘点 [`reports/player-inventory.json`](reports/player-inventory.json)（含真实球星名/原版 rarity/五维/技能 ID）。
+- 删除 11 自建：`data/players.json` 117→106（仅留 srcId 原版），version players-4；`portrait_map.json` fallbackIds 清空（106 原版头像）。
+- 六档重映射：quality 由错误的 white/green/blue/purple/orange 改为原版 green/blue/purple/orange/red/silver（CARD_QUALITIES、球员/配色/经济 schema 同步）；卡框 15→18 帧（框页 4×5）；大厅卡框 Box_Quality_01–05，银传奇复用红框 05 做银色化（沿用原 white 复用绿框模式）；动态 UI 政策补 05。
+- 新手卡重设计：starter 国足 3（p94/p99/p100）+ 淡蓝原版 5（p95/p38/p54/p97/p86，对应原版 initplayer 赠送）共 8 张；默认阵容 p99/p54/p97/p94/p38（国足+淡蓝，全 none 可进官方模式）。economy version economy-4、rules version rules-4。
+- 关键约束：经济系统只受理 none/已实现技能卡（`economyAvailable`）；梅红档 39 张技能全未实现，故「自选梅红卡」新手位须待技能按原版重做后才能发放（用户已选「先固定送 1 张过渡」，本轮过渡为国足+淡蓝，梅红卡位留待技能引入）。原版每人 3 技能（等级 3/6/10 解锁），现每人 1 个 srcSkill；技能/数据用户已定「后续按原版信息全部重做，目前临时引用原版」。
+- 验证：`npm run check` 退出 0——单测 60 文件/224 项、契约 8 文件/19 项全过；图集 106 身份/18 帧/3 页、资产目录 341 资源/310 别名、balance-data 106 source/0 rebuilt、balance-mapping 1060 行、economy 35 可用卡守恒通过、skill-rules 13 定义/71 未实现、balance-experiment valid:true（publishable:false 为既有先手偏差注记）。economy 测试随新 starter 重算（8 张/pool 35/p94 替代 p01/碎片 5n/预测 day7 [3,3,4,3,3,3,3,3]、day30 [5,5,5,6,6,6,6,6]、coins 266）。
+- 风险与剩余：技能/数据待按原版重做（71 未实现技能、每人 3 技能机制）；梅红自选新手卡待技能引入；头像授权 REL-01 未决；银传奇框为程序化银色化（原版无独立银框资产）。
+- 回滚：独立提交回退；数据 version 与清单/图集一并回退。
+- 下一项：技能按原版重做的设计讨论（做法 A 语义映射为临时桥，最终按原版 skill_parameters 重建）。
+
 ## 独立玩家视角复核（2026-11-18，Qwen Code，HEAD 6ab2533）
 
 用户要求先以玩家身份模拟并对抗压力测试前任 Agent 声称完成的任务，再继续剩余任务。本轮复核不勾选任何任务、不修改产品代码（验证期临时诊断改动已还原，`git diff` 为空）。

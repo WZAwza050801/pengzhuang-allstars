@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "assets-94dd7bb39550562c",
+  "version": "assets-d5d8704896b9eb13",
   "minProtocol": 1,
   "maxProtocol": 1,
   "assets": [
@@ -840,8 +840,8 @@
       "id": "assets.cards.atlas.json",
       "kind": "data",
       "path": "/assets/cards/atlas.json",
-      "bytes": 31142,
-      "sha256": "52bf8354571e43d13e2b960389cae1f6e277e7806d6cdd9ddff0aa54875c4d8c",
+      "bytes": 29060,
+      "sha256": "112f7776cf0cc13bae04a6dae4cfefd767f078d1a80b32900ba2022268f42142",
       "width": null,
       "height": null,
       "anchors": {},
@@ -860,10 +860,10 @@
       "id": "assets.cards.card-frames.png",
       "kind": "image",
       "path": "/assets/cards/card-frames.png",
-      "bytes": 43657,
-      "sha256": "81f65bf2a138d5230cb85319027cce10648820c41731e8982e1c617aa3868716",
+      "bytes": 54300,
+      "sha256": "8f65f18a449608cb7169882ac144d6c767a5e373a16e3aaa950f35ed7625f484",
       "width": 656,
-      "height": 912,
+      "height": 1140,
       "anchors": {
         "center": {
           "x": 0.5,
@@ -886,8 +886,8 @@
       "id": "assets.cards.portraits-0.png",
       "kind": "image",
       "path": "/assets/cards/portraits-0.png",
-      "bytes": 329849,
-      "sha256": "845ce92a714fb54e4b5cad40b0d346d6bf38a6e7b7499d1f0e80e14331dcefc2",
+      "bytes": 329658,
+      "sha256": "4eeeb7efd34812a91eedd8bd00883b208ec0435a647a390e91c1ab55c0bf2db4",
       "width": 1056,
       "height": 1056,
       "anchors": {
@@ -912,10 +912,10 @@
       "id": "assets.cards.portraits-1.png",
       "kind": "image",
       "path": "/assets/cards/portraits-1.png",
-      "bytes": 281462,
-      "sha256": "c38d4bebb92e25ed336b979239520189aa935596ab50dff9b5a8d5c73fea09ed",
+      "bytes": 243223,
+      "sha256": "a6df60e91e9354d014da1f7ad97d102980e9e01b5eee5a8cb61c67890fb1b720",
       "width": 1056,
-      "height": 924,
+      "height": 792,
       "anchors": {
         "center": {
           "x": 0.5,
@@ -8783,7 +8783,7 @@
       "kind": "data",
       "path": "/assets/ui/pack.json",
       "bytes": 8853,
-      "sha256": "297967327ebccd3ad981e88df2882df23cd9d511422d6b1129cf1576bd94b48b",
+      "sha256": "bf64a2c36c9224c8c96d9c8b7462084d55c126af4baca95d9bead210a79cfe97",
       "width": null,
       "height": null,
       "anchors": {},
@@ -9008,17 +9008,32 @@
       "usage": "card-frame"
     },
     {
-      "id": "card.frame.white.disabled",
+      "id": "card.frame.red.disabled",
       "target": "assets.cards.card-frames.png",
       "usage": "card-frame"
     },
     {
-      "id": "card.frame.white.normal",
+      "id": "card.frame.red.normal",
       "target": "assets.cards.card-frames.png",
       "usage": "card-frame"
     },
     {
-      "id": "card.frame.white.selected",
+      "id": "card.frame.red.selected",
+      "target": "assets.cards.card-frames.png",
+      "usage": "card-frame"
+    },
+    {
+      "id": "card.frame.silver.disabled",
+      "target": "assets.cards.card-frames.png",
+      "usage": "card-frame"
+    },
+    {
+      "id": "card.frame.silver.normal",
+      "target": "assets.cards.card-frames.png",
+      "usage": "card-frame"
+    },
+    {
+      "id": "card.frame.silver.selected",
       "target": "assets.cards.card-frames.png",
       "usage": "card-frame"
     },
@@ -9218,56 +9233,6 @@
       "usage": "portrait"
     },
     {
-      "id": "player.p06.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p06.portrait",
-      "target": "assets.players.p06_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p07.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p07.portrait",
-      "target": "assets.players.p07_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p08.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p08.portrait",
-      "target": "assets.players.p08_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p09.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p09.portrait",
-      "target": "assets.players.p09_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p10.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p10.portrait",
-      "target": "assets.players.p10_avatar.png",
-      "usage": "portrait"
-    },
-    {
       "id": "player.p100.cardPortrait",
       "target": "assets.cards.portraits-1.png",
       "usage": "card-portrait"
@@ -9368,16 +9333,6 @@
       "usage": "portrait"
     },
     {
-      "id": "player.p11.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p11.portrait",
-      "target": "assets.players.p11_avatar.png",
-      "usage": "portrait"
-    },
-    {
       "id": "player.p110.cardPortrait",
       "target": "assets.cards.portraits-1.png",
       "usage": "card-portrait"
@@ -9455,56 +9410,6 @@
     {
       "id": "player.p117.portrait",
       "target": "assets.players_original.head_9001_90003.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p12.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p12.portrait",
-      "target": "assets.players.p12_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p13.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p13.portrait",
-      "target": "assets.players.p13_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p14.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p14.portrait",
-      "target": "assets.players.p14_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p15.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p15.portrait",
-      "target": "assets.players.p15_avatar.png",
-      "usage": "portrait"
-    },
-    {
-      "id": "player.p16.cardPortrait",
-      "target": "assets.cards.portraits-0.png",
-      "usage": "card-portrait"
-    },
-    {
-      "id": "player.p16.portrait",
-      "target": "assets.players.p16_avatar.png",
       "usage": "portrait"
     },
     {
@@ -9989,7 +9894,7 @@
     },
     {
       "id": "player.p65.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -9999,7 +9904,7 @@
     },
     {
       "id": "player.p66.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10009,7 +9914,7 @@
     },
     {
       "id": "player.p67.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10019,7 +9924,7 @@
     },
     {
       "id": "player.p68.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10029,7 +9934,7 @@
     },
     {
       "id": "player.p69.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10039,7 +9944,7 @@
     },
     {
       "id": "player.p70.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10049,7 +9954,7 @@
     },
     {
       "id": "player.p71.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10059,7 +9964,7 @@
     },
     {
       "id": "player.p72.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10069,7 +9974,7 @@
     },
     {
       "id": "player.p73.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10079,7 +9984,7 @@
     },
     {
       "id": "player.p74.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {
@@ -10089,7 +9994,7 @@
     },
     {
       "id": "player.p75.cardPortrait",
-      "target": "assets.cards.portraits-1.png",
+      "target": "assets.cards.portraits-0.png",
       "usage": "card-portrait"
     },
     {

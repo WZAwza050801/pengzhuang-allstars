@@ -14,7 +14,7 @@ import {
 } from '../shared/match';
 import { pieceStats, SKILL_EFFECT_POLICIES } from '@pengzhuang/game-core';
 const home = ['p01', 'p02', 'p03', 'p04', 'p05'],
-  away = ['p06', 'p07', 'p08', 'p09', 'p10'];
+  away = ['p17', 'p18', 'p19', 'p20', 'p21'];
 function fixture(assign: Record<string, string>, guaranteed = true) {
   const data = buildGameData();
   for (const p of Object.values(data.players)) {
@@ -58,7 +58,7 @@ test('all thirteen implemented effects have compatible timing; six preturn buffs
   }
 });
 test('auras take the strongest value in own half and multiply shooter buffs; frozen plus anchor stays static', () => {
-  const { data, state } = fixture({ p01: 'alien', p02: 'guardian', p03: 'guardian', p06: 'wall' });
+  const { data, state } = fixture({ p01: 'alien', p02: 'guardian', p03: 'guardian', p17: 'wall' });
   state.pieces[5].frozen = 2;
   beginTurn(state, data);
   expect(state.pieces[5].anchored).toBe(true);

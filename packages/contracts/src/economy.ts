@@ -55,11 +55,12 @@ export const EconomyPolicySchema = z
       '9': positiveMoney,
     }),
     rebuiltRarityByQuality: z.strictObject({
-      white: z.literal(1),
-      green: z.literal(2),
-      blue: z.literal(3),
-      purple: z.literal(4),
-      orange: z.literal(5),
+      green: z.literal(1),
+      blue: z.literal(2),
+      purple: z.literal(3),
+      orange: z.literal(4),
+      red: z.literal(5),
+      silver: z.literal(9),
     }),
     craft: z.strictObject({
       costMultiplier: z.number().int().min(2).max(1000),

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+  "dataVersion": "field-2/phys-4/players-4/skills-1/rules-4/levels-1/attrmap-1",
   "sourceSha256": "33073e6f868724871ac56c7aa43c8366debe010009f4ad136d2eefd41dad2d0d",
   "sourceRows": 2250,
   "runtimeRows": 1060,
   "referenceOnlyRows": 1190,
-  "runtimePlayers": 117,
+  "runtimePlayers": 106,
   "sourcePlayers": 106,
-  "rebuiltPlayers": 11,
+  "rebuiltPlayers": 0,
   "implementedSkills": 13,
   "explicitUnimplementedPlayers": 71,
   "explicitNoSkillPlayers": 30,
@@ -58,83 +58,6 @@
       "srcId": "30103",
       "evidence": "data/levels.json.players.30103;docs/roster-provenance.json.players.p05",
       "runtime": "exact-level-table"
-    },
-    {
-      "id": "p06",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p06;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p07",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p07;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p08",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p08;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p09",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p09;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p10",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p10;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p11",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p11;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p12",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p12;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p13",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p13;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p14",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p14;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p15",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p15;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
-    },
-    {
-      "id": "p16",
-      "source": "B",
-      "srcId": null,
-      "evidence": "data/players.json.players.p16;nameSource=rebuilt",
-      "runtime": "attrs-plus-growth"
     },
     {
       "id": "p17",

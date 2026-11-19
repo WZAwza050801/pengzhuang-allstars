@@ -5,11 +5,11 @@ import { createAssetCatalog, imageSize } from '../tools/asset-catalog';
 
 test('catalog scans actual runtime resources and all player/field/audio bindings with provenance and dimensions', () => {
   const c = createAssetCatalog();
-  expect(c.aliases.filter((a) => a.usage === 'portrait')).toHaveLength(117);
+  expect(c.aliases.filter((a) => a.usage === 'portrait')).toHaveLength(106);
   expect(c.aliases.filter((a) => a.usage === 'field-scene')).toHaveLength(5);
   expect(c.aliases.filter((a) => a.usage === 'audio')).toHaveLength(9);
-  expect(c.aliases.filter((a) => a.usage === 'card-portrait')).toHaveLength(117);
-  expect(c.aliases.filter((a) => a.usage === 'card-frame')).toHaveLength(15);
+  expect(c.aliases.filter((a) => a.usage === 'card-portrait')).toHaveLength(106);
+  expect(c.aliases.filter((a) => a.usage === 'card-frame')).toHaveLength(18);
   expect(c.aliases.filter((a) => a.usage === 'ui-surface')).toHaveLength(18);
   expect(c.aliases.filter((a) => a.usage === 'ui-icon')).toHaveLength(16);
   expect(c.aliases.filter((a) => a.usage === 'ui-stadium')).toHaveLength(5);

@@ -4,17 +4,17 @@ import { layoutCardAtlas, validateCardBindings } from '../packages/game-core/src
 import { verifyCardAtlas } from '../tools/card-atlas';
 import { DEFAULT_DATA } from '../shared/data';
 
-const roster = Array.from({ length: 117 }, (_, i) => ({
+const roster = Array.from({ length: 106 }, (_, i) => ({
   id: `p${String(i + 1).padStart(2, '0')}`,
   name: `球员${i + 1}`,
   position: 'FW',
   quality: 'blue',
 }));
 
-test('117 portraits and 15 reusable frames pack with gutters, fixed aspect and no overlapping or unused pages', () => {
+test('106 portraits and 15 reusable frames pack with gutters, fixed aspect and no overlapping or unused pages', () => {
   const atlas = layoutCardAtlas(roster);
-  expect(atlas.portraits).toHaveLength(117);
-  expect(atlas.frames).toHaveLength(15);
+  expect(atlas.portraits).toHaveLength(106);
+  expect(atlas.frames).toHaveLength(18);
   expect(atlas.pages).toHaveLength(3);
   expect(atlas.pages.every((page) => page.width <= 2048 && page.height <= 2048)).toBe(true);
   expect(atlas.portraits.every((region) => region.width === 128 && region.height === 128)).toBe(true);

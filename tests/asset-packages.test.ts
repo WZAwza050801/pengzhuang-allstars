@@ -17,7 +17,8 @@ test('filtered build keeps every alias and explicit runtime reference, removes u
     { manifest, report } = createAssetPackage(source, refs);
   expect(manifest.assets.some((a) => a.path?.startsWith('/art/'))).toBe(false);
   expect(manifest.assets.filter((a) => a.path?.startsWith('/assets/skills/'))).toHaveLength(69);
-  for (const frame of ['01', '02', '03', '04']) expect(refs.has(`/assets/orig_ui/Box_Quality_${frame}.png`)).toBe(true);
+  for (const frame of ['01', '02', '03', '04', '05'])
+    expect(refs.has(`/assets/orig_ui/Box_Quality_${frame}.png`)).toBe(true);
   for (const path of refs)
     expect(
       manifest.assets.some((a) => a.path === path),

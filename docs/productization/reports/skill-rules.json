@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "semanticVersion": "skill-timing-1",
-  "dataVersion": "field-2/phys-4/players-2/skills-1/rules-2/levels-1/attrmap-1",
+  "dataVersion": "field-2/phys-4/players-4/skills-1/rules-4/levels-1/attrmap-1",
   "lifecycle": {
     "preturn": "beginTurn at a new action; never on reconnect",
     "preview": "rng=null; never rolls onShot",

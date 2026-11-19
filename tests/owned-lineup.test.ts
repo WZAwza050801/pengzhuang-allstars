@@ -1,9 +1,10 @@
 import { randomUUID } from 'node:crypto';
 import { expect, test } from 'vitest';
 import { placeOwnedCard, canSaveOwnedLineup, resolveLineupSave } from '../packages/client-model/src/owned-lineup';
+const ownedDefs = ['p01', 'p02', 'p03', 'p04', 'p05', 'p17'];
 const cards = Array.from({ length: 6 }, (_, index) => ({
   id: randomUUID(),
-  playerDefId: `p0${index + 1}`,
+  playerDefId: ownedDefs[index],
   status: 'active' as const,
   level: 1,
   version: 0,

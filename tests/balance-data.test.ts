@@ -19,12 +19,12 @@ const input = {
 };
 test('all runtime definitions validate without filling missing data; source and rebuilt values remain unchanged', () => {
   const d = GameDefinitionsSchema.parse(input);
-  expect(d.players.players).toHaveLength(117);
+  expect(d.players.players).toHaveLength(106);
   expect(Object.keys(d.levels.players)).toHaveLength(106);
   expect(d.levels.players['10101']['1'].weight).toBe(34);
   expect(d.mapping.attrMin).toBe(21);
   expect(DEFAULT_DATA.levels).toEqual(table);
-  expect(d.players.players.filter((p) => p.srcId === null)).toHaveLength(11);
+  expect(d.players.players.filter((p) => p.srcId === null)).toHaveLength(0);
   expect(() => buildGameData({ ...physics, hz: NaN })).toThrow();
 });
 test('broken references, missing levels, non-finite values, invalid probabilities and unsupported trigger/effect combinations fail', () => {
@@ -63,7 +63,7 @@ test('broken references, missing levels, non-finite values, invalid probabilitie
       d.mapping.attrMax = d.mapping.attrMin;
     },
     (d) => {
-      d.players.players[5].growth[0] = -1000;
+      d.players.players[5].attrs[0] = -1000;
     },
   ];
   for (const change of cases) {

@@ -1,5 +1,5 @@
 {
-  "version": "players-2",
+  "version": "players-4",
   "note": "属性 40–99，Lv1 基础值 + 每级成长。p01–p16 的数值仍为 rebuilt（保持不变）；p17 起取自原版 1.5.5 等级属性表（Lv1→attrs，(Lv10−attrs)/9→growth；字段映射与取值规则见 docs/roster-mapping.md），Lv1 低于 40 的值取下限 40 并逐条记录于 docs/roster-conflicts.json。名称来源见 nameSource。skill 为 unimplemented＝源卡有技能但效果未实现，none＝源卡无技能（见 docs/roster-audit.md）。p17 起的 quality 是按 rarity 的约定映射，不是源值，运行时不读取。",
   "attributes": {
     "weight": "重量 → 质量倍率",
@@ -10,130 +10,2897 @@
   },
   "attributesSource": "observed:S05 press_2 球员详情弹窗可见 5 项属性图标（重量/力量/弧线/精准/心理），字迹模糊，名称按图标推断；T2-a：field_dictionary 1.5.5 确认源标签为 重量/力度/心理/弧度/精准（见 docs/roster-mapping.md）",
   "players": [
-    { "id": "p01", "name": "梅球王", "nameSource": "recovered:S04", "position": "FW", "quality": "orange", "attrs": [52, 74, 86, 84, 80], "growth": [1, 2, 3, 2, 1], "skill": "king", "srcId": "40108", "srcPosition": "ST", "rarity": 5, "aliases": [], "srcSkill": "球王震慑" },
-    { "id": "p02", "name": "小小罗", "nameSource": "recovered:S04", "position": "FW", "quality": "orange", "attrs": [62, 86, 70, 76, 78], "growth": [1, 3, 2, 2, 1], "skill": "rocket", "srcId": "40208", "srcPosition": "ST", "rarity": 5, "aliases": ["C罗"], "srcSkill": "霸气侧漏" },
-    { "id": "p03", "name": "大罗", "nameSource": "recovered:S03", "position": "FW", "quality": "orange", "attrs": [72, 82, 62, 72, 70], "growth": [2, 3, 1, 2, 1], "skill": "alien", "srcId": "90002", "srcPosition": "ST", "rarity": 9, "aliases": [], "srcSkill": "外星人来袭" },
-    { "id": "p04", "name": "木乐", "nameSource": "recovered:S03", "position": "FW", "quality": "purple", "attrs": [56, 70, 66, 80, 74], "growth": [1, 2, 2, 3, 1], "skill": "fox", "srcId": "20102", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "禁区之狐" },
-    { "id": "p05", "name": "波霸", "nameSource": "recovered:S04", "position": "MF", "quality": "orange", "attrs": [78, 76, 64, 66, 70], "growth": [3, 2, 1, 1, 1], "skill": "sendoff", "srcId": "30103", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "野蛮重炮" },
-    { "id": "p06", "name": "坦克哥", "nameSource": "rebuilt", "position": "DF", "quality": "purple", "attrs": [88, 66, 48, 56, 64], "growth": [3, 2, 1, 1, 1], "skill": "tank", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p07", "name": "门神", "nameSource": "rebuilt", "position": "GK", "quality": "purple", "attrs": [74, 58, 50, 70, 82], "growth": [2, 1, 1, 2, 2], "skill": "guardian", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p08", "name": "卷毛狮", "nameSource": "rebuilt", "position": "DF", "quality": "purple", "attrs": [76, 68, 58, 62, 66], "growth": [2, 2, 1, 1, 2], "skill": "wall", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p09", "name": "鲁大师", "nameSource": "rebuilt", "position": "MF", "quality": "purple", "attrs": [74, 80, 60, 70, 68], "growth": [2, 3, 1, 1, 1], "skill": "cannon", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p10", "name": "卤蛋", "nameSource": "rebuilt", "position": "DF", "quality": "blue", "attrs": [80, 62, 50, 60, 72], "growth": [3, 1, 1, 1, 2], "skill": "wall", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p11", "name": "丸子头", "nameSource": "rebuilt", "position": "MF", "quality": "purple", "attrs": [60, 66, 74, 78, 76], "growth": [1, 2, 2, 2, 2], "skill": "extra", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p12", "name": "脏辫侠", "nameSource": "rebuilt", "position": "FW", "quality": "blue", "attrs": [54, 76, 64, 66, 62], "growth": [1, 3, 2, 1, 1], "skill": "flash", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p13", "name": "红毛", "nameSource": "rebuilt", "position": "MF", "quality": "blue", "attrs": [56, 64, 80, 68, 64], "growth": [1, 1, 3, 2, 1], "skill": "banana", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p14", "name": "金毛", "nameSource": "rebuilt", "position": "FW", "quality": "blue", "attrs": [58, 70, 68, 72, 60], "growth": [1, 2, 2, 2, 1], "skill": "cannon", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p15", "name": "飞猫", "nameSource": "rebuilt", "position": "GK", "quality": "blue", "attrs": [66, 56, 52, 74, 70], "growth": [2, 1, 1, 2, 2], "skill": "wall", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p16", "name": "大胡子", "nameSource": "rebuilt", "position": "DF", "quality": "blue", "attrs": [84, 64, 46, 56, 74], "growth": [3, 2, 1, 1, 1], "skill": "charge", "srcId": null, "srcPosition": null, "rarity": null, "aliases": [], "srcSkill": null },
-    { "id": "p17", "name": "马少尔", "nameSource": "source:players.json#10101", "position": "FW", "quality": "blue", "attrs": [40, 51, 55, 47, 53], "growth": [0.89, 2.33, 2.67, 2.33, 2.44], "skill": "unimplemented", "srcId": "10101", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "疾风金童" },
-    { "id": "p18", "name": "小胖", "nameSource": "source:players.json#10102", "position": "FW", "quality": "purple", "attrs": [56, 56, 52, 56, 57], "growth": [2.67, 2.67, 2.44, 2.67, 2.78], "skill": "unimplemented", "srcId": "10102", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "重型坦克" },
-    { "id": "p19", "name": "玛塔叔叔", "nameSource": "source:players.json#10103", "position": "MF", "quality": "blue", "attrs": [40, 50, 60, 60, 53], "growth": [-0.67, 2.33, 2.89, 2.78, 2.44], "skill": "unimplemented", "srcId": "10103", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "大叔巧射" },
-    { "id": "p20", "name": "得佩", "nameSource": "source:players.json#10104", "position": "MF", "quality": "blue", "attrs": [43, 53, 57, 51, 46], "growth": [2.11, 2.44, 2.67, 2.44, 2.22], "skill": "unimplemented", "srcId": "10104", "srcPosition": "CM", "rarity": 3, "aliases": ["嘚佩"], "srcSkill": "精准远射" },
-    { "id": "p21", "name": "小猪", "nameSource": "source:players.json#10105", "position": "MF", "quality": "blue", "attrs": [49, 47, 47, 49, 51], "growth": [2.33, 2.22, 2.22, 2.33, 2.44], "skill": "unimplemented", "srcId": "10105", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "攻防纽带" },
-    { "id": "p22", "name": "罗货", "nameSource": "source:players.json#10106", "position": "DF", "quality": "green", "attrs": [53, 40, 41, 40, 43], "growth": [2.56, 0.67, 2, 0.89, 2], "skill": "none", "srcId": "10106", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p23", "name": "布琳德", "nameSource": "source:players.json#10107", "position": "DF", "quality": "blue", "attrs": [58, 40, 40, 49, 48], "growth": [2.78, 1, 1.22, 2.33, 2.33], "skill": "unimplemented", "srcId": "10107", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "球场指挥官" },
-    { "id": "p24", "name": "阿圭罗", "nameSource": "source:players.json#10201", "position": "FW", "quality": "purple", "attrs": [40, 71, 61, 75, 60], "growth": [0.33, 3.33, 2.89, 3.56, 2.89], "skill": "unimplemented", "srcId": "10201", "srcPosition": "ST", "rarity": 4, "aliases": ["阿KUN"], "srcSkill": "凌波微步" },
-    { "id": "p25", "name": "思特灵", "nameSource": "source:players.json#10202", "position": "FW", "quality": "blue", "attrs": [45, 46, 61, 57, 40], "growth": [2.11, 2.22, 2.89, 2.78, 1.78], "skill": "unimplemented", "srcId": "10202", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "一气呵成" },
-    { "id": "p26", "name": "喜娃", "nameSource": "source:players.json#10203", "position": "MF", "quality": "purple", "attrs": [40, 60, 72, 69, 57], "growth": [0.67, 2.89, 3.44, 3.22, 2.67], "skill": "unimplemented", "srcId": "10203", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "中场发动机" },
-    { "id": "p27", "name": "土雷", "nameSource": "source:players.json#10204", "position": "MF", "quality": "blue", "attrs": [58, 57, 43, 57, 48], "growth": [2.78, 2.67, 2, 2.67, 2.22], "skill": "unimplemented", "srcId": "10204", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "碰碰车" },
-    { "id": "p28", "name": "丁丁", "nameSource": "source:players.json#10205", "position": "MF", "quality": "purple", "attrs": [41, 56, 62, 60, 50], "growth": [2, 2.67, 3.11, 2.89, 2.44], "skill": "unimplemented", "srcId": "10205", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "进攻核心" },
-    { "id": "p29", "name": "孔向前", "nameSource": "source:players.json#10206", "position": "DF", "quality": "purple", "attrs": [76, 46, 40, 55, 57], "growth": [3.56, 2.22, 1.67, 2.56, 2.67], "skill": "unimplemented", "srcId": "10206", "srcPosition": "DC", "rarity": 4, "aliases": [], "srcSkill": "钢筋铁骨" },
-    { "id": "p30", "name": "德漏勺", "nameSource": "source:players.json#10207", "position": "DF", "quality": "green", "attrs": [52, 40, 40, 40, 45], "growth": [2.44, 0.56, 1, 1.44, 2.11], "skill": "none", "srcId": "10207", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p31", "name": "克斯塔", "nameSource": "source:players.json#10301", "position": "FW", "quality": "blue", "attrs": [49, 50, 43, 48, 63], "growth": [2.33, 2.33, 2.11, 2.22, 3], "skill": "unimplemented", "srcId": "10301", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "强力中锋" },
-    { "id": "p32", "name": "扎球王", "nameSource": "source:players.json#10302", "position": "MF", "quality": "purple", "attrs": [40, 64, 74, 63, 60], "growth": [-0.22, 3, 3.44, 3, 2.89], "skill": "unimplemented", "srcId": "10302", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "无解盘带" },
-    { "id": "p33", "name": "小法", "nameSource": "source:players.json#10303", "position": "MF", "quality": "purple", "attrs": [53, 61, 68, 74, 65], "growth": [1.78, 2.22, 2.44, 2.78, 2.44], "skill": "unimplemented", "srcId": "10303", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "致命直塞" },
-    { "id": "p34", "name": "小金人", "nameSource": "source:players.json#10304", "position": "MF", "quality": "blue", "attrs": [40, 45, 62, 49, 52], "growth": [0.89, 2.11, 2.89, 2.33, 2.44], "skill": "unimplemented", "srcId": "10304", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "脚下生花" },
-    { "id": "p35", "name": "玛蒂七", "nameSource": "source:players.json#10305", "position": "MF", "quality": "green", "attrs": [59, 40, 40, 41, 50], "growth": [2.78, 1.67, 0, 1.89, 2.44], "skill": "none", "srcId": "10305", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p36", "name": "特队", "nameSource": "source:players.json#10306", "position": "DF", "quality": "purple", "attrs": [63, 40, 40, 62, 71], "growth": [3, 1.89, 1.78, 2.89, 3.44], "skill": "unimplemented", "srcId": "10306", "srcPosition": "DC", "rarity": 4, "aliases": [], "srcSkill": "定海神针" },
-    { "id": "p37", "name": "阿紫", "nameSource": "source:players.json#10307", "position": "DF", "quality": "blue", "attrs": [50, 48, 40, 46, 47], "growth": [2.33, 2.22, 1.67, 2.22, 2.22], "skill": "unimplemented", "srcId": "10307", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "全面防御" },
-    { "id": "p38", "name": "基努", "nameSource": "source:players.json#10401", "position": "FW", "quality": "green", "attrs": [57, 55, 40, 40, 46], "growth": [2.67, 2.56, 0.44, 1.11, 2.22], "skill": "none", "srcId": "10401", "srcPosition": "ST", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p39", "name": "小老虎", "nameSource": "source:players.json#10402", "position": "FW", "quality": "blue", "attrs": [40, 62, 49, 55, 46], "growth": [0.67, 2.89, 2.33, 2.56, 2.11], "skill": "unimplemented", "srcId": "10402", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "猛虎下山" },
-    { "id": "p40", "name": "桑大腿", "nameSource": "source:players.json#10403", "position": "MF", "quality": "purple", "attrs": [40, 57, 62, 60, 59], "growth": [1.67, 2.78, 3, 2.78, 2.78], "skill": "unimplemented", "srcId": "10403", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "辗转腾挪" },
-    { "id": "p41", "name": "大眼", "nameSource": "source:players.json#10404", "position": "MF", "quality": "purple", "attrs": [40, 60, 74, 64, 51], "growth": [0.56, 2.89, 3.56, 3, 2.44], "skill": "unimplemented", "srcId": "10404", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "助攻之王" },
-    { "id": "p42", "name": "卡锁啦", "nameSource": "source:players.json#10405", "position": "MF", "quality": "blue", "attrs": [40, 42, 60, 53, 54], "growth": [0.11, 2, 2.89, 2.44, 2.56], "skill": "unimplemented", "srcId": "10405", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "斗牛战将" },
-    { "id": "p43", "name": "贝闪电", "nameSource": "source:players.json#10406", "position": "DF", "quality": "green", "attrs": [40, 40, 46, 42, 43], "growth": [1.44, 0.89, 2.22, 2, 2], "skill": "none", "srcId": "10406", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p44", "name": "模特撒克", "nameSource": "source:players.json#10407", "position": "DF", "quality": "green", "attrs": [58, 40, 40, 40, 40], "growth": [2.78, 0.67, -1.11, 1.44, 1.33], "skill": "none", "srcId": "10407", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p45", "name": "莱万", "nameSource": "source:players.json#20101", "position": "FW", "quality": "purple", "attrs": [58, 60, 49, 60, 46], "growth": [2.78, 2.89, 2.33, 2.78, 2.22], "skill": "unimplemented", "srcId": "20101", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "全能中锋" },
-    { "id": "p46", "name": "小飞侠", "nameSource": "source:players.json#20103", "position": "MF", "quality": "blue", "attrs": [40, 54, 67, 55, 52], "growth": [0.22, 2.56, 3.22, 2.56, 2.44], "skill": "unimplemented", "srcId": "20103", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "边路突袭" },
-    { "id": "p47", "name": "格册", "nameSource": "source:players.json#20104", "position": "MF", "quality": "blue", "attrs": [40, 55, 69, 57, 44], "growth": [-0.11, 2.56, 3.22, 2.78, 2.11], "skill": "unimplemented", "srcId": "20104", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "超级马里奥" },
-    { "id": "p48", "name": "比达二", "nameSource": "source:players.json#20105", "position": "MF", "quality": "blue", "attrs": [51, 48, 46, 49, 67], "growth": [2.44, 2.22, 2.22, 2.33, 3.22], "skill": "unimplemented", "srcId": "20105", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "狂徒斗士" },
-    { "id": "p49", "name": "拉队", "nameSource": "source:players.json#20106", "position": "MF", "quality": "purple", "attrs": [43, 62, 46, 63, 61], "growth": [2.11, 2.89, 2.11, 3, 2.89], "skill": "unimplemented", "srcId": "20106", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "球场指挥塔" },
-    { "id": "p50", "name": "博啊疼", "nameSource": "source:players.json#20107", "position": "DF", "quality": "purple", "attrs": [75, 40, 52, 61, 40], "growth": [3.56, 0.67, 2.44, 3, 1.22], "skill": "unimplemented", "srcId": "20107", "srcPosition": "DC", "rarity": 4, "aliases": [], "srcSkill": "绝对硬霸" },
-    { "id": "p51", "name": "奥巴没样", "nameSource": "source:players.json#20201", "position": "FW", "quality": "purple", "attrs": [51, 72, 62, 73, 58], "growth": [1.67, 2.78, 2.22, 2.78, 2], "skill": "unimplemented", "srcId": "20201", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "蜘蛛侠" },
-    { "id": "p52", "name": "螺一丝", "nameSource": "source:players.json#20202", "position": "FW", "quality": "purple", "attrs": [40, 62, 63, 63, 53], "growth": [0.22, 3, 3, 3, 2.44], "skill": "unimplemented", "srcId": "20202", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "前场尖兵" },
-    { "id": "p53", "name": "美西他娘", "nameSource": "source:players.json#20203", "position": "MF", "quality": "blue", "attrs": [40, 48, 62, 53, 47], "growth": [0.56, 2.33, 3, 2.44, 2.22], "skill": "unimplemented", "srcId": "20203", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "中场马达" },
-    { "id": "p54", "name": "香川寿司", "nameSource": "source:players.json#20204", "position": "MF", "quality": "green", "attrs": [40, 40, 59, 48, 40], "growth": [-1.11, 1.89, 2.78, 2.22, 1.78], "skill": "none", "srcId": "20204", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p55", "name": "景多安", "nameSource": "source:players.json#20205", "position": "MF", "quality": "blue", "attrs": [48, 46, 50, 48, 42], "growth": [2.22, 2.11, 2.33, 2.22, 2], "skill": "unimplemented", "srcId": "20205", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "御敌之门" },
-    { "id": "p56", "name": "狐媚", "nameSource": "source:players.json#20206", "position": "DF", "quality": "blue", "attrs": [57, 40, 43, 44, 47], "growth": [2.78, 1.67, 2.11, 2.11, 2.22], "skill": "unimplemented", "srcId": "20206", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "不动如松" },
-    { "id": "p57", "name": "金特二", "nameSource": "source:players.json#20207", "position": "DF", "quality": "green", "attrs": [52, 41, 40, 42, 41], "growth": [2.44, 1.89, 0.22, 2, 1.89], "skill": "none", "srcId": "20207", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p58", "name": "迪吧啦", "nameSource": "source:players.json#30101", "position": "FW", "quality": "purple", "attrs": [40, 57, 60, 69, 53], "growth": [0.89, 2.67, 2.89, 3.22, 2.44], "skill": "unimplemented", "srcId": "30101", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "小魔仙" },
-    { "id": "p59", "name": "莫邋遢", "nameSource": "source:players.json#30102", "position": "FW", "quality": "blue", "attrs": [45, 53, 53, 51, 51], "growth": [2.11, 2.44, 2.44, 2.44, 2.44], "skill": "unimplemented", "srcId": "30102", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "势大力沉" },
-    { "id": "p60", "name": "马绩效", "nameSource": "source:players.json#30104", "position": "MF", "quality": "blue", "attrs": [48, 50, 50, 57, 48], "growth": [2.22, 2.33, 2.44, 2.78, 2.33], "skill": "unimplemented", "srcId": "30104", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "遇强则强" },
-    { "id": "p61", "name": "脸哥", "nameSource": "source:players.json#30105", "position": "MF", "quality": "green", "attrs": [53, 47, 40, 43, 50], "growth": [2.56, 2.22, 0.11, 2.11, 2.33], "skill": "none", "srcId": "30105", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p62", "name": "菠萝奇", "nameSource": "source:players.json#30106", "position": "DF", "quality": "green", "attrs": [53, 41, 44, 42, 47], "growth": [2.44, 1.89, 2.11, 2, 2.22], "skill": "none", "srcId": "30106", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p63", "name": "鲁加尼", "nameSource": "source:players.json#30107", "position": "DF", "quality": "green", "attrs": [56, 40, 40, 40, 40], "growth": [2.67, 0.22, 0.33, 0.56, 1.22], "skill": "none", "srcId": "30107", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p64", "name": "西瓜", "nameSource": "source:players.json#30108", "position": "FW", "quality": "purple", "attrs": [70, 76, 55, 70, 69], "growth": [2.89, 3.56, 1.22, 2.89, 2.33], "skill": "unimplemented", "srcId": "30108", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "神准烟枪" },
-    { "id": "p65", "name": "内少", "nameSource": "source:players.json#40101", "position": "FW", "quality": "purple", "attrs": [40, 58, 76, 71, 61], "growth": [0.11, 2.78, 3.67, 3.33, 2.89], "skill": "unimplemented", "srcId": "40101", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "蝴蝶穿花" },
-    { "id": "p66", "name": "苏牙", "nameSource": "source:players.json#40102", "position": "FW", "quality": "purple", "attrs": [43, 57, 62, 74, 57], "growth": [2, 2.78, 3, 3.44, 2.67], "skill": "unimplemented", "srcId": "40102", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "禁区之王" },
-    { "id": "p67", "name": "小白", "nameSource": "source:players.json#40103", "position": "MF", "quality": "purple", "attrs": [40, 48, 75, 58, 62], "growth": [0.22, 2.33, 3.56, 2.78, 2.89], "skill": "unimplemented", "srcId": "40103", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "攻防枢纽" },
-    { "id": "p68", "name": "布教授", "nameSource": "source:players.json#40104", "position": "MF", "quality": "blue", "attrs": [48, 46, 45, 46, 49], "growth": [2.22, 2.11, 2.11, 2.11, 2.33], "skill": "unimplemented", "srcId": "40104", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "攻防俱佳" },
-    { "id": "p69", "name": "小马哥", "nameSource": "source:players.json#40105", "position": "MF", "quality": "blue", "attrs": [57, 40, 40, 53, 54], "growth": [2.67, 0.89, 1.22, 2.44, 2.56], "skill": "unimplemented", "srcId": "40105", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "老马识途" },
-    { "id": "p70", "name": "皮主席", "nameSource": "source:players.json#40106", "position": "DF", "quality": "blue", "attrs": [63, 40, 48, 46, 41], "growth": [3, 1.33, 2.22, 2.11, 2], "skill": "unimplemented", "srcId": "40106", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "极度坚韧" },
-    { "id": "p71", "name": "铁达尼", "nameSource": "source:players.json#40107", "position": "DF", "quality": "blue", "attrs": [40, 45, 60, 43, 52], "growth": [1.56, 2.11, 2.78, 2.11, 2.44], "skill": "unimplemented", "srcId": "40107", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "边卫飞翼" },
-    { "id": "p72", "name": "图蓝", "nameSource": "source:players.json#40110", "position": "MF", "quality": "blue", "attrs": [61, 64, 61, 60, 72], "growth": [2.11, 2.22, 2.11, 2, 3.33], "skill": "unimplemented", "srcId": "40110", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "图穷匕见" },
-    { "id": "p73", "name": "笨马", "nameSource": "source:players.json#40201", "position": "FW", "quality": "blue", "attrs": [44, 53, 61, 56, 40], "growth": [2.11, 2.56, 2.89, 2.67, 1.33], "skill": "unimplemented", "srcId": "40201", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "马踏联营" },
-    { "id": "p74", "name": "大圣", "nameSource": "source:players.json#40202", "position": "FW", "quality": "purple", "attrs": [57, 76, 57, 62, 43], "growth": [2.67, 3.56, 2.67, 3, 2], "skill": "unimplemented", "srcId": "40202", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "人球分过" },
-    { "id": "p75", "name": "甜菜", "nameSource": "source:players.json#40203", "position": "MF", "quality": "purple", "attrs": [58, 57, 56, 65, 40], "growth": [2.78, 2.78, 2.67, 3.11, 1.44], "skill": "unimplemented", "srcId": "40203", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "甜而不菜" },
-    { "id": "p76", "name": "魔笛", "nameSource": "source:players.json#40204", "position": "MF", "quality": "blue", "attrs": [40, 46, 64, 56, 49], "growth": [0.56, 2.22, 3, 2.67, 2.33], "skill": "unimplemented", "srcId": "40204", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "魔笛传音" },
-    { "id": "p77", "name": "哈罗", "nameSource": "source:players.json#40205", "position": "MF", "quality": "blue", "attrs": [40, 53, 57, 56, 57], "growth": [1.22, 2.44, 2.78, 2.67, 2.78], "skill": "unimplemented", "srcId": "40205", "srcPosition": "CM", "rarity": 3, "aliases": ["J罗"], "srcSkill": "精巧盘带" },
-    { "id": "p78", "name": "水爷", "nameSource": "source:players.json#40206", "position": "DF", "quality": "purple", "attrs": [72, 47, 49, 49, 60], "growth": [3.44, 2.22, 2.33, 2.33, 2.78], "skill": "unimplemented", "srcId": "40206", "srcPosition": "DC", "rarity": 4, "aliases": [], "srcSkill": "带刀侍卫" },
-    { "id": "p79", "name": "武僧", "nameSource": "source:players.json#40207", "position": "DF", "quality": "blue", "attrs": [62, 43, 40, 44, 43], "growth": [2.89, 2, 1.44, 2.11, 2], "skill": "unimplemented", "srcId": "40207", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "少林绝学" },
-    { "id": "p80", "name": "格子", "nameSource": "source:players.json#40301", "position": "FW", "quality": "purple", "attrs": [48, 65, 71, 69, 68], "growth": [1.33, 2.11, 2.44, 2.33, 2.33], "skill": "unimplemented", "srcId": "40301", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "格子戏法" },
-    { "id": "p81", "name": "托妞", "nameSource": "source:players.json#40302", "position": "FW", "quality": "green", "attrs": [40, 46, 46, 44, 46], "growth": [1.89, 2.11, 2.11, 2.11, 2.22], "skill": "none", "srcId": "40302", "srcPosition": "ST", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p82", "name": "科客", "nameSource": "source:players.json#40303", "position": "MF", "quality": "purple", "attrs": [58, 60, 45, 58, 46], "growth": [2.78, 2.89, 2.11, 2.78, 2.11], "skill": "unimplemented", "srcId": "40303", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "野蛮冲撞" },
-    { "id": "p83", "name": "费南斯", "nameSource": "source:players.json#40304", "position": "MF", "quality": "green", "attrs": [41, 40, 47, 42, 45], "growth": [2, 1.44, 2.22, 2, 2.11], "skill": "none", "srcId": "40304", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p84", "name": "卡啦斯", "nameSource": "source:players.json#40305", "position": "MF", "quality": "green", "attrs": [40, 44, 53, 46, 49], "growth": [0.56, 2.11, 2.56, 2.11, 2.33], "skill": "none", "srcId": "40305", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p85", "name": "哥丁", "nameSource": "source:players.json#40306", "position": "DF", "quality": "blue", "attrs": [58, 40, 40, 58, 52], "growth": [2.78, 1.11, 0.33, 2.78, 2.44], "skill": "unimplemented", "srcId": "40306", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "铜墙铁壁" },
-    { "id": "p86", "name": "陆一丝", "nameSource": "source:players.json#40307", "position": "DF", "quality": "green", "attrs": [40, 43, 53, 43, 46], "growth": [1.67, 2, 2.44, 2, 2.22], "skill": "none", "srcId": "40307", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p87", "name": "咔哇泥", "nameSource": "source:players.json#50101", "position": "FW", "quality": "blue", "attrs": [62, 46, 49, 56, 48], "growth": [2.89, 2.22, 2.33, 2.67, 2.22], "skill": "unimplemented", "srcId": "50101", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "坦克前锋" },
-    { "id": "p88", "name": "奉先", "nameSource": "source:players.json#50102", "position": "FW", "quality": "purple", "attrs": [63, 71, 57, 57, 53], "growth": [3, 3.33, 2.67, 2.67, 2.44], "skill": "unimplemented", "srcId": "50102", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "人中吕布" },
-    { "id": "p89", "name": "天使", "nameSource": "source:players.json#50103", "position": "MF", "quality": "blue", "attrs": [40, 43, 60, 51, 49], "growth": [0.56, 2, 2.89, 2.44, 2.33], "skill": "unimplemented", "srcId": "50103", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "折翼天使" },
-    { "id": "p90", "name": "微辣帝", "nameSource": "source:players.json#50104", "position": "MF", "quality": "blue", "attrs": [47, 40, 56, 42, 50], "growth": [2.22, 0.67, 2.67, 2, 2.44], "skill": "unimplemented", "srcId": "50104", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "精准长传" },
-    { "id": "p91", "name": "小卢卡斯", "nameSource": "source:players.json#50105", "position": "MF", "quality": "green", "attrs": [40, 40, 56, 44, 40], "growth": [0.67, 1.44, 2.67, 2.11, 1.89], "skill": "none", "srcId": "50105", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p92", "name": "蓬蓬", "nameSource": "source:players.json#50106", "position": "DF", "quality": "blue", "attrs": [49, 43, 45, 42, 59], "growth": [2.33, 2, 2.11, 2, 2.78], "skill": "unimplemented", "srcId": "50106", "srcPosition": "DC", "rarity": 3, "aliases": [], "srcSkill": "带刀护卫" },
-    { "id": "p93", "name": "弟媳", "nameSource": "source:players.json#50107", "position": "DF", "quality": "purple", "attrs": [61, 44, 44, 60, 62], "growth": [2.89, 2.11, 2.11, 2.78, 3], "skill": "unimplemented", "srcId": "50107", "srcPosition": "DC", "rarity": 4, "aliases": [], "srcSkill": "不动如山" },
-    { "id": "p94", "name": "告林斯曼", "nameSource": "source:players.json#60101", "position": "FW", "quality": "white", "attrs": [40, 40, 40, 40, 43], "growth": [0.56, 1.33, 1.11, 0.89, 2.11], "skill": "none", "srcId": "60101", "srcPosition": "ST", "rarity": 1, "aliases": [], "srcSkill": null },
-    { "id": "p95", "name": "杰马", "nameSource": "source:players.json#60102", "position": "FW", "quality": "green", "attrs": [46, 43, 45, 48, 40], "growth": [2.22, 2.11, 2.11, 2.22, 1.78], "skill": "none", "srcId": "60102", "srcPosition": "ST", "rarity": 2, "aliases": ["J马"], "srcSkill": null },
-    { "id": "p96", "name": "高辣条", "nameSource": "source:players.json#60103", "position": "MF", "quality": "blue", "attrs": [43, 46, 48, 56, 46], "growth": [2, 2.11, 2.33, 2.67, 2.22], "skill": "unimplemented", "srcId": "60103", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "球场刺客" },
-    { "id": "p97", "name": "郑队", "nameSource": "source:players.json#60104", "position": "MF", "quality": "green", "attrs": [57, 40, 40, 40, 41], "growth": [2.78, 0.56, -1.11, 0.56, 1.89], "skill": "none", "srcId": "60104", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p98", "name": "暴力鸟", "nameSource": "source:players.json#60105", "position": "MF", "quality": "green", "attrs": [48, 40, 45, 43, 44], "growth": [2.22, 1.67, 2.11, 2.11, 2.11], "skill": "none", "srcId": "60105", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p99", "name": "世界博", "nameSource": "source:players.json#60106", "position": "DF", "quality": "white", "attrs": [40, 40, 40, 40, 40], "growth": [0.78, 0, 1, 0.33, 0.89], "skill": "none", "srcId": "60106", "srcPosition": "DC", "rarity": 1, "aliases": [], "srcSkill": null },
-    { "id": "p100", "name": "张莫斯", "nameSource": "source:players.json#60107", "position": "DF", "quality": "white", "attrs": [40, 40, 40, 40, 41], "growth": [0.22, -1, 1.11, 0.56, 2], "skill": "none", "srcId": "60107", "srcPosition": "DC", "rarity": 1, "aliases": [], "srcSkill": null },
-    { "id": "p101", "name": "马队", "nameSource": "source:players.json#70101", "position": "DF", "quality": "orange", "attrs": [73, 70, 59, 54, 72], "growth": [3, 2.89, 1.22, 1.22, 3.33], "skill": "unimplemented", "srcId": "70101", "srcPosition": "DC", "rarity": 5, "aliases": [], "srcSkill": "无所不在" },
-    { "id": "p102", "name": "马大腿", "nameSource": "source:players.json#80101", "position": "FW", "quality": "blue", "attrs": [64, 67, 70, 65, 55], "growth": [2.22, 2.33, 2.89, 2.22, 1.22], "skill": "unimplemented", "srcId": "80101", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "能突善射" },
-    { "id": "p103", "name": "费米", "nameSource": "source:players.json#80102", "position": "FW", "quality": "blue", "attrs": [45, 64, 70, 55, 69], "growth": [1, 2.22, 2.89, 1.89, 2.33], "skill": "unimplemented", "srcId": "80102", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "影子杀手" },
-    { "id": "p104", "name": "司徒", "nameSource": "source:players.json#80103", "position": "FW", "quality": "green", "attrs": [64, 65, 69, 64, 60], "growth": [2.22, 2.22, 2.33, 2.22, 2], "skill": "none", "srcId": "80103", "srcPosition": "ST", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p105", "name": "库鸟", "nameSource": "source:players.json#80104", "position": "MF", "quality": "purple", "attrs": [50, 69, 72, 69, 70], "growth": [1.11, 2.33, 2.89, 2.33, 2.89], "skill": "unimplemented", "srcId": "80104", "srcPosition": "CM", "rarity": 4, "aliases": [], "srcSkill": "库鸟展翅" },
-    { "id": "p106", "name": "纳天王", "nameSource": "source:players.json#80105", "position": "MF", "quality": "green", "attrs": [57, 55, 70, 55, 66], "growth": [2, 1.22, 2.89, 1.22, 2.22], "skill": "none", "srcId": "80105", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p107", "name": "克莱鹰", "nameSource": "source:players.json#80106", "position": "DF", "quality": "green", "attrs": [64, 55, 64, 40, 64], "growth": [2.22, 1.22, 2.22, 0.56, 2.22], "skill": "none", "srcId": "80106", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p108", "name": "莫小雷", "nameSource": "source:players.json#80107", "position": "DF", "quality": "green", "attrs": [69, 50, 64, 55, 67], "growth": [2.33, 1.11, 2.22, 1.89, 2.33], "skill": "none", "srcId": "80107", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p109", "name": "师奶", "nameSource": "source:players.json#80201", "position": "MF", "quality": "blue", "attrs": [60, 69, 73, 64, 60], "growth": [2, 2.33, 3, 2.22, 2], "skill": "unimplemented", "srcId": "80201", "srcPosition": "CM", "rarity": 3, "aliases": [], "srcSkill": "师奶杀手" },
-    { "id": "p110", "name": "魔兽", "nameSource": "source:players.json#80202", "position": "FW", "quality": "purple", "attrs": [73, 73, 69, 72, 70], "growth": [2.89, 2.89, 2.33, 2.89, 2.89], "skill": "unimplemented", "srcId": "80202", "srcPosition": "ST", "rarity": 4, "aliases": [], "srcSkill": "魔兽来袭" },
-    { "id": "p111", "name": "拓扑哥哥", "nameSource": "source:players.json#80203", "position": "MF", "quality": "green", "attrs": [61, 60, 50, 61, 50], "growth": [2.11, 2, 1.11, 2.11, 1.11], "skill": "none", "srcId": "80203", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p112", "name": "波尔蒂王子", "nameSource": "source:players.json#80204", "position": "FW", "quality": "blue", "attrs": [64, 64, 66, 67, 67], "growth": [2.22, 2.22, 2.22, 2.33, 2.33], "skill": "unimplemented", "srcId": "80204", "srcPosition": "ST", "rarity": 3, "aliases": [], "srcSkill": "王子复仇" },
-    { "id": "p113", "name": "功夫熊猫", "nameSource": "source:players.json#80205", "position": "MF", "quality": "green", "attrs": [46, 50, 50, 54, 57], "growth": [1, 1.11, 1.11, 1.22, 1.22], "skill": "none", "srcId": "80205", "srcPosition": "CM", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p114", "name": "耳帝", "nameSource": "source:players.json#80206", "position": "DF", "quality": "green", "attrs": [60, 47, 46, 42, 59], "growth": [2, 1, 1, 0.89, 1.22], "skill": "none", "srcId": "80206", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p115", "name": "霉洛", "nameSource": "source:players.json#80207", "position": "DF", "quality": "green", "attrs": [59, 55, 56, 55, 49], "growth": [1.22, 1.89, 1.89, 1.22, 1.11], "skill": "none", "srcId": "80207", "srcPosition": "DC", "rarity": 2, "aliases": [], "srcSkill": null },
-    { "id": "p116", "name": "齐祖", "nameSource": "source:players.json#90001", "position": "MF", "quality": "orange", "attrs": [40, 65, 75, 80, 45], "growth": [0, 3.33, 3.33, 4.33, 2.78], "skill": "unimplemented", "srcId": "90001", "srcPosition": "CM", "rarity": 5, "aliases": [], "srcSkill": "齐祖之光" },
-    { "id": "p117", "name": "小贝", "nameSource": "source:players.json#90003", "position": "MF", "quality": "orange", "attrs": [64, 61, 70, 73, 69], "growth": [2.22, 2.11, 2.89, 4.56, 2.33], "skill": "unimplemented", "srcId": "90003", "srcPosition": "CM", "rarity": 9, "aliases": [], "srcSkill": "贝氏弧线" }
+    {
+      "id": "p01",
+      "name": "梅球王",
+      "nameSource": "recovered:S04",
+      "position": "FW",
+      "quality": "red",
+      "attrs": [
+        52,
+        74,
+        86,
+        84,
+        80
+      ],
+      "growth": [
+        1,
+        2,
+        3,
+        2,
+        1
+      ],
+      "skill": "king",
+      "srcId": "40108",
+      "srcPosition": "ST",
+      "rarity": 5,
+      "aliases": [],
+      "srcSkill": "球王震慑"
+    },
+    {
+      "id": "p02",
+      "name": "小小罗",
+      "nameSource": "recovered:S04",
+      "position": "FW",
+      "quality": "red",
+      "attrs": [
+        62,
+        86,
+        70,
+        76,
+        78
+      ],
+      "growth": [
+        1,
+        3,
+        2,
+        2,
+        1
+      ],
+      "skill": "rocket",
+      "srcId": "40208",
+      "srcPosition": "ST",
+      "rarity": 5,
+      "aliases": [
+        "C罗"
+      ],
+      "srcSkill": "霸气侧漏"
+    },
+    {
+      "id": "p03",
+      "name": "大罗",
+      "nameSource": "recovered:S03",
+      "position": "FW",
+      "quality": "silver",
+      "attrs": [
+        72,
+        82,
+        62,
+        72,
+        70
+      ],
+      "growth": [
+        2,
+        3,
+        1,
+        2,
+        1
+      ],
+      "skill": "alien",
+      "srcId": "90002",
+      "srcPosition": "ST",
+      "rarity": 9,
+      "aliases": [],
+      "srcSkill": "外星人来袭"
+    },
+    {
+      "id": "p04",
+      "name": "木乐",
+      "nameSource": "recovered:S03",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        56,
+        70,
+        66,
+        80,
+        74
+      ],
+      "growth": [
+        1,
+        2,
+        2,
+        3,
+        1
+      ],
+      "skill": "fox",
+      "srcId": "20102",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "禁区之狐"
+    },
+    {
+      "id": "p05",
+      "name": "波霸",
+      "nameSource": "recovered:S04",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        78,
+        76,
+        64,
+        66,
+        70
+      ],
+      "growth": [
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      "skill": "sendoff",
+      "srcId": "30103",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "野蛮重炮"
+    },
+    {
+      "id": "p17",
+      "name": "马少尔",
+      "nameSource": "source:players.json#10101",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        40,
+        51,
+        55,
+        47,
+        53
+      ],
+      "growth": [
+        0.89,
+        2.33,
+        2.67,
+        2.33,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10101",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "疾风金童"
+    },
+    {
+      "id": "p18",
+      "name": "小胖",
+      "nameSource": "source:players.json#10102",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        56,
+        56,
+        52,
+        56,
+        57
+      ],
+      "growth": [
+        2.67,
+        2.67,
+        2.44,
+        2.67,
+        2.78
+      ],
+      "skill": "unimplemented",
+      "srcId": "10102",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "重型坦克"
+    },
+    {
+      "id": "p19",
+      "name": "玛塔叔叔",
+      "nameSource": "source:players.json#10103",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        50,
+        60,
+        60,
+        53
+      ],
+      "growth": [
+        -0.67,
+        2.33,
+        2.89,
+        2.78,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10103",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "大叔巧射"
+    },
+    {
+      "id": "p20",
+      "name": "得佩",
+      "nameSource": "source:players.json#10104",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        43,
+        53,
+        57,
+        51,
+        46
+      ],
+      "growth": [
+        2.11,
+        2.44,
+        2.67,
+        2.44,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "10104",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [
+        "嘚佩"
+      ],
+      "srcSkill": "精准远射"
+    },
+    {
+      "id": "p21",
+      "name": "小猪",
+      "nameSource": "source:players.json#10105",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        49,
+        47,
+        47,
+        49,
+        51
+      ],
+      "growth": [
+        2.33,
+        2.22,
+        2.22,
+        2.33,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10105",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "攻防纽带"
+    },
+    {
+      "id": "p22",
+      "name": "罗货",
+      "nameSource": "source:players.json#10106",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        53,
+        40,
+        41,
+        40,
+        43
+      ],
+      "growth": [
+        2.56,
+        0.67,
+        2,
+        0.89,
+        2
+      ],
+      "skill": "none",
+      "srcId": "10106",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p23",
+      "name": "布琳德",
+      "nameSource": "source:players.json#10107",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        58,
+        40,
+        40,
+        49,
+        48
+      ],
+      "growth": [
+        2.78,
+        1,
+        1.22,
+        2.33,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "10107",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "球场指挥官"
+    },
+    {
+      "id": "p24",
+      "name": "阿圭罗",
+      "nameSource": "source:players.json#10201",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        40,
+        71,
+        61,
+        75,
+        60
+      ],
+      "growth": [
+        0.33,
+        3.33,
+        2.89,
+        3.56,
+        2.89
+      ],
+      "skill": "unimplemented",
+      "srcId": "10201",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [
+        "阿KUN"
+      ],
+      "srcSkill": "凌波微步"
+    },
+    {
+      "id": "p25",
+      "name": "思特灵",
+      "nameSource": "source:players.json#10202",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        45,
+        46,
+        61,
+        57,
+        40
+      ],
+      "growth": [
+        2.11,
+        2.22,
+        2.89,
+        2.78,
+        1.78
+      ],
+      "skill": "unimplemented",
+      "srcId": "10202",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "一气呵成"
+    },
+    {
+      "id": "p26",
+      "name": "喜娃",
+      "nameSource": "source:players.json#10203",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        40,
+        60,
+        72,
+        69,
+        57
+      ],
+      "growth": [
+        0.67,
+        2.89,
+        3.44,
+        3.22,
+        2.67
+      ],
+      "skill": "unimplemented",
+      "srcId": "10203",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "中场发动机"
+    },
+    {
+      "id": "p27",
+      "name": "土雷",
+      "nameSource": "source:players.json#10204",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        58,
+        57,
+        43,
+        57,
+        48
+      ],
+      "growth": [
+        2.78,
+        2.67,
+        2,
+        2.67,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "10204",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "碰碰车"
+    },
+    {
+      "id": "p28",
+      "name": "丁丁",
+      "nameSource": "source:players.json#10205",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        41,
+        56,
+        62,
+        60,
+        50
+      ],
+      "growth": [
+        2,
+        2.67,
+        3.11,
+        2.89,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10205",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "进攻核心"
+    },
+    {
+      "id": "p29",
+      "name": "孔向前",
+      "nameSource": "source:players.json#10206",
+      "position": "DF",
+      "quality": "orange",
+      "attrs": [
+        76,
+        46,
+        40,
+        55,
+        57
+      ],
+      "growth": [
+        3.56,
+        2.22,
+        1.67,
+        2.56,
+        2.67
+      ],
+      "skill": "unimplemented",
+      "srcId": "10206",
+      "srcPosition": "DC",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "钢筋铁骨"
+    },
+    {
+      "id": "p30",
+      "name": "德漏勺",
+      "nameSource": "source:players.json#10207",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        52,
+        40,
+        40,
+        40,
+        45
+      ],
+      "growth": [
+        2.44,
+        0.56,
+        1,
+        1.44,
+        2.11
+      ],
+      "skill": "none",
+      "srcId": "10207",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p31",
+      "name": "克斯塔",
+      "nameSource": "source:players.json#10301",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        49,
+        50,
+        43,
+        48,
+        63
+      ],
+      "growth": [
+        2.33,
+        2.33,
+        2.11,
+        2.22,
+        3
+      ],
+      "skill": "unimplemented",
+      "srcId": "10301",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "强力中锋"
+    },
+    {
+      "id": "p32",
+      "name": "扎球王",
+      "nameSource": "source:players.json#10302",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        40,
+        64,
+        74,
+        63,
+        60
+      ],
+      "growth": [
+        -0.22,
+        3,
+        3.44,
+        3,
+        2.89
+      ],
+      "skill": "unimplemented",
+      "srcId": "10302",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "无解盘带"
+    },
+    {
+      "id": "p33",
+      "name": "小法",
+      "nameSource": "source:players.json#10303",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        53,
+        61,
+        68,
+        74,
+        65
+      ],
+      "growth": [
+        1.78,
+        2.22,
+        2.44,
+        2.78,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10303",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "致命直塞"
+    },
+    {
+      "id": "p34",
+      "name": "小金人",
+      "nameSource": "source:players.json#10304",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        45,
+        62,
+        49,
+        52
+      ],
+      "growth": [
+        0.89,
+        2.11,
+        2.89,
+        2.33,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10304",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "脚下生花"
+    },
+    {
+      "id": "p35",
+      "name": "玛蒂七",
+      "nameSource": "source:players.json#10305",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        59,
+        40,
+        40,
+        41,
+        50
+      ],
+      "growth": [
+        2.78,
+        1.67,
+        0,
+        1.89,
+        2.44
+      ],
+      "skill": "none",
+      "srcId": "10305",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p36",
+      "name": "特队",
+      "nameSource": "source:players.json#10306",
+      "position": "DF",
+      "quality": "orange",
+      "attrs": [
+        63,
+        40,
+        40,
+        62,
+        71
+      ],
+      "growth": [
+        3,
+        1.89,
+        1.78,
+        2.89,
+        3.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10306",
+      "srcPosition": "DC",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "定海神针"
+    },
+    {
+      "id": "p37",
+      "name": "阿紫",
+      "nameSource": "source:players.json#10307",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        50,
+        48,
+        40,
+        46,
+        47
+      ],
+      "growth": [
+        2.33,
+        2.22,
+        1.67,
+        2.22,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "10307",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "全面防御"
+    },
+    {
+      "id": "p38",
+      "name": "基努",
+      "nameSource": "source:players.json#10401",
+      "position": "FW",
+      "quality": "blue",
+      "attrs": [
+        57,
+        55,
+        40,
+        40,
+        46
+      ],
+      "growth": [
+        2.67,
+        2.56,
+        0.44,
+        1.11,
+        2.22
+      ],
+      "skill": "none",
+      "srcId": "10401",
+      "srcPosition": "ST",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p39",
+      "name": "小老虎",
+      "nameSource": "source:players.json#10402",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        40,
+        62,
+        49,
+        55,
+        46
+      ],
+      "growth": [
+        0.67,
+        2.89,
+        2.33,
+        2.56,
+        2.11
+      ],
+      "skill": "unimplemented",
+      "srcId": "10402",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "猛虎下山"
+    },
+    {
+      "id": "p40",
+      "name": "桑大腿",
+      "nameSource": "source:players.json#10403",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        40,
+        57,
+        62,
+        60,
+        59
+      ],
+      "growth": [
+        1.67,
+        2.78,
+        3,
+        2.78,
+        2.78
+      ],
+      "skill": "unimplemented",
+      "srcId": "10403",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "辗转腾挪"
+    },
+    {
+      "id": "p41",
+      "name": "大眼",
+      "nameSource": "source:players.json#10404",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        40,
+        60,
+        74,
+        64,
+        51
+      ],
+      "growth": [
+        0.56,
+        2.89,
+        3.56,
+        3,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "10404",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "助攻之王"
+    },
+    {
+      "id": "p42",
+      "name": "卡锁啦",
+      "nameSource": "source:players.json#10405",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        42,
+        60,
+        53,
+        54
+      ],
+      "growth": [
+        0.11,
+        2,
+        2.89,
+        2.44,
+        2.56
+      ],
+      "skill": "unimplemented",
+      "srcId": "10405",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "斗牛战将"
+    },
+    {
+      "id": "p43",
+      "name": "贝闪电",
+      "nameSource": "source:players.json#10406",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        40,
+        40,
+        46,
+        42,
+        43
+      ],
+      "growth": [
+        1.44,
+        0.89,
+        2.22,
+        2,
+        2
+      ],
+      "skill": "none",
+      "srcId": "10406",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p44",
+      "name": "模特撒克",
+      "nameSource": "source:players.json#10407",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        58,
+        40,
+        40,
+        40,
+        40
+      ],
+      "growth": [
+        2.78,
+        0.67,
+        -1.11,
+        1.44,
+        1.33
+      ],
+      "skill": "none",
+      "srcId": "10407",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p45",
+      "name": "莱万",
+      "nameSource": "source:players.json#20101",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        58,
+        60,
+        49,
+        60,
+        46
+      ],
+      "growth": [
+        2.78,
+        2.89,
+        2.33,
+        2.78,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "20101",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "全能中锋"
+    },
+    {
+      "id": "p46",
+      "name": "小飞侠",
+      "nameSource": "source:players.json#20103",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        54,
+        67,
+        55,
+        52
+      ],
+      "growth": [
+        0.22,
+        2.56,
+        3.22,
+        2.56,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "20103",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "边路突袭"
+    },
+    {
+      "id": "p47",
+      "name": "格册",
+      "nameSource": "source:players.json#20104",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        55,
+        69,
+        57,
+        44
+      ],
+      "growth": [
+        -0.11,
+        2.56,
+        3.22,
+        2.78,
+        2.11
+      ],
+      "skill": "unimplemented",
+      "srcId": "20104",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "超级马里奥"
+    },
+    {
+      "id": "p48",
+      "name": "比达二",
+      "nameSource": "source:players.json#20105",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        51,
+        48,
+        46,
+        49,
+        67
+      ],
+      "growth": [
+        2.44,
+        2.22,
+        2.22,
+        2.33,
+        3.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "20105",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "狂徒斗士"
+    },
+    {
+      "id": "p49",
+      "name": "拉队",
+      "nameSource": "source:players.json#20106",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        43,
+        62,
+        46,
+        63,
+        61
+      ],
+      "growth": [
+        2.11,
+        2.89,
+        2.11,
+        3,
+        2.89
+      ],
+      "skill": "unimplemented",
+      "srcId": "20106",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "球场指挥塔"
+    },
+    {
+      "id": "p50",
+      "name": "博啊疼",
+      "nameSource": "source:players.json#20107",
+      "position": "DF",
+      "quality": "orange",
+      "attrs": [
+        75,
+        40,
+        52,
+        61,
+        40
+      ],
+      "growth": [
+        3.56,
+        0.67,
+        2.44,
+        3,
+        1.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "20107",
+      "srcPosition": "DC",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "绝对硬霸"
+    },
+    {
+      "id": "p51",
+      "name": "奥巴没样",
+      "nameSource": "source:players.json#20201",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        51,
+        72,
+        62,
+        73,
+        58
+      ],
+      "growth": [
+        1.67,
+        2.78,
+        2.22,
+        2.78,
+        2
+      ],
+      "skill": "unimplemented",
+      "srcId": "20201",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "蜘蛛侠"
+    },
+    {
+      "id": "p52",
+      "name": "螺一丝",
+      "nameSource": "source:players.json#20202",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        40,
+        62,
+        63,
+        63,
+        53
+      ],
+      "growth": [
+        0.22,
+        3,
+        3,
+        3,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "20202",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "前场尖兵"
+    },
+    {
+      "id": "p53",
+      "name": "美西他娘",
+      "nameSource": "source:players.json#20203",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        48,
+        62,
+        53,
+        47
+      ],
+      "growth": [
+        0.56,
+        2.33,
+        3,
+        2.44,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "20203",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "中场马达"
+    },
+    {
+      "id": "p54",
+      "name": "香川寿司",
+      "nameSource": "source:players.json#20204",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        40,
+        40,
+        59,
+        48,
+        40
+      ],
+      "growth": [
+        -1.11,
+        1.89,
+        2.78,
+        2.22,
+        1.78
+      ],
+      "skill": "none",
+      "srcId": "20204",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p55",
+      "name": "景多安",
+      "nameSource": "source:players.json#20205",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        48,
+        46,
+        50,
+        48,
+        42
+      ],
+      "growth": [
+        2.22,
+        2.11,
+        2.33,
+        2.22,
+        2
+      ],
+      "skill": "unimplemented",
+      "srcId": "20205",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "御敌之门"
+    },
+    {
+      "id": "p56",
+      "name": "狐媚",
+      "nameSource": "source:players.json#20206",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        57,
+        40,
+        43,
+        44,
+        47
+      ],
+      "growth": [
+        2.78,
+        1.67,
+        2.11,
+        2.11,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "20206",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "不动如松"
+    },
+    {
+      "id": "p57",
+      "name": "金特二",
+      "nameSource": "source:players.json#20207",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        52,
+        41,
+        40,
+        42,
+        41
+      ],
+      "growth": [
+        2.44,
+        1.89,
+        0.22,
+        2,
+        1.89
+      ],
+      "skill": "none",
+      "srcId": "20207",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p58",
+      "name": "迪吧啦",
+      "nameSource": "source:players.json#30101",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        40,
+        57,
+        60,
+        69,
+        53
+      ],
+      "growth": [
+        0.89,
+        2.67,
+        2.89,
+        3.22,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "30101",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "小魔仙"
+    },
+    {
+      "id": "p59",
+      "name": "莫邋遢",
+      "nameSource": "source:players.json#30102",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        45,
+        53,
+        53,
+        51,
+        51
+      ],
+      "growth": [
+        2.11,
+        2.44,
+        2.44,
+        2.44,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "30102",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "势大力沉"
+    },
+    {
+      "id": "p60",
+      "name": "马绩效",
+      "nameSource": "source:players.json#30104",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        48,
+        50,
+        50,
+        57,
+        48
+      ],
+      "growth": [
+        2.22,
+        2.33,
+        2.44,
+        2.78,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "30104",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "遇强则强"
+    },
+    {
+      "id": "p61",
+      "name": "脸哥",
+      "nameSource": "source:players.json#30105",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        53,
+        47,
+        40,
+        43,
+        50
+      ],
+      "growth": [
+        2.56,
+        2.22,
+        0.11,
+        2.11,
+        2.33
+      ],
+      "skill": "none",
+      "srcId": "30105",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p62",
+      "name": "菠萝奇",
+      "nameSource": "source:players.json#30106",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        53,
+        41,
+        44,
+        42,
+        47
+      ],
+      "growth": [
+        2.44,
+        1.89,
+        2.11,
+        2,
+        2.22
+      ],
+      "skill": "none",
+      "srcId": "30106",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p63",
+      "name": "鲁加尼",
+      "nameSource": "source:players.json#30107",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        56,
+        40,
+        40,
+        40,
+        40
+      ],
+      "growth": [
+        2.67,
+        0.22,
+        0.33,
+        0.56,
+        1.22
+      ],
+      "skill": "none",
+      "srcId": "30107",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p64",
+      "name": "西瓜",
+      "nameSource": "source:players.json#30108",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        70,
+        76,
+        55,
+        70,
+        69
+      ],
+      "growth": [
+        2.89,
+        3.56,
+        1.22,
+        2.89,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "30108",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "神准烟枪"
+    },
+    {
+      "id": "p65",
+      "name": "内少",
+      "nameSource": "source:players.json#40101",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        40,
+        58,
+        76,
+        71,
+        61
+      ],
+      "growth": [
+        0.11,
+        2.78,
+        3.67,
+        3.33,
+        2.89
+      ],
+      "skill": "unimplemented",
+      "srcId": "40101",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "蝴蝶穿花"
+    },
+    {
+      "id": "p66",
+      "name": "苏牙",
+      "nameSource": "source:players.json#40102",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        43,
+        57,
+        62,
+        74,
+        57
+      ],
+      "growth": [
+        2,
+        2.78,
+        3,
+        3.44,
+        2.67
+      ],
+      "skill": "unimplemented",
+      "srcId": "40102",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "禁区之王"
+    },
+    {
+      "id": "p67",
+      "name": "小白",
+      "nameSource": "source:players.json#40103",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        40,
+        48,
+        75,
+        58,
+        62
+      ],
+      "growth": [
+        0.22,
+        2.33,
+        3.56,
+        2.78,
+        2.89
+      ],
+      "skill": "unimplemented",
+      "srcId": "40103",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "攻防枢纽"
+    },
+    {
+      "id": "p68",
+      "name": "布教授",
+      "nameSource": "source:players.json#40104",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        48,
+        46,
+        45,
+        46,
+        49
+      ],
+      "growth": [
+        2.22,
+        2.11,
+        2.11,
+        2.11,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "40104",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "攻防俱佳"
+    },
+    {
+      "id": "p69",
+      "name": "小马哥",
+      "nameSource": "source:players.json#40105",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        57,
+        40,
+        40,
+        53,
+        54
+      ],
+      "growth": [
+        2.67,
+        0.89,
+        1.22,
+        2.44,
+        2.56
+      ],
+      "skill": "unimplemented",
+      "srcId": "40105",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "老马识途"
+    },
+    {
+      "id": "p70",
+      "name": "皮主席",
+      "nameSource": "source:players.json#40106",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        63,
+        40,
+        48,
+        46,
+        41
+      ],
+      "growth": [
+        3,
+        1.33,
+        2.22,
+        2.11,
+        2
+      ],
+      "skill": "unimplemented",
+      "srcId": "40106",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "极度坚韧"
+    },
+    {
+      "id": "p71",
+      "name": "铁达尼",
+      "nameSource": "source:players.json#40107",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        45,
+        60,
+        43,
+        52
+      ],
+      "growth": [
+        1.56,
+        2.11,
+        2.78,
+        2.11,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "40107",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "边卫飞翼"
+    },
+    {
+      "id": "p72",
+      "name": "图蓝",
+      "nameSource": "source:players.json#40110",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        61,
+        64,
+        61,
+        60,
+        72
+      ],
+      "growth": [
+        2.11,
+        2.22,
+        2.11,
+        2,
+        3.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "40110",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "图穷匕见"
+    },
+    {
+      "id": "p73",
+      "name": "笨马",
+      "nameSource": "source:players.json#40201",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        44,
+        53,
+        61,
+        56,
+        40
+      ],
+      "growth": [
+        2.11,
+        2.56,
+        2.89,
+        2.67,
+        1.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "40201",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "马踏联营"
+    },
+    {
+      "id": "p74",
+      "name": "大圣",
+      "nameSource": "source:players.json#40202",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        57,
+        76,
+        57,
+        62,
+        43
+      ],
+      "growth": [
+        2.67,
+        3.56,
+        2.67,
+        3,
+        2
+      ],
+      "skill": "unimplemented",
+      "srcId": "40202",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "人球分过"
+    },
+    {
+      "id": "p75",
+      "name": "甜菜",
+      "nameSource": "source:players.json#40203",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        58,
+        57,
+        56,
+        65,
+        40
+      ],
+      "growth": [
+        2.78,
+        2.78,
+        2.67,
+        3.11,
+        1.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "40203",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "甜而不菜"
+    },
+    {
+      "id": "p76",
+      "name": "魔笛",
+      "nameSource": "source:players.json#40204",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        46,
+        64,
+        56,
+        49
+      ],
+      "growth": [
+        0.56,
+        2.22,
+        3,
+        2.67,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "40204",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "魔笛传音"
+    },
+    {
+      "id": "p77",
+      "name": "哈罗",
+      "nameSource": "source:players.json#40205",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        53,
+        57,
+        56,
+        57
+      ],
+      "growth": [
+        1.22,
+        2.44,
+        2.78,
+        2.67,
+        2.78
+      ],
+      "skill": "unimplemented",
+      "srcId": "40205",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [
+        "J罗"
+      ],
+      "srcSkill": "精巧盘带"
+    },
+    {
+      "id": "p78",
+      "name": "水爷",
+      "nameSource": "source:players.json#40206",
+      "position": "DF",
+      "quality": "orange",
+      "attrs": [
+        72,
+        47,
+        49,
+        49,
+        60
+      ],
+      "growth": [
+        3.44,
+        2.22,
+        2.33,
+        2.33,
+        2.78
+      ],
+      "skill": "unimplemented",
+      "srcId": "40206",
+      "srcPosition": "DC",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "带刀侍卫"
+    },
+    {
+      "id": "p79",
+      "name": "武僧",
+      "nameSource": "source:players.json#40207",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        62,
+        43,
+        40,
+        44,
+        43
+      ],
+      "growth": [
+        2.89,
+        2,
+        1.44,
+        2.11,
+        2
+      ],
+      "skill": "unimplemented",
+      "srcId": "40207",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "少林绝学"
+    },
+    {
+      "id": "p80",
+      "name": "格子",
+      "nameSource": "source:players.json#40301",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        48,
+        65,
+        71,
+        69,
+        68
+      ],
+      "growth": [
+        1.33,
+        2.11,
+        2.44,
+        2.33,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "40301",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "格子戏法"
+    },
+    {
+      "id": "p81",
+      "name": "托妞",
+      "nameSource": "source:players.json#40302",
+      "position": "FW",
+      "quality": "blue",
+      "attrs": [
+        40,
+        46,
+        46,
+        44,
+        46
+      ],
+      "growth": [
+        1.89,
+        2.11,
+        2.11,
+        2.11,
+        2.22
+      ],
+      "skill": "none",
+      "srcId": "40302",
+      "srcPosition": "ST",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p82",
+      "name": "科客",
+      "nameSource": "source:players.json#40303",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        58,
+        60,
+        45,
+        58,
+        46
+      ],
+      "growth": [
+        2.78,
+        2.89,
+        2.11,
+        2.78,
+        2.11
+      ],
+      "skill": "unimplemented",
+      "srcId": "40303",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "野蛮冲撞"
+    },
+    {
+      "id": "p83",
+      "name": "费南斯",
+      "nameSource": "source:players.json#40304",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        41,
+        40,
+        47,
+        42,
+        45
+      ],
+      "growth": [
+        2,
+        1.44,
+        2.22,
+        2,
+        2.11
+      ],
+      "skill": "none",
+      "srcId": "40304",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p84",
+      "name": "卡啦斯",
+      "nameSource": "source:players.json#40305",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        40,
+        44,
+        53,
+        46,
+        49
+      ],
+      "growth": [
+        0.56,
+        2.11,
+        2.56,
+        2.11,
+        2.33
+      ],
+      "skill": "none",
+      "srcId": "40305",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p85",
+      "name": "哥丁",
+      "nameSource": "source:players.json#40306",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        58,
+        40,
+        40,
+        58,
+        52
+      ],
+      "growth": [
+        2.78,
+        1.11,
+        0.33,
+        2.78,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "40306",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "铜墙铁壁"
+    },
+    {
+      "id": "p86",
+      "name": "陆一丝",
+      "nameSource": "source:players.json#40307",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        40,
+        43,
+        53,
+        43,
+        46
+      ],
+      "growth": [
+        1.67,
+        2,
+        2.44,
+        2,
+        2.22
+      ],
+      "skill": "none",
+      "srcId": "40307",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p87",
+      "name": "咔哇泥",
+      "nameSource": "source:players.json#50101",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        62,
+        46,
+        49,
+        56,
+        48
+      ],
+      "growth": [
+        2.89,
+        2.22,
+        2.33,
+        2.67,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "50101",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "坦克前锋"
+    },
+    {
+      "id": "p88",
+      "name": "奉先",
+      "nameSource": "source:players.json#50102",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        63,
+        71,
+        57,
+        57,
+        53
+      ],
+      "growth": [
+        3,
+        3.33,
+        2.67,
+        2.67,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "50102",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "人中吕布"
+    },
+    {
+      "id": "p89",
+      "name": "天使",
+      "nameSource": "source:players.json#50103",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        40,
+        43,
+        60,
+        51,
+        49
+      ],
+      "growth": [
+        0.56,
+        2,
+        2.89,
+        2.44,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "50103",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "折翼天使"
+    },
+    {
+      "id": "p90",
+      "name": "微辣帝",
+      "nameSource": "source:players.json#50104",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        47,
+        40,
+        56,
+        42,
+        50
+      ],
+      "growth": [
+        2.22,
+        0.67,
+        2.67,
+        2,
+        2.44
+      ],
+      "skill": "unimplemented",
+      "srcId": "50104",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "精准长传"
+    },
+    {
+      "id": "p91",
+      "name": "小卢卡斯",
+      "nameSource": "source:players.json#50105",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        40,
+        40,
+        56,
+        44,
+        40
+      ],
+      "growth": [
+        0.67,
+        1.44,
+        2.67,
+        2.11,
+        1.89
+      ],
+      "skill": "none",
+      "srcId": "50105",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p92",
+      "name": "蓬蓬",
+      "nameSource": "source:players.json#50106",
+      "position": "DF",
+      "quality": "purple",
+      "attrs": [
+        49,
+        43,
+        45,
+        42,
+        59
+      ],
+      "growth": [
+        2.33,
+        2,
+        2.11,
+        2,
+        2.78
+      ],
+      "skill": "unimplemented",
+      "srcId": "50106",
+      "srcPosition": "DC",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "带刀护卫"
+    },
+    {
+      "id": "p93",
+      "name": "弟媳",
+      "nameSource": "source:players.json#50107",
+      "position": "DF",
+      "quality": "orange",
+      "attrs": [
+        61,
+        44,
+        44,
+        60,
+        62
+      ],
+      "growth": [
+        2.89,
+        2.11,
+        2.11,
+        2.78,
+        3
+      ],
+      "skill": "unimplemented",
+      "srcId": "50107",
+      "srcPosition": "DC",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "不动如山"
+    },
+    {
+      "id": "p94",
+      "name": "告林斯曼",
+      "nameSource": "source:players.json#60101",
+      "position": "FW",
+      "quality": "green",
+      "attrs": [
+        40,
+        40,
+        40,
+        40,
+        43
+      ],
+      "growth": [
+        0.56,
+        1.33,
+        1.11,
+        0.89,
+        2.11
+      ],
+      "skill": "none",
+      "srcId": "60101",
+      "srcPosition": "ST",
+      "rarity": 1,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p95",
+      "name": "杰马",
+      "nameSource": "source:players.json#60102",
+      "position": "FW",
+      "quality": "blue",
+      "attrs": [
+        46,
+        43,
+        45,
+        48,
+        40
+      ],
+      "growth": [
+        2.22,
+        2.11,
+        2.11,
+        2.22,
+        1.78
+      ],
+      "skill": "none",
+      "srcId": "60102",
+      "srcPosition": "ST",
+      "rarity": 2,
+      "aliases": [
+        "J马"
+      ],
+      "srcSkill": null
+    },
+    {
+      "id": "p96",
+      "name": "高辣条",
+      "nameSource": "source:players.json#60103",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        43,
+        46,
+        48,
+        56,
+        46
+      ],
+      "growth": [
+        2,
+        2.11,
+        2.33,
+        2.67,
+        2.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "60103",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "球场刺客"
+    },
+    {
+      "id": "p97",
+      "name": "郑队",
+      "nameSource": "source:players.json#60104",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        57,
+        40,
+        40,
+        40,
+        41
+      ],
+      "growth": [
+        2.78,
+        0.56,
+        -1.11,
+        0.56,
+        1.89
+      ],
+      "skill": "none",
+      "srcId": "60104",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p98",
+      "name": "暴力鸟",
+      "nameSource": "source:players.json#60105",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        48,
+        40,
+        45,
+        43,
+        44
+      ],
+      "growth": [
+        2.22,
+        1.67,
+        2.11,
+        2.11,
+        2.11
+      ],
+      "skill": "none",
+      "srcId": "60105",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p99",
+      "name": "世界博",
+      "nameSource": "source:players.json#60106",
+      "position": "DF",
+      "quality": "green",
+      "attrs": [
+        40,
+        40,
+        40,
+        40,
+        40
+      ],
+      "growth": [
+        0.78,
+        0,
+        1,
+        0.33,
+        0.89
+      ],
+      "skill": "none",
+      "srcId": "60106",
+      "srcPosition": "DC",
+      "rarity": 1,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p100",
+      "name": "张莫斯",
+      "nameSource": "source:players.json#60107",
+      "position": "DF",
+      "quality": "green",
+      "attrs": [
+        40,
+        40,
+        40,
+        40,
+        41
+      ],
+      "growth": [
+        0.22,
+        -1,
+        1.11,
+        0.56,
+        2
+      ],
+      "skill": "none",
+      "srcId": "60107",
+      "srcPosition": "DC",
+      "rarity": 1,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p101",
+      "name": "马队",
+      "nameSource": "source:players.json#70101",
+      "position": "DF",
+      "quality": "red",
+      "attrs": [
+        73,
+        70,
+        59,
+        54,
+        72
+      ],
+      "growth": [
+        3,
+        2.89,
+        1.22,
+        1.22,
+        3.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "70101",
+      "srcPosition": "DC",
+      "rarity": 5,
+      "aliases": [],
+      "srcSkill": "无所不在"
+    },
+    {
+      "id": "p102",
+      "name": "马大腿",
+      "nameSource": "source:players.json#80101",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        64,
+        67,
+        70,
+        65,
+        55
+      ],
+      "growth": [
+        2.22,
+        2.33,
+        2.89,
+        2.22,
+        1.22
+      ],
+      "skill": "unimplemented",
+      "srcId": "80101",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "能突善射"
+    },
+    {
+      "id": "p103",
+      "name": "费米",
+      "nameSource": "source:players.json#80102",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        45,
+        64,
+        70,
+        55,
+        69
+      ],
+      "growth": [
+        1,
+        2.22,
+        2.89,
+        1.89,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "80102",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "影子杀手"
+    },
+    {
+      "id": "p104",
+      "name": "司徒",
+      "nameSource": "source:players.json#80103",
+      "position": "FW",
+      "quality": "blue",
+      "attrs": [
+        64,
+        65,
+        69,
+        64,
+        60
+      ],
+      "growth": [
+        2.22,
+        2.22,
+        2.33,
+        2.22,
+        2
+      ],
+      "skill": "none",
+      "srcId": "80103",
+      "srcPosition": "ST",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p105",
+      "name": "库鸟",
+      "nameSource": "source:players.json#80104",
+      "position": "MF",
+      "quality": "orange",
+      "attrs": [
+        50,
+        69,
+        72,
+        69,
+        70
+      ],
+      "growth": [
+        1.11,
+        2.33,
+        2.89,
+        2.33,
+        2.89
+      ],
+      "skill": "unimplemented",
+      "srcId": "80104",
+      "srcPosition": "CM",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "库鸟展翅"
+    },
+    {
+      "id": "p106",
+      "name": "纳天王",
+      "nameSource": "source:players.json#80105",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        57,
+        55,
+        70,
+        55,
+        66
+      ],
+      "growth": [
+        2,
+        1.22,
+        2.89,
+        1.22,
+        2.22
+      ],
+      "skill": "none",
+      "srcId": "80105",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p107",
+      "name": "克莱鹰",
+      "nameSource": "source:players.json#80106",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        64,
+        55,
+        64,
+        40,
+        64
+      ],
+      "growth": [
+        2.22,
+        1.22,
+        2.22,
+        0.56,
+        2.22
+      ],
+      "skill": "none",
+      "srcId": "80106",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p108",
+      "name": "莫小雷",
+      "nameSource": "source:players.json#80107",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        69,
+        50,
+        64,
+        55,
+        67
+      ],
+      "growth": [
+        2.33,
+        1.11,
+        2.22,
+        1.89,
+        2.33
+      ],
+      "skill": "none",
+      "srcId": "80107",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p109",
+      "name": "师奶",
+      "nameSource": "source:players.json#80201",
+      "position": "MF",
+      "quality": "purple",
+      "attrs": [
+        60,
+        69,
+        73,
+        64,
+        60
+      ],
+      "growth": [
+        2,
+        2.33,
+        3,
+        2.22,
+        2
+      ],
+      "skill": "unimplemented",
+      "srcId": "80201",
+      "srcPosition": "CM",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "师奶杀手"
+    },
+    {
+      "id": "p110",
+      "name": "魔兽",
+      "nameSource": "source:players.json#80202",
+      "position": "FW",
+      "quality": "orange",
+      "attrs": [
+        73,
+        73,
+        69,
+        72,
+        70
+      ],
+      "growth": [
+        2.89,
+        2.89,
+        2.33,
+        2.89,
+        2.89
+      ],
+      "skill": "unimplemented",
+      "srcId": "80202",
+      "srcPosition": "ST",
+      "rarity": 4,
+      "aliases": [],
+      "srcSkill": "魔兽来袭"
+    },
+    {
+      "id": "p111",
+      "name": "拓扑哥哥",
+      "nameSource": "source:players.json#80203",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        61,
+        60,
+        50,
+        61,
+        50
+      ],
+      "growth": [
+        2.11,
+        2,
+        1.11,
+        2.11,
+        1.11
+      ],
+      "skill": "none",
+      "srcId": "80203",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p112",
+      "name": "波尔蒂王子",
+      "nameSource": "source:players.json#80204",
+      "position": "FW",
+      "quality": "purple",
+      "attrs": [
+        64,
+        64,
+        66,
+        67,
+        67
+      ],
+      "growth": [
+        2.22,
+        2.22,
+        2.22,
+        2.33,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "80204",
+      "srcPosition": "ST",
+      "rarity": 3,
+      "aliases": [],
+      "srcSkill": "王子复仇"
+    },
+    {
+      "id": "p113",
+      "name": "功夫熊猫",
+      "nameSource": "source:players.json#80205",
+      "position": "MF",
+      "quality": "blue",
+      "attrs": [
+        46,
+        50,
+        50,
+        54,
+        57
+      ],
+      "growth": [
+        1,
+        1.11,
+        1.11,
+        1.22,
+        1.22
+      ],
+      "skill": "none",
+      "srcId": "80205",
+      "srcPosition": "CM",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p114",
+      "name": "耳帝",
+      "nameSource": "source:players.json#80206",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        60,
+        47,
+        46,
+        42,
+        59
+      ],
+      "growth": [
+        2,
+        1,
+        1,
+        0.89,
+        1.22
+      ],
+      "skill": "none",
+      "srcId": "80206",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p115",
+      "name": "霉洛",
+      "nameSource": "source:players.json#80207",
+      "position": "DF",
+      "quality": "blue",
+      "attrs": [
+        59,
+        55,
+        56,
+        55,
+        49
+      ],
+      "growth": [
+        1.22,
+        1.89,
+        1.89,
+        1.22,
+        1.11
+      ],
+      "skill": "none",
+      "srcId": "80207",
+      "srcPosition": "DC",
+      "rarity": 2,
+      "aliases": [],
+      "srcSkill": null
+    },
+    {
+      "id": "p116",
+      "name": "齐祖",
+      "nameSource": "source:players.json#90001",
+      "position": "MF",
+      "quality": "red",
+      "attrs": [
+        40,
+        65,
+        75,
+        80,
+        45
+      ],
+      "growth": [
+        0,
+        3.33,
+        3.33,
+        4.33,
+        2.78
+      ],
+      "skill": "unimplemented",
+      "srcId": "90001",
+      "srcPosition": "CM",
+      "rarity": 5,
+      "aliases": [],
+      "srcSkill": "齐祖之光"
+    },
+    {
+      "id": "p117",
+      "name": "小贝",
+      "nameSource": "source:players.json#90003",
+      "position": "MF",
+      "quality": "silver",
+      "attrs": [
+        64,
+        61,
+        70,
+        73,
+        69
+      ],
+      "growth": [
+        2.22,
+        2.11,
+        2.89,
+        4.56,
+        2.33
+      ],
+      "skill": "unimplemented",
+      "srcId": "90003",
+      "srcPosition": "CM",
+      "rarity": 9,
+      "aliases": [],
+      "srcSkill": "贝氏弧线"
+    }
   ],
   "mapping": {
     "note": "属性→物理只映射到 4 个可控因素，范围收窄以免失稳；calibrate 会检查极端组合。",
-    "massMul": [0.85, 1.25],
-    "speedMul": [0.92, 1.08],
-    "curveMul": [0.6, 1.4],
-    "aimAssist": [0.45, 1.0],
+    "massMul": [
+      0.85,
+      1.25
+    ],
+    "speedMul": [
+      0.92,
+      1.08
+    ],
+    "curveMul": [
+      0.6,
+      1.4
+    ],
+    "aimAssist": [
+      0.45,
+      1
+    ],
     "attrMin": 40,
     "attrMax": 99
   }

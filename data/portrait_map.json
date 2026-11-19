@@ -4,19 +4,7 @@
   "padRatio": 0.06,
   "alphaThresh": 16,
   "note": "原版 1.5.5 head_*.png。只做 alpha 内容框裁切、长边 6% 留白、等比缩放到 256、圆形遮罩。不重绘。无原图的球员不在 entries 里，渲染回退到 players/<id>_avatar.png。",
-  "fallbackIds": [
-    "p06",
-    "p07",
-    "p08",
-    "p09",
-    "p10",
-    "p11",
-    "p12",
-    "p13",
-    "p14",
-    "p15",
-    "p16"
-  ],
+  "fallbackIds": [],
   "excludedPortraits": [
     "head_4001_40109"
   ],

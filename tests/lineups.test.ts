@@ -36,7 +36,7 @@ test('participation cards keep owned and effective levels separate under the aut
   for (const list of [ranked, friend]) expect(list.map((card) => card.level)).toEqual([5, 5, 5, 5, 5]);
   expect(cards.map((card) => card.level)).toEqual([1, 4, 7, 9, 10]);
   expect(growth.map((card) => card.slotRole)).toEqual(['DC', 'CM', 'CM', 'ST', 'ST']);
-  expect(growth.map((card) => card.cardPosition)).toEqual(['GK', 'DF', 'DF', 'FW', 'FW']);
+  expect(growth.map((card) => card.cardPosition)).toEqual(['DF', 'MF', 'MF', 'FW', 'FW']);
 });
 test('unsupported owned skills can be saved for friend play but cannot enter an official mode', () => {
   const sourceOnly = Object.values(data.players).find(

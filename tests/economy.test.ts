@@ -36,8 +36,8 @@ test('starter grants are complete and the simulation receipt prevents replay; bu
   expect(another.state.wallet.coins).toBe(300n);
   expect(ledger.state.wallet).toEqual({ coins: 300n, fragments: 0n });
   expect(ledger.state.cards.map((c) => c.playerDefId)).toEqual(p.starter.playerDefIds);
-  expect(new Set(ledger.state.cards.map((c) => c.playerDefId)).size).toBe(5);
-  expect(economyCardPool(data)).toHaveLength(46);
+  expect(new Set(ledger.state.cards.map((c) => c.playerDefId)).size).toBe(8);
+  expect(economyCardPool(data)).toHaveLength(35);
   const bundle = createBundledEconomyConfiguration();
   expect(bundle.policy).toEqual(p);
   expect(Object.isFrozen(bundle.policy.starter)).toBe(true);
@@ -85,15 +85,15 @@ test('qualified rewards respect partial daily caps; practice/forfeit/short/aband
 test('duplicate definitions convert once per grant id; failed upgrades do not debit or consume receipts', () => {
   const ledger = new EconomySimulationLedger();
   ledger.starter();
-  const award = () => ledger.applyOnce('award-1', 'card.duplicate', (state) => grantCard(p, data, state, 'p01').state);
+  const award = () => ledger.applyOnce('award-1', 'card.duplicate', (state) => grantCard(p, data, state, 'p94').state);
   expect(award()).toBe(true);
   expect(award()).toBe(false);
-  expect(ledger.state.wallet.fragments).toBe(50n);
-  expect(ledger.state.cards).toHaveLength(5);
+  expect(ledger.state.wallet.fragments).toBe(5n);
+  expect(ledger.state.cards).toHaveLength(8);
   for (const level of [1, 2])
-    ledger.applyOnce(`upgrade-${level}`, 'card.upgrade', (state) => upgradeCard(p, data, state, 'p01'));
+    ledger.applyOnce(`upgrade-${level}`, 'card.upgrade', (state) => upgradeCard(p, data, state, 'p94'));
   const before = ledger.state;
-  expect(() => ledger.applyOnce('upgrade-3', 'card.upgrade', (state) => upgradeCard(p, data, state, 'p01'))).toThrow(
+  expect(() => ledger.applyOnce('upgrade-3', 'card.upgrade', (state) => upgradeCard(p, data, state, 'p94'))).toThrow(
     'INSUFFICIENT_FUNDS',
   );
   expect(ledger.state).toBe(before);
@@ -101,9 +101,9 @@ test('duplicate definitions convert once per grant id; failed upgrades do not de
     ...state,
     wallet: changeWallet(state.wallet, { coins: 200n }),
   }));
-  expect(ledger.applyOnce('upgrade-3', 'card.upgrade', (state) => upgradeCard(p, data, state, 'p01'))).toBe(true);
+  expect(ledger.applyOnce('upgrade-3', 'card.upgrade', (state) => upgradeCard(p, data, state, 'p94'))).toBe(true);
   expect(ledger.state.wallet.coins).toBe(25n);
-  expect(ledger.state.cards.find((c) => c.playerDefId === 'p01')?.level).toBe(4);
+  expect(ledger.state.cards.find((c) => c.playerDefId === 'p94')?.level).toBe(4);
 });
 test('crafting checks ownership and funds before debit, unsupported cards and bigint overflow fail without state mutation', () => {
   const ledger = new EconomySimulationLedger();
@@ -114,7 +114,7 @@ test('crafting checks ownership and funds before debit, unsupported cards and bi
       (def) => !state.cards.some((c) => c.playerDefId === def.id) && quoteCraft(p, data, def.id).fragments <= 100n,
     )!;
   const crafted = craftCard(p, data, state, choice.id);
-  expect(crafted.cards.length).toBe(6);
+  expect(crafted.cards.length).toBe(9);
   expect(state.wallet.fragments).toBe(100n);
   expect(crafted.wallet.fragments).toBe(100n - quoteCraft(p, data, choice.id).fragments);
   expect(() => craftCard(p, data, crafted, choice.id)).toThrow('ALREADY_OWNED');
@@ -126,9 +126,9 @@ test('crafting checks ownership and funds before debit, unsupported cards and bi
 });
 test('7/30-day forecasts conserve all currency and daily caps with reproducible integer ledgers', () => {
   const report = simulateEconomy(p, 20, 30, 42);
-  expect(report.day7?.lineupLevels.map((c) => c.level)).toEqual([4, 4, 4, 4, 4]);
-  expect(report.day30?.lineupLevels.map((c) => c.level).sort()).toEqual([6, 6, 7, 7, 7]);
-  expect(report.day30?.wallet.coins).toBe('428');
+  expect(report.day7?.lineupLevels.map((c) => c.level)).toEqual([3, 3, 4, 3, 3, 3, 3, 3]);
+  expect(report.day30?.lineupLevels.map((c) => c.level).sort()).toEqual([5, 5, 5, 6, 6, 6, 6, 6]);
+  expect(report.day30?.wallet.coins).toBe('266');
   expect(report.sources.matchCoins).toBe('9000');
   expect(report.daily.every((day) => BigInt(day.matchCoins) <= 300n)).toBe(true);
   expect(new Set(report.entries.map((e) => e.operationId)).size).toBe(report.entries.length);

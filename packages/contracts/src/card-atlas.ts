@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { VersionIdSchema, Sha256Schema } from './configuration';
 
-export const CARD_QUALITIES = ['white', 'green', 'blue', 'purple', 'orange'] as const;
+export const CARD_QUALITIES = ['green', 'blue', 'purple', 'orange', 'red', 'silver'] as const;
 export const CARD_STATES = ['normal', 'selected', 'disabled'] as const;
 export const PlayerCardIdentitySchema = z.strictObject({
   id: z.string().regex(/^p\d{2,4}$/),
@@ -51,7 +51,7 @@ const base = z.strictObject({
         height: z.literal(224),
       }),
     )
-    .length(15),
+    .length(18),
 });
 function errorsForLayout(atlas: z.infer<typeof base>): string[] {
   const errors: string[] = [];
@@ -60,7 +60,7 @@ function errorsForLayout(atlas: z.infer<typeof base>): string[] {
     errors.push('Duplicate atlas page');
   if (new Set(atlas.portraits.map((p) => p.playerId)).size !== atlas.portraits.length)
     errors.push('Duplicate player identity');
-  if (new Set(atlas.frames.map((f) => `${f.quality}.${f.state}`)).size !== 15)
+  if (new Set(atlas.frames.map((f) => `${f.quality}.${f.state}`)).size !== 18)
     errors.push('Missing or duplicate frame state');
   if (errors.length) return errors;
   const regions = [...atlas.portraits, ...atlas.frames];

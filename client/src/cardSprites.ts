@@ -1,7 +1,7 @@
 import type { CardAtlas } from '../../packages/contracts/src/card-atlas';
 import type { WebAssetScene } from './assets';
 export type CardState = CardAtlas['frames'][number]['state'];
-export const CARD_LABELS = { white: '白色', green: '绿色', blue: '蓝色', purple: '紫色', orange: '橙色' };
+export const CARD_LABELS = { green: '绿色', blue: '蓝色', purple: '紫色', orange: '橙色', red: '红色', silver: '银色' };
 export const CARD_STATE_LABELS = { normal: '正常', selected: '已选择', disabled: '不可用' };
 const POSITION_LABELS: Record<string, string> = { FW: '前锋', MF: '中场', DF: '后卫', GK: '门将' };
 

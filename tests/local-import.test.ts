@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { inspectLegacyStorage } from '../packages/client-model/src/local-import';
 import { LocalImportCommandSchema } from '../packages/contracts/src/local-import';
 const storage = (entries: Record<string, string>) => ({ getItem: (key: string) => entries[key] ?? null });
-const team = ['p07', 'p06', 'p08', 'p01', 'p02'];
+const team = ['p22', 'p05', 'p19', 'p01', 'p02'];
 
 test('legacy import extracts only validated preferences and a normalized nickname draft', () => {
   const preview = inspectLegacyStorage(
@@ -48,7 +48,7 @@ test('corrupt JSON and invalid values do not discard independent valid preferenc
 test('lineup parser rejects duplicate, oversized, object and unknown definitions but preserves other sets', () => {
   for (const invalid of [
     [...team, 'p03'],
-    ['p01', 'p01', 'p07', 'p06', 'p08'],
+    ['p01', 'p01', 'p22', 'p05', 'p19'],
     team.map((id) => ({ id, level: 10 })),
     ['p0000', ...team.slice(1)],
   ]) {

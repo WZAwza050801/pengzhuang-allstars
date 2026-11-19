@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "economy-2",
+  "version": "economy-4",
   "status": "engineering-default",
   "sourceType": "rebuilt",
   "sourceNote": "Nonpaid initial proposal, not recovered commercial prices. Existing reward/shop reference tables remain historical evidence; Crystal purchase flows are disabled.",
@@ -12,11 +12,14 @@
     "coins": "300",
     "fragments": "0",
     "playerDefIds": [
-      "p07",
-      "p06",
-      "p08",
-      "p01",
-      "p02"
+      "p94",
+      "p99",
+      "p100",
+      "p95",
+      "p38",
+      "p54",
+      "p97",
+      "p86"
     ]
   },
   "upgrade": {
@@ -53,11 +56,12 @@
     "9": "100"
   },
   "rebuiltRarityByQuality": {
-    "white": 1,
-    "green": 2,
-    "blue": 3,
-    "purple": 4,
-    "orange": 5
+    "green": 1,
+    "blue": 2,
+    "purple": 3,
+    "orange": 4,
+    "red": 5,
+    "silver": 9
   },
   "craft": {
     "costMultiplier": 10,

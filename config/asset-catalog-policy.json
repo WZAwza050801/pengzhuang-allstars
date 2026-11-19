@@ -3,8 +3,8 @@
   "dynamicUi": [
     {
       "prefix": "Box_Quality_",
-      "values": ["01", "02", "03", "04"],
-      "evidence": "client/src/lineup.ts QUALITY_FRAME; white and green share 01"
+      "values": ["01", "02", "03", "04", "05"],
+      "evidence": "client/src/lineup.ts QUALITY_FRAME; red and silver share 05"
     }
   ],
   "excluded": [

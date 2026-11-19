@@ -32,7 +32,7 @@ test('all card levels preserve source axes and independently computed physical m
       }
       rows++;
     }
-  expect(rows).toBe(1170);
+  expect(rows).toBe(1060);
 });
 test('endpoints, source-over-legacy priority, explicit saturation, immutable results and invalid inputs are stable', () => {
   expect(attributeFraction(21, 1, 21, 119)).toBe(0);
@@ -40,7 +40,7 @@ test('endpoints, source-over-legacy priority, explicit saturation, immutable res
   expect(attributeFraction(21, 0.7, 21, 119)).toBe(0);
   expect(levelAttrs(data, 'p17', 1).weight).toBe(34);
   expect(data.players.p17.attrs[0]).toBe(40);
-  expect(levelAttrs(data, 'p06', 10).weight).toBe(115);
+  expect(levelAttrs(data, 'p02', 10).weight).toBe(93);
   const copy = levelAttrs(data, 'p17', 1);
   copy.weight = 99;
   expect(data.levels['10101']['1'].weight).toBe(34);

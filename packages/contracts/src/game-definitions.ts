@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { SKILL_EFFECT_POLICIES } from '../../game-core/src/skill-policy';
+import { CARD_QUALITIES } from './card-atlas';
 import { VersionIdSchema } from './configuration';
 import { FieldGeometrySchema } from './field';
 import { PhysicsConfigSchema } from './physics';
@@ -14,7 +15,7 @@ export const PlayerDefinitionSchema = z.strictObject({
   name: source,
   nameSource: source,
   position: z.enum(['FW', 'MF', 'DF', 'GK']),
-  quality: z.enum(['white', 'green', 'blue', 'purple', 'orange']),
+  quality: z.enum(CARD_QUALITIES),
   attrs: five(points()),
   growth: five(z.number()),
   skill: source,
